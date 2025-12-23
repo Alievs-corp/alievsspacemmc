@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Careers — Admin</title>
+  <link rel="stylesheet" href="./css/admin.css"/>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="content">
+      
+<div class="card">
+  <div class="split">
+    <div>
+      <div class="h1">Careers</div>
+      <div class="small">Manage vacancies displayed on the Careers page.</div>
+    </div>
+    <button class="btn" id="newBtn">New vacancy</button>
+  </div>
+  <div class="hr"></div>
+
+  <div id="tableMount"></div>
+
+  <div class="hr"></div>
+  <div class="card" style="box-shadow:none">
+    <div class="h2" id="formTitle">Create / Edit</div>
+    <form id="jobForm" class="grid">
+      <div id="jobForm_fields" class="two"></div>
+      <div class="row" style="display:flex; gap:10px">
+        <button class="btn primary" type="submit">Save</button>
+        <button class="btn" type="button" id="jobForm_cancel">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="split">
+    <div>
+      <div class="h1">Team</div>
+      <div class="small">Add team members with photo, role, and experience.</div>
+    </div>
+    <button class="btn" id="newEmpBtn">New member</button>
+  </div>
+  <div class="hr"></div>
+
+  <div id="empTable"></div>
+
+  <div class="hr"></div>
+  <div class="card" style="box-shadow:none">
+    <div class="h2" id="empFormTitle">Create / Edit</div>
+    <form id="empForm" class="grid">
+      <div id="empForm_fields" class="two"></div>
+      <div class="row" style="display:flex; gap:10px">
+        <button class="btn primary" type="submit">Save</button>
+        <button class="btn" type="button" id="empForm_cancel">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script type="module">
+  import { requireAuth, logout } from "./js/auth.js";
+  import { bootstrapIfNeeded, load, save, listLocales, getLocale } from "./js/store.js";
+  import { mountShell, toast } from "./js/modules/layout.js";
+  import { renderTable, bindForm } from "./js/modules/crud.js";
+
+  requireAuth();
+  await bootstrapIfNeeded();
+  mountShell("careers");
+  document.getElementById("logoutBtn")?.addEventListener("click", ()=>{ logout(); location.href="./login.html"; });
+
+  let editingJobId = null;
+  let editingEmpId = null;
+  const currentLocale = getLocale();
+
+  function propagateNew(field, item){
+    const others = (listLocales()||[]).filter(l=>l!==currentLocale);
+    others.forEach(loc=>{
+      const data = load(loc);
+      const arr = data[field] || [];
+      if (arr.some(x=>x.id===item.id)) return;
+      data[field] = [item, ...arr];
+      save(data, loc);
+    });
+  }
+
+  function refreshJobs(){
+    const c = load();
+    const rows = c.careers || [];
+    renderTable({
+      mountId:"tableMount",
+      columns:[
+        {key:"status", label:"Status"},
+        {key:"title", label:"Title"},
+        {key:"location", label:"Location"}
+      ],
+      rows,
+      onEdit:(id)=>{ editingJobId=id; renderJobForm(); },
+      onDelete:(id)=>{
+        const next = load();
+        next.careers = (next.careers||[]).filter(x=>x.id!==id);
+        save(next); toast("Deleted"); refreshJobs();
+      }
+    });
+    renderJobForm();
+  }
+
+  function renderJobForm(){
+    const c = load();
+    const current = editingJobId ? (c.careers||[]).find(x=>x.id===editingJobId) : null;
+    document.getElementById("formTitle").textContent = editingJobId ? "Edit vacancy" : "Create vacancy";
+    bindForm({
+      formId:"jobForm",
+      fields:[
+        {key:"id", label:"ID", placeholder:"c_fe"},
+        {key:"title", label:"Title", placeholder:"Front-End Developer"},
+        {key:"type", label:"Type", placeholder:"Full-time"},
+        {key:"location", label:"Location", placeholder:"Baku / Hybrid"},
+        {key:"status", label:"Status", placeholder:"Open / Closed"},
+        {key:"desc", label:"Description", placeholder:"Short role description"},
+        {key:"requirements", label:"Requirements (comma-separated)", placeholder:"HTML/CSS/JS, UI sense"}
+      ],
+      getCurrent:()=> current ? ({...current, requirements:(current.requirements||[]).join(", ")}) : null,
+      onSubmit:(item)=>{
+        const next = load();
+        item.id = item.id || (current?.id) || ("c_"+Math.random().toString(16).slice(2));
+        item.requirements = item.requirements ? item.requirements.split(",").map(s=>s.trim()).filter(Boolean) : [];
+        const arr = next.careers || [];
+        const idx = arr.findIndex(x=>x.id===item.id);
+        if (idx>=0) arr[idx]=item; else arr.unshift(item);
+        next.careers = arr;
+        save(next);
+        propagateNew("careers", item);
+        toast("Saved");
+        editingJobId = null;
+        refreshJobs();
+      },
+      onCancel:()=>{ editingJobId=null; refreshJobs(); }
+    });
+  }
+
+  function refreshTeam(){
+    const c = load();
+    const rows = c.employees || [];
+    renderTable({
+      mountId:"empTable",
+      columns:[
+        {key:"name", label:"Name"},
+        {key:"role", label:"Role"},
+        {key:"experience", label:"Experience"}
+      ],
+      rows,
+      onEdit:(id)=>{ editingEmpId=id; renderEmpForm(); },
+      onDelete:(id)=>{
+        const next = load();
+        next.employees = (next.employees||[]).filter(x=>x.id!==id);
+        save(next); toast("Deleted"); refreshTeam();
+      }
+    });
+    renderEmpForm();
+  }
+
+  function renderEmpForm(){
+    const c = load();
+    const current = editingEmpId ? (c.employees||[]).find(x=>x.id===editingEmpId) : null;
+    document.getElementById("empFormTitle").textContent = editingEmpId ? "Edit member" : "Create member";
+    bindForm({
+      formId:"empForm",
+      fields:[
+        {key:"name", label:"Full name", placeholder:"Samira Aliyeva"},
+        {key:"role", label:"Role", placeholder:"Project Manager"},
+        {key:"experience", label:"Experience (years)", placeholder:"5+ years"},
+        {key:"photo", label:"Photo URL", placeholder:"https://..."},
+        {key:"bio", label:"Bio", placeholder:"Short bio", type:"textarea"}
+      ],
+      getCurrent:()=> current ? current : null,
+      onSubmit:(item)=>{
+        const next = load();
+        const arr = next.employees || [];
+        const idx = arr.findIndex(x=>x.id===item.id);
+        if (idx>=0){
+          arr[idx] = {...arr[idx], ...item};
+        }else{
+          item.id = item.id || ("emp_"+Math.random().toString(16).slice(2));
+          arr.unshift(item);
+        }
+        next.employees = arr;
+        save(next);
+        propagateNew("employees", item);
+        toast("Saved");
+        editingEmpId = null;
+        renderEmpForm();
+        refreshTeam();
+      },
+      onCancel:()=>{ editingEmpId=null; renderEmpForm(); }
+    });
+  }
+
+  document.getElementById("newBtn").addEventListener("click", ()=>{ editingJobId=null; renderJobForm(); toast("New vacancy"); });
+  document.getElementById("newEmpBtn").addEventListener("click", ()=>{ editingEmpId=null; renderEmpForm(); toast("New member"); });
+  refreshJobs();
+  refreshTeam();
+</script>
+
+    </main>
+  </div>
+  <script type="module">
+    import { requireAuth, logout } from "./js/auth.js";
+    import { mountShell, toast } from "./js/modules/layout.js";
+    requireAuth();
+    mountShell("careers");
+    const lb = document.getElementById("logoutBtn");
+    lb?.addEventListener("click", ()=>{ logout(); location.href="./login.html"; });
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Blog — Admin</title>
+  <link rel="stylesheet" href="./css/admin.css"/>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="content">
+      
+<div class="card">
+  <div class="split">
+    <div>
+      <div class="h1">Blog</div>
+      <div class="small">Manage blog posts. Content supports basic HTML.</div>
+    </div>
+    <button class="btn" id="newBtn">New post</button>
+  </div>
+  <div class="hr"></div>
+
+  <div id="tableMount"></div>
+
+  <div class="hr"></div>
+  <div class="card" style="box-shadow:none">
+    <div class="h2" id="formTitle">Create / Edit</div>
+    <form id="postForm" class="grid">
+      <div id="postForm_fields" class="two"></div>
+      <div class="grid">
+        <label class="small" for="contentArea">HTML content</label>
+        <textarea class="input" name="content" id="contentArea" placeholder="<p>Write content…</p>"></textarea>
+        <div class="small" id="contentTip">Tip: Use &lt;p&gt;...&lt;/p&gt; and simple tags.</div>
+      </div>
+      <div class="row" style="display:flex; gap:10px">
+        <button class="btn primary" type="submit">Save</button>
+        <button class="btn" type="button" id="postForm_cancel">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script type="module">
+  import { requireAuth, logout } from "./js/auth.js";
+  import { bootstrapIfNeeded, load, save, listLocales, getLocale } from "./js/store.js";
+  import { mountShell, toast } from "./js/modules/layout.js";
+  import { renderTable } from "./js/modules/crud.js";
+
+  requireAuth();
+  await bootstrapIfNeeded();
+  mountShell("blog");
+  document.getElementById("logoutBtn")?.addEventListener("click", ()=>{ logout(); location.href="./login.html"; });
+
+  let editingId = null;
+  const currentLocale = getLocale();
+
+  function propagateNew(item){
+    const others = (listLocales()||[]).filter(l=>l!==currentLocale);
+    others.forEach(loc=>{
+      const data = load(loc);
+      const arr = data.blog || [];
+      if (arr.some(x=>x.id===item.id)) return;
+      data.blog = [item, ...arr];
+      save(data, loc);
+    });
+  }
+
+  function refresh(){
+    const c = load();
+    const rows = c.blog || [];
+    renderTable({
+      mountId:"tableMount",
+      columns:[
+        {key:"date", label:"Date"},
+        {key:"title", label:"Title"},
+        {key:"excerpt", label:"Excerpt"}
+      ],
+      rows,
+      onEdit:(id)=>{ editingId=id; renderForm(); },
+      onDelete:(id)=>{
+        const next = load();
+        next.blog = (next.blog||[]).filter(x=>x.id!==id);
+        save(next); toast("Deleted"); refresh();
+      }
+    });
+    renderForm();
+  }
+
+  function renderForm(){
+    const c = load();
+    const current = editingId ? (c.blog||[]).find(x=>x.id===editingId) : null;
+    document.getElementById("formTitle").textContent = editingId ? "Edit post" : "Create post";
+
+    // Manual form render for blog (includes content textarea)
+    const fields = document.getElementById("postForm_fields");
+    fields.innerHTML = `
+      <div class="grid">
+        <label class="small">ID</label>
+        <input class="input" name="id" value="${current?.id||""}" placeholder="b3"/>
+      </div>
+      <div class="grid">
+        <label class="small">Date</label>
+        <input class="input" name="date" value="${current?.date||new Date().toISOString().slice(0,10)}" placeholder="YYYY-MM-DD"/>
+      </div>
+      <div class="grid" style="grid-column:1/-1">
+        <label class="small">Title</label>
+        <input class="input" name="title" value="${escapeHtml(current?.title||"")}" placeholder="Post title"/>
+      </div>
+      <div class="grid" style="grid-column:1/-1">
+        <label class="small">Excerpt</label>
+        <input class="input" name="excerpt" value="${escapeHtml(current?.excerpt||"")}" placeholder="Short excerpt"/>
+      </div>
+      <div class="grid" style="grid-column:1/-1">
+        <label class="small">Tags (comma-separated)</label>
+        <input class="input" name="tags" value="${escapeHtml((current?.tags||[]).join(", "))}" placeholder="E-commerce, UX"/>
+      </div>
+    `;
+    document.getElementById("contentArea").value = current?.content || "";
+    const contentLabel = document.querySelector("label[for='contentArea']");
+    if (contentLabel) contentLabel.textContent = "HTML content";
+    const contentTip = document.getElementById("contentTip");
+    if (contentTip) contentTip.textContent = "Tip: Use <p>...<\/p> and simple tags.";
+    document.getElementById("contentArea").placeholder = "<p>Write content…</p>";
+  }
+
+  document.getElementById("postForm").addEventListener("submit", (e)=>{
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const item = {
+      id: String(fd.get("id")||"").trim() || (editingId||("b"+Math.random().toString(16).slice(2))),
+      date: String(fd.get("date")||"").trim(),
+      title: String(fd.get("title")||"").trim(),
+      excerpt: String(fd.get("excerpt")||"").trim(),
+      tags: String(fd.get("tags")||"").split(",").map(s=>s.trim()).filter(Boolean),
+      content: document.getElementById("contentArea").value || ""
+    };
+    const next = load();
+    const arr = next.blog || [];
+    const idx = arr.findIndex(x=>x.id===item.id);
+    if (idx>=0) arr[idx]=item; else arr.unshift(item);
+    next.blog = arr;
+    save(next);
+    propagateNew(item);
+    toast("Saved");
+    editingId = null;
+    refresh();
+  });
+
+  document.getElementById("postForm_cancel").addEventListener("click", ()=>{ editingId=null; refresh(); });
+
+  document.getElementById("newBtn").addEventListener("click", ()=>{ editingId=null; renderForm(); toast("New post"); });
+
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, s=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[s]));
+  }
+  refresh();
+</script>
+
+    </main>
+  </div>
+  <script type="module">
+    import { requireAuth, logout } from "./js/auth.js";
+    import { mountShell, toast } from "./js/modules/layout.js";
+    requireAuth();
+    mountShell("blog");
+    const lb = document.getElementById("logoutBtn");
+    lb?.addEventListener("click", ()=>{ logout(); location.href="./login.html"; });
+  </script>
+  
+</body>
+</html>

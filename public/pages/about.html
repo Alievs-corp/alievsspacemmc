@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>About — Alievs Space MMC</title>
+  <link rel="stylesheet" href="../css/theme.css"/>
+  <link rel="stylesheet" href="../css/base.css"/>
+  
+</head>
+<body>
+  <header class="siteHeader" id="siteHeader"></header>
+  
+<main>
+  <section class="pageHead">
+    <div class="container">
+      <div class="breadcrumb" id="aboutBreadcrumb">Home / About</div>
+      <div class="pageTitle reveal" id="aboutHead">A premium team for ambitious businesses.</div>
+      <div class="pageIntro reveal" id="aboutIntro">We design and build scalable systems across software, commerce, and banking-focused dashboards — with premium UI and operational clarity.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container twoCol">
+      <div class="card reveal">
+        <div class="h2" id="aboutWhoTitle">Who we are</div>
+        <div id="aboutParas"></div>
+        <div class="hr"></div>
+        <div class="h3" id="valuesTitle">Values</div>
+        <div class="chips" id="values"></div>
+      </div>
+      <div class="card reveal">
+        <div class="h2" id="aboutHowTitle">How we deliver</div>
+        <div class="muted" id="aboutDelivery">A structured delivery pipeline designed to stay stable and maintainable as you scale.</div>
+        <div class="spacer"></div>
+        <div class="threeCol" id="process"></div>
+      </div>
+    </div>
+  </section>
+</main>
+<script type="module" src="../js/pages/about.js"></script>
+
+  <footer class="siteFooter" id="siteFooter"></footer>
+  <script type="module">
+    import { initPage } from "../js/app.js";
+    initPage("about");
+  </script>
+</body>
+</html>

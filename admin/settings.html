@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Settings — Admin</title>
+  <link rel="stylesheet" href="./css/admin.css"/>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="content">
+      
+<div class="card">
+  <div class="h1">Settings</div>
+  <div class="small">Brand settings, contact details, password, export/import, and reset.</div>
+  <div class="hr"></div>
+
+  <div class="two">
+    <div class="card" style="box-shadow:none">
+      <div class="h2">Brand</div>
+      <form id="brandForm" class="grid">
+        <div class="grid">
+          <label class="small">Brand name</label>
+          <input class="input" name="brandName" placeholder="Alievs Space MMC"/>
+        </div>
+        <div class="grid">
+          <label class="small">Tagline</label>
+          <input class="input" name="tagline" placeholder="Premium Digital & Commerce Ecosystem"/>
+        </div>
+        <div class="grid">
+          <label class="small">Email</label>
+          <input class="input" name="email" placeholder="hello@..."/>
+        </div>
+        <div class="grid">
+          <label class="small">Phone</label>
+          <input class="input" name="phone" placeholder="+994 ..."/>
+        </div>
+        <div class="grid">
+          <label class="small">Address</label>
+          <input class="input" name="address" placeholder="Azerbaijan"/>
+        </div>
+        <div class="grid">
+          <label class="small">Instagram URL</label>
+          <input class="input" name="instagram" placeholder="https://instagram.com/..."/>
+        </div>
+        <div class="grid">
+          <label class="small">LinkedIn URL</label>
+          <input class="input" name="linkedin" placeholder="https://linkedin.com/..."/>
+        </div>
+        <div class="grid">
+          <label class="small">YouTube URL</label>
+          <input class="input" name="youtube" placeholder="https://youtube.com/..."/>
+        </div>
+        <button class="btn primary" type="submit">Save settings</button>
+      </form>
+    </div>
+
+    <div class="card" style="box-shadow:none">
+      <div class="h2">Maintenance</div>
+      <div class="grid">
+        <button class="btn" id="exportAll">Export site JSON</button>
+        <label class="small">Import site JSON</label>
+        <input class="input" type="file" id="importFile" accept="application/json"/>
+        <button class="btn" id="resetBtn">Reset to defaults</button>
+      </div>
+      <div class="hr"></div>
+      <div class="h2">Admin password</div>
+      <div class="grid">
+        <input class="input" id="newPass" placeholder="New password"/>
+        <button class="btn primary" id="setPass">Update password</button>
+        <div class="small">Demo only. For production, connect Supabase Auth or a backend.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { requireAuth, logout, setPassword } from "./js/auth.js";
+  import { bootstrapIfNeeded, load, loadRaw, save, reset, download, importFile as parseFile } from "./js/store.js";
+  import { mountShell, toast } from "./js/modules/layout.js";
+
+  requireAuth();
+  await bootstrapIfNeeded();
+  mountShell("settings");
+  document.getElementById("logoutBtn")?.addEventListener("click", ()=>{ logout(); location.href="./login.html"; });
+
+  const c = load();
+  const f = document.getElementById("brandForm");
+  f.brandName.value = c.settings?.brandName || "";
+  f.tagline.value = c.settings?.tagline || "";
+  f.email.value = c.settings?.email || "";
+  f.phone.value = c.settings?.phone || "";
+  f.address.value = c.settings?.address || "";
+  f.instagram.value = c.settings?.social?.instagram || "";
+  f.linkedin.value = c.settings?.social?.linkedin || "";
+  f.youtube.value = c.settings?.social?.youtube || "";
+
+  f.addEventListener("submit", (e)=>{
+    e.preventDefault();
+    const fd = new FormData(f);
+    const next = load();
+    next.settings = next.settings || {};
+    next.settings.brandName = String(fd.get("brandName")||"").trim();
+    next.settings.tagline = String(fd.get("tagline")||"").trim();
+    next.settings.email = String(fd.get("email")||"").trim();
+    next.settings.phone = String(fd.get("phone")||"").trim();
+    next.settings.address = String(fd.get("address")||"").trim();
+    next.settings.social = next.settings.social || {};
+    next.settings.social.instagram = String(fd.get("instagram")||"").trim() || "#";
+    next.settings.social.linkedin = String(fd.get("linkedin")||"").trim() || "#";
+    next.settings.social.youtube = String(fd.get("youtube")||"").trim() || "#";
+    save(next);
+    toast("Saved");
+  });
+
+  document.getElementById("exportAll").addEventListener("click", ()=>{
+    download("alievs-space-content.json", loadRaw() || load());
+  });
+
+  document.getElementById("importFile").addEventListener("change", async (e)=>{
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try{
+      const data = await parseFile(file);
+      save(data);
+      toast("Imported");
+      location.reload();
+    }catch(err){
+      toast("Import failed");
+    }
+  });
+
+  document.getElementById("resetBtn").addEventListener("click", ()=>{
+    reset();
+    toast("Reset done. Reopen Admin to bootstrap defaults.");
+  });
+
+  document.getElementById("setPass").addEventListener("click", ()=>{
+    const p = document.getElementById("newPass").value.trim();
+    if (p.length < 4) return toast("Password too short");
+    setPassword(p);
+    toast("Password updated");
+    document.getElementById("newPass").value = "";
+  });
+</script>
+
+    </main>
+  </div>
+  <script type="module">
+    import { requireAuth, logout } from "./js/auth.js";
+    import { mountShell, toast } from "./js/modules/layout.js";
+    requireAuth();
+    mountShell("settings");
+    const lb = document.getElementById("logoutBtn");
+    lb?.addEventListener("click", ()=>{ logout(); location.href="./login.html"; });
+  </script>
+  
+</body>
+</html>

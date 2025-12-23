@@ -1,0 +1,110 @@
+:root{
+  --bg:#0b0f17;
+  --panel: rgba(230,231,235,.06);
+  --line: rgba(230,231,235,.12);
+  --text: rgba(230,231,235,.92);
+  --muted: rgba(230,231,235,.70);
+  --accent: #2A62FF;
+  --accent2: #0A2A6A;
+  --shadow: 0 20px 50px rgba(0,0,0,.35);
+  --radius: 18px;
+  --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:var(--sans);
+  color:var(--text);
+  background:
+    radial-gradient(900px 500px at 20% 10%, rgba(42,98,255,.18), transparent 60%),
+    radial-gradient(700px 420px at 80% 20%, rgba(10,42,106,.28), transparent 55%),
+    linear-gradient(180deg, #0b0f17, #101827);
+}
+a{color:inherit; text-decoration:none}
+.container{max-width: 1240px; margin:0 auto; padding:0 18px}
+.card{
+  border-radius: var(--radius);
+  border:1px solid var(--line);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  padding:18px;
+}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  padding:10px 12px;
+  border-radius: 14px;
+  border:1px solid var(--line);
+  background: rgba(230,231,235,.06);
+  color:var(--text);
+  cursor:pointer;
+}
+.btn:hover{transform: translateY(-1px); background: rgba(230,231,235,.09)}
+.btn.primary{background: linear-gradient(135deg, rgba(42,98,255,.9), rgba(10,42,106,.9)); border-color: rgba(42,98,255,.35)}
+.input, textarea, select{
+  width:100%;
+  padding:12px 12px;
+  border-radius: 14px;
+  border:1px solid var(--line);
+  background: rgba(16,24,39,.45);
+  color:var(--text);
+  outline:none;
+}
+.input:focus, textarea:focus, select:focus{border-color: rgba(42,98,255,.45); box-shadow: 0 0 0 4px rgba(42,98,255,.12)}
+.small{font-size:12px; color:var(--muted)}
+.h1{font-size:28px; margin:0 0 6px}
+.h2{font-size:18px; margin:0 0 8px}
+.hr{height:1px; background: var(--line); margin:14px 0}
+.grid{display:grid; gap:12px}
+.two{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
+@media(max-width: 920px){ .two{grid-template-columns:1fr} }
+.shell{display:grid; grid-template-columns: 280px 1fr; min-height:100vh}
+@media(max-width: 980px){ .shell{grid-template-columns:1fr} }
+.sidebar{
+  position:sticky; top:0; height:100vh;
+  border-right:1px solid var(--line);
+  background: rgba(16,24,39,.35);
+  backdrop-filter: blur(14px);
+  padding:14px;
+}
+@media(max-width: 980px){
+  .sidebar{position:relative; height:auto; border-right:none; border-bottom:1px solid var(--line)}
+}
+.brand{display:flex; align-items:center; gap:12px; padding:10px 10px}
+.mark{width:34px; height:34px; border-radius:12px;
+  background:
+    radial-gradient(14px 14px at 30% 30%, rgba(230,231,235,.75), transparent 70%),
+    radial-gradient(18px 18px at 70% 60%, rgba(42,98,255,.55), transparent 72%),
+    linear-gradient(135deg, rgba(230,231,235,.22), rgba(42,98,255,.18));
+  border: 1px solid rgba(230,231,235,.18);
+}
+.nav a{
+  display:flex; gap:10px; align-items:center;
+  padding:10px 10px;
+  border-radius: 14px;
+  color: rgba(230,231,235,.78);
+}
+.nav a:hover{background: rgba(230,231,235,.06); color: rgba(230,231,235,.92)}
+.nav a.active{background: rgba(42,98,255,.16); border:1px solid rgba(42,98,255,.25); color: rgba(230,231,235,.92)}
+.content{padding:18px}
+.table{
+  width:100%;
+  border-collapse: collapse;
+  border:1px solid var(--line);
+  overflow:hidden;
+  border-radius: 14px;
+}
+.table th, .table td{
+  padding:10px 10px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  font-size:13px;
+}
+.table th{color: rgba(230,231,235,.82); font-weight:600; background: rgba(230,231,235,.04)}
+.badge{display:inline-flex; align-items:center; gap:8px; font-size:12px; padding:7px 10px; border-radius:999px; border:1px solid var(--line); background: rgba(230,231,235,.05)}
+.badge i{width:8px; height:8px; border-radius:999px; background: rgba(42,98,255,.85); display:inline-block}
+.toast{
+  position:fixed; left:50%; bottom:22px; transform:translateX(-50%);
+  padding:12px 14px; border-radius:14px; border:1px solid var(--line);
+  background: rgba(16,24,39,.92); box-shadow: 0 10px 25px rgba(0,0,0,.35);
+  z-index:999;
+}
