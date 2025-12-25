@@ -12,7 +12,7 @@ import { t } from "../i18n.js";
     return;
   }
   const breadcrumb = document.getElementById("postBreadcrumb");
-  if (breadcrumb) breadcrumb.innerHTML = `<a href="/pages/blog.html">${t("nav.blog","Blog")}</a> / ${t("public.postLabel","Post")}`;
+  if (breadcrumb) breadcrumb.innerHTML = `<a href="/public/pages/blog.html">${t("nav.blog","Blog")}</a> / ${t("public.postLabel","Post")}`;
   document.getElementById("title").textContent = p.title;
   document.getElementById("date").textContent = p.date || "";
   document.getElementById("tags").innerHTML = (p.tags||[]).map(t=>`<span class="chip">${t}</span>`).join("");

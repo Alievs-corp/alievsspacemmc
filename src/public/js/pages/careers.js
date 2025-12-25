@@ -27,7 +27,7 @@ import { t } from "../i18n.js";
       <div class="hr"></div>
       <div class="muted"><b style="color:rgba(230,231,235,.92)">${t("public.requirements","Requirements:")}</b> ${(j.requirements||[]).map(r=>`<span class="chip">${escapeHtml(r)}</span>`).join("")}</div>
       <div class="spacer"></div>
-      <a class="btn primary" href="/pages/contact.html?topic=${encodeURIComponent(j.title||t("nav.careers","Career"))}">${t("public.apply","Apply")}</a>
+      <a class="btn primary" href="/public/pages/contact.html?topic=${encodeURIComponent(j.title||t("nav.careers","Career"))}">${t("public.apply","Apply")}</a>
     </div>
   `).join("");
 

@@ -31,7 +31,7 @@ export function mountShell(active){
     </nav>
     <div class="hr"></div>
     <div class="grid">
-      <a class="btn" href="../public/index.html">Open Website</a>
+      <a class="btn" href="/public/index.html">Open Website</a>
       <button class="btn" id="logoutBtn">Logout</button>
     </div>
   `;

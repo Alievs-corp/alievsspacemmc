@@ -13,7 +13,7 @@ import { t } from "../i18n.js";
   const list = (content.blog||[]).slice().sort((a,b)=>String(b.date).localeCompare(String(a.date)));
   const wrap = document.getElementById("posts");
   wrap.innerHTML = list.map(p=>`
-    <a class="card hover reveal" href="/pages/post.html?id=${encodeURIComponent(p.id)}">
+    <a class="card hover reveal" href="/public/pages/post.html?id=${encodeURIComponent(p.id)}">
       <div class="split">
         <div class="h3">${escapeHtml(p.title||"")}</div>
         <span class="chip">${escapeHtml(p.date||"")}</span>

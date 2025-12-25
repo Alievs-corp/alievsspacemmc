@@ -17,7 +17,7 @@ import { t } from "../i18n.js";
   const cta = document.getElementById("ctaPrimary");
   if (cta){
     cta.textContent = s.cta?.primaryText || "Request a Proposal";
-    cta.href = s.cta?.primaryHref || "/pages/contact.html";
+    cta.href = s.cta?.primaryHref || "/public/pages/contact.html";
   }
   const hl = document.getElementById("highlights");
   hl.innerHTML = (h.highlights||[]).map(x=>`

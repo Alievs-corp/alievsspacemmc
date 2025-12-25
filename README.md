@@ -1,15 +1,30 @@
-Alievs Space MMC — Premium Multi-page Website + Admin Panel (Static Demo)
+# Alievs Space MMC — Premium Multi-page Website + Admin Panel
 
-Open:
-- public/index.html
-- admin/login.html (password: admin123)
+## About Alievs Space MMC
 
-How it works:
-- Admin panel stores site content in localStorage.
-- Public pages read content from localStorage; if empty, they use public/data/content.default.json
-- Leads submitted from Contact are saved and visible in Admin -> Leads.
+**Alievs Space MMC** is a technology company specializing in the design and development of modern software solutions. We combine innovation, technical expertise, and reliability to deliver products that meet the highest standards of performance and scalability.
 
-Tip:
-For best results, run a local server:
-- VSCode Live Server, or
-- python -m http.server
+### About Us
+
+At Alievs Space, we develop and maintain our own software products and also collaborate with partner companies to deliver custom projects. Our team ensures that every project is completed efficiently, on time, and with a strong focus on quality and long-term sustainability.
+
+### Areas of Expertise
+
+- **Web Solutions:** Scalable and secure web applications
+- **Mobile Applications:** Native and cross-platform development
+- **APIs and Backend Systems:** High-performance, maintainable architectures
+- **Real-Time Communication Systems:** Low-latency, reliable communication tools
+- **Infrastructure and DevOps:** Complete deployment and cloud management solutions
+
+### Technologies
+
+We use modern, industry-proven technologies and continuously evolve with emerging trends: Go, Python, Java, JavaScript, TypeScript, Rust, Flask, FastAPI, Gin, Echo, React, Next.js, Flutter, PostgreSQL, Redis, Docker, AWS, WebSockets, and more.
+
+### Our Commitment
+
+We are dedicated to building solutions that are not only functional but also maintainable, efficient, and adaptable to future needs. Our mission is to help businesses grow through technology.
+
+---
+
+**Alievs Space MMC** — Building premium digital products that scale.
+

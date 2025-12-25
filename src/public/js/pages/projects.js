@@ -13,7 +13,7 @@ import { t } from "../i18n.js";
   const list = content.projects || [];
   const wrap = document.getElementById("projects");
   wrap.innerHTML = list.map(p=>`
-    <a class="card hover reveal" href="/pages/project.html?id=${encodeURIComponent(p.id)}">
+    <a class="card hover reveal" href="/public/pages/project.html?id=${encodeURIComponent(p.id)}">
       <div class="badge"><i></i> ${escapeHtml(p.industry||"")}</div>
       <div class="spacer"></div>
       <div class="h3">${escapeHtml(p.title||"")}</div>
