@@ -44,7 +44,7 @@ import { getLocale, t } from "../i18n.js";
       <div class="h3">${x.t}</div>
       <div class="muted">${x.d}</div>
       <div class="spacer"></div>
-      <a class="btn ghost" href="/public/pages/contact.html">${t("public.industriesCta","Discuss this industry →")}</a>
+      <a class="btn ghost" href="/alievsspacemmc/public/pages/contact.html">${t("public.industriesCta","Discuss this industry →")}</a>
     </div>
   `).join("");
 })();

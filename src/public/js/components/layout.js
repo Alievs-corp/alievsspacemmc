@@ -8,7 +8,7 @@ export function mountHeader({ active } = {}) {
 
   header.innerHTML = `
     <div class="container headerInner">
-      <a class="brand" href="/public/index.html" aria-label="Home">
+      <a class="brand" href="/alievsspacemmc/public/index.html" aria-label="Home">
         <div class="brandMark" aria-hidden="true"></div>
         <div class="brandText">
           <b id="brandName">Alievs Space MMC</b>
@@ -17,45 +17,45 @@ export function mountHeader({ active } = {}) {
       </a>
 
       <nav class="nav" aria-label="Primary navigation">
-        ${navLink(t("nav.home", "Home"), "/public/index.html", "home", active)}
+        ${navLink(t("nav.home", "Home"), "/alievsspacemmc/public/index.html", "home", active)}
         ${navLink(
           t("nav.about", "About"),
-          "/public/pages/about.html",
+          "/alievsspacemmc/public/pages/about.html",
           "about",
           active
         )}
         ${navLink(
           t("nav.services", "Services"),
-          "/public/pages/services.html",
+          "/alievsspacemmc/public/pages/services.html",
           "services",
           active
         )}
         ${navLink(
           t("nav.industries", "Industries"),
-          "/public/pages/industries.html",
+          "/alievsspacemmc/public/pages/industries.html",
           "industries",
           active
         )}
         ${navLink(
           t("nav.projects", "Case Studies"),
-          "/public/pages/projects.html",
+          "/alievsspacemmc/public/pages/projects.html",
           "projects",
           active
         )}
         ${navLink(
           t("nav.careers", "Careers"),
-          "/public/pages/careers.html",
+          "/alievsspacemmc/public/pages/careers.html",
           "careers",
           active
         )}
-        ${navLink(t("nav.blog", "Blog"), "/public/pages/blog.html", "blog", active)}
+        ${navLink(t("nav.blog", "Blog"), "/alievsspacemmc/public/pages/blog.html", "blog", active)}
         ${navLink(
           t("nav.contact", "Contact"),
-          "/public/pages/contact.html",
+          "/alievsspacemmc/public/pages/contact.html",
           "contact",
           active
         )}
-        <a class="ctaBtn" href="/public/pages/contact.html">${t(
+        <a class="ctaBtn" href="/alievsspacemmc/public/pages/contact.html">${t(
           "nav.cta",
           "Request a Proposal"
         )}</a>
@@ -91,22 +91,22 @@ export function mountHeader({ active } = {}) {
           )}">${t("ui.close", "Close")}</button>
         </div>
         <div class="hr"></div>
-        ${drawerLink(t("nav.home", "Home"), "/public/index.html")}
-        ${drawerLink(t("nav.about", "About"), "/public/pages/about.html")}
-        ${drawerLink(t("nav.services", "Services"), "/public/pages/services.html")}
+        ${drawerLink(t("nav.home", "Home"), "/alievsspacemmc/public/index.html")}
+        ${drawerLink(t("nav.about", "About"), "/alievsspacemmc/public/pages/about.html")}
+        ${drawerLink(t("nav.services", "Services"), "/alievsspacemmc/public/pages/services.html")}
         ${drawerLink(
           t("nav.industries", "Industries"),
-          "/public/pages/industries.html"
+          "/alievsspacemmc/public/pages/industries.html"
         )}
         ${drawerLink(
           t("nav.projects", "Case Studies"),
-          "/public/pages/projects.html"
+          "/alievsspacemmc/public/pages/projects.html"
         )}
-        ${drawerLink(t("nav.careers", "Careers"), "/public/pages/careers.html")}
-        ${drawerLink(t("nav.blog", "Blog"), "/public/pages/blog.html")}
-        ${drawerLink(t("nav.contact", "Contact"), "/public/pages/contact.html")}
+        ${drawerLink(t("nav.careers", "Careers"), "/alievsspacemmc/public/pages/careers.html")}
+        ${drawerLink(t("nav.blog", "Blog"), "/alievsspacemmc/public/pages/blog.html")}
+        ${drawerLink(t("nav.contact", "Contact"), "/alievsspacemmc/public/pages/contact.html")}
         <div class="hr"></div>
-        <a class="ctaBtn" style="display:block;text-align:center" href="/public/pages/contact.html">${t(
+        <a class="ctaBtn" style="display:block;text-align:center" href="/alievsspacemmc/public/pages/contact.html">${t(
           "nav.cta",
           "Request a Proposal"
         )}</a>
@@ -202,19 +202,19 @@ export function mountFooter() {
         <div>
           <div class="h3">${t("nav.about", "About")}</div>
           <div class="muted">
-            <div><a href="/public/pages/about.html">${t(
+            <div><a href="/alievsspacemmc/public/pages/about.html">${t(
               "nav.about",
               "About"
             )}</a></div>
-            <div><a href="/public/pages/services.html">${t(
+            <div><a href="/alievsspacemmc/public/pages/services.html">${t(
               "nav.services",
               "Services"
             )}</a></div>
-            <div><a href="/public/pages/projects.html">${t(
+            <div><a href="/alievsspacemmc/public/pages/projects.html">${t(
               "nav.projects",
               "Case Studies"
             )}</a></div>
-            <div><a href="/public/pages/careers.html">${t(
+            <div><a href="/alievsspacemmc/public/pages/careers.html">${t(
               "nav.careers",
               "Careers"
             )}</a></div>
@@ -230,7 +230,7 @@ export function mountFooter() {
               <a class="chip" id="sInsta" href="#" target="_blank" rel="noreferrer">Instagram</a>
               <a class="chip" id="sLinked" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
               <a class="chip" id="sYT" href="#" target="_blank" rel="noreferrer">YouTube</a>
-              <a class="chip" href="/admin/login.html">${t(
+              <a class="chip" href="/alievsspacemmc/admin/login.html">${t(
                 "nav.admin",
                 "Admin"
               )}</a>

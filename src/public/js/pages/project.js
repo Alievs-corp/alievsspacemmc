@@ -12,7 +12,7 @@ import { t } from "../i18n.js";
     return;
   }
   const breadcrumb = document.getElementById("projectBreadcrumb");
-  if (breadcrumb) breadcrumb.innerHTML = `<a href="/public/pages/projects.html">${t("nav.projects","Case Studies")}</a> / ${t("public.projectDetails","Details")}`;
+  if (breadcrumb) breadcrumb.innerHTML = `<a href="/alievsspacemmc/public/pages/projects.html">${t("nav.projects","Case Studies")}</a> / ${t("public.projectDetails","Details")}`;
   const industryBadge = document.getElementById("projectIndustryBadge");
   if (industryBadge) industryBadge.innerHTML = `<i></i> ${t("public.industry","Industry")}`;
   document.getElementById("title").textContent = p.title;
