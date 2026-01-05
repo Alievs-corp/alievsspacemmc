@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { api, type About, type Locale } from '@/lib/api';
+import { api, type About } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 
 export function AdminAbout() {
   const { locale } = useI18n();
-  const [about, setAbout] = useState<About | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -27,7 +26,6 @@ export function AdminAbout() {
     try {
       setLoading(true);
       const data = await api.getAbout(locale);
-      setAbout(data);
       setFormData({
         headline: data.headline || '',
         paragraphs: data.paragraphs || [],

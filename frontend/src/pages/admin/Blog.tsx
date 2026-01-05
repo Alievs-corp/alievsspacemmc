@@ -93,7 +93,7 @@ export function AdminBlog() {
     setError('');
 
     try {
-      const payload: Record<Locale, Partial<BlogPost>> = {};
+      const payload: Record<Locale, Partial<BlogPost>> = { en: {}, az: {}, ru: {} };
       for (const loc of supportedLocales.map((l) => l.code as Locale)) {
         const tags = tagsText[loc]
           .split(',')

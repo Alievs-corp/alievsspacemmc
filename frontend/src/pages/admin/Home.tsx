@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { api, type Home, type Locale } from '@/lib/api';
+import { api, type Home } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 
 export function AdminHome() {
   const { locale } = useI18n();
-  const [home, setHome] = useState<Home | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -28,7 +27,6 @@ export function AdminHome() {
     try {
       setLoading(true);
       const data = await api.getHome(locale);
-      setHome(data);
       setFormData({
         heroTitle: data.heroTitle || '',
         heroSubtitle: data.heroSubtitle || '',

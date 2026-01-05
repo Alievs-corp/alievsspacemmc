@@ -148,7 +148,7 @@ export function AdminCareers() {
     setError('');
 
     try {
-      const payload: Record<Locale, Partial<Career>> = {};
+      const payload: Record<Locale, Partial<Career>> = { en: {}, az: {}, ru: {} };
       for (const loc of supportedLocales.map((l) => l.code as Locale)) {
         const requirements = requirementsText[loc]
           .split(',')
@@ -181,7 +181,7 @@ export function AdminCareers() {
     setError('');
 
     try {
-      const payload: Record<Locale, Partial<Employee>> = {};
+      const payload: Record<Locale, Partial<Employee>> = { en: {}, az: {}, ru: {} };
       for (const loc of supportedLocales.map((l) => l.code as Locale)) {
         payload[loc] = employeeFormData[loc];
       }

@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { api, type Settings, type Locale } from '@/lib/api';
+import { api, type Settings } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 
 export function AdminSettings() {
-  const { locale, supportedLocales } = useI18n();
-  const [settings, setSettings] = useState<Settings | null>(null);
+  const { locale } = useI18n();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -34,7 +33,6 @@ export function AdminSettings() {
     try {
       setLoading(true);
       const data = await api.getSettings(locale);
-      setSettings(data);
       setFormData({
         brandName: data.brandName || '',
         tagline: data.tagline || '',
@@ -72,6 +70,9 @@ export function AdminSettings() {
       setSaving(false);
     }
   };
+
+  const social = formData.social ?? { instagram: '', linkedin: '', youtube: '' };
+  const cta = formData.cta ?? { primaryText: '', primaryHref: '' };
 
   const handleExport = async () => {
     try {
@@ -190,11 +191,11 @@ export function AdminSettings() {
               <label className="block text-sm font-medium mb-1">Instagram URL</label>
               <input
                 type="url"
-                value={formData.social?.instagram || ''}
+                value={social.instagram}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    social: { ...formData.social, instagram: e.target.value },
+                    social: { ...social, instagram: e.target.value },
                   })
                 }
                 placeholder="https://instagram.com/..."
@@ -205,11 +206,11 @@ export function AdminSettings() {
               <label className="block text-sm font-medium mb-1">LinkedIn URL</label>
               <input
                 type="url"
-                value={formData.social?.linkedin || ''}
+                value={social.linkedin}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    social: { ...formData.social, linkedin: e.target.value },
+                    social: { ...social, linkedin: e.target.value },
                   })
                 }
                 placeholder="https://linkedin.com/..."
@@ -220,11 +221,11 @@ export function AdminSettings() {
               <label className="block text-sm font-medium mb-1">YouTube URL</label>
               <input
                 type="url"
-                value={formData.social?.youtube || ''}
+                value={social.youtube}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    social: { ...formData.social, youtube: e.target.value },
+                    social: { ...social, youtube: e.target.value },
                   })
                 }
                 placeholder="https://youtube.com/..."
@@ -235,11 +236,11 @@ export function AdminSettings() {
               <label className="block text-sm font-medium mb-1">CTA Primary Text</label>
               <input
                 type="text"
-                value={formData.cta?.primaryText || ''}
+                value={cta.primaryText}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    cta: { ...formData.cta, primaryText: e.target.value },
+                    cta: { ...cta, primaryText: e.target.value },
                   })
                 }
                 placeholder="Get Started"
@@ -250,11 +251,11 @@ export function AdminSettings() {
               <label className="block text-sm font-medium mb-1">CTA Primary Href</label>
               <input
                 type="text"
-                value={formData.cta?.primaryHref || ''}
+                value={cta.primaryHref}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    cta: { ...formData.cta, primaryHref: e.target.value },
+                    cta: { ...cta, primaryHref: e.target.value },
                   })
                 }
                 placeholder="/contact"
@@ -282,9 +283,9 @@ export function AdminSettings() {
                   const file = e.target.files?.[0];
                   if (!file) return;
                   const reader = new FileReader();
-                  reader.onload = (event) => {
+                  reader.onload = () => {
                     try {
-                      const data = JSON.parse(event.target?.result as string);
+                      JSON.parse(reader.result as string);
                       setError('Import functionality requires API support');
                     } catch {
                       setError('Invalid JSON file');

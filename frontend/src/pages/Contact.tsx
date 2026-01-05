@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useI18n } from '@/contexts/I18nContext';
-import { useContent } from '@/contexts/ContentContext';
 import { api } from '@/lib/api';
 import { Button } from '@/components/ui/Button';
 
 export function Contact() {
   const { t } = useI18n();
-  const { content } = useContent();
   const [searchParams] = useSearchParams();
   const [formData, setFormData] = useState({
     name: '',

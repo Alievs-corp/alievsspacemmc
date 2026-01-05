@@ -92,7 +92,7 @@ export function AdminProjects() {
     setError('');
 
     try {
-      const payload: Record<Locale, Partial<Project>> = {};
+      const payload: Record<Locale, Partial<Project>> = { en: {}, az: {}, ru: {} };
       for (const loc of supportedLocales.map((l) => l.code as Locale)) {
         const tags = tagsText[loc]
           .split(',')

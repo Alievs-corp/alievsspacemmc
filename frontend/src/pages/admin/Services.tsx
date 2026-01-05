@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { api, type Service, type Locale } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
-import { cn } from '@/lib/utils';
 
 export function AdminServices() {
   const { locale, supportedLocales } = useI18n();
@@ -93,7 +92,7 @@ export function AdminServices() {
     setError('');
 
     try {
-      const payload: Record<Locale, Partial<Service>> = {};
+      const payload: Record<Locale, Partial<Service>> = { en: {}, az: {}, ru: {} };
       for (const loc of supportedLocales.map((l) => l.code as Locale)) {
         const bullets = bulletsText[loc]
           .split(',')

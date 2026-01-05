@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import { api, type Content, type Locale } from '@/lib/api';
 import { getLocale } from '@/lib/i18n';
 

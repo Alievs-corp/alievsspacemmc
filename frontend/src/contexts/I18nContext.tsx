@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import { getLocale, setLocale, t as tLib, type Locale, SUPPORTED_LOCALES } from '@/lib/i18n';
 
 interface I18nContextType {
