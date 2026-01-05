@@ -5,6 +5,8 @@ import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Important for GitHub Pages project sites to serve assets from /<repo>/
+  base: process.env.VITE_BASE_PATH || '/alievsspacemmc/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
