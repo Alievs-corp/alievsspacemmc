@@ -32,6 +32,7 @@ export function Header() {
               alt="Logo" 
               className="w-16 sm:w-16 md:w-14 lg:w-20" 
             />
+            {/* Comment */}
             <div className="hidden sm:block">
               <p className='font-almarai sm:text-[24px] md:text-[18px] lg:text-[28px] leading-none'>ALIYEVS</p>
               <p className='font-kavivanar sm:text-[16px] md:text-[12px] lg:text-[20px] leading-tight'>Space MMC</p>
