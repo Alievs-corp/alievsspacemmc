@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useI18n } from '@/contexts/I18nContext';
-import { useContent } from '@/contexts/ContentContext';
+// import { useContent } from '@/contexts/ContentContext';
 import alievsspace from "../../assets/images/alievsspace.png"
 import instagram from '../../assets/icons/instagram.svg';
 import linkedin from '../../assets/icons/linkedin.svg';
@@ -8,8 +8,8 @@ import youtube from '../../assets/icons/youtube.svg';
 
 export function Footer() {
   const { t } = useI18n();
-  const { content } = useContent();
-  const settings = content?.settings;
+  // const { content } = useContent();
+  // const settings = content?.settings;
 
   return (
     <footer className="bg-[#13132F] text-white py-[50px] px-[30px] md:px-[50px] shadow-[5px_4px_100px_0px_#000000] mt-[60px] md:mt-[100px]">

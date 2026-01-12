@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 import { useI18n } from '@/contexts/I18nContext';
-import { useContent } from '@/contexts/ContentContext';
-import { api, type Career } from '@/lib/api';
-import { useState, useEffect } from 'react';
+// import { useContent } from '@/contexts/ContentContext';
+// import { api, type Career } from '@/lib/api';
+import { useState } from 'react';
 import Container from '../components/ui/Container';
 import trustedPeople from "../assets/images/trusted-people.svg";
 import workWithUs from '../assets/images/work-with-us.svg';
 
 export function Careers() {
-  const { t, locale } = useI18n();
-  const { content, loading: contentLoading } = useContent();
-  const [careers, setCareers] = useState<Career[]>(content?.careers || []);
-  const [loading, setLoading] = useState(contentLoading);
+  const { t } = useI18n();
+  // const { loading: contentLoading } = useContent();
+  // const [careers, setCareers] = useState<Career[]>(content?.careers || []);
+  // const [loading, setLoading] = useState(contentLoading);
   const [showAllTeam, setShowAllTeam] = useState(false);
 
   const vacancies = [
@@ -61,22 +61,22 @@ export function Careers() {
     { id: 'lisa', name: 'Lisa Taylor', image: 'team-member-8.jpg' },
   ];
 
-  useEffect(() => {
-    if (!content?.careers || content.careers.length === 0) {
-      setLoading(true);
-      api.getCareers(locale).then(setCareers).finally(() => setLoading(false));
-    } else {
-      setCareers(content.careers);
-    }
-  }, [locale, content]);
+  // useEffect(() => {
+  //   if (!content?.careers || content.careers.length === 0) {
+  //     setLoading(true);
+  //     api.getCareers(locale).then(setCareers).finally(() => setLoading(false));
+  //   } else {
+  //     setCareers(content.careers);
+  //   }
+  // }, [locale, content]);
 
-  if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-white">Loading...</div>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="flex min-h-screen items-center justify-center">
+  //       <div className="text-white">Loading...</div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="mt-[60px] flex flex-col justify-center items-center">

@@ -8,7 +8,7 @@ import OurProjects from '@/components/ui/Home/OurProjects';
 
 export function Home() {
   const { t } = useI18n();
-  const { content, loading } = useContent();
+  const { loading } = useContent();
 
   if (loading) {
     return (
