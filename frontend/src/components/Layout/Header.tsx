@@ -4,7 +4,7 @@ import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 
-import alievsspace from '../../assets/images/alievsspace.png';
+import alievsspace from '../../assets/images/alievsspace-logo.png';
 import translate from '../../assets/icons/translate.svg';
 
 export function Header() {

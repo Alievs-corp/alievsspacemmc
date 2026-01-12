@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useI18n } from '@/contexts/I18nContext';
 // import { useContent } from '@/contexts/ContentContext';
-import alievsspace from "../../assets/images/alievsspace.png"
+// import alievsspace from "../../assets/images/alievsspace.png"
+import alievsspace from "../../assets/images/alievsspace-logo.png";
 import instagram from '../../assets/icons/instagram.svg';
 import linkedin from '../../assets/icons/linkedin.svg';
 import youtube from '../../assets/icons/youtube.svg';
