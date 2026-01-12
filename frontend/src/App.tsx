@@ -7,12 +7,8 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { Services } from './pages/Services';
-import { Projects } from './pages/Projects';
-import { Project } from './pages/Project';
-import { Blog } from './pages/Blog';
-import { BlogPost } from './pages/BlogPost';
 import { Careers } from './pages/Careers';
-import { Contact } from './pages/Contact';
+import Contact  from './pages/Contact';
 import { Industries } from './pages/Industries';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
@@ -26,6 +22,14 @@ import { AdminInquiries } from './pages/admin/Inquiries';
 import { AdminSettings } from './pages/admin/Settings';
 import { AdminHome } from './pages/admin/Home';
 import { AdminAbout } from './pages/admin/About';
+import CaseStudies from './pages/CaseStudies';
+import MarketplaceMVP from './pages/MarketplaceMVP';
+import FintechReportingDashboard from './pages/FintechReportingDashboard';
+import InventorySystem from './pages/InventorySystem';
+import Frontend from './pages/Frontend';
+import Backend from './pages/Backend';
+import UiDesigner from './pages/UiDesigner';
+import Apply from './pages/Apply';
 
 function App() {
   return (
@@ -64,13 +68,17 @@ function App() {
                       <Route path="/" element={<Home />} />
                       <Route path="/about" element={<About />} />
                       <Route path="/services" element={<Services />} />
-                      <Route path="/projects" element={<Projects />} />
-                      <Route path="/projects/:id" element={<Project />} />
-                      <Route path="/blog" element={<Blog />} />
-                      <Route path="/blog/:id" element={<BlogPost />} />
+                      <Route path="/case-studies" element={<CaseStudies />} />
+                      <Route path="/case-studies/marketplace-mvp" element={<MarketplaceMVP />} />
+                      <Route path="/case-studies/fintech-reporting-dashboard" element={<FintechReportingDashboard />} />
+                      <Route path="/case-studies/operations-inventory-system" element={<InventorySystem />} />
                       <Route path="/careers" element={<Careers />} />
+                      <Route path="/careers/frontend-developer" element={<Frontend />} />
+                      <Route path="/careers/ui-ux-designer" element={<UiDesigner />} />
+                      <Route path="/careers/backend-developer" element={<Backend />} />
                       <Route path="/contact" element={<Contact />} />
                       <Route path="/industries" element={<Industries />} />
+                      <Route path="/apply" element={<Apply />} />
                     </Routes>
                   </Layout>
                 }

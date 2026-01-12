@@ -54,7 +54,7 @@ const translations: Record<Locale, Record<string, any>> = {
       about: 'About',
       services: 'Services',
       industries: 'Industries',
-      projects: 'Case Studies',
+      caseStudies: 'Case Studies',
       careers: 'Careers',
       blog: 'Blog',
       contact: 'Contact',
@@ -64,7 +64,7 @@ const translations: Record<Locale, Record<string, any>> = {
     public: {
       footerDesc:
         'Premium web & mobile development, e-commerce/marketplace systems, and banking-ready dashboards.',
-      industriesCta: 'Discuss this industry →',
+      industriesCta: 'Discuss this industry',
       requirements: 'Requirements:',
       apply: 'Apply',
       notFoundProject: 'Project not found',
@@ -85,6 +85,156 @@ const translations: Record<Locale, Record<string, any>> = {
       adminIncluded: 'Admin Panel Included',
       adminDesc:
         'Manage services, projects, blog, careers, and incoming inquiries in a dedicated admin dashboard. Changes reflect instantly across the site.',
+      loading: 'Loading...',
+      marketplaceMvp: {
+        back: '← Back to Case Studies',
+        badge: 'E-commerce · Marketplace',
+        title: 'Multi-vendor Marketplace MVP',
+        intro:
+          'A production-ready multi-vendor marketplace MVP designed with scalable architecture, structured admin control, and vendor level dashboard to support early growth and future expansion.',
+        contextTitle: 'Project context',
+        contextItems: {
+          industry: 'Industry: E-commerce/Marketplace',
+          projectType: 'Project type: MVP',
+          scope: 'Scope: Full system design & development',
+          focus: 'Focus: Admin tooling, vendor management, analytics',
+        },
+        challengeTitle: 'The challenge',
+        challengeCopy:
+          'The client needed a marketplace MVP that could support multiple vendors while maintaining clear administrative control, structured product management, and reliable reporting — without overengineering the initial release.',
+        solutionTitle: 'Our solution',
+        solutionCopy:
+          'We designed and implemented a modular marketplace system with a centralized admin panel, individual vendor dashboards, and structured workflows for products, categories, and reporting. The architecture was built to scale as vendors and data volume grow.',
+        deliveredTitle: 'What we delivered',
+        deliveredItems: {
+          admin: 'Central admin panel with role-based access',
+          vendors: 'Vendor onboarding and store dashboards',
+          products: 'Product and category management',
+          analytics: 'Analytics and reporting tools',
+          backend: 'Scalable backend architecture',
+        },
+        deliveryTitle: 'Delivery approach',
+        deliveryCopy:
+          'We followed an architecture-first approach, defined the UI system early, and delivered the platform in controlled milestones with continuous validation and support.',
+        ctaTitle: 'Looking to build a similar system?',
+        ctaButton: 'Start a conversation',
+      },
+      fintechDashboard: {
+        back: '← Back to Case Studies',
+        badge: 'Banking · Fintech',
+        title: 'Fintech Reporting Dashboard',
+        intro:
+          'A secure, role-based reporting dashboard designed for financial operations, with audit-ready reports, controlled access layers, and clear data visibility to support compliance and internal decision-making.',
+        contextTitle: 'Project context',
+        contextItems: {
+          industry: 'Industry: Banking/ Fintech',
+          projectType: 'Project type: internal system',
+          scope: 'Scope: Dashboard design & backend implementation',
+          focus: 'Focus: RBAC, reporting, audit readiness',
+        },
+        challengeTitle: 'The challenge',
+        challengeCopy:
+          'The client required a financial reporting system that could provide accurate, structured data access while meeting internal control and audit requirements. Different user roles needed clearly defined permissions, reliable reporting outputs, and confidence in data integrity — without increasing operational complexity.',
+        solutionTitle: 'Our solution',
+        solutionCopy:
+          'We designed and implemented a role-based reporting dashboard with controlled access layers and structured report generation. The system provides permission-based views, audit-friendly data outputs, and clear financial visibility, supporting both operational use and compliance review.',
+        deliveredTitle: 'What we delivered',
+        deliveredItems: {
+          rbac: 'Role-based access control (RBAC)',
+          reports: 'Audit-friendly financial reports',
+          security: 'Secure data access layers',
+          dashboards: 'Structured reporting dashboards',
+          backend: 'Scalable backend foundations',
+        },
+        deliveryTitle: 'Delivery approach',
+        deliveryCopy:
+          'We followed a security-first and architecture-driven approach, defining access models early and validating reporting logic throughout development to ensure reliability and compliance readiness.',
+        ctaTitle: 'Looking to build a similar system?',
+        ctaButton: 'Start a conversation',
+      },
+      inventory: {
+        back: '← Back to Case Studies',
+        badge: 'Manufacturing · Operations',
+        title: 'Operations & Inventory System',
+        intro:
+          'An internal operations and inventory management system built to improve stock visibility, financial tracking, and day-to-day operational clarity through structured dashboards and reporting.',
+        contextTitle: 'Project context',
+        contextItems: {
+          industry: 'Industry: Manufacturing / Operations',
+          projectType: 'Project type: Internal management system',
+          scope: 'Scope:  System design & implementation',
+          focus: 'Focus: Inventory, finance tracking, dashboards',
+        },
+        challengeTitle: 'The challenge',
+        challengeCopy:
+          'The client needed a centralized system to track inventory levels, income and expenses, and operational data across teams. Existing processes lacked real-time visibility and made it difficult to manage stock accuracy and financial oversight efficiently.',
+        solutionTitle: 'Our solution',
+        solutionCopy:
+          'We built an internal operations platform that centralizes inventory data, financial tracking, and management dashboards. The system provides clear operational views, structured workflows, and reliable data access to support daily decision-making and long-term planning.',
+        deliveredTitle: 'What we delivered',
+        deliveredItems: {
+          inventory: 'Inventory and stock tracking',
+          finance: 'Income and expense monitoring',
+          dashboards: 'Operational dashboards',
+          reporting: 'Management reporting tools',
+          backend: 'Scalable internal system architecture',
+        },
+        deliveryTitle: 'Delivery approach',
+        deliveryCopy:
+          'We prioritized clarity and reliability by defining system workflows early and delivering the platform in structured stages, ensuring accurate data handling and ease of use for operational teams.',
+        ctaTitle: 'Looking to build a similar system?',
+        ctaButton: 'Start a conversation',
+      },
+      home: {
+        heroTitle: 'Build premium digital products that scale',
+        heroCopy:
+          'We deliver web & mobile development, e-commerce/marketplace systems, and banking-ready dashboards with a security-first mindset.',
+        ctas: {
+          contact: 'Contact Sales',
+          services: 'Explore Services',
+          caseStudies: 'View Case Studies',
+        },
+        advantages: {
+          yearsText: 'Years building production systems',
+          enterpriseText: 'Ready for real business operations',
+          premiumText: 'High-quality UI/UX design systems',
+          secureText: 'Access control and auditing built-in',
+          fastText: 'Lean delivery without shortcuts',
+        },
+        build: {
+          items: {
+            ecommerce: {
+              title: 'E-commerce & Marketplaces',
+              text: 'Multi-vendor platforms, checkout flows, commissions, analytics.',
+              alt: 'eCommerce',
+            },
+            software: {
+              title: 'Software & Product Development',
+              text: 'Web apps, mobile apps, admin dashboards, internal systems.',
+              alt: 'software',
+            },
+            banking: {
+              title: 'Banking / Fintech Systems',
+              text: 'Role-based access, audit-ready reporting, secure data flows.',
+              alt: 'banking',
+            },
+          },
+        },
+        process: {
+          phases: {
+            discovery: { title: 'Discovery', desc: 'requirements & constraints' },
+            uxui: { title: 'UX/UI', desc: 'flows & interfaces' },
+            development: { title: 'Development', desc: 'engineering & integrations' },
+            qa: { title: 'QA', desc: 'testing & validation' },
+            launch: { title: 'Launch', desc: 'deployment & rollout' },
+            support: { title: 'Support', desc: 'maintenance & improvements' },
+          },
+        },
+        projects: {
+          title: 'Our Projects',
+          copy: 'A selection of projects delivered for different business needs and product types.',
+        },
+      },
       aboutWho: 'Who we are',
       aboutValues: 'Values',
       aboutHow: 'How we deliver',
@@ -94,12 +244,405 @@ const translations: Record<Locale, Record<string, any>> = {
       serviceFallback: 'Service',
       servicesIntro:
         'Premium engineering & design across software development, e-commerce/marketplaces, and banking-ready dashboards.',
+      services: {
+        items: {
+          web: {
+            category: 'Software',
+            title: 'Web & Mobile Development',
+            description:
+              'Corporate websites, web apps, mobile apps, admin dashboards, internal platforms.',
+            reqs: {
+              premiumUi: 'Premium UI systems',
+              performancePages: 'Performance-first pages',
+              analyticsReady: 'Analytics-ready structure',
+              cleanDocs: 'Clean documentation',
+            },
+          },
+          ecommerce: {
+            category: 'Commerce',
+            title: 'E-commerce & Marketplace Systems',
+            description:
+              'Online stores and multi-vendor marketplaces with full operational tooling.',
+            reqs: {
+              catalogFiltersSearch: 'Catalog + filters + search',
+              cartCheckout: 'Cart & checkout flows',
+              commissionPayout: 'Commission & payout reporting',
+              ownerDashboards: 'Store owner dashboards',
+            },
+          },
+          banking: {
+            category: 'Banking',
+            title: 'Banking-ready Dashboards',
+            description:
+              'Secure, audit-friendly systems with roles, reporting, and controlled data access.',
+            reqs: {
+              rbac: 'Role-based access control',
+              auditReporting: 'Audit logs & reporting views',
+              secureWorkflow: 'Secure workflow design',
+              complianceFriendly: 'Compliance-friendly',
+            },
+          },
+        },
+      },
       deliveryTitle: 'Delivery model',
       deliveryCopy:
         'We start with the architecture and UI system. Then we build modules, integrate analytics, and ship in controlled milestones — with ongoing support.',
+      delivery: {
+        steps: {
+          1: { title: 'Architecture & UI System', desc: 'Define system architecture and establish a scalable UI design system.' },
+          2: { title: 'Module Development', desc: 'Build core features and modules based on validated requirements.' },
+          3: { title: 'Integration & Analytics', desc: 'Integrate services, analytics, and supporting infrastructure.' },
+          4: { title: 'Controlled Delivery', desc: 'Release in structured milestones with validation at each stage.' },
+          5: { title: 'Ongoing Support', desc: 'Maintain, monitor, and improve the system post-launch.' },
+        },
+        result: 'Result: predictable delivery, scalable systems, and long-term operational stability.',
+      },
       projectsIntro: 'Selected examples across marketplaces, banking dashboards, and operational systems.',
       blogIntro: 'Insights on marketplaces, premium UX, admin systems, and banking-ready dashboards.',
       careersIntro: 'We build premium systems. Join a team that cares about design, structure, and reliability.',
+      backend: {
+        heroTitle: 'Backend Developer (API/DB)',
+        buildTitle: 'Build reliable, scalable systems behind production platforms',
+        buildCopy:
+          "We’re looking for a Backend Developer who focuses on system reliability, clean architecture, and long-term maintainability. You’ll work on the core logic behind dashboards, marketplaces, and internal platforms where data integrity, performance, and security are critical.",
+        workOnTitle: 'What you’ll work on',
+        workOn: {
+          items: {
+            architecture: 'Designing and implementing backend architectures for production systems',
+            apis: 'Building and maintaining APIs used by web and mobile applications',
+            databasesLogic: 'Working with databases, data models, and business logic',
+            authRbac: 'Integrating authentication, authorization, and access control',
+            performanceReliability: 'Ensuring system performance, reliability, and scalability',
+            collaborateFrontend: 'Collaborating closely with frontend developers and designers',
+            improveWithoutBreaking: 'Improving existing systems without breaking production workflows',
+          },
+        },
+        expectTitle: 'What we expect',
+        technicalSkillsTitle: 'Technical Skills',
+        skills: {
+          items: {
+            language: 'Strong experience with at least one backend language (e.g. Node.js, Python, Java, or similar)',
+            apiDesign: 'Solid understanding of API design (REST, structured data flows)',
+            relationalModeling: 'Experience with relational databases and data modeling',
+            securityAuth: 'Knowledge of authentication, authorization, and basic security principles',
+            cleanMaintainable: 'Ability to write clean, maintainable, and well-structured code',
+            productionBehavior: 'Understanding of system behavior in production environments',
+          },
+        },
+        niceToHaveTitle: 'Nice to have',
+        nice: {
+          items: {
+            scalableTraffic: 'Experience with scalable or high-traffic systems',
+            jobsQueuesCaching: 'Familiarity with background jobs, queues, or caching',
+            loggingMonitoring: 'Understanding of logging, monitoring, and error handling',
+            adminInternal: 'Experience working on admin panels or internal tools',
+          },
+        },
+        howWeWorkTitle: 'How we work',
+        how: {
+          items: {
+            architectureFirst: 'Architecture-first backend design',
+            clearOwnership: 'Clear ownership and responsibility',
+            noRushedFeatures: 'No rushed features without understanding impact',
+            stabilityIntegrity: 'Focus on stability, data integrity, and maintainability',
+            closeCollaboration: 'Close collaboration between backend, frontend, and design',
+          },
+        },
+        whatYouGetTitle: 'What you get',
+        get: {
+          items: {
+            realProduction: 'Work on real production systems, not toy projects',
+            businessLogic: 'Responsibility over core business logic',
+            collaboration: 'Collaboration with experienced frontend and UX teams',
+            cleanArchitecture: 'Emphasis on clean architecture and long-term thinking',
+            engineeringEnvironment: 'A professional engineering environment with clear expectations',
+          },
+        },
+        locationTitle: 'Location & format',
+        location: {
+          items: {
+            country: 'Azerbaijan',
+            format: 'Full-time / Hybrid (depending on role and experience)',
+          },
+        },
+        applyTitle: 'Ready to apply?',
+        applyCopy:
+          'If you care about building stable, scalable backend systems — and want your work to hold up in real production environments — we’d like to hear from you.',
+        applyCta: 'Apply for this role',
+      },
+      uiux: {
+        heroTitle: 'UX/UI Designer',
+        buildTitle: 'Design systems and interfaces for real, production-ready platforms',
+        buildCopy:
+          "We’re looking for a UX/UI Designer who understands that good design is not decoration — it’s structure, clarity, and decision-making. You’ll work on real products such as dashboards, marketplaces, and internal systems where usability, consistency, and long-term scalability matter.",
+        workOnTitle: 'What you’ll work on',
+        workOn: {
+          items: {
+            flows: 'Designing end-to-end user flows for complex products',
+            wireframes: 'Creating wireframes, UI layouts, and interactive prototypes',
+            designSystems: 'Defining and maintaining design systems and reusable components',
+            translateRequirements: 'Translating business and technical requirements into clear UX solutions',
+            collaborateDev: 'Collaborating closely with frontend and backend developers',
+            improveUsability: 'Improving usability, accessibility, and consistency across products',
+            iterateFeedback: 'Iterating based on feedback, real usage, and constraints',
+          },
+        },
+        expectTitle: 'What we expect',
+        coreSkillsTitle: 'Core Skills',
+        skills: {
+          items: {
+            uxPrinciples: 'Strong understanding of UX principles and user-centered design',
+            solidUi: 'Solid UI design skills with attention to layout, spacing, and hierarchy',
+            figmaExperience: 'Experience with Figma (components, variants, auto layout)',
+            dataHeavyInterfaces: 'Ability to design for data-heavy interfaces (dashboards, admin panels)',
+            clearThinking: 'Clear thinking and structured problem-solving',
+            portfolioProcess: 'Portfolio showing process, not just visuals',
+          },
+        },
+        niceToHaveTitle: 'Nice to have',
+        nice: {
+          items: {
+            devCollab: 'Experience working with developers on real products',
+            responsiveMobile: 'Understanding of responsive and mobile-first design',
+            designSystemsPatterns: 'Familiarity with design systems and scalable UI patterns',
+            adminInternal: 'Experience working on admin panels or internal tools',
+          },
+        },
+        howWeWorkTitle: 'How we work',
+        how: {
+          items: {
+            architectureFirstProduct: 'Architecture-first product thinking',
+            alignedFromStart: 'UX, UI, and engineering aligned from the start',
+            noRushedVisuals: 'No rushed visuals without understanding the problem',
+            logicBackedDecisions: 'Design decisions backed by logic, not trends',
+            longTermMaintainability: 'Long-term maintainability over short-term polish',
+          },
+        },
+        whatYouGetTitle: 'What you get',
+        get: {
+          items: {
+            realProductionNotConcept: 'Work on real production systems, not concept designs',
+            influenceStructureUx: 'Influence product structure and user experience',
+            closeCollabEngineering: 'Close collaboration with engineering teams',
+            spaceToIterate: 'Space to think, iterate, and improve designs properly',
+            professionalEnvironment: 'A professional environment that values clarity and quality',
+          },
+        },
+        locationTitle: 'Location & format',
+        location: {
+          items: {
+            country: 'Azerbaijan',
+            format: 'Full-time / Hybrid (depending on role and experience)',
+          },
+        },
+        applyTitle: 'Ready to apply?',
+        applyCopy:
+          'If you care about building stable, scalable backend systems —  and want your work to hold up in real production environments — we’d like to hear from you.',
+        applyCta: 'Apply for this role',
+      },
+      frontend: {
+        heroTitle: 'Frontend Developer (JS / TS)',
+        buildTitle: 'Build production-ready interfaces used in real business systems',
+        buildCopy:
+          'We’re looking for a Frontend Developer who cares about structure, performance, and long-term maintainability — not just visuals. You’ll work on real products such as dashboards, marketplaces, and internal platforms that are used daily in production environments.',
+        workOnTitle: 'What you’ll work on',
+        workOn: {
+          items: {
+            architecture: 'Designing and building scalable frontend architectures',
+            adminDashboards: 'Developing admin panels, dashboards, and data-heavy interfaces',
+            translateDesigns: 'Translating UI/UX designs into clean, maintainable code',
+            integrateApis: 'Working closely with backend developers to integrate APIs',
+            performanceAccessibility: 'Improving performance, accessibility, and usability across devices',
+            maintainEvolve: 'Maintaining and evolving existing systems without breaking them',
+          },
+        },
+        expectTitle: 'What we expect',
+        technicalSkillsTitle: 'Technical Skills',
+        skills: {
+          items: {
+            jsTs: 'Strong experience with JavaScript (ES6+) / TypeScript',
+            react: 'Solid knowledge of React (or similar modern frameworks)',
+            componentArchitecture: 'Understanding of component-based architecture',
+            restAsync: 'Experience with REST APIs and async data handling',
+            responsive: 'Familiarity with responsive and adaptive UI design',
+            cleanCode: 'Clean code mindset (readability, structure, reuse)',
+          },
+        },
+        niceToHaveTitle: 'Nice to have',
+        nice: {
+          items: {
+            adminSaaS: 'Experience with admin dashboards or SaaS products',
+            uiPerformance: 'Understanding of UI performance and optimization',
+            designSystems: 'Experience working with design systems',
+            portfolio: 'GitHub portfolio or real project examples',
+          },
+        },
+        howWeWorkTitle: 'How we work',
+        how: {
+          items: {
+            architectureFirst: 'Architecture-first development',
+            clearRequirements: 'Clear requirements and structured delivery',
+            noHacks: 'No rushed features, no messy hacks',
+            longTermStability: 'Focus on long-term stability over quick wins',
+            collaboration: 'Collaboration between design, frontend, and backend from day one',
+          },
+        },
+        whatYouGetTitle: 'What you get',
+        get: {
+          items: {
+            realProduction: 'Work on real, production systems — not demo apps',
+            ownership: 'Clear technical ownership and responsibility',
+            collaboration: 'Collaboration with designers and backend engineers',
+            longTermThinking: 'Long-term product thinking instead of short-term tasks',
+            engineeringCulture: 'A clean, professional engineering culture',
+          },
+        },
+        locationTitle: 'Location & format',
+        location: {
+          items: {
+            country: 'Azerbaijan',
+            format: 'Full-time / Hybrid (depending on role and experience)',
+          },
+        },
+        applyTitle: 'Ready to apply?',
+        applyCopy:
+          'If this role sounds like how you want to work — not just what you want to code — we’d like to hear from you.',
+        applyCta: 'Apply for this role',
+      },
+      careers: {
+        viewRoleCta: 'View role',
+        whyTitle: 'Why work with us',
+        whyCopy:
+          'We hire engineers and designers who care about system quality, clarity, and long-term impact. Our work focuses on real production systems, not short-lived prototypes.',
+        workWithUsAlt: 'Work With Us',
+        viewMore: 'View More',
+        showLess: 'Show Less',
+        vacancies: {
+          frontend: {
+            title: 'Frontend Developer (JS/TS)',
+            description: 'Build premium interfaces and dashboards',
+            location: 'Full-time, Baku / Hybrid',
+            reqs: {
+              htmlCssJs: 'Strong HTML/CSS/JS',
+              uiSense: 'UI sense',
+              cleanCode: 'Clean Code',
+            },
+          },
+          backend: {
+            title: 'Backend Developer (API/DB)',
+            description: 'Design APIs, data models, and secure access.',
+            location: 'Full-time, Baku / Hybrid',
+            reqs: {
+              restSql: 'REST/SQL',
+              authRbacSense: 'Auth/RBAC sense',
+              performanceMindset: 'Performance mindset',
+            },
+          },
+          uiux: {
+            title: 'UI/UX Designer',
+            description: 'Build premium interfaces and dashboards',
+            location: 'Contract / Full-time, Remote / Hybrid',
+            reqs: {
+              figma: 'Figma',
+              designSystems: 'Design systems',
+              webMobileUx: 'Web / Mobile UX',
+            },
+          },
+        },
+        team: {
+          members: {
+            john: {
+              role: 'Sales & Marketing Lead',
+              description:
+                'Leaders building and reporting digital systems with a strong focus on business organisation, sales operations, and logistics-related business development.',
+            },
+            jane: {
+              role: 'Data Analytics Lead',
+              description:
+                'Developed sustainable analytics frameworks, efficient and ready for customization, sales chain architecture.',
+            },
+            mike: {
+              role: 'Business Development',
+              description:
+                'Focus on clear requirements and long-term stability and work time management.',
+            },
+            sarah: {
+              role: 'Operations Manager',
+              description:
+                "Managing high-quality sales databases and displayed values in the Group's top-level capital.",
+            },
+            robert: {
+              role: 'Logistics Specialist',
+              description:
+                'Expert in logistics-related business development and system optimization.',
+            },
+            emily: {
+              role: 'Sales Operations',
+              description:
+                'Specialized in sales operations and digital system reporting.',
+            },
+            david: {
+              role: 'Marketing Analyst',
+              description:
+                'Analyzing sales data and creating actionable insights for business growth.',
+            },
+            lisa: {
+              role: 'Customer Relations',
+              description:
+                'Building strong customer relationships and ensuring satisfaction.',
+            },
+          },
+        },
+      },
+            caseStudiesIntro:
+              'We showcase real-world projects where structured architecture, thoughtful UX, and disciplined engineering resulted in stable, production-ready systems. Our case studies focus on practical challenges, design decisions, and delivery outcomes that support scalable growth and operational clarity.',
+            caseStudies: {
+              viewCta: 'View case study',
+              keyFocusLabel: 'Key focus',
+              requestTitle: 'Request project review',
+              requestCopy:
+                'Tell us about your project. We receive every request and respond with clear next steps — or previews, via generic sub-pack.',
+              tip:
+                'Tip: Share your industry, key requirements, and target market. Even a rough idea is enough to start.',
+              privacy:
+                "We don't share your details. Your message goes directly to our engineering team.",
+              chooseField: 'Choose your field',
+              items: {
+                marketplace: {
+                  category: 'E-commerce · Marketplace',
+                  title: 'Multi-vendor Marketplace MVP',
+                  description:
+                    'We designed and built a production-ready multi-vendor marketplace MVP with a strong focus on scalable architecture and operational clarity. The system includes a centralized admin panel, individual vendor dashboards, structured product and category management, and built-in reporting to support early growth and long-term expansion.',
+                  focus: [
+                    'Marketplace architecture',
+                    'Admin & vendor management',
+                    'Reporting & analytics',
+                  ],
+                },
+                fintech: {
+                  category: 'Banking · Fintech',
+                  title: 'Fintech Reporting Dashboard',
+                  description:
+                    'We designed and built a secure, role-based reporting dashboard for financial operations, focused on audit readiness, data integrity, and controlled access. The system provides structured financial reports, permission-based views, and reliable data visibility to support compliance and internal decision-making.',
+                  focus: [
+                    'Role-based access control (RBAC)',
+                    'Audit-friendly reporting',
+                    'Secure data flows',
+                  ],
+                },
+                operations: {
+                  category: 'Manufacturing · Operations',
+                  title: 'Operations & Inventory System',
+                  description:
+                    'This project focused on building an internal operations and inventory management system to improve operational clarity and data accuracy. The platform supports stock tracking, income and expense monitoring, and management dashboards designed to streamline day-to-day business operations.',
+                  focus: [
+                    'Inventory management',
+                    'Financial tracking',
+                    'Operational dashboards',
+                  ],
+                },
+              },
+            },
       teamTitle: 'Our team',
       contactIntro: "Tell us what you're building. We'll reply with a structured proposal.",
       contactFormTitle: 'Send a request',
@@ -128,6 +671,126 @@ const translations: Record<Locale, Record<string, any>> = {
       noteCopy: 'Contact requests are saved and visible in Admin → Inquiries.',
       industriesIntro:
         'We build systems where reliability, reporting, and premium UX are business-critical.',
+      about: {
+        headerTitle: 'We design and build systems meant to last.',
+        headerCopy:
+          'Focused on long-term reliability, clear architecture, and systems that remain stable as teams and data grow.',
+        whoTitle: 'Who we are',
+        whoCopy:
+          'Alievs Space MMC is a digital and commerce-focused engineering company building production-ready systems with premium UI and strong operational control. We combine backend architecture, UX systems, and business logic to deliver platforms that are scalable, secure, and easy to operate through structured admin tooling. Our work spans multi-vendor marketplaces, internal management platforms, and banking-oriented dashboards with role-based access, reporting, and audit-ready workflows.',
+        who: {
+          values: {
+            responsibility: 'Responsibility',
+            transparency: 'Transparency',
+            premiumQuality: 'Premium quality',
+            securityReliability: 'Security & reliability',
+            longTermPartnership: 'Long-term partnership',
+          },
+        },
+        deliverTitle: 'How we deliver',
+        deliverIntro:
+          'A structured delivery approach built to reduce risk, ensure quality, and support sustainable product growth.',
+        deliver: {
+          items: {
+            analysis: {
+              alt: 'Analysis & Strategy',
+              title: 'Analysis & Strategy',
+              text:
+                'We analyze business goals, technical constraints, and user requirements to define scope, priorities, and a clear delivery roadmap.',
+            },
+            uxui: {
+              alt: 'UX/UI & Architecture',
+              title: 'UX/UI & Architecture',
+              text:
+                'We design the user experience and system architecture together, ensuring usability, scalability, and long-term maintainability from the start.',
+            },
+            development: {
+              alt: 'Development',
+              title: 'Development',
+              text:
+                'We implement core features using modular, production-ready code, following defined architecture and security standards.',
+            },
+            quality: {
+              alt: 'Quality Control',
+              title: 'Quality Control',
+              text:
+                'We validate functionality, performance, and edge cases through structured testing to ensure reliability before release.',
+            },
+            launch: {
+              alt: 'Launch',
+              title: 'Launch',
+              text:
+                'We deploy in controlled stages, monitor system behavior, and ensure a smooth transition into real-world use.',
+            },
+            support: {
+              alt: 'Support & Scaling',
+              title: 'Support',
+              text:
+                'We provide ongoing support, improvements, and scaling strategies as usage grows and business needs evolve.',
+            },
+          },
+        },
+        approachTitle: 'Our Approach',
+        approachCopy:
+          'We build with intention, starting from architecture and operational needs to deliver systems that scale responsibly and perform reliably in production.',
+        approachWhoTitle: 'Who we work with',
+        approachWhoCopy:
+          'We work with teams that need reliable systems, clear reporting, and long-term stability — not temporary solutions. Our approach combines structured engineering, premium UI/UX, and disciplined delivery to ensure the systems we build remain dependable after launch, not just during development.',
+        approachResponsibilityTitle: 'Our responsibility beyond code',
+        approachResponsibilityCopy:
+          'We take responsibility beyond delivery by supporting systems after launch, maintaining clear communication, and building platforms designed to last.',
+      },
+      industries: {
+        items: {
+          retail: {
+            category: 'Retail & E-commerce',
+            title: 'Designed to convert and scale',
+            description:
+              'Conversion-focused storefronts, checkout UX, analytics, and operational clarity — built to support growth without friction.',
+          },
+          marketplaces: {
+            category: 'Marketplaces',
+            title: 'Built for multi-vendor complexity',
+            description:
+              'Multi-vendor architecture with store dashboards, commissions, payouts, and moderation tools — structured for control and scalability.',
+          },
+          banking: {
+            category: 'Banking / Finance',
+            title: 'Security, access, and compliance first',
+            description:
+              'Role-based access, audit ready reporting, and controlled workflows — designed for regulated financial environments.',
+          },
+          manufacturing: {
+            category: 'Manufacturing & Inventory',
+            title: 'Operational clarity at every level',
+            description:
+              'Stock tracking, cost control, income and expense visibility, and dashboards that support real operational decisions.',
+          },
+          beauty: {
+            category: 'Beauty / Salon Systems',
+            title: 'Systems that simplify daily operations',
+            description:
+              'Bookings, inventory, reminders, staff tools, and client management — designed to reduce overhead and manual work.',
+          },
+          logistics: {
+            category: 'Logistics & Delivery',
+            title: 'Visibility across every delivery stage',
+            description:
+              'Order flows, status tracking, store/admin coordination, and reporting layers that keep operations aligned.',
+          },
+          startup: {
+            category: 'Startups / MVP',
+            title: 'From idea to production ready MVP',
+            description:
+              'Lean MVP delivery with premium UI and scalable architecture — built to validate fast and grow safely.',
+          },
+        },
+        trustedTitle: 'Trusted to deliver production-ready systems',
+        trustedCopy1:
+          'We work with teams that need reliable systems, clear reporting, and long-term stability — not temporary solutions. Our approach combines structured engineering, premium UI/UX, and disciplined delivery to ensure the systems we build remain dependable after launch, not just during development.',
+        trustedCopy2:
+          'Every project is handled with clear scope, transparent communication, and architecture-first thinking. We focus on building platforms that teams can operate, extend, and trust as their business grows.',
+      },
       projectDetails: 'Details',
       industry: 'Industry',
       tags: 'Tags',
@@ -139,6 +802,64 @@ const translations: Record<Locale, Record<string, any>> = {
       postHelpTitle: 'Need help?',
       postHelpCopy:
         "If you're building a marketplace, e-commerce platform, or a banking-ready dashboard — we can propose a premium architecture.",
+      contact: {
+        loading: 'Loading...',
+        heroTitle: 'Why teams choose us',
+        heroCopy:
+          'We design and engineer production-ready digital systems by combining premium UI/UX, stable backend architecture, and admin tooling — across commerce and banking-ready platforms.',
+        hero: {
+          items: {
+            premiumUi: 'Premium UI systems',
+            scalableBackend: 'Scalable backend architecture',
+            marketplaceInfra: 'Marketplace infrastructure',
+            adminDashboards: 'Production admin dashboards',
+          },
+        },
+        details: {
+          phone: 'Phone: +994 (00) 000 00 00',
+          email: 'Email: hello@alievsspace.com',
+          location: 'Location: Azerbaijan',
+        },
+        form: {
+          title: 'Request project review',
+          copy:
+            'Tell us about your project. We receive every request and respond with clear next steps — or previews, via generic sub-pack.',
+          labels: {
+            name: 'Your name *',
+            company: 'Company name',
+            email: 'Email',
+            phone: 'Phone',
+            industry: 'Industry',
+            projectOverview: 'Project overview',
+            message: 'Message',
+          },
+          placeholders: {
+            name: 'Name',
+            company: 'Company name',
+            email: 'name@gmail.com',
+            phone: '+994 …',
+            projectOverview: 'What do you want to build?',
+            message:
+              'Describe your project, goals, and expected timeline. Key requirements and target market are enough to start.',
+          },
+          options: {
+            choose: 'Choose your field',
+            banking: 'Banking',
+            ecommerce: 'E-commerce',
+            software: 'Software Development',
+          },
+          tip:
+            'Tip: Share your industry, key requirements, and target market. Even a rough idea is enough to start.',
+          submit: 'Send request',
+          privacy:
+            "We don't share your details. Your message goes directly to our engineering team.",
+        },
+        alt: {
+          phone: 'Phone icon',
+          mail: 'Mail icon',
+          location: 'Location icon',
+        },
+      },
     },
   },
   ru: {
@@ -154,6 +875,7 @@ const translations: Record<Locale, Record<string, any>> = {
       about: 'О нас',
       services: 'Услуги',
       industries: 'Отрасли',
+      caseStudies: 'Кейсы',
       projects: 'Кейсы',
       careers: 'Карьера',
       blog: 'Блог',
@@ -164,7 +886,7 @@ const translations: Record<Locale, Record<string, any>> = {
     public: {
       footerDesc:
         'Премиальная разработка веб и мобильных продуктов, e-commerce/маркетплейсы и банковские дашборды.',
-      industriesCta: 'Обсудить отрасль →',
+      industriesCta: 'Обсудить отрасль',
       requirements: 'Требования:',
       apply: 'Откликнуться',
       notFoundProject: 'Проект не найден',
@@ -185,6 +907,156 @@ const translations: Record<Locale, Record<string, any>> = {
       adminIncluded: 'Админ-панель включена',
       adminDesc:
         'Управляйте услугами, кейсами, блогом, вакансиями и лидами. Изменения сразу на сайте.',
+      loading: 'Загрузка…',
+      marketplaceMvp: {
+        back: '← Назад к кейсам',
+        badge: 'E-commerce · Маркетплейс',
+        title: 'MVP маркетплейса с мультивендорами',
+        intro:
+          'Готовый к продакшену MVP маркетплейса с масштабируемой архитектурой, структурированным админ‑контролем и дашбордом для продавцов — для раннего роста и будущего расширения.',
+        contextTitle: 'Контекст проекта',
+        contextItems: {
+          industry: 'Отрасль: E-commerce/Маркетплейс',
+          projectType: 'Тип проекта: MVP',
+          scope: 'Объем: Полный дизайн и разработка системы',
+          focus: 'Фокус: Админ‑инструменты, управление продавцами, аналитика',
+        },
+        challengeTitle: 'Задача',
+        challengeCopy:
+          'Клиенту нужен был MVP маркетплейса, поддерживающий нескольких продавцов, с понятным админ‑контролем, структурированным управлением товарами и надежной отчетностью — без переусложнения первого релиза.',
+        solutionTitle: 'Решение',
+        solutionCopy:
+          'Мы спроектировали и реализовали модульную систему маркетплейса с централизованной админ‑панелью, отдельными дашбордами продавцов и структурированными потоками для товаров, категорий и отчетности. Архитектура спроектирована для роста количества продавцов и объема данных.',
+        deliveredTitle: 'Что мы сделали',
+        deliveredItems: {
+          admin: 'Центральная админ‑панель с ролевым доступом',
+          vendors: 'Онбординг продавцов и дашборды магазинов',
+          products: 'Управление товарами и категориями',
+          analytics: 'Аналитика и отчетность',
+          backend: 'Масштабируемая backend‑архитектура',
+        },
+        deliveryTitle: 'Подход к поставке',
+        deliveryCopy:
+          'Мы придерживались архитектуры на первом месте, рано определили UI‑систему и поставляли платформу по контролируемым этапам с непрерывной валидацией и поддержкой.',
+        ctaTitle: 'Хотите построить похожую систему?',
+        ctaButton: 'Начать диалог',
+      },
+      fintechDashboard: {
+        back: '← Назад к кейсам',
+        badge: 'Банкинг · Финтех',
+        title: 'Дашборд отчетности для финтеха',
+        intro:
+          'Защищенный дашборд отчетности с ролевым доступом для финансовых операций: отчеты, готовые к аудиту, контролируемые уровни доступа и понятная видимость данных для соответствия и внутренних решений.',
+        contextTitle: 'Контекст проекта',
+        contextItems: {
+          industry: 'Отрасль: Банкинг/ Финтех',
+          projectType: 'Тип проекта: внутренняя система',
+          scope: 'Объем: дизайн дашборда и реализация backend',
+          focus: 'Фокус: RBAC, отчетность, готовность к аудиту',
+        },
+        challengeTitle: 'Задача',
+        challengeCopy:
+          'Клиенту требовалась система финансовой отчетности, обеспечивающая точный и структурированный доступ к данным при соблюдении внутренних контролей и требований аудита. Разным ролям нужны четкие права, надежные выходы отчетов и уверенность в целостности данных — без усложнения операций.',
+        solutionTitle: 'Решение',
+        solutionCopy:
+          'Мы спроектировали и реализовали дашборд отчетности с ролевой моделью доступа, контролируемыми уровнями и структурированной генерацией отчетов. Система обеспечивает представления по правам, аудито‑дружелюбные выгрузки и прозрачность финансов — для операционного использования и проверки соответствия.',
+        deliveredTitle: 'Что мы сделали',
+        deliveredItems: {
+          rbac: 'Ролевой доступ (RBAC)',
+          reports: 'Финансовые отчеты, удобные для аудита',
+          security: 'Защищенные уровни доступа к данным',
+          dashboards: 'Структурированные дашборды отчетности',
+          backend: 'Масштабируемые backend‑основания',
+        },
+        deliveryTitle: 'Подход к поставке',
+        deliveryCopy:
+          'Мы следовали принципу «безопасность прежде всего» и подходу, основанному на архитектуре: рано определили модели доступа и валидировали логику отчетности на протяжении разработки, чтобы обеспечить надежность и готовность к соответствию.',
+        ctaTitle: 'Хотите построить похожую систему?',
+        ctaButton: 'Начать диалог',
+      },
+      inventory: {
+        back: '← Назад к кейсам',
+        badge: 'Производство · Операции',
+        title: 'Система операций и инвентаризации',
+        intro:
+          'Внутренняя система управления операциями и инвентаризацией для улучшения видимости запасов, финансового учета и ежедневной операционной ясности через структурированные дашборды и отчетность.',
+        contextTitle: 'Контекст проекта',
+        contextItems: {
+          industry: 'Отрасль: Производство / Операции',
+          projectType: 'Тип проекта: внутренняя система управления',
+          scope: 'Объем: дизайн и реализация системы',
+          focus: 'Фокус: инвентарь, финучет, дашборды',
+        },
+        challengeTitle: 'Задача',
+        challengeCopy:
+          'Клиенту нужна была централизованная система для отслеживания уровней запасов, доходов и расходов, а также операционных данных по командам. Текущие процессы не давали видимости в реальном времени, усложняя точный учет запасов и эффективный финансовый контроль.',
+        solutionTitle: 'Решение',
+        solutionCopy:
+          'Мы создали внутреннюю операционную платформу, централизующую данные об инвентаре, финансовый учет и управленческие дашборды. Система обеспечивает понятные операционные представления, структурированные процессы и надежный доступ к данным для принятия повседневных решений и долгосрочного планирования.',
+        deliveredTitle: 'Что мы сделали',
+        deliveredItems: {
+          inventory: 'Отслеживание инвентаря и запасов',
+          finance: 'Мониторинг доходов и расходов',
+          dashboards: 'Операционные дашборды',
+          reporting: 'Инструменты управленческой отчетности',
+          backend: 'Масштабируемая архитектура внутренней системы',
+        },
+        deliveryTitle: 'Подход к поставке',
+        deliveryCopy:
+          'Мы обеспечили ясность и надежность, рано определив рабочие процессы системы и поставляя платформу по структурированным этапам, чтобы гарантировать точную обработку данных и удобство для операционных команд.',
+        ctaTitle: 'Хотите построить похожую систему?',
+        ctaButton: 'Начать диалог',
+      },
+      home: {
+        heroTitle: 'Строим премиальные цифровые продукты, которые масштабируются',
+        heroCopy:
+          'Мы создаем веб- и мобильные приложения, e-commerce/маркетплейс системы и банковские панели с приоритетом безопасности.',
+        ctas: {
+          contact: 'Связаться с отделом продаж',
+          services: 'Посмотреть услуги',
+          caseStudies: 'Смотреть кейсы',
+        },
+        advantages: {
+          yearsText: 'Лет создаем производственные системы',
+          enterpriseText: 'Готово для реальных бизнес-операций',
+          premiumText: 'Высококачественные UI/UX дизайн-системы',
+          secureText: 'Контроль доступа и аудит встроены',
+          fastText: 'Быстрая поставка без компромиссов',
+        },
+        build: {
+          items: {
+            ecommerce: {
+              title: 'E-commerce и маркетплейсы',
+              text: 'Мультивендорные платформы, платежные потоки, комиссии, аналитика.',
+              alt: 'eCommerce',
+            },
+            software: {
+              title: 'Разработка ПО и продуктов',
+              text: 'Веб-приложения, мобильные приложения, админ-панели, внутренние системы.',
+              alt: 'software',
+            },
+            banking: {
+              title: 'Банковские / финтех-системы',
+              text: 'Ролевой доступ, отчеты для аудита, защищенные потоки данных.',
+              alt: 'banking',
+            },
+          },
+        },
+        process: {
+          phases: {
+            discovery: { title: 'Аналитика', desc: 'требования и ограничения' },
+            uxui: { title: 'UX/UI', desc: 'потоки и интерфейсы' },
+            development: { title: 'Разработка', desc: 'инжиниринг и интеграции' },
+            qa: { title: 'QA', desc: 'тестирование и валидация' },
+            launch: { title: 'Запуск', desc: 'деплой и развертывание' },
+            support: { title: 'Поддержка', desc: 'сопровождение и улучшения' },
+          },
+        },
+        projects: {
+          title: 'Наши проекты',
+          copy: 'Подборка проектов, выполненных для разных бизнес-задач и типов продуктов.',
+        },
+      },
       aboutWho: 'Кто мы',
       aboutValues: 'Ценности',
       aboutHow: 'Как мы работаем',
@@ -193,13 +1065,464 @@ const translations: Record<Locale, Record<string, any>> = {
       serviceFallback: 'Услуга',
       servicesIntro:
         'Премиальная инженерия и дизайн: разработка, e-commerce/маркетплейсы и банковские дашборды.',
+      contact: {
+        loading: 'Загрузка…',
+        heroTitle: 'Почему команды выбирают нас',
+        heroCopy:
+          'Мы проектируем и создаем производственные цифровые системы, сочетая премиальный UI/UX, стабильную backend-архитектуру и админ-инструменты — для платформ коммерции и банковского уровня.',
+        hero: {
+          items: {
+            premiumUi: 'Премиальные UI‑системы',
+            scalableBackend: 'Масштабируемая backend‑архитектура',
+            marketplaceInfra: 'Инфраструктура маркетплейса',
+            adminDashboards: 'Админ‑панели для продакшена',
+          },
+        },
+        details: {
+          phone: 'Телефон: +994 (00) 000 00 00',
+          email: 'Email: hello@alievsspace.com',
+          location: 'Локация: Азербайджан',
+        },
+        form: {
+          title: 'Запрос на обзор проекта',
+          copy:
+            'Расскажите нам о проекте. Мы получаем каждый запрос и отвечаем понятными следующими шагами — или предварительным пакетом.',
+          labels: {
+            name: 'Ваше имя *',
+            company: 'Название компании',
+            email: 'Email',
+            phone: 'Телефон',
+            industry: 'Отрасль',
+            projectOverview: 'Обзор проекта',
+            message: 'Сообщение',
+          },
+          placeholders: {
+            name: 'Имя',
+            company: 'Название компании',
+            email: 'name@gmail.com',
+            phone: '+994 …',
+            projectOverview: 'Что вы хотите построить?',
+            message:
+              'Опишите проект, цели и ожидаемые сроки. Ключевые требования и целевой рынок — этого достаточно, чтобы начать.',
+          },
+          options: {
+            choose: 'Выберите сферу',
+            banking: 'Банкинг',
+            ecommerce: 'E‑commerce',
+            software: 'Разработка ПО',
+          },
+          tip:
+            'Совет: Укажите отрасль, ключевые требования и целевой рынок. Даже наброска достаточно, чтобы начать.',
+          submit: 'Отправить запрос',
+          privacy:
+            'Мы не передаем ваши данные. Сообщение попадет напрямую в инженерную команду.',
+        },
+        alt: {
+          phone: 'Иконка телефона',
+          mail: 'Иконка почты',
+          location: 'Иконка локации',
+        },
+      },
+      services: {
+        items: {
+          web: {
+            category: 'Софтвер',
+            title: 'Веб и мобильная разработка',
+            description:
+              'Корпоративные сайты, веб‑приложения, мобильные приложения, админ‑панели и внутренние платформы.',
+            reqs: {
+              premiumUi: 'Премиальные UI‑системы',
+              performancePages: 'Страницы с упором на производительность',
+              analyticsReady: 'Структура, готовая к аналитике',
+              cleanDocs: 'Чистая документация',
+            },
+          },
+          ecommerce: {
+            category: 'Коммерция',
+            title: 'E‑commerce и маркетплейсы',
+            description:
+              'Интернет‑магазины и мультивендорные маркетплейсы с полным операционным инструментарием.',
+            reqs: {
+              catalogFiltersSearch: 'Каталог + фильтры + поиск',
+              cartCheckout: 'Корзина и процессы оплаты',
+              commissionPayout: 'Отчётность по комиссиям и выплатам',
+              ownerDashboards: 'Панели владельцев магазинов',
+            },
+          },
+          banking: {
+            category: 'Банкинг',
+            title: 'Банковские дашборды',
+            description:
+              'Безопасные, аудит‑дружелюбные системы с ролями, отчётностью и контролируемым доступом к данным.',
+            reqs: {
+              rbac: 'Ролевой доступ (RBAC)',
+              auditReporting: 'Аудит‑логи и отчётные представления',
+              secureWorkflow: 'Безопасные workflows',
+              complianceFriendly: 'Соответствие требованиям',
+            },
+          },
+        },
+      },
       deliveryTitle: 'Модель поставки',
       deliveryCopy:
         'Начинаем с архитектуры и UI системы, затем строим модули, подключаем аналитику и сдаём контролируемыми этапами с поддержкой.',
+      delivery: {
+        steps: {
+          1: { title: 'Архитектура и UI‑система', desc: 'Определяем архитектуру и закладываем масштабируемую UI‑систему.' },
+          2: { title: 'Разработка модулей', desc: 'Строим ключевые функции и модули на основе валидированных требований.' },
+          3: { title: 'Интеграции и аналитика', desc: 'Подключаем сервисы, аналитику и инфраструктуру поддержки.' },
+          4: { title: 'Контролируемая поставка', desc: 'Выпуск по этапам с проверкой и валидацией на каждом шаге.' },
+          5: { title: 'Непрерывная поддержка', desc: 'Сопровождаем, мониторим и улучшаем систему после запуска.' },
+        },
+        result: 'Результат: предсказуемая поставка, масштабируемые системы и долгосрочная стабильность.',
+      },
       projectsIntro: 'Примеры проектов: маркетплейсы, банковские дашборды и операционные системы.',
       blogIntro: 'Мысли о маркетплейсах, премиальном UX, админ-системах и банковских панелях.',
       careersIntro:
         'Мы строим премиальные системы. Присоединяйтесь, если важны дизайн, структура и надежность.',
+      backend: {
+        heroTitle: 'Backend‑разработчик (API/DB)',
+        buildTitle: 'Надёжные и масштабируемые системы для продакшена',
+        buildCopy:
+          'Мы ищем бэкенд‑разработчика, который фокусируется на надёжности систем, чистой архитектуре и долгосрочной поддерживаемости. Вы будете работать над ядром логики для дашбордов, маркетплейсов и внутренних платформ, где критичны целостность данных, производительность и безопасность.',
+        workOnTitle: 'Чем будете заниматься',
+        workOn: {
+          items: {
+            architecture: 'Проектирование и реализация бэкенд‑архитектур для продакшенных систем',
+            apis: 'Разработка и поддержка API для веб и мобильных приложений',
+            databasesLogic: 'Работа с базами данных, моделями данных и бизнес‑логикой',
+            authRbac: 'Интеграция аутентификации, авторизации и контролей доступа',
+            performanceReliability: 'Обеспечение производительности, надёжности и масштабируемости систем',
+            collaborateFrontend: 'Тесное сотрудничество с фронтенд‑разработчиками и дизайнерами',
+            improveWithoutBreaking: 'Улучшение существующих систем без поломок рабочих процессов',
+          },
+        },
+        expectTitle: 'Что мы ожидаем',
+        technicalSkillsTitle: 'Технические навыки',
+        skills: {
+          items: {
+            language: 'Опыт с одним из бэкенд‑языков (например, Node.js, Python, Java и т.п.)',
+            apiDesign: 'Понимание проектирования API (REST, структурированные потоки данных)',
+            relationalModeling: 'Опыт с реляционными БД и моделированием данных',
+            securityAuth: 'Знание аутентификации, авторизации и базовых принципов безопасности',
+            cleanMaintainable: 'Умение писать чистый, поддерживаемый и хорошо структурированный код',
+            productionBehavior: 'Понимание поведения систем в продакшен‑среде',
+          },
+        },
+        niceToHaveTitle: 'Плюсом будет',
+        nice: {
+          items: {
+            scalableTraffic: 'Опыт со масштабируемыми или высоконагруженными системами',
+            jobsQueuesCaching: 'Понимание фоновых задач, очередей или кэширования',
+            loggingMonitoring: 'Знание логирования, мониторинга и обработки ошибок',
+            adminInternal: 'Опыт разработки админ‑панелей или внутренних инструментов',
+          },
+        },
+        howWeWorkTitle: 'Как мы работаем',
+        how: {
+          items: {
+            architectureFirst: 'Архитектура‑в‑приоритете для бэкенда',
+            clearOwnership: 'Чёткое владение зонами ответственности',
+            noRushedFeatures: 'Без спешки и функций без понимания последствий',
+            stabilityIntegrity: 'Фокус на стабильности, целостности данных и поддерживаемости',
+            closeCollaboration: 'Тесная работа бэкенда, фронтенда и дизайна',
+          },
+        },
+        whatYouGetTitle: 'Что вы получаете',
+        get: {
+          items: {
+            realProduction: 'Работа с реальными продакшен‑системами, а не учебными проектами',
+            businessLogic: 'Ответственность за ключевую бизнес‑логику',
+            collaboration: 'Сотрудничество с опытными фронтенд и UX командами',
+            cleanArchitecture: 'Акцент на чистую архитектуру и долгосрочное мышление',
+            engineeringEnvironment: 'Профессиональная инженерная среда с ясными ожиданиями',
+          },
+        },
+        locationTitle: 'Локация и формат',
+        location: {
+          items: {
+            country: 'Азербайджан',
+            format: 'Полный день / Гибрид (в зависимости от роли и опыта)',
+          },
+        },
+        applyTitle: 'Готовы откликнуться?',
+        applyCopy:
+          'Если вам важно строить стабильные, масштабируемые бэкенд‑системы — и вы хотите, чтобы ваша работа держалась в реальном продакшене — мы хотим вас услышать.',
+        applyCta: 'Откликнуться на вакансию',
+      },
+      uiux: {
+        heroTitle: 'UX/UI дизайнер',
+        buildTitle: 'Дизайн‑системы и интерфейсы для продакшен‑платформ',
+        buildCopy:
+          'Ищем UX/UI дизайнера, который понимает: хороший дизайн — это не декор, а структура, ясность и принятие решений. Работа над реальными продуктами: дашборды, маркетплейсы, внутренние системы, где важны удобство, консистентность и долгосрочная масштабируемость.',
+        workOnTitle: 'Чем будете заниматься',
+        workOn: {
+          items: {
+            flows: 'Проектирование сквозных пользовательских сценариев для сложных продуктов',
+            wireframes: 'Создание wireframes, UI‑макетов и интерактивных прототипов',
+            designSystems: 'Определение и поддержка дизайн‑систем и переиспользуемых компонентов',
+            translateRequirements: 'Перевод бизнес/технических требований в понятные UX‑решения',
+            collaborateDev: 'Тесная работа с фронтенд и бэкенд разработчиками',
+            improveUsability: 'Улучшение удобства, доступности и консистентности продуктов',
+            iterateFeedback: 'Итерации на основе фидбэка, реального использования и ограничений',
+          },
+        },
+        expectTitle: 'Что мы ожидаем',
+        coreSkillsTitle: 'Ключевые навыки',
+        skills: {
+          items: {
+            uxPrinciples: 'Понимание UX‑принципов и user‑centered подхода',
+            solidUi: 'Сильные UI‑навыки: композиция, отступы, иерархия',
+            figmaExperience: 'Опыт работы с Figma (компоненты, варианты, auto‑layout)',
+            dataHeavyInterfaces: 'Умение проектировать интерфейсы с данными (дашборды, админ‑панели)',
+            clearThinking: 'Структурное мышление и решение задач',
+            portfolioProcess: 'Портфолио, показывающее процесс, а не только визуал',
+          },
+        },
+        niceToHaveTitle: 'Плюсом будет',
+        nice: {
+          items: {
+            devCollab: 'Опыт работы с разработчиками над реальными продуктами',
+            responsiveMobile: 'Понимание responsive и mobile‑first подхода',
+            designSystemsPatterns: 'Знание дизайн‑систем и масштабируемых UI‑паттернов',
+            adminInternal: 'Опыт работы над админ‑панелями или внутренними инструментами',
+          },
+        },
+        howWeWorkTitle: 'Как мы работаем',
+        how: {
+          items: {
+            architectureFirstProduct: 'Продуктовое мышление с архитектурой в приоритете',
+            alignedFromStart: 'UX, UI и инженерия синхронизированы с начала',
+            noRushedVisuals: 'Без поспешного визуала без понимания задачи',
+            logicBackedDecisions: 'Дизайн‑решения на основе логики, а не трендов',
+            longTermMaintainability: 'Долгосрочная поддерживаемость вместо краткосрочного блеска',
+          },
+        },
+        whatYouGetTitle: 'Что вы получаете',
+        get: {
+          items: {
+            realProductionNotConcept: 'Работа с реальными продакшен‑системами, а не концепт‑дизайнами',
+            influenceStructureUx: 'Влияние на структуру продукта и пользовательский опыт',
+            closeCollabEngineering: 'Тесная работа с инженерными командами',
+            spaceToIterate: 'Пространство для мысли, итераций и качественных улучшений',
+            professionalEnvironment: 'Профессиональная среда, ценящая ясность и качество',
+          },
+        },
+        locationTitle: 'Локация и формат',
+        location: {
+          items: {
+            country: 'Азербайджан',
+            format: 'Полный день / Гибрид (в зависимости от роли и опыта)',
+          },
+        },
+        applyTitle: 'Готовы откликнуться?',
+        applyCopy:
+          'Если вам важно строить стабильные, масштабируемые бэкенд‑системы — и вы хотите, чтобы ваша работа держалась в реальном продакшене — мы хотим вас услышать.',
+        applyCta: 'Откликнуться на вакансию',
+      },
+      frontend: {
+        heroTitle: 'Frontend‑разработчик (JS / TS)',
+        buildTitle: 'Строить продакшен‑готовые интерфейсы для реальных бизнес‑систем',
+        buildCopy:
+          'Мы ищем фронтенд‑разработчика, которому важны структура, производительность и долгосрочная поддерживаемость — не только визуал. Вы будете работать над реальными продуктами: дашборды, маркетплейсы и внутренние платформы, используемые ежедневно в продакшене.',
+        workOnTitle: 'Чем будете заниматься',
+        workOn: {
+          items: {
+            architecture: 'Проектирование и построение масштабируемой фронтенд‑архитектуры',
+            adminDashboards: 'Разработка админ‑панелей, дашбордов и интерфейсов с данными',
+            translateDesigns: 'Перевод UI/UX‑макетов в чистый, поддерживаемый код',
+            integrateApis: 'Совместная работа с бэкендом для интеграции API',
+            performanceAccessibility: 'Повышение производительности, доступности и удобства на разных устройствах',
+            maintainEvolve: 'Поддержка и развитие существующих систем без поломок',
+          },
+        },
+        expectTitle: 'Что мы ожидаем',
+        technicalSkillsTitle: 'Технические навыки',
+        skills: {
+          items: {
+            jsTs: 'Опыт с JavaScript (ES6+) / TypeScript',
+            react: 'Знание React (или подобных современных фреймворков)',
+            componentArchitecture: 'Понимание компонентной архитектуры',
+            restAsync: 'Опыт работы с REST API и асинхронными данными',
+            responsive: 'Знание адаптивного/отзывчивого дизайна',
+            cleanCode: 'Мышление чистого кода (читаемость, структура, переиспользование)',
+          },
+        },
+        niceToHaveTitle: 'Плюсом будет',
+        nice: {
+          items: {
+            adminSaaS: 'Опыт с админ‑дашбордами или SaaS‑продуктами',
+            uiPerformance: 'Понимание UI‑производительности и оптимизации',
+            designSystems: 'Опыт работы с дизайн‑системами',
+            portfolio: 'GitHub‑портфолио или примеры реальных проектов',
+          },
+        },
+        howWeWorkTitle: 'Как мы работаем',
+        how: {
+          items: {
+            architectureFirst: 'Архитектура — в приоритете',
+            clearRequirements: 'Чёткие требования и структурированная поставка',
+            noHacks: 'Без спешки и грязных хакающих решений',
+            longTermStability: 'Фокус на долгосрочной стабильности, а не быстрых победах',
+            collaboration: 'С первого дня — синхрон дизайна, фронта и бэка',
+          },
+        },
+        whatYouGetTitle: 'Что вы получаете',
+        get: {
+          items: {
+            realProduction: 'Работа с реальными продакшен‑системами, а не демо',
+            ownership: 'Понятная техническая ответственность и владение',
+            collaboration: 'Сотрудничество с дизайнерами и бэкенд‑инженерами',
+            longTermThinking: 'Долгосрочное продуктовое мышление вместо краткосрочных задач',
+            engineeringCulture: 'Чистая, профессиональная инженерная культура',
+          },
+        },
+        locationTitle: 'Локация и формат',
+        location: {
+          items: {
+            country: 'Азербайджан',
+            format: 'Полный день / Гибрид (в зависимости от роли и опыта)',
+          },
+        },
+        applyTitle: 'Готовы откликнуться?',
+        applyCopy:
+          'Если этот формат похож на то, как вы хотите работать — а не просто что писать в коде — нам будет интересно вас услышать.',
+        applyCta: 'Откликнуться на вакансию',
+      },
+      careers: {
+        viewRoleCta: 'Открыть вакансию',
+        whyTitle: 'Почему именно мы',
+        whyCopy:
+          'Мы нанимаем инженеров и дизайнеров, которым важны качество систем, ясность и долгосрочный эффект. Мы работаем с реальными продакшен‑системами, а не короткоживущими прототипами.',
+        workWithUsAlt: 'Работа с нами',
+        viewMore: 'Показать больше',
+        showLess: 'Показать меньше',
+        vacancies: {
+          frontend: {
+            title: 'Frontend‑разработчик (JS/TS)',
+            description: 'Строить премиальные интерфейсы и дашборды',
+            location: 'Полная занятость, Баку / Гибрид',
+            reqs: {
+              htmlCssJs: 'Сильные HTML/CSS/JS',
+              uiSense: 'Чувство UI',
+              cleanCode: 'Точный и чистый код',
+            },
+          },
+          backend: {
+            title: 'Backend‑разработчик (API/DB)',
+            description: 'Проектировать API, модели данных и безопасные доступы.',
+            location: 'Полная занятость, Баку / Гибрид',
+            reqs: {
+              restSql: 'REST/SQL',
+              authRbacSense: 'Понимание Auth/RBAC',
+              performanceMindset: 'Ориентация на производительность',
+            },
+          },
+          uiux: {
+            title: 'UI/UX дизайнер',
+            description: 'Строить премиальные интерфейсы и дашборды',
+            location: 'Контракт / Полная занятость, Удалённо / Гибрид',
+            reqs: {
+              figma: 'Figma',
+              designSystems: 'Дизайн‑системы',
+              webMobileUx: 'Веб / Мобильный UX',
+            },
+          },
+        },
+        team: {
+          members: {
+            john: {
+              role: 'Лидер продаж и маркетинга',
+              description:
+                'Лидирует в построении и отчётности цифровых систем с фокусом на организацию бизнеса, операционные продажи и развитие логистики.',
+            },
+            jane: {
+              role: 'Руководитель аналитики данных',
+              description:
+                'Разработала устойчивые аналитические фреймворки, эффективные и пригодные для кастомизации; архитектура цепочек продаж.',
+            },
+            mike: {
+              role: 'Бизнес‑развитие',
+              description:
+                'Фокус на ясных требованиях, долгосрочной стабильности и управлении рабочим временем.',
+            },
+            sarah: {
+              role: 'Операционный менеджер',
+              description:
+                'Управление высококачественными базами продаж и отражёнными показателями на уровне капитала группы.',
+            },
+            robert: {
+              role: 'Специалист по логистике',
+              description:
+                'Эксперт по логистическому развитию бизнеса и оптимизации систем.',
+            },
+            emily: {
+              role: 'Операции продаж',
+              description:
+                'Специализация на операциях продаж и отчётности цифровых систем.',
+            },
+            david: {
+              role: 'Маркетинговый аналитик',
+              description:
+                'Анализирует данные продаж и формирует практические инсайты для роста бизнеса.',
+            },
+            lisa: {
+              role: 'Работа с клиентами',
+              description:
+                'Строит крепкие отношения с клиентами и обеспечивает их удовлетворённость.',
+            },
+          },
+        },
+      },
+            caseStudiesIntro:
+              'Мы показываем реальные проекты, где структурная архитектура, продуманный UX и дисциплинированная инженерия привели к стабильным продакшен‑системам. Кейсы фокусируются на практических вызовах, продуктовых решениях и результатах поставки для масштабируемого роста и операционной ясности.',
+            caseStudies: {
+              viewCta: 'Открыть кейс',
+              keyFocusLabel: 'Ключевой фокус',
+              requestTitle: 'Запрос на обзор проекта',
+              requestCopy:
+                'Расскажите о проекте. Мы получаем каждый запрос и отвечаем с понятными следующими шагами — или предварительным обзором (generic sub‑pack).',
+              tip:
+                'Совет: Укажите отрасль, ключевые требования и целевой рынок. Достаточно даже приблизительной идеи.',
+              privacy:
+                'Мы не делимся вашими данными. Сообщение идёт напрямую в команду инженеров.',
+              chooseField: 'Sahəni seçin',
+              items: {
+                marketplace: {
+                  category: 'E‑commerce · Маркетплейс',
+                  title: 'MVP маркетплейса на нескольких продавцов',
+                  description:
+                    'Мы спроектировали и построили продакшен‑готовый MVP мультивендор‑маркетплейса, уделив особое внимание масштабируемой архитектуре и операционной ясности. Система включает централизованную админ‑панель, панели продавцов, структурное управление товарами/категориями и встроенную отчётность для раннего роста и долгосрочного масштабирования.',
+                  focus: [
+                    'Архитектура маркетплейса',
+                    'Админ‑панель и управление продавцами',
+                    'Отчётность и аналитика',
+                  ],
+                },
+                fintech: {
+                  category: 'Банкинг · Финтех',
+                  title: 'Финтех‑дашборд отчётности',
+                  description:
+                    'Мы разработали безопасную, ролевую панель отчётности для финансовых операций с фокусом на готовность к аудиту, целостность данных и контролируемые доступы. Система предоставляет структурные финансовые отчёты, разрешённые представления и надёжную видимость данных для соответствия и принятия решений.',
+                  focus: [
+                    'Ролевой доступ (RBAC)',
+                    'Отчётность, дружелюбная к аудиту',
+                    'Безопасные потоки данных',
+                  ],
+                },
+                operations: {
+                  category: 'Производство · Операции',
+                  title: 'Система операций и складского учёта',
+                  description:
+                    'Проект направлен на внутреннюю систему операций и учёта запасов для повышения операционной ясности и точности данных. Платформа поддерживает учёт запасов, мониторинг доходов/расходов и управленческие дашборды для упрощения ежедневных операций.',
+                  focus: [
+                    'Управление запасами',
+                    'Финансовый учёт',
+                    'Операционные дашборды',
+                  ],
+                },
+              },
+            },
       teamTitle: 'Наша команда',
       contactIntro: 'Расскажите, что хотите создать. Ответим структурным предложением.',
       contactFormTitle: 'Отправить запрос',
@@ -227,6 +1550,126 @@ const translations: Record<Locale, Record<string, any>> = {
       noteCopy: 'В демо запросы сохраняются локально и видны в Admin → Leads.',
       industriesIntro:
         'Мы делаем системы, где критичны надежность, отчетность и премиальный UX.',
+      about: {
+        headerTitle: 'Мы создаём и проектируем системы на долгий срок.',
+        headerCopy:
+          'Фокус на долгосрочной надёжности, чёткой архитектуре и стабильности систем при росте команд и данных.',
+        whoTitle: 'Кто мы',
+        whoCopy:
+          'Alievs Space MMC — инженерная компания с фокусом на digital и commerce, создающая продакшен‑готовые системы с премиальным UI и операционным контролем. Мы соединяем backend‑архитектуру, UX‑системы и бизнес‑логику, чтобы строить платформы, которые масштабируются, безопасны и удобны в эксплуатации через структурированные админ‑инструменты. Наши проекты охватывают мультивендор‑маркетплейсы, внутренние управленческие платформы и банковские дашборды с ролями, отчётностью и аудит‑готовыми процессами.',
+        who: {
+          values: {
+            responsibility: 'Ответственность',
+            transparency: 'Прозрачность',
+            premiumQuality: 'Премиальное качество',
+            securityReliability: 'Безопасность и надёжность',
+            longTermPartnership: 'Долгосрочное партнёрство',
+          },
+        },
+        deliverTitle: 'Как мы поставляем',
+        deliverIntro:
+          'Структурированный подход к поставке, снижающий риски, обеспечивающий качество и поддерживающий устойчивый рост продукта.',
+        deliver: {
+          items: {
+            analysis: {
+              alt: 'Аналитика и стратегия',
+              title: 'Аналитика и стратегия',
+              text:
+                'Анализируем бизнес‑цели, технические ограничения и требования пользователей, определяем scope, приоритеты и понятную дорожную карту поставки.',
+            },
+            uxui: {
+              alt: 'UX/UI и архитектура',
+              title: 'UX/UI и архитектура',
+              text:
+                'Проектируем UX и архитектуру вместе, чтобы с самого начала обеспечить удобство, масштабируемость и поддержку в долгосрочной перспективе.',
+            },
+            development: {
+              alt: 'Разработка',
+              title: 'Разработка',
+              text:
+                'Реализуем ключевые функции модульным, продакшен‑готовым кодом в соответствии с архитектурными и безопасностными стандартами.',
+            },
+            quality: {
+              alt: 'Контроль качества',
+              title: 'Контроль качества',
+              text:
+                'Проверяем функциональность, производительность и крайние случаи структурированным тестированием, чтобы обеспечить надёжность перед релизом.',
+            },
+            launch: {
+              alt: 'Запуск',
+              title: 'Запуск',
+              text:
+                'Постепенно внедряем, мониторим поведение системы и обеспечиваем плавный переход к реальному использованию.',
+            },
+            support: {
+              alt: 'Поддержка и масштабирование',
+              title: 'Поддержка',
+              text:
+                'Обеспечиваем непрерывную поддержку, улучшения и стратегии масштабирования по мере роста использования и бизнес‑потребностей.',
+            },
+          },
+        },
+        approachTitle: 'Подход',
+        approachCopy:
+          'Строим осознанно: от архитектуры и операционных потребностей к системам, которые масштабируются ответственно и надёжно работают в продакшене.',
+        approachWhoTitle: 'С кем мы работаем',
+        approachWhoCopy:
+          'Мы работаем с командами, которым нужны надёжные системы, понятная отчётность и долгосрочная стабильность — вместо временных решений. Структурная инженерия, премиальный UI/UX и дисциплинированная поставка обеспечивают надёжность не только при разработке, но и после запуска.',
+        approachResponsibilityTitle: 'Ответственность за пределами кода',
+        approachResponsibilityCopy:
+          'Берём ответственность и после релиза: поддерживаем системы, обеспечиваем прозрачную коммуникацию и строим платформы с прицелом на долгую жизнь.',
+      },
+      industries: {
+        items: {
+          retail: {
+            category: 'Ритейл и E‑commerce',
+            title: 'Создано для конверсии и роста',
+            description:
+              'Витрины с упором на конверсию, UX оплаты, аналитика и операционная прозрачность — без трения при масштабировании.',
+          },
+          marketplaces: {
+            category: 'Маркетплейсы',
+            title: 'Под сложность мульти‑вендор моделей',
+            description:
+              'Архитектура для множества продавцов: панели магазинов, комиссии, выплаты и модерация — для контроля и масштабируемости.',
+          },
+          banking: {
+            category: 'Банкинг / Финансы',
+            title: 'Безопасность, доступы и соответствие — в приоритете',
+            description:
+              'Ролевой доступ, отчёты готовые к аудиту и контролируемые процессы — под регулируемую среду.',
+          },
+          manufacturing: {
+            category: 'Производство и склад',
+            title: 'Операционная ясность на каждом уровне',
+            description:
+              'Учёт остатков, контроль затрат, видимость доходов/расходов и дашборды для реальных управленческих решений.',
+          },
+          beauty: {
+            category: 'Бьюти / Салоны',
+            title: 'Системы, упрощающие ежедневную работу',
+            description:
+              'Записи, учёт, напоминания, инструменты для персонала и управление клиентами — меньше ручной рутины и накладных.',
+          },
+          logistics: {
+            category: 'Логистика и доставка',
+            title: 'Видимость на каждом этапе доставки',
+            description:
+              'Заказы, статусы, координация магазинов/админов и отчётные слои, поддерживающие согласованность операций.',
+          },
+          startup: {
+            category: 'Стартапы / MVP',
+            title: 'От идеи до продакшен‑MVP',
+            description:
+              'Лёгкая поставка MVP с премиальным UI и масштабируемой архитектурой — быстрая валидация и безопасный рост.',
+          },
+        },
+        trustedTitle: 'Нам доверяют продакшен‑системы',
+        trustedCopy1:
+          'Мы работаем с командами, где важны надёжность, отчётность и долгосрочная стабильность — вместо временных решений. Структурная инженерия, премиальный UI/UX и дисциплинированная поставка гарантируют надёжность систем после запуска, а не только во время разработки.',
+        trustedCopy2:
+          'Каждый проект ведём с чётким scope, прозрачной коммуникацией и архитектурным мышлением. Строим платформы, которые команды могут эксплуатировать, расширять и которым доверяют при росте бизнеса.',
+      },
       projectDetails: 'Детали',
       industry: 'Отрасль',
       tags: 'Теги',
@@ -239,8 +1682,8 @@ const translations: Record<Locale, Record<string, any>> = {
       postHelpCopy:
         'Если строите маркетплейс, e-commerce или банковский дашборд — подготовим архитектуру с премиальным UX.',
     },
-  },
-  az: {
+    },
+    az: {
     ui: {
       language: 'Dil',
       menu: 'Menyu',
@@ -253,6 +1696,7 @@ const translations: Record<Locale, Record<string, any>> = {
       about: 'Haqqımızda',
       services: 'Xidmətlər',
       industries: 'Sahələr',
+      caseStudies: 'Case Studies',
       projects: 'Layihələr',
       careers: 'Karyera',
       blog: 'Bloq',
@@ -263,7 +1707,7 @@ const translations: Record<Locale, Record<string, any>> = {
     public: {
       footerDesc:
         'Premium veb və mobil inkişaf, e-ticarət/marketpleys sistemləri və bank paneli həlləri.',
-      industriesCta: 'Bu sahəni müzakirə edək →',
+      industriesCta: 'Bu sahəni müzakirə edək',
       requirements: 'Tələblər:',
       apply: 'Müraciət et',
       notFoundProject: 'Layihə tapılmadı',
@@ -284,6 +1728,156 @@ const translations: Record<Locale, Record<string, any>> = {
       adminIncluded: 'Admin panel daxildir',
       adminDesc:
         'Xidmətlərə, layihələrə, bloqa, vakansiyalara və sorğulara nəzarət edin. Dəyişikliklər dərhal saytda görünür.',
+      loading: 'Yüklənir…',
+      marketplaceMvp: {
+        back: '← Case Studies bölməsinə qayıt',
+        badge: 'E‑ticarət · Marketpleys',
+        title: 'Çox‑satıcılı Marketpleys MVP',
+        intro:
+          'Miqyaslana bilən memarlıq, strukturlaşdırılmış admin nəzarəti və satıcı səviyyəsində panel ilə erkən artımı və gələcək genişlənməni dəstəkləyən prodakşen‑hazır marketpleys MVP.',
+        contextTitle: 'Layihə konteksti',
+        contextItems: {
+          industry: 'Sahə: E‑ticarət/Marketpleys',
+          projectType: 'Layihə tipi: MVP',
+          scope: 'Həcm: Tam sistem dizaynı və inkişafı',
+          focus: 'Fokus: Admin alətləri, satıcı idarəetməsi, analitika',
+        },
+        challengeTitle: 'Çağırış',
+        challengeCopy:
+          'Müştəriyə bir neçə satıcını dəstəkləyən, aydın admin nəzarəti, strukturlaşdırılmış məhsul idarəetməsi və etibarlı hesabatlılıq təmin edən marketpleys MVP lazım idi — ilkin buraxılışı həddən artıq mürəkkəbləşdirmədən.',
+        solutionTitle: 'Həllimiz',
+        solutionCopy:
+          'Mərkəzləşdirilmiş admin panel, ayrı satıcı dörd panelləri və məhsullar, kateqoriyalar və hesabat axınları üçün strukturlaşdırılmış iş axınları ilə modulyar marketpleys sistemi dizayn edib tətbiq etdik. Memarlıq satıcıların və məlumat həcminin artımı ilə miqyaslana bilmək üçün quruldu.',
+        deliveredTitle: 'Nələri çatdırdıq',
+        deliveredItems: {
+          admin: 'Rola əsaslı girişlə mərkəzi admin panel',
+          vendors: 'Satıcı onbordinqi və mağaza panelləri',
+          products: 'Məhsul və kateqoriya idarəetməsi',
+          analytics: 'Analitika və hesabat alətləri',
+          backend: 'Miqyaslana bilən backend memarlıq',
+        },
+        deliveryTitle: 'Çatdırılma yanaşması',
+        deliveryCopy:
+          'Memarlıq‑öncəli yanaşmaya əməl etdik, UI sistemini erkən müəyyənləşdirdik və platformanı davamlı doğrulama və dəstəklə idarə olunan mərhələlərlə çatdırdıq.',
+        ctaTitle: 'Oxşar sistemi qurmaq istəyirsiniz?',
+        ctaButton: 'Dialoqa başlayın',
+      },
+      fintechDashboard: {
+        back: '← Case Studies bölməsinə qayıt',
+        badge: 'Bankçılıq · Fintex',
+        title: 'Fintex Hesabat Paneli',
+        intro:
+          'Maliyyə əməliyyatları üçün təhlükəsiz, rola əsaslı hesabat paneli: auditə hazır hesabatlar, idarə olunan giriş qatları və uyğunluq və daxili qərarlar üçün aydın məlumat görünürlüğü.',
+        contextTitle: 'Layihə konteksti',
+        contextItems: {
+          industry: 'Sahə: Bankçılıq/ Fintex',
+          projectType: 'Layihə tipi: daxili sistem',
+          scope: 'Həcm: Panel dizaynı və backend icrası',
+          focus: 'Fokus: RBAC, hesabatlılıq, auditə hazır',
+        },
+        challengeTitle: 'Çağırış',
+        challengeCopy:
+          'Müştəriyə, daxili nəzarət və audit tələblərinə cavab verən, dəqiq və strukturlaşdırılmış məlumat girişi təmin edən maliyyə hesabat sistemi lazım idi. Müxtəlif rol sahibləri üçün aydın icazələr, etibarlı hesabat nəticələri və məlumat bütövlüyünə inam tələb olunurdu — əməliyyat mürəkkəbliyini artırmadan.',
+        solutionTitle: 'Həllimiz',
+        solutionCopy:
+          'Rola əsaslı giriş modelləri və strukturlaşdırılmış hesabat generasiyası ilə nəzarət olunan giriş qatlarına malik hesabat paneli dizayn edib tətbiq etdik. Sistem icazə‑əsaslı baxışlar, auditə uyğun məlumat çıxışları və aydın maliyyə görünürlüğü təmin edir — həm əməliyyat, həm də uyğunluq yoxlamaları üçün.',
+        deliveredTitle: 'Nələri çatdırdıq',
+        deliveredItems: {
+          rbac: 'Rola əsaslı giriş nəzarəti (RBAC)',
+          reports: 'Audit üçün uyğun maliyyə hesabatları',
+          security: 'Təhlükəsiz məlumat giriş qatları',
+          dashboards: 'Strukturlaşdırılmış hesabat panelləri',
+          backend: 'Miqyaslana bilən backend əsasları',
+        },
+        deliveryTitle: 'Çatdırılma yanaşması',
+        deliveryCopy:
+          'Təhlükəsizlik‑öncəli və memarlıq‑əsaslı yanaşma ilə işlədik: giriş modellərini erkən müəyyən etdik və hesabat məntiqini inkişaf müddətində doğruladıq ki, etibarlılıq və uyğunluq hazır olsun.',
+        ctaTitle: 'Oxşar sistemi qurmaq istəyirsiniz?',
+        ctaButton: 'Dialoqa başlayın',
+      },
+      inventory: {
+        back: '← Case Studies bölməsinə qayıt',
+        badge: 'İstehsal · Əməliyyatlar',
+        title: 'Əməliyyat və İnventar Sistemləri',
+        intro:
+          'Ehtiyatların görünürlüğünü, maliyyə uçotunu və gündəlik əməliyyat aydınlığını artırmaq üçün strukturlaşdırılmış panellər və hesabatlar vasitəsilə qurulmuş daxili əməliyyat və inventar idarəetmə sistemi.',
+        contextTitle: 'Layihə konteksti',
+        contextItems: {
+          industry: 'Sahə: İstehsal / Əməliyyatlar',
+          projectType: 'Layihə tipi: Daxili idarəetmə sistemi',
+          scope: 'Həcm: Sistem dizaynı və tətbiqi',
+          focus: 'Fokus: Inventar, maliyyə izləmə, panellər',
+        },
+        challengeTitle: 'Çağırış',
+        challengeCopy:
+          'Komandalar üzrə inventar səviyyələrini, gəlir‑xərc axınlarını və əməliyyat məlumatlarını izləyən mərkəzləşdirilmiş sistemə ehtiyac var idi. Mövcud proseslər real‑vaxt görünürlüğü vermirdi və ehtiyat dəqiqliyini, maliyyə nəzarətini effektiv idarə etməyi çətinləşdirirdi.',
+        solutionTitle: 'Həllimiz',
+        solutionCopy:
+          'Inventar məlumatlarını, maliyyə izləməsini və idarəetmə panellərini mərkəzləşdirən daxili əməliyyat platforması qurduq. Sistem aydın əməliyyat görünüşləri, strukturlaşdırılmış iş axınları və etibarlı məlumat girişi təmin edir — gündəlik qərarvermə və uzunmüddətli planlama üçün.',
+        deliveredTitle: 'Nələri çatdırdıq',
+        deliveredItems: {
+          inventory: 'Inventar və ehtiyat izləmə',
+          finance: 'Gəlir və xərclərin monitorinqi',
+          dashboards: 'Əməliyyat panelləri',
+          reporting: 'İdarəetmə hesabat alətləri',
+          backend: 'Miqyaslana bilən daxili sistem memarlığı',
+        },
+        deliveryTitle: 'Çatdırılma yanaşması',
+        deliveryCopy:
+          'Aydınlıq və etibarlılığı prioritet tutaraq sistem iş axınlarını erkən müəyyən etdik və platformanı strukturlaşdırılmış mərhələlərlə çatdırdıq ki, məlumatların düzgün işlənməsi və komandalar üçün rahat istifadə təmin olunsun.',
+        ctaTitle: 'Oxşar sistemi qurmaq istəyirsiniz?',
+        ctaButton: 'Dialoqa başlayın',
+      },
+      home: {
+        heroTitle: 'Miqyaslana bilən premium rəqəmsal məhsullar qururuq',
+        heroCopy:
+          'Biz veb və mobil inkişaf, e-ticarət/marketpleys sistemləri və bank üçün hazır panelləri təhlükəsizlik‑öncəli yanaşma ilə təqdim edirik.',
+        ctas: {
+          contact: 'Satışla əlaqə',
+          services: 'Xidmətləri araşdır',
+          caseStudies: 'Layihələrə bax',
+        },
+        advantages: {
+          yearsText: 'İstehsal sistemləri qurmaqda illər',
+          enterpriseText: 'Real biznes əməliyyatlarına hazır',
+          premiumText: 'Yüksək keyfiyyətli UI/UX dizayn sistemləri',
+          secureText: 'Giriş nəzarəti və audit daxildir',
+          fastText: 'Tez çatdırılma, güzəştsiz',
+        },
+        build: {
+          items: {
+            ecommerce: {
+              title: 'E‑ticarət və Marketpleyslər',
+              text: 'Çox‑satıcı platformalar, ödəniş axınları, komissiyalar, analitika.',
+              alt: 'eCommerce',
+            },
+            software: {
+              title: 'Proqram və Məhsul İnkişafı',
+              text: 'Veb tətbiqlər, mobil tətbiqlər, admin panellər, daxili sistemlər.',
+              alt: 'software',
+            },
+            banking: {
+              title: 'Bankçılıq / Fintex Sistemləri',
+              text: 'Rola əsaslı giriş, auditə hazır hesabatlar, təhlükəsiz məlumat axınları.',
+              alt: 'banking',
+            },
+          },
+        },
+        process: {
+          phases: {
+            discovery: { title: 'Araşdırma', desc: 'tələblər və məhdudiyyətlər' },
+            uxui: { title: 'UX/UI', desc: 'axınlar və interfeyslər' },
+            development: { title: 'İnkişaf', desc: 'mühəndislik və inteqrasiyalar' },
+            qa: { title: 'QA', desc: 'test və doğrulama' },
+            launch: { title: 'Buraxılış', desc: 'deploy və yayımlama' },
+            support: { title: 'Dəstək', desc: 'texniki xidmət və təkmilləşdirmələr' },
+          },
+        },
+        projects: {
+          title: 'Layihələrimiz',
+          copy: 'Müxtəlif biznes ehtiyacları və məhsul tipləri üçün həyata keçirilmiş layihələrdən seçmələr.',
+        },
+      },
       aboutWho: 'Biz kimik',
       aboutValues: 'Dəyərlər',
       aboutHow: 'Necə çatdırırıq',
@@ -292,13 +1886,406 @@ const translations: Record<Locale, Record<string, any>> = {
       serviceFallback: 'Xidmət',
       servicesIntro:
         'Premium mühəndislik və dizayn: proqram inkişafı, e-ticarət/marketpleyslər və bank panelləri.',
+      services: {
+        items: {
+          web: {
+            category: 'Proqram',
+            title: 'Veb və mobil inkişaf',
+            description:
+              'Korporativ saytlar, veb tətbiqlər, mobil tətbiqlər, admin panellər və daxili platformalar.',
+            reqs: {
+              premiumUi: 'Premium UI sistemləri',
+              performancePages: 'Performans‑öncül səhifələr',
+              analyticsReady: 'Analitikaya hazır struktur',
+              cleanDocs: 'Təmiz sənədləşmə',
+            },
+          },
+          ecommerce: {
+            category: 'Kommersiya',
+            title: 'E‑ticarət və marketpleys sistemləri',
+            description:
+              'Onlayn mağazalar və çox‑satıcılı marketpleyslər — tam operativ alətlərlə.',
+            reqs: {
+              catalogFiltersSearch: 'Kataloq + filtrlər + axtarış',
+              cartCheckout: 'Səbət və ödəmə axınları',
+              commissionPayout: 'Komissiya və ödəniş hesabatları',
+              ownerDashboards: 'Mağaza sahibi panelləri',
+            },
+          },
+          banking: {
+            category: 'Bank',
+            title: 'Bank yönümlü panellər',
+            description:
+              'Rollar, hesabatlar və nəzarətli məlumat girişinə malik təhlükəsiz sistemlər.',
+            reqs: {
+              rbac: 'Rolla idarə olunan giriş (RBAC)',
+              auditReporting: 'Audit‑jurnalları və hesabat görünüşləri',
+              secureWorkflow: 'Təhlükəsiz iş axınları',
+              complianceFriendly: 'Uyğunluğa dost dizayn',
+            },
+          },
+        },
+      },
       deliveryTitle: 'Çatdırılma modeli',
       deliveryCopy:
         'Əvvəlcə memarlıq və UI sistemi qururuq, sonra modullar əlavə edir, analitikanı qoşur və mərhələli şəkildə dəstəklə təqdim edirik.',
+      delivery: {
+        steps: {
+          1: { title: 'Memarlıq və UI sistemi', desc: 'Sistem memarlığını təyin edin və miqyasa uyğun UI dizayn sistemi qurun.' },
+          2: { title: 'Modul inkişafı', desc: 'Təsdiqlənmiş tələblərə əsasən əsas funksiyalar və modullar hazırlanır.' },
+          3: { title: 'İnteqrasiya və analitika', desc: 'Servislər, analitika və dayaq infrastrukturu inteqrasiya edilir.' },
+          4: { title: 'Kontrollu təqdimat', desc: 'Hər mərhələdə yoxlama ilə strukturlaşdırılmış buraxılış.' },
+          5: { title: 'Davamlı dəstək', desc: 'Launchdan sonra sistemin saxlanması, monitorinqi və təkmilləşdirilməsi.' },
+        },
+        result: 'Nəticə: proqnozlaşdırılan çatdırılma, miqyasa uyğun sistemlər və uzunmüddətli sabitlik.',
+      },
       projectsIntro: 'Marketpleyslər, bank panelləri və əməliyyat sistemləri üzrə nümunələr.',
       blogIntro: 'Marketpleyslər, premium UX, admin sistemləri və bank panelləri barədə fikirlər.',
       careersIntro:
         'Premium sistemlər qururuq. Dizayn və etibarlılığı önəmli sayan komandaya qoşulun.',
+      backend: {
+        heroTitle: 'Backend Developer (API/DB)',
+        buildTitle: 'İstehsal platformalarının arxasında etibarlı və miqyasa uyğun sistemlər',
+        buildCopy:
+          'Sistem etibarlılığına, təmiz memarlığa və uzunmüddətli dəstəklənməyə fokuslanan Backend Developer axtarırıq. Dashboardlar, marketpleyslər və daxili platformaların əsas məntiqi üzərində işləyəcəksiniz — burada data bütövlüyü, performans və təhlükəsizlik kritikdir.',
+        workOnTitle: 'Nə üzərində işləyəcəksiniz',
+        workOn: {
+          items: {
+            architecture: 'İstehsal sistemləri üçün backend arxitekturalarını dizayn və implementasiya etmək',
+            apis: 'Veb və mobil tətbiqlər tərəfindən istifadə olunan API‑ləri qurmaq və dəstəkləmək',
+            databasesLogic: 'Məlumat bazaları, data modelləri və biznes məntiqi ilə işləmək',
+            authRbac: 'Autentifikasiya, autorizasiya və giriş nəzarətlərini inteqrasiya etmək',
+            performanceReliability: 'Sistem performansı, etibarlılığı və miqyaslanmanı təmin etmək',
+            collaborateFrontend: 'Frontend developerlər və dizaynerlərlə sıx əməkdaşlıq etmək',
+            improveWithoutBreaking: 'Mövcud sistemləri istehsalı pozmadan yaxşılaşdırmaq',
+          },
+        },
+        expectTitle: 'Nə gözləyirik',
+        technicalSkillsTitle: 'Texniki bacarıqlar',
+        skills: {
+          items: {
+            language: 'Ən az bir backend dili ilə təcrübə (məs: Node.js, Python, Java və s.)',
+            apiDesign: 'API dizaynını anlama (REST, strukturlaşdırılmış data axınları)',
+            relationalModeling: 'Relyasion bazalar və data modelləşdirmə təcrübəsi',
+            securityAuth: 'Autentifikasiya, autorizasiya və təhlükəsizlik prinsipləri biliyi',
+            cleanMaintainable: 'Təmiz, dəstəklənə bilən və yaxşı strukturlu kod yazmaq bacarığı',
+            productionBehavior: 'İstehsal mühitində sistem davranışını anlamaq',
+          },
+        },
+        niceToHaveTitle: 'Üstünlük sayılır',
+        nice: {
+          items: {
+            scalableTraffic: 'Miqyasa uyğun və ya yüksək trafikli sistemlərlə təcrübə',
+            jobsQueuesCaching: 'Fon işləri, növbələr və ya caching ilə tanışlıq',
+            loggingMonitoring: 'Loglama, monitorinq və səhv idarəetməsini anlamaq',
+            adminInternal: 'Admin panelləri və ya daxili alətlər üzərində təcrübə',
+          },
+        },
+        howWeWorkTitle: 'Necə işləyirik',
+        how: {
+          items: {
+            architectureFirst: 'Backend üçün arxitektura‑öncül dizayn',
+            clearOwnership: 'Aydın sahiblənmə və məsuliyyət',
+            noRushedFeatures: 'Təsirini anlamadan tələsik xüsusiyyətlər yoxdur',
+            stabilityIntegrity: 'Sabitlik, data bütövlüyü və dəstəklənməyə fokus',
+            closeCollaboration: 'Backend, frontend və dizayn arasında sıx əməkdaşlıq',
+          },
+        },
+        whatYouGetTitle: 'Nə əldə edirsiniz',
+        get: {
+          items: {
+            realProduction: 'Demo deyil, real istehsal sistemlərində iş',
+            businessLogic: 'Əsas biznes məntiqinə cavabdehlik',
+            collaboration: 'Təcrübəli frontend və UX komandaları ilə əməkdaşlıq',
+            cleanArchitecture: 'Təmiz memarlığa və uzunmüddətli düşüncəyə vurğu',
+            engineeringEnvironment: 'Aydın gözləntiləri olan peşəkar mühəndislik mühiti',
+          },
+        },
+        locationTitle: 'Məkan və format',
+        location: {
+          items: {
+            country: 'Azərbaycan',
+            format: 'Tam ştat / Hibrid (rol və təcrübədən asılı olaraq)',
+          },
+        },
+        applyTitle: 'Müraciət etməyə hazırsınız?',
+        applyCopy:
+          'Sabit və miqyasa uyğun backend sistemləri qurmaq sizin üçün önəmlidirsə — və işiniz real istehsal mühitində dayanıqlı olsun istəyirsinizsə — sizi eşitmək istərdik.',
+        applyCta: 'Bu rola müraciət et',
+      },
+      uiux: {
+        heroTitle: 'UX/UI Dizayner',
+        buildTitle: 'İstehsala hazır platformalar üçün dizayn sistemləri və interfeyslər',
+        buildCopy:
+          'Dekor deyil, dizayn — struktur, aydınlıq və qərar vermədir — bunu anlayan UX/UI dizayner axtarırıq. Dashboardlar, marketpleyslər və daxili sistemlər kimi real məhsullar üzərində işləyəcəksiniz; burada istifadə rahatlığı, konsistentlik və uzunmüddətli miqyaslanma önəmlidir.',
+        workOnTitle: 'Nə üzərində işləyəcəksiniz',
+        workOn: {
+          items: {
+            flows: 'Mürəkkəb məhsullar üçün başdan‑sona istifadəçi axınlarını dizayn etmək',
+            wireframes: 'Wireframe, UI layout və interaktiv prototiplər hazırlamaq',
+            designSystems: 'Dizayn sistemlərini və təkrar istifadə olunan komponentləri müəyyənləşdirmək və qorumaq',
+            translateRequirements: 'Biznes/texniki tələbləri aydın UX həllərinə çevirmək',
+            collaborateDev: 'Frontend və backend developerlərlə sıx əməkdaşlıq',
+            improveUsability: 'Məhsullar üzrə istifadə rahatlığı, əlçatanlıq və konsistentliyi yaxşılaşdırmaq',
+            iterateFeedback: 'Rəy, real istifadə və məhdudiyyətlərə görə iterasiya etmək',
+          },
+        },
+        expectTitle: 'Nə gözləyirik',
+        coreSkillsTitle: 'Əsas bacarıqlar',
+        skills: {
+          items: {
+            uxPrinciples: 'UX prinsipləri və istifadəçi‑mərkəzli dizaynı anlamaq',
+            solidUi: 'Layout, boşluqlar və ierarxiyaya diqqətlə UI dizayn bacarıqları',
+            figmaExperience: 'Figma təcrübəsi (komponentlər, variantlar, auto layout)',
+            dataHeavyInterfaces: 'Data‑yüklü interfeyslər üçün dizayn bacarığı (dashboard, admin panellər)',
+            clearThinking: 'Aydın düşüncə və strukturlaşdırılmış problem həlli',
+            portfolioProcess: 'Yalnız vizuallar deyil, prosesi göstərən portfolio',
+          },
+        },
+        niceToHaveTitle: 'Üstünlük sayılır',
+        nice: {
+          items: {
+            devCollab: 'Real məhsullarda developerlərlə iş təcrübəsi',
+            responsiveMobile: 'Responsiv və mobile‑first dizayn anlayışı',
+            designSystemsPatterns: 'Dizayn sistemləri və miqyasa uyğun UI patternləri ilə tanışlıq',
+            adminInternal: 'Admin panelləri və ya daxili alətlər üzərində təcrübə',
+          },
+        },
+        howWeWorkTitle: 'Necə işləyirik',
+        how: {
+          items: {
+            architectureFirstProduct: 'Arxitektura‑öncül məhsul düşüncəsi',
+            alignedFromStart: 'UX, UI və mühəndislik başlanğıcdan uyğunlaşdırılır',
+            noRushedVisuals: 'Problemi anlamadan tələsik vizual yoxdur',
+            logicBackedDecisions: 'Dizayn qərarları trendlərlə yox, məntiqlə dəstəklənir',
+            longTermMaintainability: 'Qısamüddətli parıltı yox, uzunmüddətli dəstəklənmə',
+          },
+        },
+        whatYouGetTitle: 'Nə əldə edirsiniz',
+        get: {
+          items: {
+            realProductionNotConcept: 'Konsept dizaynlar yox, real istehsal sistemlərində iş',
+            influenceStructureUx: 'Məhsulun strukturu və istifadəçi təcrübəsinə təsir etmək',
+            closeCollabEngineering: 'Mühəndislik komandaları ilə yaxın əməkdaşlıq',
+            spaceToIterate: 'Düzgün iterasiya və təkmilləşdirmə üçün zaman və məkan',
+            professionalEnvironment: 'Aydınlıq və keyfiyyəti qiymətləndirən peşəkar mühit',
+          },
+        },
+        locationTitle: 'Məkan və format',
+        location: {
+          items: {
+            country: 'Azərbaycan',
+            format: 'Tam ştat / Hibrid (rol və təcrübədən asılı olaraq)',
+          },
+        },
+        applyTitle: 'Müraciət etməyə hazırsınız?',
+        applyCopy:
+          'Sabit və miqyasa uyğun backend sistemləri qurmaq sizin üçün önəmlidirsə — və işiniz real istehsal mühitində dayanıqlı olsun istəyirsinizsə — sizi eşitmək istərdik.',
+        applyCta: 'Bu rola müraciət et',
+      },
+      frontend: {
+        heroTitle: 'Frontend Developer (JS / TS)',
+        buildTitle: 'Real biznes sistemlərində istifadə olunan istehsala hazır interfeyslər qurun',
+        buildCopy:
+          'Vizualdan daha çox struktur, performans və uzunmüddətli dayanıqlılığa önəm verən Frontend Developer axtarırıq. Gündəlik istehsalda istifadə olunan dashboardlar, marketpleyslər və daxili platformalar üzərində işləyəcəksiniz.',
+        workOnTitle: 'Nə üzərində işləyəcəksiniz',
+        workOn: {
+          items: {
+            architecture: 'Miqyasa uyğun frontend arxitekturalarını dizayn və qurmaq',
+            adminDashboards: 'Admin panellər, dashboardlar və data‑yüklü interfeyslər hazırlamaq',
+            translateDesigns: 'UI/UX dizaynlarını təmiz və dəstəklənən kodla reallaşdırmaq',
+            integrateApis: 'Backend komandası ilə API inteqrasiyası üzərində sıx əməkdaşlıq',
+            performanceAccessibility: 'Cihazlar üzrə performans, əlçatanlıq və istifadə rahatlığını yaxşılaşdırmaq',
+            maintainEvolve: 'Mövcud sistemləri pozmadan dəstəkləmək və inkişaf etdirmək',
+          },
+        },
+        expectTitle: 'Nə gözləyirik',
+        technicalSkillsTitle: 'Texniki bacarıqlar',
+        skills: {
+          items: {
+            jsTs: 'JavaScript (ES6+) / TypeScript üzrə təcrübə',
+            react: 'React (və ya oxşar müasir frameworklər) biliyi',
+            componentArchitecture: 'Komponent əsaslı arxitektura anlayışı',
+            restAsync: 'REST API və asinxron data ilə iş təcrübəsi',
+            responsive: 'Responsiv və adaptiv UI dizaynına bələdlik',
+            cleanCode: 'Təmiz kod yanaşması (oxunaqlılıq, struktur, təkrar istifadə)',
+          },
+        },
+        niceToHaveTitle: 'Üstünlük sayılır',
+        nice: {
+          items: {
+            adminSaaS: 'Admin dashboard və ya SaaS məhsullarla təcrübə',
+            uiPerformance: 'UI performansı və optimallaşdırma anlayışı',
+            designSystems: 'Dizayn sistemləri ilə işləmə təcrübəsi',
+            portfolio: 'GitHub portfoli və ya real layihə nümunələri',
+          },
+        },
+        howWeWorkTitle: 'Necə işləyirik',
+        how: {
+          items: {
+            architectureFirst: 'Arxitektura‑öncül inkişaf',
+            clearRequirements: 'Aydın tələblər və strukturlaşdırılmış çatdırılma',
+            noHacks: 'Tələsik xüsusiyyətlər və qarışıq hacklər yoxdur',
+            longTermStability: 'Qısa qaliblər deyil, uzunmüddətli sabitliyə fokus',
+            collaboration: 'Dizayn, frontend və backend arasında ilk gündən əməkdaşlıq',
+          },
+        },
+        whatYouGetTitle: 'Nə əldə edirsiniz',
+        get: {
+          items: {
+            realProduction: 'Demo tətbiqlər deyil, real istehsal sistemləri ilə iş',
+            ownership: 'Aydın texniki məsuliyyət və sahiblənmə',
+            collaboration: 'Dizaynerlər və backend mühəndisləri ilə əməkdaşlıq',
+            longTermThinking: 'Qısamüddətli tapşırıqlar yox, uzunmüddətli məhsul yanaşması',
+            engineeringCulture: 'Təmiz və peşəkar mühəndislik mədəniyyəti',
+          },
+        },
+        locationTitle: 'Məkan və format',
+        location: {
+          items: {
+            country: 'Azərbaycan',
+            format: 'Tam ştat / Hibrid (rol və təcrübədən asılı olaraq)',
+          },
+        },
+        applyTitle: 'Müraciət etməyə hazırsınız?',
+        applyCopy:
+          'Bu rol, sadəcə kod yazmaq yox, necə işləmək istədiyiniz kimidirsə — sizi eşitmək istərdik.',
+        applyCta: 'Bu rola müraciət et',
+      },
+      careers: {
+        viewRoleCta: 'Vakansiyaya bax',
+        whyTitle: 'Niyə bizimlə işləmək?',
+        whyCopy:
+          'Biz sistem keyfiyyətinə, aydınlığa və uzunmüddətli təsirə önəm verən mühəndis və dizaynerləri işə alırıq. İşimiz qısamüddətli prototiplər yox, real istehsal sistemləridir.',
+        workWithUsAlt: 'Bizimlə işləyin',
+        viewMore: 'Daha çox',
+        showLess: 'Daha az',
+        vacancies: {
+          frontend: {
+            title: 'Frontend Developer (JS/TS)',
+            description: 'Premium interfeyslər və panellər qurun',
+            location: 'Tam ştat, Bakı / Hibrid',
+            reqs: {
+              htmlCssJs: 'Güclü HTML/CSS/JS',
+              uiSense: 'UI hissi',
+              cleanCode: 'Təmiz kod',
+            },
+          },
+          backend: {
+            title: 'Backend Developer (API/DB)',
+            description: 'API-lər, data modelləri və təhlükəsiz girişlər dizayn edin.',
+            location: 'Tam ştat, Bakı / Hibrid',
+            reqs: {
+              restSql: 'REST/SQL',
+              authRbacSense: 'Auth/RBAC anlayışı',
+              performanceMindset: 'Performans yönümlü yanaşma',
+            },
+          },
+          uiux: {
+            title: 'UI/UX Dizayner',
+            description: 'Premium interfeyslər və panellər qurun',
+            location: 'Müqavilə / Tam ştat, Uzaqdan / Hibrid',
+            reqs: {
+              figma: 'Figma',
+              designSystems: 'Dizayn sistemləri',
+              webMobileUx: 'Veb / Mobil UX',
+            },
+          },
+        },
+        team: {
+          members: {
+            john: {
+              role: 'Satış və Marketinq rəhbəri',
+              description:
+                'Biznes təşkilatı, satış əməliyyatları və logistika yönümlü inkişaf üzərində fokusla rəqəmsal sistemlərin qurulması və hesabatı.',
+            },
+            jane: {
+              role: 'Data Analitika rəhbəri',
+              description:
+                'Davamlı analitika çərçivələri hazırlayıb; səmərəli və fərdiləşdirməyə hazır; satış zənciri arxitekturası.',
+            },
+            mike: {
+              role: 'Biznes inkişafı',
+              description:
+                'Aydın tələblərə, uzunmüddətli sabitliyə və iş vaxtının idarə edilməsinə fokuslanır.',
+            },
+            sarah: {
+              role: 'Əməliyyat meneceri',
+              description:
+                'Yüksək keyfiyyətli satış bazalarının idarə olunması və qrupun əsas kapital səviyyəsində dəyərlərin göstərilməsi.',
+            },
+            robert: {
+              role: 'Logistika mütəxəssisi',
+              description:
+                'Logistika yönümlü biznes inkişafı və sistem optimallaşdırılmasında ekspert.',
+            },
+            emily: {
+              role: 'Satış əməliyyatları',
+              description:
+                'Satış əməliyyatları və rəqəmsal sistem hesabatında ixtisaslaşır.',
+            },
+            david: {
+              role: 'Marketinq analitiki',
+              description:
+                'Satış məlumatlarını analiz edir və biznes artımı üçün praktik anlayışlar yaradır.',
+            },
+            lisa: {
+              role: 'Müştəri münasibətləri',
+              description:
+                'Müştərilərlə güclü əlaqələr qurur və məmnuniyyəti təmin edir.',
+            },
+          },
+        },
+      },
+            caseStudiesIntro:
+              'Strukturlaşdırılmış memarlıq, düşünülmüş UX və intizamlı mühəndisliklə sabit, istehsala hazır sistemlər qurduğumuz layihələri təqdim edirik. Case studies — praktiki çağırışlar, dizayn qərarları və miqyasa uyğun artımı dəstəkləyən nəticələr.',
+            caseStudies: {
+              viewCta: 'Kəsi aç',
+              keyFocusLabel: 'Əsas fokus',
+              requestTitle: 'Layihə nəzərdən keçirmə sorğusu',
+              requestCopy:
+                'Layihənizdən bəhs edin. Hər sorğunu alırıq və aydın növbəti addımlarla cavablayırıq — yaxud önbaxış (generic sub‑pack).',
+              tip:
+                'Tövsiyə: Sənayeni, əsas tələbləri və hədəf bazarı paylaşın. Təxmini fikir belə başlamağa kifayətdir.',
+              privacy:
+                'Məlumatlarınızı paylaşmırıq. Mesajınız birbaşa mühəndislik komandasına gedir.',
+              chooseField: 'Sahəni seçin',
+              items: {
+                marketplace: {
+                  category: 'E‑ticarət · Marketpleys',
+                  title: 'Çox‑satıcılı Marketpleys MVP',
+                  description:
+                    'Miqyasa uyğun memarlıq və operativ aydınlığa fokuslanaraq istehsala hazır multi‑vendor marketpleys MVP hazırladıq. Sistem mərkəzləşdirilmiş admin paneli, satıcı panelləri, məhsul/kateqoriya idarəetməsi və erkən böyümə üçün daxili hesabatlar ehtiva edir.',
+                  focus: [
+                    'Marketpleys memarlığı',
+                    'Admin və satıcı idarəetməsi',
+                    'Hesabat və analitika',
+                  ],
+                },
+                fintech: {
+                  category: 'Bank · Fintex',
+                  title: 'Fintex hesabat paneli',
+                  description:
+                    'Auditə hazır, məlumat bütövlüyü və nəzarətli girişlərlə təhlükəsiz, rollara əsaslanan hesabat paneli hazırladıq. Sistem strukturlaşdırılmış maliyyə hesabatları, icazəyə əsaslanan görünüşlər və uyğunluq üçün etibarlı görünürlük təmin edir.',
+                  focus: [
+                    'Rolla idarə olunan giriş (RBAC)',
+                    'Audit‑dostu hesabat',
+                    'Təhlükəsiz məlumat axınları',
+                  ],
+                },
+                operations: {
+                  category: 'İstehsal · Əməliyyatlar',
+                  title: 'Əməliyyat və inventar sistemi',
+                  description:
+                    'Operativ aydınlıq və məlumat dəqiqliyini artırmaq üçün daxili əməliyyat və inventar idarəetmə sistemi. Platforma stok izləmə, gəlir‑xərc monitorinqi və gündəlik işləri sadələşdirən idarəetmə panellərini dəstəkləyir.',
+                  focus: [
+                    'İnventar idarəetməsi',
+                    'Maliyyə izləmə',
+                    'Operativ panellər',
+                  ],
+                },
+              },
+            },
       teamTitle: 'Komandamız',
       contactIntro: 'Nə qurmaq istədiyinizi deyin, strukturlu təklif göndərək.',
       contactFormTitle: 'Sorğu göndərin',
@@ -325,6 +2312,126 @@ const translations: Record<Locale, Record<string, any>> = {
       noteBadge: 'Qeyd',
       noteCopy: 'Sorğular saxlanılır və Admin → Inquiries bölməsində görünür.',
       industriesIntro: 'Etibarlılıq, hesabat və premium UX vacib olan sistemlər qururuq.',
+      about: {
+        headerTitle: 'Uzunmüddətli istifadəyə uyğun sistemlər dizayn edirik.',
+        headerCopy:
+          'Uzunmüddətli etibarlılıq, aydın memarlıq və komandalar/artan data ilə sabit qalan sistemlərə fokuslanırıq.',
+        whoTitle: 'Biz kimik',
+        whoCopy:
+          'Alievs Space MMC — digital və commerce fokuslu mühəndislik şirkətidir. Premium UI və güclü operativ nəzarət ilə istehsala hazır sistemlər qururuq. Backend memarlığı, UX sistemləri və biznes məntiqini birləşdirərək miqyasa uyğun, təhlükəsiz və admin alətləri ilə rahat idarə olunan platformalar yaradırıq. İşimiz multi‑vendor marketpleyslər, daxili idarəetmə platformaları və rollara, hesabatlara, audit‑hazır proseslərə malik bank yönümlü panelləri əhatə edir.',
+        who: {
+          values: {
+            responsibility: 'Məsuliyyət',
+            transparency: 'Şəffaflıq',
+            premiumQuality: 'Premium keyfiyyət',
+            securityReliability: 'Təhlükəsizlik və etibarlılıq',
+            longTermPartnership: 'Uzunmüddətli tərəfdaşlıq',
+          },
+        },
+        deliverTitle: 'Necə çatdırırıq',
+        deliverIntro:
+          'Riskləri azaldan, keyfiyyəti təmin edən və dayanıqlı məhsul artımını dəstəkləyən strukturlaşdırılmış çatdırılma yanaşması.',
+        deliver: {
+          items: {
+            analysis: {
+              alt: 'Analiz və strategiya',
+              title: 'Analiz və strategiya',
+              text:
+                'Biznes məqsədləri, texniki məhdudiyyətlər və istifadəçi tələblərini analiz edirik; scope, prioritetlər və aydın çatdırılma yol xəritəsi müəyyənləşdiririk.',
+            },
+            uxui: {
+              alt: 'UX/UI və arxitektura',
+              title: 'UX/UI və arxitektura',
+              text:
+                'İstifadəçi təcrübəsi və sistem arxitekturasını birlikdə dizayn edirik; başlanğıcdan istifadə rahatlığı, miqyasa uyğunluq və uzunmüddətli dəstəklənmə təmin olunur.',
+            },
+            development: {
+              alt: 'İnkişaf',
+              title: 'İnkişaf',
+              text:
+                'Arxitektura və təhlükəsizlik standartlarına uyğun, modular və istehsala hazır kodla əsas funksiyaları reallaşdırırıq.',
+            },
+            quality: {
+              alt: 'Keyfiyyətə nəzarət',
+              title: 'Keyfiyyətə nəzarət',
+              text:
+                'Funksionallıq, performans və kənar hallar strukturlaşdırılmış testlərlə yoxlanılır ki, buraxılışdan əvvəl etibarlılıq təmin olunsun.',
+            },
+            launch: {
+              alt: 'Buraxılış',
+              title: 'Buraxılış',
+              text:
+                'Nəzarətli mərhələlərlə yerləşdiririk, sistem davranışını monitorinq edirik və real istifadəyə yumşaq keçid təmin edirik.',
+            },
+            support: {
+              alt: 'Dəstək və miqyaslama',
+              title: 'Dəstək',
+              text:
+                'İstifadə artdıqca və biznes ehtiyacları dəyişdikcə davamlı dəstək, təkmilləşdirmələr və miqyaslama strategiyaları təqdim edirik.',
+            },
+          },
+        },
+        approachTitle: 'Yanaşmamız',
+        approachCopy:
+          'Memarlıq və operativ ehtiyaclardan başlayaraq, məsuliyyətli şəkildə miqyaslana bilən və istehsalda etibarlı işləyən sistemlər qururuq.',
+        approachWhoTitle: 'Kimlərlə işləyirik',
+        approachWhoCopy:
+          'Müvəqqəti həllər deyil, etibarlı sistemlər, aydın hesabat və uzunmüddətli sabitlik tələb edən komandalarla işləyirik. Strukturlaşdırılmış mühəndislik, premium UI/UX və intizamlı çatdırılma sayəsində sistemlərimiz təkcə inkişafda yox, launchdan sonra da etibarlı qalır.',
+        approachResponsibilityTitle: 'Koddan kənar məsuliyyətimiz',
+        approachResponsibilityCopy:
+          'Buraxılışdan sonra da sistemləri dəstəkləyirik, aydın ünsiyyət saxlayırıq və uzunömürlü platformalar qururuq.',
+      },
+      industries: {
+        items: {
+          retail: {
+            category: 'Pərakəndə və e‑ticarət',
+            title: 'Konversiya və miqyasa uyğun dizayn',
+            description:
+              'Konversiyaya yönəlik vitrinlər, ödəmə UX‑i, analitika və operativ şəffaflıq — böyüməni sürtünməsiz dəstəkləmək üçün.',
+          },
+          marketplaces: {
+            category: 'Marketpleyslər',
+            title: 'Çox‑satıcılı mürəkkəbliyə hazır',
+            description:
+              'Mağaza panelləri, komissiyalar, ödənişlər və moderasiya ilə multi‑vendor arxitektura — nəzarət və miqyas üçün.',
+          },
+          banking: {
+            category: 'Bank / Maliyyə',
+            title: 'Təhlükəsizlik, girişlər və uyğunluq — birinci yerdə',
+            description:
+              'Rolla idarə olunan giriş, auditə hazır hesabatlar və nəzarətli iş axınları — tənzimlənən mühitlər üçün.',
+          },
+          manufacturing: {
+            category: 'İstehsal və inventar',
+            title: 'Hər səviyyədə operativ aydınlıq',
+            description:
+              'Stok, xərclərə nəzarət, gəlir‑xərc görünürlüğü və real qərarlara dəstək verən panellər.',
+          },
+          beauty: {
+            category: 'Gözəllik / Salon sistemləri',
+            title: 'Gündəlik əməliyyatları sadələşdirən sistemlər',
+            description:
+              'Rezervasiyalar, inventar, xatırlatmalar, heyət alətləri və müştəri idarəetməsi — əlavə yükü və manual işi azaldır.',
+          },
+          logistics: {
+            category: 'Logistika və çatdırılma',
+            title: 'Çatdırılmanın hər mərhələsində görünürlük',
+            description:
+              'Sifariş axınları, statuslar, mağaza/admin koordinasiyası və əməliyyatları uyğun saxlayan hesabatlayıcı təbəqələr.',
+          },
+          startup: {
+            category: 'Startaplar / MVP',
+            title: 'İdeyadan istehsala hazır MVP‑yə',
+            description:
+              'Premium UI və miqyasa uyğun arxitektura ilə lean MVP — sürətli doğrulama və təhlükəsiz böyümə üçün.',
+          },
+        },
+        trustedTitle: 'İstehsala hazır sistemləri çatdırmaqda etibarlı',
+        trustedCopy1:
+          'Biz komandalarla işləyirik ki, etibarlılıq, aydın hesabat və uzunmüddətli sabitlik vacibdir — müvəqqəti həllər deyil. Strukturlaşdırılmış mühəndislik, premium UI/UX və intizamlı çatdırılma sistemlərin launchdan sonra da etibarlı qalmasını təmin edir.',
+        trustedCopy2:
+          'Hər layihəni aydın scope, şəffaf ünsiyyət və memarlıq‑öncül yanaşma ilə aparırıq. Komandaların idarə edə biləcəyi, genişləndirə biləcəyi və biznes böyüdükcə güvənə biləcəyi platformalar qururuq.',
+      },
       projectDetails: 'Təfərrüatlar',
       industry: 'Sahə',
       tags: 'Teqlər',
@@ -336,6 +2443,64 @@ const translations: Record<Locale, Record<string, any>> = {
       postHelpTitle: 'Kömək lazımdır?',
       postHelpCopy:
         'Marketpleys, e-ticarət və ya bank paneli qurursunuzsa, premium memarlıq təklif edə bilərik.',
+      contact: {
+        loading: 'Yüklənir…',
+        heroTitle: 'Komandalar niyə bizi seçir',
+        heroCopy:
+          'Biz premium UI/UX, sabit backend arxitekturası və admin alətlərini birləşdirərək, istehsala hazır rəqəmsal sistemlər dizayn edir və qururuq — ticarət və bank səviyyəli platformalar üçün.',
+        hero: {
+          items: {
+            premiumUi: 'Premium UI sistemləri',
+            scalableBackend: 'Miqyaslana bilən backend arxitekturası',
+            marketplaceInfra: 'Marketplace infrastruktur',
+            adminDashboards: 'İstehsal üçün admin panelləri',
+          },
+        },
+        details: {
+          phone: 'Telefon: +994 (00) 000 00 00',
+          email: 'Email: hello@alievsspace.com',
+          location: 'Məkan: Azərbaycan',
+        },
+        form: {
+          title: 'Layihə icmalı üçün müraciət',
+          copy:
+            'Layihəniz barədə məlumat verin. Hər müraciəti qəbul edirik və aydın növbəti addımlarla cavab veririk — yaxud ümumi sub-pack vasitəsilə ön-baxış.',
+          labels: {
+            name: 'Adınız *',
+            company: 'Şirkət adı',
+            email: 'Email',
+            phone: 'Telefon',
+            industry: 'Sənaye',
+            projectOverview: 'Layihənin icmalı',
+            message: 'Mesaj',
+          },
+          placeholders: {
+            name: 'Ad',
+            company: 'Şirkət adı',
+            email: 'name@gmail.com',
+            phone: '+994 …',
+            projectOverview: 'Nə qurmaq istəyirsiniz?',
+            message:
+              'Layihənizi, məqsədləri və gözlənilən vaxtı təsvir edin. Əsas tələblər və hədəf bazar — başlamaq üçün kifayətdir.',
+          },
+          options: {
+            choose: 'Sahənizi seçin',
+            banking: 'Bankçılıq',
+            ecommerce: 'E‑commerce',
+            software: 'Proqram təminatı inkişafı',
+          },
+          tip:
+            'Məsləhət: Sənayenizi, əsas tələbləri və hədəf bazarı paylaşın. Hətta təxmini fikir başlamaq üçün kifayətdir.',
+          submit: 'Müraciəti göndər',
+          privacy:
+            'Məlumatlarınızı paylaşmırıq. Mesajınız birbaşa mühəndis komandasına çatır.',
+        },
+        alt: {
+          phone: 'Telefon ikonu',
+          mail: 'Poçt ikonu',
+          location: 'Məkan ikonu',
+        },
+      },
     },
   },
 };
