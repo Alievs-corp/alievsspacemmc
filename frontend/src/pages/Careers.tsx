@@ -4,8 +4,13 @@ import { useI18n } from '@/contexts/I18nContext';
 // import { api, type Career } from '@/lib/api';
 import { useState } from 'react';
 import Container from '../components/ui/Container';
-import trustedPeople from "../assets/images/trusted-people.svg";
 import workWithUs from '../assets/images/work-with-us.svg';
+import ismat from "../assets/images/ismat.jpeg";
+import ismayil from "../assets/images/ismayil.jpg";
+import elshan from "../assets/images/elshan-hasanov.jpg";
+import elmar from "../assets/images/elmar.png";
+import ravena from "../assets/images/ravena.jpg";
+import zehra from "../assets/images/zehra.jpg";
 
 export function Careers() {
   const { t } = useI18n();
@@ -51,32 +56,70 @@ export function Careers() {
   ];
 
   const teamMembers = [
-    { id: 'john', name: 'John Doe', image: 'team-member-1.jpg' },
-    { id: 'jane', name: 'Jane Smith', image: 'team-member-2.jpg' },
-    { id: 'mike', name: 'Mike Johnson', image: 'team-member-3.jpg' },
-    { id: 'sarah', name: 'Sarah Williams', image: 'team-member-4.jpg' },
-    { id: 'robert', name: 'Robert Brown', image: 'team-member-5.jpg' },
-    { id: 'emily', name: 'Emily Davis', image: 'team-member-6.jpg' },
-    { id: 'david', name: 'David Wilson', image: 'team-member-7.jpg' },
-    { id: 'lisa', name: 'Lisa Taylor', image: 'team-member-8.jpg' },
+    {
+      id: 'ismat',
+      name: t('public.careers.teamMembers.ismat.name', 'Cahangirov İsmət'),
+      role: t('public.careers.teamMembers.ismat.role', 'Frontend Developer'),
+      description: t(
+        'public.careers.teamMembers.ismat.description',
+        '1 ildən artıqdır AliyevsspaceMMC şirkətində Frontend Developer kimi fəaliyyət göstərirəm.'
+      ),
+    },
+    {
+      id: 'elshan',
+      name: t('public.careers.teamMembers.elshan.name', 'Elşən Həsənov'),
+      role: t('public.careers.teamMembers.elshan.role', 'Frontend Developer'),
+      description: t(
+        'public.careers.teamMembers.elshan.description',
+        'Frontend developerəm, artıq 1 ildən çoxdur ki, AliyevsspaceMMC şirkətində çalışıram'
+      ),
+    },
+    {
+      id: 'ismayil',
+      name: t('public.careers.teamMembers.ismayil.name', 'İsmayıl İsmayılov'),
+      role: t('public.careers.teamMembers.ismayil.role', 'Frontend Developer'),
+      description: t(
+        'public.careers.teamMembers.ismayil.description',
+        'Frontend Development sahəsi üzrə 2 ildir ki özümü inkişaf etdirməyə çalışıram. Developia Engineering şirkətində mentor və instructor olaraq işləmişəm.'
+      ),
+    },
+    {
+      id: 'ravena',
+      name: t('public.careers.teamMembers.ravena.name', 'Ravena Balagözova'),
+      role: t('public.careers.teamMembers.ravena.role', 'Frontend Developer'),
+      description: t(
+        'public.careers.teamMembers.ravena.description',
+        '1 ildir ki Frontend Development sahəsində bilik və bacarıqlarımı davamlı şəkildə inkişaf etdirirəm'
+      ),
+    },
+    {
+      id: 'zehra',
+      name: t('public.careers.teamMembers.zehra.name', 'Zəhra Mahmudova'),
+      role: t('public.careers.teamMembers.zehra.role', 'Frontend Developer'),
+      description: t(
+        'public.careers.teamMembers.zehra.description',
+        'Front end Development sahəsində təxminən bir ildir aktiv şəkildə öyrənir və praktiki bacarıqlarımı təkmilləşdirirəm'
+      ),
+    },
+    {
+      id: 'elmar',
+      name: t('public.careers.teamMembers.elmar.name', 'Elmar Əzimli'),
+      role: t('public.careers.teamMembers.elmar.role', 'Frontend Developer'),
+      description: t(
+        'public.careers.teamMembers.elmar.description',
+        'Frontend üzrə 1 ildən artıq müddətdir öyrənməyə davam edirəm.'
+      ),
+    },
   ];
 
-  // useEffect(() => {
-  //   if (!content?.careers || content.careers.length === 0) {
-  //     setLoading(true);
-  //     api.getCareers(locale).then(setCareers).finally(() => setLoading(false));
-  //   } else {
-  //     setCareers(content.careers);
-  //   }
-  // }, [locale, content]);
-
-  // if (loading) {
-  //   return (
-  //     <div className="flex min-h-screen items-center justify-center">
-  //       <div className="text-white">Loading...</div>
-  //     </div>
-  //   );
-  // }
+  const memberImages: Record<string, string> = {
+    ismat,
+    ismayil,
+    elshan,
+    elmar,
+    ravena,
+    zehra,
+  };
 
   return (
     <div className="mt-[60px] flex flex-col justify-center items-center">
@@ -158,22 +201,45 @@ export function Careers() {
           {teamMembers.slice(0, showAllTeam ? teamMembers.length : 4).map((member, index) => (
             <div 
               key={index}
-              className="bg-[#13132F] border-l-[1px] border-b-[1px] border-white rounded-[10px] p-6 flex flex-col md:flex-row gap-6 w-full shadow-[0px_10px_20px_0px_#000000]"
+              className="bg-[#13132F] border-l-[1px] border-b-[1px] border-white rounded-[10px] p-6 shadow-[0px_10px_20px_0px_#000000]"
             >
-                <img src={trustedPeople} alt="Trusted People" />
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
+                  <img 
+                    src={memberImages[member.id]} 
+                    alt={member.name} 
+                    className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] object-cover rounded-md" 
+                  />
 
-              <div className="flex-1 flex flex-col">
-                <div className="mb-4">
-                  <h4 className="font-inter text-white text-[22px] md:text-[26px]  mb-2">
-                    {member.name}
-                  </h4>
-                  <p className="font-inter text-[#C5C5C5] text-[16px] md:text-[18px] font-semibold">
-                    {t(`public.careers.team.members.${member.id}.role`)}
+                  <div className="md:hidden flex-1">
+                    <h4 className="font-inter text-white text-[20px] md:text-[26px] mb-1">
+                      {member.name}
+                    </h4>
+                    <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[18px] font-semibold">
+                      {member.role}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="hidden md:flex md:flex-1 md:flex-col">
+                  <div className="mb-4">
+                    <h4 className="font-inter text-white text-[22px] md:text-[26px] mb-2">
+                      {member.name}
+                    </h4>
+                    <p className="font-inter text-[#C5C5C5] text-[16px] md:text-[18px] font-semibold">
+                      {member.role}
+                    </p>
+                  </div>
+                  
+                  <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] leading-relaxed">
+                    {member.description}
                   </p>
                 </div>
-                
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] leading-relaxed">
-                  {t(`public.careers.team.members.${member.id}.description`)}
+              </div>
+              
+              <div className="mt-4 md:hidden">
+                <p className="font-inter text-[#C5C5C5] text-[14px] leading-relaxed">
+                  {member.description}
                 </p>
               </div>
             </div>

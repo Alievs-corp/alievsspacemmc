@@ -195,6 +195,13 @@ const translations: Record<Locale, Record<string, any>> = {
           caseStudies: 'View Case Studies',
         },
         advantages: {
+          headings: {
+            years: '4.5+',
+            enterprise: 'Enterprise',
+            premium: 'Premium',
+            secure: 'Secure',
+            fast: 'Fast',
+          },
           yearsText: 'Years building production systems',
           enterpriseText: 'Ready for real business operations',
           premiumText: 'High-quality UI/UX design systems',
@@ -549,6 +556,44 @@ const translations: Record<Locale, Record<string, any>> = {
             },
           },
         },
+        teamMembers: {
+          ismat: {
+            name: 'Ismat Cahangirov',
+            role: 'Frontend Developer',
+            description:
+              'Frontend developer at AlievsSpace MMC for over a year.',
+          },
+          elshan: {
+            name: 'Elshan Hasanov',
+            role: 'Frontend Developer',
+            description:
+              'Frontend developer with 1+ years at AlievsSpace MMC.',
+          },
+          ismayil: {
+            name: 'Ismayil Ismayilov',
+            role: 'Frontend Developer',
+            description:
+              'Focused on Frontend Development for 2 years; previously mentor/instructor at Developia Engineering.',
+          },
+          ravena: {
+            name: 'Ravena Balagözova',
+            role: 'Frontend Developer',
+            description:
+              'Continuously improving Frontend Development skills for about a year.',
+          },
+          zehra: {
+            name: 'Zehra Mahmudova',
+            role: 'Frontend Developer',
+            description:
+              'Actively learning Frontend Development for roughly a year and refining practical skills.',
+          },
+          elmar: {
+            name: 'Elmar Azimli',
+            role: 'Frontend Developer',
+            description:
+              'Learning and growing in Frontend for over a year.',
+          },
+        },
         team: {
           members: {
             john: {
@@ -816,8 +861,8 @@ const translations: Record<Locale, Record<string, any>> = {
           },
         },
         details: {
-          phone: 'Phone: +994 (00) 000 00 00',
-          email: 'Email: hello@alievsspace.com',
+          phone: 'Phone: +994 (51) 700 35 00',
+          email: 'Email: alievsspacemmc@gmail.com' ,
           location: 'Location: Azerbaijan',
         },
         form: {
@@ -1017,6 +1062,13 @@ const translations: Record<Locale, Record<string, any>> = {
           caseStudies: 'Смотреть кейсы',
         },
         advantages: {
+          headings: {
+            years: '4.5+',
+            enterprise: 'Enterprise',
+            premium: 'Премиум',
+            secure: 'Безопасно',
+            fast: 'Быстро',
+          },
           yearsText: 'Лет создаем производственные системы',
           enterpriseText: 'Готово для реальных бизнес-операций',
           premiumText: 'Высококачественные UI/UX дизайн-системы',
@@ -1079,8 +1131,8 @@ const translations: Record<Locale, Record<string, any>> = {
           },
         },
         details: {
-          phone: 'Телефон: +994 (00) 000 00 00',
-          email: 'Email: hello@alievsspace.com',
+          phone: 'Телефон: +994 (51) 700 35 00',
+          email: 'Email: alievsspacemmc@gmail.com',
           location: 'Локация: Азербайджан',
         },
         form: {
@@ -1427,6 +1479,44 @@ const translations: Record<Locale, Record<string, any>> = {
               designSystems: 'Дизайн‑системы',
               webMobileUx: 'Веб / Мобильный UX',
             },
+          },
+        },
+        teamMembers: {
+          ismat: {
+            name: 'Исмат Джахангиров',
+            role: 'Frontend‑разработчик',
+            description:
+              'Frontend‑разработчик в AlievsSpace MMC более года.',
+          },
+          elshan: {
+            name: 'Элшан Гасанов',
+            role: 'Frontend‑разработчик',
+            description:
+              'Frontend‑разработчик, более 1 года в AlievsSpace MMC.',
+          },
+          ismayil: {
+            name: 'Исмаил Исмаилов',
+            role: 'Frontend‑разработчик',
+            description:
+              'Занимается Frontend‑разработкой около 2 лет; ранее — ментор/инструктор в Developia Engineering.',
+          },
+          ravena: {
+            name: 'Равена Балагёзова',
+            role: 'Frontend‑разработчик',
+            description:
+              'Около года непрерывно развивает навыки в Frontend‑разработке.',
+          },
+          zehra: {
+            name: 'Зехра Махмудова',
+            role: 'Frontend‑разработчик',
+            description:
+              'Активно изучает Frontend около года и совершенствует практические навыки.',
+          },
+          elmar: {
+            name: 'Эльмар Азимли',
+            role: 'Frontend‑разработчик',
+            description:
+              'Более года изучает и развивается в Frontend‑направлении.',
           },
         },
         team: {
@@ -1838,6 +1928,13 @@ const translations: Record<Locale, Record<string, any>> = {
           caseStudies: 'Layihələrə bax',
         },
         advantages: {
+          headings: {
+            years: '4.5+',
+            enterprise: 'Enterprise',
+            premium: 'Premium',
+            secure: 'Təhlükəsiz',
+            fast: 'Sürətli',
+          },
           yearsText: 'İstehsal sistemləri qurmaqda illər',
           enterpriseText: 'Real biznes əməliyyatlarına hazır',
           premiumText: 'Yüksək keyfiyyətli UI/UX dizayn sistemləri',
@@ -2192,6 +2289,44 @@ const translations: Record<Locale, Record<string, any>> = {
             },
           },
         },
+        teamMembers: {
+          ismat: {
+            name: 'Cahangirov İsmət',
+            role: 'Frontend Developer',
+            description:
+              '1 ildən artıqdır AlievsSpace MMC şirkətində Frontend Developer kimi fəaliyyət göstərirəm.',
+          },
+          elshan: {
+            name: 'Elşən Həsənov',
+            role: 'Frontend Developer',
+            description:
+              'Frontend developerəm, artıq 1 ildən çoxdur ki, AlievsSpace MMC şirkətində çalışıram.',
+          },
+          ismayil: {
+            name: 'İsmayıl İsmayılov',
+            role: 'Frontend Developer',
+            description:
+              'Frontend Development sahəsi üzrə 2 ildir ki özümü inkişaf etdirməyə çalışıram. Developia Engineering şirkətində mentor və instructor olaraq işləmişəm.',
+          },
+          ravena: {
+            name: 'Ravena Balagözova',
+            role: 'Frontend Developer',
+            description:
+              'Təxminən bir ildir Frontend Development sahəsində bilik və bacarıqlarımı davamlı şəkildə inkişaf etdirirəm.',
+          },
+          zehra: {
+            name: 'Zəhra Mahmudova',
+            role: 'Frontend Developer',
+            description:
+              'Front end Development sahəsində təxminən bir ildir aktiv şəkildə öyrənir və praktiki bacarıqlarımı təkmilləşdirirəm.',
+          },
+          elmar: {
+            name: 'Elmar Əzimli',
+            role: 'Frontend Developer',
+            description:
+              'Frontend üzrə 1 ildən artıq müddətdir öyrənməyə davam edirəm.',
+          },
+        },
         team: {
           members: {
             john: {
@@ -2457,8 +2592,8 @@ const translations: Record<Locale, Record<string, any>> = {
           },
         },
         details: {
-          phone: 'Telefon: +994 (00) 000 00 00',
-          email: 'Email: hello@alievsspace.com',
+          phone: 'Telefon: +994 (51) 700 35 00',
+          email: 'Email: alievsspacemmc@gmail.com',
           location: 'Məkan: Azərbaycan',
         },
         form: {

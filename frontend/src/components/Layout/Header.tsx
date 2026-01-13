@@ -103,7 +103,7 @@ export function Header() {
                   supportedLocales[(idx + 1) % supportedLocales.length].code
                 );
               }}
-              className="p-2 rounded-md hover:bg-[#546691]"
+              className="p-2 rounded-md hover:bg-[#546691] cursor-pointer"
             >
               <img 
                 src={translate} 

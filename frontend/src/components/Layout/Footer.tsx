@@ -5,7 +5,6 @@ import { useI18n } from '@/contexts/I18nContext';
 import alievsspace from "../../assets/images/alievsspace-logo.png";
 import instagram from '../../assets/icons/instagram.svg';
 import linkedin from '../../assets/icons/linkedin.svg';
-import youtube from '../../assets/icons/youtube.svg';
 
 export function Footer() {
   const { t } = useI18n();
@@ -95,7 +94,7 @@ export function Footer() {
                       href="mailto:help@aliyevsspace.com" 
                       className="font-inter text-white text-[13px] transition-colors duration-300"
                     >
-                      help@aliyevsspace.com
+                      alievsspacemmc@gmail.com
                     </a>
                   </li>
                   <li className="flex ">
@@ -104,7 +103,7 @@ export function Footer() {
                       href="tel:011000100" 
                       className="font-inter text-white text-[13px] transition-colors duration-300"
                     >
-                    012 000 00 00
+                    +994 (51) 700 35 00
                     </a>
                   </li>
                 </ul>
@@ -114,7 +113,7 @@ export function Footer() {
                 <div className="mt-6">
                   <div className="flex gap-4 justify-center items-center md:justify-start">
                     <a 
-                      href="https://instagram.com" 
+                      href="https://www.instagram.com/alievsspace/?igsh=MWRpb3J4NmNoMTA0OQ%3D%3D#" 
                       target="_blank" 
                       rel="noopener noreferrer">
                       <img src={instagram} alt="Instagram"/>
@@ -124,12 +123,6 @@ export function Footer() {
                       target="_blank" 
                       rel="noopener noreferrer">
                       <img src={linkedin} alt="LinkedIn"/>
-                    </a>
-                    <a 
-                      href="https://youtube.com" 
-                      target="_blank" 
-                      rel="noopener noreferrer">
-                      <img src={youtube} alt="YouTube"/>
                     </a>
                   </div>
                 </div>

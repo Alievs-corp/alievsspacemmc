@@ -56,7 +56,7 @@ const InventorySystem = () => {
                                 <li className="flex items-start">
                                     <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                     <div>
-                                        <h3 className="font-inter text.white text-[13px] md:text-[18px] mb-1">{t('public.inventory.contextItems.projectType')}</h3>
+                                        <h3 className="font-inter text-white text-[13px] md:text-[18px] mb-1">{t('public.inventory.contextItems.projectType')}</h3>
                                     </div>
                                 </li>
                                 
