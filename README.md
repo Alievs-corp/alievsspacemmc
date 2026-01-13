@@ -1,4 +1,4 @@
-# Alievs Space MMC — Premium Multi-page Website + Admin Panel
+# Alievs Space MMC
 
 ## About Alievs Space MMC
 
