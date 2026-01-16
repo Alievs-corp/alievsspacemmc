@@ -20,8 +20,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const token = localStorage.getItem('auth_token');
     if (token) {
-      api.auth
-        .getCurrentUser()
+      api.user
+        .getProfile()
         .then(setUser)
         .catch(() => {
           localStorage.removeItem('auth_token');
@@ -35,7 +35,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (credentials: LoginRequest): Promise<User | null> => {
     try {
-      const response = await api.auth.userLogin(credentials);
+      const response = await api.auth.login(credentials);
       localStorage.setItem('auth_token', response.token);
       setUser(response.user || null);
       return response.user || null;
@@ -78,4 +78,3 @@ export function useAuth() {
   }
   return context;
 }
-

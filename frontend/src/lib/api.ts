@@ -79,19 +79,7 @@ export interface Employee {
   bio: string;
 }
 
-export interface Content {
-  settings: Settings;
-  home: Home;
-  about: About;
-  services: Service[];
-  projects: Project[];
-  blog: BlogPost[];
-  careers: Career[];
-  employees: Employee[];
-}
-
 export interface Inquiry {
-  id: string;
   name: string;
   company?: string;
   email?: string;
@@ -99,9 +87,6 @@ export interface Inquiry {
   interest?: string;
   topic?: string;
   message?: string;
-  status?: string;
-  createdAt: string;
-  updatedAt?: string;
 }
 
 export interface User {
@@ -116,7 +101,6 @@ export interface User {
 export interface LoginResponse {
   token: string;
   user?: User;
-  admin?: boolean;
 }
 
 export interface RegisterRequest {
@@ -130,6 +114,22 @@ export interface RegisterRequest {
 export interface LoginRequest {
   email: string;
   password: string;
+}
+
+export interface PasswordChangeRequest {
+  currentPassword: string;
+  newPassword: string;
+}
+
+export interface Content {
+  settings: Settings;
+  home: Home;
+  about: About;
+  services: Service[];
+  projects: Project[];
+  blog: BlogPost[];
+  careers: Career[];
+  employees: Employee[];
 }
 
 function getAuthToken(): string | null {
@@ -163,200 +163,222 @@ async function fetchAPI<T>(endpoint: string, options?: RequestInit): Promise<T> 
 }
 
 export const api = {
-  getContent: (locale: Locale = 'en'): Promise<Content> =>
+  getContent: (locale: Locale = 'en'): Promise<Content> => 
     fetchAPI<Content>(`/content?locale=${locale}`),
 
-  getSettings: (locale: Locale = 'en'): Promise<Settings> =>
+  getSettings: (locale: Locale = 'en'): Promise<Settings> => 
     fetchAPI<Settings>(`/settings?locale=${locale}`),
 
-  getHome: (locale: Locale = 'en'): Promise<Home> =>
+  getHome: (locale: Locale = 'en'): Promise<Home> => 
     fetchAPI<Home>(`/home?locale=${locale}`),
 
-  getAbout: (locale: Locale = 'en'): Promise<About> =>
+  getAbout: (locale: Locale = 'en'): Promise<About> => 
     fetchAPI<About>(`/about?locale=${locale}`),
-
-  getServices: (locale: Locale = 'en'): Promise<Service[]> =>
+  
+  getServices: (locale: Locale = 'en'): Promise<Service[]> => 
     fetchAPI<Service[]>(`/services?locale=${locale}`),
 
-  getService: (id: string, locale: Locale = 'en'): Promise<Service> =>
+  getService: (id: string, locale: Locale = 'en'): Promise<Service> => 
     fetchAPI<Service>(`/services/${id}?locale=${locale}`),
 
-  getProjects: (locale: Locale = 'en'): Promise<Project[]> =>
+  getProjects: (locale: Locale = 'en'): Promise<Project[]> => 
     fetchAPI<Project[]>(`/projects?locale=${locale}`),
 
-  getProject: (id: string, locale: Locale = 'en'): Promise<Project> =>
+  getProject: (id: string, locale: Locale = 'en'): Promise<Project> => 
     fetchAPI<Project>(`/projects/${id}?locale=${locale}`),
 
-  getBlogPosts: (locale: Locale = 'en'): Promise<BlogPost[]> =>
+  getBlogPosts: (locale: Locale = 'en'): Promise<BlogPost[]> => 
     fetchAPI<BlogPost[]>(`/blog?locale=${locale}`),
 
-  getBlogPost: (id: string, locale: Locale = 'en'): Promise<BlogPost> =>
+  getBlogPost: (id: string, locale: Locale = 'en'): Promise<BlogPost> => 
     fetchAPI<BlogPost>(`/blog/${id}?locale=${locale}`),
 
-  getCareers: (locale: Locale = 'en'): Promise<Career[]> =>
+  getCareers: (locale: Locale = 'en'): Promise<Career[]> => 
     fetchAPI<Career[]>(`/careers?locale=${locale}`),
 
-  getCareer: (id: string, locale: Locale = 'en'): Promise<Career> =>
+  getCareer: (id: string, locale: Locale = 'en'): Promise<Career> => 
     fetchAPI<Career>(`/careers/${id}?locale=${locale}`),
 
-  getEmployees: (locale: Locale = 'en'): Promise<Employee[]> =>
+  getEmployees: (locale: Locale = 'en'): Promise<Employee[]> => 
     fetchAPI<Employee[]>(`/employees?locale=${locale}`),
 
-  getEmployee: (id: string, locale: Locale = 'en'): Promise<Employee> =>
+  getEmployee: (id: string, locale: Locale = 'en'): Promise<Employee> => 
     fetchAPI<Employee>(`/employees/${id}?locale=${locale}`),
 
-  createInquiry: (inquiry: Omit<Inquiry, 'id' | 'createdAt'>): Promise<Inquiry> =>
-    fetchAPI<Inquiry>('/inquiries', {
+  createInquiry: (inquiry: Inquiry): Promise<any> => 
+    fetchAPI('/inquiries', {
       method: 'POST',
       body: JSON.stringify(inquiry),
     }),
 
   auth: {
-    adminLogin: (credentials: LoginRequest): Promise<LoginResponse> =>
+    adminLogin: (credentials: LoginRequest): Promise<LoginResponse> => 
       fetchAPI<LoginResponse>('/auth/admin/login', {
         method: 'POST',
         body: JSON.stringify(credentials),
       }),
 
-    userLogin: (credentials: LoginRequest): Promise<LoginResponse> =>
-      fetchAPI<LoginResponse>('/auth/login', {
-        method: 'POST',
-        body: JSON.stringify(credentials),
-      }),
-
-    register: (data: RegisterRequest): Promise<LoginResponse> =>
+    register: (data: RegisterRequest): Promise<LoginResponse> => 
       fetchAPI<LoginResponse>('/auth/register', {
         method: 'POST',
         body: JSON.stringify(data),
       }),
 
-    getCurrentUser: (): Promise<User> => fetchAPI<User>('/user/profile'),
+    login: (credentials: LoginRequest): Promise<LoginResponse> => 
+      fetchAPI<LoginResponse>('/auth/login', {
+        method: 'POST',
+        body: JSON.stringify(credentials),
+      }),
+  },
 
-    updateProfile: (data: Partial<User>): Promise<User> =>
+  user: {
+    getProfile: (): Promise<User> => 
+      fetchAPI<User>('/user/profile'),
+
+    updateProfile: (data: Partial<User>): Promise<User> => 
       fetchAPI<User>('/user/profile', {
         method: 'PUT',
         body: JSON.stringify(data),
       }),
 
-    changePassword: (currentPassword: string, newPassword: string): Promise<void> =>
+    changePassword: (data: PasswordChangeRequest): Promise<void> => 
       fetchAPI<void>('/user/password', {
         method: 'PUT',
-        body: JSON.stringify({ currentPassword, newPassword }),
+        body: JSON.stringify(data),
       }),
   },
 
   admin: {
-    getInquiries: (): Promise<Inquiry[]> => fetchAPI<Inquiry[]>('/admin/inquiries'),
-
-    updateInquiryStatus: (id: string, status: string): Promise<void> =>
-      fetchAPI<void>(`/admin/inquiries/${id}/status`, {
-        method: 'PUT',
-        body: JSON.stringify({ status }),
-      }),
-
-    deleteInquiry: (id: string): Promise<void> =>
-      fetchAPI<void>(`/admin/inquiries/${id}`, { method: 'DELETE' }),
-
-    deleteAllInquiries: (): Promise<void> =>
-      fetchAPI<void>('/admin/inquiries', { method: 'DELETE' }),
-
-    getAllUsers: (): Promise<User[]> => fetchAPI<User[]>('/admin/users'),
-
-    deleteUser: (email: string): Promise<void> =>
-      fetchAPI<void>(`/admin/users/${email}`, { method: 'DELETE' }),
-
-    updateSettings: (locale: Locale, settings: Partial<Settings>): Promise<Settings> =>
+    updateSettings: (locale: Locale, settings: Partial<Settings>): Promise<Settings> => 
       fetchAPI<Settings>(`/admin/settings?locale=${locale}`, {
         method: 'PUT',
         body: JSON.stringify(settings),
       }),
 
-    updateHome: (locale: Locale, home: Partial<Home>): Promise<Home> =>
+    updateHome: (locale: Locale, home: Partial<Home>): Promise<Home> => 
       fetchAPI<Home>(`/admin/home?locale=${locale}`, {
         method: 'PUT',
         body: JSON.stringify(home),
       }),
 
-    updateAbout: (locale: Locale, about: Partial<About>): Promise<About> =>
+    updateAbout: (locale: Locale, about: Partial<About>): Promise<About> => 
       fetchAPI<About>(`/admin/about?locale=${locale}`, {
         method: 'PUT',
         body: JSON.stringify(about),
       }),
 
-    createService: (services: Record<Locale, Partial<Service>>): Promise<{ id: string }> =>
-      fetchAPI<{ id: string }>('/admin/services', {
+    // Services Management
+    createService: (locale: Locale, service: Partial<Service>): Promise<Service> => 
+      fetchAPI<Service>(`/admin/services?locale=${locale}`, {
         method: 'POST',
-        body: JSON.stringify(services),
+        body: JSON.stringify(service),
       }),
 
-    updateService: (id: string, services: Record<Locale, Partial<Service>>): Promise<void> =>
-      fetchAPI<void>(`/admin/services/${id}`, {
+    updateService: (id: string, locale: Locale, service: Partial<Service>): Promise<Service> => 
+      fetchAPI<Service>(`/admin/services/${id}?locale=${locale}`, {
         method: 'PUT',
-        body: JSON.stringify(services),
+        body: JSON.stringify(service),
       }),
 
-    deleteService: (id: string): Promise<void> =>
-      fetchAPI<void>(`/admin/services/${id}`, { method: 'DELETE' }),
+    deleteService: (id: string): Promise<void> => 
+      fetchAPI<void>(`/admin/services/${id}`, { 
+        method: 'DELETE' 
+      }),
 
-    createProject: (projects: Record<Locale, Partial<Project>>): Promise<{ id: string }> =>
-      fetchAPI<{ id: string }>('/admin/projects', {
+    // Projects Management
+    createProject: (locale: Locale, project: Partial<Project>): Promise<Project> => 
+      fetchAPI<Project>(`/admin/projects?locale=${locale}`, {
         method: 'POST',
-        body: JSON.stringify(projects),
+        body: JSON.stringify(project),
       }),
 
-    updateProject: (id: string, projects: Record<Locale, Partial<Project>>): Promise<void> =>
-      fetchAPI<void>(`/admin/projects/${id}`, {
+    updateProject: (id: string, locale: Locale, project: Partial<Project>): Promise<Project> => 
+      fetchAPI<Project>(`/admin/projects/${id}?locale=${locale}`, {
         method: 'PUT',
-        body: JSON.stringify(projects),
+        body: JSON.stringify(project),
       }),
 
-    deleteProject: (id: string): Promise<void> =>
-      fetchAPI<void>(`/admin/projects/${id}`, { method: 'DELETE' }),
+    deleteProject: (id: string): Promise<void> => 
+      fetchAPI<void>(`/admin/projects/${id}`, { 
+        method: 'DELETE' 
+      }),
 
-    createBlogPost: (posts: Record<Locale, Partial<BlogPost>>): Promise<{ id: string }> =>
-      fetchAPI<{ id: string }>('/admin/blog', {
+    // Blog Management
+    createBlogPost: (locale: Locale, post: Partial<BlogPost>): Promise<BlogPost> => 
+      fetchAPI<BlogPost>(`/admin/blog?locale=${locale}`, {
         method: 'POST',
-        body: JSON.stringify(posts),
+        body: JSON.stringify(post),
       }),
 
-    updateBlogPost: (id: string, posts: Record<Locale, Partial<BlogPost>>): Promise<void> =>
-      fetchAPI<void>(`/admin/blog/${id}`, {
+    updateBlogPost: (id: string, locale: Locale, post: Partial<BlogPost>): Promise<BlogPost> => 
+      fetchAPI<BlogPost>(`/admin/blog/${id}?locale=${locale}`, {
         method: 'PUT',
-        body: JSON.stringify(posts),
+        body: JSON.stringify(post),
       }),
 
-    deleteBlogPost: (id: string): Promise<void> =>
-      fetchAPI<void>(`/admin/blog/${id}`, { method: 'DELETE' }),
+    deleteBlogPost: (id: string): Promise<void> => 
+      fetchAPI<void>(`/admin/blog/${id}`, { 
+        method: 'DELETE' 
+      }),
 
-    createCareer: (careers: Record<Locale, Partial<Career>>): Promise<{ id: string }> =>
-      fetchAPI<{ id: string }>('/admin/careers', {
+    // Careers Management
+    createCareer: (locale: Locale, career: Partial<Career>): Promise<Career> => 
+      fetchAPI<Career>(`/admin/careers?locale=${locale}`, {
         method: 'POST',
-        body: JSON.stringify(careers),
+        body: JSON.stringify(career),
       }),
 
-    updateCareer: (id: string, careers: Record<Locale, Partial<Career>>): Promise<void> =>
-      fetchAPI<void>(`/admin/careers/${id}`, {
+    updateCareer: (id: string, locale: Locale, career: Partial<Career>): Promise<Career> => 
+      fetchAPI<Career>(`/admin/careers/${id}?locale=${locale}`, {
         method: 'PUT',
-        body: JSON.stringify(careers),
+        body: JSON.stringify(career),
       }),
 
-    deleteCareer: (id: string): Promise<void> =>
-      fetchAPI<void>(`/admin/careers/${id}`, { method: 'DELETE' }),
+    deleteCareer: (id: string): Promise<void> => 
+      fetchAPI<void>(`/admin/careers/${id}`, { 
+        method: 'DELETE' 
+      }),
 
-    createEmployee: (employees: Record<Locale, Partial<Employee>>): Promise<{ id: string }> =>
-      fetchAPI<{ id: string }>('/admin/employees', {
+    // Employees Management
+    createEmployee: (locale: Locale, employee: Partial<Employee>): Promise<Employee> => 
+      fetchAPI<Employee>(`/admin/employees?locale=${locale}`, {
         method: 'POST',
-        body: JSON.stringify(employees),
+        body: JSON.stringify(employee),
       }),
 
-    updateEmployee: (id: string, employees: Record<Locale, Partial<Employee>>): Promise<void> =>
-      fetchAPI<void>(`/admin/employees/${id}`, {
+    updateEmployee: (id: string, locale: Locale, employee: Partial<Employee>): Promise<Employee> => 
+      fetchAPI<Employee>(`/admin/employees/${id}?locale=${locale}`, {
         method: 'PUT',
-        body: JSON.stringify(employees),
+        body: JSON.stringify(employee),
       }),
 
-    deleteEmployee: (id: string): Promise<void> =>
-      fetchAPI<void>(`/admin/employees/${id}`, { method: 'DELETE' }),
+    deleteEmployee: (id: string): Promise<void> => 
+      fetchAPI<void>(`/admin/employees/${id}`, { 
+        method: 'DELETE' 
+      }),
+
+    // INQUIRIES MANAGEMENT - ADMIN ONLY
+    getInquiries: (): Promise<Inquiry[]> => 
+      fetchAPI<Inquiry[]>('/inquiries'), // GET /api/v1/inquiries (Admin auth required)
+
+    updateInquiryStatus: (id: string, status: string): Promise<void> =>
+      fetchAPI<void>(`/inquiries/${id}/status`, {
+        method: 'PUT',
+        body: JSON.stringify({ status }),
+      }),
+
+    deleteInquiry: (id: string): Promise<void> =>
+      fetchAPI<void>(`/inquiries/${id}`, { 
+        method: 'DELETE' 
+      }),
+
+    // User Management
+    getUsers: (): Promise<User[]> => 
+      fetchAPI<User[]>('/admin/users'),
+
+    deleteUser: (email: string): Promise<void> => 
+      fetchAPI<void>(`/admin/users/${email}`, { 
+        method: 'DELETE' 
+      }),
   },
 };
-

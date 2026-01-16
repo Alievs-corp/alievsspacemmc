@@ -148,22 +148,23 @@ export function AdminCareers() {
     setError('');
 
     try {
-      const payload: Record<Locale, Partial<Career>> = { en: {}, az: {}, ru: {} };
+      // Save per locale according to API signature
       for (const loc of supportedLocales.map((l) => l.code as Locale)) {
         const requirements = requirementsText[loc]
           .split(',')
           .map((s) => s.trim())
           .filter(Boolean);
-        payload[loc] = {
+
+        const payload: Partial<Career> = {
           ...careerFormData[loc],
           requirements,
         };
-      }
 
-      if (editingCareerId) {
-        await api.admin.updateCareer(editingCareerId, payload);
-      } else {
-        await api.admin.createCareer(payload);
+        if (editingCareerId) {
+          await api.admin.updateCareer(editingCareerId, loc, payload);
+        } else {
+          await api.admin.createCareer(loc, payload);
+        }
       }
 
       await loadData();
@@ -181,15 +182,15 @@ export function AdminCareers() {
     setError('');
 
     try {
-      const payload: Record<Locale, Partial<Employee>> = { en: {}, az: {}, ru: {} };
+      // Save per locale according to API signature
       for (const loc of supportedLocales.map((l) => l.code as Locale)) {
-        payload[loc] = employeeFormData[loc];
-      }
+        const payload: Partial<Employee> = employeeFormData[loc];
 
-      if (editingEmployeeId) {
-        await api.admin.updateEmployee(editingEmployeeId, payload);
-      } else {
-        await api.admin.createEmployee(payload);
+        if (editingEmployeeId) {
+          await api.admin.updateEmployee(editingEmployeeId, loc, payload);
+        } else {
+          await api.admin.createEmployee(loc, payload);
+        }
       }
 
       await loadData();

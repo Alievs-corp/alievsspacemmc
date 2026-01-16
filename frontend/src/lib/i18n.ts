@@ -61,6 +61,33 @@ const translations: Record<Locale, Record<string, any>> = {
       cta: 'Request a Proposal',
       admin: 'Admin',
     },
+    auth: {
+      register: {
+        brandTitle: 'Alievs Space',
+        brandTagline: 'Premium Digital & Commerce Ecosystems',
+        title: 'Create your account',
+        haveAccount: 'Already have an account?',
+        signIn: 'Sign in',
+        fields: {
+          name: 'Full Name *',
+          email: 'Email Address *',
+          password: 'Password *',
+          phone: 'Phone Number',
+          company: 'Company Name',
+        },
+        placeholders: {
+          name: 'John Doe',
+          email: 'you@example.com',
+          password: '••••••••',
+          phone: '+994 ...',
+          company: 'Your Company Inc.',
+        },
+        submit: 'Create account',
+        submitting: 'Creating account...',
+        backHome: 'Return to homepage',
+        error: 'Registration failed',
+      },
+    },
     public: {
       footerDesc:
         'Premium web & mobile development, e-commerce/marketplace systems, and banking-ready dashboards.',
@@ -444,7 +471,7 @@ const translations: Record<Locale, Record<string, any>> = {
         },
         applyTitle: 'Ready to apply?',
         applyCopy:
-          'If you care about building stable, scalable backend systems —  and want your work to hold up in real production environments — we’d like to hear from you.',
+          'If you care about building stable, scalable backend systems — and want your work to hold up in real production environments — we’d like to hear from you.',
         applyCta: 'Apply for this role',
       },
       frontend: {
@@ -927,6 +954,33 @@ const translations: Record<Locale, Record<string, any>> = {
       contact: 'Контакты',
       cta: 'Запросить предложение',
       admin: 'Админ',
+    },
+    auth: {
+      register: {
+        brandTitle: 'Alievs Space',
+        brandTagline: 'Премиальные цифровые и коммерческие экосистемы',
+        title: 'Создайте аккаунт',
+        haveAccount: 'Уже есть аккаунт?',
+        signIn: 'Войти',
+        fields: {
+          name: 'Полное имя *',
+          email: 'Электронная почта *',
+          password: 'Пароль *',
+          phone: 'Номер телефона',
+          company: 'Название компании',
+        },
+        placeholders: {
+          name: 'Иван Иванов',
+          email: 'you@example.com',
+          password: '••••••••',
+          phone: '+7 (999) 123-45-67',
+          company: 'Ваша Компания',
+        },
+        submit: 'Создать аккаунт',
+        submitting: 'Создание аккаунта...',
+        backHome: 'Вернуться на главную',
+        error: 'Регистрация не удалась',
+      },
     },
     public: {
       footerDesc:
@@ -1793,6 +1847,33 @@ const translations: Record<Locale, Record<string, any>> = {
       contact: 'Əlaqə',
       cta: 'Təklif istəyin',
       admin: 'Admin',
+    },
+    auth: {
+      register: {
+        brandTitle: 'Alievs Space',
+        brandTagline: 'Premium Rəqəmsal və Ticarət Ekosistemləri',
+        title: 'Hesab yaradın',
+        haveAccount: 'Artıq hesabınız var?',
+        signIn: 'Daxil olun',
+        fields: {
+          name: 'Tam ad *',
+          email: 'E-poçt ünvanı *',
+          password: 'Şifrə *',
+          phone: 'Telefon nömrəsi',
+          company: 'Şirkət adı',
+        },
+        placeholders: {
+          name: 'Ad Soyad',
+          email: 'you@example.com',
+          password: '••••••••',
+          phone: '+994 (50) 123-45-67',
+          company: 'Şirkətiniz',
+        },
+        submit: 'Hesab yaradın',
+        submitting: 'Hesab yaradılır...',
+        backHome: 'Ana səhifəyə qayıt',
+        error: 'Qeydiyyat alınmadı',
+      },
     },
     public: {
       footerDesc:

@@ -119,7 +119,7 @@ export function Footer() {
                       <img src={instagram} alt="Instagram"/>
                     </a>
                     <a 
-                      href="https://linkedin.com" 
+                      href="https://www.linkedin.com/company/alievs-space-mmc" 
                       target="_blank" 
                       rel="noopener noreferrer">
                       <img src={linkedin} alt="LinkedIn"/>

@@ -93,22 +93,23 @@ export function AdminBlog() {
     setError('');
 
     try {
-      const payload: Record<Locale, Partial<BlogPost>> = { en: {}, az: {}, ru: {} };
+      // Save per-locale using API contract
       for (const loc of supportedLocales.map((l) => l.code as Locale)) {
         const tags = tagsText[loc]
           .split(',')
           .map((s) => s.trim())
           .filter(Boolean);
-        payload[loc] = {
+
+        const payload: Partial<BlogPost> = {
           ...formData[loc],
           tags,
         };
-      }
 
-      if (editingId) {
-        await api.admin.updateBlogPost(editingId, payload);
-      } else {
-        await api.admin.createBlogPost(payload);
+        if (editingId) {
+          await api.admin.updateBlogPost(editingId, loc, payload);
+        } else {
+          await api.admin.createBlogPost(loc, payload);
+        }
       }
 
       await loadPosts();

@@ -92,22 +92,23 @@ export function AdminServices() {
     setError('');
 
     try {
-      const payload: Record<Locale, Partial<Service>> = { en: {}, az: {}, ru: {} };
+      // Save per-locale using API signatures
       for (const loc of supportedLocales.map((l) => l.code as Locale)) {
         const bullets = bulletsText[loc]
           .split(',')
           .map((s) => s.trim())
           .filter(Boolean);
-        payload[loc] = {
+
+        const payload: Partial<Service> = {
           ...formData[loc],
           bullets,
         };
-      }
 
-      if (editingId) {
-        await api.admin.updateService(editingId, payload);
-      } else {
-        await api.admin.createService(payload);
+        if (editingId) {
+          await api.admin.updateService(editingId, loc, payload);
+        } else {
+          await api.admin.createService(loc, payload);
+        }
       }
 
       await loadServices();

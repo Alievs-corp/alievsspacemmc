@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useI18n } from '@/contexts/I18nContext';
-import { api } from '@/lib/api';
+import { api, type Service, type Project, type BlogPost, type Career, type Employee, type Inquiry } from '@/lib/api';
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
 
@@ -10,7 +10,7 @@ interface Stats {
   projects: number;
   blog: number;
   careers: number;
-  inquiries: number;
+  inquiries: number; // leads əvəzinə inquiries
   employees: number;
 }
 
@@ -22,7 +22,7 @@ export function AdminDashboard() {
     projects: 0,
     blog: 0,
     careers: 0,
-    inquiries: 0,
+    inquiries: 0, // leads əvəzinə inquiries
     employees: 0,
   });
   const [loading, setLoading] = useState(true);
@@ -31,21 +31,21 @@ export function AdminDashboard() {
     const loadStats = async () => {
       try {
         const [services, projects, blog, careers, employees, inquiries] = await Promise.all([
-          api.getServices(locale).catch(() => []),
-          api.getProjects(locale).catch(() => []),
-          api.getBlogPosts(locale).catch(() => []),
-          api.getCareers(locale).catch(() => []),
-          api.getEmployees(locale).catch(() => []),
-          api.admin.getInquiries().catch(() => []),
+          api.getServices(locale) as Promise<Service[]>,
+          api.getProjects(locale) as Promise<Project[]>,
+          api.getBlogPosts(locale) as Promise<BlogPost[]>,
+          api.getCareers(locale) as Promise<Career[]>,
+          api.getEmployees(locale) as Promise<Employee[]>,
+          api.admin.getInquiries() as Promise<Inquiry[]>, // getLeads əvəzinə getInquiries
         ]);
 
         setStats({
-          services: services.length,
-          projects: projects.length,
-          blog: blog.length,
-          careers: careers.length,
-          employees: employees.length,
-          inquiries: inquiries.length,
+          services: services?.length || 0,
+          projects: projects?.length || 0,
+          blog: blog?.length || 0,
+          careers: careers?.length || 0,
+          employees: employees?.length || 0,
+          inquiries: inquiries?.length || 0, // leads əvəzinə inquiries
         });
       } catch (error) {
         console.error('Failed to load stats:', error);
@@ -62,7 +62,7 @@ export function AdminDashboard() {
       <div>
         <h1 className="text-3xl font-bold">Overview</h1>
         <p className="mt-2 text-[var(--color-muted-foreground)]">
-          Welcome back, {user?.name}. Manage your site content, services, projects, blog posts, careers, and leads.
+          Welcome back, {user?.name}. Manage your site content, services, projects, blog posts, careers, and inquiries.
         </p>
       </div>
 
@@ -83,6 +83,9 @@ export function AdminDashboard() {
               <Link to="/admin/inquiries">View Inquiries</Link>
             </Button>
             <Button asChild variant="outline">
+              <Link to="/admin/users">Manage Users</Link>
+            </Button>
+            <Button asChild variant="outline">
               <Link to="/admin/home">Edit Home</Link>
             </Button>
             <Button asChild variant="outline">
@@ -99,10 +102,10 @@ export function AdminDashboard() {
             <div className="text-sm text-[var(--color-muted-foreground)] space-y-1">
               <div>Services: {stats.services}</div>
               <div>Projects: {stats.projects}</div>
-              <div>Blog: {stats.blog}</div>
+              <div>Blog Posts: {stats.blog}</div>
               <div>Careers: {stats.careers}</div>
               <div>Employees: {stats.employees}</div>
-              <div>Inquiries: {stats.inquiries}</div>
+              <div>Inquiries: {stats.inquiries}</div> {/* Leads əvəzinə Inquiries */}
             </div>
           )}
           <div className="mt-4 pt-4 border-t border-[var(--color-border)]">
