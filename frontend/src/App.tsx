@@ -18,7 +18,7 @@ import { AdminServices } from './pages/admin/Services';
 import { AdminProjects } from './pages/admin/Projects';
 import { AdminBlog } from './pages/admin/Blog';
 import { AdminCareers } from './pages/admin/Careers';
-import { AdminInquiries } from './pages/admin/Inquiries';
+import { AdminInquiries } from './pages/admin/Inquiry';
 import { AdminSettings } from './pages/admin/Settings';
 import { AdminHome } from './pages/admin/Home';
 import { AdminAbout } from './pages/admin/About';

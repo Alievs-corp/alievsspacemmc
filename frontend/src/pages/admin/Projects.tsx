@@ -92,22 +92,23 @@ export function AdminProjects() {
     setError('');
 
     try {
-      const payload: Record<Locale, Partial<Project>> = { en: {}, az: {}, ru: {} };
+      // Save per-locale using API signatures
       for (const loc of supportedLocales.map((l) => l.code as Locale)) {
         const tags = tagsText[loc]
           .split(',')
           .map((s) => s.trim())
           .filter(Boolean);
-        payload[loc] = {
+
+        const payload: Partial<Project> = {
           ...formData[loc],
           tags,
         };
-      }
 
-      if (editingId) {
-        await api.admin.updateProject(editingId, payload);
-      } else {
-        await api.admin.createProject(payload);
+        if (editingId) {
+          await api.admin.updateProject(editingId, loc, payload);
+        } else {
+          await api.admin.createProject(loc, payload);
+        }
       }
 
       await loadProjects();
