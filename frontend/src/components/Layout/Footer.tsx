@@ -20,11 +20,11 @@ export function Footer() {
               <div className="flex items-center mb-4">
                 <img 
                   src={alievsspace} 
-                  alt={t('companyName', 'Aliyevs Space MMC')} 
+                  alt={t('companyName', 'Alievs Space MMC')} 
                   className="h-10 mr-3"
                 />
                 <div>
-                  <p className='font-almarai sm:text-[24px] md:text-[18px] leading-none'>{t('companyName', 'ALIYEVS SPACE MMC')}</p>
+                  <p className='font-almarai sm:text-[24px] md:text-[18px] leading-none'>{t('companyName', 'ALIEVS SPACE MMC')}</p>
                   <p className='font-kavivanar text-[9.4px] text-white leading-tight'>{t('public.footerTagline', 'Premium Digital & Commerce Ecosystem')}</p>
                 </div>
               </div>
@@ -34,7 +34,7 @@ export function Footer() {
               </p>
               <div className="w-52 h-[1px] bg-gradient-to-r from-blue-500 to-purple-500 my-4"></div>
               <p className="font-inter text-white text-[13px] hidden lg:block">
-                {t('public.copyright', '© 2025 Aliyevs Space MMC. All rights reserved.')}
+                {t('public.copyright', '© 2025 Alievs Space MMC. All rights reserved.')}
               </p>
             </div>
             
@@ -131,7 +131,7 @@ export function Footer() {
           </div>
           
           <p className="font-inter text-white text-[13px] text-center mt-6 block lg:hidden">
-            {t('public.copyright', '© 2025 Aliyevs Space MMC. All rights reserved.')}
+            {t('public.copyright', '© 2025 Alievs Space MMC. All rights reserved.')}
           </p>
         </div>
       </div>
