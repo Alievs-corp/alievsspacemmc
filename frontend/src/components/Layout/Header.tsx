@@ -32,13 +32,13 @@ export function Header() {
               alt="Logo" 
               className="w-16 sm:w-16 md:w-14 lg:w-20" 
             />
-            {/* Comment */}
-            <div className="hidden sm:block">
-              <p className='font-almarai sm:text-[24px] md:text-[18px] lg:text-[28px] leading-none'>ALIYEVS</p>
+            {/* Tablet (md) üçün mətni gizlədirik */}
+            <div className="hidden sm:block md:hidden lg:block">
+              <p className='font-almarai sm:text-[24px] md:text-[18px] lg:text-[28px] leading-none'>ALIEVS</p>
               <p className='font-kavivanar sm:text-[16px] md:text-[12px] lg:text-[20px] leading-tight'>Space MMC</p>
             </div>
             <div className="flex sm:hidden flex-col gap-1">
-              <p className='font-almarai text-[15.44px] '>ALIYEVS</p>
+              <p className='font-almarai text-[15.44px] '>ALIEVS</p>
               <p className='font-kavivanar text-[11.6px]'>Space MMC</p>
             </div>
           </Link>
@@ -96,40 +96,73 @@ export function Header() {
           </nav>
 
           <div className="hidden md:flex items-center space-x-2 lg:space-x-3">
-            <button
-              onClick={() => {
-                const idx = supportedLocales.findIndex((l) => l.code === locale);
-                setLocale(
-                  supportedLocales[(idx + 1) % supportedLocales.length].code
-                );
-              }}
-              className="p-2 rounded-md hover:bg-[#546691] cursor-pointer"
-            >
-              <img 
-                src={translate} 
-                alt="Translate" 
-                className="w-4 h-4 md:w-5 md:h-5" 
-              />
-            </button>
+            {/* Tablet (md) versiya üçün - düymələr soldan sağa: Translate, Contact Sales, Login */}
+            <div className="hidden md:flex lg:hidden items-center space-x-2">
+              <button
+                onClick={() => {
+                  const idx = supportedLocales.findIndex((l) => l.code === locale);
+                  setLocale(
+                    supportedLocales[(idx + 1) % supportedLocales.length].code
+                  );
+                }}
+                className="p-2 rounded-md hover:bg-[#546691] cursor-pointer"
+              >
+                <img 
+                  src={translate} 
+                  alt="Translate" 
+                  className="w-4 h-4" 
+                />
+              </button>
 
-            <div className="hidden md:block lg:hidden">
               <Button
                 size="sm"
-                className="bg-[#133FA6] hover:bg-[#0f2f78] text-white text-xs px-2 py-0.5 border-b-[0.7px] border-white cursor-pointer"
+                className="bg-[#133FA6] hover:bg-[#0f2f78] text-white text-xs px-3 py-1.5 border-b-[0.7px] border-white cursor-pointer"
                 onClick={() => navigate('/contact')}
               >
                 Contact Sales
               </Button>
-            </div>
 
-            <div className="hidden lg:block">
               <Button
                 size="sm"
-                className="bg-[#133FA6] hover:bg-[#0f2f78] text-white px-4 py-2 
-                border-b-[0.7px] border-white cursor-pointer"
+                className="bg-transparent hover:bg-[#546691] text-white text-xs px-3 py-1.5 border border-white cursor-pointer"
+                onClick={() => navigate('/login')}
+              >
+                {t('nav.login')}
+              </Button>
+            </div>
+
+            {/* Desktop (lg) versiya üçün - düymələr soldan sağa: Translate, Contact Sales, Login */}
+            <div className="hidden lg:flex items-center space-x-3 xl:space-x-4">
+              <button
+                onClick={() => {
+                  const idx = supportedLocales.findIndex((l) => l.code === locale);
+                  setLocale(
+                    supportedLocales[(idx + 1) % supportedLocales.length].code
+                  );
+                }}
+                className="p-2 rounded-md hover:bg-[#546691] cursor-pointer"
+              >
+                <img 
+                  src={translate} 
+                  alt="Translate" 
+                  className="w-5 h-5" 
+                />
+              </button>
+
+              <Button
+                size="sm"
+                className="bg-[#133FA6] hover:bg-[#0f2f78] text-white px-5 py-2.5 border-b-[0.7px] border-white cursor-pointer text-sm lg:text-base"
                 onClick={() => navigate('/contact')}
               >
                 Contact Sales
+              </Button>
+
+              <Button
+                size="sm"
+                className="bg-transparent hover:bg-[#546691] text-white px-5 py-2.5 border border-white cursor-pointer text-sm lg:text-base"
+                onClick={() => navigate('/login')}
+              >
+                {t('nav.login')}
               </Button>
             </div>
           </div>
@@ -153,7 +186,7 @@ export function Header() {
                     className="w-12 h-12 object-cover"
                   />
                   <div>
-                    <h1 className="text-lg text-white">ALIYEVS SPACE MMC</h1>
+                    <h1 className="text-lg text-white">ALIEVS SPACE MMC</h1>
                     <p className="font-kavivanar text-sm text-white">Premium Digital & Commerce Ecosystem</p>
                   </div>
                 </div>
@@ -207,10 +240,34 @@ export function Header() {
                         </svg>
                       </Link>
                     ))}
+                    
+                    {/* Mobile menyuda login linki */}
+                    <Link
+                      to="/login"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center justify-between px-4 py-3.5 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-900 transition-all"
+                    >
+                      <span className="font-medium">
+                        {t('nav.login')}
+                      </span>
+                      <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
                   </nav>
                 </div>
 
-                <div className="mt-12">
+                <div className="mt-12 space-y-3">
+                  <Button
+                    className="w-full bg-[#133FA6] hover:bg-[#0f2f78] text-white font-semibold py-3.5 text-lg rounded-lg"
+                    onClick={() => {
+                      navigate('/login');
+                      setMobileMenuOpen(false);
+                    }}
+                  >
+                    {t('nav.login')}
+                  </Button>
+                  
                   <Button
                     className="w-full bg-[#133FA6] hover:bg-[#0f2f78] text-white font-semibold py-3.5 text-lg rounded-lg"
                     onClick={() => {
@@ -223,7 +280,7 @@ export function Header() {
                   
                   <div className="text-center mt-10 pt-6 border-t border-gray-200">
                     <p className="text-gray-500 text-sm">
-                      © {new Date().getFullYear()} ALIYEVS SPACE MMC
+                      © {new Date().getFullYear()} ALIEVS SPACE MMC
                     </p>
                     <p className="text-gray-400 text-xs mt-2">
                       Premium Digital & Commerce Ecosystem

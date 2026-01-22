@@ -10,8 +10,8 @@ import { Services } from './pages/Services';
 import { Careers } from './pages/Careers';
 import Contact  from './pages/Contact';
 import { Industries } from './pages/Industries';
-import { Login } from './pages/Login';
-import { Register } from './pages/Register';
+import { Login } from './pages/admin/Login';
+import { Register } from './pages/admin/Register';
 import { AdminDashboard } from './pages/admin/Dashboard';
 import { AdminLayout } from './components/admin/AdminLayout';
 import { AdminServices } from './pages/admin/Services';
@@ -38,8 +38,6 @@ function App() {
         <ContentProvider>
           <BrowserRouter>
             <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
               <Route
                 path="/admin/*"
                 element={
@@ -47,6 +45,8 @@ function App() {
                     <AdminLayout>
                       <Routes>
                         <Route path="/" element={<AdminDashboard />} />
+                        <Route path="/admin-login" element={<Login />} />
+                        <Route path="/admin-register" element={<Register />} />
                         <Route path="/services" element={<AdminServices />} />
                         <Route path="/projects" element={<AdminProjects />} />
                         <Route path="/blog" element={<AdminBlog />} />
@@ -66,6 +66,7 @@ function App() {
                   <Layout>
                     <Routes>
                       <Route path="/" element={<Home />} />
+                      <Route path="/login" element={<Login />} />
                       <Route path="/about" element={<About />} />
                       <Route path="/services" element={<Services />} />
                       <Route path="/case-studies" element={<CaseStudies />} />

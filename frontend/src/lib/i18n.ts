@@ -6,7 +6,7 @@ export const SUPPORTED_LOCALES: Array<{ code: Locale; label: string }> = [
   { code: 'az', label: 'Azərbaycanca' },
 ];
 
-export const DEFAULT_LOCALE: Locale = 'en';
+export const DEFAULT_LOCALE: Locale = 'az';
 
 const LOCALE_KEY = 'alievs_space_locale';
 
@@ -60,6 +60,7 @@ const translations: Record<Locale, Record<string, any>> = {
       contact: 'Contact',
       cta: 'Request a Proposal',
       admin: 'Admin',
+      login: 'Login',
     },
     auth: {
       register: {
@@ -934,6 +935,8 @@ const translations: Record<Locale, Record<string, any>> = {
       },
     },
   },
+
+
   ru: {
     ui: {
       language: 'Язык',
@@ -954,6 +957,7 @@ const translations: Record<Locale, Record<string, any>> = {
       contact: 'Контакты',
       cta: 'Запросить предложение',
       admin: 'Админ',
+      login: 'Войти',
     },
     auth: {
       register: {
@@ -1827,6 +1831,7 @@ const translations: Record<Locale, Record<string, any>> = {
         'Если строите маркетплейс, e-commerce или банковский дашборд — подготовим архитектуру с премиальным UX.',
     },
     },
+
     az: {
     ui: {
       language: 'Dil',
@@ -1847,6 +1852,7 @@ const translations: Record<Locale, Record<string, any>> = {
       contact: 'Əlaqə',
       cta: 'Təklif istəyin',
       admin: 'Admin',
+      login: 'Daxil ol',
     },
     auth: {
       register: {
