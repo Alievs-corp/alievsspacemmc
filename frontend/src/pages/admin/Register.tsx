@@ -1,14 +1,13 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useI18n } from '@/contexts/I18nContext';
-import type { Locale } from '@/lib/i18n';
-import translateIcon from '@/assets/icons/translate.svg';
+import { Button } from '@/components/ui/Button';
 
 export function Register() {
   const navigate = useNavigate();
   const { register } = useAuth();
-  const { locale, setLocale, supportedLocales, t } = useI18n();
+  const { t } = useI18n();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -37,15 +36,7 @@ export function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A1E] flex flex-col justify-center py-4 sm:py-8 px-3 sm:px-4 relative">
-      {/* Top-right language selector */}
-      <LanguageDropdown
-        locale={locale}
-        setLocale={setLocale}
-        supportedLocales={supportedLocales}
-        t={t}
-      />
-      
+    <div className="min-h-screen bg-[#0A0A1E] flex flex-col justify-center py-4 sm:py-8 px-3 sm:px-4">
       <div className="mx-auto w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl px-3 sm:px-4">
         <div className="text-center mb-4 sm:mb-6 md:mb-8">
           <p className='font-almarai text-xl sm:text-2xl md:text-3xl leading-none text-white mb-1 sm:mb-2'>ALIEVS</p>
@@ -55,13 +46,12 @@ export function Register() {
           </p>
         </div>
 
-        <div className="rounded-xl sm:rounded-2xl p-[1px] bg-gradient-to-br from-[#2A3A8C] to-[#0D1B5E] mb-3 sm:mb-4 shadow-[0_4px_15px_rgba(0,0,0,0.25)] sm:shadow-[0_10px_25px_rgba(0,0,0,0.35)]">
-          <div className="bg-[#13132F] border border-[#546691]/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8">
+        <div className="bg-[#13132F] border border-[#546691] rounded-xl p-4 sm:p-6 md:p-8">
             <div className="text-center mb-4 sm:mb-5 md:mb-6">
               <h2 className="font-inter text-lg sm:text-xl md:text-2xl font-bold text-white mb-1">
                 {t('auth.register.title', 'Create your account')}
               </h2>
-              <p className="font-inter text-xs sm:text-sm text-white mt-1">
+              <p className="font-inter text-xs sm:text-sm text-[#808087] mt-1">
                 {t('auth.register.haveAccount', 'Already have an account?')}{' '}
                 <Link to="/login" className="font-medium text-[#133FA6] hover:text-[#1a4cc0] hover:underline">
                   {t('auth.register.signIn', 'Sign in')}
@@ -98,9 +88,8 @@ export function Register() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#546691] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
+                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#546691] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6]"
                       placeholder={t('auth.register.placeholders.name', 'John Doe')}
-                      style={{ color: '#FFFFFF' }}
                     />
                   </div>
                 </div>
@@ -121,9 +110,8 @@ export function Register() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#546691] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
+                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#546691] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6]"
                       placeholder={t('auth.register.placeholders.email', 'you@example.com')}
-                      style={{ color: '#FFFFFF' }}
                     />
                   </div>
                 </div>
@@ -145,9 +133,8 @@ export function Register() {
                       minLength={6}
                       value={formData.password}
                       onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#546691] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
+                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#546691] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6]"
                       placeholder={t('auth.register.placeholders.password', '••••••••')}
-                      style={{ color: '#FFFFFF' }}
                     />
                   </div>
                 </div>
@@ -167,9 +154,8 @@ export function Register() {
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#546691] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
+                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#546691] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6]"
                       placeholder={t('auth.register.placeholders.phone', '+994 (XXX) XXX-XX-XX')}
-                      style={{ color: '#FFFFFF' }}
                     />
                   </div>
                 </div>
@@ -189,19 +175,18 @@ export function Register() {
                       type="text"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#546691] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
+                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#546691] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6]"
                       placeholder={t('auth.register.placeholders.company', 'Your Company Inc.')}
-                      style={{ color: '#FFFFFF' }}
                     />
                   </div>
                 </div>
               </div>
 
               <div>
-                <button
+                <Button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-2.5 sm:py-3 px-4 border border-transparent rounded-lg font-inter text-xs sm:text-sm font-medium text-white bg-gradient-to-r from-[#133FA6] to-blue-700 hover:from-blue-700 hover:to-[#133FA6] focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-[#133FA6] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                  className="w-full"
                 >
                   {loading ? (
                     <div className="flex items-center justify-center">
@@ -214,7 +199,7 @@ export function Register() {
                   ) : (
                     t('auth.register.submit', 'Create account')
                   )}
-                </button>
+                </Button>
               </div>
             </form>
 
@@ -230,93 +215,12 @@ export function Register() {
               </Link>
             </div>
           </div>
-        </div>
 
         <div className="text-center mt-3 sm:mt-4">
           <p className="font-inter text-xs sm:text-sm text-[#808087] px-2">
             © {new Date().getFullYear()} {t('company.name')}. {t('auth.register.copyright')}
           </p>
         </div>
-      </div>
-    </div>
-  );
-}
-
-function LanguageDropdown({
-  locale,
-  setLocale,
-  supportedLocales,
-  t,
-}: {
-  locale: Locale;
-  setLocale: (l: Locale) => void;
-  supportedLocales: { code: Locale; label: string }[];
-  t: (key: string, fallback?: string) => string;
-}) {
-  const [open, setOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  return (
-    <div className="fixed top-3 right-3 sm:top-4 sm:right-4 z-50" ref={dropdownRef}>
-      <div className="relative">
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className="inline-flex items-center gap-2 rounded-full bg-[#0A0A1E]/80 border border-[#546691] px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm text-white shadow-[0_4px_15px_rgba(0,0,0,0.3)] hover:border-[#546691] hover:bg-[#0A0A1E] focus:outline-none focus:ring-2 focus:ring-[#133FA6] backdrop-blur"
-          aria-haspopup="listbox"
-          aria-expanded={open}
-        >
-          <img src={translateIcon} alt="translate" className="w-4 h-4 sm:w-5 sm:h-5 opacity-80" />
-          <span className="uppercase tracking-wide hidden sm:inline">{locale}</span>
-          <span className="uppercase tracking-wide sm:hidden">{locale}</span>
-          <svg className={`w-3 h-3 sm:w-4 sm:h-4 transition-transform ${open ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
-          </svg>
-        </button>
-
-        {open && (
-          <div className="absolute right-0 mt-2 w-40 sm:w-52 rounded-xl sm:rounded-2xl border border-[#546691] bg-[#11112B] shadow-[0_8px_25px_rgba(0,0,0,0.4)] overflow-hidden">
-            <div className="px-3 sm:px-4 py-2 sm:py-2.5 text-[10px] sm:text-[11px] text-[#808087] uppercase tracking-wider">
-              {t('ui.language', 'Language')}
-            </div>
-            <ul role="listbox" className="py-1">
-              {supportedLocales.map((l) => (
-                <li key={l.code}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setLocale(l.code);
-                      setOpen(false);
-                    }}
-                    className={`w-full text-left px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm flex items-center justify-between hover:bg-[#546691] ${
-                      l.code === locale ? 'text-white' : 'text-white'
-                    }`}
-                    role="option"
-                    aria-selected={l.code === locale}
-                  >
-                    <span className="truncate">{l.label}</span>
-                    {l.code === locale && (
-                      <svg className="w-3 h-3 sm:w-4 sm:h-4 text-[#4F7BFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    )}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
     </div>
   );
