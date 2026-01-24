@@ -40,7 +40,7 @@ export function AdminAbout() {
       if (data.process && data.process.length > 0) {
         if (typeof data.process[0] === 'string') {
           // Old format - convert to new format
-          setProcessItems((data.process as string[]).map((p, idx) => {
+          setProcessItems((data.process as unknown as string[]).map((p) => {
             const parts = p.split(':').map(s => s.trim());
             return {
               title: parts[0] || p,

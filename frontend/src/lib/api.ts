@@ -42,6 +42,7 @@ export interface Service {
   title: string;
   desc: string;
   bullets: string[];
+  image?: string;
 }
 
 export interface Project {

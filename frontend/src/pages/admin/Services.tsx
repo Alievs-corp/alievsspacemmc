@@ -260,6 +260,19 @@ export function AdminServices() {
                       className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] px-3 py-2 text-sm text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6]"
                     />
                   </div>
+                  <div className="md:col-span-2">
+                    <ImageUpload
+                      value={formData[locCode].image}
+                      onChange={(url) =>
+                        setFormData({
+                          ...formData,
+                          [locCode]: { ...formData[locCode], image: url },
+                        })
+                      }
+                      folder="services"
+                      label={t('admin.image') || 'Image'}
+                    />
+                  </div>
                 </div>
               </div>
             );
