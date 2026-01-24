@@ -45,8 +45,6 @@ function App() {
                     <AdminLayout>
                       <Routes>
                         <Route path="/" element={<AdminDashboard />} />
-                        <Route path="/admin-login" element={<Login />} />
-                        <Route path="/admin-register" element={<Register />} />
                         <Route path="/services" element={<AdminServices />} />
                         <Route path="/projects" element={<AdminProjects />} />
                         <Route path="/blog" element={<AdminBlog />} />
@@ -67,6 +65,7 @@ function App() {
                     <Routes>
                       <Route path="/" element={<Home />} />
                       <Route path="/login" element={<Login />} />
+                      <Route path="/register" element={<Register />} />
                       <Route path="/about" element={<About />} />
                       <Route path="/services" element={<Services />} />
                       <Route path="/case-studies" element={<CaseStudies />} />

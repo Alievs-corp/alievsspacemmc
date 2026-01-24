@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useI18n } from '@/contexts/I18nContext';
+import { Button } from '@/components/ui/Button';
 
 export function Login() {
   const navigate = useNavigate();
@@ -42,15 +43,15 @@ export function Login() {
           </p>
         </div>
 
-        <div className="bg-[#13132F] border border-[#2A2A3A] rounded-xl p-6">
-          <div className="text-center mb-6">
+        <div className="bg-[#13132F] border border-[#546691] rounded-xl p-6">
+            <div className="text-center mb-6">
             <h2 className="font-inter text-2xl font-bold text-white">
-              Sign in to your account
+              {t('auth.login.title')}
             </h2>
-            <p className="mt-1 font-inter text-sm text-white">
-              Don't have an account?{' '}
+            <p className="mt-1 font-inter text-sm text-[#808087]">
+              {t('auth.login.noAccount')}{' '}
               <Link to="/register" className="font-medium text-[#133FA6] hover:text-[#1a4cc0] hover:underline">
-                Sign up
+                {t('auth.login.signUp')}
               </Link>
             </p>
           </div>
@@ -84,7 +85,7 @@ export function Login() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="block w-full pl-9 pr-3 py-2.5 font-inter text-sm bg-[#0A0A1E] border border-[#2A2A3A] rounded-lg text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
+                    className="block w-full pl-9 pr-3 py-2.5 font-inter text-sm bg-[#0A0A1E] border border-[#546691] rounded-lg text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6]"
                     placeholder={t('auth.login.placeholders.email')}
                   />
                 </div>
@@ -106,7 +107,7 @@ export function Login() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="block w-full pl-9 pr-3 py-2.5 font-inter text-sm bg-[#0A0A1E] border border-[#2A2A3A] rounded-lg text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
+                    className="block w-full pl-9 pr-3 py-2.5 font-inter text-sm bg-[#0A0A1E] border border-[#546691] rounded-lg text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6]"
                     placeholder={t('auth.login.placeholders.password')}
                   />
                 </div>
@@ -118,25 +119,25 @@ export function Login() {
                 <input
                   id="remember-me"
                   type="checkbox"
-                  className="h-3.5 w-3.5 text-[#133FA6] focus:ring-[#133FA6] border-[#2A2A3A] rounded bg-[#0A0A1E]"
+                  className="h-3.5 w-3.5 text-[#133FA6] focus:ring-[#133FA6] border-[#546691] rounded bg-[#0A0A1E]"
                 />
-                <label htmlFor="remember-me" className="ml-2 block font-inter text-xs text-white">
-                  Remember me
+                <label htmlFor="remember-me" className="ml-2 block font-inter text-xs text-[#808087]">
+                  {t('auth.login.rememberMe')}
                 </label>
               </div>
 
               <div className="text-xs">
                 <a href="#" className="font-inter font-medium text-[#133FA6] hover:text-[#1a4cc0]">
-                  Forgot password?
+                  {t('auth.login.forgotPassword')}
                 </a>
               </div>
             </div>
 
             <div>
-              <button
+              <Button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 px-4 border border-transparent rounded-lg font-inter text-sm font-medium text-white bg-gradient-to-r from-[#133FA6] to-blue-700 hover:from-blue-700 hover:to-[#133FA6] focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-[#133FA6] disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full"
               >
                 {loading ? (
                   <div className="flex items-center justify-center">
@@ -149,14 +150,14 @@ export function Login() {
                 ) : (
                   t('auth.login.submit')
                 )}
-              </button>
+              </Button>
             </div>
           </form>
 
           <div className="mt-6 text-center">
             <Link 
               to="/" 
-              className="inline-flex items-center font-inter text-xs text-[#808087] hover:text-white"
+              className="inline-flex items-center font-inter text-xs text-[#808087] hover:text-white transition-colors"
             >
               <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
