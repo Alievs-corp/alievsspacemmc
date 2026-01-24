@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { api, type Service, type Locale } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
+import { ImageUpload } from '@/components/admin/ImageUpload';
 
 export function AdminServices() {
-  const { locale, supportedLocales } = useI18n();
+  const { locale, supportedLocales, t } = useI18n();
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -31,7 +32,7 @@ export function AdminServices() {
       const data = await api.getServices(locale);
       setServices(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load services');
+      setError(err instanceof Error ? err.message : t('admin.failedToLoad'));
     } finally {
       setLoading(false);
     }
@@ -77,7 +78,7 @@ export function AdminServices() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this service?')) return;
+    if (!confirm(t('admin.confirmDelete'))) return;
     try {
       await api.admin.deleteService(id);
       await loadServices();
@@ -114,71 +115,71 @@ export function AdminServices() {
       await loadServices();
       handleNew();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to save service');
+      setError(err instanceof Error ? err.message : t('admin.failedToSave'));
     } finally {
       setSaving(false);
     }
   };
 
   if (loading) {
-    return <div className="text-[var(--color-muted-foreground)]">Loading...</div>;
+    return <div className="text-[#808087]">{t('admin.loading')}</div>;
   }
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Services</h1>
-          <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
-            Add, edit, and delete services shown on the public website.
+          <h1 className="text-3xl font-bold text-white">{t('admin.services')}</h1>
+          <p className="mt-2 text-sm text-[#808087]">
+            {t('admin.manageDescription')}
           </p>
         </div>
-        <Button onClick={handleNew}>New service</Button>
+        <Button onClick={handleNew}>{t('admin.newService')}</Button>
       </div>
 
       {error && (
-        <div className="rounded-md bg-[var(--color-destructive)]/10 p-3 text-sm text-[var(--color-destructive)]">
+        <div className="rounded-md bg-red-900/20 border border-red-800 p-3 text-sm text-red-400">
           {error}
         </div>
       )}
 
-      <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] overflow-hidden">
+      <div className="rounded-lg border border-[#546691] bg-[#13132F] overflow-hidden">
         <table className="w-full">
-          <thead className="bg-[var(--color-muted)]/50">
+          <thead className="bg-[#1A1A2E]/50">
             <tr>
-              <th className="px-4 py-3 text-left text-sm font-medium">Category</th>
-              <th className="px-4 py-3 text-left text-sm font-medium">Title</th>
-              <th className="px-4 py-3 text-left text-sm font-medium">Description</th>
-              <th className="px-4 py-3 text-right text-sm font-medium">Actions</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">{t('admin.category')}</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">{t('admin.title')}</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">{t('admin.description')}</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-white">{t('admin.actions')}</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[var(--color-border)]">
+          <tbody className="divide-y divide-[#546691]">
             {services.length === 0 ? (
               <tr>
-                <td colSpan={4} className="px-4 py-8 text-center text-sm text-[var(--color-muted-foreground)]">
-                  No services yet. Click "New service" to create one.
+                <td colSpan={4} className="px-4 py-8 text-center text-sm text-[#808087]">
+                  {t('admin.noServicesYet')}
                 </td>
               </tr>
             ) : (
               services.map((service) => (
-                <tr key={service.id} className="hover:bg-[var(--color-accent)]/50">
-                  <td className="px-4 py-3 text-sm">{service.category}</td>
-                  <td className="px-4 py-3 text-sm font-medium">{service.title}</td>
-                  <td className="px-4 py-3 text-sm text-[var(--color-muted-foreground)] line-clamp-2">
+                <tr key={service.id} className="hover:bg-[#546691]/30">
+                  <td className="px-4 py-3 text-sm text-white">{service.category}</td>
+                  <td className="px-4 py-3 text-sm font-medium text-white">{service.title}</td>
+                  <td className="px-4 py-3 text-sm text-[#808087] line-clamp-2">
                     {service.desc}
                   </td>
                   <td className="px-4 py-3 text-right">
                     <div className="flex justify-end gap-2">
                       <Button variant="ghost" size="sm" onClick={() => handleEdit(service)}>
-                        Edit
+                        {t('admin.edit')}
                       </Button>
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => handleDelete(service.id)}
-                        className="text-[var(--color-destructive)]"
+                        className="text-red-400 hover:text-red-300"
                       >
-                        Delete
+                        {t('admin.delete')}
                       </Button>
                     </div>
                   </td>
@@ -189,19 +190,19 @@ export function AdminServices() {
         </table>
       </div>
 
-      <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-6">
-        <h2 className="text-xl font-semibold mb-4">
-          {editingId ? 'Edit service' : 'Create service'}
+      <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
+        <h2 className="text-xl font-semibold mb-4 text-white">
+          {editingId ? t('admin.editService') : t('admin.createService')}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           {supportedLocales.map((loc) => {
             const locCode = loc.code as Locale;
             return (
-              <div key={locCode} className="space-y-4 p-4 border border-[var(--color-border)] rounded-lg">
-                <h3 className="font-medium">{loc.label}</h3>
+              <div key={locCode} className="space-y-4 p-4 border border-[#546691] rounded-lg bg-[#0A0A1E]/30">
+                <h3 className="font-medium text-white">{loc.label}</h3>
                 <div className="grid gap-4 md:grid-cols-2">
                   <div>
-                    <label className="block text-sm font-medium mb-1">Category</label>
+                    <label className="block text-sm font-medium mb-1 text-white">{t('admin.category')}</label>
                     <input
                       type="text"
                       value={formData[locCode].category || ''}
@@ -212,11 +213,11 @@ export function AdminServices() {
                         })
                       }
                       placeholder="Software / Commerce / Banking"
-                      className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                      className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] px-3 py-2 text-sm text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6]"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-1">Title</label>
+                    <label className="block text-sm font-medium mb-1 text-white">{t('admin.title')}</label>
                     <input
                       type="text"
                       value={formData[locCode].title || ''}
@@ -227,11 +228,11 @@ export function AdminServices() {
                         })
                       }
                       placeholder="Web & Mobile Development"
-                      className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                      className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] px-3 py-2 text-sm text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6]"
                     />
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium mb-1">Description</label>
+                    <label className="block text-sm font-medium mb-1 text-white">{t('admin.description')}</label>
                     <textarea
                       value={formData[locCode].desc || ''}
                       onChange={(e) =>
@@ -242,12 +243,12 @@ export function AdminServices() {
                       }
                       placeholder="Short premium description"
                       rows={3}
-                      className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                      className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] px-3 py-2 text-sm text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6]"
                     />
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium mb-1">
-                      Bullets (comma-separated)
+                    <label className="block text-sm font-medium mb-1 text-white">
+                      {t('admin.bullets')} ({t('admin.tagsPlaceholder')})
                     </label>
                     <input
                       type="text"
@@ -256,7 +257,20 @@ export function AdminServices() {
                         setBulletsText({ ...bulletsText, [locCode]: e.target.value })
                       }
                       placeholder="Premium UI, Performance, ..."
-                      className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                      className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] px-3 py-2 text-sm text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6]"
+                    />
+                  </div>
+                  <div className="md:col-span-2">
+                    <ImageUpload
+                      value={formData[locCode].image}
+                      onChange={(url) =>
+                        setFormData({
+                          ...formData,
+                          [locCode]: { ...formData[locCode], image: url },
+                        })
+                      }
+                      folder="services"
+                      label={t('admin.image') || 'Image'}
                     />
                   </div>
                 </div>
@@ -266,10 +280,10 @@ export function AdminServices() {
 
           <div className="flex gap-3">
             <Button type="submit" disabled={saving}>
-              {saving ? 'Saving...' : 'Save'}
+              {saving ? t('admin.saving') : t('admin.save')}
             </Button>
             <Button type="button" variant="outline" onClick={handleNew}>
-              Cancel
+              {t('admin.cancel')}
             </Button>
           </div>
         </form>

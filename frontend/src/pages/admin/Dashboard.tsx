@@ -16,7 +16,7 @@ interface Stats {
 
 export function AdminDashboard() {
   const { user } = useAuth();
-  const { locale } = useI18n();
+  const { locale, t } = useI18n();
   const [stats, setStats] = useState<Stats>({
     services: 0,
     projects: 0,
@@ -60,57 +60,57 @@ export function AdminDashboard() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Overview</h1>
-        <p className="mt-2 text-[var(--color-muted-foreground)]">
-          Welcome back, {user?.name}. Manage your site content, services, projects, blog posts, careers, and inquiries.
+        <h1 className="text-3xl font-bold text-white">{t('admin.overview')}</h1>
+        <p className="mt-2 text-[#808087]">
+          {t('admin.welcome')}, {user?.name}. {t('admin.manageContent')}
         </p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
-        <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-6">
-          <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
+        <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
+          <h2 className="text-xl font-semibold mb-4 text-white">{t('admin.quickActions')}</h2>
           <div className="grid gap-3">
             <Button asChild variant="default">
-              <Link to="/admin/services">Edit Services</Link>
+              <Link to="/admin/services">{t('admin.editServices')}</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link to="/admin/projects">Edit Projects</Link>
+              <Link to="/admin/projects">{t('admin.editProjects')}</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link to="/admin/blog">Edit Blog</Link>
+              <Link to="/admin/blog">{t('admin.editBlog')}</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link to="/admin/inquiries">View Inquiries</Link>
+              <Link to="/admin/inquiries">{t('admin.viewInquiries')}</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link to="/admin/users">Manage Users</Link>
+              <Link to="/admin/users">{t('admin.manageUsers')}</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link to="/admin/home">Edit Home</Link>
+              <Link to="/admin/home">{t('admin.editHome')}</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link to="/admin/about">Edit About</Link>
+              <Link to="/admin/about">{t('admin.editAbout')}</Link>
             </Button>
           </div>
         </div>
 
-        <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-6">
-          <h2 className="text-xl font-semibold mb-4">Status</h2>
+        <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
+          <h2 className="text-xl font-semibold mb-4 text-white">{t('admin.status')}</h2>
           {loading ? (
-            <div className="text-sm text-[var(--color-muted-foreground)]">Loading...</div>
+            <div className="text-sm text-[#808087]">{t('admin.loading')}</div>
           ) : (
-            <div className="text-sm text-[var(--color-muted-foreground)] space-y-1">
-              <div>Services: {stats.services}</div>
-              <div>Projects: {stats.projects}</div>
-              <div>Blog Posts: {stats.blog}</div>
-              <div>Careers: {stats.careers}</div>
-              <div>Employees: {stats.employees}</div>
-              <div>Inquiries: {stats.inquiries}</div> {/* Leads əvəzinə Inquiries */}
+            <div className="text-sm text-[#808087] space-y-1">
+              <div>{t('admin.services')}: {stats.services}</div>
+              <div>{t('admin.projects')}: {stats.projects}</div>
+              <div>{t('admin.blog')}: {stats.blog}</div>
+              <div>{t('admin.careers')}: {stats.careers}</div>
+              <div>{t('admin.users')}: {stats.employees}</div>
+              <div>{t('admin.inquiries')}: {stats.inquiries}</div>
             </div>
           )}
-          <div className="mt-4 pt-4 border-t border-[var(--color-border)]">
-            <p className="text-xs text-[var(--color-muted-foreground)]">
-              Tip: Use Settings → Export JSON to save a backup.
+          <div className="mt-4 pt-4 border-t border-[#546691]">
+            <p className="text-xs text-[#808087]">
+              {t('admin.tip')}
             </p>
           </div>
         </div>

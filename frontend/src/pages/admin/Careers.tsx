@@ -4,7 +4,7 @@ import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 
 export function AdminCareers() {
-  const { locale, supportedLocales } = useI18n();
+  const { locale, supportedLocales, t } = useI18n();
   const [careers, setCareers] = useState<Career[]>([]);
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [loading, setLoading] = useState(true);
@@ -42,7 +42,7 @@ export function AdminCareers() {
       setCareers(careersData);
       setEmployees(employeesData);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load data');
+      setError(err instanceof Error ? err.message : t('admin.failedToLoad'));
     } finally {
       setLoading(false);
     }
@@ -123,7 +123,7 @@ export function AdminCareers() {
   };
 
   const handleDeleteCareer = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this career?')) return;
+    if (!confirm(t('admin.confirmDelete'))) return;
     try {
       await api.admin.deleteCareer(id);
       await loadData();
@@ -133,12 +133,12 @@ export function AdminCareers() {
   };
 
   const handleDeleteEmployee = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this employee?')) return;
+    if (!confirm(t('admin.confirmDelete'))) return;
     try {
       await api.admin.deleteEmployee(id);
       await loadData();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete employee');
+      setError(err instanceof Error ? err.message : t('admin.failedToDelete'));
     }
   };
 
@@ -196,20 +196,20 @@ export function AdminCareers() {
       await loadData();
       handleNewEmployee();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to save employee');
+      setError(err instanceof Error ? err.message : t('admin.failedToSave'));
     } finally {
       setSaving(false);
     }
   };
 
   if (loading) {
-    return <div className="text-[var(--color-muted-foreground)]">Loading...</div>;
+    return <div className="text-[#808087]">{t('admin.loading')}</div>;
   }
 
   return (
     <div className="space-y-8">
       {error && (
-        <div className="rounded-md bg-[var(--color-destructive)]/10 p-3 text-sm text-[var(--color-destructive)]">
+        <div className="rounded-md bg-red-900/20 border border-red-800 p-3 text-sm text-red-400">
           {error}
         </div>
       )}
@@ -217,34 +217,34 @@ export function AdminCareers() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">Careers</h1>
-            <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
-              Manage vacancies displayed on the Careers page.
+            <h1 className="text-3xl font-bold text-white">{t('admin.careers')}</h1>
+            <p className="mt-2 text-sm text-[#808087]">
+              {t('admin.manageDescription')}
             </p>
           </div>
-          <Button onClick={handleNewCareer}>New vacancy</Button>
+          <Button onClick={handleNewCareer}>{t('admin.newVacancy')}</Button>
         </div>
 
-        <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] overflow-hidden">
+        <div className="rounded-lg border border-[#546691] bg-[#13132F] overflow-hidden">
           <table className="w-full">
-            <thead className="bg-[var(--color-muted)]/50">
+            <thead className="bg-[#1A1A2E]/50">
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-medium">Status</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Title</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Location</th>
-                <th className="px-4 py-3 text-right text-sm font-medium">Actions</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-white">{t('admin.status')}</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-white">{t('admin.title')}</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-white">{t('admin.location')}</th>
+                <th className="px-4 py-3 text-right text-sm font-medium text-white">{t('admin.actions')}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[var(--color-border)]">
+            <tbody className="divide-y divide-[#546691]">
               {careers.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="px-4 py-8 text-center text-sm text-[var(--color-muted-foreground)]">
-                    No careers yet. Click "New vacancy" to create one.
+                  <td colSpan={4} className="px-4 py-8 text-center text-sm text-[#808087]">
+                    {t('admin.noCareersYet')}
                   </td>
                 </tr>
               ) : (
                 careers.map((career) => (
-                  <tr key={career.id} className="hover:bg-[var(--color-accent)]/50">
+                  <tr key={career.id} className="hover:bg-[#546691]/30">
                     <td className="px-4 py-3 text-sm">
                       <span
                         className={`inline-flex rounded-full px-2 py-1 text-xs font-medium ${
@@ -253,7 +253,7 @@ export function AdminCareers() {
                             : 'bg-gray-100 text-gray-800'
                         }`}
                       >
-                        {career.status}
+                        {career.status === 'Open' ? t('admin.open') : t('admin.closed')}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-sm font-medium">{career.title}</td>
@@ -261,15 +261,15 @@ export function AdminCareers() {
                     <td className="px-4 py-3 text-right">
                       <div className="flex justify-end gap-2">
                         <Button variant="ghost" size="sm" onClick={() => handleEditCareer(career)}>
-                          Edit
+                          {t('admin.edit')}
                         </Button>
                         <Button
                           variant="ghost"
                           size="sm"
                           onClick={() => handleDeleteCareer(career.id)}
-                          className="text-[var(--color-destructive)]"
+                          className="text-red-400 hover:text-red-300"
                         >
-                          Delete
+                          {t('admin.delete')}
                         </Button>
                       </div>
                     </td>
@@ -280,19 +280,19 @@ export function AdminCareers() {
           </table>
         </div>
 
-        <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-6">
-          <h2 className="text-xl font-semibold mb-4">
-            {editingCareerId ? 'Edit vacancy' : 'Create vacancy'}
+        <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
+          <h2 className="text-xl font-semibold mb-4 text-white">
+            {editingCareerId ? t('admin.editVacancy') : t('admin.createVacancy')}
           </h2>
           <form onSubmit={handleSubmitCareer} className="space-y-6">
             {supportedLocales.map((loc) => {
               const locCode = loc.code as Locale;
               return (
-                <div key={locCode} className="space-y-4 p-4 border border-[var(--color-border)] rounded-lg">
+                <div key={locCode} className="space-y-4 p-4 border border-[#546691] rounded-lg bg-[#0A0A1E]/30">
                   <h3 className="font-medium">{loc.label}</h3>
                   <div className="grid gap-4 md:grid-cols-2">
                     <div>
-                      <label className="block text-sm font-medium mb-1">Title</label>
+                      <label className="block text-sm font-medium mb-1 text-white">{t('admin.title')}</label>
                       <input
                         type="text"
                         value={careerFormData[locCode].title || ''}
@@ -303,11 +303,11 @@ export function AdminCareers() {
                           })
                         }
                         placeholder="Front-End Developer"
-                        className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-1">Type</label>
+                      <label className="block text-sm font-medium mb-1 text-white">{t('admin.type')}</label>
                       <input
                         type="text"
                         value={careerFormData[locCode].type || ''}
@@ -318,11 +318,11 @@ export function AdminCareers() {
                           })
                         }
                         placeholder="Full-time"
-                        className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-1">Location</label>
+                      <label className="block text-sm font-medium mb-1 text-white">Location</label>
                       <input
                         type="text"
                         value={careerFormData[locCode].location || ''}
@@ -333,11 +333,11 @@ export function AdminCareers() {
                           })
                         }
                         placeholder="Baku / Hybrid"
-                        className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-1">Status</label>
+                      <label className="block text-sm font-medium mb-1 text-white">{t('admin.status')}</label>
                       <select
                         value={careerFormData[locCode].status || 'Open'}
                         onChange={(e) =>
@@ -346,14 +346,14 @@ export function AdminCareers() {
                             [locCode]: { ...careerFormData[locCode], status: e.target.value },
                           })
                         }
-                        className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
                       >
-                        <option value="Open">Open</option>
-                        <option value="Closed">Closed</option>
+                        <option value="Open">{t('admin.open')}</option>
+                        <option value="Closed">{t('admin.closed')}</option>
                       </select>
                     </div>
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-medium mb-1">Description</label>
+                      <label className="block text-sm font-medium mb-1 text-white">{t('admin.description')}</label>
                       <textarea
                         value={careerFormData[locCode].desc || ''}
                         onChange={(e) =>
@@ -364,12 +364,12 @@ export function AdminCareers() {
                         }
                         placeholder="Short role description"
                         rows={3}
-                        className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
                       />
                     </div>
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-medium mb-1">
-                        Requirements (comma-separated)
+                      <label className="block text-sm font-medium mb-1 text-white">
+                        {t('admin.requirements')} ({t('admin.tagsPlaceholder')})
                       </label>
                       <input
                         type="text"
@@ -378,7 +378,7 @@ export function AdminCareers() {
                           setRequirementsText({ ...requirementsText, [locCode]: e.target.value })
                         }
                         placeholder="HTML/CSS/JS, UI sense"
-                        className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
                       />
                     </div>
                   </div>
@@ -388,10 +388,10 @@ export function AdminCareers() {
 
             <div className="flex gap-3">
               <Button type="submit" disabled={saving}>
-                {saving ? 'Saving...' : 'Save'}
+                {saving ? t('admin.saving') : t('admin.save')}
               </Button>
               <Button type="button" variant="outline" onClick={handleNewCareer}>
-                Cancel
+                {t('admin.cancel')}
               </Button>
             </div>
           </form>
@@ -401,49 +401,49 @@ export function AdminCareers() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">Team</h1>
-            <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
-              Add team members with photo, role, and experience.
+            <h1 className="text-3xl font-bold text-white">{t('admin.team')}</h1>
+            <p className="mt-2 text-sm text-[#808087]">
+              {t('admin.teamDescription')}
             </p>
           </div>
-          <Button onClick={handleNewEmployee}>New member</Button>
+          <Button onClick={handleNewEmployee}>{t('admin.newMember')}</Button>
         </div>
 
-        <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] overflow-hidden">
+        <div className="rounded-lg border border-[#546691] bg-[#13132F] overflow-hidden">
           <table className="w-full">
-            <thead className="bg-[var(--color-muted)]/50">
+            <thead className="bg-[#1A1A2E]/50">
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-medium">Name</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Role</th>
-                <th className="px-4 py-3 text-left text-sm font-medium">Experience</th>
-                <th className="px-4 py-3 text-right text-sm font-medium">Actions</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-white">Name</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-white">Role</th>
+                <th className="px-4 py-3 text-left text-sm font-medium text-white">Experience</th>
+                <th className="px-4 py-3 text-right text-sm font-medium text-white">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[var(--color-border)]">
+            <tbody className="divide-y divide-[#546691]">
               {employees.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="px-4 py-8 text-center text-sm text-[var(--color-muted-foreground)]">
-                    No employees yet. Click "New member" to create one.
+                  <td colSpan={4} className="px-4 py-8 text-center text-sm text-[#808087]">
+                    {t('admin.noEmployeesYet')}
                   </td>
                 </tr>
               ) : (
                 employees.map((employee) => (
-                  <tr key={employee.id} className="hover:bg-[var(--color-accent)]/50">
+                  <tr key={employee.id} className="hover:bg-[#546691]/30">
                     <td className="px-4 py-3 text-sm font-medium">{employee.name}</td>
                     <td className="px-4 py-3 text-sm">{employee.role}</td>
                     <td className="px-4 py-3 text-sm">{employee.experience}</td>
                     <td className="px-4 py-3 text-right">
                       <div className="flex justify-end gap-2">
                         <Button variant="ghost" size="sm" onClick={() => handleEditEmployee(employee)}>
-                          Edit
+                          {t('admin.edit')}
                         </Button>
                         <Button
                           variant="ghost"
                           size="sm"
                           onClick={() => handleDeleteEmployee(employee.id)}
-                          className="text-[var(--color-destructive)]"
+                          className="text-red-400 hover:text-red-300"
                         >
-                          Delete
+                          {t('admin.delete')}
                         </Button>
                       </div>
                     </td>
@@ -454,19 +454,19 @@ export function AdminCareers() {
           </table>
         </div>
 
-        <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-6">
-          <h2 className="text-xl font-semibold mb-4">
-            {editingEmployeeId ? 'Edit member' : 'Create member'}
+        <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
+          <h2 className="text-xl font-semibold mb-4 text-white">
+            {editingEmployeeId ? t('admin.editMember') : t('admin.createMember')}
           </h2>
           <form onSubmit={handleSubmitEmployee} className="space-y-6">
             {supportedLocales.map((loc) => {
               const locCode = loc.code as Locale;
               return (
-                <div key={locCode} className="space-y-4 p-4 border border-[var(--color-border)] rounded-lg">
+                <div key={locCode} className="space-y-4 p-4 border border-[#546691] rounded-lg bg-[#0A0A1E]/30">
                   <h3 className="font-medium">{loc.label}</h3>
                   <div className="grid gap-4 md:grid-cols-2">
                     <div>
-                      <label className="block text-sm font-medium mb-1">Full name</label>
+                      <label className="block text-sm font-medium mb-1 text-white">Full name</label>
                       <input
                         type="text"
                         value={employeeFormData[locCode].name || ''}
@@ -477,11 +477,11 @@ export function AdminCareers() {
                           })
                         }
                         placeholder="Samira Aliyeva"
-                        className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-1">Role</label>
+                      <label className="block text-sm font-medium mb-1 text-white">{t('admin.role')}</label>
                       <input
                         type="text"
                         value={employeeFormData[locCode].role || ''}
@@ -492,11 +492,11 @@ export function AdminCareers() {
                           })
                         }
                         placeholder="Project Manager"
-                        className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-1">Experience (years)</label>
+                      <label className="block text-sm font-medium mb-1 text-white">Experience (years)</label>
                       <input
                         type="text"
                         value={employeeFormData[locCode].experience || ''}
@@ -507,11 +507,11 @@ export function AdminCareers() {
                           })
                         }
                         placeholder="5+ years"
-                        className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-1">Photo URL</label>
+                      <label className="block text-sm font-medium mb-1 text-white">{t('admin.photoUrl')}</label>
                       <input
                         type="url"
                         value={employeeFormData[locCode].photo || ''}
@@ -522,11 +522,11 @@ export function AdminCareers() {
                           })
                         }
                         placeholder="https://..."
-                        className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
                       />
                     </div>
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-medium mb-1">Bio</label>
+                      <label className="block text-sm font-medium mb-1 text-white">Bio</label>
                       <textarea
                         value={employeeFormData[locCode].bio || ''}
                         onChange={(e) =>
@@ -537,7 +537,7 @@ export function AdminCareers() {
                         }
                         placeholder="Short bio"
                         rows={3}
-                        className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
                       />
                     </div>
                   </div>
@@ -547,10 +547,10 @@ export function AdminCareers() {
 
             <div className="flex gap-3">
               <Button type="submit" disabled={saving}>
-                {saving ? 'Saving...' : 'Save'}
+                {saving ? t('admin.saving') : t('admin.save')}
               </Button>
               <Button type="button" variant="outline" onClick={handleNewEmployee}>
-                Cancel
+                {t('admin.cancel')}
               </Button>
             </div>
           </form>

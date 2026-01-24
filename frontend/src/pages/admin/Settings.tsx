@@ -4,7 +4,7 @@ import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 
 export function AdminSettings() {
-  const { locale } = useI18n();
+  const { locale, t } = useI18n();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -65,7 +65,7 @@ export function AdminSettings() {
       await api.admin.updateSettings(locale, formData);
       await loadSettings();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to save settings');
+      setError(err instanceof Error ? err.message : t('admin.failedToSave'));
     } finally {
       setSaving(false);
     }
@@ -115,80 +115,80 @@ export function AdminSettings() {
   };
 
   if (loading) {
-    return <div className="text-[var(--color-muted-foreground)]">Loading...</div>;
+    return <div className="text-[#808087]">{t('admin.loading')}</div>;
   }
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Settings</h1>
-        <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
-          Brand settings, contact details, export/import, and reset.
+        <h1 className="text-3xl font-bold text-white">{t('admin.settings')}</h1>
+        <p className="mt-2 text-sm text-[#808087]">
+          {t('admin.manageDescription')}
         </p>
       </div>
 
       {error && (
-        <div className="rounded-md bg-[var(--color-destructive)]/10 p-3 text-sm text-[var(--color-destructive)]">
+        <div className="rounded-md bg-red-900/20 border border-red-800 p-3 text-sm text-red-400">
           {error}
         </div>
       )}
 
       <div className="grid gap-6 md:grid-cols-2">
-        <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-6">
-          <h2 className="text-xl font-semibold mb-4">Brand</h2>
+        <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
+          <h2 className="text-xl font-semibold mb-4 text-white">{t('admin.brand')}</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Brand name</label>
+                    <label className="block text-sm font-medium mb-1 text-white">{t('admin.brandName')}</label>
               <input
                 type="text"
                 value={formData.brandName || ''}
                 onChange={(e) => setFormData({ ...formData, brandName: e.target.value })}
-                placeholder="Alievs Space MMC"
-                className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                placeholder={t('company.name')}
+                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Tagline</label>
+                    <label className="block text-sm font-medium mb-1 text-white">{t('admin.tagline')}</label>
               <input
                 type="text"
                 value={formData.tagline || ''}
                 onChange={(e) => setFormData({ ...formData, tagline: e.target.value })}
-                placeholder="Premium Digital & Commerce Ecosystem"
-                className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                placeholder={t('company.tagline')}
+                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Email</label>
+                    <label className="block text-sm font-medium mb-1 text-white">Email</label>
               <input
                 type="email"
                 value={formData.email || ''}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="hello@..."
-                className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Phone</label>
+                    <label className="block text-sm font-medium mb-1 text-white">{t('admin.phone')}</label>
               <input
                 type="tel"
                 value={formData.phone || ''}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                placeholder="+994 ..."
-                className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                placeholder={t('auth.register.placeholders.phone')}
+                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Address</label>
+                    <label className="block text-sm font-medium mb-1 text-white">{t('admin.address')}</label>
               <input
                 type="text"
                 value={formData.address || ''}
                 onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                placeholder="Azerbaijan"
-                className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                placeholder={t('admin.address')}
+                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Instagram URL</label>
+                    <label className="block text-sm font-medium mb-1 text-white">Instagram URL</label>
               <input
                 type="url"
                 value={social.instagram}
@@ -199,11 +199,11 @@ export function AdminSettings() {
                   })
                 }
                 placeholder="https://instagram.com/..."
-                className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">LinkedIn URL</label>
+                    <label className="block text-sm font-medium mb-1 text-white">{t('admin.linkedinUrl')}</label>
               <input
                 type="url"
                 value={social.linkedin}
@@ -214,11 +214,11 @@ export function AdminSettings() {
                   })
                 }
                 placeholder="https://linkedin.com/..."
-                className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">YouTube URL</label>
+                    <label className="block text-sm font-medium mb-1 text-white">{t('admin.youtubeUrl')}</label>
               <input
                 type="url"
                 value={social.youtube}
@@ -229,11 +229,11 @@ export function AdminSettings() {
                   })
                 }
                 placeholder="https://youtube.com/..."
-                className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">CTA Primary Text</label>
+                    <label className="block text-sm font-medium mb-1 text-white">{t('admin.ctaPrimaryText')}</label>
               <input
                 type="text"
                 value={cta.primaryText}
@@ -243,12 +243,12 @@ export function AdminSettings() {
                     cta: { ...cta, primaryText: e.target.value },
                   })
                 }
-                placeholder="Get Started"
-                className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                placeholder={t('admin.ctaPrimaryText')}
+                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">CTA Primary Href</label>
+                    <label className="block text-sm font-medium mb-1 text-white">{t('admin.ctaPrimaryHref')}</label>
               <input
                 type="text"
                 value={cta.primaryHref}
@@ -259,23 +259,23 @@ export function AdminSettings() {
                   })
                 }
                 placeholder="/contact"
-                className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
               />
             </div>
             <Button type="submit" disabled={saving}>
-              {saving ? 'Saving...' : 'Save settings'}
+              {saving ? t('admin.saving') : t('admin.save') + ' ' + t('admin.settings').toLowerCase()}
             </Button>
           </form>
         </div>
 
-        <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-6">
-          <h2 className="text-xl font-semibold mb-4">Maintenance</h2>
+        <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
+          <h2 className="text-xl font-semibold mb-4 text-white">{t('admin.export')}</h2>
           <div className="space-y-4">
             <Button variant="outline" onClick={handleExport} className="w-full">
-              Export site JSON
+              {t('admin.export')}
             </Button>
             <div>
-              <label className="block text-sm font-medium mb-1">Import site JSON</label>
+                    <label className="block text-sm font-medium mb-1 text-white">{t('admin.import')}</label>
               <input
                 type="file"
                 accept="application/json"
@@ -293,11 +293,11 @@ export function AdminSettings() {
                   };
                   reader.readAsText(file);
                 }}
-                className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
               />
             </div>
-            <p className="text-xs text-[var(--color-muted-foreground)]">
-              Tip: Use Export to save a backup before making changes.
+            <p className="text-xs text-[#808087]">
+              {t('admin.tip')}
             </p>
           </div>
         </div>

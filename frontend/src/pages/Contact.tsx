@@ -23,7 +23,8 @@ const Contact = () => {
     const [submitError, setSubmitError] = useState('');
 
     const { t } = useI18n();
-    const { loading } = useContent();
+    const { content, loading } = useContent();
+    const settings = content?.settings;
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -129,15 +130,19 @@ const Contact = () => {
                     <div className="space-y-6">
                       <div className='flex items-center gap-[10px]'>
                         <img src={phone} alt={t('public.contact.alt.phone')} className="w-5 h-5" />
-                        <p className="font-inter text-[#C5C5C5] text-[16px]">{t('public.contact.details.phone')}</p>
+                        <a href={`tel:${settings?.phone || ''}`} className="font-inter text-[#C5C5C5] text-[16px] hover:text-white transition-colors">
+                          {settings?.phone || t('public.contact.details.phone')}
+                        </a>
                       </div>
                       <div className='flex items-center gap-[10px]'>
                         <img src={mail} alt={t('public.contact.alt.mail')} className="w-5 h-5" />
-                        <p className="font-inter text-[#C5C5C5] text-[16px]">{t('public.contact.details.email')}</p>
+                        <a href={`mailto:${settings?.email || ''}`} className="font-inter text-[#C5C5C5] text-[16px] hover:text-white transition-colors">
+                          {settings?.email || t('public.contact.details.email')}
+                        </a>
                       </div>
                       <div className='flex items-center gap-[10px]'>
                         <img src={location} alt={t('public.contact.alt.location')} className="w-5 h-5" />
-                        <p className="font-inter text-[#C5C5C5] text-[16px]">{t('public.contact.details.location')}</p>
+                        <p className="font-inter text-[#C5C5C5] text-[16px]">{settings?.address || t('public.contact.details.location')}</p>
                       </div>
                     </div>
                   </div>

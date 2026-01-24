@@ -48,21 +48,20 @@ export function Register() {
       
       <div className="mx-auto w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl px-3 sm:px-4">
         <div className="text-center mb-4 sm:mb-6 md:mb-8">
-          <h1 className="font-inter text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1 sm:mb-2">
-            {t('auth.register.brandTitle', 'Alievs Space')}
-          </h1>
-          <p className="font-inter text-xs sm:text-sm md:text-base text-[#C5C5C5] px-2">
+          <p className='font-almarai text-xl sm:text-2xl md:text-3xl leading-none text-white mb-1 sm:mb-2'>ALIEVS</p>
+          <p className='font-kavivanar text-base sm:text-lg md:text-xl leading-tight text-white mb-1 sm:mb-2'>Space MMC</p>
+          <p className="font-inter text-xs sm:text-sm md:text-base text-[#808087] px-2">
             {t('auth.register.brandTagline', 'Premium Digital & Commerce Ecosystems')}
           </p>
         </div>
 
         <div className="rounded-xl sm:rounded-2xl p-[1px] bg-gradient-to-br from-[#2A3A8C] to-[#0D1B5E] mb-3 sm:mb-4 shadow-[0_4px_15px_rgba(0,0,0,0.25)] sm:shadow-[0_10px_25px_rgba(0,0,0,0.35)]">
-          <div className="bg-[#13132F] border border-[#2A2A3A]/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8">
+          <div className="bg-[#13132F] border border-[#546691]/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8">
             <div className="text-center mb-4 sm:mb-5 md:mb-6">
               <h2 className="font-inter text-lg sm:text-xl md:text-2xl font-bold text-white mb-1">
                 {t('auth.register.title', 'Create your account')}
               </h2>
-              <p className="font-inter text-xs sm:text-sm text-[#C5C5C5] mt-1">
+              <p className="font-inter text-xs sm:text-sm text-white mt-1">
                 {t('auth.register.haveAccount', 'Already have an account?')}{' '}
                 <Link to="/login" className="font-medium text-[#133FA6] hover:text-[#1a4cc0] hover:underline">
                   {t('auth.register.signIn', 'Sign in')}
@@ -84,7 +83,7 @@ export function Register() {
 
               <div className="space-y-2 sm:space-y-3 md:space-y-4">
                 <div>
-                  <label htmlFor="name" className="block font-inter text-xs sm:text-sm font-medium text-[#C5C5C5] mb-1">
+                  <label htmlFor="name" className="block font-inter text-xs sm:text-sm font-medium text-white mb-1">
                     {t('auth.register.fields.name', 'Full Name *')}
                   </label>
                   <div className="relative">
@@ -99,7 +98,7 @@ export function Register() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#2A2A3A] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
+                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#546691] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
                       placeholder={t('auth.register.placeholders.name', 'John Doe')}
                       style={{ color: '#FFFFFF' }}
                     />
@@ -107,7 +106,7 @@ export function Register() {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block font-inter text-xs sm:text-sm font-medium text-[#C5C5C5] mb-1">
+                  <label htmlFor="email" className="block font-inter text-xs sm:text-sm font-medium text-white mb-1">
                     {t('auth.register.fields.email', 'Email Address *')}
                   </label>
                   <div className="relative">
@@ -122,7 +121,7 @@ export function Register() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#2A2A3A] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
+                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#546691] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
                       placeholder={t('auth.register.placeholders.email', 'you@example.com')}
                       style={{ color: '#FFFFFF' }}
                     />
@@ -130,7 +129,7 @@ export function Register() {
                 </div>
 
                 <div>
-                  <label htmlFor="password" className="block font-inter text-xs sm:text-sm font-medium text-[#C5C5C5] mb-1">
+                  <label htmlFor="password" className="block font-inter text-xs sm:text-sm font-medium text-white mb-1">
                     {t('auth.register.fields.password', 'Password *')}
                   </label>
                   <div className="relative">
@@ -146,7 +145,7 @@ export function Register() {
                       minLength={6}
                       value={formData.password}
                       onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#2A2A3A] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
+                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#546691] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
                       placeholder={t('auth.register.placeholders.password', '••••••••')}
                       style={{ color: '#FFFFFF' }}
                     />
@@ -154,7 +153,7 @@ export function Register() {
                 </div>
 
                 <div>
-                  <label htmlFor="phone" className="block font-inter text-xs sm:text-sm font-medium text-[#C5C5C5] mb-1">
+                  <label htmlFor="phone" className="block font-inter text-xs sm:text-sm font-medium text-white mb-1">
                     {t('auth.register.fields.phone', 'Phone Number')}
                   </label>
                   <div className="relative">
@@ -168,7 +167,7 @@ export function Register() {
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#2A2A3A] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
+                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#546691] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
                       placeholder={t('auth.register.placeholders.phone', '+994 (XXX) XXX-XX-XX')}
                       style={{ color: '#FFFFFF' }}
                     />
@@ -176,7 +175,7 @@ export function Register() {
                 </div>
 
                 <div>
-                  <label htmlFor="company" className="block font-inter text-xs sm:text-sm font-medium text-[#C5C5C5] mb-1">
+                  <label htmlFor="company" className="block font-inter text-xs sm:text-sm font-medium text-white mb-1">
                     {t('auth.register.fields.company', 'Company Name')}
                   </label>
                   <div className="relative">
@@ -190,7 +189,7 @@ export function Register() {
                       type="text"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#2A2A3A] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
+                      className="block w-full pl-8 sm:pl-10 pr-3 py-2 sm:py-2.5 font-inter text-xs sm:text-sm bg-[#0A0A1E] border border-[#546691] rounded-lg text-white placeholder:text-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
                       placeholder={t('auth.register.placeholders.company', 'Your Company Inc.')}
                       style={{ color: '#FFFFFF' }}
                     />
@@ -235,7 +234,7 @@ export function Register() {
 
         <div className="text-center mt-3 sm:mt-4">
           <p className="font-inter text-xs sm:text-sm text-[#808087] px-2">
-            © {new Date().getFullYear()} Alievs Space MMC. All rights reserved.
+            © {new Date().getFullYear()} {t('company.name')}. {t('auth.register.copyright')}
           </p>
         </div>
       </div>
@@ -274,7 +273,7 @@ function LanguageDropdown({
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex items-center gap-2 rounded-full bg-[#0B0B21]/80 border border-[#2A2A3A] px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm text-white shadow-[0_4px_15px_rgba(0,0,0,0.3)] hover:border-[#3A3A4A] hover:bg-[#0B0B21] focus:outline-none focus:ring-2 focus:ring-[#133FA6] backdrop-blur"
+          className="inline-flex items-center gap-2 rounded-full bg-[#0A0A1E]/80 border border-[#546691] px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm text-white shadow-[0_4px_15px_rgba(0,0,0,0.3)] hover:border-[#546691] hover:bg-[#0A0A1E] focus:outline-none focus:ring-2 focus:ring-[#133FA6] backdrop-blur"
           aria-haspopup="listbox"
           aria-expanded={open}
         >
@@ -287,8 +286,8 @@ function LanguageDropdown({
         </button>
 
         {open && (
-          <div className="absolute right-0 mt-2 w-40 sm:w-52 rounded-xl sm:rounded-2xl border border-[#2A2A3A] bg-[#11112B] shadow-[0_8px_25px_rgba(0,0,0,0.4)] overflow-hidden">
-            <div className="px-3 sm:px-4 py-2 sm:py-2.5 text-[10px] sm:text-[11px] text-[#9AA0B4] uppercase tracking-wider">
+          <div className="absolute right-0 mt-2 w-40 sm:w-52 rounded-xl sm:rounded-2xl border border-[#546691] bg-[#11112B] shadow-[0_8px_25px_rgba(0,0,0,0.4)] overflow-hidden">
+            <div className="px-3 sm:px-4 py-2 sm:py-2.5 text-[10px] sm:text-[11px] text-[#808087] uppercase tracking-wider">
               {t('ui.language', 'Language')}
             </div>
             <ul role="listbox" className="py-1">
@@ -300,8 +299,8 @@ function LanguageDropdown({
                       setLocale(l.code);
                       setOpen(false);
                     }}
-                    className={`w-full text-left px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm flex items-center justify-between hover:bg-[#1A1A3A] ${
-                      l.code === locale ? 'text-white' : 'text-[#C5C5C5]'
+                    className={`w-full text-left px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm flex items-center justify-between hover:bg-[#546691] ${
+                      l.code === locale ? 'text-white' : 'text-white'
                     }`}
                     role="option"
                     aria-selected={l.code === locale}
