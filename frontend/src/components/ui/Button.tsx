@@ -18,13 +18,13 @@ export function Button({
   ...props
 }: ButtonProps) {
   const baseClasses = cn(
-    'inline-flex items-center justify-center rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)] disabled:pointer-events-none disabled:opacity-50',
+    'inline-flex items-center justify-center rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#133FA6] disabled:pointer-events-none disabled:opacity-50',
     {
-      'bg-[var(--color-primary)] text-[var(--color-primary-foreground)] hover:opacity-90': variant === 'default',
-      'border border-[var(--color-input)] bg-[var(--color-background)] hover:bg-[var(--color-accent)] hover:text-[var(--color-accent-foreground)]':
+      'bg-[#133FA6] hover:bg-[#0f2f78] text-white border-b-[0.7px] border-white': variant === 'default',
+      'border border-white bg-transparent hover:bg-[#546691] text-white':
         variant === 'outline',
-      'hover:bg-[var(--color-accent)] hover:text-[var(--color-accent-foreground)]': variant === 'ghost',
-      'bg-[var(--color-destructive)] text-[var(--color-destructive-foreground)] hover:opacity-90':
+      'hover:bg-[#546691] text-white': variant === 'ghost',
+      'bg-red-600 hover:bg-red-700 text-white':
         variant === 'destructive',
       'h-9 px-3 text-sm': size === 'sm',
       'h-10 px-4 py-2': size === 'md',

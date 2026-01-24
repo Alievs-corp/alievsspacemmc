@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { api, type About } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
+import { ImageUpload } from '@/components/admin/ImageUpload';
 
 export function AdminAbout() {
-  const { locale } = useI18n();
+  const { locale, t } = useI18n();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -16,7 +17,7 @@ export function AdminAbout() {
   });
   const [paragraphsText, setParagraphsText] = useState<string>('');
   const [valuesText, setValuesText] = useState<string>('');
-  const [processText, setProcessText] = useState<string>('');
+  const [processItems, setProcessItems] = useState<Array<{ title: string; desc: string; image: string }>>([]);
 
   useEffect(() => {
     loadAbout();
@@ -28,13 +29,32 @@ export function AdminAbout() {
       const data = await api.getAbout(locale);
       setFormData({
         headline: data.headline || '',
+        headlineImage: data.headlineImage || '',
         paragraphs: data.paragraphs || [],
         values: data.values || [],
         process: data.process || [],
       });
       setParagraphsText((data.paragraphs || []).join('\n\n'));
       setValuesText((data.values || []).join(', '));
-      setProcessText((data.process || []).join('\n'));
+      // Handle both old format (string[]) and new format (object[])
+      if (data.process && data.process.length > 0) {
+        if (typeof data.process[0] === 'string') {
+          // Old format - convert to new format
+          setProcessItems((data.process as string[]).map((p, idx) => {
+            const parts = p.split(':').map(s => s.trim());
+            return {
+              title: parts[0] || p,
+              desc: parts[1] || '',
+              image: '',
+            };
+          }));
+        } else {
+          // New format
+          setProcessItems(data.process as Array<{ title: string; desc: string; image: string }>);
+        }
+      } else {
+        setProcessItems([]);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load about content');
     } finally {
@@ -56,10 +76,13 @@ export function AdminAbout() {
         .split(',')
         .map((v) => v.trim())
         .filter(Boolean);
-      const process = processText
-        .split('\n')
-        .map((p) => p.trim())
-        .filter(Boolean);
+      const process = processItems
+        .filter((p) => p.title.trim())
+        .map((p) => ({
+          title: p.title.trim(),
+          desc: p.desc.trim(),
+          image: p.image.trim(),
+        }));
 
       const payload: Partial<About> = {
         ...formData,
@@ -78,40 +101,48 @@ export function AdminAbout() {
   };
 
   if (loading) {
-    return <div className="text-[var(--color-muted-foreground)]">Loading...</div>;
+    return <div className="text-[#808087]">{t('admin.loading')}</div>;
   }
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">About</h1>
-        <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
+          <h1 className="text-3xl font-bold text-white">About</h1>
+        <p className="mt-2 text-sm text-[#808087]">
           Edit about page content.
         </p>
       </div>
 
       {error && (
-        <div className="rounded-md bg-[var(--color-destructive)]/10 p-3 text-sm text-[var(--color-destructive)]">
+        <div className="rounded-md bg-red-900/20 border border-red-800 p-3 text-sm text-red-400">
           {error}
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-6">
-          <h2 className="text-xl font-semibold mb-4">About Content</h2>
+        <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
+          <h2 className="text-xl font-semibold mb-4 text-white">About Content</h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Headline</label>
+                    <label className="block text-sm font-medium mb-1 text-white">Headline</label>
               <input
                 type="text"
                 value={formData.headline || ''}
                 onChange={(e) => setFormData({ ...formData, headline: e.target.value })}
                 placeholder="A premium team for ambitious businesses."
-                className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">
+              <ImageUpload
+                value={formData.headlineImage}
+                onChange={(url) => setFormData({ ...formData, headlineImage: url })}
+                folder="about"
+                label="Headline Image"
+              />
+            </div>
+            <div>
+                    <label className="block text-sm font-medium mb-1 text-white">
                 Paragraphs (separate with double line break)
               </label>
               <textarea
@@ -119,11 +150,11 @@ export function AdminAbout() {
                 onChange={(e) => setParagraphsText(e.target.value)}
                 placeholder="First paragraph...&#10;&#10;Second paragraph..."
                 rows={6}
-                className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">
+                    <label className="block text-sm font-medium mb-1 text-white">
                 Values (comma-separated)
               </label>
               <input
@@ -131,27 +162,82 @@ export function AdminAbout() {
                 value={valuesText}
                 onChange={(e) => setValuesText(e.target.value)}
                 placeholder="Quality, Innovation, Trust"
-                className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">
-                Process Steps (one per line)
-              </label>
-              <textarea
-                value={processText}
-                onChange={(e) => setProcessText(e.target.value)}
-                placeholder="Step 1&#10;Step 2&#10;Step 3"
-                rows={6}
-                className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
-              />
+              <label className="block text-sm font-medium mb-2 text-white">Process Steps</label>
+              <div className="space-y-4">
+                {processItems.map((item, idx) => (
+                  <div key={idx} className="border border-[#546691] rounded-lg p-4 space-y-3">
+                    <div className="grid gap-4 md:grid-cols-2">
+                      <div>
+                        <label className="block text-sm font-medium mb-1 text-white">Title</label>
+                        <input
+                          type="text"
+                          value={item.title}
+                          onChange={(e) => {
+                            const newItems = [...processItems];
+                            newItems[idx].title = e.target.value;
+                            setProcessItems(newItems);
+                          }}
+                          placeholder="Step title"
+                          className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-1 text-white">Description</label>
+                        <input
+                          type="text"
+                          value={item.desc}
+                          onChange={(e) => {
+                            const newItems = [...processItems];
+                            newItems[idx].desc = e.target.value;
+                            setProcessItems(newItems);
+                          }}
+                          placeholder="Step description"
+                          className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                        />
+                      </div>
+                    </div>
+                    <ImageUpload
+                      value={item.image}
+                      onChange={(url) => {
+                        const newItems = [...processItems];
+                        newItems[idx].image = url;
+                        setProcessItems(newItems);
+                      }}
+                      folder="about/process"
+                      label="Image"
+                    />
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      onClick={() => {
+                        setProcessItems(processItems.filter((_, i) => i !== idx));
+                      }}
+                    >
+                      Remove Step
+                    </Button>
+                  </div>
+                ))}
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => {
+                    setProcessItems([...processItems, { title: '', desc: '', image: '' }]);
+                  }}
+                >
+                  Add Process Step
+                </Button>
+              </div>
             </div>
           </div>
         </div>
 
         <div className="flex gap-3">
           <Button type="submit" disabled={saving}>
-            {saving ? 'Saving...' : 'Save'}
+            {saving ? t('admin.saving') : t('admin.save')}
           </Button>
         </div>
       </form>

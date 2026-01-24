@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { useI18n } from '@/contexts/I18nContext';
 
 export function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
+  const { t } = useI18n();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -23,7 +25,7 @@ export function Login() {
         navigate('/');
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Login failed');
+      setError(err instanceof Error ? err.message : t('auth.login.error'));
     } finally {
       setLoading(false);
     }
@@ -33,11 +35,10 @@ export function Login() {
     <div className="h-screen bg-[#0A0A1E] flex flex-col justify-center">
       <div className="mx-auto w-full max-w-md px-4">
         <div className="text-center mb-8">
-          <h1 className="font-inter text-3xl font-bold text-white mb-2">
-            Alievs Space
-          </h1>
-          <p className="font-inter text-[#C5C5C5]">
-            Premium Digital & Commerce Ecosystems
+          <p className='font-almarai text-3xl leading-none text-white mb-1'>ALIEVS</p>
+          <p className='font-kavivanar text-xl leading-tight text-white mb-2'>Space MMC</p>
+          <p className="font-inter text-[#808087] text-sm">
+            {t('auth.login.brandTagline')}
           </p>
         </div>
 
@@ -46,7 +47,7 @@ export function Login() {
             <h2 className="font-inter text-2xl font-bold text-white">
               Sign in to your account
             </h2>
-            <p className="mt-1 font-inter text-sm text-[#C5C5C5]">
+            <p className="mt-1 font-inter text-sm text-white">
               Don't have an account?{' '}
               <Link to="/register" className="font-medium text-[#133FA6] hover:text-[#1a4cc0] hover:underline">
                 Sign up
@@ -68,8 +69,8 @@ export function Login() {
 
             <div className="space-y-3">
               <div>
-                <label htmlFor="email" className="block font-inter text-sm font-medium text-[#C5C5C5] mb-1">
-                  Email Address
+                <label htmlFor="email" className="block font-inter text-sm font-medium text-white mb-1">
+                  {t('auth.login.fields.email')}
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -84,14 +85,14 @@ export function Login() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="block w-full pl-9 pr-3 py-2.5 font-inter text-sm bg-[#0A0A1E] border border-[#2A2A3A] rounded-lg text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
-                    placeholder="you@example.com"
+                    placeholder={t('auth.login.placeholders.email')}
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="password" className="block font-inter text-sm font-medium text-[#C5C5C5] mb-1">
-                  Password
+                <label htmlFor="password" className="block font-inter text-sm font-medium text-white mb-1">
+                  {t('auth.login.fields.password')}
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -106,7 +107,7 @@ export function Login() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="block w-full pl-9 pr-3 py-2.5 font-inter text-sm bg-[#0A0A1E] border border-[#2A2A3A] rounded-lg text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-transparent"
-                    placeholder="••••••••"
+                    placeholder={t('auth.login.placeholders.password')}
                   />
                 </div>
               </div>
@@ -119,7 +120,7 @@ export function Login() {
                   type="checkbox"
                   className="h-3.5 w-3.5 text-[#133FA6] focus:ring-[#133FA6] border-[#2A2A3A] rounded bg-[#0A0A1E]"
                 />
-                <label htmlFor="remember-me" className="ml-2 block font-inter text-xs text-[#C5C5C5]">
+                <label htmlFor="remember-me" className="ml-2 block font-inter text-xs text-white">
                   Remember me
                 </label>
               </div>
@@ -143,10 +144,10 @@ export function Login() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                     </svg>
-                    Signing in...
+                    {t('auth.login.submitting')}
                   </div>
                 ) : (
-                  'Sign in'
+                  t('auth.login.submit')
                 )}
               </button>
             </div>
@@ -160,14 +161,14 @@ export function Login() {
               <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
-              Return to homepage
+              {t('auth.login.backHome')}
             </Link>
           </div>
         </div>
 
         <div className="mt-6 text-center">
           <p className="font-inter text-xs text-[#808087]">
-            © {new Date().getFullYear()} Alievs Space MMC. All rights reserved.
+            © {new Date().getFullYear()} {t('company.name')}. {t('auth.login.copyright')}
           </p>
         </div>
       </div>

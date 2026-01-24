@@ -19,6 +19,7 @@ export function Header() {
     { path: '/case-studies', key: 'caseStudies' },
     { path: '/about', key: 'about' },
     { path: '/careers', key: 'careers' },
+    { path: 'https://academy.alievsspace.com', key: 'academy', external: true },
     { path: '/contact', key: 'contact' },
   ];
 
@@ -29,7 +30,7 @@ export function Header() {
           <Link to="/" className="flex items-center space-x-1 gap-1">
             <img 
               src={alievsspace} 
-              alt="Logo" 
+              alt={t('ui.logo')} 
               className="w-16 sm:w-16 md:w-14 lg:w-20" 
             />
             {/* Tablet (md) üçün mətni gizlədirik */}
@@ -67,31 +68,67 @@ export function Header() {
 
           <nav className="hidden md:flex lg:hidden flex-1 justify-center items-center space-x-0.5">
             {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={cn(
-                  'whitespace-nowrap text-sm px-2 py-1 rounded transition-colors hover:bg-[#546691]',
-                  'text-white'
-                )}
-              >
-                {t(`nav.${link.key}`)}
-              </Link>
+              link.external ? (
+                <a
+                  key={link.path}
+                  href={link.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    'whitespace-nowrap text-sm px-2 py-1 rounded transition-colors hover:bg-[#546691]',
+                    'text-white flex items-center gap-1'
+                  )}
+                >
+                  {t(`nav.${link.key}`)}
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              ) : (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={cn(
+                    'whitespace-nowrap text-sm px-2 py-1 rounded transition-colors hover:bg-[#546691]',
+                    'text-white'
+                  )}
+                >
+                  {t(`nav.${link.key}`)}
+                </Link>
+              )
             ))}
           </nav>
 
           <nav className="hidden lg:flex flex-1 justify-center items-center space-x-4 xl:space-x-6">
             {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={cn(
-                  'text-[15px] lg:text-[16px] xl:text-lg px-3 py-2 rounded-md transition-colors hover:bg-[#546691]',
-                  'text-white'
-                )}
-              >
-                {t(`nav.${link.key}`)}
-              </Link>
+              link.external ? (
+                <a
+                  key={link.path}
+                  href={link.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    'text-[15px] lg:text-[16px] xl:text-lg px-3 py-2 rounded-md transition-colors hover:bg-[#546691]',
+                    'text-white flex items-center gap-1.5'
+                  )}
+                >
+                  {t(`nav.${link.key}`)}
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              ) : (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={cn(
+                    'text-[15px] lg:text-[16px] xl:text-lg px-3 py-2 rounded-md transition-colors hover:bg-[#546691]',
+                    'text-white'
+                  )}
+                >
+                  {t(`nav.${link.key}`)}
+                </Link>
+              )
             ))}
           </nav>
 
@@ -119,7 +156,7 @@ export function Header() {
                 className="bg-[#133FA6] hover:bg-[#0f2f78] text-white text-xs px-3 py-1.5 border-b-[0.7px] border-white cursor-pointer"
                 onClick={() => navigate('/contact')}
               >
-                Contact Sales
+                {t('nav.contactSales')}
               </Button>
 
               <Button
@@ -144,7 +181,7 @@ export function Header() {
               >
                 <img 
                   src={translate} 
-                  alt="Translate" 
+                  alt={t('ui.translate')} 
                   className="w-5 h-5" 
                 />
               </button>
@@ -154,7 +191,7 @@ export function Header() {
                 className="bg-[#133FA6] hover:bg-[#0f2f78] text-white px-5 py-2.5 border-b-[0.7px] border-white cursor-pointer text-sm lg:text-base"
                 onClick={() => navigate('/contact')}
               >
-                Contact Sales
+                {t('nav.contactSales')}
               </Button>
 
               <Button
@@ -182,12 +219,12 @@ export function Header() {
                 <div className="flex items-center space-x-3">
                   <img 
                     src={alievsspace} 
-                    alt="Logo" 
+                    alt={t('ui.logo')} 
                     className="w-12 h-12 object-cover"
                   />
                   <div>
-                    <h1 className="text-lg text-white">ALIEVS SPACE MMC</h1>
-                    <p className="font-kavivanar text-sm text-white">Premium Digital & Commerce Ecosystem</p>
+                    <h1 className="text-lg text-white">{t('company.name')}</h1>
+                    <p className="font-kavivanar text-sm text-white">{t('company.tagline')}</p>
                   </div>
                 </div>
                 
@@ -226,19 +263,40 @@ export function Header() {
                 <div className="mb-8">
                   <nav className="space-y-3">
                     {navLinks.map((link) => (
-                      <Link
-                        key={link.path}
-                        to={link.path}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-center justify-between px-4 py-3.5 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-900 transition-all"
-                      >
-                        <span className="font-medium">
-                          {t(`nav.${link.key}`)}
-                        </span>
-                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </Link>
+                      link.external ? (
+                        <a
+                          key={link.path}
+                          href={link.path}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center justify-between px-4 py-3.5 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-900 transition-all"
+                        >
+                          <span className="font-medium flex items-center gap-2">
+                            {t(`nav.${link.key}`)}
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                          </span>
+                          <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </a>
+                      ) : (
+                        <Link
+                          key={link.path}
+                          to={link.path}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center justify-between px-4 py-3.5 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-900 transition-all"
+                        >
+                          <span className="font-medium">
+                            {t(`nav.${link.key}`)}
+                          </span>
+                          <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                      )
                     ))}
                     
                     {/* Mobile menyuda login linki */}
@@ -275,15 +333,15 @@ export function Header() {
                       setMobileMenuOpen(false);
                     }}
                   >
-                    Contact Sales
+                    {t('nav.contactSales')}
                   </Button>
                   
                   <div className="text-center mt-10 pt-6 border-t border-gray-200">
                     <p className="text-gray-500 text-sm">
-                      © {new Date().getFullYear()} ALIEVS SPACE MMC
+                      © {new Date().getFullYear()} {t('company.name')}
                     </p>
                     <p className="text-gray-400 text-xs mt-2">
-                      Premium Digital & Commerce Ecosystem
+                      {t('company.tagline')}
                     </p>
                   </div>
                 </div>

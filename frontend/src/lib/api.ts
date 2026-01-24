@@ -23,15 +23,17 @@ export interface Settings {
 export interface Home {
   heroTitle: string;
   heroSubtitle: string;
-  highlights: Array<{ title: string; desc: string }>;
+  heroImage?: string;
+  highlights: Array<{ title: string; desc: string; image?: string }>;
   proof: Array<{ kpi: string; label: string }>;
 }
 
 export interface About {
   headline: string;
+  headlineImage?: string;
   paragraphs: string[];
   values: string[];
-  process: string[];
+  process: Array<{ title: string; desc: string; image?: string }>;
 }
 
 export interface Service {
@@ -47,6 +49,7 @@ export interface Project {
   title: string;
   industry: string;
   summary: string;
+  image?: string;
   tags: string[];
   link?: string;
 }
@@ -55,6 +58,7 @@ export interface BlogPost {
   id: string;
   title: string;
   date: string;
+  image?: string;
   tags: string[];
   excerpt: string;
   content: string;
@@ -359,16 +363,21 @@ export const api = {
 
     // INQUIRIES MANAGEMENT - ADMIN ONLY
     getInquiries: (): Promise<Inquiry[]> => 
-      fetchAPI<Inquiry[]>('/inquiries'), // GET /api/v1/inquiries (Admin auth required)
+      fetchAPI<Inquiry[]>('/admin/inquiries'), // GET /api/v1/admin/inquiries (Admin auth required)
 
     updateInquiryStatus: (id: string, status: string): Promise<void> =>
-      fetchAPI<void>(`/inquiries/${id}/status`, {
+      fetchAPI<void>(`/admin/inquiries/${id}/status`, {
         method: 'PUT',
         body: JSON.stringify({ status }),
       }),
 
     deleteInquiry: (id: string): Promise<void> =>
-      fetchAPI<void>(`/inquiries/${id}`, { 
+      fetchAPI<void>(`/admin/inquiries/${id}`, { 
+        method: 'DELETE' 
+      }),
+
+    deleteAllInquiries: (): Promise<void> =>
+      fetchAPI<void>('/admin/inquiries', { 
         method: 'DELETE' 
       }),
 
@@ -380,5 +389,42 @@ export const api = {
       fetchAPI<void>(`/admin/users/${email}`, { 
         method: 'DELETE' 
       }),
+
+    // File Upload
+    uploadFile: (file: File, folder?: string, isPublic?: boolean): Promise<{ url: string; filename: string; size: number }> => {
+      const formData = new FormData();
+      formData.append('file', file);
+      
+      const url = new URL(`${API_BASE_URL}/admin/upload`);
+      if (folder) url.searchParams.append('folder', folder);
+      if (isPublic !== undefined) url.searchParams.append('public', String(isPublic));
+      
+      const token = getAuthToken();
+      const headers: Record<string, string> = {};
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+
+      return fetch(url.toString(), {
+        method: 'POST',
+        headers,
+        body: formData,
+      }).then(async (response) => {
+        if (!response.ok) {
+          const error = await response.json().catch(() => ({ error: response.statusText }));
+          throw new Error(error.error || `API error: ${response.statusText}`);
+        }
+        return response.json();
+      });
+    },
+
+    deleteFile: (key: string): Promise<void> => {
+      const url = new URL(`${API_BASE_URL}/admin/upload`);
+      url.searchParams.append('key', key);
+      
+      return fetchAPI<void>(url.pathname + url.search, {
+        method: 'DELETE',
+      });
+    },
   },
 };

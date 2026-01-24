@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { api, type BlogPost, type Locale } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
+import { ImageUpload } from '@/components/admin/ImageUpload';
 
 export function AdminBlog() {
-  const { locale, supportedLocales } = useI18n();
+  const { locale, supportedLocales, t } = useI18n();
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -31,7 +32,7 @@ export function AdminBlog() {
       const data = await api.getBlogPosts(locale);
       setPosts(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load blog posts');
+      setError(err instanceof Error ? err.message : t('admin.failedToLoad'));
     } finally {
       setLoading(false);
     }
@@ -78,7 +79,7 @@ export function AdminBlog() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this blog post?')) return;
+    if (!confirm(t('admin.confirmDelete'))) return;
     try {
       await api.admin.deleteBlogPost(id);
       await loadPosts();
@@ -115,57 +116,57 @@ export function AdminBlog() {
       await loadPosts();
       handleNew();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to save blog post');
+      setError(err instanceof Error ? err.message : t('admin.failedToSave'));
     } finally {
       setSaving(false);
     }
   };
 
   if (loading) {
-    return <div className="text-[var(--color-muted-foreground)]">Loading...</div>;
+    return <div className="text-[#808087]">{t('admin.loading')}</div>;
   }
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Blog</h1>
-          <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
-            Manage blog posts. Content supports basic HTML.
+          <h1 className="text-3xl font-bold text-white">{t('admin.blog')}</h1>
+          <p className="mt-2 text-sm text-[#808087]">
+            {t('admin.manageDescription')}
           </p>
         </div>
-        <Button onClick={handleNew}>New post</Button>
+        <Button onClick={handleNew}>{t('admin.newPost')}</Button>
       </div>
 
       {error && (
-        <div className="rounded-md bg-[var(--color-destructive)]/10 p-3 text-sm text-[var(--color-destructive)]">
+        <div className="rounded-md bg-red-900/20 border border-red-800 p-3 text-sm text-red-400">
           {error}
         </div>
       )}
 
-      <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] overflow-hidden">
+      <div className="rounded-lg border border-[#546691] bg-[#13132F] overflow-hidden">
         <table className="w-full">
-          <thead className="bg-[var(--color-muted)]/50">
+          <thead className="bg-[#1A1A2E]/50">
             <tr>
-              <th className="px-4 py-3 text-left text-sm font-medium">Date</th>
-              <th className="px-4 py-3 text-left text-sm font-medium">Title</th>
-              <th className="px-4 py-3 text-left text-sm font-medium">Excerpt</th>
-              <th className="px-4 py-3 text-right text-sm font-medium">Actions</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">Date</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">{t('admin.title')}</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white">Excerpt</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-white">{t('admin.actions')}</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[var(--color-border)]">
+          <tbody className="divide-y divide-[#546691]">
             {posts.length === 0 ? (
               <tr>
-                <td colSpan={4} className="px-4 py-8 text-center text-sm text-[var(--color-muted-foreground)]">
-                  No blog posts yet. Click "New post" to create one.
+                <td colSpan={4} className="px-4 py-8 text-center text-sm text-[#808087]">
+                  {t('admin.noPostsYet')}
                 </td>
               </tr>
             ) : (
               posts.map((post) => (
-                <tr key={post.id} className="hover:bg-[var(--color-accent)]/50">
-                  <td className="px-4 py-3 text-sm">{post.date}</td>
-                  <td className="px-4 py-3 text-sm font-medium">{post.title}</td>
-                  <td className="px-4 py-3 text-sm text-[var(--color-muted-foreground)] line-clamp-2">
+                <tr key={post.id} className="hover:bg-[#546691]/30">
+                  <td className="px-4 py-3 text-sm text-white">{post.date}</td>
+                  <td className="px-4 py-3 text-sm font-medium text-white">{post.title}</td>
+                  <td className="px-4 py-3 text-sm text-[#808087] line-clamp-2">
                     {post.excerpt}
                   </td>
                   <td className="px-4 py-3 text-right">
@@ -177,7 +178,7 @@ export function AdminBlog() {
                         variant="ghost"
                         size="sm"
                         onClick={() => handleDelete(post.id)}
-                        className="text-[var(--color-destructive)]"
+                        className="text-red-400 hover:text-red-300"
                       >
                         Delete
                       </Button>
@@ -190,20 +191,20 @@ export function AdminBlog() {
         </table>
       </div>
 
-      <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] p-6">
-        <h2 className="text-xl font-semibold mb-4">
-          {editingId ? 'Edit post' : 'Create post'}
+      <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
+          <h2 className="text-xl font-semibold mb-4 text-white">
+          {editingId ? t('admin.editPost') : t('admin.createPost')}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           {supportedLocales.map((loc) => {
             const locCode = loc.code as Locale;
             return (
-              <div key={locCode} className="space-y-4 p-4 border border-[var(--color-border)] rounded-lg">
-                <h3 className="font-medium">{loc.label}</h3>
+              <div key={locCode} className="space-y-4 p-4 border border-[#546691] rounded-lg bg-[#0A0A1E]/30">
+                <h3 className="font-medium text-white">{loc.label}</h3>
                 <div className="grid gap-4">
                   <div className="grid gap-4 md:grid-cols-2">
                     <div>
-                      <label className="block text-sm font-medium mb-1">Date</label>
+                      <label className="block text-sm font-medium mb-1 text-white">Date</label>
                       <input
                         type="date"
                         value={formData[locCode].date || ''}
@@ -213,11 +214,11 @@ export function AdminBlog() {
                             [locCode]: { ...formData[locCode], date: e.target.value },
                           })
                         }
-                        className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-1">
+                      <label className="block text-sm font-medium mb-1 text-white">
                         Tags (comma-separated)
                       </label>
                       <input
@@ -227,12 +228,12 @@ export function AdminBlog() {
                           setTagsText({ ...tagsText, [locCode]: e.target.value })
                         }
                         placeholder="E-commerce, UX"
-                        className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-1">Title</label>
+                    <label className="block text-sm font-medium mb-1 text-white">{t('admin.title')}</label>
                     <input
                       type="text"
                       value={formData[locCode].title || ''}
@@ -243,11 +244,24 @@ export function AdminBlog() {
                         })
                       }
                       placeholder="Post title"
-                      className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                      className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-1">Excerpt</label>
+                    <ImageUpload
+                      value={formData[locCode].image}
+                      onChange={(url) =>
+                        setFormData({
+                          ...formData,
+                          [locCode]: { ...formData[locCode], image: url },
+                        })
+                      }
+                      folder="blog"
+                      label={t('admin.image') || 'Image'}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1 text-white">Excerpt</label>
                     <input
                       type="text"
                       value={formData[locCode].excerpt || ''}
@@ -258,11 +272,11 @@ export function AdminBlog() {
                         })
                       }
                       placeholder="Short excerpt"
-                      className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm"
+                      className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-1">HTML Content</label>
+                    <label className="block text-sm font-medium mb-1 text-white">HTML Content</label>
                     <textarea
                       value={formData[locCode].content || ''}
                       onChange={(e) =>
@@ -273,9 +287,9 @@ export function AdminBlog() {
                       }
                       placeholder="<p>Write content…</p>"
                       rows={10}
-                      className="w-full rounded-md border border-[var(--color-input)] bg-[var(--color-background)] px-3 py-2 text-sm font-mono"
+                      className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm font-mono"
                     />
-                    <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">
+                    <p className="mt-1 text-xs text-[#808087]">
                       Tip: Use &lt;p&gt;...&lt;/p&gt; and simple tags.
                     </p>
                   </div>
@@ -286,10 +300,10 @@ export function AdminBlog() {
 
           <div className="flex gap-3">
             <Button type="submit" disabled={saving}>
-              {saving ? 'Saving...' : 'Save'}
+              {saving ? t('admin.saving') : t('admin.save')}
             </Button>
             <Button type="button" variant="outline" onClick={handleNew}>
-              Cancel
+              {t('admin.cancel')}
             </Button>
           </div>
         </form>
