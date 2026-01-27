@@ -4,6 +4,7 @@ import Container from './../components/ui/Container';
 import { useState } from 'react';
 import type React from 'react';
 import { Link } from 'react-router-dom';
+import { api } from '@/lib/api';
 
 const CaseStudies = () => {
     const { t } = useI18n();
@@ -12,10 +13,14 @@ const CaseStudies = () => {
         company: '',
         email: '',
         phone: '',
-        industry: '',
-        projectOverview: '',
+        interest: '',
+        topic: '',
         message: ''
     });
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [submitError, setSubmitError] = useState('');
 
     const info = [
         {
@@ -61,13 +66,53 @@ const CaseStudies = () => {
             ...prev,
             [name]: value
         }));
+        if (submitError) setSubmitError('');
     };
-
-    const handleSubmit = (e: React.FormEvent) => {
+    
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Form submission logic here
-        console.log('Form submitted:', formData);
-        // Reset form or show success message
+
+        // Validate required fields (backend requires name)
+        if (!formData.name.trim()) {
+            setSubmitError('Name is required');
+            return;
+        }
+
+        setIsSubmitting(true);
+        setSubmitError('');
+        setSubmitSuccess(false);
+
+        try {
+            const inquiryData = {
+                name: formData.name.trim(),
+                company: formData.company.trim() || undefined,
+                email: formData.email.trim() || undefined,
+                phone: formData.phone.trim() || undefined,
+                interest: formData.interest.trim() || undefined,
+                topic: formData.topic.trim() || undefined,
+                message: formData.message.trim() || undefined,
+            };
+
+            await api.createInquiry(inquiryData);
+
+            setSubmitSuccess(true);
+            setFormData({
+                name: '',
+                company: '',
+                email: '',
+                phone: '',
+                interest: '',
+                topic: '',
+                message: ''
+            });
+
+            setTimeout(() => setSubmitSuccess(false), 5000);
+        } catch (error: any) {
+            console.error('Failed to submit inquiry from CaseStudies:', error);
+            setSubmitError(error?.message || 'Failed to submit form. Please try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     if (loading) {
@@ -231,100 +276,116 @@ const CaseStudies = () => {
                         <h2 className="font-inter text-[26px] font-bold text-white mb-4">{t('public.caseStudies.requestTitle')}</h2>
                         <p className="font-inter text-[18px] text-[#C5C5C5]">{t('public.caseStudies.requestCopy')}</p>
                     </div>
+                    {submitSuccess && (
+                        <div className="mb-6 p-4 bg-green-900/20 border border-green-500 rounded-lg">
+                            <p className="text-green-400 font-inter text-center">
+                                ✅ {t('public.contact.form.success') || 'Thank you! Your inquiry has been submitted successfully.'}
+                            </p>
+                        </div>
+                    )}
+                    {submitError && (
+                        <div className="mb-6 p-4 bg-red-900/20 border border-red-500 rounded-lg">
+                            <p className="text-red-400 font-inter text-center">❌ {submitError}</p>
+                        </div>
+                    )}
                     <form onSubmit={handleSubmit} className="space-y-8">
                         <div className="space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label className="font-inter text-white text-[16px] font-semibold mb-2 block">{t('public.contactName')}</label>
+                                    <label className="font-inter text-white text-[16px] font-semibold mb-2 block">{t('public.contact.form.labels.name')} *</label>
                                     <input
                                         type="text"
                                         name="name"
                                         value={formData.name}
                                         onChange={handleInputChange}
                                         required
-                                        placeholder={t('public.contactName')}
-                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-[#808087] font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300"
+                                        disabled={isSubmitting}
+                                        placeholder={t('public.contact.form.placeholders.name')}
+                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                                 <div>
-                                    <label className="font-inter text-white text-[16px] font-semibold mb-2 block">{t('public.contactCompany')}</label>
+                                    <label className="font-inter text-white text-[16px] font-semibold mb-2 block">{t('public.contact.form.labels.company')}</label>
                                     <input
                                         type="text"
                                         name="company"
                                         value={formData.company}
                                         onChange={handleInputChange}
-                                        placeholder={t('public.contactCompanyPlaceholder')}
-                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-[#808087] font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300"
+                                        disabled={isSubmitting}
+                                        placeholder={t('public.contact.form.placeholders.company')}
+                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label className="font-inter text-white text-[16px] font-semibold mb-2 block">{t('public.contactEmail')}</label>
+                                    <label className="font-inter text-white text-[16px] font-semibold mb-2 block">{t('public.contact.form.labels.email')}</label>
                                     <input
                                         type="email"
                                         name="email"
                                         value={formData.email}
                                         onChange={handleInputChange}
-                                        required
-                                        placeholder="name@gmail.com"
-                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-[#808087] font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300"
+                                        disabled={isSubmitting}
+                                        placeholder={t('public.contact.form.placeholders.email')}
+                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                                 <div>
-                                    <label className="font-inter text-white text-[16px] font-semibold mb-2 block">{t('public.contactPhone')}</label>
+                                    <label className="font-inter text-white text-[16px] font-semibold mb-2 block">{t('public.contact.form.labels.phone')}</label>
                                     <input
                                         type="tel"
                                         name="phone"
                                         value={formData.phone}
                                         onChange={handleInputChange}
-                                        placeholder="+994 …"
-                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-[#808087] font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300"
+                                        disabled={isSubmitting}
+                                        placeholder={t('public.contact.form.placeholders.phone')}
+                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label className="font-inter text-white text-[16px] font-semibold mb-2 block">{t('public.industry')}</label>
+                                    <label className="font-inter text-white text-[16px] font-semibold mb-2 block">{t('public.contact.form.labels.industry') || 'Interest'}</label>
                                     <select
-                                        name="industry"
-                                        value={formData.industry}
+                                        name="interest"
+                                        value={formData.interest}
                                         onChange={handleInputChange}
-                                        required
-                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-[#808087] font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300"
+                                        disabled={isSubmitting}
+                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        <option value="" className="bg-[#0F0F23]">{t('public.caseStudies.chooseField')}</option>
-                                        <option value="banking" className="bg-[#0F0F23]">{t('public.contactInterestBanking')}</option>
-                                        <option value="commerce" className="bg-[#0F0F23]">{t('public.contactInterestCommerce')}</option>
-                                        <option value="software" className="bg-[#0F0F23]">{t('public.contactInterestSoftware')}</option>
+                                        <option value="" className="bg-[#0F0F23] text-[#808087]">{t('public.contact.form.options.choose') || 'Select...'}</option>
+                                        <option value="banking" className="bg-[#0F0F23]">{t('public.contact.form.options.banking') || 'Banking & Fintech'}</option>
+                                        <option value="ecommerce" className="bg-[#0F0F23]">{t('public.contact.form.options.ecommerce') || 'E-commerce'}</option>
+                                        <option value="software" className="bg-[#0F0F23]">{t('public.contact.form.options.software') || 'Web & Software Development'}</option>
+                                        <option value="other" className="bg-[#0F0F23]">Other</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="font-inter text-white text-[16px] font-semibold mb-2 block">{t('public.contactTopic')}</label>
+                                    <label className="font-inter text-white text-[16px] font-semibold mb-2 block">{t('public.contact.form.labels.projectOverview') || 'Topic'}</label>
                                     <input
                                         type="text"
-                                        name="projectOverview"
-                                        value={formData.projectOverview}
+                                        name="topic"
+                                        value={formData.topic}
                                         onChange={handleInputChange}
-                                        required
-                                        placeholder={t('public.contactTopicPlaceholder')}
-                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-[#808087] font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300"
+                                        disabled={isSubmitting}
+                                        placeholder={t('public.contact.form.placeholders.projectOverview') || 'Project topic or brief overview...'}
+                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                             </div>
 
                             <div>
-                                <label className="font-inter text-white text-[16px] font-semibold mb-2 block">{t('public.contactMessage')}</label>
+                                <label className="font-inter text-white text-[16px] font-semibold mb-2 block">{t('public.contact.form.labels.message')}</label>
                                 <textarea
                                     name="message"
                                     value={formData.message}
                                     onChange={handleInputChange}
-                                    required
+                                    disabled={isSubmitting}
                                     rows={6}
-                                    placeholder={t('public.contactMessagePlaceholder')}
-                                    className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-[#808087] font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300"
+                                    placeholder={t('public.contact.form.placeholders.message') || 'Tell us more about your project...'}
+                                    className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                 />
                             </div>
                             <p className='font-inter text-[10px] text-[#808087] font-bold'>{t('public.caseStudies.tip')}</p>
@@ -333,9 +394,10 @@ const CaseStudies = () => {
                         <div className="flex flex-col items-end gap-2 pt-4">
                             <button
                                 type="submit"
-                                className="bg-[#133FA6] border-b border-white hover:bg-[#1a4cc0] text-white font-inter py-3 px-8 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-[18px] whitespace-nowrap"
+                                disabled={isSubmitting || !formData.name.trim()}
+                                className={`bg-[#133FA6] border-b border-white hover:bg-[#1a4cc0] text-white font-inter py-3 px-8 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-[18px] whitespace-nowrap ${(isSubmitting || !formData.name.trim()) ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
-                                {t('public.contactSubmit')}
+                                {isSubmitting ? (t('public.contact.form.submitting') || 'Submitting...') : t('public.contactSubmit')}
                             </button>
                             <p className="font-inter text-[#808087] text-[10px] text-right">
                                 {t('public.caseStudies.privacy')}

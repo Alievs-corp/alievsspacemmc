@@ -2106,7 +2106,7 @@ const translations: Record<Locale, Record<string, any>> = {
       about: 'Haqqımızda',
       services: 'Xidmətlər',
       industries: 'Sahələr',
-      caseStudies: 'Case Studies',
+      caseStudies: 'Layihələr',
       projects: 'Layihələr',
       careers: 'Karyera',
       academy: 'Akademiya',
@@ -2508,10 +2508,10 @@ const translations: Record<Locale, Record<string, any>> = {
       },
       deliveryTitle: 'Çatdırılma modeli',
       deliveryCopy:
-        'Əvvəlcə memarlıq və UI sistemi qururuq, sonra modullar əlavə edir, analitikanı qoşur və mərhələli şəkildə dəstəklə təqdim edirik.',
+        'Əvvəlcə arxitektura və UI sistemi qururuq, sonra modullar əlavə edir, analitikanı qoşur və mərhələli şəkildə dəstəklə təqdim edirik.',
       delivery: {
         steps: {
-          1: { title: 'Memarlıq və UI sistemi', desc: 'Sistem memarlığını təyin edin və miqyasa uyğun UI dizayn sistemi qurun.' },
+          1: { title: 'Arxitektura və UI sistemi', desc: 'Sistem arxitekturasını təyin edin və miqyasa uyğun UI dizayn sistemi qurulur.' },
           2: { title: 'Modul inkişafı', desc: 'Təsdiqlənmiş tələblərə əsasən əsas funksiyalar və modullar hazırlanır.' },
           3: { title: 'İnteqrasiya və analitika', desc: 'Servislər, analitika və dayaq infrastrukturu inteqrasiya edilir.' },
           4: { title: 'Kontrollu təqdimat', desc: 'Hər mərhələdə yoxlama ilə strukturlaşdırılmış buraxılış.' },
@@ -2858,7 +2858,7 @@ const translations: Record<Locale, Record<string, any>> = {
             caseStudiesIntro:
               'Strukturlaşdırılmış memarlıq, düşünülmüş UX və intizamlı mühəndisliklə sabit, istehsala hazır sistemlər qurduğumuz layihələri təqdim edirik. Case studies — praktiki çağırışlar, dizayn qərarları və miqyasa uyğun artımı dəstəkləyən nəticələr.',
             caseStudies: {
-              viewCta: 'Kəsi aç',
+              viewCta: 'İş nümunələrinə bax',
               keyFocusLabel: 'Əsas fokus',
               requestTitle: 'Layihə nəzərdən keçirmə sorğusu',
               requestCopy:
