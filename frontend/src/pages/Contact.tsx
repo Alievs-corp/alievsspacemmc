@@ -4,7 +4,7 @@ import Container from './../components/ui/Container';
 import phone from "../assets/icons/phone.svg";
 import mail from "../assets/icons/mail.svg";
 import location from "../assets/icons/location.svg";
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; 
 import { api } from '@/lib/api';
 
 const Contact = () => {
@@ -21,10 +21,19 @@ const Contact = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
     const [submitError, setSubmitError] = useState('');
+    const [isFormValid, setIsFormValid] = useState(false); 
 
     const { t } = useI18n();
     const { content, loading } = useContent();
     const settings = content?.settings;
+
+    useEffect(() => {
+        const requiredFields = ['name', 'email', 'industry', 'projectOverview', 'message'];
+        const isValid = requiredFields.every(field => 
+            formData[field as keyof typeof formData]?.trim() !== ''
+        );
+        setIsFormValid(isValid);
+    }, [formData]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -32,18 +41,19 @@ const Contact = () => {
             ...prev,
             [name]: value
         }));
-        // Clear any previous errors when user starts typing
         if (submitError) setSubmitError('');
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        
+        if (!isFormValid) return;
+        
         setIsSubmitting(true);
         setSubmitError('');
         setSubmitSuccess(false);
 
         try {
-            // Prepare data for API
             const leadData = {
                 name: formData.name,
                 company: formData.company || undefined,
@@ -55,16 +65,13 @@ const Contact = () => {
             };
 
             console.log('Submitting lead:', leadData);
-            
-            // Call API to create lead
+
             const response = await api.createInquiry(leadData);
             
             console.log('Lead created successfully:', response);
-            
-            // Show success message
+
             setSubmitSuccess(true);
-            
-            // Reset form
+
             setFormData({
                 name: '',
                 company: '',
@@ -75,7 +82,6 @@ const Contact = () => {
                 message: ''
             });
 
-            // Hide success message after 5 seconds
             setTimeout(() => {
                 setSubmitSuccess(false);
             }, 5000);
@@ -180,7 +186,7 @@ const Contact = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label className="font-inter text-white text-[16px] font-semibold mb-2 block">
-                                        {t('public.contact.form.labels.name')}
+                                        {t('public.contact.form.labels.name')} *
                                     </label>
                                     <input
                                         type="text"
@@ -212,7 +218,7 @@ const Contact = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label className="font-inter text-white text-[16px] font-semibold mb-2 block">
-                                        {t('public.contact.form.labels.email')}
+                                        {t('public.contact.form.labels.email')} *
                                     </label>
                                     <input
                                         type="email"
@@ -244,7 +250,7 @@ const Contact = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label className="font-inter text-white text-[16px] font-semibold mb-2 block">
-                                        {t('public.contact.form.labels.industry')}
+                                        {t('public.contact.form.labels.industry')} *
                                     </label>
                                     <select
                                         name="industry"
@@ -262,7 +268,7 @@ const Contact = () => {
                                 </div>
                                 <div>
                                     <label className="font-inter text-white text-[16px] font-semibold mb-2 block">
-                                        {t('public.contact.form.labels.projectOverview')}
+                                        {t('public.contact.form.labels.projectOverview')} *
                                     </label>
                                     <input
                                         type="text"
@@ -279,7 +285,7 @@ const Contact = () => {
 
                             <div>
                                 <label className="font-inter text-white text-[16px] font-semibold mb-2 block">
-                                    {t('public.contact.form.labels.message')}
+                                    {t('public.contact.form.labels.message')} *
                                 </label>
                                 <textarea
                                     name="message"
@@ -292,14 +298,14 @@ const Contact = () => {
                                     className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-[#808087] font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                 />
                             </div>
-                            <p className='font-inter text-[10px] text-[#808087] font-bold'>{t('public.contact.form.tip')}</p>
+                            <p className='font-inter text-[10px] text-[#808087] font-bold'>{t('public.contact.form.tip')} * - {t('public.contact.form.required')}</p>
                         </div>
 
                         <div className="flex flex-col items-end gap-2 pt-4">
                             <button
                                 type="submit"
-                                disabled={isSubmitting}
-                                className={`bg-[#133FA6] border-b border-white hover:bg-[#1a4cc0] text-white font-inter py-3 px-8 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-[18px] whitespace-nowrap ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                disabled={!isFormValid || isSubmitting}
+                                className={`bg-[#133FA6] border-b border-white hover:bg-[#1a4cc0] text-white font-inter py-3 px-8 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-[18px] whitespace-nowrap ${!isFormValid || isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
                                 {isSubmitting ? t('public.contact.form.submitting') || 'Sending...' : t('public.contact.form.submit')}
                             </button>

@@ -105,201 +105,222 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   );
 
   return (
-    <div className="flex h-screen" style={{
-      background: `
-        radial-gradient(
-          ellipse at center,
-          rgba(52,52,93,0.35) 0%,
-          rgba(8,8,30,0.85) 70%,
-          rgba(8,8,30,1) 100%
-        ),
-        linear-gradient(
-          135deg,
-          #34345D 0%,
-          #08081E 50%,
-          #34345D 75%,
-          #08081E 100%
-        )
-      `
-    }}>
-      <aside
-        className={cn(
-          'flex flex-col bg-gradient-to-b from-[#13132F] to-[#0A0A1E] transition-all duration-300 z-20 fixed lg:relative h-full',
-          sidebarOpen ? 'w-64 shadow-2xl' : 'w-[120px]'
-        )}
-      >
-        <div className={cn(
-          "flex items-center p-4 sm:p-6 border-b border-[#546691]",
-          sidebarOpen ? "justify-between" : "justify-center gap-2"
-        )}>
-          <div className={cn('flex items-center gap-3', !sidebarOpen && 'justify-center')}>
-            <img src={alievsspace} className="h-8 w-8 rounded-lg" alt={t('company.name')} />
-            {sidebarOpen && (
-              <div>
-                <p className='font-almarai text-lg leading-none text-white'>ALIEVS</p>
-                <p className='font-kavivanar text-xs leading-tight text-white'>Space MMC</p>
-                <div className="font-inter text-[10px] text-[#808087] mt-0.5">{t('admin.panel')}</div>
-              </div>
-            )}
-          </div>
-
-          <button
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="text-[#808087] hover:text-white transition-colors p-1 rounded-lg hover:bg-[#546691]"
-          >
-            {sidebarOpen ? (
-              <Icon path="M15 19l-7-7 7-7" className="w-5 h-5" />
-            ) : (
-              <Icon path="M9 5l7 7-7 7" className="w-5 h-5" />
-            )}
-          </button>
-        </div>
-
-        <nav className="flex-1 p-3 sm:p-4 space-y-1.5 sm:space-y-2 overflow-y-auto">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={cn(
-                'flex items-center gap-3 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 font-inter transition-all duration-200 group',
-                isActive(item.path)
-                  ? 'bg-[#133FA6] text-white shadow-md'
-                  : 'text-white hover:bg-[#546691]',
-                !sidebarOpen && 'justify-center px-2'
-              )}
-              title={!sidebarOpen ? t(item.labelKey) : undefined}
-            >
-              <div className={cn(
-                "p-1.5 sm:p-2 rounded-md flex items-center justify-center",
-                isActive(item.path) 
-                  ? "bg-white/10" 
-                  : "bg-transparent"
-              )}>
-                <Icon 
-                  path={item.icon} 
-                  className={cn(
-                    "w-4 h-4 sm:w-5 sm:h-5",
-                    "text-white"
-                  )} 
-                />
-              </div>
+    <>
+      <style>{`
+        /* Scrollbar gizlət */
+        .no-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;     /* Firefox */
+        }
+        
+        .no-scrollbar::-webkit-scrollbar {
+          display: none; /* Chrome, Safari and Opera */
+        }
+        
+        /* Hover zamanı nav items üçün smooth scroll */
+        .nav-container {
+          scroll-behavior: smooth;
+        }
+      `}</style>
+      
+      <div className="flex h-screen" style={{
+        background: `
+          radial-gradient(
+            ellipse at center,
+            rgba(52,52,93,0.35) 0%,
+            rgba(8,8,30,0.85) 70%,
+            rgba(8,8,30,1) 100%
+          ),
+          linear-gradient(
+            135deg,
+            #34345D 0%,
+            #08081E 50%,
+            #34345D 75%,
+            #08081E 100%
+          )
+        `
+      }}>
+        <aside
+          className={cn(
+            'flex flex-col bg-gradient-to-b from-[#13132F] to-[#0A0A1E] transition-all duration-300 z-20 fixed lg:relative h-full',
+            sidebarOpen ? 'w-64 shadow-2xl' : 'w-[120px]'
+          )}
+        >
+          <div className={cn(
+            "flex items-center p-4 sm:p-6 border-b border-[#546691]",
+            sidebarOpen ? "justify-between" : "justify-center gap-2"
+          )}>
+            <div className={cn('flex items-center gap-3', !sidebarOpen && 'justify-center')}>
+              <img src={alievsspace} className="h-8 w-8 rounded-lg" alt={t('company.name')} />
               {sidebarOpen && (
-                <span className="text-sm font-medium text-white flex-1">
-                  {t(item.labelKey)}
-                </span>
+                <div>
+                  <p className='font-almarai text-lg leading-none text-white'>ALIEVS</p>
+                  <p className='font-kavivanar text-xs leading-tight text-white'>Space MMC</p>
+                  <div className="font-inter text-[10px] text-[#808087] mt-0.5">{t('admin.panel')}</div>
+                </div>
               )}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="p-3 sm:p-4 border-t border-[#546691]">
-          <button
-            onClick={() => navigate('/')}
-            className={cn(
-              'w-full flex items-center gap-2 sm:gap-3 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 text-sm font-medium transition-all',
-              sidebarOpen 
-                ? 'bg-[#1A1A2E] text-white hover:bg-[#546691] justify-start' 
-                : 'justify-center p-2 text-white hover:bg-[#546691]'
-            )}
-            title={!sidebarOpen ? t('admin.goToSite') : undefined}
-          >
-            <Icon path="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-            {sidebarOpen && <span className="text-white">{t('admin.goToSite')}</span>}
-          </button>
-        </div>
-      </aside>
-
-      <main className="flex-1 overflow-auto bg-transparent ml-[120px] lg:ml-0">
-        <div className="sticky top-0 z-10 bg-[#13132F] border-b border-[#546691] px-4 sm:px-6 lg:px-8 h-20">
-          <div className="flex items-center justify-between h-full">
-            <div className="flex items-center gap-4">
-              <div className="lg:hidden">
-                <button
-                  onClick={() => setSidebarOpen(!sidebarOpen)}
-                  className="text-white p-2 hover:bg-[#546691] rounded-md transition-colors"
-                  aria-label="Menu"
-                >
-                  <Icon path="M4 6h16M4 12h16M4 18h16" className="w-6 h-6" />
-                </button>
-              </div>
-              
-              <div>
-                <h1 className="font-inter text-lg sm:text-xl font-bold text-white">
-                  {navItems.find(item => isActive(item.path)) ? t(navItems.find(item => isActive(item.path))!.labelKey) : t('admin.dashboard')}
-                </h1>
-                <p className="font-inter text-[#808087] text-xs sm:text-sm hidden sm:block">
-                  {location.pathname === '/admin' ? t('admin.generalStats') : t('admin.contentManagement')}
-                </p>
-              </div>
             </div>
 
-            <div className="flex items-center gap-2 lg:gap-3">
-              <button
-                onClick={() => {
-                  const idx = supportedLocales.findIndex((l) => l.code === locale);
-                  setLocale(
-                    supportedLocales[(idx + 1) % supportedLocales.length].code
-                  );
-                }}
-                className="p-2 rounded-md hover:bg-[#546691] cursor-pointer transition-colors"
-                title={t('ui.language')}
-              >
-                <img 
-                  src={translate} 
-                  alt={t('ui.translate')} 
-                  className="w-4 h-4 lg:w-5 lg:h-5" 
-                />
-              </button>
+            <button
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="text-[#808087] hover:text-white transition-colors p-1 rounded-lg hover:bg-[#546691]"
+            >
+              {sidebarOpen ? (
+                <Icon path="M15 19l-7-7 7-7" className="w-5 h-5" />
+              ) : (
+                <Icon path="M9 5l7 7-7 7" className="w-5 h-5" />
+              )}
+            </button>
+          </div>
 
-              <div className="flex items-center gap-2 lg:gap-3">
-                <div className="hidden md:block text-right">
-                  <div className="text-sm font-medium text-white">{user?.name || user?.email}</div>
-                  <div className="text-xs text-[#808087]">{t('nav.admin')}</div>
+          {/* Scroll olsun amma scrollbar olmasın */}
+          <nav className="flex-1 p-3 sm:p-4 space-y-1.5 sm:space-y-2 overflow-y-auto no-scrollbar nav-container">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={cn(
+                  'flex items-center gap-3 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 font-inter transition-all duration-200 group',
+                  isActive(item.path)
+                    ? 'bg-[#133FA6] text-white shadow-md'
+                    : 'text-white hover:bg-[#546691]',
+                  !sidebarOpen && 'justify-center px-2'
+                )}
+                title={!sidebarOpen ? t(item.labelKey) : undefined}
+              >
+                <div className={cn(
+                  "p-1.5 sm:p-2 rounded-md flex items-center justify-center",
+                  isActive(item.path) 
+                    ? "bg-white/10" 
+                    : "bg-transparent"
+                )}>
+                  <Icon 
+                    path={item.icon} 
+                    className={cn(
+                      "w-4 h-4 sm:w-5 sm:h-5",
+                      "text-white"
+                    )} 
+                  />
+                </div>
+                {sidebarOpen && (
+                  <span className="text-sm font-medium text-white flex-1">
+                    {t(item.labelKey)}
+                  </span>
+                )}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="p-3 sm:p-4 border-t border-[#546691]">
+            <button
+              onClick={() => navigate('/')}
+              className={cn(
+                'w-full flex items-center gap-2 sm:gap-3 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 text-sm font-medium transition-all',
+                sidebarOpen 
+                  ? 'bg-[#1A1A2E] text-white hover:bg-[#546691] justify-start' 
+                  : 'justify-center p-2 text-white hover:bg-[#546691]'
+              )}
+              title={!sidebarOpen ? t('admin.goToSite') : undefined}
+            >
+              <Icon path="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              {sidebarOpen && <span className="text-white">{t('admin.goToSite')}</span>}
+            </button>
+          </div>
+        </aside>
+
+        {/* Main content də no-scrollbar istifadə edə bilərsiniz */}
+        <main className="flex-1 overflow-auto bg-transparent ml-[120px] lg:ml-0 no-scrollbar">
+          <div className="sticky top-0 z-10 bg-[#13132F] border-b border-[#546691] px-4 sm:px-6 lg:px-8 h-20">
+            <div className="flex items-center justify-between h-full">
+              <div className="flex items-center gap-4">
+                <div className="lg:hidden">
+                  <button
+                    onClick={() => setSidebarOpen(!sidebarOpen)}
+                    className="text-white p-2 hover:bg-[#546691] rounded-md transition-colors"
+                    aria-label="Menu"
+                  >
+                    <Icon path="M4 6h16M4 12h16M4 18h16" className="w-6 h-6" />
+                  </button>
                 </div>
                 
-                <div className="relative">
-                  <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-full border border-[#546691] bg-[#1A1A2E] flex items-center justify-center hover:bg-[#546691] transition-colors cursor-pointer">
-                    <Icon path="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
-                  </div>
+                <div>
+                  <h1 className="font-inter text-lg sm:text-xl font-bold text-white">
+                    {navItems.find(item => isActive(item.path)) ? t(navItems.find(item => isActive(item.path))!.labelKey) : t('admin.dashboard')}
+                  </h1>
+                  <p className="font-inter text-[#808087] text-xs sm:text-sm hidden sm:block">
+                    {location.pathname === '/admin' ? t('admin.generalStats') : t('admin.contentManagement')}
+                  </p>
                 </div>
+              </div>
 
+              <div className="flex items-center gap-2 lg:gap-3">
                 <button
                   onClick={() => {
-                    logout();
-                    navigate('/login');
+                    const idx = supportedLocales.findIndex((l) => l.code === locale);
+                    setLocale(
+                      supportedLocales[(idx + 1) % supportedLocales.length].code
+                    );
                   }}
-                  className="flex items-center gap-2 px-3 lg:px-4 py-2 bg-transparent hover:bg-[#546691] text-white border border-white rounded-md transition-colors text-sm"
+                  className="p-2 rounded-md hover:bg-[#546691] cursor-pointer transition-colors"
+                  title={t('ui.language')}
                 >
-                  <Icon path="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" className="w-4 h-4" />
-                  <span className="hidden sm:inline">{t('ui.logout')}</span>
+                  <img 
+                    src={translate} 
+                    alt={t('ui.translate')} 
+                    className="w-4 h-4 lg:w-5 lg:h-5" 
+                  />
                 </button>
+
+                <div className="flex items-center gap-2 lg:gap-3">
+                  <div className="hidden md:block text-right">
+                    <div className="text-sm font-medium text-white">{user?.name || user?.email}</div>
+                    <div className="text-xs text-[#808087]">{t('nav.admin')}</div>
+                  </div>
+                  
+                  <div className="relative">
+                    <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-full border border-[#546691] bg-[#1A1A2E] flex items-center justify-center hover:bg-[#546691] transition-colors cursor-pointer">
+                      <Icon path="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      logout();
+                      navigate('/login');
+                    }}
+                    className="flex items-center gap-2 px-3 lg:px-4 py-2 bg-transparent hover:bg-[#546691] text-white border border-white rounded-md transition-colors text-sm"
+                  >
+                    <Icon path="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" className="w-4 h-4" />
+                    <span className="hidden sm:inline">{t('ui.logout')}</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="p-6">
-          <div className="bg-[#13132F]/50 rounded-2xl border border-[#546691] p-6 md:p-8 shadow-lg backdrop-blur-sm">
-            <div className="mb-6">
-              <h2 className="text-xl font-bold text-white">
-                {location.pathname === '/admin'
-                  ? t('admin.generalManagement')
-                  : `${navItems.find(item => isActive(item.path)) ? t(navItems.find(item => isActive(item.path))!.labelKey) : ''} ${t('admin.management')}`}
-              </h2>
-              <p className="text-[#808087] mt-1">
-                {location.pathname === '/admin' 
-                  ? t('admin.generalStats')
-                  : t('admin.contentManagement')}
-              </p>
+          <div className="p-6">
+            <div className="bg-[#13132F]/50 rounded-2xl border border-[#546691] p-6 md:p-8 shadow-lg backdrop-blur-sm">
+              <div className="mb-6">
+                <h2 className="text-xl font-bold text-white">
+                  {location.pathname === '/admin'
+                    ? t('admin.generalManagement')
+                    : `${navItems.find(item => isActive(item.path)) ? t(navItems.find(item => isActive(item.path))!.labelKey) : ''} ${t('admin.management')}`}
+                </h2>
+                <p className="text-[#808087] mt-1">
+                  {location.pathname === '/admin' 
+                    ? t('admin.generalStats')
+                    : t('admin.contentManagement')}
+                </p>
+              </div>
+              
+              <div className="text-white">
+                {children}
+              </div>
             </div>
-            
-            <div className="text-white">
-              {children}
-            </div>
+
           </div>
-
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 }
