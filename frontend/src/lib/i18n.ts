@@ -54,6 +54,7 @@ const translations: Record<Locale, Record<string, any>> = {
     nav: {
       home: 'Home',
       about: 'About',
+      company: 'Company',
       services: 'Services',
       industries: 'Industries',
       caseStudies: 'Case Studies',
@@ -1072,6 +1073,7 @@ const translations: Record<Locale, Record<string, any>> = {
     nav: {
       home: 'Главная',
       about: 'О нас',
+      company: 'Компания',
       services: 'Услуги',
       industries: 'Отрасли',
       caseStudies: 'Кейсы',
@@ -1372,7 +1374,7 @@ const translations: Record<Locale, Record<string, any>> = {
       home: {
         heroTitle: 'Строим премиальные цифровые продукты, которые масштабируются',
         heroCopy:
-          'Мы создаем веб- и мобильные приложения, e-commerce/маркетплейс системы и банковские панели с приоритетом безопасности.',
+          'Мы всегда ставим безопасность на первый план, предоставляя веб- и мобильную разработку, системы электронной коммерции и панели управления, соответствующие банковским стандартам.',
         ctas: {
           contact: 'Связаться с отделом продаж',
           services: 'Посмотреть услуги',
@@ -1381,16 +1383,16 @@ const translations: Record<Locale, Record<string, any>> = {
         advantages: {
           headings: {
             years: '4.5+',
-            enterprise: 'Enterprise',
+            enterprise: 'Предприятие',
             premium: 'Премиум',
             secure: 'Безопасно',
             fast: 'Быстро',
           },
-          yearsText: 'Лет создаем производственные системы',
-          enterpriseText: 'Готово для реальных бизнес-операций',
+          yearsText: 'Годы работы над производственными системами',
+          enterpriseText: 'Готов к реальным деловым операциям',
           premiumText: 'Высококачественные UI/UX дизайн-системы',
-          secureText: 'Контроль доступа и аудит встроены',
-          fastText: 'Быстрая поставка без компромиссов',
+          secureText: 'Встроенный контроль доступа и аудит',
+          fastText: 'Эффективная доставка без сокращений',
         },
         build: {
           items: {
@@ -2104,6 +2106,7 @@ const translations: Record<Locale, Record<string, any>> = {
     nav: {
       home: 'Baş səhifə',
       about: 'Haqqımızda',
+      company: 'Şirkət',
       services: 'Xidmətlər',
       industries: 'Sahələr',
       caseStudies: 'Layihələr',
@@ -2291,11 +2294,11 @@ const translations: Record<Locale, Record<string, any>> = {
       heroTagline: 'Premium • Platinum • Blue',
       buildWhat: 'Biz nələri qururuq',
       buildDesc:
-        'Proqram, e-ticarət və bank yönümlü panellər üzrə strukturlaşdırılmış ekosistem — premium dizayn və dayanıqlı icra.',
+        'Premium dizayn və uzunömürlü proqramlar, e-ticarət və bank yönümlü panellər üzrə strukturlaşdırılmış ekosistemlər qururuq.',
       premiumProcess: 'Premium proses',
       focusIndustries: 'Prioritet sahələr',
       processDesc:
-        'Mərhələli çatdırılma: memarlıq, premium UI, keyfiyyətə nəzarət, buraxılış və dəstək.',
+        'Arxitektura, premium UI, keyfiyyətə nəzarət, buraxılış və dəstək.',
       focusDesc:
         'E-ticarət və marketpleyslər, fintex panelləri və hesabatlı əməliyyat sistemləri.',
       adminIncluded: 'Admin panel daxildir',
@@ -2307,7 +2310,7 @@ const translations: Record<Locale, Record<string, any>> = {
         badge: 'E‑ticarət · Marketpleys',
         title: 'Çox‑satıcılı Marketpleys MVP',
         intro:
-          'Miqyaslana bilən memarlıq, strukturlaşdırılmış admin nəzarəti və satıcı səviyyəsində panel ilə erkən artımı və gələcək genişlənməni dəstəkləyən prodakşen‑hazır marketpleys MVP.',
+          'Erkən böyüməni və gələcək genişlənməni dəstəkləmək üçün miqyaslana bilən arxitektura, strukturlaşdırılmış admin idarəsi və satıcı səviyyəli panel ilə hazırlanmış istehsalata hazır çox-satıcı bazar MVP.',
         contextTitle: 'Layihə konteksti',
         contextItems: {
           industry: 'Sahə: E‑ticarət/Marketpleys',
@@ -2404,7 +2407,7 @@ const translations: Record<Locale, Record<string, any>> = {
       home: {
         heroTitle: 'Miqyaslana bilən premium rəqəmsal məhsullar qururuq',
         heroCopy:
-          'Biz veb və mobil inkişaf, e-ticarət/marketpleys sistemləri və bank üçün hazır panelləri təhlükəsizlik‑öncəli yanaşma ilə təqdim edirik.',
+          'Hər zaman təhlükəsizliyi öndə tutaraq veb və mobil development, e-ticarət sistemləri və bank standartlarına uyğun panellər  təqdim edirik.',
         ctas: {
           contact: 'Satışla əlaqə',
           services: 'Xidmətləri araşdır',
@@ -2413,16 +2416,16 @@ const translations: Record<Locale, Record<string, any>> = {
         advantages: {
           headings: {
             years: '4.5+',
-            enterprise: 'Enterprise',
+            enterprise: 'Müəssisə',
             premium: 'Premium',
             secure: 'Təhlükəsiz',
             fast: 'Sürətli',
           },
-          yearsText: 'İstehsal sistemləri qurmaqda illər',
+          yearsText: 'İllərə dayanan iş təcrübəsi',
           enterpriseText: 'Real biznes əməliyyatlarına hazır',
-          premiumText: 'Yüksək keyfiyyətli UI/UX dizayn sistemləri',
-          secureText: 'Giriş nəzarəti və audit daxildir',
-          fastText: 'Tez çatdırılma, güzəştsiz',
+          premiumText: 'Yüksək keyfiyyətli UI/UX dizaynları',
+          secureText: 'Giriş nəzarəti və daxili təhlükəsizlik',
+          fastText: 'Səmərəli çatdırılma',
         },
         build: {
           items: {
@@ -2455,7 +2458,7 @@ const translations: Record<Locale, Record<string, any>> = {
         },
         projects: {
           title: 'Layihələrimiz',
-          copy: 'Müxtəlif biznes ehtiyacları və məhsul tipləri üçün həyata keçirilmiş layihələrdən seçmələr.',
+          copy: 'Müxtəlif biznes ehtiyacları və məhsul tipləri üçün həyata keçirilmiş layihələrimiz',
         },
       },
       aboutWho: 'Biz kimik',
@@ -2465,7 +2468,7 @@ const translations: Record<Locale, Record<string, any>> = {
       stepLabel: 'Addım',
       serviceFallback: 'Xidmət',
       servicesIntro:
-        'Premium mühəndislik və dizayn: proqram inkişafı, e-ticarət/marketpleyslər və bank panelləri.',
+        'Premium mühəndislik və dizayn: proqram inkişafı, e-ticarət və bank panelləri.',
       services: {
         items: {
           web: {
@@ -2475,7 +2478,7 @@ const translations: Record<Locale, Record<string, any>> = {
               'Korporativ saytlar, veb tətbiqlər, mobil tətbiqlər, admin panellər və daxili platformalar.',
             reqs: {
               premiumUi: 'Premium UI sistemləri',
-              performancePages: 'Performans‑öncül səhifələr',
+              performancePages: 'Yüksək performanslı səhifələr',
               analyticsReady: 'Analitikaya hazır struktur',
               cleanDocs: 'Təmiz sənədləşmə',
             },
@@ -2484,10 +2487,10 @@ const translations: Record<Locale, Record<string, any>> = {
             category: 'Kommersiya',
             title: 'E‑ticarət və marketpleys sistemləri',
             description:
-              'Onlayn mağazalar və çox‑satıcılı marketpleyslər — tam operativ alətlərlə.',
+              'Tam funksional onlayn mağazalar və çox satıcılı bazarlar.',
             reqs: {
               catalogFiltersSearch: 'Kataloq + filtrlər + axtarış',
-              cartCheckout: 'Səbət və ödəmə axınları',
+              cartCheckout: 'Səbət və ödəmə formaları',
               commissionPayout: 'Komissiya və ödəniş hesabatları',
               ownerDashboards: 'Mağaza sahibi panelləri',
             },
@@ -2500,8 +2503,8 @@ const translations: Record<Locale, Record<string, any>> = {
             reqs: {
               rbac: 'Rolla idarə olunan giriş (RBAC)',
               auditReporting: 'Audit‑jurnalları və hesabat görünüşləri',
-              secureWorkflow: 'Təhlükəsiz iş axınları',
-              complianceFriendly: 'Uyğunluğa dost dizayn',
+              secureWorkflow: 'Təhlükəsiz iş formaları',
+              complianceFriendly: 'Uyğunluğa dost',
             },
           },
         },
@@ -2856,13 +2859,13 @@ const translations: Record<Locale, Record<string, any>> = {
         },
       },
             caseStudiesIntro:
-              'Strukturlaşdırılmış memarlıq, düşünülmüş UX və intizamlı mühəndisliklə sabit, istehsala hazır sistemlər qurduğumuz layihələri təqdim edirik. Case studies — praktiki çağırışlar, dizayn qərarları və miqyasa uyğun artımı dəstəkləyən nəticələr.',
+              'Biz strukturlu arxitektura, düşünülmüş istifadəçi təcrübəsi və disiplinli mühəndisliyin sabit, istehsalata hazır sistemlər yaratdığı real layihələri təqdim edirik. Bizim tədqiqat nümunələrimiz praktik çətinliklərə, dizayn qərarlarına və ölçülə bilən artımı və əməliyyat aydınlığını dəstəkləyən çatdırılma nəticələrinə fokuslanır.',
             caseStudies: {
               viewCta: 'İş nümunələrinə bax',
               keyFocusLabel: 'Əsas fokus',
               requestTitle: 'Layihə nəzərdən keçirmə sorğusu',
               requestCopy:
-                'Layihənizdən bəhs edin. Hər sorğunu alırıq və aydın növbəti addımlarla cavablayırıq — yaxud önbaxış (generic sub‑pack).',
+                'Layihənizdən bəhs edin. Hər sorğunu alırıq və aydın növbəti addımlarla cavablayırıq.',
               tip:
                 'Tövsiyə: Sənayeni, əsas tələbləri və hədəf bazarı paylaşın. Təxmini fikir belə başlamağa kifayətdir.',
               privacy:
@@ -2873,9 +2876,9 @@ const translations: Record<Locale, Record<string, any>> = {
                   category: 'E‑ticarət · Marketpleys',
                   title: 'Çox‑satıcılı Marketpleys MVP',
                   description:
-                    'Miqyasa uyğun memarlıq və operativ aydınlığa fokuslanaraq istehsala hazır multi‑vendor marketpleys MVP hazırladıq. Sistem mərkəzləşdirilmiş admin paneli, satıcı panelləri, məhsul/kateqoriya idarəetməsi və erkən böyümə üçün daxili hesabatlar ehtiva edir.',
+                    'Biz miqyaslana bilən arxitektura və əməliyyat aydınlığına böyük diqqət yetirərək istehsalata hazır çoxsatıcılı bazar yerinin MVP-sini dizayn edib yaradırıq. Sistemdə mərkəzləşdirilmiş idarə paneli, strukturlaşdırılmış məhsul və kateqoriya idarəsi, həmçinin erkən böyümə və uzunmüddətli inkişafı dəstəkləyən daxili hesabatlar mövcuddur.',
                   focus: [
-                    'Marketpleys memarlığı',
+                    'Marketpleys arxitekturası',
                     'Admin və satıcı idarəetməsi',
                     'Hesabat və analitika',
                   ],
@@ -2884,7 +2887,7 @@ const translations: Record<Locale, Record<string, any>> = {
                   category: 'Bank · Fintex',
                   title: 'Fintex hesabat paneli',
                   description:
-                    'Auditə hazır, məlumat bütövlüyü və nəzarətli girişlərlə təhlükəsiz, rollara əsaslanan hesabat paneli hazırladıq. Sistem strukturlaşdırılmış maliyyə hesabatları, icazəyə əsaslanan görünüşlər və uyğunluq üçün etibarlı görünürlük təmin edir.',
+                    'Biz maliyyə əməliyyatları üçün audit hazırlığına, məlumat bütövlüyünə və nəzarət olunan girişə yönəlmiş təhlükəsiz, rol əsaslı hesabat paneli dizayn edib yaradırıq. Sistem strukturlaşdırılmış maliyyə hesabatları, icazəyə əsaslanan baxışlar və etibarlı məlumat görünürlüğü təmin edərək uyğunluq və daxili qərar qəbul etmə prosesinə dəstək olur.',
                   focus: [
                     'Rolla idarə olunan giriş (RBAC)',
                     'Audit‑dostu hesabat',
@@ -2895,7 +2898,7 @@ const translations: Record<Locale, Record<string, any>> = {
                   category: 'İstehsal · Əməliyyatlar',
                   title: 'Əməliyyat və inventar sistemi',
                   description:
-                    'Operativ aydınlıq və məlumat dəqiqliyini artırmaq üçün daxili əməliyyat və inventar idarəetmə sistemi. Platforma stok izləmə, gəlir‑xərc monitorinqi və gündəlik işləri sadələşdirən idarəetmə panellərini dəstəkləyir.',
+                    'Bu layihə daxili əməliyyatlar və inventar idarəetmə sistemi qurmağa yönəlir ki, əməliyyatların aydınlığını və verilənlərin dəqiqliyini artırmaq mümkün olsun. Platforma stok izləməyi, gəlir və xərclərin monitorinqini, həmçinin gündəlik biznes əməliyyatlarını səmərəli idarə etmək üçün nəzərdə tutulmuş idarəetmə panellərini dəstəkləyir.',
                   focus: [
                     'İnventar idarəetməsi',
                     'Maliyyə izləmə',
@@ -2933,7 +2936,7 @@ const translations: Record<Locale, Record<string, any>> = {
       about: {
         headerTitle: 'Uzunmüddətli istifadəyə uyğun sistemlər dizayn edirik.',
         headerCopy:
-          'Uzunmüddətli etibarlılıq, aydın memarlıq və komandalar/artan data ilə sabit qalan sistemlərə fokuslanırıq.',
+          'Uzunmüddətli etibarlılıq, artan komandalar və data üçün aydın memarlıq sistemlərinə fokuslanırıq.',
         whoTitle: 'Biz kimik',
         whoCopy:
           'Alievs Space MMC — digital və commerce fokuslu mühəndislik şirkətidir. Premium UI və güclü operativ nəzarət ilə istehsala hazır sistemlər qururuq. Backend memarlığı, UX sistemləri və biznes məntiqini birləşdirərək miqyasa uyğun, təhlükəsiz və admin alətləri ilə rahat idarə olunan platformalar yaradırıq. İşimiz multi‑vendor marketpleyslər, daxili idarəetmə platformaları və rollara, hesabatlara, audit‑hazır proseslərə malik bank yönümlü panelləri əhatə edir.',
@@ -3005,7 +3008,7 @@ const translations: Record<Locale, Record<string, any>> = {
             category: 'Pərakəndə və e‑ticarət',
             title: 'Konversiya və miqyasa uyğun dizayn',
             description:
-              'Konversiyaya yönəlik vitrinlər, ödəmə UX‑i, analitika və operativ şəffaflıq — böyüməni sürtünməsiz dəstəkləmək üçün.',
+              'Konversiyaya yönəlmiş mağazalar, ödəniş təcrübəsi (UX), analitika və əməliyyat aydınlığı',
           },
           marketplaces: {
             category: 'Marketpleyslər',
@@ -3015,9 +3018,9 @@ const translations: Record<Locale, Record<string, any>> = {
           },
           banking: {
             category: 'Bank / Maliyyə',
-            title: 'Təhlükəsizlik, girişlər və uyğunluq — birinci yerdə',
+            title: 'Təhlükəsizlik, giriş və uyğunluq',
             description:
-              'Rolla idarə olunan giriş, auditə hazır hesabatlar və nəzarətli iş axınları — tənzimlənən mühitlər üçün.',
+              'Tənzimlənən mühitlər üçün rolla idarə olunan giriş, auditə hazır hesabatlar və nəzarətli iş axınları',
           },
           manufacturing: {
             category: 'İstehsal və inventar',
@@ -3029,7 +3032,7 @@ const translations: Record<Locale, Record<string, any>> = {
             category: 'Gözəllik / Salon sistemləri',
             title: 'Gündəlik əməliyyatları sadələşdirən sistemlər',
             description:
-              'Rezervasiyalar, inventar, xatırlatmalar, heyət alətləri və müştəri idarəetməsi — əlavə yükü və manual işi azaldır.',
+              'Əlavə yükü və manual işi azaldan rezervasiyalar, inventar, xatırlatmalar və müştəri idarəetməsi.',
           },
           logistics: {
             category: 'Logistika və çatdırılma',
@@ -3041,14 +3044,14 @@ const translations: Record<Locale, Record<string, any>> = {
             category: 'Startaplar / MVP',
             title: 'İdeyadan istehsala hazır MVP‑yə',
             description:
-              'Premium UI və miqyasa uyğun arxitektura ilə lean MVP — sürətli doğrulama və təhlükəsiz böyümə üçün.',
+              'Sürətli doğrulama və təhlükəsiz böyümə üçün premium UI və miqyasa uyğun arxitektura ilə lean MVP',
           },
         },
         trustedTitle: 'İstehsala hazır sistemləri çatdırmaqda etibarlı',
         trustedCopy1:
-          'Biz komandalarla işləyirik ki, etibarlılıq, aydın hesabat və uzunmüddətli sabitlik vacibdir — müvəqqəti həllər deyil. Strukturlaşdırılmış mühəndislik, premium UI/UX və intizamlı çatdırılma sistemlərin launchdan sonra da etibarlı qalmasını təmin edir.',
+          'Biz etibarlı sistemlərə, aydın hesabatlılığa və uzunmüddətli sabitliyə ehtiyacı olan komandalarla işləyirik. Yanaşmamız strukturlaşdırılmış mühəndislik, yüksək səviyyəli UI/UX və disiplinli çatdırılmanı birləşdirir ki, yaratdığımız sistemlər yalnız inkişaf zamanı deyil, istifadəyə verildikdən sonra da etibarlı qalır.',
         trustedCopy2:
-          'Hər layihəni aydın scope, şəffaf ünsiyyət və memarlıq‑öncül yanaşma ilə aparırıq. Komandaların idarə edə biləcəyi, genişləndirə biləcəyi və biznes böyüdükcə güvənə biləcəyi platformalar qururuq.',
+          'Hər bir layihə aydın həcmlə, şəffaf ünsiyyətlə və arxitektura-prioritetli düşüncələrlə idarə olunur. Biz komandaların biznesləri böyüdükcə istifadə edə, inkişaf etdirə və etibar edə biləcəyi platformalar qurmağa fokuslanırıq.',
       },
       projectDetails: 'Təfərrüatlar',
       industry: 'Sahə',
@@ -3065,7 +3068,7 @@ const translations: Record<Locale, Record<string, any>> = {
         loading: 'Yüklənir…',
         heroTitle: 'Komandalar niyə bizi seçir',
         heroCopy:
-          'Biz premium UI/UX, sabit backend arxitekturası və admin alətlərini birləşdirərək, istehsala hazır rəqəmsal sistemlər dizayn edir və qururuq — ticarət və bank səviyyəli platformalar üçün.',
+          'Biz ticarət və bank səviyyəli platformalar üçün premium UI/UX, sabit backend arxitekturası və admin alətlərini birləşdirərək, istehsala hazır rəqəmsal sistemlər dizayn edir və qururuq.',
         hero: {
           items: {
             premiumUi: 'Premium UI sistemləri',
@@ -3082,7 +3085,7 @@ const translations: Record<Locale, Record<string, any>> = {
         form: {
           title: 'Layihə icmalı üçün müraciət',
           copy:
-            'Layihəniz barədə məlumat verin. Hər müraciəti qəbul edirik və aydın növbəti addımlarla cavab veririk — yaxud ümumi sub-pack vasitəsilə ön-baxış.',
+            'Layihəniz barədə məlumat verin. Hər müraciəti qəbul edirik və aydın növbəti addımlarla cavab veririk.',
           labels: {
             name: 'Adınız *',
             company: 'Şirkət adı',

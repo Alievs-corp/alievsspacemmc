@@ -44,7 +44,7 @@ export function Footer() {
             
             <div className="flex flex-col gap-10 md:flex-row lg:gap-120 ">
               <div>
-                <h3 className="font-inter text-[18px] text-white mb-4">{t('nav.about', 'About')}</h3>
+                <h3 className="font-inter text-[18px] text-white mb-4">{t('nav.company', 'Company')}</h3>
                 <ul className="space-y-3">
                   <li>
                     <Link 

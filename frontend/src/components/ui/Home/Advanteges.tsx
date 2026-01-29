@@ -5,11 +5,11 @@ import { useI18n } from '@/contexts/I18nContext';
 const Advanteges = () => {
     const { t } = useI18n();
     const cards = [
-        { heading: '4.5+', text: t('public.home.advantages.yearsText') },
-        { heading: 'Enterprise', text: t('public.home.advantages.enterpriseText') },
-        { heading: 'Premium', text: t('public.home.advantages.premiumText') },
-        { heading: 'Secure', text: t('public.home.advantages.secureText') },
-        { heading: 'Fast', text: t('public.home.advantages.fastText') },
+        { heading: t('public.home.advantages.headings.years'), text: t('public.home.advantages.yearsText') },
+        { heading: t('public.home.advantages.headings.enterprise'), text: t('public.home.advantages.enterpriseText') },
+        { heading: t('public.home.advantages.headings.premium'), text: t('public.home.advantages.premiumText') },
+        { heading: t('public.home.advantages.headings.secure'), text: t('public.home.advantages.secureText') },
+        { heading: t('public.home.advantages.headings.fast'), text: t('public.home.advantages.fastText') },
     ] as const;
 
     const scrollerRef = useRef<HTMLDivElement>(null);
