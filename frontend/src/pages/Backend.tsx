@@ -2,15 +2,23 @@ import Container from "./../components/ui/Container";
 import backend from "../assets/images/backend.jpg";
 import { Link } from "react-router-dom";
 import { useI18n } from "@/contexts/I18nContext";
+import { Helmet } from 'react-helmet-async';
 
 const Backend = () => {
     const { t } = useI18n();
     return (
     <>
+        <Helmet>
+            <title>{`${t('public.backend.heroTitle')} | Alievs Space MMC`}</title>
+            <meta name="description" content={t('public.backend.buildCopy')} />
+            <meta property="og:title" content={t('public.backend.heroTitle')} />
+            <meta property="og:description" content={t('public.backend.buildCopy')} />
+            <meta property="og:type" content="website" />
+        </Helmet>
         <div className="relative w-full">
             <img 
                 src={backend} 
-                alt="Frontend background" 
+                alt="Backend background" 
                 className="w-full h-[320px] object-cover" 
             />
 

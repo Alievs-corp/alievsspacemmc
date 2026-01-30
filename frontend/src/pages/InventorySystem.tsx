@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useI18n } from '@/contexts/I18nContext';
 import { useContent } from '@/contexts/ContentContext';
 import Container from './../components/ui/Container';
+import { Helmet } from 'react-helmet-async';
 
 const InventorySystem = () => {
     const { t } = useI18n();
@@ -17,6 +18,13 @@ const InventorySystem = () => {
 
     return (
         <div className='mt-[60px] flex flex-col justify-center items-center'>
+            <Helmet>
+                <title>{`${t('public.inventory.title')} | Alievs Space MMC`}</title>
+                <meta name="description" content={t('public.inventory.intro')} />
+                <meta property="og:title" content={t('public.inventory.title')} />
+                <meta property="og:description" content={t('public.inventory.intro')} />
+                <meta property="og:type" content="website" />
+            </Helmet>
             <Container className="w-full mb-16">
                 <div className="max-w-[1200px] mx-auto">
                     <div className="mb-8">
