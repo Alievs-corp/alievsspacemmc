@@ -2,11 +2,19 @@ import Container from "../components/ui/Container";
 import { Link } from "react-router-dom";
 import uxUiDesigner from "../assets/images/ux-ui-designer.jpg";
 import { useI18n } from "@/contexts/I18nContext";
+import { Helmet } from 'react-helmet-async';
 
 const UiDesigner = () => {
     const { t } = useI18n();
     return (
     <>
+        <Helmet>
+            <title>{`${t('public.uiux.heroTitle')} | Alievs Space MMC`}</title>
+            <meta name="description" content={t('public.uiux.buildCopy')} />
+            <meta property="og:title" content={t('public.uiux.heroTitle')} />
+            <meta property="og:description" content={t('public.uiux.buildCopy')} />
+            <meta property="og:type" content="website" />
+        </Helmet>
         <div className="relative w-full">
             <img 
                 src={uxUiDesigner} 

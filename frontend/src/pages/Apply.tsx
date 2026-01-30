@@ -1,8 +1,11 @@
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect, type ChangeEvent, type FormEvent } from 'react';
 import Container from '../components/ui/Container';
+import { Helmet } from 'react-helmet-async';
+import { useI18n } from '@/contexts/I18nContext';
 
 const Apply = () => {
+  const { t } = useI18n();
   const location = useLocation();
   const [position, setPosition] = useState('');
   const [formData, setFormData] = useState<{
@@ -32,7 +35,6 @@ const Apply = () => {
     'ui-ux-designer': 'UX/UI Designer'
   };
 
-  // URL'den position parametresini al
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const positionFromURL = queryParams.get('position') as PositionKey | null;
@@ -47,7 +49,7 @@ const Apply = () => {
     }
   }, [location.search]);
 
-  // Position'a göre başlık belirle
+
   const getPositionTitle = () => {
     if (position && position in fullPositionTitles) {
       return fullPositionTitles[position as PositionKey];
@@ -67,15 +69,19 @@ const Apply = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Form submission logic
-    console.log('Application submitted:', { ...formData, position });
   };
 
   return (
     <div className="mt-[60px] flex flex-col justify-center items-center">
+      <Helmet>
+        <title>{`${t('public.apply', 'Apply')} | Alievs Space MMC`}</title>
+        <meta name="description" content={t('careersIntro')} />
+        <meta property="og:title" content={`${t('public.apply', 'Apply')}`} />
+        <meta property="og:description" content={t('careersIntro')} />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <Container className="w-full">
         <div className="max-w-[800px] mx-auto">
-          {/* Başlık - Position'a göre değişecek */}
           <div className="mb-10 text-center">
             <h2 className="font-inter text-[26px] md:text-[38px] font-bold text-white mb-4">
               Apply for {getPositionTitle()}
@@ -85,10 +91,8 @@ const Apply = () => {
             </p>
           </div>
 
-          {/* Custom application form per request */}
           <form onSubmit={handleSubmit} className="space-y-8">
             <div className="space-y-6">
-              {/* Row: Full Name | Upload CV */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="font-inter text-white text-[13px] mb-2 block">

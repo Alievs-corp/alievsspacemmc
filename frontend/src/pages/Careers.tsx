@@ -11,6 +11,8 @@ import elshan from "../assets/images/elshan-hasanov.jpg";
 import elmar from "../assets/images/elmar.png";
 import ravena from "../assets/images/ravena.jpg";
 import zehra from "../assets/images/zehra.jpg";
+import parvin from "../assets/images/pervin.jpeg"
+import { Helmet } from 'react-helmet-async';
 
 export function Careers() {
   const { t } = useI18n();
@@ -110,6 +112,15 @@ export function Careers() {
         'Frontend üzrə 1 ildən artıq müddətdir öyrənməyə davam edirəm.'
       ),
     },
+    {
+      id: 'parvin',
+      name: t('public.careers.teamMembers.parvin.name', 'Pərvin Əhmədov'),
+      role: t('public.careers.teamMembers.parvin.role', 'Frontend Developer'),
+      description: t(
+        'public.careers.teamMembers.parvin.description',
+        'Software Developer sahəsində 1 ildən artıqdır təcrübə qazanıram və biliklərimi davamlı olaraq inkişaf etdirirəm'
+      ),
+    },
   ];
 
   const memberImages: Record<string, string> = {
@@ -119,10 +130,18 @@ export function Careers() {
     elmar,
     ravena,
     zehra,
+    parvin,
   };
 
   return (
     <div className="mt-[60px] flex flex-col justify-center items-center">
+      <Helmet>
+        <title>{`${t('nav.careers', 'Careers')} | Alievs Space MMC`}</title>
+        <meta name="description" content={t('public.careersIntro')} />
+        <meta property="og:title" content={`${t('nav.careers', 'Careers')}`} />
+        <meta property="og:description" content={t('public.careersIntro')} />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <Container className="flex flex-col justify-center items-center">
         <h2 className="font-inter text-[38px] font-bold text-white">{t('nav.careers')}</h2>
         <p className="font-inter text-[18px] text-[#C5C5C5] text-center max-w-[800px]">
@@ -205,11 +224,13 @@ export function Careers() {
             >
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
-                  <img 
-                    src={memberImages[member.id]} 
-                    alt={member.name} 
-                    className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] object-cover rounded-md" 
-                  />
+                  {memberImages[member.id] && (
+                    <img
+                      src={memberImages[member.id]}
+                      alt={member.name}
+                      className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] object-cover rounded-md"
+                    />
+                  )}
 
                   <div className="md:hidden flex-1">
                     <h4 className="font-inter text-white text-[20px] md:text-[26px] mb-1">

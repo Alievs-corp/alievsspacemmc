@@ -4,6 +4,7 @@ import webDevelopment from "../assets/images/web-development.svg";
 import bankingFintech from "../assets/images/banking-fintech.svg";
 import eCommerceSite from "../assets/images/e-commerce-site.svg";
 import trueIcon from "../assets/icons/true.svg";
+import { Helmet } from 'react-helmet-async';
 
 const servicesData: Array<{
   id: string;
@@ -50,6 +51,13 @@ export function Services() {
   const { t } = useI18n();
   return (
     <div className='mt-[60px] flex flex-col justify-center items-center'>
+      <Helmet>
+        <title>{`${t('nav.services', 'Services')} | Alievs Space MMC`}</title>
+        <meta name="description" content={t('public.servicesIntro')} />
+        <meta property="og:title" content={`${t('nav.services', 'Services')}`} />
+        <meta property="og:description" content={t('public.servicesIntro')} />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <Container className="flex flex-col justify-center items-center mb-12">
         <h2 className="font-inter text-[38px] font-bold text-white">{t('nav.services', 'Services')}</h2>
         <p className="font-inter text-[18px] text-[#C5C5C5] text-center max-w-[800px]">

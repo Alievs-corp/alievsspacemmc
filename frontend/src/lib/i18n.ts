@@ -681,7 +681,7 @@ const translations: Record<Locale, Record<string, any>> = {
             description: 'Build premium interfaces and dashboards',
             location: 'Full-time, Baku / Hybrid',
             reqs: {
-              htmlCssJs: 'Strong HTML/CSS/JS',
+              htmlCssJs: 'Strong HTML/CSS/JS(TS) skills',
               uiSense: 'UI sense',
               cleanCode: 'Clean Code',
             },
@@ -743,6 +743,12 @@ const translations: Record<Locale, Record<string, any>> = {
             role: 'Frontend Developer',
             description:
               'Learning and growing in Frontend for over a year.',
+          },
+          parvin: {
+            name: 'Parvin Ahmadov',
+            role: 'Frontend Developer',
+            description:
+              'Gaining experience in Software Development for over a year and continuously improving skills.',
           },
         },
         team: {
@@ -1774,7 +1780,7 @@ const translations: Record<Locale, Record<string, any>> = {
             description: 'Строить премиальные интерфейсы и дашборды',
             location: 'Полная занятость, Баку / Гибрид',
             reqs: {
-              htmlCssJs: 'Сильные HTML/CSS/JS',
+              htmlCssJs: 'Сильные HTML/CSS/JS(TS) навыки',
               uiSense: 'Чувство UI',
               cleanCode: 'Точный и чистый код',
             },
@@ -1836,6 +1842,12 @@ const translations: Record<Locale, Record<string, any>> = {
             role: 'Frontend‑разработчик',
             description:
               'Более года изучает и развивается в Frontend‑направлении.',
+          },
+          parvin: {
+            name: 'Парвин Ахмедов',
+            role: 'Frontend‑разработчик',
+            description:
+              'Получаю опыт в разработке ПО более года и постоянно развиваю свои навыки.',
           },
         },
         team: {
@@ -2468,7 +2480,7 @@ const translations: Record<Locale, Record<string, any>> = {
       stepLabel: 'Addım',
       serviceFallback: 'Xidmət',
       servicesIntro:
-        'Premium mühəndislik və dizayn: proqram inkişafı, e-ticarət və bank panelləri.',
+        'Premium mühəndislik və dizayn: proqram yaradıcıllığı, e-ticarət və bank panelləri.',
       services: {
         items: {
           web: {
@@ -2530,7 +2542,7 @@ const translations: Record<Locale, Record<string, any>> = {
         heroTitle: 'Backend Developer (API/DB)',
         buildTitle: 'İstehsal platformalarının arxasında etibarlı və miqyasa uyğun sistemlər',
         buildCopy:
-          'Sistem etibarlılığına, təmiz memarlığa və uzunmüddətli dəstəklənməyə fokuslanan Backend Developer axtarırıq. Dashboardlar, marketpleyslər və daxili platformaların əsas məntiqi üzərində işləyəcəksiniz — burada data bütövlüyü, performans və təhlükəsizlik kritikdir.',
+          'Sistem etibarlılığına, təmiz memarlığa və uzunmüddətli dəstəklənməyə fokuslanan Backend Developer axtarırıq. Dashboardlar, marketpleyslər və daxili platformaların əsas məntiqi üzərində işləyəcəksiniz. Burada data bütövlüyü, performans və təhlükəsizlik kritikdir.',
         workOnTitle: 'Nə üzərində işləyəcəksiniz',
         workOn: {
           items: {
@@ -2593,14 +2605,14 @@ const translations: Record<Locale, Record<string, any>> = {
         },
         applyTitle: 'Müraciət etməyə hazırsınız?',
         applyCopy:
-          'Sabit və miqyasa uyğun backend sistemləri qurmaq sizin üçün önəmlidirsə — və işiniz real istehsal mühitində dayanıqlı olsun istəyirsinizsə — sizi eşitmək istərdik.',
+          'Əgər sabit, genişlənə bilən Backend sistemləri yaratmaqla maraqlanırsınızsa və işinizin real istehsal mühitində olmasını istəyirsinizsə, sizinlə tanış olmaq istərdik.',
         applyCta: 'Bu rola müraciət et',
       },
       uiux: {
         heroTitle: 'UX/UI Dizayner',
         buildTitle: 'İstehsala hazır platformalar üçün dizayn sistemləri və interfeyslər',
         buildCopy:
-          'Dekor deyil, dizayn — struktur, aydınlıq və qərar vermədir — bunu anlayan UX/UI dizayner axtarırıq. Dashboardlar, marketpleyslər və daxili sistemlər kimi real məhsullar üzərində işləyəcəksiniz; burada istifadə rahatlığı, konsistentlik və uzunmüddətli miqyaslanma önəmlidir.',
+          'Biz yaxşı dizaynın yalnız bəzək olmadığını, dizaynın struktur, aydınlıq və qərar qəbul etmə olduğunu anlayan  bir UX/UI Dizayner axtarırıq . Siz istifadə rahatlığı, ardıcıllıq və uzunmüddətli miqyaslana bilən mühüm panellər, bazarlar və daxili sistemlər kimi real məhsullar üzərində işləyəcəksiniz.',
         workOnTitle: 'Nə üzərində işləyəcəksiniz',
         workOn: {
           items: {
@@ -2663,7 +2675,7 @@ const translations: Record<Locale, Record<string, any>> = {
         },
         applyTitle: 'Müraciət etməyə hazırsınız?',
         applyCopy:
-          'Sabit və miqyasa uyğun backend sistemləri qurmaq sizin üçün önəmlidirsə — və işiniz real istehsal mühitində dayanıqlı olsun istəyirsinizsə — sizi eşitmək istərdik.',
+          'Əgər istifadəçi yönümlü, estetik və funksional UX/UI dizaynlar yaratmaqla maraqlanırsınızsa və işinizin real istehsal mühitində istifadə olunmasını istəyirsinizsə, sizinlə tanış olmaq istərdik.',
         applyCta: 'Bu rola müraciət et',
       },
       frontend: {
@@ -2674,7 +2686,7 @@ const translations: Record<Locale, Record<string, any>> = {
         workOnTitle: 'Nə üzərində işləyəcəksiniz',
         workOn: {
           items: {
-            architecture: 'Miqyasa uyğun frontend arxitekturalarını dizayn və qurmaq',
+            architecture: 'Miqyasa uyğun frontend arxitekturalarını dizaynı və qurulması',
             adminDashboards: 'Admin panellər, dashboardlar və data‑yüklü interfeyslər hazırlamaq',
             translateDesigns: 'UI/UX dizaynlarını təmiz və dəstəklənən kodla reallaşdırmaq',
             integrateApis: 'Backend komandası ilə API inteqrasiyası üzərində sıx əməkdaşlıq',
@@ -2691,7 +2703,7 @@ const translations: Record<Locale, Record<string, any>> = {
             componentArchitecture: 'Komponent əsaslı arxitektura anlayışı',
             restAsync: 'REST API və asinxron data ilə iş təcrübəsi',
             responsive: 'Responsiv və adaptiv UI dizaynına bələdlik',
-            cleanCode: 'Təmiz kod yanaşması (oxunaqlılıq, struktur, təkrar istifadə)',
+            cleanCode: 'Təmiz və anlaşılan kod yanaşması (oxunaqlılıq, struktur, təkrar istifadə)',
           },
         },
         niceToHaveTitle: 'Üstünlük sayılır',
@@ -2709,7 +2721,7 @@ const translations: Record<Locale, Record<string, any>> = {
             architectureFirst: 'Arxitektura‑öncül inkişaf',
             clearRequirements: 'Aydın tələblər və strukturlaşdırılmış çatdırılma',
             noHacks: 'Tələsik xüsusiyyətlər və qarışıq hacklər yoxdur',
-            longTermStability: 'Qısa qaliblər deyil, uzunmüddətli sabitliyə fokus',
+            longTermStability: 'Qısa qalibiyyətlər deyil, uzunmüddətli sabitliyə fokus',
             collaboration: 'Dizayn, frontend və backend arasında ilk gündən əməkdaşlıq',
           },
         },
@@ -2732,7 +2744,7 @@ const translations: Record<Locale, Record<string, any>> = {
         },
         applyTitle: 'Müraciət etməyə hazırsınız?',
         applyCopy:
-          'Bu rol, sadəcə kod yazmaq yox, necə işləmək istədiyiniz kimidirsə — sizi eşitmək istərdik.',
+          'Əgər bu rol sizin yalnız yazmaq istədiyiniz kodla deyil, işləmək istədiyiniz tərzə uyğundursa sizdən eşitmək istərdik.',
         applyCta: 'Bu rola müraciət et',
       },
       careers: {
@@ -2749,9 +2761,9 @@ const translations: Record<Locale, Record<string, any>> = {
             description: 'Premium interfeyslər və panellər qurun',
             location: 'Tam ştat, Bakı / Hibrid',
             reqs: {
-              htmlCssJs: 'Güclü HTML/CSS/JS',
-              uiSense: 'UI hissi',
-              cleanCode: 'Təmiz kod',
+              htmlCssJs: 'Güclü HTML/CSS/JS(TS) bacarıqları',
+              uiSense: 'Figma ilə işləmə anlayışı',
+              cleanCode: 'Təmiz və anlaşılan kod',
             },
           },
           backend: {
@@ -2812,51 +2824,15 @@ const translations: Record<Locale, Record<string, any>> = {
             description:
               'Frontend üzrə 1 ildən artıq müddətdir öyrənməyə davam edirəm.',
           },
-        },
-        team: {
-          members: {
-            john: {
-              role: 'Satış və Marketinq rəhbəri',
-              description:
-                'Biznes təşkilatı, satış əməliyyatları və logistika yönümlü inkişaf üzərində fokusla rəqəmsal sistemlərin qurulması və hesabatı.',
-            },
-            jane: {
-              role: 'Data Analitika rəhbəri',
-              description:
-                'Davamlı analitika çərçivələri hazırlayıb; səmərəli və fərdiləşdirməyə hazır; satış zənciri arxitekturası.',
-            },
-            mike: {
-              role: 'Biznes inkişafı',
-              description:
-                'Aydın tələblərə, uzunmüddətli sabitliyə və iş vaxtının idarə edilməsinə fokuslanır.',
-            },
-            sarah: {
-              role: 'Əməliyyat meneceri',
-              description:
-                'Yüksək keyfiyyətli satış bazalarının idarə olunması və qrupun əsas kapital səviyyəsində dəyərlərin göstərilməsi.',
-            },
-            robert: {
-              role: 'Logistika mütəxəssisi',
-              description:
-                'Logistika yönümlü biznes inkişafı və sistem optimallaşdırılmasında ekspert.',
-            },
-            emily: {
-              role: 'Satış əməliyyatları',
-              description:
-                'Satış əməliyyatları və rəqəmsal sistem hesabatında ixtisaslaşır.',
-            },
-            david: {
-              role: 'Marketinq analitiki',
-              description:
-                'Satış məlumatlarını analiz edir və biznes artımı üçün praktik anlayışlar yaradır.',
-            },
-            lisa: {
-              role: 'Müştəri münasibətləri',
-              description:
-                'Müştərilərlə güclü əlaqələr qurur və məmnuniyyəti təmin edir.',
-            },
+          parvin: {
+            name: 'Pərvin Əhmədov',
+            role: 'Frontend Developer',
+            description:
+              'Software Developer sahəsində 1 ildən artıqdır təcrübə qazanıram və biliklərimi davamlı olaraq inkişaf etdirirəm.',
           },
         },
+
+
       },
             caseStudiesIntro:
               'Biz strukturlu arxitektura, düşünülmüş istifadəçi təcrübəsi və disiplinli mühəndisliyin sabit, istehsalata hazır sistemlər yaratdığı real layihələri təqdim edirik. Bizim tədqiqat nümunələrimiz praktik çətinliklərə, dizayn qərarlarına və ölçülə bilən artımı və əməliyyat aydınlığını dəstəkləyən çatdırılma nəticələrinə fokuslanır.',
