@@ -211,7 +211,7 @@ export function Careers() {
         />
       </Container>
 
-      <Container className='w-full mt-[120px]'>
+      <Container className='w-full mt-[120px] mb-[60px] md:mb-[100px]'>
         <div className="flex flex-col justify-center items-center mb-12">
           <h3 className="font-inter text-[38px] font-bold text-white">{t('public.teamTitle')}</h3>
         </div>
