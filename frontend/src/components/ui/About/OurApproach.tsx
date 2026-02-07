@@ -15,7 +15,7 @@ const OurApproach = () => {
           </p>
         </div>
         
-        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-[60px] md:gap-[20px]">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-[60px] md:gap-[20px] mb-[60px] md:mb-[100px]">
             <div className='flex flex-col gap-[10px] max-w-[540px]'>
                 <h3 className='font-inter text-white font-semibold font-[26px] text-center md:text-left'>{t('public.about.approachWhoTitle')}</h3>
                 <p className='font-inter font-[13px] text-[#C5C5C5] text-center md:text-left'>{t('public.about.approachWhoCopy')}</p>

@@ -170,7 +170,7 @@ const translations: Record<Locale, Record<string, any>> = {
         noAccount: "Don't have an account?",
         signUp: 'Sign up',
         fields: {
-          email: 'Email Address',
+          email: 'Email',
           password: 'Password',
         },
         placeholders: {
@@ -193,7 +193,7 @@ const translations: Record<Locale, Record<string, any>> = {
         signIn: 'Sign in',
         fields: {
           name: 'Full Name *',
-          email: 'Email Address *',
+          email: 'Email *',
           password: 'Password *',
           phone: 'Phone Number',
           company: 'Company Name',

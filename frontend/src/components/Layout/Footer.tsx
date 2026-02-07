@@ -12,7 +12,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#13132F] text-white py-[50px] px-[30px] md:px-[50px] shadow-[5px_4px_100px_0px_#000000] mt-[60px] md:mt-[100px]">
+    <footer className="bg-[#13132F] text-white py-[50px] px-[30px] md:px-[50px] shadow-[5px_4px_100px_0px_#000000] ">
       <div className="max-w-7xl mx-auto">
         <div>
           <div className="flex flex-col lg:flex-row justify-between items-start">

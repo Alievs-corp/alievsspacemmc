@@ -163,7 +163,7 @@ const Contact = () => {
                 </div>
             </Container>
 
-            <Container >
+            <Container className='mb-[60px] md:mb-[100px]'>
                 <div className="max-w-[800px] mx-auto">
                     <div className="mb-10 text-center">
                         <h2 className="font-inter text-[26px] font-bold text-white mb-4">{t('public.contact.form.title')}</h2>

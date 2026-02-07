@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useI18n } from '@/contexts/I18nContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/Button';
+import { ProfileMenu } from '@/components/ui/ProfileMenu';
 import { cn } from '@/lib/utils';
 
 import alievsspace from '../../assets/images/alievsspace-logo.png';
@@ -10,6 +12,7 @@ import translate from '../../assets/icons/translate.svg';
 export function Header() {
   const { t, locale, setLocale, supportedLocales } = useI18n();
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -184,17 +187,21 @@ export function Header() {
               >
                 {t('nav.contactSales')}
               </Button>
-
-              <Button
-                size="sm"
-                className="bg-transparent hover:bg-[#546691] text-white text-[10px] px-1.5 py-1 border border-white cursor-pointer min-w-[50px]"
-                onClick={() => {
-                  navigate('/login');
-                  scrollToTop();
-                }}
-              >
-                {t('nav.login')}
-              </Button>
+              {/* Login düyməsi / profil menyusu */}
+              {user ? (
+                <ProfileMenu variant="md" />
+              ) : (
+                <Button
+                  size="sm"
+                  className="bg-transparent hover:bg-[#546691] text-white text-[10px] px-1.5 py-1 border border-white cursor-pointer min-w-[50px]"
+                  onClick={() => {
+                    navigate('/login');
+                    scrollToTop();
+                  }}
+                >
+                  {t('nav.login')}
+                </Button>
+              )}
             </div>
 
             <div className="hidden lg:flex items-center space-x-1 xl:space-x-2 2xl:space-x-3">
@@ -225,16 +232,21 @@ export function Header() {
                 {t('nav.contactSales')}
               </Button>
 
-              <Button
-                size="sm"
-                className="bg-transparent hover:bg-[#546691] text-white px-2 py-1.5 lg:px-2 lg:py-1.5 xl:px-3 xl:py-2 2xl:px-5 2xl:py-2.5 border border-white cursor-pointer text-[10px] lg:text-[11px] xl:text-[13px] 2xl:text-base whitespace-nowrap"
-                onClick={() => {
-                  navigate('/login');
-                  scrollToTop();
-                }}
-              >
-                {t('nav.login')}
-              </Button>
+              {/* Login düyməsi / profil menyusu */}
+              {user ? (
+                <ProfileMenu variant="lg" />
+              ) : (
+                <Button
+                  size="sm"
+                  className="bg-transparent hover:bg-[#546691] text-white px-2 py-1.5 lg:px-2 lg:py-1.5 xl:px-3 xl:py-2 2xl:px-5 2xl:py-2.5 border border-white cursor-pointer text-[10px] lg:text-[11px] xl:text-[13px] 2xl:text-base whitespace-nowrap"
+                  onClick={() => {
+                    navigate('/login');
+                    scrollToTop();
+                  }}
+                >
+                  {t('nav.login')}
+                </Button>
+              )}
             </div>
           </div>
         </div>
@@ -337,18 +349,38 @@ export function Header() {
                       )
                     ))}
                     
-                    <Link
-                      to="/login"
-                      onClick={handleLinkClick}
-                      className="flex items-center justify-between px-4 py-3.5 rounded-lg bg-[#1A1A2E] hover:bg-[#546691] text-white transition-all"
-                    >
-                      <span className="font-inter font-medium">
-                        {t('nav.login')}
-                      </span>
-                      <svg className="w-5 h-5 text-[#808087]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
+                    {user ? (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          navigate('/login');
+                          localStorage.removeItem('auth_token');
+                          window.location.reload();
+                        }}
+                        className="flex w-full items-center justify-between px-4 py-3.5 rounded-lg bg-[#1A1A2E] hover:bg-[#546691] text-white transition-all cursor-pointer"
+                      >
+                        <span className="font-inter font-medium">
+                          {t('nav.logout', 'Logout')}
+                        </span>
+                        <svg className="w-5 h-5 text-[#808087]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7" />
+                        </svg>
+                      </button>
+                    ) : (
+                      <Link
+                        to="/login"
+                        onClick={handleLinkClick}
+                        className="flex items-center justify-between px-4 py-3.5 rounded-lg bg-[#1A1A2E] hover:bg-[#546691] text-white transition-all"
+                      >
+                        <span className="font-inter font-medium">
+                          {t('nav.login')}
+                        </span>
+                        <svg className="w-5 h-5 text-[#808087]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </Link>
+                    )}
                   </nav>
                 </div>
 
@@ -363,15 +395,29 @@ export function Header() {
                     {t('nav.contactSales')}
                   </Button>
                   
-                  <Button
-                    className="w-full bg-transparent hover:bg-[#546691] text-white font-inter font-semibold py-3.5 text-lg rounded-lg border border-white"
-                    onClick={() => {
-                      navigate('/login');
-                      handleLinkClick();
-                    }}
-                  >
-                    {t('nav.login')}
-                  </Button>
+                  {user ? (
+                    <Button
+                      className="w-full bg-transparent hover:bg-[#546691] text-white font-inter font-semibold py-3.5 text-lg rounded-lg border border-white"
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        navigate('/login');
+                        localStorage.removeItem('auth_token');
+                        window.location.reload();
+                      }}
+                    >
+                      {t('nav.logout', 'Logout')}
+                    </Button>
+                  ) : (
+                    <Button
+                      className="w-full bg-transparent hover:bg-[#546691] text-white font-inter font-semibold py-3.5 text-lg rounded-lg border border-white"
+                      onClick={() => {
+                        navigate('/login');
+                        handleLinkClick();
+                      }}
+                    >
+                      {t('nav.login')}
+                    </Button>
+                  )}
                   
                   <div className="text-center mt-10 pt-6 border-t border-[#546691]">
                     <p className="text-[#808087] text-sm font-inter">

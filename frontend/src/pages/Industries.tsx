@@ -115,7 +115,7 @@ export function Industries() {
         </div>
       </Container>
 
-      <Container className="flex justify-between mt-[120px] flex-col md:flex-row gap-[40px] md:gap-0 items-center md:items-start">
+      <Container className="flex justify-between mt-[120px] flex-col md:flex-row gap-[40px] md:gap-0 items-center md:items-start mb-[60px] md:mb-[100px]">
         <div className="flex flex-col gap-[10px] max-w-[586px] justify-center w-full md:w-auto ">
           <h3 className="font-inter text-white text-[21px] md:text-[26px] font-semibold text-center md:text-left">{t('public.industries.trustedTitle')}</h3>
           <p className="font-inter text-[10px] md:text-[13px] text-[#C5C5C5] text-center md:text-left">{t('public.industries.trustedCopy1')}</p>

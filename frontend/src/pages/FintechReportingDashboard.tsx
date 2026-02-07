@@ -87,7 +87,7 @@ const FintechReportingDashboard = () => {
                 </div>
             </Container>
 
-            <Container className="w-full">
+            <Container className="w-full mb-[60px] md:mb-[100px]">
                 <div className="max-w-[1200px] mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                         <div className="lg:col-span-3 space-y-16">
