@@ -59,7 +59,6 @@ export function Register() {
         backgroundImage: `url(${loginBg})`,
       }}
     >
-      {/* Mobil: Tam ekran, Tablet/Desktop: Sağda 50% */}
       <div className="min-h-screen flex items-center justify-end w-full md:w-1/2">
         <div 
           className="bg-[#13132F] min-h-screen flex flex-col justify-center w-full md:rounded-tl-[30.6px] md:rounded-bl-[30.6px] overflow-y-auto"
@@ -124,9 +123,7 @@ export function Register() {
               )}
 
               <div className="space-y-4 md:space-y-6">
-                {/* Name and Company - Responsive grid */}
                 <div className="flex flex-col md:flex-row gap-3 md:gap-4">
-                  {/* Name Input */}
                   <div className="relative w-full md:w-1/2">
                     <div className="relative">
                       <div className="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
@@ -187,7 +184,6 @@ export function Register() {
                     </div>
                   </div>
 
-                  {/* Company Input */}
                   <div className="relative w-full md:w-1/2">
                     <div className="relative">
                       <div className="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
@@ -250,7 +246,6 @@ export function Register() {
                   </div>
                 </div>
 
-                {/* Phone Input */}
                 <div className="relative">
                   <div className="relative">
                     <div className="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
@@ -310,7 +305,6 @@ export function Register() {
                   </div>
                 </div>
 
-                {/* Email Input */}
                 <div className="relative">
                   <div className="relative">
                     <div className="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
@@ -371,7 +365,6 @@ export function Register() {
                   </div>
                 </div>
 
-                {/* Password Input */}
                 <div className="relative">
                   <div className="relative">
                     <input
@@ -464,7 +457,6 @@ export function Register() {
                 </div>
               </div>
 
-              {/* Submit Button */}
               <div className="pt-4">
                 <button
                   type="submit"

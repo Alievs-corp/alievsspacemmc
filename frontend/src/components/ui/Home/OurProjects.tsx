@@ -6,7 +6,7 @@ import { useI18n } from '@/contexts/I18nContext';
 const OurProjects = () => {
   const { t } = useI18n();
   return (
-    <div className="mt-[120px] hidden md:block">
+    <div className="mt-[120px] hidden md:block mb-24">
       <Container className="flex flex-col">
         <div className="flex justify-center items-center flex-col gap-[10px]">
           <h2 className="text-white font-inter text-[38px] font-bold">{t('public.home.projects.title')}</h2>
