@@ -391,6 +391,13 @@ const translations: Record<Locale, Record<string, any>> = {
         projects: {
           title: 'Our Projects',
           copy: 'A selection of projects delivered for different business needs and product types.',
+          items: {
+            luxmart: { name: 'LuxMart', description: 'Global e‑commerce platform for multi‑category retail.' },
+            lms: { name: 'Alievs Space LMS', description: 'Our own learning management system for courses, tracking, and internal training.' },
+            azenn: { name: 'Azenn', description: 'E‑commerce platform built for Azenn company’s online retail.' },
+            academy: { name: 'Alievs Space Academy', description: 'Our Academy website for education programs, applications, and student journeys.' },
+            ederaEvents: { name: 'EderaEvents', description: 'EderaEvents is a dance academy platform' },
+          },
         },
       },
       aboutWho: 'Who we are',
@@ -1432,6 +1439,13 @@ const translations: Record<Locale, Record<string, any>> = {
         projects: {
           title: 'Наши проекты',
           copy: 'Подборка проектов, выполненных для разных бизнес-задач и типов продуктов.',
+          items: {
+            luxmart: { name: 'LuxMart', description: 'Глобальная e‑commerce платформа для мульти-категорийной розницы.' },
+            lms: { name: 'Alievs Space LMS', description: 'Наша система управления обучением: курсы, трекинг и внутреннее обучение.' },
+            azenn: { name: 'Azenn', description: 'E‑commerce платформа для онлайн-продаж компании Azenn.' },
+            academy: { name: 'Alievs Space Academy', description: 'Сайт нашей Академии: образовательные программы, заявки и путь студента.' },
+            ederaEvents: { name: 'EderaEvents', description: 'EderaEvents — платформа танцевальной академии' },
+          },
         },
       },
       aboutWho: 'Кто мы',
@@ -2471,6 +2485,13 @@ const translations: Record<Locale, Record<string, any>> = {
         projects: {
           title: 'Layihələrimiz',
           copy: 'Müxtəlif biznes ehtiyacları və məhsul tipləri üçün həyata keçirilmiş layihələrimiz',
+          items: {
+            luxmart: { name: 'LuxMart', description: 'Çoxkateqoriyalı pərakəndə satış üçün qlobal e‑ticarət platforması.' },
+            lms: { name: 'Alievs Space LMS', description: 'Kurslar, izləmə və daxili təlim üçün öz öyrənmə idarəetmə sistemimiz.' },
+            azenn: { name: 'Azenn', description: 'Azenn şirkəti üçün onlayn satış e‑ticarət platforması.' },
+            academy: { name: 'Alievs Space Academy', description: 'Təhsil proqramları, müraciətlər və tələbə səyahəti üçün Akademiya saytımız.' },
+            ederaEvents: { name: 'EderaEvents', description: 'EderaEvents — rəqs akademiyası platformasıdır' },
+          },
         },
       },
       aboutWho: 'Biz kimik',
