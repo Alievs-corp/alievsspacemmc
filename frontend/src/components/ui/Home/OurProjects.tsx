@@ -2,48 +2,22 @@ import luxmart from "../../../assets/images/luxmart.png";
 import lmsImage from "../../../assets/images/lms.png";
 import academyImage from "../../../assets/images/academy.png";
 import azennImage from "../../../assets/images/azenn.png";
-import ederaeventsImage from "../../../assets/images/ederaevents.png";
+import ederaEventsImage from "../../../assets/images/ederaevents.png";
 import Container from "../Container";
 import { useI18n } from "@/contexts/I18nContext";
 
 type ProjectCard = {
-  name: string;
+  key: 'luxmart' | 'lms' | 'azenn' | 'academy' | 'ederaEvents';
   link: string;
   image: string;
-  description: string;
 };
 
 const PROJECTS: ProjectCard[] = [
-  {
-    name: "LuxMart",
-    link: "https://luxmart.az",
-    image: luxmart,
-    description: "Global e‑commerce platform for multi‑category retail.",
-  },
-  {
-    name: "Alievs Space LMS",
-    link: "https://lms.alievsspace.com",
-    image: lmsImage,
-    description: "Our own learning management system for courses, tracking, and internal training.",
-  },
-  {
-    name: "Azenn",
-    link: "https://azenn.az",
-    image: azennImage,
-    description: "Dedicated e‑commerce platform built for Azenn company’s online retail.",
-  },
-  {
-    name: "Alievs Space Academy",
-    link: "https://academy.alievsspace.com",
-    image: academyImage,
-    description: "Our Academy website for education programs, applications, and student journeys.",
-  },
-  {
-    name: "EderaEvents",
-    link: "https://ederaevents.com",
-    image: ederaeventsImage,
-    description: "Event and ticketing platform for organizing and promoting modern events.",
-  },
+  { key: 'luxmart', link: "https://luxmart.az", image: luxmart },
+  { key: 'lms', link: "https://lms.alievsspace.com", image: lmsImage },
+  { key: 'azenn', link: "https://azenn.az", image: azennImage },
+  { key: 'academy', link: "https://academy.alievsspace.com", image: academyImage },
+  { key: 'ederaEvents', link: "https://ederaevents.com", image: ederaEventsImage },
 ];
 
 const OurProjects = () => {
@@ -69,9 +43,11 @@ const OurProjects = () => {
         <div className="mt-[60px] w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[40px] lg:gap-[20px]">
           {PROJECTS.map((project) => {
             const href = normalizeUrl(project.link);
+            const name = t(`public.home.projects.items.${project.key}.name`);
+            const description = t(`public.home.projects.items.${project.key}.description`);
             return (
               <a
-                key={project.name}
+                key={project.key}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -79,14 +55,14 @@ const OurProjects = () => {
               >
                 <img
                   src={project.image}
-                  alt={project.name}
+                  alt={name}
                   className="w-full h-[140px] md:h-[160px] object-cover rounded-[8px] bg-[#0A0A1E]"
                 />
                 <h4 className="font-inter text-white text-[20px] md:text-[24px] font-semibold">
-                  {project.name}
+                  {name}
                 </h4>
                 <p className="font-inter text-[#C5C5C5] text-[13px] md:text-[16px]">
-                  {project.description}
+                  {description}
                 </p>
               </a>
             );
