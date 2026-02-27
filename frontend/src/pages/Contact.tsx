@@ -28,6 +28,14 @@ const Contact = () => {
     const { content, loading } = useContent();
     const settings = content?.settings;
 
+    const cleanedPhoneHref = settings?.phone
+        ? `tel:${settings.phone.replace(/[^\d+]/g, '')}`
+        : '';
+
+    const cleanedEmailHref = settings?.email
+        ? `mailto:${settings.email.trim()}`
+        : '';
+
     useEffect(() => {
         const requiredFields = ['name', 'email', 'industry', 'projectOverview', 'message'];
         const isValid = requiredFields.every(field => 
@@ -113,7 +121,7 @@ const Contact = () => {
                 <meta property="og:type" content="website" />
             </Helmet>
             <Container className="flex flex-col justify-center items-center mb-12">
-                <h2 className="font-inter text-[38px] font-bold text-white">{t('public.contact.heroTitle')}</h2>
+                <h2 className="font-inter text-[38px] font-bold text-white text-center">{t('public.contact.heroTitle')}</h2>
                 <p className="font-inter text-[18px] text-[#C5C5C5] text-center max-w-[800px]">
                     {t('public.contact.heroCopy')}
                 </p>
@@ -144,19 +152,19 @@ const Contact = () => {
                     <div className="space-y-6">
                       <div className='flex items-center gap-[10px]'>
                         <img src={phone} alt={t('public.contact.alt.phone')} className="w-5 h-5" />
-                        <a href={`tel:${settings?.phone || ''}`} className="font-inter text-[#C5C5C5] text-[16px] hover:text-white transition-colors">
-                          {settings?.phone || t('public.contact.details.phone')}
+                                                <a href={cleanedPhoneHref} className="font-inter text-[#C5C5C5] text-[16px] hover:text-white transition-colors">
+                           {t('public.contact.details.phone')}
                         </a>
                       </div>
                       <div className='flex items-center gap-[10px]'>
                         <img src={mail} alt={t('public.contact.alt.mail')} className="w-5 h-5" />
-                        <a href={`mailto:${settings?.email || ''}`} className="font-inter text-[#C5C5C5] text-[16px] hover:text-white transition-colors">
-                          {settings?.email || t('public.contact.details.email')}
+                                                <a href={cleanedEmailHref} className="font-inter text-[#C5C5C5] text-[16px] hover:text-white transition-colors">
+                          {t('public.contact.details.email')}
                         </a>
                       </div>
                       <div className='flex items-center gap-[10px]'>
                         <img src={location} alt={t('public.contact.alt.location')} className="w-5 h-5" />
-                        <p className="font-inter text-[#C5C5C5] text-[16px]">{settings?.address || t('public.contact.details.location')}</p>
+                        <p className="font-inter text-[#C5C5C5] text-[16px]"> {t('public.contact.details.location')}</p>
                       </div>
                     </div>
                   </div>
@@ -172,7 +180,6 @@ const Contact = () => {
                         </p>
                     </div>
 
-                    {/* Success and Error Messages */}
                     {submitSuccess && (
                         <div className="mb-6 p-4 bg-green-900/20 border border-green-500 rounded-lg">
                             <p className="text-green-400 font-inter text-center">

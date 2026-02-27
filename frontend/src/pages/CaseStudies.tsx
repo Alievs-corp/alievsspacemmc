@@ -23,6 +23,10 @@ const CaseStudies = () => {
     const [submitSuccess, setSubmitSuccess] = useState(false);
     const [submitError, setSubmitError] = useState('');
 
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     const info = [
         {
             id: 'marketplace-mvp',
@@ -176,6 +180,7 @@ const CaseStudies = () => {
 
                                 <Link 
                                     to={`/case-studies/${item.id}`}
+                                    onClick={scrollToTop}
                                     className="mt-auto w-full bg-[#133FA6] hover:bg-[#1a4cc0] text-white font-inter font-semibold py-3 px-4 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-center"
                                 >
                                     {t('public.caseStudies.viewCta')}
@@ -223,6 +228,7 @@ const CaseStudies = () => {
 
                                     <Link 
                                         to={`/case-studies/${item.id}`}
+                                        onClick={scrollToTop}
                                         className="mt-auto w-full bg-[#133FA6] hover:bg-[#1a4cc0] text-white font-inter font-semibold py-3 px-4 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-center"
                                     >
                                         {t('public.caseStudies.viewCta')}
@@ -268,6 +274,7 @@ const CaseStudies = () => {
                                     
                                     <Link 
                                         to={`/case-studies/${info[2].id}`}
+                                        onClick={scrollToTop}
                                         className="mt-auto w-full bg-[#133FA6] hover:bg-[#1a4cc0] text-white font-inter font-semibold py-3 px-4 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-center"
                                     >
                                         {t('public.caseStudies.viewCta')}
