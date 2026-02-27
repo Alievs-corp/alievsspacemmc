@@ -37,6 +37,15 @@ const Frontend = () => {
             <div className="absolute inset-0 mb-[30px] md:mb-[50px]">
                 <Container className="h-full px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col h-full">
+                    <div className="mt-8">
+                        <Link
+                            to="/careers"
+                            className="font-inter text-[#808087] text-[14px] hover:text-white transition-colors duration-300"
+                        >
+                            {t('public.careers.back', '← Back to Careers')}
+                        </Link>
+                    </div>
+
                     <div className="flex-grow"></div>
                     
                     <div className="mb-[30px] md:mb-[50px]">

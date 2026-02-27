@@ -50,6 +50,7 @@ const translations: Record<Locale, Record<string, any>> = {
       logout: 'Logout',
       logo: 'Logo',
       translate: 'Translate',
+      companyDescription: "LLC"
     },
     nav: {
       home: 'Home',
@@ -213,8 +214,10 @@ const translations: Record<Locale, Record<string, any>> = {
       },
     },
     public: {
+      company: "Alievs Space LLC",
       footerDesc:
-        'Premium web & mobile development, e-commerce/marketplace systems, and banking-ready dashboards.',
+        'Premium web & mobile app, e-commerce/marketplace systems, and banking-ready dashboards.',
+      copyrightSuffix: 'All rights reserved.',
       industriesCta: 'Discuss this industry',
       requirements: 'Requirements:',
       apply: 'Apply',
@@ -339,7 +342,7 @@ const translations: Record<Locale, Record<string, any>> = {
       home: {
         heroTitle: 'Build premium digital products that scale',
         heroCopy:
-          'We deliver web & mobile development, e-commerce/marketplace systems, and banking-ready dashboards with a security-first mindset.',
+          'We deliver web & mobile app development, e-commerce/marketplace systems, and banking-ready dashboards with a security-first mindset.',
         ctas: {
           contact: 'Contact Sales',
           services: 'Explore Services',
@@ -413,7 +416,7 @@ const translations: Record<Locale, Record<string, any>> = {
         items: {
           web: {
             category: 'Software',
-            title: 'Web & Mobile Development',
+            title: 'Web & Mobile App Development',
             description:
               'Corporate websites, web apps, mobile apps, admin dashboards, internal platforms.',
             reqs: {
@@ -675,6 +678,7 @@ const translations: Record<Locale, Record<string, any>> = {
         applyCta: 'Apply for this role',
       },
       careers: {
+        back: '← Back to Careers',
         viewRoleCta: 'View role',
         whyTitle: 'Why work with us',
         whyCopy:
@@ -719,43 +723,79 @@ const translations: Record<Locale, Record<string, any>> = {
             name: 'Ismat Cahangirov',
             role: 'Frontend Developer',
             description:
-              'Frontend developer at AlievsSpace MMC for over a year.',
+              'Frontend Developer at Alievs Space MMC for 3+ years and frontend instructor at Alievs Space Academy.',
           },
           elshan: {
             name: 'Elshan Hasanov',
             role: 'Frontend Developer',
             description:
-              'Frontend developer with 1+ years at AlievsSpace MMC.',
+              'Frontend Developer at Alievs Space MMC for over 3 years.',
           },
           ismayil: {
             name: 'Ismayil Ismayilov',
             role: 'Frontend Developer',
             description:
-              'Focused on Frontend Development for 2 years; previously mentor/instructor at Developia Engineering.',
+              'Working in Frontend Development for 4 years; former mentor and instructor at Developia Engineering and for the last 2 years a Frontend Developer at Alievs Space MMC.',
           },
           ravena: {
             name: 'Ravena Balagözova',
             role: 'Frontend Developer',
             description:
-              'Continuously improving Frontend Development skills for about a year.',
+              'Improving her frontend skills for about 3 years and working as a Frontend Developer at Alievs Space MMC for 1 year.',
           },
           zehra: {
             name: 'Zehra Mahmudova',
             role: 'Frontend Developer',
             description:
-              'Actively learning Frontend Development for roughly a year and refining practical skills.',
+              'Working and growing in the Frontend field for 3 years.',
           },
           elmar: {
             name: 'Elmar Azimli',
             role: 'Frontend Developer',
             description:
-              'Learning and growing in Frontend for over a year.',
+              'In frontend for 4 years and at Alievs Space MMC for over a year.',
           },
           parvin: {
             name: 'Parvin Ahmadov',
             role: 'Frontend Developer',
             description:
-              'Gaining experience in Software Development for over a year and continuously improving skills.',
+              'Gaining experience in Software Development for 4 years and working at Alievs Space MMC for 2 years.',
+          },
+          aygun: {
+            name: 'Aygun Mammadzade',
+            role: 'Backend Developer',
+            description:
+              'Backend Developer at Alievs Space MMC for over a year.',
+          },
+          fuad: {
+            name: 'Fuad Alizade',
+            role: 'Full Stack Developer',
+            description:
+              'Working in the field for 6 years; Full Stack Developer at Alievs Space MMC.',
+          },
+          ilkin: {
+            name: 'Ilkin Ramazanli',
+            role: 'UX/UI Designer',
+            description:
+              'UX/UI Designer with 5 years of experience.',
+          },
+          sekine: {
+            name: 'Sekine Rahimova',
+            role: 'UX/UI Designer',
+            description:
+              'UX/UI Designer at Alievs Space MMC for 1 year.',
+          },
+          selen: {
+            name: 'Selen Kalbaliyeva',
+            role: 'Backend Developer',
+            description:
+              'Backend Developer at Alievs Space MMC for 2 years.',
+          },
+          yunis: {
+            name: 'Yunis Pashayev',
+            role: 'Backend Developer',
+            description:
+              'Backend Developer at Alievs Space MMC for 4 years.',
           },
         },
         team: {
@@ -1025,9 +1065,9 @@ const translations: Record<Locale, Record<string, any>> = {
           },
         },
         details: {
-          phone: 'Phone: +994 (51) 700 35 00',
-          email: 'Email: alievsspacemmc@gmail.com' ,
-          location: 'Location: Azerbaijan',
+          phone: '+994 (51) 700 35 00',
+          email: 'info@alievsspace.com' ,
+          location: 'Azerbaijan, Baku',
         },
         form: {
           title: 'Request project review',
@@ -1082,6 +1122,7 @@ const translations: Record<Locale, Record<string, any>> = {
       logout: 'Выйти',
       logo: 'Логотип',
       translate: 'Перевести',
+      companyDescription: 'OOO',
     },
     nav: {
       home: 'Главная',
@@ -1261,8 +1302,10 @@ const translations: Record<Locale, Record<string, any>> = {
       },
     },
     public: {
+      company: "Alievs Space OOO",
       footerDesc:
         'Премиальная разработка веб и мобильных продуктов, e-commerce/маркетплейсы и банковские дашборды.',
+      copyrightSuffix: 'Все права защищены.',
       industriesCta: 'Обсудить отрасль',
       requirements: 'Требования:',
       apply: 'Откликнуться',
@@ -1470,9 +1513,9 @@ const translations: Record<Locale, Record<string, any>> = {
           },
         },
         details: {
-          phone: 'Телефон: +994 (51) 700 35 00',
-          email: 'Email: alievsspacemmc@gmail.com',
-          location: 'Локация: Азербайджан',
+          phone: '+994 (51) 700 35 00',
+          email: 'info@alievsspace.com',
+          location: 'Азербайджан, Баку',
         },
         form: {
           title: 'Запрос на обзор проекта',
@@ -1781,6 +1824,7 @@ const translations: Record<Locale, Record<string, any>> = {
         applyCta: 'Откликнуться на вакансию',
       },
       careers: {
+        back: '← Назад к странице «Карьера»',
         viewRoleCta: 'Открыть вакансию',
         whyTitle: 'Почему именно мы',
         whyCopy:
@@ -1825,43 +1869,79 @@ const translations: Record<Locale, Record<string, any>> = {
             name: 'Исмат Джахангиров',
             role: 'Frontend‑разработчик',
             description:
-              'Frontend‑разработчик в AlievsSpace MMC более года.',
+              'Frontend‑разработчик в Alievs Space MMC более 3 лет и преподаватель фронтенда в Alievs Space Academy.',
           },
           elshan: {
             name: 'Элшан Гасанов',
             role: 'Frontend‑разработчик',
             description:
-              'Frontend‑разработчик, более 1 года в AlievsSpace MMC.',
+              'Frontend‑разработчик в Alievs Space MMC более 3 лет.',
           },
           ismayil: {
             name: 'Исмаил Исмаилов',
             role: 'Frontend‑разработчик',
             description:
-              'Занимается Frontend‑разработкой около 2 лет; ранее — ментор/инструктор в Developia Engineering.',
+              'Около 4 лет развивается в Frontend‑разработке; ранее был ментором и инструктором в Developia Engineering, последние 2 года — Frontend‑разработчик в Alievs Space MMC.',
           },
           ravena: {
             name: 'Равена Балагёзова',
             role: 'Frontend‑разработчик',
             description:
-              'Около года непрерывно развивает навыки в Frontend‑разработке.',
+              'Около 3 лет развивает навыки во Frontend и 1 год работает Frontend‑разработчиком в Alievs Space MMC.',
           },
           zehra: {
             name: 'Зехра Махмудова',
             role: 'Frontend‑разработчик',
             description:
-              'Активно изучает Frontend около года и совершенствует практические навыки.',
+              'Уже 3 года постоянно работает и развивается в области Frontend.',
           },
           elmar: {
             name: 'Эльмар Азимли',
             role: 'Frontend‑разработчик',
             description:
-              'Более года изучает и развивается в Frontend‑направлении.',
+              'Около 4 лет в Frontend‑разработке и более года работает в Alievs Space MMC.',
           },
           parvin: {
             name: 'Парвин Ахмедов',
             role: 'Frontend‑разработчик',
             description:
-              'Получаю опыт в разработке ПО более года и постоянно развиваю свои навыки.',
+              'Уже 4 года набирается опыта в разработке ПО и 2 года работает в Alievs Space MMC.',
+          },
+          aygun: {
+            name: 'Айгюн Мамедзаде',
+            role: 'Backend‑разработчик',
+            description:
+              'Backend‑разработчик, более года работает в Alievs Space MMC.',
+          },
+          fuad: {
+            name: 'Фуад Ализаде',
+            role: 'Full Stack Developer',
+            description:
+              'Уже 6 лет работает в этой сфере. Full Stack‑разработчик в Alievs Space MMC.',
+          },
+          ilkin: {
+            name: 'Илькин Рамазанлы',
+            role: 'UX/UI‑дизайнер',
+            description:
+              'UX/UI‑дизайнер с 5‑летним опытом.',
+          },
+          sekine: {
+            name: 'Секинэ Рагимова',
+            role: 'UX/UI‑дизайнер',
+            description:
+              'UX/UI‑дизайнер, 1 год работает в Alievs Space MMC.',
+          },
+          selen: {
+            name: 'Селен Кальбалыева',
+            role: 'Backend‑разработчик',
+            description:
+              'Backend‑разработчик в Alievs Space MMC уже 2 года.',
+          },
+          yunis: {
+            name: 'Юнис Пашаев',
+            role: 'Backend‑разработчик',
+            description:
+              'Backend‑разработчик в Alievs Space MMC уже 4 года.',
           },
         },
         team: {
@@ -2128,6 +2208,7 @@ const translations: Record<Locale, Record<string, any>> = {
       logout: 'Çıxış',
       logo: 'Loqo',
       translate: 'Tərcümə et',
+      companyDescription: 'MMC',
     },
     nav: {
       home: 'Baş səhifə',
@@ -2308,7 +2389,8 @@ const translations: Record<Locale, Record<string, any>> = {
     },
     public: {
       footerDesc:
-        'Premium veb və mobil inkişaf, e-ticarət/marketpleys sistemləri və bank paneli həlləri.',
+        'Premium veb və mobil tətbiq, e-ticarət/marketpleys sistemləri və bank paneli həlləri.',
+      copyrightSuffix: 'Bütün hüquqlar qorunur.',
       industriesCta: 'Bu sahəni müzakirə edək',
       requirements: 'Tələblər:',
       apply: 'Müraciət et',
@@ -2447,11 +2529,11 @@ const translations: Record<Locale, Record<string, any>> = {
             secure: 'Təhlükəsiz',
             fast: 'Sürətli',
           },
-          yearsText: 'İllərə dayanan iş təcrübəsi',
+          yearsText: 'İllərlə davam edən iş təcrübəsi',
           enterpriseText: 'Real biznes əməliyyatlarına hazır',
           premiumText: 'Yüksək keyfiyyətli UI/UX dizaynları',
           secureText: 'Giriş nəzarəti və daxili təhlükəsizlik',
-          fastText: 'Səmərəli çatdırılma',
+          fastText: 'Qısa müddətdə məhsul çatdırılması',
         },
         build: {
           items: {
@@ -2506,7 +2588,7 @@ const translations: Record<Locale, Record<string, any>> = {
         items: {
           web: {
             category: 'Proqram',
-            title: 'Veb və mobil inkişaf',
+            title: 'Veb və mobil tətbiqlər',
             description:
               'Korporativ saytlar, veb tətbiqlər, mobil tətbiqlər, admin panellər və daxili platformalar.',
             reqs: {
@@ -2769,6 +2851,7 @@ const translations: Record<Locale, Record<string, any>> = {
         applyCta: 'Bu rola müraciət et',
       },
       careers: {
+        back: '← Karyera səhifəsinə qayıt',
         viewRoleCta: 'Vakansiyaya bax',
         whyTitle: 'Niyə bizimlə işləmək?',
         whyCopy:
@@ -2813,43 +2896,79 @@ const translations: Record<Locale, Record<string, any>> = {
             name: 'Cahangirov İsmət',
             role: 'Frontend Developer',
             description:
-              '1 ildən artıqdır AlievsSpace MMC şirkətində Frontend Developer kimi fəaliyyət göstərirəm.',
+              '3 ildən artıq müddətdir Alievs Space MMC-də Frontend Developer olaraq çalışıram. Alievs Space Academy-də Frontend dərsləri tədris edirəm.',
           },
           elshan: {
             name: 'Elşən Həsənov',
             role: 'Frontend Developer',
             description:
-              'Frontend developerəm, artıq 1 ildən çoxdur ki, AlievsSpace MMC şirkətində çalışıram.',
+              '3 ildən artıq müddətdir ki Alievs Space MMC-də Frontend Developer olaraq çalışıram.',
           },
           ismayil: {
             name: 'İsmayıl İsmayılov',
             role: 'Frontend Developer',
             description:
-              'Frontend Development sahəsi üzrə 2 ildir ki özümü inkişaf etdirməyə çalışıram. Developia Engineering şirkətində mentor və instructor olaraq işləmişəm.',
+              'Frontend Development sahəsi üzrə 4 ildir ki özümü inkişaf etdirməyə çalışıram. Developia Engineering şirkətində mentor və instructor olaraq işləmişəm. Artıq 2 ildir ki Alievs Space MMC-də Frontend Developer olaraq çalışıram.',
           },
           ravena: {
             name: 'Ravena Balagözova',
             role: 'Frontend Developer',
             description:
-              'Təxminən bir ildir Frontend Development sahəsində bilik və bacarıqlarımı davamlı şəkildə inkişaf etdirirəm.',
+              'Təxminən 3 ildir ki Frontend üzrə biliklərimi inkişaf etdirirəm. 1 ildir ki Alievs Space MMC də Frontend Developer olaraq işləyirəm.',
           },
           zehra: {
             name: 'Zəhra Mahmudova',
             role: 'Frontend Developer',
             description:
-              'Front end Development sahəsində təxminən bir ildir aktiv şəkildə öyrənir və praktiki bacarıqlarımı təkmilləşdirirəm.',
+              '3 ildir ki Frontend sahəsi üzrə daimi olaraq çalışır və inkişaf edirəm.',
           },
           elmar: {
             name: 'Elmar Əzimli',
             role: 'Frontend Developer',
             description:
-              'Frontend üzrə 1 ildən artıq müddətdir öyrənməyə davam edirəm.',
+              '4 ildir Frontend sahəsindəyəm. 1 ildən artıqdır ki Alievs Space MMC-də işləyirəm.',
           },
           parvin: {
             name: 'Pərvin Əhmədov',
             role: 'Frontend Developer',
             description:
-              'Software Developer sahəsində 1 ildən artıqdır təcrübə qazanıram və biliklərimi davamlı olaraq inkişaf etdirirəm.',
+              '4 ildir Software Developer olaraq təcrübə qazanıram və biliklərimi davamlı olaraq inkişaf etdirirəm. 2 ildir ki, Alievs Space MMC-də işləyirəm.',
+          },
+          aygun: {
+            name: 'Aygün Məmmədzadə',
+            role: 'Backend Developer',
+            description:
+              '1 ildən artıq müddətdir Alievs Space MMC-də işləyirəm.',
+          },
+          fuad: {
+            name: 'Fuad Əlizadə',
+            role: 'Full Stack Developer',
+            description:
+              '6 ildir bu sahə üzrə çalışıram. Full Stack Developer olaraq Alievs Space MMC-də işləyirəm.',
+          },
+          ilkin: {
+            name: 'İlkin Ramazanlı',
+            role: 'UX/UI Designer',
+            description:
+              'Artıq 5 ildir ki, UX/UI Dizayner olaraq fəaliyyət göstərirəm.',
+          },
+          sekine: {
+            name: 'Səkinə Rəhimova',
+            role: 'UX/UI Designer',
+            description:
+              '1 ildir ki Alievs Space MMC də işləyirəm.',
+          },
+          selen: {
+            name: 'Selen Kalbalıyeva',
+            role: 'Backend Developer',
+            description:
+              '2 ildir ki Alievs Space MMC-də Backend Developer olaraq işləyirəm.',
+          },
+          yunis: {
+            name: 'Yunis Paşayev',
+            role: 'Backend Developer',
+            description:
+              '4 ildir ki Backend Developer olaraq Alievs Space MMC-də işləyirəm.',
           },
         },
 
@@ -3075,9 +3194,9 @@ const translations: Record<Locale, Record<string, any>> = {
           },
         },
         details: {
-          phone: 'Telefon: +994 (51) 700 35 00',
-          email: 'Email: alievsspacemmc@gmail.com',
-          location: 'Məkan: Azərbaycan',
+          phone: '+994 (51) 700 35 00',
+          email: 'info@alievsspace.com',
+          location: 'Azərbaycan, Bakı',
         },
         form: {
           title: 'Layihə icmalı üçün müraciət',

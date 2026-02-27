@@ -55,11 +55,11 @@ export function Header() {
             />
             <div className="hidden sm:block md:hidden lg:block">
               <p className='font-almarai sm:text-[24px] md:text-[18px] lg:text-[26px] xl:text-[28px] leading-none'>ALIEVS</p>
-              <p className='font-kavivanar sm:text-[16px] md:text-[12px] lg:text-[18px] xl:text-[20px] leading-tight'>Space MMC</p>
+              <p className='font-kavivanar sm:text-[16px] md:text-[12px] lg:text-[18px] xl:text-[20px] leading-tight'>Space {t('ui.companyDescription')}</p>
             </div>
             <div className="flex sm:hidden flex-col gap-1">
               <p className='font-almarai text-[15.44px] '>ALIEVS</p>
-              <p className='font-kavivanar text-[11.6px]'>Space MMC</p>
+              <p className='font-kavivanar text-[11.6px]'>Space {t('ui.companyDescription')}</p>
             </div>
           </Link>
 
