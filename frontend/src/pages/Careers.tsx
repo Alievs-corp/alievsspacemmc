@@ -18,6 +18,7 @@ import ilkin from "../assets/images/ilkin-ramazanli.jpeg"
 import sekine from "../assets/images/sekine-rehimova.jpeg"
 import yunis from "../assets/images/yunis.jpeg"
 import selen from "../assets/images/selen.jpeg"
+import nicat from "../assets/images/nicat.jpeg"
 import { Helmet } from 'react-helmet-async';
 
 export function Careers() {
@@ -140,6 +141,16 @@ export function Careers() {
       ),
     },
     {
+      id: 'nicat',
+      name: t('public.careers.teamMembers.nicat.name', 'Nicat Məsməliyev'),
+      role: t('public.careers.teamMembers.nicat.role', 'Frontend Developer'),
+      roleType: 'frontend',
+      description: t(
+        'public.careers.teamMembers.nicat.description',
+        '1 ildən artıq müddətdir Alievs Space MMC şirkətində Frontend Developer olaraq işləyirəm.'
+      ),
+    },
+    {
       id: 'aygun',
       name: t('public.careers.teamMembers.aygun.name', 'Aygün Məmmədzadə'),
       role: t('public.careers.teamMembers.aygun.role', 'Backend Developer'),
@@ -221,6 +232,7 @@ export function Careers() {
     ravena,
     zehra,
     parvin,
+    nicat,
     aygun,
     fuad,
     ilkin,

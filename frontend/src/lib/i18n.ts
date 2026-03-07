@@ -67,6 +67,11 @@ const translations: Record<Locale, Record<string, any>> = {
       cta: 'Request a Proposal',
       admin: 'Admin',
       login: 'Login',
+      legal: 'Legal',
+      privacyPolicy: 'Privacy Policy',
+      termsOfService: 'Terms of Service',
+      refundPolicy: 'Refund Policy',
+      cookiePolicy: 'Cookie Policy',
     },
     company: {
       name: 'ALIEVS SPACE MMC',
@@ -738,13 +743,13 @@ const translations: Record<Locale, Record<string, any>> = {
               'Working in Frontend Development for 4 years; former mentor and instructor at Developia Engineering and for the last 2 years a Frontend Developer at Alievs Space MMC.',
           },
           ravena: {
-            name: 'Ravena Balagözova',
+            name: 'Ravena Balagozova',
             role: 'Frontend Developer',
             description:
               'Improving her frontend skills for about 3 years and working as a Frontend Developer at Alievs Space MMC for 1 year.',
           },
           zehra: {
-            name: 'Zehra Mahmudova',
+            name: 'Zahra Mahmudova',
             role: 'Frontend Developer',
             description:
               'Working and growing in the Frontend field for 3 years.',
@@ -760,6 +765,12 @@ const translations: Record<Locale, Record<string, any>> = {
             role: 'Frontend Developer',
             description:
               'Gaining experience in Software Development for 4 years and working at Alievs Space MMC for 2 years.',
+          },
+          nicat: {
+            name: 'Nicat Masmaliyev',
+            role: 'Frontend Developer',
+            description:
+              'Frontend Developer at Alievs Space MMC for over a year.',
           },
           aygun: {
             name: 'Aygun Mammadzade',
@@ -1140,6 +1151,11 @@ const translations: Record<Locale, Record<string, any>> = {
       cta: 'Запросить предложение',
       admin: 'Админ',
       login: 'Войти',
+      legal: 'Правовая информация',
+      privacyPolicy: 'Политика конфиденциальности',
+      termsOfService: 'Условия использования',
+      refundPolicy: 'Политика возврата средств',
+      cookiePolicy: 'Политика cookie',
     },
     company: {
       name: 'ALIEVS SPACE MMC',
@@ -1907,6 +1923,12 @@ const translations: Record<Locale, Record<string, any>> = {
             description:
               'Уже 4 года набирается опыта в разработке ПО и 2 года работает в Alievs Space MMC.',
           },
+          nicat: {
+            name: 'Nicat Məsməliyev',
+            role: 'Frontend‑разработчик',
+            description:
+              'Более года работаю в Alievs Space MMC в роли Frontend‑разработчика.',
+          },
           aygun: {
             name: 'Айгюн Мамедзаде',
             role: 'Backend‑разработчик',
@@ -2226,6 +2248,11 @@ const translations: Record<Locale, Record<string, any>> = {
       cta: 'Təklif istəyin',
       admin: 'Admin',
       login: 'Daxil ol',
+      legal: 'Hüquqi',
+      privacyPolicy: 'Məxfilik Siyasəti',
+      termsOfService: 'Xidmət Şərtləri',
+      refundPolicy: 'Geri Ödəniş Siyasəti',
+      cookiePolicy: 'Kuki Siyasəti',
     },
     company: {
       name: 'ALIEVS SPACE MMC',
@@ -2933,6 +2960,12 @@ const translations: Record<Locale, Record<string, any>> = {
             role: 'Frontend Developer',
             description:
               '4 ildir Software Developer olaraq təcrübə qazanıram və biliklərimi davamlı olaraq inkişaf etdirirəm. 2 ildir ki, Alievs Space MMC-də işləyirəm.',
+          },
+          nicat: {
+            name: 'Nicat Məsməliyev',
+            role: 'Frontend Developer',
+            description:
+              '1 ildən artıq müddətdir Alievs Space MMC şirkətində Frontend Developer olaraq işləyirəm.',
           },
           aygun: {
             name: 'Aygün Məmmədzadə',

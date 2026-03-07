@@ -5,6 +5,10 @@ import { AuthProvider } from './contexts/AuthContext';
 import { Layout } from './components/Layout';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { Home } from './pages/Home';
+import { PrivacyPolicy } from './pages/PrivacyPolicy';
+import { TermsOfService } from './pages/TermsOfService';
+import { RefundPolicy } from './pages/RefundPolicy';
+import { CookiePolicy } from './pages/CookiePolicy';
 import { About } from './pages/About';
 import { Services } from './pages/Services';
 import { Careers } from './pages/Careers';
@@ -67,6 +71,10 @@ function App() {
                       <Route path="/login" element={<Login />} />
                       <Route path="/register" element={<Register />} />
                       <Route path="/about" element={<About />} />
+                      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                      <Route path="/terms-of-service" element={<TermsOfService />} />
+                      <Route path="/refund-policy" element={<RefundPolicy />} />
+                      <Route path="/cookie-policy" element={<CookiePolicy />} />
                       <Route path="/services" element={<Services />} />
                       <Route path="/case-studies" element={<CaseStudies />} />
                       <Route path="/case-studies/marketplace-mvp" element={<MarketplaceMVP />} />
