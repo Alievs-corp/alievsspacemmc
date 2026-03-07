@@ -148,7 +148,6 @@ export function AdminCareers() {
     setError('');
 
     try {
-      // Save per locale according to API signature
       for (const loc of supportedLocales.map((l) => l.code as Locale)) {
         const requirements = requirementsText[loc]
           .split(',')
@@ -182,7 +181,6 @@ export function AdminCareers() {
     setError('');
 
     try {
-      // Save per locale according to API signature
       for (const loc of supportedLocales.map((l) => l.code as Locale)) {
         const payload: Partial<Employee> = employeeFormData[loc];
 
