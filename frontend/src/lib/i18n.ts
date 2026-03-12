@@ -457,6 +457,142 @@ const translations: Record<Locale, Record<string, any>> = {
           },
         },
       },
+      servicesBuilder: {
+        title: 'Website Structure Builder',
+        intro: 'Select your business type to see the recommended website structure',
+        businessTypes: {
+          restaurant: 'Restaurant',
+          ecommerce: 'E-commerce',
+          banking: 'Banking',
+          education: 'Education',
+        },
+        pages: {
+          restaurant: {
+            menu: {
+              title: 'Menu',
+              desc:
+                'Present your restaurant menu on a digital platform with category-based organization and the ability to update it daily.',
+            },
+            reservation: {
+              title: 'Reservation',
+              desc:
+                'Simplify table booking with an online reservation system that supports automatic confirmations and reminders.',
+            },
+            gallery: {
+              title: 'Gallery',
+              desc:
+                'Showcase your interior, special events, and signature dishes with a professional photo gallery.',
+            },
+            location: {
+              title: 'Location',
+              desc:
+                'Display your exact location with Google Maps integration, including navigation and driving directions.',
+            },
+          },
+          ecommerce: {
+            products: {
+              title: 'Products',
+              desc:
+                'Provide a rich product catalog with filtering and search, detailed product information, and multiple images.',
+            },
+            categories: {
+              title: 'Categories',
+              desc:
+                'Organize products into categories and subcategories to deliver user-friendly navigation.',
+            },
+            cart: {
+              title: 'Cart',
+              desc:
+                'Let customers collect selected products, adjust quantities, and see the total amount before checkout.',
+            },
+            checkout: {
+              title: 'Checkout',
+              desc:
+                'Offer a secure payment flow with multiple payment methods and clear order confirmation.',
+            },
+          },
+          banking: {
+            accounts: {
+              title: 'Accounts',
+              desc:
+                'Manage customer accounts, check balances, execute account-to-account transfers, and generate statements.',
+            },
+            payments: {
+              title: 'Payments',
+              desc:
+                'Support utilities, loan repayments, card-to-card transfers, and recurring payments in one system.',
+            },
+            security: {
+              title: 'Security',
+              desc:
+                'Provide two-factor authentication, biometric login, transaction approvals, and anti-fraud monitoring.',
+            },
+            transactions: {
+              title: 'Transactions',
+              desc:
+                'Give full visibility into financial transaction history with filters and detailed reporting views.',
+            },
+          },
+          education: {
+            courses: {
+              title: 'Courses',
+              desc:
+                'List education programs with course descriptions, curriculum details, and enrollment flows.',
+            },
+            students: {
+              title: 'Students',
+              desc:
+                'Manage student profiles, track attendance, maintain grade books, and provide individual progress reports.',
+            },
+            lessons: {
+              title: 'Lessons',
+              desc:
+                'Deliver online lesson materials, video content, interactive assignments, and live class sessions.',
+            },
+            certificates: {
+              title: 'Certificates',
+              desc:
+                'Generate and verify digital certificates for students who successfully complete courses.',
+            },
+          },
+        },
+      },
+      servicesProcess: {
+        design: {
+          title: 'Design',
+          tags: {
+            uiux: 'UI/UX Design',
+            wireframing: 'Wireframing',
+            prototyping: 'Prototyping',
+            designSystem: 'Design System',
+            responsive: 'Responsive Design',
+          },
+        },
+        development: {
+          title: 'Development',
+          tags: {
+            frontend: 'Frontend (React)',
+            backend: 'Backend (Node.js)',
+            database: 'Database',
+            apiIntegration: 'API Integration',
+            testing: 'Testing',
+            performance: 'Performance Optimization',
+            security: 'Security',
+            versionControl: 'Version Control',
+          },
+        },
+        launch: {
+          title: 'Launch',
+          tags: {
+            domain: 'Domain Registration',
+            hosting: 'Hosting Setup',
+            ssl: 'SSL Certificate',
+            deployment: 'Deployment',
+            monitoring: 'Monitoring',
+            maintenance: 'Maintenance',
+          },
+        },
+      },
       deliveryTitle: 'Delivery model',
       deliveryCopy:
         'We start with the architecture and UI system. Then we build modules, integrate analytics, and ship in controlled milestones — with ongoing support.',
@@ -783,18 +919,6 @@ const translations: Record<Locale, Record<string, any>> = {
             role: 'Full Stack Developer',
             description:
               'Working in the field for 6 years; Full Stack Developer at Alievs Space MMC.',
-          },
-          ilkin: {
-            name: 'Ilkin Ramazanli',
-            role: 'UX/UI Designer',
-            description:
-              'UX/UI Designer with 5 years of experience.',
-          },
-          sekine: {
-            name: 'Sekine Rahimova',
-            role: 'UX/UI Designer',
-            description:
-              'UX/UI Designer at Alievs Space MMC for 1 year.',
           },
           selen: {
             name: 'Selen Kalbaliyeva',
@@ -1523,7 +1647,7 @@ const translations: Record<Locale, Record<string, any>> = {
         hero: {
           items: {
             premiumUi: 'Премиальные UI‑системы',
-            scalableBackend: 'Масштабируемая backend‑архитектура',
+            scalableBackend: 'Масштабируемый бэкенд',
             marketplaceInfra: 'Инфраструктура маркетплейса',
             adminDashboards: 'Админ‑панели для продакшена',
           },
@@ -1610,6 +1734,142 @@ const translations: Record<Locale, Record<string, any>> = {
               secureWorkflow: 'Безопасные workflows',
               complianceFriendly: 'Соответствие требованиям',
             },
+          },
+        },
+      },
+      servicesBuilder: {
+        title: 'Конструктор структуры сайта',
+        intro: 'Выберите тип бизнеса, чтобы увидеть рекомендуемую структуру сайта',
+        businessTypes: {
+          restaurant: 'Ресторан',
+          ecommerce: 'E-commerce',
+          banking: 'Банкинг',
+          education: 'Образование',
+        },
+        pages: {
+          restaurant: {
+            menu: {
+              title: 'Меню',
+              desc:
+                'Представьте меню ресторана в цифровом виде с рубрикацией по категориям и возможностью ежедневного обновления.',
+            },
+            reservation: {
+              title: 'Бронирование',
+              desc:
+                'Упростите бронирование столиков через онлайн‑систему с автоматическими подтверждениями и напоминаниями.',
+            },
+            gallery: {
+              title: 'Галерея',
+              desc:
+                'Покажите интерьер, специальные мероприятия и фирменные блюда с помощью профессиональной фотогалереи.',
+            },
+            location: {
+              title: 'Локация',
+              desc:
+                'Отобразите точное местоположение благодаря интеграции с Google Maps, включая навигацию и построение маршрута.',
+            },
+          },
+          ecommerce: {
+            products: {
+              title: 'Товары',
+              desc:
+                'Предоставьте расширенный каталог товаров с фильтрацией, поиском, детальными описаниями и несколькими фото.',
+            },
+            categories: {
+              title: 'Категории',
+              desc:
+                'Структурируйте товары по категориям и подкатегориям, обеспечивая удобную навигацию для пользователей.',
+            },
+            cart: {
+              title: 'Корзина',
+              desc:
+                'Позвольте покупателям собирать выбранные позиции, менять количество и видеть итоговую сумму перед оплатой.',
+            },
+            checkout: {
+              title: 'Оформление заказа',
+              desc:
+                'Организуйте безопасный процесс оплаты с поддержкой разных способов и понятным подтверждением заказа.',
+            },
+          },
+          banking: {
+            accounts: {
+              title: 'Счета',
+              desc:
+                'Управляйте клиентскими счетами: проверка баланса, переводы между счетами и формирование выписок.',
+            },
+            payments: {
+              title: 'Платежи',
+              desc:
+                'Поддержка коммунальных платежей, кредитных погашений, переводов карта‑к‑карте и регулярных списаний.',
+            },
+            security: {
+              title: 'Безопасность',
+              desc:
+                'Двухфакторная аутентификация, биометрический вход, подтверждение операций и антифрод‑мониторинг.',
+            },
+            transactions: {
+              title: 'Транзакции',
+              desc:
+                'Полная история финансовых операций с фильтрацией и детализированными отчётами по транзакциям.',
+            },
+          },
+          education: {
+            courses: {
+              title: 'Курсы',
+              desc:
+                'Каталог образовательных программ с описаниями курсов, учебными планами и возможностью записи.',
+            },
+            students: {
+              title: 'Студенты',
+              desc:
+                'Управляйте профилями студентов, отслеживайте посещаемость, оценки и индивидуальный прогресс.',
+            },
+            lessons: {
+              title: 'Уроки',
+              desc:
+                'Размещайте онлайн‑материалы, видеоконтент, интерактивные задания и проводите живые занятия.',
+            },
+            certificates: {
+              title: 'Сертификаты',
+              desc:
+                'Формируйте и подтверждайте цифровые сертификаты для студентов, успешно завершивших курсы.',
+            },
+          },
+        },
+      },
+      servicesProcess: {
+        design: {
+          title: 'Дизайн',
+          tags: {
+            uiux: 'UI/UX дизайн',
+            wireframing: 'Вайрфреймы',
+            prototyping: 'Прототипирование',
+            designSystem: 'Дизайн‑система',
+            responsive: 'Адаптивный дизайн',
+          },
+        },
+        development: {
+          title: 'Разработка',
+          tags: {
+            frontend: 'Фронтенд (React)',
+            backend: 'Бэкенд (Node.js)',
+            database: 'База данных',
+            apiIntegration: 'Интеграция API',
+            testing: 'Тестирование',
+            performance: 'Оптимизация производительности',
+            security: 'Безопасность',
+            versionControl: 'Система контроля версий',
+          },
+        },
+        launch: {
+          title: 'Запуск',
+          tags: {
+            domain: 'Домены',
+            hosting: 'Хостинг',
+            ssl: 'SSL‑сертификат',
+            deployment: 'Деплой',
+            monitoring: 'Мониторинг',
+            maintenance: 'Поддержка',
           },
         },
       },
@@ -1940,18 +2200,6 @@ const translations: Record<Locale, Record<string, any>> = {
             role: 'Full Stack Developer',
             description:
               'Уже 6 лет работает в этой сфере. Full Stack‑разработчик в Alievs Space MMC.',
-          },
-          ilkin: {
-            name: 'Илькин Рамазанлы',
-            role: 'UX/UI‑дизайнер',
-            description:
-              'UX/UI‑дизайнер с 5‑летним опытом.',
-          },
-          sekine: {
-            name: 'Секинэ Рагимова',
-            role: 'UX/UI‑дизайнер',
-            description:
-              'UX/UI‑дизайнер, 1 год работает в Alievs Space MMC.',
           },
           selen: {
             name: 'Селен Кальбалыева',
@@ -2648,6 +2896,142 @@ const translations: Record<Locale, Record<string, any>> = {
               secureWorkflow: 'Təhlükəsiz iş formaları',
               complianceFriendly: 'Uyğunluğa dost',
             },
+          },
+        },
+      },
+      servicesBuilder: {
+        title: 'Veb Sayt Strukturu Qurucusu',
+        intro: 'Biznes növünüzü seçin və tövsiyə olunan veb sayt strukturunu görün',
+        businessTypes: {
+          restaurant: 'Restoran',
+          ecommerce: 'E‑ticarət',
+          banking: 'Bankçılıq',
+          education: 'Təhsil',
+        },
+        pages: {
+          restaurant: {
+            menu: {
+              title: 'Menyu',
+              desc:
+                'Restoranınızın menyusunu rəqəmsal platformada təqdim edin, kateqoriyalar üzrə təsnifat və gündəlik yeniləmə imkanı',
+            },
+            reservation: {
+              title: 'Rezervasiya',
+              desc:
+                'Onlayn rezervasiya sistemi ilə müştərilərinizin masa sifarişini asanlaşdırın, avtomatik təsdiq və xatırlatma funksiyaları',
+            },
+            gallery: {
+              title: 'Qalereya',
+              desc:
+                'Restoranınızın interyerini, xüsusi tədbirləri və imza yeməklərinizi peşəkar fotoqalereya ilə nümayiş etdirin',
+            },
+            location: {
+              title: 'Ünvan',
+              desc:
+                'Google Maps inteqrasiyası ilə restoranınızın yerini dəqiq göstərin, naviqasiya və yol tarifi imkanı',
+            },
+          },
+          ecommerce: {
+            products: {
+              title: 'Məhsullar',
+              desc:
+                'Geniş məhsul kataloqu, filtrasiya və axtarış imkanları, məhsul detalları və çoxsaylı şəkil təqdimatı',
+            },
+            categories: {
+              title: 'Kateqoriyalar',
+              desc:
+                'Məhsullarınızı kateqoriyalar və alt kateqoriyalar üzrə təsnif edin, istifadəçi dostu naviqasiya təmin edin',
+            },
+            cart: {
+              title: 'Səbət',
+              desc:
+                'İstifadəçilərə seçdikləri məhsulları toplamaq, miqdarı dəyişmək və ümumi məbləği görmək imkanı',
+            },
+            checkout: {
+              title: 'Ödəniş',
+              desc:
+                'Təhlükəsiz ödəniş şlüzu, çoxsaylı ödəniş metodları dəstəyi və sifariş təsdiqi sistemi',
+            },
+          },
+          banking: {
+            accounts: {
+              title: 'Hesablar',
+              desc:
+                'Müştəri hesablarının idarə edilməsi, balans yoxlaması, hesabdan-hesaba köçürmələr və hesab çıxarışları',
+            },
+            payments: {
+              title: 'Ödənişlər',
+              desc:
+                'Kommunal ödənişlər, kredit ödənişləri, kartdan karta köçürmələr və təkrarlanan ödənişlər üçün sistem',
+            },
+            security: {
+              title: 'Təhlükəsizlik',
+              desc:
+                'İki faktorlu autentifikasiya, biometrik giriş, əməliyyat təsdiqi və fırıldaqçılıq əleyhinə monitorinq',
+            },
+            transactions: {
+              title: 'Tranzaksiyalar',
+              desc:
+                'Bütün maliyyə əməliyyatlarının tarixçəsi, filtrləmə imkanları və ətraflı əməliyyat hesabatları',
+            },
+          },
+          education: {
+            courses: {
+              title: 'Kurslar',
+              desc:
+                'Təhsil proqramlarının kataloqu, kurs təsvirləri, tədris planı və qeydiyyat sistemi',
+            },
+            students: {
+              title: 'Tələbələr',
+              desc:
+                'Tələbə profilləri, davamiyyət izləmə, qiymət jurnalı və fərdi inkişaf hesabatları',
+            },
+            lessons: {
+              title: 'Dərslər',
+              desc:
+                'Onlayn dərs materialları, video məzmun, interaktiv tapşırıqlar və canlı dərslər üçün platforma',
+            },
+            certificates: {
+              title: 'Sertifikatlar',
+              desc:
+                'Kursu tamamlayan tələbələr üçün rəqəmsal sertifikatların generasiyası və təsdiqlənməsi',
+            },
+          },
+        },
+      },
+      servicesProcess: {
+        design: {
+          title: 'Dizayn',
+          tags: {
+            uiux: 'UI/UX Dizayn',
+            wireframing: 'Wireframing',
+            prototyping: 'Prototipləmə',
+            designSystem: 'Dizayn Sistemi',
+            responsive: 'Responsive Dizayn',
+          },
+        },
+        development: {
+          title: 'İnkişaf',
+          tags: {
+            frontend: 'Frontend (React)',
+            backend: 'Backend (Node.js)',
+            database: 'Məlumat Bazası',
+            apiIntegration: 'API İnteqrasiyası',
+            testing: 'Test etmə',
+            performance: 'Performans Optimizasiyası',
+            security: 'Təhlükəsizlik',
+            versionControl: 'Versiya Nəzarəti',
+          },
+        },
+        launch: {
+          title: 'Yayımlama',
+          tags: {
+            domain: 'Domen Qeydiyyatı',
+            hosting: 'Hosting Qurulumu',
+            ssl: 'SSL Sertifikatı',
+            deployment: 'Deployment',
+            monitoring: 'Monitorinq',
+            maintenance: 'Texniki Dəstək',
           },
         },
       },

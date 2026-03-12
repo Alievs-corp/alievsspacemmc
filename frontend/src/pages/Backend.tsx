@@ -61,13 +61,11 @@ const Backend = () => {
                 <div className="max-w-[1200px] mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                         <div className="lg:col-span-3 space-y-16">
-                            {/* The Challenge */}
                             <section className='max-w-[800px]'>
                                 <h2 className="font-inter text-white text-[21px] md:text-[32px] font-bold mb-6">{t('public.backend.buildTitle')}</h2>
                                 <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[18px] leading-relaxed">{t('public.backend.buildCopy')}</p>
                             </section>
 
-                            {/* What We Delivered */}
                             <section className='max-w-[800px]'>
                                 <h2 className="font-inter text-white text-[21px] md:text-[32px] font-bold mb-6">{t('public.backend.workOnTitle')}</h2>
                                 <div className="space-y-4">
@@ -235,7 +233,7 @@ const Backend = () => {
                             </section>
 
                             <section>
-                                <div className="max-w-[800px]">
+                                <div className="max-w-[800px] mb-[50px] lg:mb-[70px]">
                                     <h3 className="font-inter text-white text-[21px] md:text-[26px] font-bold mb-4">{t('public.backend.applyTitle')}</h3>
                                     <p className="font-inter text-white text-[18px] mb-[10px]">{t('public.backend.applyCopy')}</p>    
                                     <Link 

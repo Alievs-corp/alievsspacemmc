@@ -232,7 +232,7 @@ const Frontend = () => {
                             </section>
 
                             <section>
-                                <div className="max-w-[800px]">
+                                <div className="max-w-[800px] mb-[50px] lg:mb-[70px]">
                                     <h3 className="font-inter text-white text-[21px] md:text-[26px] font-bold mb-4">{t('public.frontend.applyTitle')}</h3>
                                     <p className="font-inter text-white text-[18px] mb-[10px]">{t('public.frontend.applyCopy')}</p>    
                                     <Link 
