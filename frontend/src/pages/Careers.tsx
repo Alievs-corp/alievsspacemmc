@@ -14,8 +14,6 @@ import zehra from "../assets/images/zehra.jpg";
 import parvin from "../assets/images/pervin.jpeg"
 import aygun from "../assets/images/aygun-memmedzade.jpeg"
 import fuad from "../assets/images/fuad-elizade.jpeg"
-import ilkin from "../assets/images/ilkin-ramazanli.jpeg"
-import sekine from "../assets/images/sekine-rehimova.jpeg"
 import yunis from "../assets/images/yunis.jpeg"
 import selen from "../assets/images/selen.jpeg"
 import nicat from "../assets/images/nicat.jpeg"
@@ -171,26 +169,6 @@ export function Careers() {
       ),
     },
     {
-      id: 'ilkin',
-      name: t('public.careers.teamMembers.ilkin.name', 'İlkin Ramazanlı'),
-      role: t('public.careers.teamMembers.ilkin.role', 'UX/UI Designer'),
-      roleType: 'uiux',
-      description: t(
-        'public.careers.teamMembers.ilkin.description',
-        'Artıq 5 ildir ki, UX/UI Dizayner olaraq fəaliyyət göstərirəm.'
-      ),
-    },
-    {
-      id: 'sekine',
-      name: t('public.careers.teamMembers.sekine.name', 'Səkinə Rəhimova'),
-      role: t('public.careers.teamMembers.sekine.role', 'UX/UI Designer'),
-      roleType: 'uiux',
-      description: t(
-        'public.careers.teamMembers.sekine.description',
-        '1 ildir ki Alievs Space MMC də işləyirəm.'
-      ),
-    },
-    {
       id: 'selen',
       name: t('public.careers.teamMembers.selen.name', 'Selen Kalbalıyeva'),
       role: t('public.careers.teamMembers.selen.role', 'Backend Developer'),
@@ -216,7 +194,6 @@ export function Careers() {
     { value: 'all', label: t('public.careers.allRoles', 'Hamısı') },
     { value: 'frontend', label: t('public.careers.frontend', 'Frontend') },
     { value: 'backend', label: t('public.careers.backend', 'Backend') },
-    { value: 'uiux', label: t('public.careers.uiux', 'UX/UI') },
     // { value: 'data', label: t('public.careers.data', 'Data Analysts') },
   ];
 
@@ -235,8 +212,6 @@ export function Careers() {
     nicat,
     aygun,
     fuad,
-    ilkin,
-    sekine,
     yunis,
     selen,
   };
