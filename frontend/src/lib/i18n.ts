@@ -405,6 +405,11 @@ const translations: Record<Locale, Record<string, any>> = {
             azenn: { name: 'Azenn', description: 'E‑commerce platform built for Azenn company’s online retail.' },
             academy: { name: 'Alievs Space Academy', description: 'Our Academy website for education programs, applications, and student journeys.' },
             ederaEvents: { name: 'EderaEvents', description: 'EderaEvents is a dance academy platform' },
+            ssystemsMb: {
+              name: 'SSYSTEMS MB',
+              description:
+                'A trusted repairing partner providing structured, reliable solutions for your repair needs.',
+            },
           },
         },
       },
@@ -1628,6 +1633,11 @@ const translations: Record<Locale, Record<string, any>> = {
             azenn: { name: 'Azenn', description: 'E‑commerce платформа для онлайн-продаж компании Azenn.' },
             academy: { name: 'Alievs Space Academy', description: 'Сайт нашей Академии: образовательные программы, заявки и путь студента.' },
             ederaEvents: { name: 'EderaEvents', description: 'EderaEvents — платформа танцевальной академии' },
+            ssystemsMb: {
+              name: 'SSYSTEMS MB',
+              description:
+                'Надежный партнер по ремонту, предлагающий структурированные и стабильные решения для ваших задач.',
+            },
           },
         },
       },
@@ -2848,6 +2858,11 @@ const translations: Record<Locale, Record<string, any>> = {
             azenn: { name: 'Azenn', description: 'Azenn şirkəti üçün onlayn satış e‑ticarət platforması.' },
             academy: { name: 'Alievs Space Academy', description: 'Təhsil proqramları, müraciətlər və tələbə səyahəti üçün Akademiya saytımız.' },
             ederaEvents: { name: 'EderaEvents', description: 'EderaEvents — rəqs akademiyası platformasıdır' },
+            ssystemsMb: {
+              name: 'SSYSTEMS MB',
+              description:
+                'Təmir ehtiyaclarınız üçün strukturlaşdırılmış və etibarlı həllər təqdim edən təmir tərəfdaşınız.',
+            },
           },
         },
       },
