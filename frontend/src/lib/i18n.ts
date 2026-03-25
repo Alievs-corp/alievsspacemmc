@@ -410,6 +410,10 @@ const translations: Record<Locale, Record<string, any>> = {
               description:
                 'A trusted repairing partner providing structured, reliable solutions for your repair needs.',
             },
+            turanSK: {
+              name: 'Turan SK',
+              description: 'Logistics platform for fast, transparent shipment delivery.',
+            },
           },
         },
       },
@@ -1638,6 +1642,10 @@ const translations: Record<Locale, Record<string, any>> = {
               description:
                 'Надежный партнер по ремонту, предлагающий структурированные и стабильные решения для ваших задач.',
             },
+            turanSK: {
+              name: 'Turan SK',
+              description: 'Логистическая платформа для быстрой и прозрачной доставки грузов.',
+            },
           },
         },
       },
@@ -2862,6 +2870,10 @@ const translations: Record<Locale, Record<string, any>> = {
               name: 'SSYSTEMS MB',
               description:
                 'Təmir ehtiyaclarınız üçün strukturlaşdırılmış və etibarlı həllər təqdim edən təmir tərəfdaşınız.',
+            },
+            turanSK: {
+              name: 'Turan SK',
+              description: 'Sürətli və şəffaf yüklərin daşınması üçün logistika platforması.',
             },
           },
         },

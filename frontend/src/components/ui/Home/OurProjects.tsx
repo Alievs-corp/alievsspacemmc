@@ -4,11 +4,12 @@ import academyImage from "../../../assets/images/academy.png";
 import azennImage from "../../../assets/images/azenn.png";
 import ederaEventsImage from "../../../assets/images/ederaevents.png";
 import ssystemsMb from "../../../assets/images/ssystems-mb.png"
+import turanSK from "../../../assets/images/turanSK.png"
 import Container from "../Container";
 import { useI18n } from "@/contexts/I18nContext";
 
 type ProjectCard = {
-  key: 'luxmart' | 'lms' | 'azenn' | 'academy' | 'ederaEvents' | 'ssystemsMb';
+  key: 'luxmart' | 'lms' | 'azenn' | 'academy' | 'ederaEvents' | 'ssystemsMb' | 'turanSK';
   link: string;
   image: string;
 };
@@ -19,7 +20,8 @@ const PROJECTS: ProjectCard[] = [
   { key: 'azenn', link: "https://azenn.az", image: azennImage },
   { key: 'academy', link: "https://academy.alievsspace.com", image: academyImage },
   { key: 'ederaEvents', link: "https://ederaevents.com", image: ederaEventsImage },
-  {key: 'ssystemsMb', link: "https://mb-ssystems.com/", image: ssystemsMb}
+  {key: 'ssystemsMb', link: "https://mb-ssystems.com/", image: ssystemsMb},
+  {key: 'turanSK', link: "https://turansk.com/", image: turanSK},
 ];
 
 const OurProjects = () => {
