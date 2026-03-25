@@ -1,18 +1,16 @@
 import { Link } from 'react-router-dom';
 import { useI18n } from '@/contexts/I18nContext';
-// import { useContent } from '@/contexts/ContentContext';
-// import { api, type Career } from '@/lib/api';
 import { useState } from 'react';
 import Container from '../components/ui/Container';
 import workWithUs from '../assets/images/work-with-us.svg';
 import ismat from "../assets/images/ismat.jpeg";
-import ismayil from "../assets/images/ismayil.jpg";
-import elshan from "../assets/images/elshan-hasanov.jpg";
-import elmar from "../assets/images/elmar.png";
-import ravena from "../assets/images/ravena.jpg";
+import ismayil from "../assets/images/ismayil.jpeg";
+import elshan from "../assets/images/elsen.jpeg";
+import elmar from "../assets/images/elmar.jpeg";
+import ravena from "../assets/images/ravena.jpeg";
 import zehra from "../assets/images/zehra.jpg";
 import parvin from "../assets/images/pervin.jpeg"
-import aygun from "../assets/images/aygun-memmedzade.jpeg"
+import aygun from "../assets/images/aygun.jpeg"
 import fuad from "../assets/images/fuad-elizade.jpeg"
 import yunis from "../assets/images/yunis.jpeg"
 import selen from "../assets/images/selen.jpeg"
@@ -21,11 +19,10 @@ import { Helmet } from 'react-helmet-async';
 
 export function Careers() {
   const { t } = useI18n();
-  // const { loading: contentLoading } = useContent();
-  // const [careers, setCareers] = useState<Career[]>(content?.careers || []);
-  // const [loading, setLoading] = useState(contentLoading);
   const [showAllTeam, setShowAllTeam] = useState(false);
   const [selectedRole, setSelectedRole] = useState<string>('all');
+  const [previewMemberId, setPreviewMemberId] = useState<string | null>(null);
+  const [imageLoading, setImageLoading] = useState(true);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -194,7 +191,6 @@ export function Careers() {
     { value: 'all', label: t('public.careers.allRoles', 'Hamısı') },
     { value: 'frontend', label: t('public.careers.frontend', 'Frontend') },
     { value: 'backend', label: t('public.careers.backend', 'Backend') },
-    // { value: 'data', label: t('public.careers.data', 'Data Analysts') },
   ];
 
   const filteredTeamMembers = selectedRole === 'all' 
@@ -216,6 +212,10 @@ export function Careers() {
     selen,
   };
 
+  const previewMember = previewMemberId
+    ? teamMembers.find((member) => member.id === previewMemberId) || null
+    : null;
+
   return (
     <div className="mt-[60px] flex flex-col justify-center items-center">
       <Helmet>
@@ -225,6 +225,7 @@ export function Careers() {
         <meta property="og:description" content={t('public.careersIntro')} />
         <meta property="og:type" content="website" />
       </Helmet>
+      
       <Container className="flex flex-col justify-center items-center">
         <h2 className="font-inter text-[38px] font-bold text-white">{t('nav.careers')}</h2>
         <p className="font-inter text-[18px] text-[#C5C5C5] text-center max-w-[800px]">
@@ -239,7 +240,6 @@ export function Careers() {
               key={index}
               className="bg-[#13132F] border border-white/20 rounded-[10px] p-6 flex flex-col h-full shadow-[0px_10px_20px_0px_#000000] hover:border-[#133FA6] hover:shadow-[0_8px_24px_rgba(19,63,166,0.25)] transition-all duration-300"
             >
-
               <h3 className="font-inter text-white text-[22px] md:text-[24px] font-bold mb-3">
                 {vacancy.title}
               </h3>
@@ -279,7 +279,7 @@ export function Careers() {
       </Container>
 
       <Container className="flex justify-between mt-[120px] flex-col md:flex-row gap-[40px] md:gap-0 items-center md:items-start">
-        <div className="flex flex-col gap-[10px] max-w-[586px] justify-center w-full md:w-auto ">
+        <div className="flex flex-col gap-[10px] max-w-[586px] justify-center w-full md:w-auto">
           <h3 className="font-inter text-white text-[21px] md:text-[26px] font-semibold text-center md:text-left">
             {t('public.careers.whyTitle')}
           </h3>
@@ -291,7 +291,7 @@ export function Careers() {
         <img
           src={workWithUs}
           alt={t('public.careers.workWithUsAlt')}
-          className="w-[308px] h-[168px] md:w-auto md:h-auto max-w-[586px] "
+          className="w-[308px] h-[168px] md:w-auto md:h-auto max-w-[586px]"
         />
       </Container>
 
@@ -303,7 +303,10 @@ export function Careers() {
             {roleOptions.map((option) => (
               <button
                 key={option.value}
-                onClick={() => setSelectedRole(option.value)}
+                onClick={() => {
+                  setSelectedRole(option.value);
+                  setShowAllTeam(false);
+                }}
                 className={`px-4 py-2 rounded-full text-sm md:text-base font-inter transition-all duration-300 cursor-pointer ${
                   selectedRole === option.value
                     ? 'bg-[#133FA6] text-white'
@@ -320,16 +323,23 @@ export function Careers() {
           {filteredTeamMembers.slice(0, showAllTeam ? filteredTeamMembers.length : 4).map((member, index) => (
             <div 
               key={index}
-              className="bg-[#13132F] border-l-[1px] border-b-[1px] border-white rounded-[10px] p-6 shadow-[0px_10px_20px_0px_#000000]"
+              className="bg-[#13132F] border-l-[1px] border-b-[1px] border-white rounded-[10px] p-6 shadow-[0px_10px_20px_0px_#000000] hover:shadow-[0px_15px_30px_0px_#000000] transition-shadow duration-300"
             >
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
                   {memberImages[member.id] && (
-                    <img
-                      src={memberImages[member.id]}
-                      alt={member.name}
-                      className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] object-cover rounded-md"
-                    />
+                    <div className="relative group cursor-pointer" onClick={() => setPreviewMemberId(member.id)}>
+                      <img
+                        src={memberImages[member.id]}
+                        alt={member.name}
+                        className="w-[110px] h-[140px] md:w-[140px] md:h-[180px] object-cover object-top rounded-lg transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg"
+                      />
+                      <div className="absolute inset-0 bg-black/40 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                        </svg>
+                      </div>
+                    </div>
                   )}
 
                   <div className="md:hidden flex-1">
@@ -371,7 +381,7 @@ export function Careers() {
           <div className="flex justify-center mt-12">
             <button 
               onClick={() => setShowAllTeam(!showAllTeam)}
-              className="bg-transparent hover:bg-[#1a4cc0] border-[1px] border-white/20 text-white font-inter py-[10px] px-[20px] rounded-[6.45px] transition-colors duration-300 cursor-pointer"
+              className="bg-transparent hover:bg-[#133FA6] border-[1px] border-white/20 text-white font-inter py-[10px] px-[20px] rounded-[6.45px] transition-all duration-300 cursor-pointer hover:scale-105"
             >
               {showAllTeam ? t('public.careers.showLess') : t('public.careers.viewMore')}
             </button>
@@ -379,10 +389,67 @@ export function Careers() {
         )}
 
         {filteredTeamMembers.length === 0 && (
-          <div className="text-center py-12">
+          <div className="text-center py-12 animate-fade-in">
             <p className="font-inter text-[#C5C5C5] text-[18px]">
               {t('public.careers.noTeamMembers', 'Bu sahədə hələ işçi yoxdur')}
             </p>
+          </div>
+        )}
+
+        {previewMember && memberImages[previewMember.id] && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md animate-fade-in cursor-pointer"
+            onClick={() => setPreviewMemberId(null)}
+          >
+            <div
+              className="relative max-w-[90vw] max-h-[85vh] animate-zoom-in cursor-pointer"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={() => setPreviewMemberId(null)}
+                className="absolute -top-4 -right-4 bg-black/60 hover:bg-black/80 text-white rounded-full w-10 h-10 flex items-center justify-center text-xl font-inter transition-all duration-200 hover:scale-110 backdrop-blur-sm border border-white/20 z-10 cursor-pointer"
+                aria-label="Şəkli bağla"
+              >
+                ✕
+              </button>
+
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                {imageLoading && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
+                    <div className="w-8 h-8 border-4 border-[#133FA6] border-t-transparent rounded-full animate-spin"></div>
+                  </div>
+                )}
+                <img
+                  src={memberImages[previewMember.id]}
+                  alt={previewMember.name}
+                  className={`max-w-full max-h-[75vh] object-contain bg-gradient-to-b from-gray-900 to-black transition-opacity duration-300 ${
+                    imageLoading ? 'opacity-0' : 'opacity-100'
+                  }`}
+                  onLoad={() => setImageLoading(false)}
+                />
+
+                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none" />
+              </div>
+
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-md animate-slide-up">
+                <div className="bg-gradient-to-r from-[#0f0f2a] to-[#1a1a3a] backdrop-blur-md rounded-xl px-6 py-4 border border-white/20 shadow-lg">
+                  <p className="font-inter text-white text-[18px] font-semibold text-center">
+                    {previewMember.name}
+                  </p>
+                  <p className="font-inter text-[#C5C5C5] text-[14px] text-center mt-1">
+                    {previewMember.role}
+                  </p>
+                  {previewMember.description && (
+                    <p className="font-inter text-[#C5C5C5] text-[12px] text-center mt-2 pt-2 border-t border-white/10">
+                      {previewMember.description.length > 100 
+                        ? `${previewMember.description.substring(0, 100)}...` 
+                        : previewMember.description}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </Container>

@@ -24,17 +24,27 @@ const Contact = () => {
     const [submitError, setSubmitError] = useState('');
     const [isFormValid, setIsFormValid] = useState(false); 
 
-    const { t } = useI18n();
+    const { t, locale } = useI18n();
     const { content, loading } = useContent();
     const settings = content?.settings;
-
-    const cleanedPhoneHref = settings?.phone
-        ? `tel:${settings.phone.replace(/[^\d+]/g, '')}`
-        : '';
 
     const cleanedEmailHref = settings?.email
         ? `mailto:${settings.email.trim()}`
         : '';
+
+    const isEnglish = locale === 'en';
+    const defaultPhoneText = t('public.contact.details.phone');
+    const cmsPhoneRaw = settings?.phone?.trim();
+
+    const displayPhoneText = isEnglish
+        ? '+421 952 480 349'
+        : (cmsPhoneRaw || defaultPhoneText);
+
+    const phoneHref = isEnglish
+        ? 'tel:+421952480349'
+        : cmsPhoneRaw
+            ? `tel:${cmsPhoneRaw.replace(/[^\d+]/g, '')}`
+            : `tel:${defaultPhoneText.replace(/[^\d+]/g, '')}`;
 
     useEffect(() => {
         const requiredFields = ['name', 'email', 'industry', 'projectOverview', 'message'];
@@ -152,15 +162,11 @@ const Contact = () => {
                     <div className="space-y-6">
                       <div className='flex items-center gap-[10px]'>
                         <img src={phone} alt={t('public.contact.alt.phone')} className="w-5 h-5" />
-                                                <a href={cleanedPhoneHref} className="font-inter text-[#C5C5C5] text-[16px] hover:text-white transition-colors">
-                           {t('public.contact.details.phone')}
-                        </a>
+                            <a href={phoneHref} className="font-inter text-[#C5C5C5] text-[16px] hover:text-white transition-colors">{displayPhoneText}</a>
                       </div>
                       <div className='flex items-center gap-[10px]'>
                         <img src={mail} alt={t('public.contact.alt.mail')} className="w-5 h-5" />
-                                                <a href={cleanedEmailHref} className="font-inter text-[#C5C5C5] text-[16px] hover:text-white transition-colors">
-                          {t('public.contact.details.email')}
-                        </a>
+                            <a href={cleanedEmailHref} className="font-inter text-[#C5C5C5] text-[16px] hover:text-white transition-colors">{t('public.contact.details.email')}</a>
                       </div>
                       <div className='flex items-center gap-[10px]'>
                         <img src={location} alt={t('public.contact.alt.location')} className="w-5 h-5" />

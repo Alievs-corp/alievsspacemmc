@@ -5,9 +5,13 @@ import instagram from '../../assets/icons/instagram.svg';
 import linkedin from '../../assets/icons/linkedin.svg';
 
 export function Footer() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
 
   const currentYear = new Date().getFullYear();
+
+  const isEnglish = locale === 'en';
+  const footerPhoneHref = isEnglish ? 'tel:+421952480349' : 'tel:+994517003500';
+  const footerPhoneText = isEnglish ? '+421 952 480 349' : '+994 (51) 700 35 00';
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -88,7 +92,6 @@ export function Footer() {
                   </ul>
                 </div>
 
-                {/* Yeni Legal bölməsi */}
                 <div className="lg:block">
                   <h3 className="font-inter text-[18px] text-white mb-4">{t('nav.legal', 'Legal')}</h3>
                   <ul className="space-y-3">
@@ -146,15 +149,14 @@ export function Footer() {
                     <li className="flex items-center gap-2">
                       <p className='font-inter text-white text-[13px] font-semibold whitespace-nowrap'>{t('public.contactPhone', 'Phone')}:</p>
                       <a 
-                        href="tel:+994517003500" 
+                        href={footerPhoneHref}
                         className="font-inter text-white text-[13px] transition-colors duration-300 hover:text-blue-400 whitespace-nowrap"
                       >
-                        +994 (51) 700 35 00
+                        {footerPhoneText}
                       </a>
                     </li>
                   </ul>
-                  
-                  {/* Desktopda olan xett - yalnız desktopda gorsenir */}
+
                   <div className="hidden lg:block w-52 h-[1px] bg-gradient-to-r from-blue-500 to-purple-500 my-4"></div>
 
                   <div className="hidden lg:block mt-6">
