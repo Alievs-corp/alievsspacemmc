@@ -414,6 +414,19 @@ const translations: Record<Locale, Record<string, any>> = {
               name: 'Turan SK',
               description: 'Logistics platform for fast, transparent shipment delivery.',
             },
+            dabiCars: {
+              name: 'Premium Car Rental | DABI Cars',
+              description: 'Rent premium cars, explore featured offers, and manage bookings with Dabi Cars.',
+            },
+            vdvAutoParts: {
+              name: 'Professional Service Rental & Sales',
+              description: 'High-quality industrial service for construction, manufacturing, and material handling needs.',
+            },
+            wolfService: {
+              name: 'AutoService',
+              description: 'AutoService offers car repair, maintenance, and spare parts support with fast booking and trusted technicians.',
+            }
+
           },
         },
       },
@@ -987,55 +1000,55 @@ const translations: Record<Locale, Record<string, any>> = {
           },
         },
       },
-            caseStudiesIntro:
-              'We showcase real-world projects where structured architecture, thoughtful UX, and disciplined engineering resulted in stable, production-ready systems. Our case studies focus on practical challenges, design decisions, and delivery outcomes that support scalable growth and operational clarity.',
-            caseStudies: {
-              viewCta: 'View case study',
-              keyFocusLabel: 'Key focus',
-              requestTitle: 'Request project review',
-              requestCopy:
-                'Tell us about your project. We receive every request and respond with clear next steps — or previews, via generic sub-pack.',
-              tip:
-                'Tip: Share your industry, key requirements, and target market. Even a rough idea is enough to start.',
-              privacy:
-                "We don't share your details. Your message goes directly to our engineering team.",
-              chooseField: 'Choose your field',
-              items: {
-                marketplace: {
-                  category: 'E-commerce · Marketplace',
-                  title: 'Multi-vendor Marketplace MVP',
-                  description:
-                    'We designed and built a production-ready multi-vendor marketplace MVP with a strong focus on scalable architecture and operational clarity. The system includes a centralized admin panel, individual vendor dashboards, structured product and category management, and built-in reporting to support early growth and long-term expansion.',
-                  focus: [
-                    'Marketplace architecture',
-                    'Admin & vendor management',
-                    'Reporting & analytics',
-                  ],
-                },
-                fintech: {
-                  category: 'Banking · Fintech',
-                  title: 'Fintech Reporting Dashboard',
-                  description:
-                    'We designed and built a secure, role-based reporting dashboard for financial operations, focused on audit readiness, data integrity, and controlled access. The system provides structured financial reports, permission-based views, and reliable data visibility to support compliance and internal decision-making.',
-                  focus: [
-                    'Role-based access control (RBAC)',
-                    'Audit-friendly reporting',
-                    'Secure data flows',
-                  ],
-                },
-                operations: {
-                  category: 'Manufacturing · Operations',
-                  title: 'Operations & Inventory System',
-                  description:
-                    'This project focused on building an internal operations and inventory management system to improve operational clarity and data accuracy. The platform supports stock tracking, income and expense monitoring, and management dashboards designed to streamline day-to-day business operations.',
-                  focus: [
-                    'Inventory management',
-                    'Financial tracking',
-                    'Operational dashboards',
-                  ],
-                },
-              },
-            },
+      caseStudiesIntro:
+        'We showcase real-world projects where structured architecture, thoughtful UX, and disciplined engineering resulted in stable, production-ready systems. Our case studies focus on practical challenges, design decisions, and delivery outcomes that support scalable growth and operational clarity.',
+      caseStudies: {
+        viewCta: 'View case study',
+        keyFocusLabel: 'Key focus',
+        requestTitle: 'Request project review',
+        requestCopy:
+          'Tell us about your project. We receive every request and respond with clear next steps — or previews, via generic sub-pack.',
+        tip:
+          'Tip: Share your industry, key requirements, and target market. Even a rough idea is enough to start.',
+        privacy:
+          "We don't share your details. Your message goes directly to our engineering team.",
+        chooseField: 'Choose your field',
+        items: {
+          marketplace: {
+            category: 'E-commerce · Marketplace',
+            title: 'Multi-vendor Marketplace MVP',
+            description:
+              'We designed and built a production-ready multi-vendor marketplace MVP with a strong focus on scalable architecture and operational clarity. The system includes a centralized admin panel, individual vendor dashboards, structured product and category management, and built-in reporting to support early growth and long-term expansion.',
+            focus: [
+              'Marketplace architecture',
+              'Admin & vendor management',
+              'Reporting & analytics',
+            ],
+          },
+          fintech: {
+            category: 'Banking · Fintech',
+            title: 'Fintech Reporting Dashboard',
+            description:
+              'We designed and built a secure, role-based reporting dashboard for financial operations, focused on audit readiness, data integrity, and controlled access. The system provides structured financial reports, permission-based views, and reliable data visibility to support compliance and internal decision-making.',
+            focus: [
+              'Role-based access control (RBAC)',
+              'Audit-friendly reporting',
+              'Secure data flows',
+            ],
+          },
+          operations: {
+            category: 'Manufacturing · Operations',
+            title: 'Operations & Inventory System',
+            description:
+              'This project focused on building an internal operations and inventory management system to improve operational clarity and data accuracy. The platform supports stock tracking, income and expense monitoring, and management dashboards designed to streamline day-to-day business operations.',
+            focus: [
+              'Inventory management',
+              'Financial tracking',
+              'Operational dashboards',
+            ],
+          },
+        },
+      },
       teamTitle: 'Our team',
       contactIntro: "Tell us what you're building. We'll reply with a structured proposal.",
       contactFormTitle: 'Send a request',
@@ -1210,7 +1223,7 @@ const translations: Record<Locale, Record<string, any>> = {
         },
         details: {
           phone: '+994 (51) 700 35 00',
-          email: 'info@alievsspace.com' ,
+          email: 'info@alievsspace.com',
           location: 'Azerbaijan, Baku',
         },
         form: {
@@ -1646,6 +1659,18 @@ const translations: Record<Locale, Record<string, any>> = {
               name: 'Turan SK',
               description: 'Логистическая платформа для быстрой и прозрачной доставки грузов.',
             },
+            dabiCars: {
+              name: 'Premium Car Rental | DABI Cars',
+              description: 'Арендуйте автомобили премиум-класса, изучайте эксклюзивные предложения и управляйте бронированием с Dabi Cars.',
+            },
+            vdvAutoParts: {
+              name: 'Professional Service Rental & Sales',
+              description: 'Высококачественный промышленный сервис для нужд строительства, производства и обработки материалов.',
+            },
+            wolfService: {
+              name: 'AutoService',
+              description: 'AutoService предлагает ремонт автомобилей, техническое обслуживание и поддержку запчастями с быстрым бронированием и надежными мастерами.',
+            }
           },
         },
       },
@@ -2277,55 +2302,55 @@ const translations: Record<Locale, Record<string, any>> = {
           },
         },
       },
-            caseStudiesIntro:
-              'Мы показываем реальные проекты, где структурная архитектура, продуманный UX и дисциплинированная инженерия привели к стабильным продакшен‑системам. Кейсы фокусируются на практических вызовах, продуктовых решениях и результатах поставки для масштабируемого роста и операционной ясности.',
-            caseStudies: {
-              viewCta: 'Открыть кейс',
-              keyFocusLabel: 'Ключевой фокус',
-              requestTitle: 'Запрос на обзор проекта',
-              requestCopy:
-                'Расскажите о проекте. Мы получаем каждый запрос и отвечаем с понятными следующими шагами — или предварительным обзором (generic sub‑pack).',
-              tip:
-                'Совет: Укажите отрасль, ключевые требования и целевой рынок. Достаточно даже приблизительной идеи.',
-              privacy:
-                'Мы не делимся вашими данными. Сообщение идёт напрямую в команду инженеров.',
-              chooseField: 'Sahəni seçin',
-              items: {
-                marketplace: {
-                  category: 'E‑commerce · Маркетплейс',
-                  title: 'MVP маркетплейса на нескольких продавцов',
-                  description:
-                    'Мы спроектировали и построили продакшен‑готовый MVP мультивендор‑маркетплейса, уделив особое внимание масштабируемой архитектуре и операционной ясности. Система включает централизованную админ‑панель, панели продавцов, структурное управление товарами/категориями и встроенную отчётность для раннего роста и долгосрочного масштабирования.',
-                  focus: [
-                    'Архитектура маркетплейса',
-                    'Админ‑панель и управление продавцами',
-                    'Отчётность и аналитика',
-                  ],
-                },
-                fintech: {
-                  category: 'Банкинг · Финтех',
-                  title: 'Финтех‑дашборд отчётности',
-                  description:
-                    'Мы разработали безопасную, ролевую панель отчётности для финансовых операций с фокусом на готовность к аудиту, целостность данных и контролируемые доступы. Система предоставляет структурные финансовые отчёты, разрешённые представления и надёжную видимость данных для соответствия и принятия решений.',
-                  focus: [
-                    'Ролевой доступ (RBAC)',
-                    'Отчётность, дружелюбная к аудиту',
-                    'Безопасные потоки данных',
-                  ],
-                },
-                operations: {
-                  category: 'Производство · Операции',
-                  title: 'Система операций и складского учёта',
-                  description:
-                    'Проект направлен на внутреннюю систему операций и учёта запасов для повышения операционной ясности и точности данных. Платформа поддерживает учёт запасов, мониторинг доходов/расходов и управленческие дашборды для упрощения ежедневных операций.',
-                  focus: [
-                    'Управление запасами',
-                    'Финансовый учёт',
-                    'Операционные дашборды',
-                  ],
-                },
-              },
-            },
+      caseStudiesIntro:
+        'Мы показываем реальные проекты, где структурная архитектура, продуманный UX и дисциплинированная инженерия привели к стабильным продакшен‑системам. Кейсы фокусируются на практических вызовах, продуктовых решениях и результатах поставки для масштабируемого роста и операционной ясности.',
+      caseStudies: {
+        viewCta: 'Открыть кейс',
+        keyFocusLabel: 'Ключевой фокус',
+        requestTitle: 'Запрос на обзор проекта',
+        requestCopy:
+          'Расскажите о проекте. Мы получаем каждый запрос и отвечаем с понятными следующими шагами — или предварительным обзором (generic sub‑pack).',
+        tip:
+          'Совет: Укажите отрасль, ключевые требования и целевой рынок. Достаточно даже приблизительной идеи.',
+        privacy:
+          'Мы не делимся вашими данными. Сообщение идёт напрямую в команду инженеров.',
+        chooseField: 'Sahəni seçin',
+        items: {
+          marketplace: {
+            category: 'E‑commerce · Маркетплейс',
+            title: 'MVP маркетплейса на нескольких продавцов',
+            description:
+              'Мы спроектировали и построили продакшен‑готовый MVP мультивендор‑маркетплейса, уделив особое внимание масштабируемой архитектуре и операционной ясности. Система включает централизованную админ‑панель, панели продавцов, структурное управление товарами/категориями и встроенную отчётность для раннего роста и долгосрочного масштабирования.',
+            focus: [
+              'Архитектура маркетплейса',
+              'Админ‑панель и управление продавцами',
+              'Отчётность и аналитика',
+            ],
+          },
+          fintech: {
+            category: 'Банкинг · Финтех',
+            title: 'Финтех‑дашборд отчётности',
+            description:
+              'Мы разработали безопасную, ролевую панель отчётности для финансовых операций с фокусом на готовность к аудиту, целостность данных и контролируемые доступы. Система предоставляет структурные финансовые отчёты, разрешённые представления и надёжную видимость данных для соответствия и принятия решений.',
+            focus: [
+              'Ролевой доступ (RBAC)',
+              'Отчётность, дружелюбная к аудиту',
+              'Безопасные потоки данных',
+            ],
+          },
+          operations: {
+            category: 'Производство · Операции',
+            title: 'Система операций и складского учёта',
+            description:
+              'Проект направлен на внутреннюю систему операций и учёта запасов для повышения операционной ясности и точности данных. Платформа поддерживает учёт запасов, мониторинг доходов/расходов и управленческие дашборды для упрощения ежедневных операций.',
+            focus: [
+              'Управление запасами',
+              'Финансовый учёт',
+              'Операционные дашборды',
+            ],
+          },
+        },
+      },
       teamTitle: 'Наша команда',
       contactIntro: 'Расскажите, что хотите создать. Ответим структурным предложением.',
       contactFormTitle: 'Отправить запрос',
@@ -2485,9 +2510,9 @@ const translations: Record<Locale, Record<string, any>> = {
       postHelpCopy:
         'Если строите маркетплейс, e-commerce или банковский дашборд — подготовим архитектуру с премиальным UX.',
     },
-    },
+  },
 
-    az: {
+  az: {
     ui: {
       language: 'Dil',
       menu: 'Menyu',
@@ -2875,6 +2900,18 @@ const translations: Record<Locale, Record<string, any>> = {
               name: 'Turan SK',
               description: 'Sürətli və şəffaf yüklərin daşınması üçün logistika platforması.',
             },
+            dabiCars: {
+              name: 'Premium Car Rental | DABI Cars',
+              description: 'Premium avtomobilləri icarəyə götürün, xüsusi təkliflərlə tanış olun və Dabi Cars ilə rezervasiyalarınızı idarə edin.',
+            },
+            vdvAutoParts: {
+              name: 'Professional Service Rental & Sales',
+              description: 'Tikinti, istehsalat və material daşınması ehtiyacları üçün yüksək keyfiyyətli sənaye xidməti.',
+            },
+            wolfService: {
+              name: 'AutoService',
+              description: 'AutoService sürətli rezervasiya və etibarlı texniklərlə avtomobil təmiri, texniki baxış və ehtiyat hissələri dəstəyi təklif edir.',
+            }
           },
         },
       },
@@ -3418,55 +3455,55 @@ const translations: Record<Locale, Record<string, any>> = {
 
 
       },
-            caseStudiesIntro:
-              'Biz strukturlu arxitektura, düşünülmüş istifadəçi təcrübəsi və disiplinli mühəndisliyin sabit, istehsalata hazır sistemlər yaratdığı real layihələri təqdim edirik. Bizim tədqiqat nümunələrimiz praktik çətinliklərə, dizayn qərarlarına və ölçülə bilən artımı və əməliyyat aydınlığını dəstəkləyən çatdırılma nəticələrinə fokuslanır.',
-            caseStudies: {
-              viewCta: 'İş nümunələrinə bax',
-              keyFocusLabel: 'Əsas fokus',
-              requestTitle: 'Layihə nəzərdən keçirmə sorğusu',
-              requestCopy:
-                'Layihənizdən bəhs edin. Hər sorğunu alırıq və aydın növbəti addımlarla cavablayırıq.',
-              tip:
-                'Tövsiyə: Sənayeni, əsas tələbləri və hədəf bazarı paylaşın. Təxmini fikir belə başlamağa kifayətdir.',
-              privacy:
-                'Məlumatlarınızı paylaşmırıq. Mesajınız birbaşa mühəndislik komandasına gedir.',
-              chooseField: 'Sahəni seçin',
-              items: {
-                marketplace: {
-                  category: 'E‑ticarət · Marketpleys',
-                  title: 'Çox‑satıcılı Marketpleys MVP',
-                  description:
-                    'Biz miqyaslana bilən arxitektura və əməliyyat aydınlığına böyük diqqət yetirərək istehsalata hazır çoxsatıcılı bazar yerinin MVP-sini dizayn edib yaradırıq. Sistemdə mərkəzləşdirilmiş idarə paneli, strukturlaşdırılmış məhsul və kateqoriya idarəsi, həmçinin erkən böyümə və uzunmüddətli inkişafı dəstəkləyən daxili hesabatlar mövcuddur.',
-                  focus: [
-                    'Marketpleys arxitekturası',
-                    'Admin və satıcı idarəetməsi',
-                    'Hesabat və analitika',
-                  ],
-                },
-                fintech: {
-                  category: 'Bank · Fintex',
-                  title: 'Fintex hesabat paneli',
-                  description:
-                    'Biz maliyyə əməliyyatları üçün audit hazırlığına, məlumat bütövlüyünə və nəzarət olunan girişə yönəlmiş təhlükəsiz, rol əsaslı hesabat paneli dizayn edib yaradırıq. Sistem strukturlaşdırılmış maliyyə hesabatları, icazəyə əsaslanan baxışlar və etibarlı məlumat görünürlüğü təmin edərək uyğunluq və daxili qərar qəbul etmə prosesinə dəstək olur.',
-                  focus: [
-                    'Rolla idarə olunan giriş (RBAC)',
-                    'Audit‑dostu hesabat',
-                    'Təhlükəsiz məlumat axınları',
-                  ],
-                },
-                operations: {
-                  category: 'İstehsal · Əməliyyatlar',
-                  title: 'Əməliyyat və inventar sistemi',
-                  description:
-                    'Bu layihə daxili əməliyyatlar və inventar idarəetmə sistemi qurmağa yönəlir ki, əməliyyatların aydınlığını və verilənlərin dəqiqliyini artırmaq mümkün olsun. Platforma stok izləməyi, gəlir və xərclərin monitorinqini, həmçinin gündəlik biznes əməliyyatlarını səmərəli idarə etmək üçün nəzərdə tutulmuş idarəetmə panellərini dəstəkləyir.',
-                  focus: [
-                    'İnventar idarəetməsi',
-                    'Maliyyə izləmə',
-                    'Operativ panellər',
-                  ],
-                },
-              },
-            },
+      caseStudiesIntro:
+        'Biz strukturlu arxitektura, düşünülmüş istifadəçi təcrübəsi və disiplinli mühəndisliyin sabit, istehsalata hazır sistemlər yaratdığı real layihələri təqdim edirik. Bizim tədqiqat nümunələrimiz praktik çətinliklərə, dizayn qərarlarına və ölçülə bilən artımı və əməliyyat aydınlığını dəstəkləyən çatdırılma nəticələrinə fokuslanır.',
+      caseStudies: {
+        viewCta: 'İş nümunələrinə bax',
+        keyFocusLabel: 'Əsas fokus',
+        requestTitle: 'Layihə nəzərdən keçirmə sorğusu',
+        requestCopy:
+          'Layihənizdən bəhs edin. Hər sorğunu alırıq və aydın növbəti addımlarla cavablayırıq.',
+        tip:
+          'Tövsiyə: Sənayeni, əsas tələbləri və hədəf bazarı paylaşın. Təxmini fikir belə başlamağa kifayətdir.',
+        privacy:
+          'Məlumatlarınızı paylaşmırıq. Mesajınız birbaşa mühəndislik komandasına gedir.',
+        chooseField: 'Sahəni seçin',
+        items: {
+          marketplace: {
+            category: 'E‑ticarət · Marketpleys',
+            title: 'Çox‑satıcılı Marketpleys MVP',
+            description:
+              'Biz miqyaslana bilən arxitektura və əməliyyat aydınlığına böyük diqqət yetirərək istehsalata hazır çoxsatıcılı bazar yerinin MVP-sini dizayn edib yaradırıq. Sistemdə mərkəzləşdirilmiş idarə paneli, strukturlaşdırılmış məhsul və kateqoriya idarəsi, həmçinin erkən böyümə və uzunmüddətli inkişafı dəstəkləyən daxili hesabatlar mövcuddur.',
+            focus: [
+              'Marketpleys arxitekturası',
+              'Admin və satıcı idarəetməsi',
+              'Hesabat və analitika',
+            ],
+          },
+          fintech: {
+            category: 'Bank · Fintex',
+            title: 'Fintex hesabat paneli',
+            description:
+              'Biz maliyyə əməliyyatları üçün audit hazırlığına, məlumat bütövlüyünə və nəzarət olunan girişə yönəlmiş təhlükəsiz, rol əsaslı hesabat paneli dizayn edib yaradırıq. Sistem strukturlaşdırılmış maliyyə hesabatları, icazəyə əsaslanan baxışlar və etibarlı məlumat görünürlüğü təmin edərək uyğunluq və daxili qərar qəbul etmə prosesinə dəstək olur.',
+            focus: [
+              'Rolla idarə olunan giriş (RBAC)',
+              'Audit‑dostu hesabat',
+              'Təhlükəsiz məlumat axınları',
+            ],
+          },
+          operations: {
+            category: 'İstehsal · Əməliyyatlar',
+            title: 'Əməliyyat və inventar sistemi',
+            description:
+              'Bu layihə daxili əməliyyatlar və inventar idarəetmə sistemi qurmağa yönəlir ki, əməliyyatların aydınlığını və verilənlərin dəqiqliyini artırmaq mümkün olsun. Platforma stok izləməyi, gəlir və xərclərin monitorinqini, həmçinin gündəlik biznes əməliyyatlarını səmərəli idarə etmək üçün nəzərdə tutulmuş idarəetmə panellərini dəstəkləyir.',
+            focus: [
+              'İnventar idarəetməsi',
+              'Maliyyə izləmə',
+              'Operativ panellər',
+            ],
+          },
+        },
+      },
       teamTitle: 'Komandamız',
       contactIntro: 'Nə qurmaq istədiyinizi deyin, strukturlu təklif göndərək.',
       contactFormTitle: 'Sorğu göndərin',
