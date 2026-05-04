@@ -1,5 +1,3 @@
-import { VscDeviceCamera } from "react-icons/vsc";
-
 export type Locale = 'en' | 'az' | 'ru';
 
 export const SUPPORTED_LOCALES: Array<{ code: Locale; label: string }> = [
