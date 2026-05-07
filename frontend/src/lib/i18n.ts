@@ -425,8 +425,11 @@ const translations: Record<Locale, Record<string, any>> = {
             wolfService: {
               name: 'AutoService',
               description: 'AutoService offers car repair, maintenance, and spare parts support with fast booking and trusted technicians.',
-            }
-
+            },
+            leonCasting: {
+              name: 'LeonCasting',
+              description: 'A platform where brands discover the right talent and connect with verified and curated talents for campaigns, projects, and events.',
+            },
           },
         },
       },
@@ -1670,7 +1673,11 @@ const translations: Record<Locale, Record<string, any>> = {
             wolfService: {
               name: 'AutoService',
               description: 'AutoService предлагает ремонт автомобилей, техническое обслуживание и поддержку запчастями с быстрым бронированием и надежными мастерами.',
-            }
+            },
+            leonCasting: {
+              name: 'LeonCasting',
+              description: 'Платформа, где бренды находят нужные таланты и объединяются с проверенными и отобранными моделями, актёрами и новыми лицами для кампаний, проектов и мероприятий.',
+            },
           },
         },
       },
@@ -2911,7 +2918,11 @@ const translations: Record<Locale, Record<string, any>> = {
             wolfService: {
               name: 'AutoService',
               description: 'AutoService sürətli rezervasiya və etibarlı texniklərlə avtomobil təmiri, texniki baxış və ehtiyat hissələri dəstəyi təklif edir.',
-            }
+            },
+            leonCasting: {
+              name: 'LeonCasting',
+              description: 'Brendlərin doğru istedadı kəşf etdiyi, kampaniyalar, layihələr və tədbirlər üçün təsdiqlənmiş və seçilmiş istedadlarla bir araya gəldiyi platforma.',
+            },
           },
         },
       },
