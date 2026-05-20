@@ -205,7 +205,7 @@ export function Footer() {
                     </a>
                   </div>
                   
-                  <p className="font-inter text-white text-[13px]">
+                  <p className="font-inter text-white text-[13px] text-center">
                     © {currentYear} Alievs Space {t('ui.companyDescription')}. {t('public.copyrightSuffix')}
                   </p>
                 </div>

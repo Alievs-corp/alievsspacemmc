@@ -9,11 +9,12 @@ import dabiCars from "../../../assets/images/dabiCars.png"
 import vdvAutoParts from "../../../assets/images/vdvAutoParts.png"
 import wolfServis from "../../../assets/images/wolfServis.png"
 import leonCasting from "../../../assets/images/leonCasting.png"
+import asanyer from "../../../assets/images/asanyer.png"
 import Container from "../Container";
 import { useI18n } from "@/contexts/I18nContext";
 
 type ProjectCard = {
-  key: 'luxmart' | 'lms' | 'azenn' | 'academy' | 'ederaEvents' | 'ssystemsMb' | 'turanSK' | 'dabiCars' | 'vdvAutoParts' | 'wolfService' | 'leonCasting';
+  key: 'luxmart' | 'lms' | 'azenn' | 'academy' | 'ederaEvents' | 'ssystemsMb' | 'turanSK' | 'dabiCars' | 'vdvAutoParts' | 'wolfService' | 'leonCasting' | 'asanyer';
   link: string;
   image: string;
 };
@@ -30,6 +31,7 @@ const PROJECTS: ProjectCard[] = [
   { key: 'vdvAutoParts', link: "https://vdvautoparts.com/", image: vdvAutoParts },
   { key: 'wolfService', link: "https://wolfhibridservice.com/", image: wolfServis },
   { key: 'leonCasting', link: "https://leoncasting.az/", image: leonCasting },
+  { key: 'asanyer', link: "https://asanyer.com/", image: asanyer },
 ];
 
 const OurProjects = () => {

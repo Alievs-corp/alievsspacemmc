@@ -430,6 +430,10 @@ const translations: Record<Locale, Record<string, any>> = {
               name: 'LeonCasting',
               description: 'A platform where brands discover the right talent and connect with verified and curated talents for campaigns, projects, and events.',
             },
+            asanyer: {
+              name: 'Asanyer',
+              description: 'A marketplace website built to manage store operations, showcase products, and support a smooth buying experience for customers.',
+            },
           },
         },
       },
@@ -1678,6 +1682,10 @@ const translations: Record<Locale, Record<string, any>> = {
               name: 'LeonCasting',
               description: 'Платформа, где бренды находят нужные таланты и объединяются с проверенными и отобранными моделями, актёрами и новыми лицами для кампаний, проектов и мероприятий.',
             },
+            asanyer: {
+              name: 'Asanyer',
+              description: 'Маркетплейс-сайт, созданный для управления магазинами, представления товаров и удобного покупательского опыта.',
+            },
           },
         },
       },
@@ -2922,6 +2930,10 @@ const translations: Record<Locale, Record<string, any>> = {
             leonCasting: {
               name: 'LeonCasting',
               description: 'Brendlərin doğru istedadı kəşf etdiyi, kampaniyalar, layihələr və tədbirlər üçün təsdiqlənmiş və seçilmiş istedadlarla bir araya gəldiyi platforma.',
+            },
+            asanyer: {
+              name: 'Asanyer',
+              description: 'Mağaza əməliyyatlarını idarə etmək, məhsulları təqdim etmək və müştərilər üçün rahat alış təcrübəsi yaratmaq üçün hazırlanmış marketplace platforması.',
             },
           },
         },
