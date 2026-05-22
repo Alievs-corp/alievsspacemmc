@@ -132,7 +132,7 @@ const Contact = () => {
             </Helmet>
             <Container className="flex flex-col justify-center items-center mb-12">
                 <h2 className="font-inter text-[38px] font-bold text-white text-center">{t('public.contact.heroTitle')}</h2>
-                <p className="font-inter text-[18px] text-[#C5C5C5] text-center max-w-[800px]">
+                <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">
                     {t('public.contact.heroCopy')}
                 </p>
                 
@@ -140,20 +140,20 @@ const Contact = () => {
                   <div className="md:w-1/2">
                     <ul className="space-y-4 w-[366px]">
                       <li className="flex items-start">
-                         <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                         <h3 className="font-inter text-[#C5C5C5] text-[18px]">{t('public.contact.hero.items.premiumUi')}</h3>
+                         <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                         <h3 className="font-inter text-text-muted text-[18px]">{t('public.contact.hero.items.premiumUi')}</h3>
                       </li>
                       <li className="flex items-start">
-                          <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          <h3 className="font-inter text-[#C5C5C5] text-[18px]">{t('public.contact.hero.items.scalableBackend')}</h3>
+                          <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                          <h3 className="font-inter text-text-muted text-[18px]">{t('public.contact.hero.items.scalableBackend')}</h3>
                       </li>
                       <li className="flex items-start">
-                          <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          <h3 className="font-inter text-[#C5C5C5]  text-[18px]">{t('public.contact.hero.items.marketplaceInfra')}</h3>
+                          <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                          <h3 className="font-inter text-text-muted  text-[18px]">{t('public.contact.hero.items.marketplaceInfra')}</h3>
                       </li>
                       <li className="flex items-start">
-                          <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          <h3 className="font-inter text-[#C5C5C5] text-[18px]">{t('public.contact.hero.items.adminDashboards')}</h3>
+                          <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                          <h3 className="font-inter text-text-muted text-[18px]">{t('public.contact.hero.items.adminDashboards')}</h3>
                       </li>
                     </ul>
                   </div>
@@ -162,15 +162,15 @@ const Contact = () => {
                     <div className="space-y-6">
                       <div className='flex items-center gap-[10px]'>
                         <img src={phone} alt={t('public.contact.alt.phone')} className="w-5 h-5" />
-                            <a href={phoneHref} className="font-inter text-[#C5C5C5] text-[16px] hover:text-white transition-colors">{displayPhoneText}</a>
+                            <a href={phoneHref} className="font-inter text-text-muted text-[16px] hover:text-white transition-colors">{displayPhoneText}</a>
                       </div>
                       <div className='flex items-center gap-[10px]'>
                         <img src={mail} alt={t('public.contact.alt.mail')} className="w-5 h-5" />
-                            <a href={cleanedEmailHref} className="font-inter text-[#C5C5C5] text-[16px] hover:text-white transition-colors">{t('public.contact.details.email')}</a>
+                            <a href={cleanedEmailHref} className="font-inter text-text-muted text-[16px] hover:text-white transition-colors">{t('public.contact.details.email')}</a>
                       </div>
                       <div className='flex items-center gap-[10px]'>
                         <img src={location} alt={t('public.contact.alt.location')} className="w-5 h-5" />
-                        <p className="font-inter text-[#C5C5C5] text-[16px]"> {t('public.contact.details.location')}</p>
+                        <p className="font-inter text-text-muted text-[16px]"> {t('public.contact.details.location')}</p>
                       </div>
                     </div>
                   </div>
@@ -181,7 +181,7 @@ const Contact = () => {
                 <div className="max-w-[800px] mx-auto">
                     <div className="mb-10 text-center">
                         <h2 className="font-inter text-[26px] font-bold text-white mb-4">{t('public.contact.form.title')}</h2>
-                        <p className="font-inter text-[18px] text-[#C5C5C5]">
+                        <p className="font-inter text-[18px] text-text-muted">
                             {t('public.contact.form.copy')}
                         </p>
                     </div>
@@ -217,7 +217,7 @@ const Contact = () => {
                                         required
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.name')}
-                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-[#808087] font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                                 <div>
@@ -231,7 +231,7 @@ const Contact = () => {
                                         onChange={handleInputChange}
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.company')}
-                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-[#808087] font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                             </div>
@@ -249,7 +249,7 @@ const Contact = () => {
                                         required
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.email')}
-                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-[#808087] font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                                 <div>
@@ -263,7 +263,7 @@ const Contact = () => {
                                         onChange={handleInputChange}
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.phone')}
-                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-[#808087] font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                             </div>
@@ -279,12 +279,12 @@ const Contact = () => {
                                         onChange={handleInputChange}
                                         required
                                         disabled={isSubmitting}
-                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-[#808087] font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        <option value="" className="bg-[#0F0F23]">{t('public.contact.form.options.choose')}</option>
-                                        <option value="banking" className="bg-[#0F0F23]">{t('public.contact.form.options.banking')}</option>
-                                        <option value="ecommerce" className="bg-[#0F0F23]">{t('public.contact.form.options.ecommerce')}</option>
-                                        <option value="software" className="bg-[#0F0F23]">{t('public.contact.form.options.software')}</option>
+                                        <option value="" className="bg-surface">{t('public.contact.form.options.choose')}</option>
+                                        <option value="banking" className="bg-surface">{t('public.contact.form.options.banking')}</option>
+                                        <option value="ecommerce" className="bg-surface">{t('public.contact.form.options.ecommerce')}</option>
+                                        <option value="software" className="bg-surface">{t('public.contact.form.options.software')}</option>
                                     </select>
                                 </div>
                                 <div>
@@ -299,7 +299,7 @@ const Contact = () => {
                                         required
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.projectOverview')}
-                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-[#808087] font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                             </div>
@@ -316,21 +316,21 @@ const Contact = () => {
                                     disabled={isSubmitting}
                                     rows={6}
                                     placeholder={t('public.contact.form.placeholders.message')}
-                                    className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-[#808087] font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                 />
                             </div>
-                            <p className='font-inter text-[10px] text-[#808087] font-bold'>{t('public.contact.form.tip')} * - {t('public.contact.form.required')}</p>
+                            <p className='font-inter text-[10px] text-text-subtle font-bold'>{t('public.contact.form.tip')} * - {t('public.contact.form.required')}</p>
                         </div>
 
                         <div className="flex flex-col items-end gap-2 pt-4">
                             <button
                                 type="submit"
                                 disabled={!isFormValid || isSubmitting}
-                                className={`bg-[#133FA6] border-b border-white hover:bg-[#1a4cc0] text-white font-inter py-3 px-8 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-[18px] whitespace-nowrap ${!isFormValid || isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                className={`bg-primary hover:bg-primary-hover text-on-primary font-inter py-3 px-8 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-[18px] whitespace-nowrap ${!isFormValid || isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
                                 {isSubmitting ? t('public.contact.form.submitting') || 'Sending...' : t('public.contact.form.submit')}
                             </button>
-                            <p className="font-inter text-[#808087] text-[10px] text-right">
+                            <p className="font-inter text-text-subtle text-[10px] text-right">
                                 {t('public.contact.form.privacy')}
                             </p>
                         </div>

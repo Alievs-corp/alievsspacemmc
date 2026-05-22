@@ -139,7 +139,7 @@ const CaseStudies = () => {
             </Helmet>
             <Container className="flex flex-col justify-center items-center mb-12">
                 <h2 className="font-inter text-[38px] font-bold text-white">{t('nav.caseStudies', 'Case Studies')}</h2>
-                <p className="font-inter text-[18px] text-[#C5C5C5] text-center max-w-[800px]">{t('public.caseStudiesIntro')}</p>
+                <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">{t('public.caseStudiesIntro')}</p>
             </Container>
 
             <Container className="w-full mb-24">
@@ -148,7 +148,7 @@ const CaseStudies = () => {
                         {info.map((item, index) => (
                             <div 
                                 key={index}
-                                className="bg-[#13132F] border-b-[1.7px] border-l-[1.7px] border-white rounded-[10px] p-6 flex flex-col w-full max-w-[520px] mx-auto shadow-[0px_10px_20px_0px_#000000] hover:border-[#133FA6] hover:shadow-[0_8px_24px_rgba(19,63,166,0.25)] transition-all duration-300"
+                                className="bg-surface border-b-[1.7px] border-l-[1.7px] border-white rounded-[10px] p-6 flex flex-col w-full max-w-[520px] mx-auto shadow-[0px_10px_20px_0px_#000000] hover:border-border-strong transition-all duration-300"
                             >
                                 <div className="mb-4">
                                     <span className="font-inter text-white text-[13px] font-semibold">
@@ -160,7 +160,7 @@ const CaseStudies = () => {
                                     {item.title}
                                 </h3>
 
-                                <p className="font-inter text-[#C5C5C5] text-[18px] mb-6 leading-relaxed">
+                                <p className="font-inter text-text-muted text-[18px] mb-6 leading-relaxed">
                                     {item.description}
                                 </p>
 
@@ -171,8 +171,8 @@ const CaseStudies = () => {
                                     <ul className="space-y-3">
                                         {item.focus.map((focusItem, idx) => (
                                             <li key={idx} className="flex items-start">
-                                                <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                                <span className="font-inter text-[#C5C5C5] text-[18px]">{focusItem}</span>
+                                                <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                                <span className="font-inter text-text-muted text-[18px]">{focusItem}</span>
                                             </li>
                                         ))}
                                     </ul>
@@ -181,7 +181,7 @@ const CaseStudies = () => {
                                 <Link 
                                     to={`/case-studies/${item.id}`}
                                     onClick={scrollToTop}
-                                    className="mt-auto w-full bg-[#133FA6] hover:bg-[#1a4cc0] text-white font-inter font-semibold py-3 px-4 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-center"
+                                    className="mt-auto w-full bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-4 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-center"
                                 >
                                     {t('public.caseStudies.viewCta')}
                                 </Link>
@@ -194,7 +194,7 @@ const CaseStudies = () => {
                             {info.slice(0, 2).map((item, index) => (
                                 <div 
                                     key={index}
-                                    className="bg-[#13132F] border-b-[1.7px] border-l-[1.7px] border-white rounded-[10px] p-6 flex flex-col w-[520px] shadow-[0px_10px_20px_0px_#000000] hover:border-[#133FA6] hover:shadow-[0_8px_24px_rgba(19,63,166,0.25)] transition-all duration-300"
+                                    className="bg-surface border-b-[1.7px] border-l-[1.7px] border-white rounded-[10px] p-6 flex flex-col w-[520px] shadow-[0px_10px_20px_0px_#000000] hover:border-border-strong transition-all duration-300"
                                 >
                                     <div className="mb-4">
                                         <span className="font-inter text-white text-[13px] font-semibold">
@@ -207,7 +207,7 @@ const CaseStudies = () => {
                                     </h3>
 
                                     <div className="mb-6">
-                                        <p className="font-inter text-[#C5C5C5] text-[18px] leading-relaxed">
+                                        <p className="font-inter text-text-muted text-[18px] leading-relaxed">
                                             {item.description}
                                         </p>
                                     </div>
@@ -219,8 +219,8 @@ const CaseStudies = () => {
                                         <ul className="space-y-2">
                                             {item.focus.map((focusItem, idx) => (
                                                 <li key={idx} className="flex items-start">
-                                                    <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                                    <span className="font-inter text-[#C5C5C5] text-[18px] line-clamp-1">{focusItem}</span>
+                                                    <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                                    <span className="font-inter text-text-muted text-[18px] line-clamp-1">{focusItem}</span>
                                                 </li>
                                             ))}
                                         </ul>
@@ -229,7 +229,7 @@ const CaseStudies = () => {
                                     <Link 
                                         to={`/case-studies/${item.id}`}
                                         onClick={scrollToTop}
-                                        className="mt-auto w-full bg-[#133FA6] hover:bg-[#1a4cc0] text-white font-inter font-semibold py-3 px-4 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-center"
+                                        className="mt-auto w-full bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-4 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-center"
                                     >
                                         {t('public.caseStudies.viewCta')}
                                     </Link>
@@ -240,7 +240,7 @@ const CaseStudies = () => {
                         {info[2] && (
                             <div className="flex justify-center w-full">
                                 <div 
-                                    className="bg-[#13132F] border-b-[1.7px] border-l-[1.7px] border-white rounded-[10px] p-6 flex flex-col w-[520px] shadow-[0px_10px_20px_0px_#000000] hover:border-[#133FA6] hover:shadow-[0_8px_24px_rgba(19,63,166,0.25)] transition-all duration-300"
+                                    className="bg-surface border-b-[1.7px] border-l-[1.7px] border-white rounded-[10px] p-6 flex flex-col w-[520px] shadow-[0px_10px_20px_0px_#000000] hover:border-border-strong transition-all duration-300"
                                 >
                                     <div className="mb-4">
                                         <span className="font-inter text-white text-[13px] font-semibold">
@@ -253,7 +253,7 @@ const CaseStudies = () => {
                                     </h3>
                                     
                                     <div className="mb-6">
-                                        <p className="font-inter text-[#C5C5C5] text-[18px] leading-relaxed">
+                                        <p className="font-inter text-text-muted text-[18px] leading-relaxed">
                                             {info[2].description}
                                         </p>
                                     </div>
@@ -265,8 +265,8 @@ const CaseStudies = () => {
                                         <ul className="space-y-2">
                                             {info[2].focus.map((focusItem, idx) => (
                                                 <li key={idx} className="flex items-start">
-                                                    <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                                    <span className="font-inter text-[#C5C5C5] text-[18px]">{focusItem}</span>
+                                                    <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                                    <span className="font-inter text-text-muted text-[18px]">{focusItem}</span>
                                                 </li>
                                             ))}
                                         </ul>
@@ -275,7 +275,7 @@ const CaseStudies = () => {
                                     <Link 
                                         to={`/case-studies/${info[2].id}`}
                                         onClick={scrollToTop}
-                                        className="mt-auto w-full bg-[#133FA6] hover:bg-[#1a4cc0] text-white font-inter font-semibold py-3 px-4 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-center"
+                                        className="mt-auto w-full bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-4 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-center"
                                     >
                                         {t('public.caseStudies.viewCta')}
                                     </Link>
@@ -289,7 +289,7 @@ const CaseStudies = () => {
                 <div className="max-w-[800px] mx-auto">
                     <div className="mb-10 text-center">
                         <h2 className="font-inter text-[26px] font-bold text-white mb-4">{t('public.caseStudies.requestTitle')}</h2>
-                        <p className="font-inter text-[18px] text-[#C5C5C5]">{t('public.caseStudies.requestCopy')}</p>
+                        <p className="font-inter text-[18px] text-text-muted">{t('public.caseStudies.requestCopy')}</p>
                     </div>
                     {submitSuccess && (
                         <div className="mb-6 p-4 bg-green-900/20 border border-green-500 rounded-lg">
@@ -316,7 +316,7 @@ const CaseStudies = () => {
                                         required
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.name')}
-                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                                 <div>
@@ -328,7 +328,7 @@ const CaseStudies = () => {
                                         onChange={handleInputChange}
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.company')}
-                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                             </div>
@@ -343,7 +343,7 @@ const CaseStudies = () => {
                                         onChange={handleInputChange}
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.email')}
-                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                                 <div>
@@ -355,7 +355,7 @@ const CaseStudies = () => {
                                         onChange={handleInputChange}
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.phone')}
-                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                             </div>
@@ -368,13 +368,13 @@ const CaseStudies = () => {
                                         value={formData.interest}
                                         onChange={handleInputChange}
                                         disabled={isSubmitting}
-                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        <option value="" className="bg-[#0F0F23] text-[#808087]">{t('public.contact.form.options.choose') || 'Select...'}</option>
-                                        <option value="banking" className="bg-[#0F0F23]">{t('public.contact.form.options.banking') || 'Banking & Fintech'}</option>
-                                        <option value="ecommerce" className="bg-[#0F0F23]">{t('public.contact.form.options.ecommerce') || 'E-commerce'}</option>
-                                        <option value="software" className="bg-[#0F0F23]">{t('public.contact.form.options.software') || 'Web & Software Development'}</option>
-                                        <option value="other" className="bg-[#0F0F23]">Other</option>
+                                        <option value="" className="bg-surface text-text-subtle">{t('public.contact.form.options.choose') || 'Select...'}</option>
+                                        <option value="banking" className="bg-surface">{t('public.contact.form.options.banking') || 'Banking & Fintech'}</option>
+                                        <option value="ecommerce" className="bg-surface">{t('public.contact.form.options.ecommerce') || 'E-commerce'}</option>
+                                        <option value="software" className="bg-surface">{t('public.contact.form.options.software') || 'Web & Software Development'}</option>
+                                        <option value="other" className="bg-surface">Other</option>
                                     </select>
                                 </div>
                                 <div>
@@ -386,7 +386,7 @@ const CaseStudies = () => {
                                         onChange={handleInputChange}
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.projectOverview') || 'Project topic or brief overview...'}
-                                        className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                             </div>
@@ -400,21 +400,21 @@ const CaseStudies = () => {
                                     disabled={isSubmitting}
                                     rows={6}
                                     placeholder={t('public.contact.form.placeholders.message') || 'Tell us more about your project...'}
-                                    className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-[#808087] focus:outline-none focus:border-[#133FA6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                 />
                             </div>
-                            <p className='font-inter text-[10px] text-[#808087] font-bold'>{t('public.caseStudies.tip')}</p>
+                            <p className='font-inter text-[10px] text-text-subtle font-bold'>{t('public.caseStudies.tip')}</p>
                         </div>
 
                         <div className="flex flex-col items-end gap-2 pt-4">
                             <button
                                 type="submit"
                                 disabled={isSubmitting || !formData.name.trim()}
-                                className={`bg-[#133FA6] border-b border-white hover:bg-[#1a4cc0] text-white font-inter py-3 px-8 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-[18px] whitespace-nowrap ${(isSubmitting || !formData.name.trim()) ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                className={`bg-primary hover:bg-primary-hover text-on-primary font-inter py-3 px-8 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-[18px] whitespace-nowrap ${(isSubmitting || !formData.name.trim()) ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
                                 {isSubmitting ? (t('public.contact.form.submitting') || 'Submitting...') : t('public.contactSubmit')}
                             </button>
-                            <p className="font-inter text-[#808087] text-[10px] text-right">
+                            <p className="font-inter text-text-subtle text-[10px] text-right">
                                 {t('public.caseStudies.privacy')}
                             </p>
                         </div>

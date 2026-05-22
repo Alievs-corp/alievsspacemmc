@@ -61,7 +61,7 @@ export function Register() {
     >
       <div className="min-h-screen flex items-center justify-end w-full md:w-1/2">
         <div 
-          className="bg-[#13132F] min-h-screen flex flex-col justify-center w-full md:rounded-tl-[30.6px] md:rounded-bl-[30.6px] overflow-y-auto"
+          className="bg-surface min-h-screen flex flex-col justify-center w-full md:rounded-tl-[30.6px] md:rounded-bl-[30.6px] overflow-y-auto"
           style={{
             borderTopLeftRadius: '0px',
             borderBottomLeftRadius: '0px',
@@ -77,7 +77,7 @@ export function Register() {
               alt="Alievs Space Logo" 
               className="w-14 md:w-18 lg:w-20 mb-2"
             />
-            <p className="font-inter text-[#808087] text-xs md:text-sm">
+            <p className="font-inter text-text-subtle text-xs md:text-sm">
               {t('auth.register.brandTagline', 'Premium Digital & Commerce Ecosystems')}
             </p>
           </div>
@@ -87,11 +87,11 @@ export function Register() {
               <h2 className="font-inter text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1">
                 {t('auth.register.title', 'Create your account')}
               </h2>
-              <p className="font-inter text-xs md:text-sm text-[#808087]">
+              <p className="font-inter text-xs md:text-sm text-text-subtle">
                 {t('auth.register.haveAccount', 'Already have an account?')}{' '}
                 <Link
                   to="/login"
-                  className="font-medium text-[#133FA6] hover:text-[#1a4cc0] hover:underline"
+                  className="font-medium text-primary hover:text-primary hover:underline"
                 >
                   {t('auth.register.signIn', 'Sign in')}
                 </Link>
@@ -129,7 +129,7 @@ export function Register() {
                       <div className="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
                         <svg
                           className={`h-5 w-5 md:h-6 md:w-6 transition-colors duration-300 ${
-                            isNameFocused ? 'text-[#133FA6]' : 'text-[#808087]'
+                            isNameFocused ? 'text-primary' : 'text-text-subtle'
                           }`}
                           fill="none"
                           stroke="currentColor"
@@ -153,9 +153,9 @@ export function Register() {
                         }
                         onFocus={() => setIsNameFocused(true)}
                         onBlur={() => !formData.name && setIsNameFocused(false)}
-                        className={`block w-full pt-5 md:pt-6 pb-3 md:pb-4 px-3 md:px-4 font-inter font-semibold text-base md:text-lg bg-[#0A0A1E] rounded-[9.6px] text-white placeholder-transparent focus:outline-none transition-all duration-300 ${
+                        className={`block w-full pt-5 md:pt-6 pb-3 md:pb-4 px-3 md:px-4 font-inter font-semibold text-base md:text-lg bg-surface rounded-[9.6px] text-white placeholder-transparent focus:outline-none transition-all duration-300 ${
                           isNameFocused
-                            ? 'shadow-[0_0_0_3px_rgba(19,63,166,0.1),0_2px_8px_rgba(19,63,166,0.2)]'
+                            ? 'shadow-[0_0_0_3px_rgba(253, 82, 4,0.1),0_2px_8px_rgba(253, 82, 4,0.2)]'
                             : ''
                         }`}
                         style={{
@@ -163,8 +163,8 @@ export function Register() {
                           paddingLeft: 'clamp(12px, 3vw, 16px)',
                           border: 'none',
                           borderBottom: isNameFocused
-                            ? '3px solid #133FA6'
-                            : '3px solid #808087',
+                            ? '3px solid #FD5204'
+                            : '3px solid #8C8B85',
                         }}
                         placeholder={t(
                           'auth.register.fields.name',
@@ -175,8 +175,8 @@ export function Register() {
                         htmlFor="name"
                         className={`absolute left-3 md:left-4 transition-all duration-300 pointer-events-none font-inter font-semibold ${
                           isNameFocused || formData.name
-                            ? 'top-2 text-[10px] md:text-xs text-[#133FA6]'
-                            : 'top-1/2 transform -translate-y-1/2 text-sm md:text-lg text-[#808087]'
+                            ? 'top-2 text-[10px] md:text-xs text-primary'
+                            : 'top-1/2 transform -translate-y-1/2 text-sm md:text-lg text-text-subtle'
                         }`}
                       >
                         {t('auth.register.fields.name', 'Full Name *')}
@@ -189,7 +189,7 @@ export function Register() {
                       <div className="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
                         <svg
                           className={`h-5 w-5 md:h-6 md:w-6 transition-colors duration-300 ${
-                            isCompanyFocused ? 'text-[#133FA6]' : 'text-[#808087]'
+                            isCompanyFocused ? 'text-primary' : 'text-text-subtle'
                           }`}
                           fill="none"
                           stroke="currentColor"
@@ -214,9 +214,9 @@ export function Register() {
                         onBlur={() =>
                           !formData.company && setIsCompanyFocused(false)
                         }
-                        className={`block w-full pt-5 md:pt-6 pb-3 md:pb-4 px-3 md:px-4 font-inter font-semibold text-base md:text-lg bg-[#0A0A1E] rounded-[9.6px] text-white placeholder-transparent focus:outline-none transition-all duration-300 ${
+                        className={`block w-full pt-5 md:pt-6 pb-3 md:pb-4 px-3 md:px-4 font-inter font-semibold text-base md:text-lg bg-surface rounded-[9.6px] text-white placeholder-transparent focus:outline-none transition-all duration-300 ${
                           isCompanyFocused
-                            ? 'shadow-[0_0_0_3px_rgba(19,63,166,0.1),0_2px_8px_rgba(19,63,166,0.2)]'
+                            ? 'shadow-[0_0_0_3px_rgba(253, 82, 4,0.1),0_2px_8px_rgba(253, 82, 4,0.2)]'
                             : ''
                         }`}
                         style={{
@@ -224,8 +224,8 @@ export function Register() {
                           paddingLeft: 'clamp(12px, 3vw, 16px)',
                           border: 'none',
                           borderBottom: isCompanyFocused
-                            ? '3px solid #133FA6'
-                            : '3px solid #808087',
+                            ? '3px solid #FD5204'
+                            : '3px solid #8C8B85',
                         }}
                         placeholder={t(
                           'auth.register.fields.company',
@@ -236,8 +236,8 @@ export function Register() {
                         htmlFor="company"
                         className={`absolute left-3 md:left-4 transition-all duration-300 pointer-events-none font-inter font-semibold ${
                           isCompanyFocused || formData.company
-                            ? 'top-2 text-[10px] md:text-xs text-[#133FA6]'
-                            : 'top-1/2 transform -translate-y-1/2 text-sm md:text-lg text-[#808087]'
+                            ? 'top-2 text-[10px] md:text-xs text-primary'
+                            : 'top-1/2 transform -translate-y-1/2 text-sm md:text-lg text-text-subtle'
                         }`}
                       >
                         {t('auth.register.fields.company', 'Company')}
@@ -251,7 +251,7 @@ export function Register() {
                     <div className="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
                       <svg
                         className={`h-5 w-5 md:h-6 md:w-6 transition-colors duration-300 ${
-                          isPhoneFocused ? 'text-[#133FA6]' : 'text-[#808087]'
+                          isPhoneFocused ? 'text-primary' : 'text-text-subtle'
                         }`}
                         fill="none"
                         stroke="currentColor"
@@ -274,9 +274,9 @@ export function Register() {
                       }
                       onFocus={() => setIsPhoneFocused(true)}
                       onBlur={() => !formData.phone && setIsPhoneFocused(false)}
-                      className={`block w-full pt-5 md:pt-6 pb-3 md:pb-4 px-3 md:px-4 font-inter font-semibold text-base md:text-lg bg-[#0A0A1E] rounded-[9.6px] text-white placeholder-transparent focus:outline-none transition-all duration-300 ${
+                      className={`block w-full pt-5 md:pt-6 pb-3 md:pb-4 px-3 md:px-4 font-inter font-semibold text-base md:text-lg bg-surface rounded-[9.6px] text-white placeholder-transparent focus:outline-none transition-all duration-300 ${
                         isPhoneFocused
-                          ? 'shadow-[0_0_0_3px_rgba(19,63,166,0.1),0_2px_8px_rgba(19,63,166,0.2)]'
+                          ? 'shadow-[0_0_0_3px_rgba(253, 82, 4,0.1),0_2px_8px_rgba(253, 82, 4,0.2)]'
                           : ''
                       }`}
                       style={{
@@ -284,8 +284,8 @@ export function Register() {
                         paddingLeft: 'clamp(12px, 3vw, 16px)',
                         border: 'none',
                         borderBottom: isPhoneFocused
-                          ? '3px solid #133FA6'
-                          : '3px solid #808087',
+                          ? '3px solid #FD5204'
+                          : '3px solid #8C8B85',
                       }}
                       placeholder={t(
                         'auth.register.fields.phone',
@@ -296,8 +296,8 @@ export function Register() {
                       htmlFor="phone"
                       className={`absolute left-3 md:left-4 transition-all duration-300 pointer-events-none font-inter font-semibold ${
                         isPhoneFocused || formData.phone
-                          ? 'top-2 text-[10px] md:text-xs text-[#133FA6]'
-                          : 'top-1/2 transform -translate-y-1/2 text-sm md:text-lg text-[#808087]'
+                          ? 'top-2 text-[10px] md:text-xs text-primary'
+                          : 'top-1/2 transform -translate-y-1/2 text-sm md:text-lg text-text-subtle'
                       }`}
                     >
                       {t('auth.register.fields.phone', 'Phone Number')}
@@ -310,7 +310,7 @@ export function Register() {
                     <div className="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
                       <svg
                         className={`h-5 w-5 md:h-6 md:w-6 transition-colors duration-300 ${
-                          isEmailFocused ? 'text-[#133FA6]' : 'text-[#808087]'
+                          isEmailFocused ? 'text-primary' : 'text-text-subtle'
                         }`}
                         fill="none"
                         stroke="currentColor"
@@ -334,9 +334,9 @@ export function Register() {
                       }
                       onFocus={() => setIsEmailFocused(true)}
                       onBlur={() => !formData.email && setIsEmailFocused(false)}
-                      className={`block w-full pt-5 md:pt-6 pb-3 md:pb-4 px-3 md:px-4 font-inter font-semibold text-base md:text-lg bg-[#0A0A1E] rounded-[9.6px] text-white placeholder-transparent focus:outline-none transition-all duration-300 ${
+                      className={`block w-full pt-5 md:pt-6 pb-3 md:pb-4 px-3 md:px-4 font-inter font-semibold text-base md:text-lg bg-surface rounded-[9.6px] text-white placeholder-transparent focus:outline-none transition-all duration-300 ${
                         isEmailFocused
-                          ? 'shadow-[0_0_0_3px_rgba(19,63,166,0.1),0_2px_8px_rgba(19,63,166,0.2)]'
+                          ? 'shadow-[0_0_0_3px_rgba(253, 82, 4,0.1),0_2px_8px_rgba(253, 82, 4,0.2)]'
                           : ''
                       }`}
                       style={{
@@ -344,8 +344,8 @@ export function Register() {
                         paddingLeft: 'clamp(12px, 3vw, 16px)',
                         border: 'none',
                         borderBottom: isEmailFocused
-                          ? '3px solid #133FA6'
-                          : '3px solid #808087',
+                          ? '3px solid #FD5204'
+                          : '3px solid #8C8B85',
                       }}
                       placeholder={t(
                         'auth.register.fields.email',
@@ -356,8 +356,8 @@ export function Register() {
                       htmlFor="email"
                       className={`absolute left-3 md:left-4 transition-all duration-300 pointer-events-none font-inter font-semibold ${
                         isEmailFocused || formData.email
-                          ? 'top-2 text-[10px] md:text-xs text-[#133FA6]'
-                          : 'top-1/2 transform -translate-y-1/2 text-sm md:text-lg text-[#808087]'
+                          ? 'top-2 text-[10px] md:text-xs text-primary'
+                          : 'top-1/2 transform -translate-y-1/2 text-sm md:text-lg text-text-subtle'
                       }`}
                     >
                       {t('auth.register.fields.email', 'Email Address *')}
@@ -380,9 +380,9 @@ export function Register() {
                       onBlur={() =>
                         !formData.password && setIsPasswordFocused(false)
                       }
-                      className={`block w-full pt-5 md:pt-6 pb-3 md:pb-4 px-3 md:px-4 font-inter font-semibold text-base md:text-lg bg-[#0A0A1E] rounded-[9.6px] text-white placeholder-transparent focus:outline-none transition-all duration-300 ${
+                      className={`block w-full pt-5 md:pt-6 pb-3 md:pb-4 px-3 md:px-4 font-inter font-semibold text-base md:text-lg bg-surface rounded-[9.6px] text-white placeholder-transparent focus:outline-none transition-all duration-300 ${
                         isPasswordFocused
-                          ? 'shadow-[0_0_0_3px_rgba(19,63,166,0.1),0_2px_8px_rgba(19,63,166,0.2)]'
+                          ? 'shadow-[0_0_0_3px_rgba(253, 82, 4,0.1),0_2px_8px_rgba(253, 82, 4,0.2)]'
                           : ''
                       }`}
                       style={{
@@ -390,8 +390,8 @@ export function Register() {
                         paddingLeft: 'clamp(12px, 3vw, 16px)',
                         border: 'none',
                         borderBottom: isPasswordFocused
-                          ? '3px solid #133FA6'
-                          : '3px solid #808087',
+                          ? '3px solid #FD5204'
+                          : '3px solid #8C8B85',
                       }}
                       placeholder={t(
                         'auth.register.fields.password',
@@ -408,9 +408,9 @@ export function Register() {
                       <svg
                         className={`h-5 w-5 md:h-6 md:w-6 transition-colors duration-300 ${
                           isPasswordFocused
-                            ? 'text-[#133FA6]'
-                            : 'text-[#808087]'
-                        } hover:text-[#133FA6]`}
+                            ? 'text-primary'
+                            : 'text-text-subtle'
+                        } hover:text-primary`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -447,8 +447,8 @@ export function Register() {
                       htmlFor="password"
                       className={`absolute left-3 md:left-4 transition-all duration-300 pointer-events-none font-inter font-semibold ${
                         isPasswordFocused || formData.password
-                          ? 'top-2 text-[10px] md:text-xs text-[#133FA6]'
-                          : 'top-1/2 transform -translate-y-1/2 text-sm md:text-lg text-[#808087]'
+                          ? 'top-2 text-[10px] md:text-xs text-primary'
+                          : 'top-1/2 transform -translate-y-1/2 text-sm md:text-lg text-text-subtle'
                       }`}
                     >
                       {t('auth.register.fields.password', 'Password *')}
@@ -464,7 +464,7 @@ export function Register() {
                   className="w-full font-inter text-white text-lg md:text-[22px] font-normal rounded-[9.6px] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:opacity-90 active:opacity-80 active:scale-[0.99]"
                   style={{
                     background:
-                      'linear-gradient(180deg, #0088FF -0.66%, #071840 99.34%)',
+                      'linear-gradient(180deg, #FD5204 -0.66%, #141413 99.34%)',
                     paddingTop: 'clamp(10px, 2vh, 13.5px)',
                     paddingRight: 'clamp(10px, 2vw, 13px)',
                     paddingBottom: 'clamp(10px, 2vh, 13.5px)',

@@ -123,7 +123,7 @@ export function AdminBlog() {
   };
 
   if (loading) {
-    return <div className="text-[#808087]">{t('admin.loading')}</div>;
+    return <div className="text-text-subtle">{t('admin.loading')}</div>;
   }
 
   return (
@@ -131,7 +131,7 @@ export function AdminBlog() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-white">{t('admin.blog')}</h1>
-          <p className="mt-2 text-sm text-[#808087]">
+          <p className="mt-2 text-sm text-text-subtle">
             {t('admin.manageDescription')}
           </p>
         </div>
@@ -144,9 +144,9 @@ export function AdminBlog() {
         </div>
       )}
 
-      <div className="rounded-lg border border-[#546691] bg-[#13132F] overflow-hidden">
+      <div className="rounded-lg border border-surface-3 bg-surface overflow-hidden">
         <table className="w-full">
-          <thead className="bg-[#1A1A2E]/50">
+          <thead className="bg-surface-2/50">
             <tr>
               <th className="px-4 py-3 text-left text-sm font-medium text-white">Date</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-white">{t('admin.title')}</th>
@@ -154,19 +154,19 @@ export function AdminBlog() {
               <th className="px-4 py-3 text-right text-sm font-medium text-white">{t('admin.actions')}</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#546691]">
+          <tbody className="divide-y divide-surface-3">
             {posts.length === 0 ? (
               <tr>
-                <td colSpan={4} className="px-4 py-8 text-center text-sm text-[#808087]">
+                <td colSpan={4} className="px-4 py-8 text-center text-sm text-text-subtle">
                   {t('admin.noPostsYet')}
                 </td>
               </tr>
             ) : (
               posts.map((post) => (
-                <tr key={post.id} className="hover:bg-[#546691]/30">
+                <tr key={post.id} className="hover:bg-surface-3/30">
                   <td className="px-4 py-3 text-sm text-white">{post.date}</td>
                   <td className="px-4 py-3 text-sm font-medium text-white">{post.title}</td>
-                  <td className="px-4 py-3 text-sm text-[#808087] line-clamp-2">
+                  <td className="px-4 py-3 text-sm text-text-subtle line-clamp-2">
                     {post.excerpt}
                   </td>
                   <td className="px-4 py-3 text-right">
@@ -191,7 +191,7 @@ export function AdminBlog() {
         </table>
       </div>
 
-      <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
+      <div className="rounded-lg border border-surface-3 bg-surface p-6">
           <h2 className="text-xl font-semibold mb-4 text-white">
           {editingId ? t('admin.editPost') : t('admin.createPost')}
         </h2>
@@ -199,7 +199,7 @@ export function AdminBlog() {
           {supportedLocales.map((loc) => {
             const locCode = loc.code as Locale;
             return (
-              <div key={locCode} className="space-y-4 p-4 border border-[#546691] rounded-lg bg-[#0A0A1E]/30">
+              <div key={locCode} className="space-y-4 p-4 border border-surface-3 rounded-lg bg-surface/30">
                 <h3 className="font-medium text-white">{loc.label}</h3>
                 <div className="grid gap-4">
                   <div className="grid gap-4 md:grid-cols-2">
@@ -214,7 +214,7 @@ export function AdminBlog() {
                             [locCode]: { ...formData[locCode], date: e.target.value },
                           })
                         }
-                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                       />
                     </div>
                     <div>
@@ -228,7 +228,7 @@ export function AdminBlog() {
                           setTagsText({ ...tagsText, [locCode]: e.target.value })
                         }
                         placeholder="E-commerce, UX"
-                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                       />
                     </div>
                   </div>
@@ -244,7 +244,7 @@ export function AdminBlog() {
                         })
                       }
                       placeholder="Post title"
-                      className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                      className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                     />
                   </div>
                   <div>
@@ -272,7 +272,7 @@ export function AdminBlog() {
                         })
                       }
                       placeholder="Short excerpt"
-                      className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                      className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                     />
                   </div>
                   <div>
@@ -287,9 +287,9 @@ export function AdminBlog() {
                       }
                       placeholder="<p>Write content…</p>"
                       rows={10}
-                      className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm font-mono"
+                      className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm font-mono"
                     />
-                    <p className="mt-1 text-xs text-[#808087]">
+                    <p className="mt-1 text-xs text-text-subtle">
                       Tip: Use &lt;p&gt;...&lt;/p&gt; and simple tags.
                     </p>
                   </div>

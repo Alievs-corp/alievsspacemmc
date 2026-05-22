@@ -26,8 +26,8 @@ const UiDesigner = () => {
                 className="absolute inset-0"
                 style={{
                 backgroundImage:
-                    `linear-gradient(286.96deg, rgba(19, 19, 47, 0.2) 0.27%, rgba(19, 19, 47, 0.9) 100%), ` +
-                    `linear-gradient(72.85deg, rgba(17, 49, 124, 0) -0.01%, rgba(0, 53, 179, 0.2) 100%)`,
+                    `linear-gradient(286.96deg, rgba(11, 11, 11, 0.2) 0.27%, rgba(11, 11, 11, 0.9) 100%), ` +
+                    `linear-gradient(72.85deg, rgba(253, 82, 4, 0) -0.01%, rgba(253, 82, 4, 0.2) 100%)`,
                 backgroundRepeat: 'no-repeat, no-repeat',
                 backgroundPosition: 'center, center',
                 backgroundSize: 'cover, cover'
@@ -41,7 +41,7 @@ const UiDesigner = () => {
                     <div className="mt-8">
                         <Link
                             to="/careers"
-                            className="font-inter text-[#808087] text-[14px] hover:text-white transition-colors duration-300"
+                            className="font-inter text-text-subtle text-[14px] hover:text-white transition-colors duration-300"
                         >
                             {t('public.careers.back', '← Back to Careers')}
                         </Link>
@@ -64,7 +64,7 @@ const UiDesigner = () => {
                         <div className="lg:col-span-3 space-y-16">
                             <section className='max-w-[800px]'>
                                 <h2 className="font-inter text-white text-[21px] md:text-[32px] font-bold mb-6">{t('public.uiux.buildTitle')}</h2>
-                                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[18px] leading-relaxed">{t('public.uiux.buildCopy')}</p>
+                                <p className="font-inter text-text-muted text-[14px] md:text-[18px] leading-relaxed">{t('public.uiux.buildCopy')}</p>
                             </section>
 
                             <section className='max-w-[800px]'>
@@ -72,31 +72,31 @@ const UiDesigner = () => {
                                 <div className="space-y-4">
                                     <ul className="space-y-4">
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px]">{t('public.uiux.workOn.items.flows')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px]">{t('public.uiux.workOn.items.wireframes')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px]">{t('public.uiux.workOn.items.designSystems')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px]">{t('public.uiux.workOn.items.translateRequirements')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px]">{t('public.uiux.workOn.items.collaborateDev')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.uiux.workOn.items.improveUsability')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.uiux.workOn.items.iterateFeedback')}</h3>
                                         </li>
                                     </ul>
@@ -110,27 +110,27 @@ const UiDesigner = () => {
                                     <div className="space-y-4">
                                     <ul className="space-y-4">
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px]">{t('public.uiux.skills.items.uxPrinciples')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px]">{t('public.uiux.skills.items.solidUi')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px]">{t('public.uiux.skills.items.figmaExperience')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px]">{t('public.uiux.skills.items.dataHeavyInterfaces')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px]">{t('public.uiux.skills.items.clearThinking')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.uiux.skills.items.portfolioProcess')}</h3>
                                         </li>
                                     </ul>
@@ -141,19 +141,19 @@ const UiDesigner = () => {
                                     <div className="space-y-4">
                                         <ul className="space-y-4">
                                             <li className="flex items-start">
-                                                <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                                <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                                 <h3 className="font-inter text-white text-[18px]">{t('public.uiux.nice.items.devCollab')}</h3>
                                             </li>
                                             <li className="flex items-start">
-                                                <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                                <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                                 <h3 className="font-inter text-white text-[18px]">{t('public.uiux.nice.items.responsiveMobile')}</h3>
                                             </li>
                                             <li className="flex items-start">
-                                                <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                                <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                                 <h3 className="font-inter text-white text-[18px]">{t('public.uiux.nice.items.designSystemsPatterns')}</h3>
                                             </li>
                                             <li className="flex items-start">
-                                                <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                                <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                                 <h3 className="font-inter text-white text-[18px]">{t('public.uiux.nice.items.adminInternal')}</h3>
                                             </li>
                                         </ul>
@@ -166,23 +166,23 @@ const UiDesigner = () => {
                                 <div className="space-y-4">
                                     <ul className="space-y-4">
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.uiux.how.items.architectureFirstProduct')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.uiux.how.items.alignedFromStart')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.uiux.how.items.noRushedVisuals')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.uiux.how.items.logicBackedDecisions')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.uiux.how.items.longTermMaintainability')}</h3>
                                         </li>
                                     </ul>
@@ -194,23 +194,23 @@ const UiDesigner = () => {
                                 <div className="space-y-4">
                                     <ul className="space-y-4">
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.uiux.get.items.realProductionNotConcept')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.uiux.get.items.influenceStructureUx')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.uiux.get.items.closeCollabEngineering')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.uiux.get.items.spaceToIterate')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.uiux.get.items.professionalEnvironment')}</h3>
                                         </li>
                                     </ul>
@@ -222,11 +222,11 @@ const UiDesigner = () => {
                                 <div className="space-y-4">
                                     <ul className="space-y-4">
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.uiux.location.items.country')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                             <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.uiux.location.items.format')}</h3>
                                         </li>
                                     </ul>
@@ -239,7 +239,7 @@ const UiDesigner = () => {
                                     <p className="font-inter text-white text-[18px] mb-[10px]">{t('public.uiux.applyCopy')}</p>    
                                     <Link 
                                         to="/apply?position=ui-ux-designer"
-                                        className="inline border-b border-white bg-[#133FA6] hover:bg-[#1a4cc0] text-white font-inter py-2.5 px-2 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-[16px] md:text-[18px]"
+                                        className="inline bg-primary hover:bg-primary-hover text-on-primary font-inter py-2.5 px-2 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-[16px] md:text-[18px]"
                                     >
                                         {t('public.uiux.applyCta')}
                                     </Link>

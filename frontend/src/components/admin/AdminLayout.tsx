@@ -26,11 +26,11 @@ export function AdminLayout({ children }: AdminLayoutProps) {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#0A0A1E] via-[#13132F] to-[#1A1A2E]">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-surface via-surface to-surface-2">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#133FA6] mb-4"></div>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mb-4"></div>
           <div className="text-white font-inter text-lg">{t('admin.loading')}</div>
-          <div className="text-[#808087] text-sm mt-2">{t('public.loading')}</div>
+          <div className="text-text-subtle text-sm mt-2">{t('public.loading')}</div>
         </div>
       </div>
     );
@@ -45,13 +45,13 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     path: '/admin', 
     labelKey: 'admin.dashboard', 
     icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
-    color: 'text-blue-500'
+    color: 'text-primary'
   },
   { 
     path: '/admin/services', 
     labelKey: 'admin.services', 
     icon: 'M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z',
-    color: 'text-purple-500'
+    color: 'text-primary'
   },
   { 
     path: '/admin/projects', 
@@ -133,37 +133,37 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           ),
           linear-gradient(
             135deg,
-            #34345D 0%,
-            #08081E 50%,
-            #34345D 75%,
-            #08081E 100%
+            #141413 0%,
+            #0B0B0B 50%,
+            #141413 75%,
+            #0B0B0B 100%
           )
         `
       }}>
         <aside
           className={cn(
-            'flex flex-col bg-gradient-to-b from-[#13132F] to-[#0A0A1E] transition-all duration-300 z-20 fixed lg:relative h-full',
+            'flex flex-col bg-gradient-to-b from-surface to-surface transition-all duration-300 z-20 fixed lg:relative h-full',
             sidebarOpen ? 'w-64 shadow-2xl' : 'w-[120px]'
           )}
         >
           <div className={cn(
-            "flex items-center p-4 sm:p-6 border-b border-[#546691]",
+            "flex items-center p-4 sm:p-6 border-b border-surface-3",
             sidebarOpen ? "justify-between" : "justify-center gap-2"
           )}>
             <div className={cn('flex items-center gap-3', !sidebarOpen && 'justify-center')}>
               <img src={alievsspace} className="h-8 w-8 rounded-lg" alt={t('company.name')} />
               {sidebarOpen && (
                 <div>
-                  <p className='font-almarai text-lg leading-none text-white'>ALIEVS</p>
-                  <p className='font-kavivanar text-xs leading-tight text-white'>Space MMC</p>
-                  <div className="font-inter text-[10px] text-[#808087] mt-0.5">{t('admin.panel')}</div>
+                  <p className='font-display text-lg leading-none text-white'>ALIEVS</p>
+                  <p className='font-mono text-xs leading-tight text-white'>Space MMC</p>
+                  <div className="font-inter text-[10px] text-text-subtle mt-0.5">{t('admin.panel')}</div>
                 </div>
               )}
             </div>
 
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="text-[#808087] hover:text-white transition-colors p-1 rounded-lg hover:bg-[#546691]"
+              className="text-text-subtle hover:text-white transition-colors p-1 rounded-lg hover:bg-surface-3"
             >
               {sidebarOpen ? (
                 <Icon path="M15 19l-7-7 7-7" className="w-5 h-5" />
@@ -182,8 +182,8 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 className={cn(
                   'flex items-center gap-3 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 font-inter transition-all duration-200 group',
                   isActive(item.path)
-                    ? 'bg-[#133FA6] text-white shadow-md'
-                    : 'text-white hover:bg-[#546691]',
+                    ? 'bg-primary text-on-primary shadow-md'
+                    : 'text-white hover:bg-surface-3',
                   !sidebarOpen && 'justify-center px-2'
                 )}
                 title={!sidebarOpen ? t(item.labelKey) : undefined}
@@ -211,14 +211,14 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             ))}
           </nav>
 
-          <div className="p-3 sm:p-4 border-t border-[#546691]">
+          <div className="p-3 sm:p-4 border-t border-surface-3">
             <button
               onClick={() => navigate('/')}
               className={cn(
                 'w-full flex items-center gap-2 sm:gap-3 rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 text-sm font-medium transition-all',
                 sidebarOpen 
-                  ? 'bg-[#1A1A2E] text-white hover:bg-[#546691] justify-start' 
-                  : 'justify-center p-2 text-white hover:bg-[#546691]'
+                  ? 'bg-surface-2 text-white hover:bg-surface-3 justify-start' 
+                  : 'justify-center p-2 text-white hover:bg-surface-3'
               )}
               title={!sidebarOpen ? t('admin.goToSite') : undefined}
             >
@@ -230,13 +230,13 @@ export function AdminLayout({ children }: AdminLayoutProps) {
 
         {/* Main content də no-scrollbar istifadə edə bilərsiniz */}
         <main className="flex-1 overflow-auto bg-transparent ml-[120px] lg:ml-0 no-scrollbar">
-          <div className="sticky top-0 z-10 bg-[#13132F] border-b border-[#546691] px-4 sm:px-6 lg:px-8 h-20">
+          <div className="sticky top-0 z-10 bg-surface border-b border-surface-3 px-4 sm:px-6 lg:px-8 h-20">
             <div className="flex items-center justify-between h-full">
               <div className="flex items-center gap-4">
                 <div className="lg:hidden">
                   <button
                     onClick={() => setSidebarOpen(!sidebarOpen)}
-                    className="text-white p-2 hover:bg-[#546691] rounded-md transition-colors"
+                    className="text-white p-2 hover:bg-surface-3 rounded-md transition-colors"
                     aria-label="Menu"
                   >
                     <Icon path="M4 6h16M4 12h16M4 18h16" className="w-6 h-6" />
@@ -247,7 +247,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                   <h1 className="font-inter text-lg sm:text-xl font-bold text-white">
                     {navItems.find(item => isActive(item.path)) ? t(navItems.find(item => isActive(item.path))!.labelKey) : t('admin.dashboard')}
                   </h1>
-                  <p className="font-inter text-[#808087] text-xs sm:text-sm hidden sm:block">
+                  <p className="font-inter text-text-subtle text-xs sm:text-sm hidden sm:block">
                     {location.pathname === '/admin' ? t('admin.generalStats') : t('admin.contentManagement')}
                   </p>
                 </div>
@@ -261,7 +261,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                       supportedLocales[(idx + 1) % supportedLocales.length].code
                     );
                   }}
-                  className="p-2 rounded-md hover:bg-[#546691] cursor-pointer transition-colors"
+                  className="p-2 rounded-md hover:bg-surface-3 cursor-pointer transition-colors"
                   title={t('ui.language')}
                 >
                   <img 
@@ -274,11 +274,11 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 <div className="flex items-center gap-2 lg:gap-3">
                   <div className="hidden md:block text-right">
                     <div className="text-sm font-medium text-white">{user?.name || user?.email}</div>
-                    <div className="text-xs text-[#808087]">{t('nav.admin')}</div>
+                    <div className="text-xs text-text-subtle">{t('nav.admin')}</div>
                   </div>
                   
                   <div className="relative">
-                    <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-full border border-[#546691] bg-[#1A1A2E] flex items-center justify-center hover:bg-[#546691] transition-colors cursor-pointer">
+                    <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-full border border-surface-3 bg-surface-2 flex items-center justify-center hover:bg-surface-3 transition-colors cursor-pointer">
                       <Icon path="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
                     </div>
                   </div>
@@ -288,7 +288,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                       logout();
                       navigate('/login');
                     }}
-                    className="flex items-center gap-2 px-3 lg:px-4 py-2 bg-transparent hover:bg-[#546691] text-white border border-white rounded-md transition-colors text-sm"
+                    className="flex items-center gap-2 px-3 lg:px-4 py-2 bg-transparent hover:bg-surface-3 text-white border border-white rounded-md transition-colors text-sm"
                   >
                     <Icon path="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" className="w-4 h-4" />
                     <span className="hidden sm:inline">{t('ui.logout')}</span>
@@ -299,14 +299,14 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           </div>
 
           <div className="p-6">
-            <div className="bg-[#13132F]/50 rounded-2xl border border-[#546691] p-6 md:p-8 shadow-lg backdrop-blur-sm">
+            <div className="bg-surface/50 rounded-2xl border border-surface-3 p-6 md:p-8 shadow-lg backdrop-blur-sm">
               <div className="mb-6">
                 <h2 className="text-xl font-bold text-white">
                   {location.pathname === '/admin'
                     ? t('admin.generalManagement')
                     : `${navItems.find(item => isActive(item.path)) ? t(navItems.find(item => isActive(item.path))!.labelKey) : ''} ${t('admin.management')}`}
                 </h2>
-                <p className="text-[#808087] mt-1">
+                <p className="text-text-subtle mt-1">
                   {location.pathname === '/admin' 
                     ? t('admin.generalStats')
                     : t('admin.contentManagement')}

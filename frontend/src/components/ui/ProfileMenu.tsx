@@ -64,7 +64,7 @@ export function ProfileMenu({ variant = 'md' }: ProfileMenuProps) {
       <button
         type="button"
         onClick={handleToggle}
-        className={`ml-1 flex items-center justify-center rounded-full bg-transparent border border-white hover:bg-[#546691] cursor-pointer transition-colors ${buttonSizeClasses}`}
+        className={`ml-1 flex items-center justify-center rounded-full bg-transparent border border-white hover:bg-surface-3 cursor-pointer transition-colors ${buttonSizeClasses}`}
         aria-label={t('nav.profile', 'Profile')}
       >
         <svg
@@ -83,17 +83,17 @@ export function ProfileMenu({ variant = 'md' }: ProfileMenuProps) {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-40 rounded-md bg-[#1A1A2E] border border-[#546691] shadow-lg z-50">
+        <div className="absolute right-0 mt-2 w-40 rounded-md bg-surface-2 border border-surface-3 shadow-lg z-50">
           <button
             type="button"
             onClick={handleGoToDashboard}
-            className="w-full px-3 py-2 text-left text-sm font-inter text-white hover:bg-[#546691] cursor-pointer"
+            className="w-full px-3 py-2 text-left text-sm font-inter text-white hover:bg-surface-3 cursor-pointer"
           >
             {isAdmin
               ? t('nav.adminPanel', 'Admin panel')
               : t('nav.profile', 'Profile')}
           </button>
-          <div className="h-px bg-[#546691]" />
+          <div className="h-px bg-surface-3" />
           <button
             type="button"
             onClick={handleLogout}

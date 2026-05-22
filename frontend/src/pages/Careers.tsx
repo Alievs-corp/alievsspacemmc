@@ -228,7 +228,7 @@ export function Careers() {
       
       <Container className="flex flex-col justify-center items-center">
         <h2 className="font-inter text-[38px] font-bold text-white">{t('nav.careers')}</h2>
-        <p className="font-inter text-[18px] text-[#C5C5C5] text-center max-w-[800px]">
+        <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">
           {t('public.careersIntro')}
         </p>
       </Container>
@@ -238,18 +238,18 @@ export function Careers() {
           {vacancies.map((vacancy, index) => (
             <div 
               key={index}
-              className="bg-[#13132F] border border-white/20 rounded-[10px] p-6 flex flex-col h-full shadow-[0px_10px_20px_0px_#000000] hover:border-[#133FA6] hover:shadow-[0_8px_24px_rgba(19,63,166,0.25)] transition-all duration-300"
+              className="bg-surface border border-white/20 rounded-[10px] p-6 flex flex-col h-full shadow-[0px_10px_20px_0px_#000000] hover:border-border-strong transition-all duration-300"
             >
               <h3 className="font-inter text-white text-[22px] md:text-[24px] font-bold mb-3">
                 {vacancy.title}
               </h3>
               
-              <p className="font-inter text-[#C5C5C5] text-[16px] mb-4">
+              <p className="font-inter text-text-muted text-[16px] mb-4">
                 {vacancy.description}
               </p>
               
               <div className="mb-6">
-                <div className="flex items-center gap-2 text-[#C5C5C5] font-inter text-[14px]">
+                <div className="flex items-center gap-2 text-text-muted font-inter text-[14px]">
                   <span className="font-medium">{vacancy.location}</span>
                 </div>
               </div>
@@ -259,8 +259,8 @@ export function Careers() {
                 <ul className="space-y-2">
                   {vacancy.requirements.map((requirement, idx) => (
                     <li key={idx} className="flex items-start">
-                      <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                      <span className="font-inter text-[#C5C5C5] text-[14px]">{requirement}</span>
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                      <span className="font-inter text-text-muted text-[14px]">{requirement}</span>
                     </li>
                   ))}
                 </ul>
@@ -269,7 +269,7 @@ export function Careers() {
               <Link 
                 to={`/careers/${vacancy.id}`}
                 onClick={scrollToTop}
-                className="mt-auto w-full bg-[#133FA6] hover:bg-[#1a4cc0] text-white font-inter font-semibold py-3 px-4 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-center"
+                className="mt-auto w-full bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-4 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-center"
               >
                 {t('public.careers.viewRoleCta')}
               </Link>
@@ -283,7 +283,7 @@ export function Careers() {
           <h3 className="font-inter text-white text-[21px] md:text-[26px] font-semibold text-center md:text-left">
             {t('public.careers.whyTitle')}
           </h3>
-          <p className="font-inter text-[10px] md:text-[13px] text-[#C5C5C5] text-center md:text-left">
+          <p className="font-inter text-[10px] md:text-[13px] text-text-muted text-center md:text-left">
             {t('public.careers.whyCopy')}
           </p>
         </div>
@@ -309,8 +309,8 @@ export function Careers() {
                 }}
                 className={`px-4 py-2 rounded-full text-sm md:text-base font-inter transition-all duration-300 cursor-pointer ${
                   selectedRole === option.value
-                    ? 'bg-[#133FA6] text-white'
-                    : 'bg-transparent border border-white/20 text-[#C5C5C5] hover:border-[#133FA6] hover:text-white'
+                    ? 'bg-primary text-on-primary'
+                    : 'bg-transparent border border-white/20 text-text-muted hover:border-border-strong hover:text-white'
                 }`}
               >
                 {option.label}
@@ -323,7 +323,7 @@ export function Careers() {
           {filteredTeamMembers.slice(0, showAllTeam ? filteredTeamMembers.length : 4).map((member, index) => (
             <div 
               key={index}
-              className="bg-[#13132F] border-l-[1px] border-b-[1px] border-white rounded-[10px] p-6 shadow-[0px_10px_20px_0px_#000000] hover:shadow-[0px_15px_30px_0px_#000000] transition-shadow duration-300"
+              className="bg-surface border-l-[1px] border-b-[1px] border-white rounded-[10px] p-6 shadow-[0px_10px_20px_0px_#000000] hover:shadow-[0px_15px_30px_0px_#000000] transition-shadow duration-300"
             >
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
@@ -332,7 +332,7 @@ export function Careers() {
                       <img
                         src={memberImages[member.id]}
                         alt={member.name}
-                        className="w-[110px] h-[140px] md:w-[140px] md:h-[180px] object-cover object-top rounded-lg transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg"
+                        className="w-[110px] h-[140px] md:w-[140px] md:h-[180px] object-cover object-top rounded-lg transition-all duration-300 group-group-hover:shadow-lg"
                       />
                       <div className="absolute inset-0 bg-black/40 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -346,7 +346,7 @@ export function Careers() {
                     <h4 className="font-inter text-white text-[20px] md:text-[26px] mb-1">
                       {member.name}
                     </h4>
-                    <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[18px] font-semibold">
+                    <p className="font-inter text-text-muted text-[14px] md:text-[18px] font-semibold">
                       {member.role}
                     </p>
                   </div>
@@ -357,19 +357,19 @@ export function Careers() {
                     <h4 className="font-inter text-white text-[22px] md:text-[26px] mb-2">
                       {member.name}
                     </h4>
-                    <p className="font-inter text-[#C5C5C5] text-[16px] md:text-[18px] font-semibold">
+                    <p className="font-inter text-text-muted text-[16px] md:text-[18px] font-semibold">
                       {member.role}
                     </p>
                   </div>
                   
-                  <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] leading-relaxed">
+                  <p className="font-inter text-text-muted text-[14px] md:text-[16px] leading-relaxed">
                     {member.description}
                   </p>
                 </div>
               </div>
               
               <div className="mt-4 md:hidden">
-                <p className="font-inter text-[#C5C5C5] text-[14px] leading-relaxed">
+                <p className="font-inter text-text-muted text-[14px] leading-relaxed">
                   {member.description}
                 </p>
               </div>
@@ -381,7 +381,7 @@ export function Careers() {
           <div className="flex justify-center mt-12">
             <button 
               onClick={() => setShowAllTeam(!showAllTeam)}
-              className="bg-transparent hover:bg-[#133FA6] border-[1px] border-white/20 text-white font-inter py-[10px] px-[20px] rounded-[6.45px] transition-all duration-300 cursor-pointer hover:scale-105"
+              className="bg-transparent hover:bg-primary-hover border-[1px] border-white/20 text-white font-inter py-[10px] px-[20px] rounded-[6.45px] transition-all duration-300 cursor-pointer"
             >
               {showAllTeam ? t('public.careers.showLess') : t('public.careers.viewMore')}
             </button>
@@ -390,7 +390,7 @@ export function Careers() {
 
         {filteredTeamMembers.length === 0 && (
           <div className="text-center py-12 animate-fade-in">
-            <p className="font-inter text-[#C5C5C5] text-[18px]">
+            <p className="font-inter text-text-muted text-[18px]">
               {t('public.careers.noTeamMembers', 'Bu sahədə hələ işçi yoxdur')}
             </p>
           </div>
@@ -408,7 +408,7 @@ export function Careers() {
               <button
                 type="button"
                 onClick={() => setPreviewMemberId(null)}
-                className="absolute -top-4 -right-4 bg-black/60 hover:bg-black/80 text-white rounded-full w-10 h-10 flex items-center justify-center text-xl font-inter transition-all duration-200 hover:scale-110 backdrop-blur-sm border border-white/20 z-10 cursor-pointer"
+                className="absolute -top-4 -right-4 bg-black/60 hover:bg-black/80 text-white rounded-full w-10 h-10 flex items-center justify-center text-xl font-inter transition-all duration-200 backdrop-blur-sm border border-white/20 z-10 cursor-pointer"
                 aria-label="Şəkli bağla"
               >
                 ✕
@@ -417,7 +417,7 @@ export function Careers() {
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 {imageLoading && (
                   <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
-                    <div className="w-8 h-8 border-4 border-[#133FA6] border-t-transparent rounded-full animate-spin"></div>
+                    <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
                   </div>
                 )}
                 <img
@@ -437,11 +437,11 @@ export function Careers() {
                   <p className="font-inter text-white text-[18px] font-semibold text-center">
                     {previewMember.name}
                   </p>
-                  <p className="font-inter text-[#C5C5C5] text-[14px] text-center mt-1">
+                  <p className="font-inter text-text-muted text-[14px] text-center mt-1">
                     {previewMember.role}
                   </p>
                   {previewMember.description && (
-                    <p className="font-inter text-[#C5C5C5] text-[12px] text-center mt-2 pt-2 border-t border-white/10">
+                    <p className="font-inter text-text-muted text-[12px] text-center mt-2 pt-2 border-t border-white/10">
                       {previewMember.description.length > 100 
                         ? `${previewMember.description.substring(0, 100)}...` 
                         : previewMember.description}

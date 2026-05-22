@@ -86,7 +86,7 @@ const Apply = () => {
             <h2 className="font-inter text-[26px] md:text-[38px] font-bold text-white mb-4">
               Apply for {getPositionTitle()}
             </h2>
-            <p className="font-inter text-[13px] md:text-[18px] text-[#C5C5C5]">
+            <p className="font-inter text-[13px] md:text-[18px] text-text-muted">
               We review every application manually. No automated filters.
             </p>
           </div>
@@ -105,7 +105,7 @@ const Apply = () => {
                     onChange={handleInputChange}
                     required
                     placeholder="Your full name"
-                    className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white placeholder:text-[#C5C5C5]/50 focus:outline-none focus:border-[#133FA6] transition-colors duration-300"
+                    className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white placeholder:text-text-muted/50 focus:outline-none focus:border-primary transition-colors duration-300"
                   />
                 </div>
                 <div>
@@ -127,15 +127,15 @@ const Apply = () => {
                       aria-label="Upload CV"
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                     />
-                    <div className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white focus:outline-none transition-colors duration-300">
+                    <div className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white focus:outline-none transition-colors duration-300">
                       {formData.resume ? (
                         <span className="text-white/90">Selected: {formData.resume.name}</span>
                       ) : (
-                        <span className="text-[#C5C5C5]/60">Upload here</span>
+                        <span className="text-text-muted/60">Upload here</span>
                       )}
                     </div>
                   </div>
-                  <p className="font-inter text-[#C5C5C5] text-[13px] mt-2">
+                  <p className="font-inter text-text-muted text-[13px] mt-2">
                     Upload CV (PDF, max 10MB)
                   </p>
                 </div>
@@ -153,7 +153,7 @@ const Apply = () => {
                     onChange={handleInputChange}
                     required
                     placeholder="your.email@example.com"
-                    className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white placeholder:text-[#C5C5C5]/50 focus:outline-none focus:border-[#133FA6] transition-colors duration-300"
+                    className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white placeholder:text-text-muted/50 focus:outline-none focus:border-primary transition-colors duration-300"
                   />
                 </div>
                 <div>
@@ -166,7 +166,7 @@ const Apply = () => {
                     value={formData.profileUrl}
                     onChange={handleInputChange}
                     placeholder="https:// ..."
-                    className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white placeholder:text-[#C5C5C5]/50 focus:outline-none focus:border-[#133FA6] transition-colors duration-300"
+                    className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white placeholder:text-text-muted/50 focus:outline-none focus:border-primary transition-colors duration-300"
                   />
                 </div>
               </div>
@@ -182,7 +182,7 @@ const Apply = () => {
                   onChange={handleInputChange}
                   rows={4}
                   placeholder="Brief note about your experience or motivation"
-                  className="w-full bg-[#0F0F23] border border-[#808087] rounded-[10px] px-4 py-3 font-inter text-white placeholder:text-[#C5C5C5]/50 focus:outline-none focus:border-[#133FA6] transition-colors duration-300"
+                  className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white placeholder:text-text-muted/50 focus:outline-none focus:border-primary transition-colors duration-300"
                 />
               </div>
             </div>
@@ -191,11 +191,11 @@ const Apply = () => {
             <div className="flex flex-col items-end gap-2 pt-4 border-t border-white/20">
               <button
                 type="submit"
-                className="border-b border-white bg-[#133FA6] hover:bg-[#1a4cc0] text-white font-inter font-semibold py-3 px-8 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-[16px] whitespace-nowrap"
+                className="bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-8 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-[16px] whitespace-nowrap"
               >
                 Submit Application
               </button>
-              <p className="font-inter text-[#C5C5C5] text-[14px] text-right">
+              <p className="font-inter text-text-muted text-[14px] text-right">
                 We'll review your application and contact you within 3-5 business days.
               </p>
             </div>

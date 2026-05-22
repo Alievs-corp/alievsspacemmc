@@ -16,8 +16,8 @@ const AboutHeader = () => {
         className="absolute inset-0"
         style={{
           backgroundImage:
-            `linear-gradient(286.96deg, rgba(19, 19, 47, 0.2) 0.27%, rgba(19, 19, 47, 0.9) 100%), ` +
-            `linear-gradient(72.85deg, rgba(17, 49, 124, 0) -0.01%, rgba(0, 53, 179, 0.2) 100%)`,
+            `linear-gradient(286.96deg, rgba(11, 11, 11, 0.2) 0.27%, rgba(11, 11, 11, 0.9) 100%), ` +
+            `linear-gradient(72.85deg, rgba(253, 82, 4, 0) -0.01%, rgba(253, 82, 4, 0.2) 100%)`,
           backgroundRepeat: 'no-repeat, no-repeat',
           backgroundPosition: 'center, center',
           backgroundSize: 'cover, cover'
@@ -31,7 +31,7 @@ const AboutHeader = () => {
                 <h2 className="font-inter text-[38px] md:text-5xl lg:text-5xl xl:text-6xl text-white font-bold max-w-full sm:max-w-[370px] md:max-w-[800px] lg:max-w-[900px] xl:max-w-[1000px] leading-tight sm:leading-normal">
                   {t('public.about.headerTitle')}
                 </h2>
-                <p className="text-[#C5C5C5] text-[13px] sm:text-base md:text-lg lg:text-xl max-w-full sm:max-w-[90%] md:max-w-[647px] leading-relaxed">
+                <p className="text-text-muted text-[13px] sm:text-base md:text-lg lg:text-xl max-w-full sm:max-w-[90%] md:max-w-[647px] leading-relaxed">
                   {t('public.about.headerCopy')}
                 </p>
             </div>

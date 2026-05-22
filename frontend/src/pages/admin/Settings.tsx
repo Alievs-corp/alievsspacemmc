@@ -115,14 +115,14 @@ export function AdminSettings() {
   };
 
   if (loading) {
-    return <div className="text-[#808087]">{t('admin.loading')}</div>;
+    return <div className="text-text-subtle">{t('admin.loading')}</div>;
   }
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-white">{t('admin.settings')}</h1>
-        <p className="mt-2 text-sm text-[#808087]">
+        <p className="mt-2 text-sm text-text-subtle">
           {t('admin.manageDescription')}
         </p>
       </div>
@@ -134,7 +134,7 @@ export function AdminSettings() {
       )}
 
       <div className="grid gap-6 md:grid-cols-2">
-        <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
+        <div className="rounded-lg border border-surface-3 bg-surface p-6">
           <h2 className="text-xl font-semibold mb-4 text-white">{t('admin.brand')}</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
@@ -144,7 +144,7 @@ export function AdminSettings() {
                 value={formData.brandName || ''}
                 onChange={(e) => setFormData({ ...formData, brandName: e.target.value })}
                 placeholder={t('company.name')}
-                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
               />
             </div>
             <div>
@@ -154,7 +154,7 @@ export function AdminSettings() {
                 value={formData.tagline || ''}
                 onChange={(e) => setFormData({ ...formData, tagline: e.target.value })}
                 placeholder={t('company.tagline')}
-                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
               />
             </div>
             <div>
@@ -164,7 +164,7 @@ export function AdminSettings() {
                 value={formData.email || ''}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="hello@..."
-                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
               />
             </div>
             <div>
@@ -174,7 +174,7 @@ export function AdminSettings() {
                 value={formData.phone || ''}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 placeholder={t('auth.register.placeholders.phone')}
-                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
               />
             </div>
             <div>
@@ -184,7 +184,7 @@ export function AdminSettings() {
                 value={formData.address || ''}
                 onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                 placeholder={t('admin.address')}
-                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
               />
             </div>
             <div>
@@ -199,7 +199,7 @@ export function AdminSettings() {
                   })
                 }
                 placeholder="https://instagram.com/..."
-                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
               />
             </div>
             <div>
@@ -214,7 +214,7 @@ export function AdminSettings() {
                   })
                 }
                 placeholder="https://linkedin.com/..."
-                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
               />
             </div>
             <div>
@@ -229,7 +229,7 @@ export function AdminSettings() {
                   })
                 }
                 placeholder="https://youtube.com/..."
-                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
               />
             </div>
             <div>
@@ -244,7 +244,7 @@ export function AdminSettings() {
                   })
                 }
                 placeholder={t('admin.ctaPrimaryText')}
-                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
               />
             </div>
             <div>
@@ -259,7 +259,7 @@ export function AdminSettings() {
                   })
                 }
                 placeholder="/contact"
-                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
               />
             </div>
             <Button type="submit" disabled={saving}>
@@ -268,7 +268,7 @@ export function AdminSettings() {
           </form>
         </div>
 
-        <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
+        <div className="rounded-lg border border-surface-3 bg-surface p-6">
           <h2 className="text-xl font-semibold mb-4 text-white">{t('admin.export')}</h2>
           <div className="space-y-4">
             <Button variant="outline" onClick={handleExport} className="w-full">
@@ -293,10 +293,10 @@ export function AdminSettings() {
                   };
                   reader.readAsText(file);
                 }}
-                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
               />
             </div>
-            <p className="text-xs text-[#808087]">
+            <p className="text-xs text-text-subtle">
               {t('admin.tip')}
             </p>
           </div>

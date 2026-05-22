@@ -61,13 +61,13 @@ export function AdminDashboard() {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-white">{t('admin.overview')}</h1>
-        <p className="mt-2 text-[#808087]">
+        <p className="mt-2 text-text-subtle">
           {t('admin.welcome')}, {user?.name}. {t('admin.manageContent')}
         </p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
-        <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
+        <div className="rounded-lg border border-surface-3 bg-surface p-6">
           <h2 className="text-xl font-semibold mb-4 text-white">{t('admin.quickActions')}</h2>
           <div className="grid gap-3">
             <Button asChild variant="default">
@@ -94,12 +94,12 @@ export function AdminDashboard() {
           </div>
         </div>
 
-        <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
+        <div className="rounded-lg border border-surface-3 bg-surface p-6">
           <h2 className="text-xl font-semibold mb-4 text-white">{t('admin.status')}</h2>
           {loading ? (
-            <div className="text-sm text-[#808087]">{t('admin.loading')}</div>
+            <div className="text-sm text-text-subtle">{t('admin.loading')}</div>
           ) : (
-            <div className="text-sm text-[#808087] space-y-1">
+            <div className="text-sm text-text-subtle space-y-1">
               <div>{t('admin.services')}: {stats.services}</div>
               <div>{t('admin.projects')}: {stats.projects}</div>
               <div>{t('admin.blog')}: {stats.blog}</div>
@@ -108,8 +108,8 @@ export function AdminDashboard() {
               <div>{t('admin.inquiries')}: {stats.inquiries}</div>
             </div>
           )}
-          <div className="mt-4 pt-4 border-t border-[#546691]">
-            <p className="text-xs text-[#808087]">
+          <div className="mt-4 pt-4 border-t border-surface-3">
+            <p className="text-xs text-text-subtle">
               {t('admin.tip')}
             </p>
           </div>

@@ -45,7 +45,7 @@ export function ImageUpload({ value, onChange, folder = 'images', label }: Image
           <img 
             src={value} 
             alt="Preview" 
-            className="max-w-xs max-h-48 object-contain rounded border border-[#546691]"
+            className="max-w-xs max-h-48 object-contain rounded border border-surface-3"
           />
         </div>
       )}
@@ -55,7 +55,7 @@ export function ImageUpload({ value, onChange, folder = 'images', label }: Image
           accept="image/*"
           onChange={handleFileChange}
           disabled={uploading}
-          className="block w-full text-sm text-white file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#133FA6] file:text-white hover:file:bg-[#0f2f78] file:cursor-pointer disabled:opacity-50"
+          className="block w-full text-sm text-white file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary-active file:cursor-pointer disabled:opacity-50"
         />
         {value && (
           <Button
@@ -69,7 +69,7 @@ export function ImageUpload({ value, onChange, folder = 'images', label }: Image
         )}
       </div>
       {uploading && (
-        <p className="text-sm text-[#808087]">Uploading...</p>
+        <p className="text-sm text-text-subtle">Uploading...</p>
       )}
       {error && (
         <p className="text-sm text-red-400">{error}</p>

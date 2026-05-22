@@ -50,7 +50,7 @@ export function Login() {
     >
       <div className="h-full flex items-start md:items-center justify-end w-full md:w-1/2">
         <div
-          className="bg-[#13132F] h-full flex flex-col justify-between w-full md:rounded-tl-[30.6px] md:rounded-bl-[30.6px]"
+          className="bg-surface h-full flex flex-col justify-between w-full md:rounded-tl-[30.6px] md:rounded-bl-[30.6px]"
           style={{
             borderTopLeftRadius: '0px',
             borderBottomLeftRadius: '0px',
@@ -67,7 +67,7 @@ export function Login() {
                 alt="Alievs Space Logo" 
                 className='w-16 md:w-20 lg:w-24 mb-2'
               />
-              <p className="font-inter text-[#808087] text-xs md:text-sm">
+              <p className="font-inter text-text-subtle text-xs md:text-sm">
                 {t('auth.login.brandTagline')}
               </p>
             </div>
@@ -77,11 +77,11 @@ export function Login() {
                 <h2 className="font-inter text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1">
                   {t('auth.login.title')}
                 </h2>
-                <p className="font-inter text-xs md:text-sm text-[#808087]">
+                <p className="font-inter text-xs md:text-sm text-text-subtle">
                   {t('auth.login.noAccount')}{' '}
                   <Link 
                     to="/register" 
-                    className="font-medium text-[#133FA6] hover:text-[#1a4cc0] hover:underline"
+                    className="font-medium text-primary hover:text-primary hover:underline"
                   >
                     {t('auth.login.signUp')}
                   </Link>
@@ -113,16 +113,16 @@ export function Login() {
                         onChange={(e) => setEmail(e.target.value)}
                         onFocus={() => setIsEmailFocused(true)}
                         onBlur={() => !email && setIsEmailFocused(false)}
-                        className={`block w-full pt-5 md:pt-6 pb-3 md:pb-4 px-3 md:px-4 font-inter font-semibold text-base md:text-lg bg-[#0A0A1E] rounded-[9.6px] text-white placeholder-transparent focus:outline-none transition-all duration-300 ${
+                        className={`block w-full pt-5 md:pt-6 pb-3 md:pb-4 px-3 md:px-4 font-inter font-semibold text-base md:text-lg bg-surface rounded-[9.6px] text-white placeholder-transparent focus:outline-none transition-all duration-300 ${
                           isEmailFocused 
-                            ? 'shadow-[0_0_0_3px_rgba(19,63,166,0.1),0_2px_8px_rgba(19,63,166,0.2)]' 
+                            ? 'shadow-[0_0_0_3px_rgba(253, 82, 4,0.1),0_2px_8px_rgba(253, 82, 4,0.2)]' 
                             : ''
                         }`}
                         style={{
                           paddingRight: 'clamp(40px, 4vw, 16px)',
                           paddingLeft: 'clamp(12px, 3vw, 16px)',
                           border: 'none',
-                          borderBottom: isEmailFocused ? '3px solid #133FA6' : '3px solid #808087'
+                          borderBottom: isEmailFocused ? '3px solid #FD5204' : '3px solid #8C8B85'
                         }}
                         placeholder={t('auth.login.fields.email')}
                       />
@@ -130,7 +130,7 @@ export function Login() {
                       <div className="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
                         <svg 
                           className={`h-5 w-5 md:h-6 md:w-6 transition-colors duration-300 ${
-                            isEmailFocused ? 'text-[#133FA6]' : 'text-[#808087]'
+                            isEmailFocused ? 'text-primary' : 'text-text-subtle'
                           }`} 
                           fill="none" 
                           stroke="currentColor" 
@@ -144,8 +144,8 @@ export function Login() {
                         htmlFor="email"
                         className={`absolute left-3 md:left-4 transition-all duration-300 pointer-events-none font-inter font-semibold ${
                           isEmailFocused || email 
-                            ? 'top-2 text-[10px] md:text-xs text-[#133FA6]' 
-                            : 'top-1/2 transform -translate-y-1/2 text-sm md:text-lg text-[#808087]'
+                            ? 'top-2 text-[10px] md:text-xs text-primary' 
+                            : 'top-1/2 transform -translate-y-1/2 text-sm md:text-lg text-text-subtle'
                         }`}
                       >
                         {t('auth.login.fields.email')}
@@ -163,16 +163,16 @@ export function Login() {
                         onChange={(e) => setPassword(e.target.value)}
                         onFocus={() => setIsPasswordFocused(true)}
                         onBlur={() => !password && setIsPasswordFocused(false)}
-                        className={`block w-full pt-5 md:pt-6 pb-3 md:pb-4 px-3 md:px-4 font-inter font-semibold text-base md:text-lg bg-[#0A0A1E] rounded-[9.6px] text-white placeholder-transparent focus:outline-none transition-all duration-300 ${
+                        className={`block w-full pt-5 md:pt-6 pb-3 md:pb-4 px-3 md:px-4 font-inter font-semibold text-base md:text-lg bg-surface rounded-[9.6px] text-white placeholder-transparent focus:outline-none transition-all duration-300 ${
                           isPasswordFocused 
-                            ? 'shadow-[0_0_0_3px_rgba(19,63,166,0.1),0_2px_8px_rgba(19,63,166,0.2)]' 
+                            ? 'shadow-[0_0_0_3px_rgba(253, 82, 4,0.1),0_2px_8px_rgba(253, 82, 4,0.2)]' 
                             : ''
                         }`}
                         style={{
                           paddingRight: 'clamp(56px, 8vw, 48px)',
                           paddingLeft: 'clamp(12px, 3vw, 16px)',
                           border: 'none',
-                          borderBottom: isPasswordFocused ? '3px solid #133FA6' : '3px solid #808087'
+                          borderBottom: isPasswordFocused ? '3px solid #FD5204' : '3px solid #8C8B85'
                         }}
                         placeholder={t('auth.login.fields.password')}
                       />
@@ -184,8 +184,8 @@ export function Login() {
                       >
                         <svg 
                           className={`h-5 w-5 md:h-6 md:w-6 transition-colors duration-300 ${
-                            isPasswordFocused ? 'text-[#133FA6]' : 'text-[#808087]'
-                          } hover:text-[#133FA6]`} 
+                            isPasswordFocused ? 'text-primary' : 'text-text-subtle'
+                          } hover:text-primary`} 
                           fill="none" 
                           stroke="currentColor" 
                           viewBox="0 0 24 24"
@@ -207,8 +207,8 @@ export function Login() {
                         htmlFor="password"
                         className={`absolute left-3 md:left-4 transition-all duration-300 pointer-events-none font-inter font-semibold ${
                           isPasswordFocused || password 
-                            ? 'top-2 text-[10px] md:text-xs text-[#133FA6]' 
-                            : 'top-1/2 transform -translate-y-1/2 text-sm md:text-lg text-[#808087]'
+                            ? 'top-2 text-[10px] md:text-xs text-primary' 
+                            : 'top-1/2 transform -translate-y-1/2 text-sm md:text-lg text-text-subtle'
                         }`}
                       >
                         {t('auth.login.fields.password')}
@@ -222,9 +222,9 @@ export function Login() {
                     <input
                       id="remember-me"
                       type="checkbox"
-                      className="h-4 w-4 md:h-3.5 md:w-3.5 text-[#133FA6] focus:ring-[#133FA6] border-[#808087] rounded bg-[#0A0A1E] cursor-pointer"
+                      className="h-4 w-4 md:h-3.5 md:w-3.5 text-primary focus:ring-primary border-text-subtle rounded bg-surface cursor-pointer"
                     />
-                    <label htmlFor="remember-me" className="ml-2 block font-inter text-sm md:text-[18px] text-[#808087]">
+                    <label htmlFor="remember-me" className="ml-2 block font-inter text-sm md:text-[18px] text-text-subtle">
                       {t('auth.login.rememberMe')}
                     </label>
                   </div>
@@ -232,7 +232,7 @@ export function Login() {
                   <div className="mt-2 sm:mt-0">
                     <a 
                       href="#" 
-                      className="font-inter font-medium text-sm md:text-[18px] text-[#0088FF] hover:text-[#1a4cc0] whitespace-nowrap"
+                      className="font-inter font-medium text-sm md:text-[18px] text-primary hover:text-primary whitespace-nowrap"
                     >
                       {t('auth.login.forgotPassword')}
                     </a>
@@ -245,7 +245,7 @@ export function Login() {
                     disabled={loading}
                     className="w-full font-inter text-white text-lg md:text-[22px] font-normal rounded-[9.6px] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:opacity-90 active:opacity-80 active:scale-[0.99]"
                     style={{
-                      background: 'linear-gradient(180deg, #0088FF -0.66%, #071840 99.34%)',
+                      background: 'linear-gradient(180deg, #FD5204 -0.66%, #141413 99.34%)',
                       paddingTop: 'clamp(10px, 2vh, 13.5px)',
                       paddingRight: 'clamp(10px, 2vw, 13px)',
                       paddingBottom: 'clamp(10px, 2vh, 13.5px)',

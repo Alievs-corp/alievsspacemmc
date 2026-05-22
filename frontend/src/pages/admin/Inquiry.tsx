@@ -29,7 +29,7 @@ export function AdminInquiries() {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="text-[#808087]">Loading inquiries...</div>
+        <div className="text-text-subtle">Loading inquiries...</div>
       </div>
     );
   }
@@ -39,12 +39,12 @@ export function AdminInquiries() {
       <div className="space-y-6">
         <div>
           <h1 className="text-3xl font-bold text-white">{t('admin.inquiries')} {t('admin.management')}</h1>
-          <p className="mt-2 text-[#808087]">
+          <p className="mt-2 text-text-subtle">
             View and manage all contact form submissions from your website.
           </p>
         </div>
         
-        <div className="bg-[#13132F] rounded-lg border border-[#546691] p-6">
+        <div className="bg-surface rounded-lg border border-surface-3 p-6">
           <div className="text-center py-8">
             <div className="text-red-400 mb-4">
               <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,8 +52,8 @@ export function AdminInquiries() {
               </svg>
             </div>
             <h3 className="text-lg font-medium text-white mb-2">API Connection Error</h3>
-            <p className="text-[#808087] mb-4">{error}</p>
-            <p className="text-sm text-[#808087]">
+            <p className="text-text-subtle mb-4">{error}</p>
+            <p className="text-sm text-text-subtle">
               Backend API-də /api/v1/inquiries endpoint-i mövcud deyil. 
               Lütfən backend developer ilə əlaqə saxlayın.
             </p>
@@ -68,27 +68,27 @@ export function AdminInquiries() {
       <div className="flex justify-between items-start">
         <div>
           <h1 className="text-3xl font-bold text-white">{t('admin.inquiries')} {t('admin.management')}</h1>
-          <p className="mt-2 text-[#808087]">
+          <p className="mt-2 text-text-subtle">
             View and manage all contact form submissions from your website.
           </p>
         </div>
         <div className="flex items-center gap-4">
-          <span className="text-sm text-[#808087]">
+          <span className="text-sm text-text-subtle">
             Total: {inquiries.length} inquiries
           </span>
           <button
             onClick={loadInquiries}
-            className="px-4 py-2 bg-[#133FA6] text-white text-sm font-medium rounded-lg hover:bg-[#0f2f78] transition-colors"
+            className="px-4 py-2 bg-primary text-on-primary text-sm font-medium rounded-lg hover:bg-primary-hover transition-colors"
           >
             Refresh
           </button>
         </div>
       </div>
 
-      <div className="bg-[#13132F] rounded-lg border border-[#546691] overflow-hidden">
+      <div className="bg-surface rounded-lg border border-surface-3 overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-[#546691]">
-            <thead className="bg-[#1A1A2E]/50">
+          <table className="min-w-full divide-y divide-surface-3">
+            <thead className="bg-surface-2/50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Name / Company
@@ -104,25 +104,25 @@ export function AdminInquiries() {
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-[#13132F] divide-y divide-[#546691]">
+            <tbody className="bg-surface divide-y divide-surface-3">
               {inquiries.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="px-6 py-8 text-center text-[#808087]">
+                  <td colSpan={4} className="px-6 py-8 text-center text-text-subtle">
                     <div className="flex flex-col items-center justify-center">
-                      <svg className="w-12 h-12 text-[#808087] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-12 h-12 text-text-subtle mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
-                      <p className="text-[#808087]">{t('admin.inquiries')} {t('admin.loading')}</p>
-                      <p className="text-sm text-[#808087] mt-1">{t('admin.manageDescription')}</p>
+                      <p className="text-text-subtle">{t('admin.inquiries')} {t('admin.loading')}</p>
+                      <p className="text-sm text-text-subtle mt-1">{t('admin.manageDescription')}</p>
                     </div>
                   </td>
                 </tr>
               ) : (
                 inquiries.map((inquiry, index) => (
-                  <tr key={inquiry.email || `inquiry-${index}`} className="hover:bg-[#546691]/30">
+                  <tr key={inquiry.email || `inquiry-${index}`} className="hover:bg-surface-3/30">
                     <td className="px-6 py-4">
                       <div className="font-medium text-white">{inquiry.name}</div>
-                      <div className="text-sm text-[#808087]">{inquiry.company || 'No company specified'}</div>
+                      <div className="text-sm text-text-subtle">{inquiry.company || 'No company specified'}</div>
                     </td>
                     <td className="px-6 py-4">
                       <div className="text-sm space-y-1">
@@ -135,7 +135,7 @@ export function AdminInquiries() {
                           </div>
                         )}
                         {inquiry.phone && (
-                          <div className="text-[#808087] flex items-center gap-1">
+                          <div className="text-text-subtle flex items-center gap-1">
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                             </svg>
@@ -152,20 +152,20 @@ export function AdminInquiries() {
                           </div>
                         )}
                         {inquiry.topic && (
-                          <div className="text-[#808087]">
+                          <div className="text-text-subtle">
                             <span className="font-medium">Topic:</span> {inquiry.topic}
                           </div>
                         )}
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="text-sm text-[#808087]">
+                      <div className="text-sm text-text-subtle">
                         {inquiry.message ? (
                           <div className="truncate max-w-xs" title={inquiry.message}>
                             {inquiry.message.length > 100 ? `${inquiry.message.substring(0, 100)}...` : inquiry.message}
                           </div>
                         ) : (
-                          <span className="text-[#808087]">No message</span>
+                          <span className="text-text-subtle">No message</span>
                         )}
                       </div>
                     </td>
@@ -178,7 +178,7 @@ export function AdminInquiries() {
       </div>
 
       {inquiries.length > 0 && (
-        <div className="flex items-center justify-between text-sm text-[#808087]">
+        <div className="flex items-center justify-between text-sm text-text-subtle">
           <div>
             Showing {inquiries.length} of {inquiries.length} inquiries
           </div>
