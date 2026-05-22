@@ -244,7 +244,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 </div>
                 
                 <div>
-                  <h1 className="font-inter text-lg sm:text-xl font-bold text-white">
+                  <h1 className="font-display text-lg sm:text-xl font-bold text-white">
                     {navItems.find(item => isActive(item.path)) ? t(navItems.find(item => isActive(item.path))!.labelKey) : t('admin.dashboard')}
                   </h1>
                   <p className="font-inter text-text-subtle text-xs sm:text-sm hidden sm:block">
@@ -288,7 +288,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                       logout();
                       navigate('/login');
                     }}
-                    className="flex items-center gap-2 px-3 lg:px-4 py-2 bg-transparent hover:bg-surface-3 text-white border border-white rounded-md transition-colors text-sm"
+                    className="flex items-center gap-2 px-3 lg:px-4 py-2 bg-transparent hover:bg-surface-3 text-white border border-border rounded-md transition-colors text-sm"
                   >
                     <Icon path="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" className="w-4 h-4" />
                     <span className="hidden sm:inline">{t('ui.logout')}</span>

@@ -52,7 +52,7 @@ const WeDeliver = () => {
     <div className='mt-[80px] md:mt-[100px] lg:mt-[120px]'>
         <Container className='flex flex-col justify-center items-center'>
             <div className='w-full flex flex-col justify-center items-center gap-[10px]'>
-              <h3 className='font-inter text-white text-[26px] md:text-[38px] font-bold'>{t('public.about.deliverTitle')}</h3>
+              <h3 className='font-display text-white text-[26px] md:text-[38px] font-bold'>{t('public.about.deliverTitle')}</h3>
               <p className='font-inter text-text-muted max-w-[370px] md:max-w-[800px] text-center text-[13px] md:text-[18px]'>
                 {t('public.about.deliverIntro')}
               </p>
@@ -62,9 +62,9 @@ const WeDeliver = () => {
                 <div
                   key={idx}
                   tabIndex={0}
-                  className='flex justify-center items-center bg-surface h-full flex-col gap-[14px] p-5 rounded-[10px] cursor-pointer transition-all duration-200 ease-out hover:bg-surface-2 hover:border-border-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 max-w-[317px]'
+                  className='flex justify-center items-center card h-full flex-col gap-[14px] p-6 cursor-pointer transition-all duration-200 ease-out hover:bg-surface-2 hover:border-border-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus max-w-[317px]'
                 >
-                    <h4 className='font-inter text-white text-[20px] md:text-[21px] font-semibold max-w-[250px]'>{item.title}</h4>
+                    <h4 className='font-display text-white text-[20px] md:text-[21px] font-semibold max-w-[250px]'>{item.title}</h4>
                     <img src={item.img} alt={item.alt} />
                     <p className='font-inter text-text-muted text-[13px] '>{item.text}</p>
                 </div>

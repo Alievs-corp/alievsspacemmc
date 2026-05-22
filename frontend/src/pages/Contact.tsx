@@ -131,7 +131,7 @@ const Contact = () => {
                 <meta property="og:type" content="website" />
             </Helmet>
             <Container className="flex flex-col justify-center items-center mb-12">
-                <h2 className="font-inter text-[38px] font-bold text-white text-center">{t('public.contact.heroTitle')}</h2>
+                <h2 className="font-display text-[38px] font-bold text-white text-center">{t('public.contact.heroTitle')}</h2>
                 <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">
                     {t('public.contact.heroCopy')}
                 </p>
@@ -141,19 +141,19 @@ const Contact = () => {
                     <ul className="space-y-4 w-[366px]">
                       <li className="flex items-start">
                          <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                         <h3 className="font-inter text-text-muted text-[18px]">{t('public.contact.hero.items.premiumUi')}</h3>
+                         <h3 className="font-display text-text-muted text-[18px]">{t('public.contact.hero.items.premiumUi')}</h3>
                       </li>
                       <li className="flex items-start">
                           <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          <h3 className="font-inter text-text-muted text-[18px]">{t('public.contact.hero.items.scalableBackend')}</h3>
+                          <h3 className="font-display text-text-muted text-[18px]">{t('public.contact.hero.items.scalableBackend')}</h3>
                       </li>
                       <li className="flex items-start">
                           <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          <h3 className="font-inter text-text-muted  text-[18px]">{t('public.contact.hero.items.marketplaceInfra')}</h3>
+                          <h3 className="font-display text-text-muted  text-[18px]">{t('public.contact.hero.items.marketplaceInfra')}</h3>
                       </li>
                       <li className="flex items-start">
                           <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          <h3 className="font-inter text-text-muted text-[18px]">{t('public.contact.hero.items.adminDashboards')}</h3>
+                          <h3 className="font-display text-text-muted text-[18px]">{t('public.contact.hero.items.adminDashboards')}</h3>
                       </li>
                     </ul>
                   </div>
@@ -180,7 +180,7 @@ const Contact = () => {
             <Container className='mb-[60px] md:mb-[100px]'>
                 <div className="max-w-[800px] mx-auto">
                     <div className="mb-10 text-center">
-                        <h2 className="font-inter text-[26px] font-bold text-white mb-4">{t('public.contact.form.title')}</h2>
+                        <h2 className="font-display text-[26px] font-bold text-white mb-4">{t('public.contact.form.title')}</h2>
                         <p className="font-inter text-[18px] text-text-muted">
                             {t('public.contact.form.copy')}
                         </p>
@@ -217,7 +217,7 @@ const Contact = () => {
                                         required
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.name')}
-                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="field font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                                 <div>
@@ -231,7 +231,7 @@ const Contact = () => {
                                         onChange={handleInputChange}
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.company')}
-                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="field font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                             </div>
@@ -249,7 +249,7 @@ const Contact = () => {
                                         required
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.email')}
-                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="field font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                                 <div>
@@ -263,7 +263,7 @@ const Contact = () => {
                                         onChange={handleInputChange}
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.phone')}
-                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="field font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                             </div>
@@ -279,7 +279,7 @@ const Contact = () => {
                                         onChange={handleInputChange}
                                         required
                                         disabled={isSubmitting}
-                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="field font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         <option value="" className="bg-surface">{t('public.contact.form.options.choose')}</option>
                                         <option value="banking" className="bg-surface">{t('public.contact.form.options.banking')}</option>
@@ -299,7 +299,7 @@ const Contact = () => {
                                         required
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.projectOverview')}
-                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="field font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                             </div>
@@ -316,7 +316,7 @@ const Contact = () => {
                                     disabled={isSubmitting}
                                     rows={6}
                                     placeholder={t('public.contact.form.placeholders.message')}
-                                    className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="field font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                 />
                             </div>
                             <p className='font-inter text-[10px] text-text-subtle font-bold'>{t('public.contact.form.tip')} * - {t('public.contact.form.required')}</p>
@@ -326,7 +326,7 @@ const Contact = () => {
                             <button
                                 type="submit"
                                 disabled={!isFormValid || isSubmitting}
-                                className={`bg-primary hover:bg-primary-hover text-on-primary font-inter py-3 px-8 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-[18px] whitespace-nowrap ${!isFormValid || isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                className={`bg-primary hover:bg-primary-hover text-on-primary font-inter py-3 px-8 rounded-md transition-colors duration-300 cursor-pointer text-[18px] whitespace-nowrap ${!isFormValid || isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
                                 {isSubmitting ? t('public.contact.form.submitting') || 'Sending...' : t('public.contact.form.submit')}
                             </button>

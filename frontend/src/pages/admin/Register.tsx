@@ -84,7 +84,7 @@ export function Register() {
 
           <div className="w-full">
             <div className="text-center mb-4 md:mb-6">
-              <h2 className="font-inter text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1">
+              <h2 className="font-display text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1">
                 {t('auth.register.title', 'Create your account')}
               </h2>
               <p className="font-inter text-xs md:text-sm text-text-subtle">

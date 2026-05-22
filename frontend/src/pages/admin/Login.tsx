@@ -74,7 +74,7 @@ export function Login() {
 
             <div className="w-full flex-1">
               <div className="text-center mb-3 md:mb-6">
-                <h2 className="font-inter text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1">
+                <h2 className="font-display text-xl md:text-2xl lg:text-3xl font-bold text-white mb-1">
                   {t('auth.login.title')}
                 </h2>
                 <p className="font-inter text-xs md:text-sm text-text-subtle">
@@ -222,7 +222,7 @@ export function Login() {
                     <input
                       id="remember-me"
                       type="checkbox"
-                      className="h-4 w-4 md:h-3.5 md:w-3.5 text-primary focus:ring-primary border-text-subtle rounded bg-surface cursor-pointer"
+                      className="h-4 w-4 md:h-3.5 md:w-3.5 text-primary focus:ring-primary border-border rounded bg-surface cursor-pointer"
                     />
                     <label htmlFor="remember-me" className="ml-2 block font-inter text-sm md:text-[18px] text-text-subtle">
                       {t('auth.login.rememberMe')}

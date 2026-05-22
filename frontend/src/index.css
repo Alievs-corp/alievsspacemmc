@@ -113,3 +113,23 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---- Shared component classes (single source of truth) ---- */
+@layer components {
+  /* Canonical card skin (matches the Home cards): bordered, subtle hover. */
+  .card {
+    @apply border border-border rounded-lg transition-colors duration-200 hover:border-border-strong hover:bg-surface-2;
+  }
+  /* Static surface panel: same skin, no hover (large content blocks). */
+  .panel {
+    @apply border border-border rounded-lg;
+  }
+  /* Clickable cards add pointer + a visible focus ring. */
+  .card-interactive {
+    @apply cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-bg;
+  }
+  /* Canonical form control skin. */
+  .field {
+    @apply w-full bg-surface border border-border rounded-lg px-4 py-3 text-text placeholder:text-text-subtle transition-colors duration-200 focus:outline-none focus:border-primary focus-visible:ring-2 focus-visible:ring-focus disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+}

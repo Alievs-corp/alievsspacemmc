@@ -138,7 +138,7 @@ const CaseStudies = () => {
                 <meta property="og:type" content="website" />
             </Helmet>
             <Container className="flex flex-col justify-center items-center mb-12">
-                <h2 className="font-inter text-[38px] font-bold text-white">{t('nav.caseStudies', 'Case Studies')}</h2>
+                <h2 className="font-display text-[38px] font-bold text-white">{t('nav.caseStudies', 'Case Studies')}</h2>
                 <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">{t('public.caseStudiesIntro')}</p>
             </Container>
 
@@ -148,7 +148,7 @@ const CaseStudies = () => {
                         {info.map((item, index) => (
                             <div 
                                 key={index}
-                                className="bg-surface border-b-[1.7px] border-l-[1.7px] border-white rounded-[10px] p-6 flex flex-col w-full max-w-[520px] mx-auto shadow-[0px_10px_20px_0px_#000000] hover:border-border-strong transition-all duration-300"
+                                className="card p-6 flex flex-col w-full max-w-[520px] mx-auto hover:border-border-strong transition-all duration-300"
                             >
                                 <div className="mb-4">
                                     <span className="font-inter text-white text-[13px] font-semibold">
@@ -156,7 +156,7 @@ const CaseStudies = () => {
                                     </span>
                                 </div>
 
-                                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-4">
+                                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-4">
                                     {item.title}
                                 </h3>
 
@@ -165,7 +165,7 @@ const CaseStudies = () => {
                                 </p>
 
                                 <div className="mb-8 flex-grow">
-                                    <h4 className="font-inter text-white text-[16px] font-semibold mb-4">
+                                    <h4 className="font-display text-white text-[16px] font-semibold mb-4">
                                         {t('public.caseStudies.keyFocusLabel')}
                                     </h4>
                                     <ul className="space-y-3">
@@ -181,7 +181,7 @@ const CaseStudies = () => {
                                 <Link 
                                     to={`/case-studies/${item.id}`}
                                     onClick={scrollToTop}
-                                    className="mt-auto w-full bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-4 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-center"
+                                    className="mt-auto w-full bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-4 rounded-md transition-colors duration-300 cursor-pointer text-center"
                                 >
                                     {t('public.caseStudies.viewCta')}
                                 </Link>
@@ -194,7 +194,7 @@ const CaseStudies = () => {
                             {info.slice(0, 2).map((item, index) => (
                                 <div 
                                     key={index}
-                                    className="bg-surface border-b-[1.7px] border-l-[1.7px] border-white rounded-[10px] p-6 flex flex-col w-[520px] shadow-[0px_10px_20px_0px_#000000] hover:border-border-strong transition-all duration-300"
+                                    className="card p-6 flex flex-col w-[520px] hover:border-border-strong transition-all duration-300"
                                 >
                                     <div className="mb-4">
                                         <span className="font-inter text-white text-[13px] font-semibold">
@@ -202,7 +202,7 @@ const CaseStudies = () => {
                                         </span>
                                     </div>
 
-                                    <h3 className="font-inter text-white text-[26px] font-semibold mb-4">
+                                    <h3 className="font-display text-white text-[26px] font-semibold mb-4">
                                         {item.title}
                                     </h3>
 
@@ -213,7 +213,7 @@ const CaseStudies = () => {
                                     </div>
 
                                     <div className="mb-6">
-                                        <h4 className="font-inter text-white text-[16px] font-semibold mb-3">
+                                        <h4 className="font-display text-white text-[16px] font-semibold mb-3">
                                             {t('public.caseStudies.keyFocusLabel')}
                                         </h4>
                                         <ul className="space-y-2">
@@ -229,7 +229,7 @@ const CaseStudies = () => {
                                     <Link 
                                         to={`/case-studies/${item.id}`}
                                         onClick={scrollToTop}
-                                        className="mt-auto w-full bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-4 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-center"
+                                        className="mt-auto w-full bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-4 rounded-md transition-colors duration-300 cursor-pointer text-center"
                                     >
                                         {t('public.caseStudies.viewCta')}
                                     </Link>
@@ -240,7 +240,7 @@ const CaseStudies = () => {
                         {info[2] && (
                             <div className="flex justify-center w-full">
                                 <div 
-                                    className="bg-surface border-b-[1.7px] border-l-[1.7px] border-white rounded-[10px] p-6 flex flex-col w-[520px] shadow-[0px_10px_20px_0px_#000000] hover:border-border-strong transition-all duration-300"
+                                    className="card p-6 flex flex-col w-[520px] hover:border-border-strong transition-all duration-300"
                                 >
                                     <div className="mb-4">
                                         <span className="font-inter text-white text-[13px] font-semibold">
@@ -248,7 +248,7 @@ const CaseStudies = () => {
                                         </span>
                                     </div>
                                     
-                                    <h3 className="font-inter text-white text-[26px] font-semibold mb-4">
+                                    <h3 className="font-display text-white text-[26px] font-semibold mb-4">
                                         {info[2].title}
                                     </h3>
                                     
@@ -259,7 +259,7 @@ const CaseStudies = () => {
                                     </div>
                                     
                                     <div className="mb-6">
-                                        <h4 className="font-inter text-white text-[16px] font-semibold mb-3">
+                                        <h4 className="font-display text-white text-[16px] font-semibold mb-3">
                                             {t('public.caseStudies.keyFocusLabel')}
                                         </h4>
                                         <ul className="space-y-2">
@@ -275,7 +275,7 @@ const CaseStudies = () => {
                                     <Link 
                                         to={`/case-studies/${info[2].id}`}
                                         onClick={scrollToTop}
-                                        className="mt-auto w-full bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-4 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-center"
+                                        className="mt-auto w-full bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-4 rounded-md transition-colors duration-300 cursor-pointer text-center"
                                     >
                                         {t('public.caseStudies.viewCta')}
                                     </Link>
@@ -288,7 +288,7 @@ const CaseStudies = () => {
             <Container className="w-full mb-[60px] md:mb-[100px]">
                 <div className="max-w-[800px] mx-auto">
                     <div className="mb-10 text-center">
-                        <h2 className="font-inter text-[26px] font-bold text-white mb-4">{t('public.caseStudies.requestTitle')}</h2>
+                        <h2 className="font-display text-[26px] font-bold text-white mb-4">{t('public.caseStudies.requestTitle')}</h2>
                         <p className="font-inter text-[18px] text-text-muted">{t('public.caseStudies.requestCopy')}</p>
                     </div>
                     {submitSuccess && (
@@ -316,7 +316,7 @@ const CaseStudies = () => {
                                         required
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.name')}
-                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="field font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                                 <div>
@@ -328,7 +328,7 @@ const CaseStudies = () => {
                                         onChange={handleInputChange}
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.company')}
-                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="field font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                             </div>
@@ -343,7 +343,7 @@ const CaseStudies = () => {
                                         onChange={handleInputChange}
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.email')}
-                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="field font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                                 <div>
@@ -355,7 +355,7 @@ const CaseStudies = () => {
                                         onChange={handleInputChange}
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.phone')}
-                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="field font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                             </div>
@@ -368,7 +368,7 @@ const CaseStudies = () => {
                                         value={formData.interest}
                                         onChange={handleInputChange}
                                         disabled={isSubmitting}
-                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="field font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         <option value="" className="bg-surface text-text-subtle">{t('public.contact.form.options.choose') || 'Select...'}</option>
                                         <option value="banking" className="bg-surface">{t('public.contact.form.options.banking') || 'Banking & Fintech'}</option>
@@ -386,7 +386,7 @@ const CaseStudies = () => {
                                         onChange={handleInputChange}
                                         disabled={isSubmitting}
                                         placeholder={t('public.contact.form.placeholders.projectOverview') || 'Project topic or brief overview...'}
-                                        className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="field font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                     />
                                 </div>
                             </div>
@@ -400,7 +400,7 @@ const CaseStudies = () => {
                                     disabled={isSubmitting}
                                     rows={6}
                                     placeholder={t('public.contact.form.placeholders.message') || 'Tell us more about your project...'}
-                                    className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="field font-inter text-white font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                 />
                             </div>
                             <p className='font-inter text-[10px] text-text-subtle font-bold'>{t('public.caseStudies.tip')}</p>
@@ -410,7 +410,7 @@ const CaseStudies = () => {
                             <button
                                 type="submit"
                                 disabled={isSubmitting || !formData.name.trim()}
-                                className={`bg-primary hover:bg-primary-hover text-on-primary font-inter py-3 px-8 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-[18px] whitespace-nowrap ${(isSubmitting || !formData.name.trim()) ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                className={`bg-primary hover:bg-primary-hover text-on-primary font-inter py-3 px-8 rounded-md transition-colors duration-300 cursor-pointer text-[18px] whitespace-nowrap ${(isSubmitting || !formData.name.trim()) ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
                                 {isSubmitting ? (t('public.contact.form.submitting') || 'Submitting...') : t('public.contactSubmit')}
                             </button>

@@ -64,7 +64,7 @@ export function ProfileMenu({ variant = 'md' }: ProfileMenuProps) {
       <button
         type="button"
         onClick={handleToggle}
-        className={`ml-1 flex items-center justify-center rounded-full bg-transparent border border-white hover:bg-surface-3 cursor-pointer transition-colors ${buttonSizeClasses}`}
+        className={`ml-1 flex items-center justify-center rounded-full bg-transparent border border-border hover:bg-surface-3 cursor-pointer transition-colors ${buttonSizeClasses}`}
         aria-label={t('nav.profile', 'Profile')}
       >
         <svg

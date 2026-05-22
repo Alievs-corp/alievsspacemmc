@@ -216,7 +216,7 @@ export function RefundPolicy() {
       </Helmet>
 
       <Container className="flex flex-col justify-center items-center mb-12">
-        <h2 className="font-inter text-[38px] font-bold text-white">{content.title}</h2>
+        <h2 className="font-display text-[38px] font-bold text-white">{content.title}</h2>
         <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">
           {content.companyName}
         </p>
@@ -227,27 +227,27 @@ export function RefundPolicy() {
 
       <Container className="w-full mb-24">
         <div className="flex flex-col items-center">
-          <div className="bg-surface border-b-[1.7px] border-l-[1.7px] border-white rounded-[10px] p-8 md:p-10 flex flex-col w-full max-w-4xl mx-auto shadow-[0px_10px_20px_0px_#000000] hover:border-border-strong transition-all duration-300">
+          <div className="panel p-8 md:p-10 flex flex-col w-full max-w-4xl mx-auto hover:border-border-strong transition-all duration-300">
 
             <p className="font-inter text-text-muted text-[16px] md:text-[18px] leading-relaxed mb-8 border-l-4 border-primary pl-4">
               {content.intro}
             </p>
             <div className="space-y-8">
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.nature.title}</h3>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.nature.title}</h3>
                 <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.nature.body}</p>
               </div>
 
               <hr className="border-surface-3" />
 
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.deposits.title}</h3>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.deposits.title}</h3>
                 <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.deposits.body}</p>
               </div>
 
               <hr className="border-surface-3" />
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.eligibility.title}</h3>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.eligibility.title}</h3>
                 <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.eligibility.intro}</p>
                 <ul className="list-disc pl-6 space-y-1">
                   {content.sections.eligibility.list.map((item) => (
@@ -260,7 +260,7 @@ export function RefundPolicy() {
 
               <hr className="border-surface-3" />
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.partial.title}</h3>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.partial.title}</h3>
                 <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.partial.intro}</p>
                 <ul className="list-disc pl-6 space-y-1">
                   {content.sections.partial.list.map((item) => (
@@ -273,7 +273,7 @@ export function RefundPolicy() {
 
               <hr className="border-surface-3" />
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.nonRefundable.title}</h3>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.nonRefundable.title}</h3>
                 <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.nonRefundable.intro}</p>
                 <ul className="list-disc pl-6 space-y-1">
                   {content.sections.nonRefundable.list.map((item) => (
@@ -286,20 +286,20 @@ export function RefundPolicy() {
 
               <hr className="border-surface-3" />
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.disputes.title}</h3>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.disputes.title}</h3>
                 <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.disputes.body}</p>
               </div>
 
               <hr className="border-surface-3" />
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.processing.title}</h3>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.processing.title}</h3>
                 <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.processing.body}</p>
               </div>
 
               <hr className="border-surface-3" />
 
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.contact.title}</h3>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.contact.title}</h3>
                 <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.contact.intro}</p>
                 <div className="bg-surface p-4 rounded-lg mt-2 border border-surface-3">
                   <p className="font-inter text-white text-[16px] md:text-[18px] font-semibold">{content.companyName}</p>

@@ -28,7 +28,7 @@ const AboutHeader = () => {
         <Container className="px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-[80px] h-full justify-start xs:justify-center">
             <div className="flex flex-col gap-3 sm:gap-4 md:gap-5">
-                <h2 className="font-inter text-[38px] md:text-5xl lg:text-5xl xl:text-6xl text-white font-bold max-w-full sm:max-w-[370px] md:max-w-[800px] lg:max-w-[900px] xl:max-w-[1000px] leading-tight sm:leading-normal">
+                <h2 className="font-display text-[38px] md:text-5xl lg:text-5xl xl:text-6xl text-white font-bold max-w-full sm:max-w-[370px] md:max-w-[800px] lg:max-w-[900px] xl:max-w-[1000px] leading-tight sm:leading-normal">
                   {t('public.about.headerTitle')}
                 </h2>
                 <p className="text-text-muted text-[13px] sm:text-base md:text-lg lg:text-xl max-w-full sm:max-w-[90%] md:max-w-[647px] leading-relaxed">

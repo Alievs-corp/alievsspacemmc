@@ -41,7 +41,7 @@ const WeBuild = () => {
                 <div
                   key={idx}
                   tabIndex={0}
-                  className='flex h-full flex-col gap-3 p-5 border border-border rounded-lg cursor-pointer transition-all duration-200 ease-out hover:border-border-strong hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus'
+                  className='flex h-full flex-col gap-3 card card-interactive p-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus'
                 >
                   <img src={item.img} alt={item.alt} />
                   <h4 className='font-display text-white text-[20px] md:text-[24px] font-semibold max-w-[250px]'>{item.title}</h4>

@@ -51,7 +51,7 @@ export function Footer() {
             <div className="flex flex-col lg:flex-row lg:gap-24 w-full lg:w-auto">
               <div className="grid grid-cols-2 lg:flex lg:flex-row lg:gap-24 w-full">
                 <div className="lg:block">
-                  <h3 className="font-inter text-[18px] text-white mb-4">{t('nav.company', 'Company')}</h3>
+                  <h3 className="font-display text-[18px] text-white mb-4">{t('nav.company', 'Company')}</h3>
                   <ul className="space-y-3">
                     <li>
                       <Link 
@@ -93,7 +93,7 @@ export function Footer() {
                 </div>
 
                 <div className="lg:block">
-                  <h3 className="font-inter text-[18px] text-white mb-4">{t('nav.legal', 'Legal')}</h3>
+                  <h3 className="font-display text-[18px] text-white mb-4">{t('nav.legal', 'Legal')}</h3>
                   <ul className="space-y-3">
                     <li>
                       <Link 
@@ -135,7 +135,7 @@ export function Footer() {
                 </div>
 
                 <div className="lg:block col-span-2 mt-8 lg:mt-0">
-                  <h3 className="font-inter text-[18px] text-white mb-4">{t('nav.contact', 'Contact')}</h3>
+                  <h3 className="font-display text-[18px] text-white mb-4">{t('nav.contact', 'Contact')}</h3>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-center gap-2">
                       <p className='font-inter text-white text-[13px] font-semibold whitespace-nowrap'>{t('public.contactEmail', 'Email')}:</p>

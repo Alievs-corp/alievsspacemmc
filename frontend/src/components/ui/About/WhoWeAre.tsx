@@ -25,7 +25,7 @@ const WhoWeAre = () => {
     <div className='mt-[80px] md:mt-[100px] lg:mt-[120px]'>
         <Container className='flex flex-col justify-center items-center'>
             <div className='w-full flex flex-col justify-center items-center gap-[10px]'>
-              <h3 className='font-inter text-white text-[26px] md:text-[38px] font-bold'>{t('public.about.whoTitle')}</h3>
+              <h3 className='font-display text-white text-[26px] md:text-[38px] font-bold'>{t('public.about.whoTitle')}</h3>
               <p className='font-inter text-text-muted max-w-[370px] md:max-w-[800px] text-center text-[13px] md:text-[18px]'>
                 {t('public.about.whoCopy')}
               </p>
@@ -38,9 +38,9 @@ const WhoWeAre = () => {
                   <div
                     key={idx}
                     tabIndex={0}
-                    className='flex items-center justify-center p-4 border-b-[1px] border-l-[1px] border-white rounded-[10px] cursor-pointer transition-all duration-200 ease-out hover:bg-surface-2 hover:border-border-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 w-full sm:w-auto sm:flex-1 max-w-[280px] sm:max-w-none min-h-[60px] mx-auto sm:mx-0'
+                    className='flex items-center justify-center card p-4 cursor-pointer transition-all duration-200 ease-out hover:bg-surface-2 hover:border-border-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus w-full sm:w-auto sm:flex-1 max-w-[280px] sm:max-w-none min-h-[60px] mx-auto sm:mx-0'
                   >
-                    <h4 className='font-inter text-white text-sm md:text-base text-center'>{item.title}</h4>
+                    <h4 className='font-display text-white text-sm md:text-base text-center'>{item.title}</h4>
                   </div>
                 ))}
               </div>

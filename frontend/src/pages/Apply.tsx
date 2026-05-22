@@ -83,7 +83,7 @@ const Apply = () => {
       <Container className="w-full">
         <div className="max-w-[800px] mx-auto">
           <div className="mb-10 text-center">
-            <h2 className="font-inter text-[26px] md:text-[38px] font-bold text-white mb-4">
+            <h2 className="font-display text-[26px] md:text-[38px] font-bold text-white mb-4">
               Apply for {getPositionTitle()}
             </h2>
             <p className="font-inter text-[13px] md:text-[18px] text-text-muted">
@@ -105,7 +105,7 @@ const Apply = () => {
                     onChange={handleInputChange}
                     required
                     placeholder="Your full name"
-                    className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white placeholder:text-text-muted/50 focus:outline-none focus:border-primary transition-colors duration-300"
+                    className="field font-inter text-white placeholder:text-text-muted/50 focus:outline-none focus:border-primary transition-colors duration-300"
                   />
                 </div>
                 <div>
@@ -127,7 +127,7 @@ const Apply = () => {
                       aria-label="Upload CV"
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                     />
-                    <div className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white focus:outline-none transition-colors duration-300">
+                    <div className="field font-inter text-white focus:outline-none transition-colors duration-300">
                       {formData.resume ? (
                         <span className="text-white/90">Selected: {formData.resume.name}</span>
                       ) : (
@@ -153,7 +153,7 @@ const Apply = () => {
                     onChange={handleInputChange}
                     required
                     placeholder="your.email@example.com"
-                    className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white placeholder:text-text-muted/50 focus:outline-none focus:border-primary transition-colors duration-300"
+                    className="field font-inter text-white placeholder:text-text-muted/50 focus:outline-none focus:border-primary transition-colors duration-300"
                   />
                 </div>
                 <div>
@@ -166,7 +166,7 @@ const Apply = () => {
                     value={formData.profileUrl}
                     onChange={handleInputChange}
                     placeholder="https:// ..."
-                    className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white placeholder:text-text-muted/50 focus:outline-none focus:border-primary transition-colors duration-300"
+                    className="field font-inter text-white placeholder:text-text-muted/50 focus:outline-none focus:border-primary transition-colors duration-300"
                   />
                 </div>
               </div>
@@ -182,16 +182,16 @@ const Apply = () => {
                   onChange={handleInputChange}
                   rows={4}
                   placeholder="Brief note about your experience or motivation"
-                  className="w-full bg-surface border border-text-subtle rounded-[10px] px-4 py-3 font-inter text-white placeholder:text-text-muted/50 focus:outline-none focus:border-primary transition-colors duration-300"
+                  className="field font-inter text-white placeholder:text-text-muted/50 focus:outline-none focus:border-primary transition-colors duration-300"
                 />
               </div>
             </div>
 
             {/* Submit Button & Note */}
-            <div className="flex flex-col items-end gap-2 pt-4 border-t border-white/20">
+            <div className="flex flex-col items-end gap-2 pt-4 border-t border-border">
               <button
                 type="submit"
-                className="bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-8 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-[16px] whitespace-nowrap"
+                className="bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-8 rounded-md transition-colors duration-300 cursor-pointer text-[16px] whitespace-nowrap"
               >
                 Submit Application
               </button>

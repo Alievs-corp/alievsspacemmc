@@ -227,7 +227,7 @@ export function Careers() {
       </Helmet>
       
       <Container className="flex flex-col justify-center items-center">
-        <h2 className="font-inter text-[38px] font-bold text-white">{t('nav.careers')}</h2>
+        <h2 className="font-display text-[38px] font-bold text-white">{t('nav.careers')}</h2>
         <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">
           {t('public.careersIntro')}
         </p>
@@ -238,9 +238,9 @@ export function Careers() {
           {vacancies.map((vacancy, index) => (
             <div 
               key={index}
-              className="bg-surface border border-white/20 rounded-[10px] p-6 flex flex-col h-full shadow-[0px_10px_20px_0px_#000000] hover:border-border-strong transition-all duration-300"
+              className="card p-6 flex flex-col h-full hover:border-border-strong transition-all duration-300"
             >
-              <h3 className="font-inter text-white text-[22px] md:text-[24px] font-bold mb-3">
+              <h3 className="font-display text-white text-[22px] md:text-[24px] font-bold mb-3">
                 {vacancy.title}
               </h3>
               
@@ -255,7 +255,7 @@ export function Careers() {
               </div>
               
               <div className="mb-6 flex-grow">
-                <h4 className="font-inter text-white text-[16px] font-semibold mb-3">{t('public.requirements')}</h4>
+                <h4 className="font-display text-white text-[16px] font-semibold mb-3">{t('public.requirements')}</h4>
                 <ul className="space-y-2">
                   {vacancy.requirements.map((requirement, idx) => (
                     <li key={idx} className="flex items-start">
@@ -269,7 +269,7 @@ export function Careers() {
               <Link 
                 to={`/careers/${vacancy.id}`}
                 onClick={scrollToTop}
-                className="mt-auto w-full bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-4 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-center"
+                className="mt-auto w-full bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-4 rounded-md transition-colors duration-300 cursor-pointer text-center"
               >
                 {t('public.careers.viewRoleCta')}
               </Link>
@@ -280,7 +280,7 @@ export function Careers() {
 
       <Container className="flex justify-between mt-[120px] flex-col md:flex-row gap-[40px] md:gap-0 items-center md:items-start">
         <div className="flex flex-col gap-[10px] max-w-[586px] justify-center w-full md:w-auto">
-          <h3 className="font-inter text-white text-[21px] md:text-[26px] font-semibold text-center md:text-left">
+          <h3 className="font-display text-white text-[21px] md:text-[26px] font-semibold text-center md:text-left">
             {t('public.careers.whyTitle')}
           </h3>
           <p className="font-inter text-[10px] md:text-[13px] text-text-muted text-center md:text-left">
@@ -297,7 +297,7 @@ export function Careers() {
 
       <Container className='w-full mt-[120px] mb-[60px] md:mb-[100px]'>
         <div className="flex flex-col justify-center items-center mb-12">
-          <h3 className="font-inter text-[38px] font-bold text-white">{t('public.teamTitle')}</h3>
+          <h3 className="font-display text-[38px] font-bold text-white">{t('public.teamTitle')}</h3>
           
           <div className="flex flex-wrap justify-center gap-2 md:gap-4 mt-6">
             {roleOptions.map((option) => (
@@ -310,7 +310,7 @@ export function Careers() {
                 className={`px-4 py-2 rounded-full text-sm md:text-base font-inter transition-all duration-300 cursor-pointer ${
                   selectedRole === option.value
                     ? 'bg-primary text-on-primary'
-                    : 'bg-transparent border border-white/20 text-text-muted hover:border-border-strong hover:text-white'
+                    : 'bg-transparent border border-border text-text-muted hover:border-border-strong hover:text-white'
                 }`}
               >
                 {option.label}
@@ -323,7 +323,7 @@ export function Careers() {
           {filteredTeamMembers.slice(0, showAllTeam ? filteredTeamMembers.length : 4).map((member, index) => (
             <div 
               key={index}
-              className="bg-surface border-l-[1px] border-b-[1px] border-white rounded-[10px] p-6 shadow-[0px_10px_20px_0px_#000000] hover:shadow-[0px_15px_30px_0px_#000000] transition-shadow duration-300"
+              className="card p-6"
             >
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-0">
@@ -343,7 +343,7 @@ export function Careers() {
                   )}
 
                   <div className="md:hidden flex-1">
-                    <h4 className="font-inter text-white text-[20px] md:text-[26px] mb-1">
+                    <h4 className="font-display text-white text-[20px] md:text-[26px] mb-1">
                       {member.name}
                     </h4>
                     <p className="font-inter text-text-muted text-[14px] md:text-[18px] font-semibold">
@@ -354,7 +354,7 @@ export function Careers() {
 
                 <div className="hidden md:flex md:flex-1 md:flex-col">
                   <div className="mb-4">
-                    <h4 className="font-inter text-white text-[22px] md:text-[26px] mb-2">
+                    <h4 className="font-display text-white text-[22px] md:text-[26px] mb-2">
                       {member.name}
                     </h4>
                     <p className="font-inter text-text-muted text-[16px] md:text-[18px] font-semibold">
@@ -381,7 +381,7 @@ export function Careers() {
           <div className="flex justify-center mt-12">
             <button 
               onClick={() => setShowAllTeam(!showAllTeam)}
-              className="bg-transparent hover:bg-primary-hover border-[1px] border-white/20 text-white font-inter py-[10px] px-[20px] rounded-[6.45px] transition-all duration-300 cursor-pointer"
+              className="bg-transparent hover:bg-surface-3 border border-border text-white font-inter py-[10px] px-[20px] rounded-md transition-colors duration-300 cursor-pointer"
             >
               {showAllTeam ? t('public.careers.showLess') : t('public.careers.viewMore')}
             </button>
@@ -408,7 +408,7 @@ export function Careers() {
               <button
                 type="button"
                 onClick={() => setPreviewMemberId(null)}
-                className="absolute -top-4 -right-4 bg-black/60 hover:bg-black/80 text-white rounded-full w-10 h-10 flex items-center justify-center text-xl font-inter transition-all duration-200 backdrop-blur-sm border border-white/20 z-10 cursor-pointer"
+                className="absolute -top-4 -right-4 bg-black/60 hover:bg-black/80 text-white rounded-full w-10 h-10 flex items-center justify-center text-xl font-inter transition-all duration-200 backdrop-blur-sm border border-border z-10 cursor-pointer"
                 aria-label="Şəkli bağla"
               >
                 ✕
@@ -433,7 +433,7 @@ export function Careers() {
               </div>
 
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-md animate-slide-up">
-                <div className="bg-gradient-to-r from-[#0f0f2a] to-[#1a1a3a] backdrop-blur-md rounded-xl px-6 py-4 border border-white/20 shadow-lg">
+                <div className="panel px-6 py-4 shadow-lg">
                   <p className="font-inter text-white text-[18px] font-semibold text-center">
                     {previewMember.name}
                   </p>
@@ -441,7 +441,7 @@ export function Careers() {
                     {previewMember.role}
                   </p>
                   {previewMember.description && (
-                    <p className="font-inter text-text-muted text-[12px] text-center mt-2 pt-2 border-t border-white/10">
+                    <p className="font-inter text-text-muted text-[12px] text-center mt-2 pt-2 border-t border-border/10">
                       {previewMember.description.length > 100 
                         ? `${previewMember.description.substring(0, 100)}...` 
                         : previewMember.description}
