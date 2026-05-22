@@ -31,8 +31,8 @@ const WeBuild = () => {
     <div className='mt-[80px] md:mt-[100px] lg:mt-[120px]'>
         <Container className='flex flex-col justify-center items-center'>
             <div className='w-full flex flex-col justify-center items-center gap-[10px]'>
-              <h3 className='font-inter text-white text-[26px] md:text-[38px] font-bold'>{t('public.buildWhat')}</h3>
-              <p className='font-inter text-[#C5C5C5] max-w-[370px] md:max-w-[800px] text-center text-[13px] md:text-[18px]'>
+              <h3 className='font-display text-white text-[26px] md:text-[38px] font-bold'>{t('public.buildWhat')}</h3>
+              <p className='font-inter text-text-muted max-w-[370px] md:max-w-[800px] text-center text-[13px] md:text-[18px]'>
                 {t('public.buildDesc')}
               </p>
             </div>
@@ -41,11 +41,11 @@ const WeBuild = () => {
                 <div
                   key={idx}
                   tabIndex={0}
-                  className='flex h-full flex-col gap-3 p-5 border-b-[1px] border-l-[1px] border-white rounded-[10px] cursor-pointer transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-white/5 hover:border-[#133FA6] hover:shadow-[0_8px_24px_rgba(19,63,166,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#133FA6]/50'
+                  className='flex h-full flex-col gap-3 p-5 border border-border rounded-lg cursor-pointer transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-surface-2 hover:border-primary hover:shadow-glow-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus'
                 >
                   <img src={item.img} alt={item.alt} />
-                  <h4 className='font-inter text-white text-[20px] md:text-[24px] font-semibold max-w-[250px]'>{item.title}</h4>
-                  <p className='font-inter text-[#C5C5C5] text-[13px] md:text-[16px]'>{item.text}</p>
+                  <h4 className='font-display text-white text-[20px] md:text-[24px] font-semibold max-w-[250px]'>{item.title}</h4>
+                  <p className='font-inter text-text-muted text-[13px] md:text-[16px]'>{item.text}</p>
                 </div>
               ))}
             </div>
