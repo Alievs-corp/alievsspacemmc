@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { api, type Career, type Employee, type Locale } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
+import { LocaleTabs } from '@/components/admin/LocaleTabs';
+import { cn } from '@/lib/utils';
+import { CheckCircle2 } from 'lucide-react';
 
 export function AdminCareers() {
   const { locale, supportedLocales, t } = useI18n();
@@ -27,6 +30,10 @@ export function AdminCareers() {
   });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
+  const [careerLoc, setCareerLoc] = useState<Locale>('en');
+  const [employeeLoc, setEmployeeLoc] = useState<Locale>('en');
+  const [careerSaved, setCareerSaved] = useState(false);
+  const [employeeSaved, setEmployeeSaved] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -168,6 +175,8 @@ export function AdminCareers() {
 
       await loadData();
       handleNewCareer();
+      setCareerSaved(true);
+      setTimeout(() => setCareerSaved(false), 2500);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to save career');
     } finally {
@@ -193,6 +202,8 @@ export function AdminCareers() {
 
       await loadData();
       handleNewEmployee();
+      setEmployeeSaved(true);
+      setTimeout(() => setEmployeeSaved(false), 2500);
     } catch (err) {
       setError(err instanceof Error ? err.message : t('admin.failedToSave'));
     } finally {
@@ -215,7 +226,7 @@ export function AdminCareers() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-white">{t('admin.careers')}</h1>
+            <h1 className="font-display text-2xl sm:text-3xl font-bold text-text">{t('admin.careers')}</h1>
             <p className="mt-2 text-sm text-text-subtle">
               {t('admin.manageDescription')}
             </p>
@@ -279,15 +290,17 @@ export function AdminCareers() {
         </div>
 
         <div className="rounded-lg border border-surface-3 bg-surface p-6">
-          <h2 className="text-xl font-semibold mb-4 text-white">
-            {editingCareerId ? t('admin.editVacancy') : t('admin.createVacancy')}
-          </h2>
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <h2 className="font-display text-lg font-semibold text-text">
+              {editingCareerId ? t('admin.editVacancy') : t('admin.createVacancy')}
+            </h2>
+            <LocaleTabs locales={supportedLocales} active={careerLoc} onChange={(c) => setCareerLoc(c as Locale)} />
+          </div>
           <form onSubmit={handleSubmitCareer} className="space-y-6">
             {supportedLocales.map((loc) => {
               const locCode = loc.code as Locale;
               return (
-                <div key={locCode} className="space-y-4 p-4 border border-surface-3 rounded-lg bg-surface/30">
-                  <h3 className="font-medium">{loc.label}</h3>
+                <div key={locCode} className={cn('space-y-4', locCode !== careerLoc && 'hidden')}>
                   <div className="grid gap-4 md:grid-cols-2">
                     <div>
                       <label className="block text-sm font-medium mb-1 text-white">{t('admin.title')}</label>
@@ -384,13 +397,18 @@ export function AdminCareers() {
               );
             })}
 
-            <div className="flex gap-3">
+            <div className="flex items-center gap-3">
               <Button type="submit" disabled={saving}>
                 {saving ? t('admin.saving') : t('admin.save')}
               </Button>
               <Button type="button" variant="outline" onClick={handleNewCareer}>
                 {t('admin.cancel')}
               </Button>
+              {careerSaved && (
+                <span className="inline-flex items-center gap-1.5 text-sm text-success">
+                  <CheckCircle2 className="h-4 w-4" /> {t('admin.saved', 'Saved')}
+                </span>
+              )}
             </div>
           </form>
         </div>
@@ -399,7 +417,7 @@ export function AdminCareers() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-white">{t('admin.team')}</h1>
+            <h1 className="font-display text-2xl sm:text-3xl font-bold text-text">{t('admin.team')}</h1>
             <p className="mt-2 text-sm text-text-subtle">
               {t('admin.teamDescription')}
             </p>
@@ -453,15 +471,17 @@ export function AdminCareers() {
         </div>
 
         <div className="rounded-lg border border-surface-3 bg-surface p-6">
-          <h2 className="text-xl font-semibold mb-4 text-white">
-            {editingEmployeeId ? t('admin.editMember') : t('admin.createMember')}
-          </h2>
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <h2 className="font-display text-lg font-semibold text-text">
+              {editingEmployeeId ? t('admin.editMember') : t('admin.createMember')}
+            </h2>
+            <LocaleTabs locales={supportedLocales} active={employeeLoc} onChange={(c) => setEmployeeLoc(c as Locale)} />
+          </div>
           <form onSubmit={handleSubmitEmployee} className="space-y-6">
             {supportedLocales.map((loc) => {
               const locCode = loc.code as Locale;
               return (
-                <div key={locCode} className="space-y-4 p-4 border border-surface-3 rounded-lg bg-surface/30">
-                  <h3 className="font-medium">{loc.label}</h3>
+                <div key={locCode} className={cn('space-y-4', locCode !== employeeLoc && 'hidden')}>
                   <div className="grid gap-4 md:grid-cols-2">
                     <div>
                       <label className="block text-sm font-medium mb-1 text-white">Full name</label>
@@ -543,13 +563,18 @@ export function AdminCareers() {
               );
             })}
 
-            <div className="flex gap-3">
+            <div className="flex items-center gap-3">
               <Button type="submit" disabled={saving}>
                 {saving ? t('admin.saving') : t('admin.save')}
               </Button>
               <Button type="button" variant="outline" onClick={handleNewEmployee}>
                 {t('admin.cancel')}
               </Button>
+              {employeeSaved && (
+                <span className="inline-flex items-center gap-1.5 text-sm text-success">
+                  <CheckCircle2 className="h-4 w-4" /> {t('admin.saved', 'Saved')}
+                </span>
+              )}
             </div>
           </form>
         </div>

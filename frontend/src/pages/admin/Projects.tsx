@@ -3,6 +3,9 @@ import { api, type Project, type Locale } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 import { ImageUpload } from '@/components/admin/ImageUpload';
+import { LocaleTabs } from '@/components/admin/LocaleTabs';
+import { cn } from '@/lib/utils';
+import { CheckCircle2 } from 'lucide-react';
 
 export function AdminProjects() {
   const { locale, supportedLocales, t } = useI18n();
@@ -21,6 +24,8 @@ export function AdminProjects() {
   });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
+  const [activeLoc, setActiveLoc] = useState<Locale>('en');
+  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
     loadProjects();
@@ -114,6 +119,8 @@ export function AdminProjects() {
 
       await loadProjects();
       handleNew();
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2500);
     } catch (err) {
       setError(err instanceof Error ? err.message : t('admin.failedToSave'));
     } finally {
@@ -129,7 +136,7 @@ export function AdminProjects() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-white">{t('admin.projects')}</h1>
+          <h1 className="font-display text-2xl sm:text-3xl font-bold text-text">{t('admin.projects')}</h1>
           <p className="mt-2 text-sm text-text-subtle">
             {t('admin.manageDescription')}
           </p>
@@ -191,15 +198,17 @@ export function AdminProjects() {
       </div>
 
       <div className="rounded-lg border border-surface-3 bg-surface p-6">
-        <h2 className="text-xl font-semibold mb-4 text-white">
-          {editingId ? t('admin.editProject') : t('admin.createProject')}
-        </h2>
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <h2 className="font-display text-lg font-semibold text-text">
+            {editingId ? t('admin.editProject') : t('admin.createProject')}
+          </h2>
+          <LocaleTabs locales={supportedLocales} active={activeLoc} onChange={(c) => setActiveLoc(c as Locale)} />
+        </div>
         <form onSubmit={handleSubmit} className="space-y-6">
           {supportedLocales.map((loc) => {
             const locCode = loc.code as Locale;
             return (
-              <div key={locCode} className="space-y-4 p-4 border border-surface-3 rounded-lg bg-surface/30">
-                <h3 className="font-medium text-white">{loc.label}</h3>
+              <div key={locCode} className={cn('space-y-4', locCode !== activeLoc && 'hidden')}>
                 <div className="grid gap-4 md:grid-cols-2">
                   <div>
                     <label className="block text-sm font-medium mb-1 text-white">{t('admin.industry')}</label>
@@ -293,13 +302,18 @@ export function AdminProjects() {
             );
           })}
 
-          <div className="flex gap-3">
+          <div className="flex items-center gap-3">
             <Button type="submit" disabled={saving}>
               {saving ? t('admin.saving') : t('admin.save')}
             </Button>
             <Button type="button" variant="outline" onClick={handleNew}>
               {t('admin.cancel')}
             </Button>
+            {saved && (
+              <span className="inline-flex items-center gap-1.5 text-sm text-success">
+                <CheckCircle2 className="h-4 w-4" /> {t('admin.saved', 'Saved')}
+              </span>
+            )}
           </div>
         </form>
       </div>
