@@ -41,7 +41,7 @@ export function Header() {
 
   return (
     <>
-      <header className='sticky top-0 z-40 w-full bg-[#13132F] text-white'>
+      <header className='sticky top-0 z-40 w-full bg-surface text-text border-b border-border'>
         <div className='flex items-center justify-between px-4 sm:px-6 lg:px-8 h-20'>
           <Link 
             to="/" 
@@ -54,18 +54,18 @@ export function Header() {
               className="w-16 sm:w-16 md:w-14 lg:w-20" 
             />
             <div className="hidden sm:block md:hidden lg:block">
-              <p className='font-almarai sm:text-[24px] md:text-[18px] lg:text-[26px] xl:text-[28px] leading-none'>ALIEVS</p>
-              <p className='font-kavivanar sm:text-[16px] md:text-[12px] lg:text-[18px] xl:text-[20px] leading-tight'>Space {t('ui.companyDescription')}</p>
+              <p className='font-display sm:text-[24px] md:text-[18px] lg:text-[26px] xl:text-[28px] leading-none'>ALIEVS</p>
+              <p className='font-mono sm:text-[16px] md:text-[12px] lg:text-[18px] xl:text-[20px] leading-tight'>Space {t('ui.companyDescription')}</p>
             </div>
             <div className="flex sm:hidden flex-col gap-1">
-              <p className='font-almarai text-[15.44px] '>ALIEVS</p>
-              <p className='font-kavivanar text-[11.6px]'>Space {t('ui.companyDescription')}</p>
+              <p className='font-display text-[15.44px] '>ALIEVS</p>
+              <p className='font-mono text-[11.6px]'>Space {t('ui.companyDescription')}</p>
             </div>
           </Link>
 
           <div className="flex items-center md:hidden">
             <button
-              className="text-white p-2 hover:bg-[#546691] rounded-md transition-colors"
+              className="text-white p-2 hover:bg-surface-3 rounded-md transition-colors"
               aria-label={t('ui.menu')}
               onClick={() => setMobileMenuOpen(true)}
             >
@@ -95,7 +95,7 @@ export function Header() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cn(
-                      'whitespace-nowrap text-[10px] px-1 py-0.5 rounded transition-colors hover:bg-[#546691]',
+                      'whitespace-nowrap text-[10px] px-1 py-0.5 rounded transition-colors hover:bg-surface-3',
                       'text-white flex items-center gap-0.5'
                     )}
                     onClick={handleExternalLinkClick}
@@ -110,7 +110,7 @@ export function Header() {
                     key={link.path}
                     to={link.path}
                     className={cn(
-                      'whitespace-nowrap text-[10px] px-1 py-0.5 rounded transition-colors hover:bg-[#546691]',
+                      'whitespace-nowrap text-[10px] px-1 py-0.5 rounded transition-colors hover:bg-surface-3',
                       'text-white'
                     )}
                     onClick={scrollToTop}
@@ -132,7 +132,7 @@ export function Header() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cn(
-                      'whitespace-nowrap text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-1.5 lg:px-2 xl:px-2.5 2xl:px-3 py-1 lg:py-1.5 xl:py-2 rounded-md transition-colors hover:bg-[#546691]',
+                      'whitespace-nowrap text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-1.5 lg:px-2 xl:px-2.5 2xl:px-3 py-1 lg:py-1.5 xl:py-2 rounded-md transition-colors hover:bg-surface-3',
                       'text-white flex items-center gap-0.5 lg:gap-1 xl:gap-1.5'
                     )}
                     onClick={handleExternalLinkClick}
@@ -147,7 +147,7 @@ export function Header() {
                     key={link.path}
                     to={link.path}
                     className={cn(
-                      'whitespace-nowrap text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-1.5 lg:px-2 xl:px-2.5 2xl:px-3 py-1 lg:py-1.5 xl:py-2 rounded-md transition-colors hover:bg-[#546691]',
+                      'whitespace-nowrap text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-1.5 lg:px-2 xl:px-2.5 2xl:px-3 py-1 lg:py-1.5 xl:py-2 rounded-md transition-colors hover:bg-surface-3',
                       'text-white'
                     )}
                     onClick={scrollToTop}
@@ -168,7 +168,7 @@ export function Header() {
                     supportedLocales[(idx + 1) % supportedLocales.length].code
                   );
                 }}
-                className="p-1 rounded-md hover:bg-[#546691] cursor-pointer transition-colors"
+                className="p-1 rounded-md hover:bg-surface-3 cursor-pointer transition-colors"
               >
                 <img 
                   src={translate} 
@@ -179,7 +179,7 @@ export function Header() {
 
               <Button
                 size="sm"
-                className="bg-[#133FA6] hover:bg-[#0f2f78] text-white text-[10px] px-1.5 py-1 border-b-[0.7px] border-white cursor-pointer min-w-[70px]"
+                className="bg-primary hover:bg-primary-hover text-on-primary font-medium text-[10px] px-1.5 py-1 cursor-pointer min-w-[70px]"
                 onClick={() => {
                   navigate('/contact');
                   scrollToTop();
@@ -193,7 +193,7 @@ export function Header() {
               ) : (
                 <Button
                   size="sm"
-                  className="bg-transparent hover:bg-[#546691] text-white text-[10px] px-1.5 py-1 border border-white cursor-pointer min-w-[50px]"
+                  className="bg-transparent hover:bg-surface-3 text-white text-[10px] px-1.5 py-1 border border-border-strong cursor-pointer min-w-[50px]"
                   onClick={() => {
                     navigate('/login');
                     scrollToTop();
@@ -212,7 +212,7 @@ export function Header() {
                     supportedLocales[(idx + 1) % supportedLocales.length].code
                   );
                 }}
-                className="p-1.5 lg:p-1.5 xl:p-2 2xl:p-2 rounded-md hover:bg-[#546691] cursor-pointer transition-colors"
+                className="p-1.5 lg:p-1.5 xl:p-2 2xl:p-2 rounded-md hover:bg-surface-3 cursor-pointer transition-colors"
               >
                 <img 
                   src={translate} 
@@ -223,7 +223,7 @@ export function Header() {
 
               <Button
                 size="sm"
-                className="bg-[#133FA6] hover:bg-[#0f2f78] text-white px-2 py-1.5 lg:px-2 lg:py-1.5 xl:px-3 xl:py-2 2xl:px-5 2xl:py-2.5 border-b-[0.7px] border-white cursor-pointer text-[10px] lg:text-[11px] xl:text-[13px] 2xl:text-base whitespace-nowrap"
+                className="bg-primary hover:bg-primary-hover text-on-primary font-medium px-2 py-1.5 lg:px-2 lg:py-1.5 xl:px-3 xl:py-2 2xl:px-5 2xl:py-2.5 cursor-pointer text-[10px] lg:text-[11px] xl:text-[13px] 2xl:text-base whitespace-nowrap"
                 onClick={() => {
                   navigate('/contact');
                   scrollToTop();
@@ -238,7 +238,7 @@ export function Header() {
               ) : (
                 <Button
                   size="sm"
-                  className="bg-transparent hover:bg-[#546691] text-white px-2 py-1.5 lg:px-2 lg:py-1.5 xl:px-3 xl:py-2 2xl:px-5 2xl:py-2.5 border border-white cursor-pointer text-[10px] lg:text-[11px] xl:text-[13px] 2xl:text-base whitespace-nowrap"
+                  className="bg-transparent hover:bg-surface-3 text-white px-2 py-1.5 lg:px-2 lg:py-1.5 xl:px-3 xl:py-2 2xl:px-5 2xl:py-2.5 border border-border-strong cursor-pointer text-[10px] lg:text-[11px] xl:text-[13px] 2xl:text-base whitespace-nowrap"
                   onClick={() => {
                     navigate('/login');
                     scrollToTop();
@@ -259,8 +259,8 @@ export function Header() {
             onClick={() => setMobileMenuOpen(false)}
           />
           
-          <div className="absolute right-0 top-0 h-full w-full max-w-sm bg-[#13132F]">
-            <div className="sticky top-0 bg-[#13132F] px-6 py-5 border-b border-[#546691]">
+          <div className="absolute right-0 top-0 h-full w-full max-w-sm bg-surface">
+            <div className="sticky top-0 bg-surface px-6 py-5 border-b border-border">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <img 
@@ -269,14 +269,14 @@ export function Header() {
                     className="w-12 h-12 rounded-lg object-cover"
                   />
                   <div>
-                    <p className='font-almarai text-lg leading-none text-white'>ALIEVS</p>
-                    <p className='font-kavivanar text-xs leading-tight text-white'>Space MMC</p>
+                    <p className='font-display text-lg leading-none text-white'>ALIEVS</p>
+                    <p className='font-mono text-xs leading-tight text-white'>Space MMC</p>
                   </div>
                 </div>
                 
                 <button 
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-md hover:bg-[#546691] transition-colors"
+                  className="p-2 rounded-md hover:bg-surface-3 transition-colors"
                 >
                   <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -285,7 +285,7 @@ export function Header() {
               </div>
             </div>
 
-            <div className="h-[calc(100vh-88px)] overflow-y-auto bg-[#13132F]">
+            <div className="h-[calc(100vh-88px)] overflow-y-auto bg-surface">
               <div className="px-6 py-8">
                 <div className="mb-8">
                   <p className="text-white font-inter text-sm mb-3">{t('ui.language')}</p>
@@ -300,8 +300,8 @@ export function Header() {
                         className={cn(
                           "px-4 py-2.5 rounded-lg text-sm font-medium transition-all",
                           locale === l.code
-                            ? "bg-[#133FA6] text-white"
-                            : "bg-[#1A1A2E] text-white hover:bg-[#546691]"
+                            ? "bg-primary text-on-primary"
+                            : "bg-surface-2 text-white hover:bg-surface-3"
                         )}
                       >
                         {l.code.toUpperCase()}
@@ -320,7 +320,7 @@ export function Header() {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={handleExternalLinkClick}
-                          className="flex items-center justify-between px-4 py-3.5 rounded-lg bg-[#1A1A2E] hover:bg-[#546691] text-white transition-all"
+                          className="flex items-center justify-between px-4 py-3.5 rounded-lg bg-surface-2 hover:bg-surface-3 text-white transition-all"
                         >
                           <span className="font-inter font-medium flex items-center gap-2">
                             {t(`nav.${link.key}`)}
@@ -328,7 +328,7 @@ export function Header() {
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                             </svg>
                           </span>
-                          <svg className="w-5 h-5 text-[#808087]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-5 h-5 text-text-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </a>
@@ -337,12 +337,12 @@ export function Header() {
                           key={link.path}
                           to={link.path}
                           onClick={handleLinkClick}
-                          className="flex items-center justify-between px-4 py-3.5 rounded-lg bg-[#1A1A2E] hover:bg-[#546691] text-white transition-all"
+                          className="flex items-center justify-between px-4 py-3.5 rounded-lg bg-surface-2 hover:bg-surface-3 text-white transition-all"
                         >
                           <span className="font-inter font-medium">
                             {t(`nav.${link.key}`)}
                           </span>
-                          <svg className="w-5 h-5 text-[#808087]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-5 h-5 text-text-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </Link>
@@ -358,12 +358,12 @@ export function Header() {
                           localStorage.removeItem('auth_token');
                           window.location.reload();
                         }}
-                        className="flex w-full items-center justify-between px-4 py-3.5 rounded-lg bg-[#1A1A2E] hover:bg-[#546691] text-white transition-all cursor-pointer"
+                        className="flex w-full items-center justify-between px-4 py-3.5 rounded-lg bg-surface-2 hover:bg-surface-3 text-white transition-all cursor-pointer"
                       >
                         <span className="font-inter font-medium">
                           {t('nav.logout', 'Logout')}
                         </span>
-                        <svg className="w-5 h-5 text-[#808087]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5 text-text-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7" />
                         </svg>
                       </button>
@@ -371,12 +371,12 @@ export function Header() {
                       <Link
                         to="/login"
                         onClick={handleLinkClick}
-                        className="flex items-center justify-between px-4 py-3.5 rounded-lg bg-[#1A1A2E] hover:bg-[#546691] text-white transition-all"
+                        className="flex items-center justify-between px-4 py-3.5 rounded-lg bg-surface-2 hover:bg-surface-3 text-white transition-all"
                       >
                         <span className="font-inter font-medium">
                           {t('nav.login')}
                         </span>
-                        <svg className="w-5 h-5 text-[#808087]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5 text-text-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </Link>
@@ -386,7 +386,7 @@ export function Header() {
 
                 <div className="mt-12 space-y-3">
                   <Button
-                    className="w-full bg-[#133FA6] hover:bg-[#0f2f78] text-white font-inter font-semibold py-3.5 text-lg rounded-lg"
+                    className="w-full bg-primary hover:bg-primary-hover text-on-primary font-medium font-inter font-semibold py-3.5 text-lg rounded-lg"
                     onClick={() => {
                       navigate('/contact');
                       handleLinkClick();
@@ -397,7 +397,7 @@ export function Header() {
                   
                   {user ? (
                     <Button
-                      className="w-full bg-transparent hover:bg-[#546691] text-white font-inter font-semibold py-3.5 text-lg rounded-lg border border-white"
+                      className="w-full bg-transparent hover:bg-surface-3 text-white font-inter font-semibold py-3.5 text-lg rounded-lg border border-border-strong"
                       onClick={() => {
                         setMobileMenuOpen(false);
                         navigate('/login');
@@ -409,7 +409,7 @@ export function Header() {
                     </Button>
                   ) : (
                     <Button
-                      className="w-full bg-transparent hover:bg-[#546691] text-white font-inter font-semibold py-3.5 text-lg rounded-lg border border-white"
+                      className="w-full bg-transparent hover:bg-surface-3 text-white font-inter font-semibold py-3.5 text-lg rounded-lg border border-border-strong"
                       onClick={() => {
                         navigate('/login');
                         handleLinkClick();
@@ -419,11 +419,11 @@ export function Header() {
                     </Button>
                   )}
                   
-                  <div className="text-center mt-10 pt-6 border-t border-[#546691]">
-                    <p className="text-[#808087] text-sm font-inter">
+                  <div className="text-center mt-10 pt-6 border-t border-border">
+                    <p className="text-text-subtle text-sm font-inter">
                       © {new Date().getFullYear()} ALIEVS Space MMC
                     </p>
-                    <p className="text-[#808087] text-xs mt-2 font-inter">
+                    <p className="text-text-subtle text-xs mt-2 font-inter">
                       {t('company.tagline')}
                     </p>
                   </div>
