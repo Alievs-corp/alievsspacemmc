@@ -18,7 +18,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#13132F] text-white py-[50px] px-[30px] md:px-[50px] shadow-[5px_4px_100px_0px_#000000] ">
+    <footer className="bg-ink-950 text-text py-[50px] px-[30px] md:px-[50px] border-t border-border">
       <div className="max-w-7xl mx-auto">
         <div>
           <div className="flex flex-col lg:flex-row justify-between items-start">
@@ -34,15 +34,15 @@ export function Footer() {
                   className="h-10 mr-3"
                 />
                 <div>
-                  <p className='font-almarai sm:text-[24px] md:text-[18px] leading-none'>{t('companyName', 'ALIEVS SPACE MMC')}</p>
-                  <p className='font-kavivanar text-[9.4px] text-white leading-tight'>{t('public.footerTagline', 'Premium Digital & Commerce Ecosystem')}</p>
+                  <p className='font-display sm:text-[24px] md:text-[18px] leading-none'>{t('companyName', 'ALIEVS SPACE MMC')}</p>
+                  <p className='font-mono text-[9.4px] text-white leading-tight'>{t('public.footerTagline', 'Premium Digital & Commerce Ecosystem')}</p>
                 </div>
               </Link>
-              <div className="w-52 h-[1px] bg-gradient-to-r from-blue-500 to-purple-500 my-4"></div>
-              <p className="font-inter text-[#808087] max-w-md">
+              <div className="w-52 h-[1px] bg-gradient-to-r from-primary to-transparent my-4"></div>
+              <p className="font-inter text-text-subtle max-w-md">
                 {t('public.footerDesc', 'Premium web & mobile development, e-commerce/marketplace systems, and banking-ready dashboards.')}
               </p>
-              <div className="w-52 h-[1px] bg-gradient-to-r from-blue-500 to-purple-500 my-4"></div>
+              <div className="w-52 h-[1px] bg-gradient-to-r from-primary to-transparent my-4"></div>
               <p className="font-inter text-white text-[13px] hidden lg:block">
                 © {currentYear} Alievs Space {t('ui.companyDescription')}. {t('public.copyrightSuffix', 'All rights reserved.')}
               </p>
@@ -56,7 +56,7 @@ export function Footer() {
                     <li>
                       <Link 
                         to="/services" 
-                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-blue-400"
+                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-primary"
                         onClick={scrollToTop}
                       >
                         {t('nav.services', 'Services')}
@@ -65,7 +65,7 @@ export function Footer() {
                     <li>
                       <Link 
                         to="/case-studies" 
-                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-blue-400"
+                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-primary"
                         onClick={scrollToTop}
                       >
                         {t('nav.caseStudies', 'Case studies')}
@@ -74,7 +74,7 @@ export function Footer() {
                     <li>
                       <Link 
                         to="/about" 
-                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-blue-400"
+                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-primary"
                         onClick={scrollToTop}
                       >
                         {t('nav.about', 'About')}
@@ -83,7 +83,7 @@ export function Footer() {
                     <li>
                       <Link 
                         to="/careers" 
-                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-blue-400"
+                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-primary"
                         onClick={scrollToTop}
                       >
                         {t('nav.careers', 'Careers')}
@@ -98,7 +98,7 @@ export function Footer() {
                     <li>
                       <Link 
                         to="/privacy-policy" 
-                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-blue-400"
+                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-primary"
                         onClick={scrollToTop}
                       >
                         {t('nav.privacyPolicy', 'Privacy Policy')}
@@ -107,7 +107,7 @@ export function Footer() {
                     <li>
                       <Link 
                         to="/terms-of-service" 
-                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-blue-400"
+                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-primary"
                         onClick={scrollToTop}
                       >
                         {t('nav.termsOfService', 'Terms of Service')}
@@ -116,7 +116,7 @@ export function Footer() {
                     <li>
                       <Link 
                         to="/refund-policy" 
-                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-blue-400"
+                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-primary"
                         onClick={scrollToTop}
                       >
                         {t('nav.refundPolicy', 'Refund Policy')}
@@ -125,7 +125,7 @@ export function Footer() {
                     <li>
                       <Link 
                         to="/cookie-policy" 
-                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-blue-400"
+                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-primary"
                         onClick={scrollToTop}
                       >
                         {t('nav.cookiePolicy', 'Cookie Policy')}
@@ -141,7 +141,7 @@ export function Footer() {
                       <p className='font-inter text-white text-[13px] font-semibold whitespace-nowrap'>{t('public.contactEmail', 'Email')}:</p>
                       <a 
                         href="mailto:info@alievsspace.com" 
-                        className="font-inter text-white text-[13px] transition-colors duration-300 hover:text-blue-400 break-all"
+                        className="font-inter text-white text-[13px] transition-colors duration-300 hover:text-primary break-all"
                       >
                         info@alievsspace.com
                       </a>
@@ -150,14 +150,14 @@ export function Footer() {
                       <p className='font-inter text-white text-[13px] font-semibold whitespace-nowrap'>{t('public.contactPhone', 'Phone')}:</p>
                       <a 
                         href={footerPhoneHref}
-                        className="font-inter text-white text-[13px] transition-colors duration-300 hover:text-blue-400 whitespace-nowrap"
+                        className="font-inter text-white text-[13px] transition-colors duration-300 hover:text-primary whitespace-nowrap"
                       >
                         {footerPhoneText}
                       </a>
                     </li>
                   </ul>
 
-                  <div className="hidden lg:block w-52 h-[1px] bg-gradient-to-r from-blue-500 to-purple-500 my-4"></div>
+                  <div className="hidden lg:block w-52 h-[1px] bg-gradient-to-r from-primary to-transparent my-4"></div>
 
                   <div className="hidden lg:block mt-6">
                     <div className="flex gap-4 justify-center items-center md:justify-start">
@@ -182,7 +182,7 @@ export function Footer() {
                 </div>
               </div>
 
-              <div className="block lg:hidden w-full h-[1px] bg-gradient-to-r from-blue-500 to-purple-500 my-8"></div>
+              <div className="block lg:hidden w-full h-[1px] bg-gradient-to-r from-primary to-transparent my-8"></div>
 
               <div className="block lg:hidden">
                 <div className="flex flex-col items-center">
