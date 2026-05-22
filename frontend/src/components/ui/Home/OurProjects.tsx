@@ -46,10 +46,10 @@ const OurProjects = () => {
     <section className="mt-[80px] md:mt-[100px] lg:mt-[120px] mb-16 md:mb-24 px-4">
       <Container className="flex flex-col justify-center items-center">
         <div className="w-full flex flex-col justify-center items-center gap-[10px] text-center">
-          <h2 className="text-white font-inter text-[26px] md:text-[38px] font-bold">
+          <h2 className="text-white font-display text-[26px] md:text-[38px] font-bold">
             {t("public.home.projects.title")}
           </h2>
-          <p className="font-inter text-[#C5C5C5] max-w-[370px] md:max-w-[800px] text-center text-[13px] md:text-[18px]">
+          <p className="font-inter text-text-muted max-w-[370px] md:max-w-[800px] text-center text-[13px] md:text-[18px]">
             {t("public.home.projects.copy")}
           </p>
         </div>
@@ -65,17 +65,17 @@ const OurProjects = () => {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-full flex-col gap-3 p-5 border-b-[1px] border-l-[1px] border-white rounded-[10px] cursor-pointer transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-white/5 hover:border-[#133FA6] hover:shadow-[0_8px_24px_rgba(19,63,166,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#133FA6]/50"
+                className="flex h-full flex-col gap-3 card card-interactive p-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
               >
                 <img
                   src={project.image}
                   alt={name}
-                  className="w-full h-[140px] md:h-[160px] object-cover rounded-[8px] bg-[#0A0A1E]"
+                  className="w-full h-[140px] md:h-[160px] object-cover rounded-md bg-surface-2"
                 />
-                <h4 className="font-inter text-white text-[20px] md:text-[24px] font-semibold">
+                <h4 className="font-display text-white text-[20px] md:text-[24px] font-semibold">
                   {name}
                 </h4>
-                <p className="font-inter text-[#C5C5C5] text-[13px] md:text-[16px]">
+                <p className="font-inter text-text-muted text-[13px] md:text-[16px]">
                   {description}
                 </p>
               </a>

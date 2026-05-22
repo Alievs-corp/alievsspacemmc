@@ -47,9 +47,9 @@ const Advanteges = () => {
                         {duplicatedCards.map((card, idx) => (
                             <div
                                 key={idx}
-                                className='flex-shrink-0 mx-2 flex h-full flex-col gap-[10px] p-5 border-b-[1px] border-l-[1px] border-white rounded-[10px] cursor-pointer transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-white/5 hover:border-[#133FA6] hover:shadow-[0_8px_24px_rgba(19,63,166,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#133FA6]/50 w-[250px] sm:w-[280px] md:w-[300px]'
+                                className='flex-shrink-0 mx-2 flex h-full flex-col gap-[10px] card card-interactive p-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus w-[250px] sm:w-[280px] md:w-[300px]'
                             >
-                                <h3 className='font-inter text-white text-2xl sm:text-[26px] font-semibold'>{card.heading}</h3>
+                                <h3 className='font-display text-white text-2xl sm:text-[26px] font-semibold'>{card.heading}</h3>
                                 <p className='font-inter text-white text-base sm:text-base md:text-base'>{card.text}</p>
                             </div>
                         ))}

@@ -69,8 +69,8 @@ export function Industries() {
         <meta property="og:type" content="website" />
       </Helmet>
       <Container className="flex flex-col justify-center items-center">
-        <h2 className="font-inter text-[38px] font-bold text-white">{t('nav.industries', 'Industries')}</h2>
-        <p className="font-inter text-[18px] text-[#C5C5C5] text-center max-w-[800px]">{t('public.industriesIntro')}</p>
+        <h2 className="font-display text-[38px] font-bold text-white">{t('nav.industries', 'Industries')}</h2>
+        <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">{t('public.industriesIntro')}</p>
       </Container>
 
       <Container>
@@ -82,22 +82,22 @@ export function Industries() {
             return (
               <div
                 key={item.category}
-                className={`w-full max-w-[520px] h-full bg-[#13132F] rounded-[10px] p-6 flex flex-col gap-[14px] border-[0.7px] border-white shadow-[0px_10px_20px_0px_#000000] cursor-pointer transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-white/5 hover:border-[#133FA6] hover:shadow-[0px_10px_20px_0px_#000000] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#133FA6]/50 ${
+                className={`w-full max-w-[520px] h-full card card-interactive p-6 flex flex-col gap-[14px] ${
                   isLastSingle ? "md:col-span-2 md:justify-self-center" : ""
                 }`}
               >
                 <div className="flex items-center gap-3">
                   <img src={item.icons} alt={item.category} className="w-8 h-8" />
-                  <h3 className="font-inter text-white text-[26px] font-semibold">
+                  <h3 className="font-display text-white text-[26px] font-semibold">
                     {item.category}
                   </h3>
                 </div>
 
                 <div className="max-w-[450px] flex flex-col gap-[10px]">
-                  <h4 className="font-inter text-white text-[22px] font-bold">
+                  <h4 className="font-display text-white text-[22px] font-bold">
                     {item.title}
                   </h4>
-                  <p className="font-inter text-[#C5C5C5] text-[18px] flex-1">
+                  <p className="font-inter text-text-muted text-[18px] flex-1">
                     {item.description}
                   </p>
                 </div>
@@ -105,7 +105,7 @@ export function Industries() {
                 <button
                   type="button"
                   onClick={() => navigate('/contact')}
-                  className="bg-[#133FA6] border-b-[1px] border-white rounded-[6.45px] p-[10px] font-inter font-[18px] text-white cursor-pointer  self-center md:self-start"
+                  className="bg-primary hover:bg-primary-hover rounded-md px-4 py-2.5 font-inter font-medium text-on-primary cursor-pointer self-center md:self-start transition-colors"
                 >
                   {t('public.industriesCta')}
                 </button>
@@ -117,9 +117,9 @@ export function Industries() {
 
       <Container className="flex justify-between mt-[120px] flex-col md:flex-row gap-[40px] md:gap-0 items-center md:items-start mb-[60px] md:mb-[100px]">
         <div className="flex flex-col gap-[10px] max-w-[586px] justify-center w-full md:w-auto ">
-          <h3 className="font-inter text-white text-[21px] md:text-[26px] font-semibold text-center md:text-left">{t('public.industries.trustedTitle')}</h3>
-          <p className="font-inter text-[10px] md:text-[13px] text-[#C5C5C5] text-center md:text-left">{t('public.industries.trustedCopy1')}</p>
-          <p className="font-inter text-[10px] md:text-[13px] text-[#C5C5C5] text-center md:text-left">{t('public.industries.trustedCopy2')}</p>
+          <h3 className="font-display text-white text-[21px] md:text-[26px] font-semibold text-center md:text-left">{t('public.industries.trustedTitle')}</h3>
+          <p className="font-inter text-[10px] md:text-[13px] text-text-muted text-center md:text-left">{t('public.industries.trustedCopy1')}</p>
+          <p className="font-inter text-[10px] md:text-[13px] text-text-muted text-center md:text-left">{t('public.industries.trustedCopy2')}</p>
         </div>
 
         <img

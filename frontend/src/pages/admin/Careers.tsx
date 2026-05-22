@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { api, type Career, type Employee, type Locale } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
+import { LocaleTabs } from '@/components/admin/LocaleTabs';
+import { cn } from '@/lib/utils';
+import { CheckCircle2 } from 'lucide-react';
 
 export function AdminCareers() {
   const { locale, supportedLocales, t } = useI18n();
@@ -27,6 +30,10 @@ export function AdminCareers() {
   });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
+  const [careerLoc, setCareerLoc] = useState<Locale>('en');
+  const [employeeLoc, setEmployeeLoc] = useState<Locale>('en');
+  const [careerSaved, setCareerSaved] = useState(false);
+  const [employeeSaved, setEmployeeSaved] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -168,6 +175,8 @@ export function AdminCareers() {
 
       await loadData();
       handleNewCareer();
+      setCareerSaved(true);
+      setTimeout(() => setCareerSaved(false), 2500);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to save career');
     } finally {
@@ -193,6 +202,8 @@ export function AdminCareers() {
 
       await loadData();
       handleNewEmployee();
+      setEmployeeSaved(true);
+      setTimeout(() => setEmployeeSaved(false), 2500);
     } catch (err) {
       setError(err instanceof Error ? err.message : t('admin.failedToSave'));
     } finally {
@@ -201,7 +212,7 @@ export function AdminCareers() {
   };
 
   if (loading) {
-    return <div className="text-[#808087]">{t('admin.loading')}</div>;
+    return <div className="text-text-subtle">{t('admin.loading')}</div>;
   }
 
   return (
@@ -215,17 +226,17 @@ export function AdminCareers() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-white">{t('admin.careers')}</h1>
-            <p className="mt-2 text-sm text-[#808087]">
+            <h1 className="font-display text-2xl sm:text-3xl font-bold text-text">{t('admin.careers')}</h1>
+            <p className="mt-2 text-sm text-text-subtle">
               {t('admin.manageDescription')}
             </p>
           </div>
           <Button onClick={handleNewCareer}>{t('admin.newVacancy')}</Button>
         </div>
 
-        <div className="rounded-lg border border-[#546691] bg-[#13132F] overflow-hidden">
+        <div className="rounded-lg border border-surface-3 bg-surface overflow-hidden">
           <table className="w-full">
-            <thead className="bg-[#1A1A2E]/50">
+            <thead className="bg-surface-2/50">
               <tr>
                 <th className="px-4 py-3 text-left text-sm font-medium text-white">{t('admin.status')}</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-white">{t('admin.title')}</th>
@@ -233,16 +244,16 @@ export function AdminCareers() {
                 <th className="px-4 py-3 text-right text-sm font-medium text-white">{t('admin.actions')}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#546691]">
+            <tbody className="divide-y divide-surface-3">
               {careers.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="px-4 py-8 text-center text-sm text-[#808087]">
+                  <td colSpan={4} className="px-4 py-8 text-center text-sm text-text-subtle">
                     {t('admin.noCareersYet')}
                   </td>
                 </tr>
               ) : (
                 careers.map((career) => (
-                  <tr key={career.id} className="hover:bg-[#546691]/30">
+                  <tr key={career.id} className="hover:bg-surface-3/30">
                     <td className="px-4 py-3 text-sm">
                       <span
                         className={`inline-flex rounded-full px-2 py-1 text-xs font-medium ${
@@ -278,16 +289,18 @@ export function AdminCareers() {
           </table>
         </div>
 
-        <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
-          <h2 className="text-xl font-semibold mb-4 text-white">
-            {editingCareerId ? t('admin.editVacancy') : t('admin.createVacancy')}
-          </h2>
+        <div className="rounded-lg border border-surface-3 bg-surface p-6">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <h2 className="font-display text-lg font-semibold text-text">
+              {editingCareerId ? t('admin.editVacancy') : t('admin.createVacancy')}
+            </h2>
+            <LocaleTabs locales={supportedLocales} active={careerLoc} onChange={(c) => setCareerLoc(c as Locale)} />
+          </div>
           <form onSubmit={handleSubmitCareer} className="space-y-6">
             {supportedLocales.map((loc) => {
               const locCode = loc.code as Locale;
               return (
-                <div key={locCode} className="space-y-4 p-4 border border-[#546691] rounded-lg bg-[#0A0A1E]/30">
-                  <h3 className="font-medium">{loc.label}</h3>
+                <div key={locCode} className={cn('space-y-4', locCode !== careerLoc && 'hidden')}>
                   <div className="grid gap-4 md:grid-cols-2">
                     <div>
                       <label className="block text-sm font-medium mb-1 text-white">{t('admin.title')}</label>
@@ -301,7 +314,7 @@ export function AdminCareers() {
                           })
                         }
                         placeholder="Front-End Developer"
-                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                       />
                     </div>
                     <div>
@@ -316,7 +329,7 @@ export function AdminCareers() {
                           })
                         }
                         placeholder="Full-time"
-                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                       />
                     </div>
                     <div>
@@ -331,7 +344,7 @@ export function AdminCareers() {
                           })
                         }
                         placeholder="Baku / Hybrid"
-                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                       />
                     </div>
                     <div>
@@ -344,7 +357,7 @@ export function AdminCareers() {
                             [locCode]: { ...careerFormData[locCode], status: e.target.value },
                           })
                         }
-                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                       >
                         <option value="Open">{t('admin.open')}</option>
                         <option value="Closed">{t('admin.closed')}</option>
@@ -362,7 +375,7 @@ export function AdminCareers() {
                         }
                         placeholder="Short role description"
                         rows={3}
-                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                       />
                     </div>
                     <div className="md:col-span-2">
@@ -376,7 +389,7 @@ export function AdminCareers() {
                           setRequirementsText({ ...requirementsText, [locCode]: e.target.value })
                         }
                         placeholder="HTML/CSS/JS, UI sense"
-                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                       />
                     </div>
                   </div>
@@ -384,13 +397,18 @@ export function AdminCareers() {
               );
             })}
 
-            <div className="flex gap-3">
+            <div className="flex items-center gap-3">
               <Button type="submit" disabled={saving}>
                 {saving ? t('admin.saving') : t('admin.save')}
               </Button>
               <Button type="button" variant="outline" onClick={handleNewCareer}>
                 {t('admin.cancel')}
               </Button>
+              {careerSaved && (
+                <span className="inline-flex items-center gap-1.5 text-sm text-success">
+                  <CheckCircle2 className="h-4 w-4" /> {t('admin.saved', 'Saved')}
+                </span>
+              )}
             </div>
           </form>
         </div>
@@ -399,17 +417,17 @@ export function AdminCareers() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-white">{t('admin.team')}</h1>
-            <p className="mt-2 text-sm text-[#808087]">
+            <h1 className="font-display text-2xl sm:text-3xl font-bold text-text">{t('admin.team')}</h1>
+            <p className="mt-2 text-sm text-text-subtle">
               {t('admin.teamDescription')}
             </p>
           </div>
           <Button onClick={handleNewEmployee}>{t('admin.newMember')}</Button>
         </div>
 
-        <div className="rounded-lg border border-[#546691] bg-[#13132F] overflow-hidden">
+        <div className="rounded-lg border border-surface-3 bg-surface overflow-hidden">
           <table className="w-full">
-            <thead className="bg-[#1A1A2E]/50">
+            <thead className="bg-surface-2/50">
               <tr>
                 <th className="px-4 py-3 text-left text-sm font-medium text-white">Name</th>
                 <th className="px-4 py-3 text-left text-sm font-medium text-white">Role</th>
@@ -417,16 +435,16 @@ export function AdminCareers() {
                 <th className="px-4 py-3 text-right text-sm font-medium text-white">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#546691]">
+            <tbody className="divide-y divide-surface-3">
               {employees.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="px-4 py-8 text-center text-sm text-[#808087]">
+                  <td colSpan={4} className="px-4 py-8 text-center text-sm text-text-subtle">
                     {t('admin.noEmployeesYet')}
                   </td>
                 </tr>
               ) : (
                 employees.map((employee) => (
-                  <tr key={employee.id} className="hover:bg-[#546691]/30">
+                  <tr key={employee.id} className="hover:bg-surface-3/30">
                     <td className="px-4 py-3 text-sm font-medium">{employee.name}</td>
                     <td className="px-4 py-3 text-sm">{employee.role}</td>
                     <td className="px-4 py-3 text-sm">{employee.experience}</td>
@@ -452,16 +470,18 @@ export function AdminCareers() {
           </table>
         </div>
 
-        <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
-          <h2 className="text-xl font-semibold mb-4 text-white">
-            {editingEmployeeId ? t('admin.editMember') : t('admin.createMember')}
-          </h2>
+        <div className="rounded-lg border border-surface-3 bg-surface p-6">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <h2 className="font-display text-lg font-semibold text-text">
+              {editingEmployeeId ? t('admin.editMember') : t('admin.createMember')}
+            </h2>
+            <LocaleTabs locales={supportedLocales} active={employeeLoc} onChange={(c) => setEmployeeLoc(c as Locale)} />
+          </div>
           <form onSubmit={handleSubmitEmployee} className="space-y-6">
             {supportedLocales.map((loc) => {
               const locCode = loc.code as Locale;
               return (
-                <div key={locCode} className="space-y-4 p-4 border border-[#546691] rounded-lg bg-[#0A0A1E]/30">
-                  <h3 className="font-medium">{loc.label}</h3>
+                <div key={locCode} className={cn('space-y-4', locCode !== employeeLoc && 'hidden')}>
                   <div className="grid gap-4 md:grid-cols-2">
                     <div>
                       <label className="block text-sm font-medium mb-1 text-white">Full name</label>
@@ -475,7 +495,7 @@ export function AdminCareers() {
                           })
                         }
                         placeholder="Samira Aliyeva"
-                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                       />
                     </div>
                     <div>
@@ -490,7 +510,7 @@ export function AdminCareers() {
                           })
                         }
                         placeholder="Project Manager"
-                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                       />
                     </div>
                     <div>
@@ -505,7 +525,7 @@ export function AdminCareers() {
                           })
                         }
                         placeholder="5+ years"
-                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                       />
                     </div>
                     <div>
@@ -520,7 +540,7 @@ export function AdminCareers() {
                           })
                         }
                         placeholder="https://..."
-                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                       />
                     </div>
                     <div className="md:col-span-2">
@@ -535,7 +555,7 @@ export function AdminCareers() {
                         }
                         placeholder="Short bio"
                         rows={3}
-                        className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                        className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                       />
                     </div>
                   </div>
@@ -543,13 +563,18 @@ export function AdminCareers() {
               );
             })}
 
-            <div className="flex gap-3">
+            <div className="flex items-center gap-3">
               <Button type="submit" disabled={saving}>
                 {saving ? t('admin.saving') : t('admin.save')}
               </Button>
               <Button type="button" variant="outline" onClick={handleNewEmployee}>
                 {t('admin.cancel')}
               </Button>
+              {employeeSaved && (
+                <span className="inline-flex items-center gap-1.5 text-sm text-success">
+                  <CheckCircle2 className="h-4 w-4" /> {t('admin.saved', 'Saved')}
+                </span>
+              )}
             </div>
           </form>
         </div>

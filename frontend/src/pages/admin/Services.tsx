@@ -3,6 +3,9 @@ import { api, type Service, type Locale } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 import { ImageUpload } from '@/components/admin/ImageUpload';
+import { LocaleTabs } from '@/components/admin/LocaleTabs';
+import { cn } from '@/lib/utils';
+import { CheckCircle2 } from 'lucide-react';
 
 export function AdminServices() {
   const { locale, supportedLocales, t } = useI18n();
@@ -21,6 +24,8 @@ export function AdminServices() {
   });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
+  const [activeLoc, setActiveLoc] = useState<Locale>('en');
+  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
     loadServices();
@@ -114,6 +119,8 @@ export function AdminServices() {
 
       await loadServices();
       handleNew();
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2500);
     } catch (err) {
       setError(err instanceof Error ? err.message : t('admin.failedToSave'));
     } finally {
@@ -122,15 +129,15 @@ export function AdminServices() {
   };
 
   if (loading) {
-    return <div className="text-[#808087]">{t('admin.loading')}</div>;
+    return <div className="text-text-subtle">{t('admin.loading')}</div>;
   }
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-white">{t('admin.services')}</h1>
-          <p className="mt-2 text-sm text-[#808087]">
+          <h1 className="font-display text-2xl sm:text-3xl font-bold text-text">{t('admin.services')}</h1>
+          <p className="mt-2 text-sm text-text-subtle">
             {t('admin.manageDescription')}
           </p>
         </div>
@@ -143,9 +150,9 @@ export function AdminServices() {
         </div>
       )}
 
-      <div className="rounded-lg border border-[#546691] bg-[#13132F] overflow-hidden">
+      <div className="rounded-lg border border-surface-3 bg-surface overflow-hidden">
         <table className="w-full">
-          <thead className="bg-[#1A1A2E]/50">
+          <thead className="bg-surface-2/50">
             <tr>
               <th className="px-4 py-3 text-left text-sm font-medium text-white">{t('admin.category')}</th>
               <th className="px-4 py-3 text-left text-sm font-medium text-white">{t('admin.title')}</th>
@@ -153,19 +160,19 @@ export function AdminServices() {
               <th className="px-4 py-3 text-right text-sm font-medium text-white">{t('admin.actions')}</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#546691]">
+          <tbody className="divide-y divide-surface-3">
             {services.length === 0 ? (
               <tr>
-                <td colSpan={4} className="px-4 py-8 text-center text-sm text-[#808087]">
+                <td colSpan={4} className="px-4 py-8 text-center text-sm text-text-subtle">
                   {t('admin.noServicesYet')}
                 </td>
               </tr>
             ) : (
               services.map((service) => (
-                <tr key={service.id} className="hover:bg-[#546691]/30">
+                <tr key={service.id} className="hover:bg-surface-3/30">
                   <td className="px-4 py-3 text-sm text-white">{service.category}</td>
                   <td className="px-4 py-3 text-sm font-medium text-white">{service.title}</td>
-                  <td className="px-4 py-3 text-sm text-[#808087] line-clamp-2">
+                  <td className="px-4 py-3 text-sm text-text-subtle line-clamp-2">
                     {service.desc}
                   </td>
                   <td className="px-4 py-3 text-right">
@@ -190,16 +197,18 @@ export function AdminServices() {
         </table>
       </div>
 
-      <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
-        <h2 className="text-xl font-semibold mb-4 text-white">
-          {editingId ? t('admin.editService') : t('admin.createService')}
-        </h2>
+      <div className="rounded-lg border border-surface-3 bg-surface p-6">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <h2 className="font-display text-lg font-semibold text-text">
+            {editingId ? t('admin.editService') : t('admin.createService')}
+          </h2>
+          <LocaleTabs locales={supportedLocales} active={activeLoc} onChange={(c) => setActiveLoc(c as Locale)} />
+        </div>
         <form onSubmit={handleSubmit} className="space-y-6">
           {supportedLocales.map((loc) => {
             const locCode = loc.code as Locale;
             return (
-              <div key={locCode} className="space-y-4 p-4 border border-[#546691] rounded-lg bg-[#0A0A1E]/30">
-                <h3 className="font-medium text-white">{loc.label}</h3>
+              <div key={locCode} className={cn('space-y-4', locCode !== activeLoc && 'hidden')}>
                 <div className="grid gap-4 md:grid-cols-2">
                   <div>
                     <label className="block text-sm font-medium mb-1 text-white">{t('admin.category')}</label>
@@ -213,7 +222,7 @@ export function AdminServices() {
                         })
                       }
                       placeholder="Software / Commerce / Banking"
-                      className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] px-3 py-2 text-sm text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6]"
+                      className="w-full rounded-md border border-surface-3 bg-surface px-3 py-2 text-sm text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
                     />
                   </div>
                   <div>
@@ -228,7 +237,7 @@ export function AdminServices() {
                         })
                       }
                       placeholder="Web & Mobile Development"
-                      className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] px-3 py-2 text-sm text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6]"
+                      className="w-full rounded-md border border-surface-3 bg-surface px-3 py-2 text-sm text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
                     />
                   </div>
                   <div className="md:col-span-2">
@@ -243,7 +252,7 @@ export function AdminServices() {
                       }
                       placeholder="Short premium description"
                       rows={3}
-                      className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] px-3 py-2 text-sm text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6]"
+                      className="w-full rounded-md border border-surface-3 bg-surface px-3 py-2 text-sm text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
                     />
                   </div>
                   <div className="md:col-span-2">
@@ -257,7 +266,7 @@ export function AdminServices() {
                         setBulletsText({ ...bulletsText, [locCode]: e.target.value })
                       }
                       placeholder="Premium UI, Performance, ..."
-                      className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] px-3 py-2 text-sm text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6]"
+                      className="w-full rounded-md border border-surface-3 bg-surface px-3 py-2 text-sm text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
                     />
                   </div>
                   <div className="md:col-span-2">
@@ -278,13 +287,18 @@ export function AdminServices() {
             );
           })}
 
-          <div className="flex gap-3">
+          <div className="flex items-center gap-3">
             <Button type="submit" disabled={saving}>
               {saving ? t('admin.saving') : t('admin.save')}
             </Button>
             <Button type="button" variant="outline" onClick={handleNew}>
               {t('admin.cancel')}
             </Button>
+            {saved && (
+              <span className="inline-flex items-center gap-1.5 text-sm text-success">
+                <CheckCircle2 className="h-4 w-4" /> {t('admin.saved', 'Saved')}
+              </span>
+            )}
           </div>
         </form>
       </div>

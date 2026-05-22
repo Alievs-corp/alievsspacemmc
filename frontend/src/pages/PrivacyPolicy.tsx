@@ -502,201 +502,201 @@ export function PrivacyPolicy() {
       </Helmet>
 
       <Container className="flex flex-col justify-center items-center mb-12">
-        <h2 className="font-inter text-[38px] font-bold text-white">{content.title}</h2>
-        <p className="font-inter text-[18px] text-[#C5C5C5] text-center max-w-[800px]">
+        <h2 className="font-display text-[38px] font-bold text-white">{content.title}</h2>
+        <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">
           {content.companyName}
         </p>
-        <p className="font-inter text-[16px] text-[#C5C5C5] text-center max-w-[800px] mt-2">
+        <p className="font-inter text-[16px] text-text-muted text-center max-w-[800px] mt-2">
           {content.lastUpdatedLabel} {currentYear}
         </p>
       </Container>
 
       <Container className="w-full mb-24">
         <div className="flex flex-col items-center">
-          <div className="bg-[#13132F] border-b-[1.7px] border-l-[1.7px] border-white rounded-[10px] p-8 md:p-10 flex flex-col w-full max-w-4xl mx-auto shadow-[0px_10px_20px_0px_#000000] hover:border-[#133FA6] hover:shadow-[0_8px_24px_rgba(19,63,166,0.25)] transition-all duration-300">
+          <div className="panel p-8 md:p-10 flex flex-col w-full max-w-4xl mx-auto hover:border-border-strong transition-all duration-300">
             
-            <p className="font-inter text-[#C5C5C5] text-[16px] md:text-[18px] leading-relaxed mb-6">
+            <p className="font-inter text-text-muted text-[16px] md:text-[18px] leading-relaxed mb-6">
               {content.intro1}
             </p>
-            <p className="font-inter text-[#C5C5C5] text-[16px] md:text-[18px] leading-relaxed mb-8 border-l-4 border-[#133FA6] pl-4">
+            <p className="font-inter text-text-muted text-[16px] md:text-[18px] leading-relaxed mb-8 border-l-4 border-primary pl-4">
               {content.intro2}
             </p>
 
             <div className="space-y-8">
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.infoWeCollect.title}</h3>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mb-2">{content.sections.infoWeCollect.intro}</p>
-                <h4 className="font-inter text-white text-[18px] md:text-[20px] font-semibold mt-4 mb-2">{content.sections.infoWeCollect.personalTitle}</h4>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mb-2">{content.sections.infoWeCollect.personalIntro}</p>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.infoWeCollect.title}</h3>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.infoWeCollect.intro}</p>
+                <h4 className="font-display text-white text-[18px] md:text-[20px] font-semibold mt-4 mb-2">{content.sections.infoWeCollect.personalTitle}</h4>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.infoWeCollect.personalIntro}</p>
                 <ul className="list-disc pl-6 space-y-1 mb-4">
                   {content.sections.infoWeCollect.personalList.map((item) => (
-                    <li key={item} className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px]">
+                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
                       {item}
                     </li>
                   ))}
                 </ul>
 
-                <h4 className="font-inter text-white text-[18px] md:text-[20px] font-semibold mt-4 mb-2">{content.sections.infoWeCollect.technicalTitle}</h4>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mb-2">{content.sections.infoWeCollect.technicalIntro}</p>
+                <h4 className="font-display text-white text-[18px] md:text-[20px] font-semibold mt-4 mb-2">{content.sections.infoWeCollect.technicalTitle}</h4>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.infoWeCollect.technicalIntro}</p>
                 <ul className="list-disc pl-6 space-y-1 mb-4">
                   {content.sections.infoWeCollect.technicalList.map((item) => (
-                    <li key={item} className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px]">
+                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
                       {item}
                     </li>
                   ))}
                 </ul>
 
-                <h4 className="font-inter text-white text-[18px] md:text-[20px] font-semibold mt-4 mb-2">{content.sections.infoWeCollect.cookiesTitle}</h4>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mb-2">{content.sections.infoWeCollect.cookiesIntro}</p>
+                <h4 className="font-display text-white text-[18px] md:text-[20px] font-semibold mt-4 mb-2">{content.sections.infoWeCollect.cookiesTitle}</h4>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.infoWeCollect.cookiesIntro}</p>
                 <ul className="list-disc pl-6 space-y-1 mb-2">
                   {content.sections.infoWeCollect.cookiesList.map((item) => (
-                    <li key={item} className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px]">
+                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
                       {item}
                     </li>
                   ))}
                 </ul>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px]">{content.sections.infoWeCollect.cookiesFooter}</p>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.infoWeCollect.cookiesFooter}</p>
               </div>
 
-              <hr className="border-[#333368]" /> 
+              <hr className="border-surface-3" /> 
 
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.howWeUse.title}</h3>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mb-2">{content.sections.howWeUse.intro}</p>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.howWeUse.title}</h3>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.howWeUse.intro}</p>
                 <ul className="list-disc pl-6 space-y-1">
                   {content.sections.howWeUse.list.map((item) => (
-                    <li key={item} className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px]">
+                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
                       {item}
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <hr className="border-[#333368]" />
+              <hr className="border-surface-3" />
 
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.sharing.title}</h3>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mb-2">{content.sections.sharing.intro1}</p>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mb-2">{content.sections.sharing.intro2}</p>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.sharing.title}</h3>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.sharing.intro1}</p>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.sharing.intro2}</p>
                 <ul className="list-disc pl-6 space-y-1">
                   {content.sections.sharing.list.map((item) => (
-                    <li key={item} className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px]">
+                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
                       {item}
                     </li>
                   ))}
                 </ul>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mt-2">{content.sections.sharing.footer}</p>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mt-2">{content.sections.sharing.footer}</p>
               </div>
 
-              <hr className="border-[#333368]" />
+              <hr className="border-surface-3" />
 
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.security.title}</h3>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mb-2">{content.sections.security.intro}</p>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.security.title}</h3>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.security.intro}</p>
                 <ul className="list-disc pl-6 space-y-1">
                   {content.sections.security.list.map((item) => (
-                    <li key={item} className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px]">
+                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
                       {item}
                     </li>
                   ))}
                 </ul>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mt-2">{content.sections.security.footer}</p>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mt-2">{content.sections.security.footer}</p>
               </div>
 
-              <hr className="border-[#333368]" />
+              <hr className="border-surface-3" />
 
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.retention.title}</h3>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mb-2">{content.sections.retention.intro}</p>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.retention.title}</h3>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.retention.intro}</p>
                 <ul className="list-disc pl-6 space-y-1">
                   {content.sections.retention.list.map((item) => (
-                    <li key={item} className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px]">
+                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
                       {item}
                     </li>
                   ))}
                 </ul>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mt-2">{content.sections.retention.footer}</p>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mt-2">{content.sections.retention.footer}</p>
               </div>
 
-              <hr className="border-[#333368]" />
+              <hr className="border-surface-3" />
 
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.rights.title}</h3>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mb-2">{content.sections.rights.intro}</p>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.rights.title}</h3>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.rights.intro}</p>
                 <ul className="list-disc pl-6 space-y-1">
                   {content.sections.rights.list.map((item) => (
-                    <li key={item} className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px]">
+                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
                       {item}
                     </li>
                   ))}
                 </ul>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mt-2">{content.sections.rights.footer}</p>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mt-2">{content.sections.rights.footer}</p>
               </div>
 
-              <hr className="border-[#333368]" />
+              <hr className="border-surface-3" />
 
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.gdpr.title}</h3>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mb-2">{content.sections.gdpr.intro}</p>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.gdpr.title}</h3>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.gdpr.intro}</p>
                 <ul className="list-disc pl-6 space-y-1">
                   {content.sections.gdpr.list.map((item) => (
-                    <li key={item} className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px]">
+                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
                       {item}
                     </li>
                   ))}
                 </ul>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mt-2">{content.sections.gdpr.footer}</p>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mt-2">{content.sections.gdpr.footer}</p>
               </div>
 
-              <hr className="border-[#333368]" />
+              <hr className="border-surface-3" />
 
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.ccpa.title}</h3>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mb-2">{content.sections.ccpa.intro}</p>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.ccpa.title}</h3>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.ccpa.intro}</p>
                 <ul className="list-disc pl-6 space-y-1">
                   {content.sections.ccpa.list.map((item) => (
-                    <li key={item} className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px]">
+                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
                       {item}
                     </li>
                   ))}
                 </ul>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mt-2">{content.sections.ccpa.footer}</p>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mt-2">{content.sections.ccpa.footer}</p>
               </div>
 
-              <hr className="border-[#333368]" />
+              <hr className="border-surface-3" />
 
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.thirdPartyLinks.title}</h3>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px]">{content.sections.thirdPartyLinks.body}</p>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.thirdPartyLinks.title}</h3>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.thirdPartyLinks.body}</p>
               </div>
 
-              <hr className="border-[#333368]" />
+              <hr className="border-surface-3" />
 
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.children.title}</h3>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px]">{content.sections.children.body}</p>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.children.title}</h3>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.children.body}</p>
               </div>
 
-              <hr className="border-[#333368]" />
+              <hr className="border-surface-3" />
 
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.changes.title}</h3>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px]">{content.sections.changes.body}</p>
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.changes.title}</h3>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.changes.body}</p>
               </div>
 
-              <hr className="border-[#333368]" />
+              <hr className="border-surface-3" />
 
               <div>
-                <h3 className="font-inter text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.contact.title}</h3>
-                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px] mb-2">{content.sections.contact.intro}</p>
-                <div className="bg-[#0F0F24] p-4 rounded-lg mt-2 border border-[#333368]">
+                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.contact.title}</h3>
+                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.contact.intro}</p>
+                <div className="bg-surface p-4 rounded-lg mt-2 border border-surface-3">
                   <p className="font-inter text-white text-[16px] md:text-[18px] font-semibold">{content.companyName}</p>
-                  <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px]">{content.sections.contact.emailLabel} info@alievsspace.com</p>
-                  <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[16px]">
+                  <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.contact.emailLabel} info@alievsspace.com</p>
+                  <p className="font-inter text-text-muted text-[14px] md:text-[16px]">
                     {content.sections.contact.websiteLabel}{' '}
                     <a
                       href="https://alievsspace.com"
-                      className="text-[#4F8DF9] hover:underline"
+                      className="text-primary hover:underline"
                       target="_blank"
                       rel="noopener noreferrer"
                     >

@@ -101,14 +101,14 @@ export function AdminAbout() {
   };
 
   if (loading) {
-    return <div className="text-[#808087]">{t('admin.loading')}</div>;
+    return <div className="text-text-subtle">{t('admin.loading')}</div>;
   }
 
   return (
     <div className="space-y-6">
       <div>
           <h1 className="text-3xl font-bold text-white">About</h1>
-        <p className="mt-2 text-sm text-[#808087]">
+        <p className="mt-2 text-sm text-text-subtle">
           Edit about page content.
         </p>
       </div>
@@ -120,7 +120,7 @@ export function AdminAbout() {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
+        <div className="rounded-lg border border-surface-3 bg-surface p-6">
           <h2 className="text-xl font-semibold mb-4 text-white">About Content</h2>
           <div className="space-y-4">
             <div>
@@ -130,7 +130,7 @@ export function AdminAbout() {
                 value={formData.headline || ''}
                 onChange={(e) => setFormData({ ...formData, headline: e.target.value })}
                 placeholder="A premium team for ambitious businesses."
-                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
               />
             </div>
             <div>
@@ -150,7 +150,7 @@ export function AdminAbout() {
                 onChange={(e) => setParagraphsText(e.target.value)}
                 placeholder="First paragraph...&#10;&#10;Second paragraph..."
                 rows={6}
-                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
               />
             </div>
             <div>
@@ -162,14 +162,14 @@ export function AdminAbout() {
                 value={valuesText}
                 onChange={(e) => setValuesText(e.target.value)}
                 placeholder="Quality, Innovation, Trust"
-                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
               />
             </div>
             <div>
               <label className="block text-sm font-medium mb-2 text-white">Process Steps</label>
               <div className="space-y-4">
                 {processItems.map((item, idx) => (
-                  <div key={idx} className="border border-[#546691] rounded-lg p-4 space-y-3">
+                  <div key={idx} className="border border-surface-3 rounded-lg p-4 space-y-3">
                     <div className="grid gap-4 md:grid-cols-2">
                       <div>
                         <label className="block text-sm font-medium mb-1 text-white">Title</label>
@@ -182,7 +182,7 @@ export function AdminAbout() {
                             setProcessItems(newItems);
                           }}
                           placeholder="Step title"
-                          className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                          className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                         />
                       </div>
                       <div>
@@ -196,7 +196,7 @@ export function AdminAbout() {
                             setProcessItems(newItems);
                           }}
                           placeholder="Step description"
-                          className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                          className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                         />
                       </div>
                     </div>

@@ -26,8 +26,8 @@ const Frontend = () => {
                 className="absolute inset-0"
                 style={{
                 backgroundImage:
-                    `linear-gradient(286.96deg, rgba(19, 19, 47, 0.2) 0.27%, rgba(19, 19, 47, 0.9) 100%), ` +
-                    `linear-gradient(72.85deg, rgba(17, 49, 124, 0) -0.01%, rgba(0, 53, 179, 0.2) 100%)`,
+                    `linear-gradient(286.96deg, rgba(11, 11, 11, 0.2) 0.27%, rgba(11, 11, 11, 0.9) 100%), ` +
+                    `linear-gradient(72.85deg, rgba(253, 82, 4, 0) -0.01%, rgba(253, 82, 4, 0.2) 100%)`,
                 backgroundRepeat: 'no-repeat, no-repeat',
                 backgroundPosition: 'center, center',
                 backgroundSize: 'cover, cover'
@@ -40,7 +40,7 @@ const Frontend = () => {
                     <div className="mt-8">
                         <Link
                             to="/careers"
-                            className="font-inter text-[#808087] text-[14px] hover:text-white transition-colors duration-300"
+                            className="font-inter text-text-subtle text-[14px] hover:text-white transition-colors duration-300"
                         >
                             {t('public.careers.back', '← Back to Careers')}
                         </Link>
@@ -49,7 +49,7 @@ const Frontend = () => {
                     <div className="flex-grow"></div>
                     
                     <div className="mb-[30px] md:mb-[50px]">
-                    <h2 className="font-inter text-[38px] md:text-5xl lg:text-5xl xl:text-6xl text-white font-bold max-w-full sm:max-w-[370px] md:max-w-[800px] lg:max-w-[900px] xl:max-w-[1000px] leading-tight sm:leading-normal">
+                    <h2 className="font-display text-[38px] md:text-5xl lg:text-5xl xl:text-6xl text-white font-bold max-w-full sm:max-w-[370px] md:max-w-[800px] lg:max-w-[900px] xl:max-w-[1000px] leading-tight sm:leading-normal">
                         {t('public.frontend.heroTitle')}
                     </h2>
                     </div>
@@ -63,96 +63,96 @@ const Frontend = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                         <div className="lg:col-span-3 space-y-16">
                             <section className='max-w-[800px]'>
-                                <h2 className="font-inter text-white text-[21px] md:text-[32px] font-bold mb-6">{t('public.frontend.buildTitle')}</h2>
-                                <p className="font-inter text-[#C5C5C5] text-[14px] md:text-[18px] leading-relaxed">
+                                <h2 className="font-display text-white text-[21px] md:text-[32px] font-bold mb-6">{t('public.frontend.buildTitle')}</h2>
+                                <p className="font-inter text-text-muted text-[14px] md:text-[18px] leading-relaxed">
                                     {t('public.frontend.buildCopy')}
                                 </p>
                             </section>
 
                             <section className='max-w-[800px]'>
-                                <h2 className="font-inter text-white text-[21px] md:text-[32px] font-bold mb-6">{t('public.frontend.workOnTitle')}</h2>
+                                <h2 className="font-display text-white text-[21px] md:text-[32px] font-bold mb-6">{t('public.frontend.workOnTitle')}</h2>
                                 <div className="space-y-4">
                                     <ul className="space-y-4">
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px]">{t('public.frontend.workOn.items.architecture')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px]">{t('public.frontend.workOn.items.architecture')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px]">{t('public.frontend.workOn.items.adminDashboards')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px]">{t('public.frontend.workOn.items.adminDashboards')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px]">{t('public.frontend.workOn.items.translateDesigns')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px]">{t('public.frontend.workOn.items.translateDesigns')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px]">{t('public.frontend.workOn.items.integrateApis')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px]">{t('public.frontend.workOn.items.integrateApis')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px]">{t('public.frontend.workOn.items.performanceAccessibility')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px]">{t('public.frontend.workOn.items.performanceAccessibility')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.frontend.workOn.items.maintainEvolve')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px] md:text-[20px]">{t('public.frontend.workOn.items.maintainEvolve')}</h3>
                                         </li>
                                     </ul>
                                 </div>
                             </section>
 
                             <section className='max-w-[800px] flex flex-col gap-[20px]'>
-                                <h2 className="font-inter text-white text-[21px] md:text-[32px] font-bold mb-6">{t('public.frontend.expectTitle')}</h2>
+                                <h2 className="font-display text-white text-[21px] md:text-[32px] font-bold mb-6">{t('public.frontend.expectTitle')}</h2>
                                 <div>
-                                    <h3 className="font-inter text-white text-[18px] ">{t('public.frontend.technicalSkillsTitle')}</h3>
+                                    <h3 className="font-display text-white text-[18px] ">{t('public.frontend.technicalSkillsTitle')}</h3>
                                     <div className="space-y-4">
                                     <ul className="space-y-4">
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px]">{t('public.frontend.skills.items.jsTs')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px]">{t('public.frontend.skills.items.jsTs')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px]">{t('public.frontend.skills.items.react')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px]">{t('public.frontend.skills.items.react')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px]">{t('public.frontend.skills.items.componentArchitecture')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px]">{t('public.frontend.skills.items.componentArchitecture')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px]">{t('public.frontend.skills.items.restAsync')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px]">{t('public.frontend.skills.items.restAsync')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px]">{t('public.frontend.skills.items.responsive')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px]">{t('public.frontend.skills.items.responsive')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.frontend.skills.items.cleanCode')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px] md:text-[20px]">{t('public.frontend.skills.items.cleanCode')}</h3>
                                         </li>
                                     </ul>
                                     </div>
                                 </div>
                                 <div>
-                                    <h3 className="font-inter text-white text-[18px]">{t('public.frontend.niceToHaveTitle')}</h3>
+                                    <h3 className="font-display text-white text-[18px]">{t('public.frontend.niceToHaveTitle')}</h3>
                                     <div className="space-y-4">
                                         <ul className="space-y-4">
                                             <li className="flex items-start">
-                                                <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                                <h3 className="font-inter text-white text-[18px]">{t('public.frontend.nice.items.adminSaaS')}</h3>
+                                                <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                                <h3 className="font-display text-white text-[18px]">{t('public.frontend.nice.items.adminSaaS')}</h3>
                                             </li>
                                             <li className="flex items-start">
-                                                <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                                <h3 className="font-inter text-white text-[18px]">{t('public.frontend.nice.items.uiPerformance')}</h3>
+                                                <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                                <h3 className="font-display text-white text-[18px]">{t('public.frontend.nice.items.uiPerformance')}</h3>
                                             </li>
                                             <li className="flex items-start">
-                                                <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                                <h3 className="font-inter text-white text-[18px]">{t('public.frontend.nice.items.designSystems')}</h3>
+                                                <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                                <h3 className="font-display text-white text-[18px]">{t('public.frontend.nice.items.designSystems')}</h3>
                                             </li>
                                             <li className="flex items-start">
-                                                <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                                <h3 className="font-inter text-white text-[18px]">{t('public.frontend.nice.items.portfolio')}</h3>
+                                                <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                                <h3 className="font-display text-white text-[18px]">{t('public.frontend.nice.items.portfolio')}</h3>
                                             </li>
                                         </ul>
                                     </div>
@@ -160,72 +160,72 @@ const Frontend = () => {
                             </section>
 
                             <section className='max-w-[800px]'>
-                                <h2 className="font-inter text-white text-[21px] md:text-[32px] font-bold mb-6">{t('public.frontend.howWeWorkTitle')}</h2>
+                                <h2 className="font-display text-white text-[21px] md:text-[32px] font-bold mb-6">{t('public.frontend.howWeWorkTitle')}</h2>
                                 <div className="space-y-4">
                                     <ul className="space-y-4">
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.frontend.how.items.architectureFirst')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px] md:text-[20px]">{t('public.frontend.how.items.architectureFirst')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.frontend.how.items.clearRequirements')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px] md:text-[20px]">{t('public.frontend.how.items.clearRequirements')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.frontend.how.items.noHacks')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px] md:text-[20px]">{t('public.frontend.how.items.noHacks')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.frontend.how.items.longTermStability')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px] md:text-[20px]">{t('public.frontend.how.items.longTermStability')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.frontend.how.items.collaboration')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px] md:text-[20px]">{t('public.frontend.how.items.collaboration')}</h3>
                                         </li>
                                     </ul>
                                 </div>
                             </section>
 
                             <section className='max-w-[800px]'>
-                                <h2 className="font-inter text-white text-[21px] md:text-[32px] font-bold mb-6">{t('public.frontend.whatYouGetTitle')}</h2>
+                                <h2 className="font-display text-white text-[21px] md:text-[32px] font-bold mb-6">{t('public.frontend.whatYouGetTitle')}</h2>
                                 <div className="space-y-4">
                                     <ul className="space-y-4">
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.frontend.get.items.realProduction')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px] md:text-[20px]">{t('public.frontend.get.items.realProduction')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.frontend.get.items.ownership')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px] md:text-[20px]">{t('public.frontend.get.items.ownership')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.frontend.get.items.collaboration')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px] md:text-[20px]">{t('public.frontend.get.items.collaboration')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.frontend.get.items.longTermThinking')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px] md:text-[20px]">{t('public.frontend.get.items.longTermThinking')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.frontend.get.items.engineeringCulture')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px] md:text-[20px]">{t('public.frontend.get.items.engineeringCulture')}</h3>
                                         </li>
                                     </ul>
                                 </div>
                             </section>
 
                             <section className='max-w-[800px]'>
-                                <h2 className="font-inter text-white text-[21px] md:text-[32px] font-bold mb-6">{t('public.frontend.locationTitle')}</h2>
+                                <h2 className="font-display text-white text-[21px] md:text-[32px] font-bold mb-6">{t('public.frontend.locationTitle')}</h2>
                                 <div className="space-y-4">
                                     <ul className="space-y-4">
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.frontend.location.items.country')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px] md:text-[20px]">{t('public.frontend.location.items.country')}</h3>
                                         </li>
                                         <li className="flex items-start">
-                                            <span className="w-1.5 h-1.5 bg-[#133FA6] rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                            <h3 className="font-inter text-white text-[18px] md:text-[20px]">{t('public.frontend.location.items.format')}</h3>
+                                            <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                                            <h3 className="font-display text-white text-[18px] md:text-[20px]">{t('public.frontend.location.items.format')}</h3>
                                         </li>
                                     </ul>
                                 </div>
@@ -233,11 +233,11 @@ const Frontend = () => {
 
                             <section>
                                 <div className="max-w-[800px] mb-[50px] lg:mb-[70px]">
-                                    <h3 className="font-inter text-white text-[21px] md:text-[26px] font-bold mb-4">{t('public.frontend.applyTitle')}</h3>
+                                    <h3 className="font-display text-white text-[21px] md:text-[26px] font-bold mb-4">{t('public.frontend.applyTitle')}</h3>
                                     <p className="font-inter text-white text-[18px] mb-[10px]">{t('public.frontend.applyCopy')}</p>    
                                     <Link 
                                         to="/apply?position=frontend-developer"
-                                        className="border-b border-white bg-[#133FA6] hover:bg-[#1a4cc0] text-white font-inter py-2.5 px-2 rounded-[6.45px] transition-colors duration-300 cursor-pointer text-[16px] md:text-[18px]"
+                                        className="bg-primary hover:bg-primary-hover text-on-primary font-inter py-2.5 px-2 rounded-md transition-colors duration-300 cursor-pointer text-[16px] md:text-[18px]"
                                     >
                                         {t('public.frontend.applyCta')}
                                     </Link>

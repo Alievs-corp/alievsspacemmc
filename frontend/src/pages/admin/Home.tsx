@@ -92,14 +92,14 @@ export function AdminHome() {
   };
 
   if (loading) {
-    return <div className="text-[#808087]">{t('admin.loading')}</div>;
+    return <div className="text-text-subtle">{t('admin.loading')}</div>;
   }
 
   return (
     <div className="space-y-6">
       <div>
           <h1 className="text-3xl font-bold text-white">Home</h1>
-        <p className="mt-2 text-sm text-[#808087]">
+        <p className="mt-2 text-sm text-text-subtle">
           Edit home page content.
         </p>
       </div>
@@ -111,7 +111,7 @@ export function AdminHome() {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
+        <div className="rounded-lg border border-surface-3 bg-surface p-6">
           <h2 className="text-xl font-semibold mb-4 text-white">Hero Section</h2>
           <div className="space-y-4">
             <div>
@@ -121,7 +121,7 @@ export function AdminHome() {
                 value={formData.heroTitle || ''}
                 onChange={(e) => setFormData({ ...formData, heroTitle: e.target.value })}
                 placeholder="Build premium digital products that scale."
-                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
               />
             </div>
             <div>
@@ -131,7 +131,7 @@ export function AdminHome() {
                 onChange={(e) => setFormData({ ...formData, heroSubtitle: e.target.value })}
                 placeholder="Subtitle text"
                 rows={3}
-                className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
               />
             </div>
             <div>
@@ -145,11 +145,11 @@ export function AdminHome() {
           </div>
         </div>
 
-        <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
+        <div className="rounded-lg border border-surface-3 bg-surface p-6">
           <h2 className="text-xl font-semibold mb-4">Highlights</h2>
           <div className="space-y-4">
             {[0, 1, 2].map((i) => (
-              <div key={i} className="space-y-4 border border-[#546691] rounded-lg p-4">
+              <div key={i} className="space-y-4 border border-surface-3 rounded-lg p-4">
                 <div className="grid gap-4 md:grid-cols-2">
                   <div>
                       <label className="block text-sm font-medium mb-1 text-white">Title {i + 1}</label>
@@ -162,7 +162,7 @@ export function AdminHome() {
                         setHighlightTitles(newTitles);
                       }}
                       placeholder="Highlight title"
-                      className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                      className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                     />
                   </div>
                   <div>
@@ -176,7 +176,7 @@ export function AdminHome() {
                         setHighlightDescs(newDescs);
                       }}
                       placeholder="Highlight description"
-                      className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                      className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                     />
                   </div>
                 </div>
@@ -197,7 +197,7 @@ export function AdminHome() {
           </div>
         </div>
 
-        <div className="rounded-lg border border-[#546691] bg-[#13132F] p-6">
+        <div className="rounded-lg border border-surface-3 bg-surface p-6">
           <h2 className="text-xl font-semibold mb-4 text-white">Proof/Stats</h2>
           <div className="space-y-4">
             {[0, 1, 2, 3].map((i) => (
@@ -213,7 +213,7 @@ export function AdminHome() {
                       setProofKPIs(newKPIs);
                     }}
                     placeholder="100+"
-                    className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                    className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                   />
                 </div>
                 <div>
@@ -227,7 +227,7 @@ export function AdminHome() {
                       setProofLabels(newLabels);
                     }}
                     placeholder="Projects Delivered"
-                    className="w-full rounded-md border border-[#546691] bg-[#0A0A1E] text-white placeholder-[#808087] focus:outline-none focus:ring-1 focus:ring-[#133FA6] focus:border-[#133FA6] px-3 py-2 text-sm"
+                    className="w-full rounded-md border border-surface-3 bg-surface text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary px-3 py-2 text-sm"
                   />
                 </div>
               </div>
