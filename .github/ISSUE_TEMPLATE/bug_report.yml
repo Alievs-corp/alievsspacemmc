@@ -1,0 +1,48 @@
+name: Bug report
+description: Report a problem with the website
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to file a bug. Please fill out the details below.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug, including what you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: How can we reproduce the issue?
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. See error
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Public website
+        - Admin panel
+        - Authentication
+        - Other / not sure
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser, OS, device, and screen size if relevant.
+      placeholder: "Chrome 124 on Windows 11, desktop"
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or console output
+      description: Drag-and-drop screenshots or paste any console errors.
