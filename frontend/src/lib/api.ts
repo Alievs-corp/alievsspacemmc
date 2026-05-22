@@ -167,6 +167,20 @@ async function fetchAPI<T>(endpoint: string, options?: RequestInit): Promise<T> 
   return response.json();
 }
 
+/**
+ * Fetch a list endpoint, tolerating both a plain array and the API's
+ * paginated envelope ({ data: [...], page, limit, total, totalPages }).
+ * Always resolves to an array so callers can safely .map()/.slice().
+ */
+async function fetchList<T>(endpoint: string, options?: RequestInit): Promise<T[]> {
+  const res = await fetchAPI<unknown>(endpoint, options);
+  if (Array.isArray(res)) return res as T[];
+  if (res && typeof res === 'object' && Array.isArray((res as { data?: unknown }).data)) {
+    return (res as { data: T[] }).data;
+  }
+  return [];
+}
+
 export const api = {
   getContent: (locale: Locale = 'en'): Promise<Content> => 
     fetchAPI<Content>(`/content?locale=${locale}`),
@@ -181,31 +195,31 @@ export const api = {
     fetchAPI<About>(`/about?locale=${locale}`),
   
   getServices: (locale: Locale = 'en'): Promise<Service[]> => 
-    fetchAPI<Service[]>(`/services?locale=${locale}`),
+    fetchList<Service>(`/services?locale=${locale}`),
 
   getService: (id: string, locale: Locale = 'en'): Promise<Service> => 
     fetchAPI<Service>(`/services/${id}?locale=${locale}`),
 
   getProjects: (locale: Locale = 'en'): Promise<Project[]> => 
-    fetchAPI<Project[]>(`/projects?locale=${locale}`),
+    fetchList<Project>(`/projects?locale=${locale}`),
 
   getProject: (id: string, locale: Locale = 'en'): Promise<Project> => 
     fetchAPI<Project>(`/projects/${id}?locale=${locale}`),
 
   getBlogPosts: (locale: Locale = 'en'): Promise<BlogPost[]> => 
-    fetchAPI<BlogPost[]>(`/blog?locale=${locale}`),
+    fetchList<BlogPost>(`/blog?locale=${locale}`),
 
   getBlogPost: (id: string, locale: Locale = 'en'): Promise<BlogPost> => 
     fetchAPI<BlogPost>(`/blog/${id}?locale=${locale}`),
 
   getCareers: (locale: Locale = 'en'): Promise<Career[]> => 
-    fetchAPI<Career[]>(`/careers?locale=${locale}`),
+    fetchList<Career>(`/careers?locale=${locale}`),
 
   getCareer: (id: string, locale: Locale = 'en'): Promise<Career> => 
     fetchAPI<Career>(`/careers/${id}?locale=${locale}`),
 
   getEmployees: (locale: Locale = 'en'): Promise<Employee[]> => 
-    fetchAPI<Employee[]>(`/employees?locale=${locale}`),
+    fetchList<Employee>(`/employees?locale=${locale}`),
 
   getEmployee: (id: string, locale: Locale = 'en'): Promise<Employee> => 
     fetchAPI<Employee>(`/employees/${id}?locale=${locale}`),
@@ -363,8 +377,8 @@ export const api = {
       }),
 
     // INQUIRIES MANAGEMENT - ADMIN ONLY
-    getInquiries: (): Promise<Inquiry[]> => 
-      fetchAPI<Inquiry[]>('/admin/inquiries'), // GET /api/v1/admin/inquiries (Admin auth required)
+    getInquiries: (): Promise<Inquiry[]> =>
+      fetchList<Inquiry>('/admin/inquiries'), // GET /api/v1/admin/inquiries (Admin auth required)
 
     updateInquiryStatus: (id: string, status: string): Promise<void> =>
       fetchAPI<void>(`/admin/inquiries/${id}/status`, {
@@ -383,8 +397,8 @@ export const api = {
       }),
 
     // User Management
-    getUsers: (): Promise<User[]> => 
-      fetchAPI<User[]>('/admin/users'),
+    getUsers: (): Promise<User[]> =>
+      fetchList<User>('/admin/users'),
 
     deleteUser: (email: string): Promise<void> => 
       fetchAPI<void>(`/admin/users/${email}`, { 
