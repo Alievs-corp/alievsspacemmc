@@ -1,16 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { api, type Inquiry } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
+import { RefreshCw, Inbox, AlertCircle, Mail, Phone, ChevronLeft, ChevronRight } from 'lucide-react';
+
+const PAGE_SIZE = 10;
 
 export function AdminInquiries() {
   const { t } = useI18n();
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    loadInquiries();
-  }, []);
+  useEffect(() => { loadInquiries(); }, []);
 
   const loadInquiries = async () => {
     try {
@@ -18,171 +20,158 @@ export function AdminInquiries() {
       setError(null);
       const data = await api.admin.getInquiries();
       setInquiries(data);
-    } catch (error) {
-      console.error('Failed to load inquiries:', error);
-      setError('Inquiries-ləri yükləmək mümkün olmadı. API endpoint-i yoxdur.');
+      setPage(1);
+    } catch (err) {
+      console.error('Failed to load inquiries:', err);
+      setError(t('admin.inquiriesError', 'Could not load inquiries. Please try again.'));
     } finally {
       setLoading(false);
     }
   };
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <div className="text-text-subtle">Loading inquiries...</div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold text-white">{t('admin.inquiries')} {t('admin.management')}</h1>
-          <p className="mt-2 text-text-subtle">
-            View and manage all contact form submissions from your website.
-          </p>
-        </div>
-        
-        <div className="bg-surface rounded-lg border border-surface-3 p-6">
-          <div className="text-center py-8">
-            <div className="text-red-400 mb-4">
-              <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-              </svg>
-            </div>
-            <h3 className="text-lg font-medium text-white mb-2">API Connection Error</h3>
-            <p className="text-text-subtle mb-4">{error}</p>
-            <p className="text-sm text-text-subtle">
-              Backend API-də /api/v1/inquiries endpoint-i mövcud deyil. 
-              Lütfən backend developer ilə əlaqə saxlayın.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const totalPages = Math.max(1, Math.ceil(inquiries.length / PAGE_SIZE));
+  const pageRows = useMemo(
+    () => inquiries.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE),
+    [inquiries, page],
+  );
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-start">
+      <header className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-white">{t('admin.inquiries')} {t('admin.management')}</h1>
-          <p className="mt-2 text-text-subtle">
-            View and manage all contact form submissions from your website.
+          <h1 className="font-display text-2xl font-bold text-text sm:text-3xl">
+            {t('admin.inquiries', 'Inquiries')}
+          </h1>
+          <p className="mt-1 text-text-muted">
+            {t('admin.inquiriesSubtitle', 'Contact form submissions from your website.')}
           </p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <span className="text-sm text-text-subtle">
-            Total: {inquiries.length} inquiries
+            {inquiries.length} {t('admin.inquiriesTotal', 'total')}
           </span>
           <button
             onClick={loadInquiries}
-            className="px-4 py-2 bg-primary text-on-primary text-sm font-medium rounded-lg hover:bg-primary-hover transition-colors"
+            disabled={loading}
+            className="inline-flex items-center gap-2 rounded-md bg-primary px-3.5 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
           >
-            Refresh
+            <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+            {t('admin.refresh', 'Refresh')}
           </button>
         </div>
-      </div>
+      </header>
 
-      <div className="bg-surface rounded-lg border border-surface-3 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-surface-3">
-            <thead className="bg-surface-2/50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  Name / Company
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  Contact Info
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  Project Details
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  Message
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-surface divide-y divide-surface-3">
-              {inquiries.length === 0 ? (
-                <tr>
-                  <td colSpan={4} className="px-6 py-8 text-center text-text-subtle">
-                    <div className="flex flex-col items-center justify-center">
-                      <svg className="w-12 h-12 text-text-subtle mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                      <p className="text-text-subtle">{t('admin.inquiries')} {t('admin.loading')}</p>
-                      <p className="text-sm text-text-subtle mt-1">{t('admin.manageDescription')}</p>
-                    </div>
-                  </td>
-                </tr>
-              ) : (
-                inquiries.map((inquiry, index) => (
-                  <tr key={inquiry.email || `inquiry-${index}`} className="hover:bg-surface-3/30">
-                    <td className="px-6 py-4">
-                      <div className="font-medium text-white">{inquiry.name}</div>
-                      <div className="text-sm text-text-subtle">{inquiry.company || 'No company specified'}</div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="text-sm space-y-1">
-                        {inquiry.email && (
-                          <div className="text-white flex items-center gap-1">
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                            {inquiry.email}
-                          </div>
-                        )}
-                        {inquiry.phone && (
-                          <div className="text-text-subtle flex items-center gap-1">
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                            </svg>
-                            {inquiry.phone}
-                          </div>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="text-sm space-y-1">
-                        {inquiry.interest && (
-                          <div className="text-white">
-                            <span className="font-medium">Interest:</span> {inquiry.interest}
-                          </div>
-                        )}
-                        {inquiry.topic && (
-                          <div className="text-text-subtle">
-                            <span className="font-medium">Topic:</span> {inquiry.topic}
-                          </div>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="text-sm text-text-subtle">
-                        {inquiry.message ? (
-                          <div className="truncate max-w-xs" title={inquiry.message}>
-                            {inquiry.message.length > 100 ? `${inquiry.message.substring(0, 100)}...` : inquiry.message}
-                          </div>
-                        ) : (
-                          <span className="text-text-subtle">No message</span>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+      {error ? (
+        <div className="card flex flex-col items-center justify-center gap-3 p-12 text-center">
+          <AlertCircle className="h-10 w-10 text-danger" />
+          <p className="font-medium text-text">{t('admin.inquiriesErrorTitle', 'Could not load inquiries')}</p>
+          <p className="max-w-md text-sm text-text-muted">{error}</p>
+          <button
+            onClick={loadInquiries}
+            className="mt-2 rounded-md border border-border px-4 py-2 text-sm text-text-muted hover:bg-surface-3 hover:text-text"
+          >
+            {t('admin.retry', 'Retry')}
+          </button>
         </div>
-      </div>
-
-      {inquiries.length > 0 && (
-        <div className="flex items-center justify-between text-sm text-text-subtle">
-          <div>
-            Showing {inquiries.length} of {inquiries.length} inquiries
+      ) : loading ? (
+        <div className="card p-4">
+          <div className="space-y-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="h-12 animate-pulse rounded-lg bg-surface-3/60" />
+            ))}
           </div>
         </div>
+      ) : inquiries.length === 0 ? (
+        <div className="card flex flex-col items-center justify-center gap-3 p-16 text-center">
+          <Inbox className="h-12 w-12 text-text-subtle" />
+          <p className="font-medium text-text">{t('admin.noInquiries', 'No inquiries yet')}</p>
+          <p className="max-w-md text-sm text-text-muted">
+            {t('admin.noInquiriesHint', 'Submissions from the contact form will appear here.')}
+          </p>
+        </div>
+      ) : (
+        <>
+          <div className="card overflow-hidden p-0">
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-left text-sm">
+                <thead className="border-b border-border bg-surface-2">
+                  <tr className="text-xs uppercase tracking-wider text-text-subtle">
+                    <th className="px-5 py-3 font-medium">{t('admin.inq.name', 'Name / Company')}</th>
+                    <th className="px-5 py-3 font-medium">{t('admin.inq.contact', 'Contact')}</th>
+                    <th className="px-5 py-3 font-medium">{t('admin.inq.details', 'Details')}</th>
+                    <th className="px-5 py-3 font-medium">{t('admin.inq.message', 'Message')}</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border">
+                  {pageRows.map((q, i) => (
+                    <tr key={q.email || `row-${i}`} className="align-top transition-colors hover:bg-surface-2/60">
+                      <td className="px-5 py-4">
+                        <div className="font-medium text-text">{q.name}</div>
+                        {q.company && <div className="text-text-subtle">{q.company}</div>}
+                      </td>
+                      <td className="px-5 py-4">
+                        <div className="space-y-1">
+                          {q.email && (
+                            <a href={`mailto:${q.email}`} className="flex items-center gap-1.5 text-text-muted hover:text-primary">
+                              <Mail className="h-3.5 w-3.5 shrink-0" /> <span className="break-all">{q.email}</span>
+                            </a>
+                          )}
+                          {q.phone && (
+                            <a href={`tel:${q.phone}`} className="flex items-center gap-1.5 text-text-subtle hover:text-primary">
+                              <Phone className="h-3.5 w-3.5 shrink-0" /> {q.phone}
+                            </a>
+                          )}
+                        </div>
+                      </td>
+                      <td className="px-5 py-4">
+                        <div className="flex flex-wrap gap-1.5">
+                          {q.interest && (
+                            <span className="rounded-full bg-surface-3 px-2.5 py-0.5 text-xs text-text-muted">{q.interest}</span>
+                          )}
+                          {q.topic && (
+                            <span className="rounded-full bg-surface-3 px-2.5 py-0.5 text-xs text-text-muted">{q.topic}</span>
+                          )}
+                          {!q.interest && !q.topic && <span className="text-text-subtle">—</span>}
+                        </div>
+                      </td>
+                      <td className="px-5 py-4">
+                        <p className="max-w-xs text-text-muted" title={q.message || ''}>
+                          {q.message
+                            ? q.message.length > 120 ? `${q.message.slice(0, 120)}…` : q.message
+                            : <span className="text-text-subtle">{t('admin.inq.noMessage', 'No message')}</span>}
+                        </p>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {totalPages > 1 && (
+            <div className="flex items-center justify-between text-sm text-text-muted">
+              <span>
+                {t('admin.page', 'Page')} {page} / {totalPages}
+              </span>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={page === 1}
+                  className="inline-flex items-center gap-1 rounded-md border border-border px-3 py-1.5 hover:bg-surface-3 hover:text-text disabled:opacity-40"
+                >
+                  <ChevronLeft className="h-4 w-4" /> {t('admin.prev', 'Prev')}
+                </button>
+                <button
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={page === totalPages}
+                  className="inline-flex items-center gap-1 rounded-md border border-border px-3 py-1.5 hover:bg-surface-3 hover:text-text disabled:opacity-40"
+                >
+                  {t('admin.next', 'Next')} <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
