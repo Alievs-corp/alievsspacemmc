@@ -1,30 +1,84 @@
-# Alievs Space MMC
+# Alievs Space MMC — Company Website
 
-## About Alievs Space MMC
+[![CI](https://github.com/Alievs-corp/alievsspacemmc/actions/workflows/ci.yml/badge.svg)](https://github.com/Alievs-corp/alievsspacemmc/actions/workflows/ci.yml)
 
-**Alievs Space MMC** is a technology company specializing in the design and development of modern software solutions. We combine innovation, technical expertise, and reliability to deliver products that meet the highest standards of performance and scalability.
+The official website of **Alievs Space MMC**, a technology company building modern,
+scalable software products. This repository contains the **company website
+frontend** (in `frontend/`) and repository documentation. The backend API and the
+academy app are maintained in separate repositories.
 
-### About Us
+## Tech stack
 
-At Alievs Space, we develop and maintain our own software products and also collaborate with partner companies to deliver custom projects. Our team ensures that every project is completed efficiently, on time, and with a strong focus on quality and long-term sustainability.
+- **Vite 7** + **React 18** + **TypeScript**
+- **React Router 7**
+- **Tailwind CSS v4** (design tokens via `@theme` in `src/index.css`)
+- **Lucide** icons
+- Hand-rolled i18n (`en` / `az` / `ru`)
 
-### Areas of Expertise
+## Getting started
 
-- **Web Solutions:** Scalable and secure web applications
-- **Mobile Applications:** Native and cross-platform development
-- **APIs and Backend Systems:** High-performance, maintainable architectures
-- **Real-Time Communication Systems:** Low-latency, reliable communication tools
-- **Infrastructure and DevOps:** Complete deployment and cloud management solutions
+```bash
+cd frontend
+npm install
+cp .env.example .env   # then set VITE_API_URL
+npm run dev
+```
 
-### Technologies
+Environment variables:
 
-We use modern, industry-proven technologies and continuously evolve with emerging trends: Go, Python, Java, JavaScript, TypeScript, Rust, Flask, FastAPI, Gin, Echo, React, Next.js, Flutter, PostgreSQL, Redis, Docker, AWS, WebSockets, and more.
+| Variable | Description | Default |
+| -------- | ----------- | ------- |
+| `VITE_API_URL` | Base URL of the API | `http://localhost:8080/api/v1` |
+| `VITE_BASE_PATH` | Vite `base` path (sub-path hosting only) | — |
 
-### Our Commitment
+### Scripts (run inside `frontend/`)
 
-We are dedicated to building solutions that are not only functional but also maintainable, efficient, and adaptable to future needs. Our mission is to help businesses grow through technology.
+| Command | Description |
+| ------- | ----------- |
+| `npm run dev` | Start the Vite dev server |
+| `npm run build` | Type-check (`tsc`) and build for production |
+| `npm run lint` | Run ESLint |
+| `npm run preview` | Preview the production build |
+
+## Project structure
+
+```
+.
+├── frontend/            # Company website (Vite + React + Tailwind) — tracked here
+│   ├── src/
+│   │   ├── components/   # Layout, UI, and admin components
+│   │   ├── pages/        # Public pages + admin panel (/admin/*)
+│   │   ├── contexts/     # i18n, auth, content providers
+│   │   └── lib/          # API client, i18n, utilities
+│   └── ...
+├── .github/             # CI workflow, issue/PR templates
+└── README.md
+```
+
+> The backend API (`alievsspacemmc-api`) and academy app (`alievsspace-academy`)
+> live in their own repositories.
+
+## Contributing
+
+Contributions follow a feature-branch + Pull Request workflow with
+[Conventional Commits](https://www.conventionalcommits.org/). See
+[CONTRIBUTING.md](./CONTRIBUTING.md) and the [Code of Conduct](./CODE_OF_CONDUCT.md).
+
+## Security
+
+Please report vulnerabilities privately — see [SECURITY.md](./SECURITY.md). Do not
+open public issues for security problems.
+
+## License
+
+Proprietary — © Alievs Space MMC. All rights reserved. See [LICENSE](./LICENSE).
 
 ---
 
-**Alievs Space MMC** — Building premium digital products that scale.
+### About Alievs Space MMC
 
+We specialize in the design and development of modern software solutions — web and
+mobile applications, APIs and backend systems, real-time communication, and
+DevOps/infrastructure — combining innovation, technical expertise, and reliability.
+
+**Alievs Space MMC** — Building premium digital products that scale.
