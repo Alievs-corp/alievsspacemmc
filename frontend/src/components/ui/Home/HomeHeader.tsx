@@ -40,21 +40,21 @@ const HomeHeader = () => {
             <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 lg:gap-[10px]">
                 <button
                   type="button"
-                  className="bg-primary hover:bg-primary-hover rounded-md text-on-primary px-4 sm:px-5 py-2 sm:py-2.5 md:py-3 cursor-pointer text-sm sm:text-base md:text-lg font-semibold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
+                  className="bg-primary hover:bg-primary-hover rounded-md text-on-primary px-4 sm:px-5 py-2 sm:py-2.5 md:py-3 cursor-pointer text-sm sm:text-base md:text-lg font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
                   onClick={() => navigate('/contact')}
                 >
                   {t('public.home.ctas.contact')}
                 </button>
                 <button
                   type="button"
-                  className="rounded-md text-text px-4 sm:px-5 py-2 sm:py-2.5 md:py-3 border border-border-strong cursor-pointer text-sm sm:text-base md:text-lg font-medium transition-all duration-200 hover:scale-[1.02] hover:bg-surface-3 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
+                  className="rounded-md text-text px-4 sm:px-5 py-2 sm:py-2.5 md:py-3 border border-border-strong cursor-pointer text-sm sm:text-base md:text-lg font-medium transition-all duration-200 hover:bg-surface-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
                   onClick={() => navigate('/services')}
                 >
                   {t('public.home.ctas.services')}
                 </button>
                 <button
                   type="button"
-                  className="rounded-md text-text px-4 sm:px-5 py-2 sm:py-2.5 md:py-3 border border-border-strong cursor-pointer text-sm sm:text-base md:text-lg font-medium transition-all duration-200 hover:scale-[1.02] hover:bg-surface-3 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
+                  className="rounded-md text-text px-4 sm:px-5 py-2 sm:py-2.5 md:py-3 border border-border-strong cursor-pointer text-sm sm:text-base md:text-lg font-medium transition-all duration-200 hover:bg-surface-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
                   onClick={() => navigate('/case-studies')}
                 >
                   {t('public.home.ctas.caseStudies')}
