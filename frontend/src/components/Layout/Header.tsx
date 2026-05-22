@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/Button';
 import { ProfileMenu } from '@/components/ui/ProfileMenu';
 import { cn } from '@/lib/utils';
 
-import alievsspace from '../../assets/images/alievsspace-logo.png';
+import alievsspace from '../../assets/images/logo-dark.png';
 import translate from '../../assets/icons/translate.svg';
 
 export function Header() {
