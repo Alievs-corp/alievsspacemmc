@@ -80,6 +80,8 @@ const translations: Record<Locale, Record<string, any>> = {
     admin: {
       panel: 'Admin Panel',
       dashboard: 'Dashboard',
+      home: 'Home',
+      about: 'About',
       services: 'Services',
       projects: 'Projects',
       blog: 'Blog',
@@ -1317,6 +1319,8 @@ const translations: Record<Locale, Record<string, any>> = {
     admin: {
       panel: 'Админ-панель',
       dashboard: 'Панель управления',
+      home: 'Главная',
+      about: 'О нас',
       services: 'Услуги',
       projects: 'Проекты',
       blog: 'Блог',
@@ -2567,6 +2571,8 @@ const translations: Record<Locale, Record<string, any>> = {
     admin: {
       panel: 'İdarəetmə Paneli',
       dashboard: 'İdarəetmə Paneli',
+      home: 'Baş səhifə',
+      about: 'Haqqımızda',
       services: 'Xidmətlər',
       projects: 'Layihələr',
       blog: 'Blog',
