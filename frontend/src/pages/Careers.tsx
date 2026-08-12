@@ -1,28 +1,29 @@
 import { Link } from 'react-router-dom';
 import { useI18n } from '@/contexts/I18nContext';
-import { useState } from 'react';
+// "Our Team" section is temporarily disabled.
+// import { useState } from 'react';
 import Container from '../components/ui/Container';
 import workWithUs from '../assets/images/work-with-us.svg';
-import ismat from "../assets/images/ismat.jpeg";
-import ismayil from "../assets/images/ismayil.jpeg";
-import elshan from "../assets/images/elsen.jpeg";
-import elmar from "../assets/images/elmar.jpeg";
-import ravena from "../assets/images/ravena.jpeg";
-import zehra from "../assets/images/zehra.jpg";
-import parvin from "../assets/images/pervin.jpeg"
-import aygun from "../assets/images/aygun.jpeg"
-import fuad from "../assets/images/fuad-elizade.jpeg"
-import yunis from "../assets/images/yunis.jpeg"
-import selen from "../assets/images/selen.jpeg"
-import nicat from "../assets/images/nicat.jpeg"
+// import ismat from "../assets/images/ismat.jpeg";
+// import ismayil from "../assets/images/ismayil.jpeg";
+// import elshan from "../assets/images/elsen.jpeg";
+// import elmar from "../assets/images/elmar.jpeg";
+// import ravena from "../assets/images/ravena.jpeg";
+// import zehra from "../assets/images/zehra.jpg";
+// import parvin from "../assets/images/pervin.jpeg"
+// import aygun from "../assets/images/aygun.jpeg"
+// import fuad from "../assets/images/fuad-elizade.jpeg"
+// import yunis from "../assets/images/yunis.jpeg"
+// import selen from "../assets/images/selen.jpeg"
+// import nicat from "../assets/images/nicat.jpeg"
 import { Helmet } from 'react-helmet-async';
 
 export function Careers() {
   const { t } = useI18n();
-  const [showAllTeam, setShowAllTeam] = useState(false);
-  const [selectedRole, setSelectedRole] = useState<string>('all');
-  const [previewMemberId, setPreviewMemberId] = useState<string | null>(null);
-  const [imageLoading, setImageLoading] = useState(true);
+  // const [showAllTeam, setShowAllTeam] = useState(false);
+  // const [selectedRole, setSelectedRole] = useState<string>('all');
+  // const [previewMemberId, setPreviewMemberId] = useState<string | null>(null);
+  // const [imageLoading, setImageLoading] = useState(true);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -64,6 +65,7 @@ export function Careers() {
     },
   ];
 
+  /* --- "Our Team" section temporarily disabled ---
   const teamMembers = [
     {
       id: 'ismat',
@@ -215,6 +217,7 @@ export function Careers() {
   const previewMember = previewMemberId
     ? teamMembers.find((member) => member.id === previewMemberId) || null
     : null;
+  --- end of disabled "Our Team" data --- */
 
   return (
     <div className="mt-[60px] flex flex-col justify-center items-center">
@@ -278,7 +281,7 @@ export function Careers() {
         </div>
       </Container>
 
-      <Container className="flex justify-between mt-[120px] flex-col md:flex-row gap-[40px] md:gap-0 items-center md:items-start">
+      <Container className="flex justify-between mt-[120px] mb-[60px] md:mb-[100px] flex-col md:flex-row gap-[40px] md:gap-0 items-center md:items-start">
         <div className="flex flex-col gap-[10px] max-w-[586px] justify-center w-full md:w-auto">
           <h3 className="font-display text-white text-[21px] md:text-[26px] font-semibold text-center md:text-left">
             {t('public.careers.whyTitle')}
@@ -295,6 +298,7 @@ export function Careers() {
         />
       </Container>
 
+      {/* --- "Our Team" section temporarily disabled ---
       <Container className='w-full mt-[120px] mb-[60px] md:mb-[100px]'>
         <div className="flex flex-col justify-center items-center mb-12">
           <h3 className="font-display text-[38px] font-bold text-white">{t('public.teamTitle')}</h3>
@@ -453,6 +457,7 @@ export function Careers() {
           </div>
         )}
       </Container>
+      --- end of disabled "Our Team" section --- */}
     </div>
   );
 }
