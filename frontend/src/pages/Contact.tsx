@@ -46,6 +46,34 @@ const Contact = () => {
             ? `tel:${cmsPhoneRaw.replace(/[^\d+]/g, '')}`
             : `tel:${defaultPhoneText.replace(/[^\d+]/g, '')}`;
 
+    const whatsappNumber = phoneHref.replace(/\D/g, '');
+
+    const buildWhatsappMessage = () => {
+        const lines = [
+            t('public.contact.form.title'),
+            '',
+            `${t('public.contact.form.labels.name')}: ${formData.name}`,
+        ];
+
+        if (formData.company) {
+            lines.push(`${t('public.contact.form.labels.company')}: ${formData.company}`);
+        }
+
+        lines.push(`${t('public.contact.form.labels.email')}: ${formData.email}`);
+
+        if (formData.phone) {
+            lines.push(`${t('public.contact.form.labels.phone')}: ${formData.phone}`);
+        }
+
+        lines.push(
+            `${t('public.contact.form.labels.industry')}: ${formData.industry}`,
+            `${t('public.contact.form.labels.projectOverview')}: ${formData.projectOverview}`,
+            `${t('public.contact.form.labels.message')}: ${formData.message}`
+        );
+
+        return lines.join('\n');
+    };
+
     useEffect(() => {
         const requiredFields = ['name', 'email', 'industry', 'projectOverview', 'message'];
         const isValid = requiredFields.every(field => 
@@ -67,7 +95,12 @@ const Contact = () => {
         e.preventDefault();
         
         if (!isFormValid) return;
-        
+
+        if (whatsappNumber) {
+            const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(buildWhatsappMessage())}`;
+            window.open(waUrl, '_blank', 'noopener,noreferrer');
+        }
+
         setIsSubmitting(true);
         setSubmitError('');
         setSubmitSuccess(false);
@@ -83,34 +116,28 @@ const Contact = () => {
                 message: formData.message || undefined,
             };
 
-            console.log('Submitting lead:', leadData);
-
-            const response = await api.createInquiry(leadData);
-            
-            console.log('Lead created successfully:', response);
-
-            setSubmitSuccess(true);
-
-            setFormData({
-                name: '',
-                company: '',
-                email: '',
-                phone: '',
-                industry: '',
-                projectOverview: '',
-                message: ''
-            });
-
-            setTimeout(() => {
-                setSubmitSuccess(false);
-            }, 5000);
-
+            await api.createInquiry(leadData);
         } catch (error: any) {
-            console.error('Failed to submit lead:', error);
-            setSubmitError(error.message || 'Failed to submit form. Please try again.');
-        } finally {
-            setIsSubmitting(false);
+            console.error('Failed to save lead in CRM:', error);
         }
+
+        setSubmitSuccess(true);
+
+        setFormData({
+            name: '',
+            company: '',
+            email: '',
+            phone: '',
+            industry: '',
+            projectOverview: '',
+            message: ''
+        });
+
+        setTimeout(() => {
+            setSubmitSuccess(false);
+        }, 5000);
+
+        setIsSubmitting(false);
     };
 
     if (loading) {

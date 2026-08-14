@@ -21,7 +21,7 @@ export function Header() {
     { path: '/industries', key: 'industries' },
     { path: '/case-studies', key: 'caseStudies' },
     { path: '/about', key: 'about' },
-    { path: '/careers', key: 'careers' },
+    { path: 'https://academy.alievsspace.com/vacancies', key: 'careers', external: true },
     { path: 'https://academy.alievsspace.com', key: 'academy', external: true },
     { path: '/contact', key: 'contact' },
   ];

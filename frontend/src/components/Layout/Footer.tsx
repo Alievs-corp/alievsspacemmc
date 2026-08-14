@@ -81,13 +81,14 @@ export function Footer() {
                       </Link>
                     </li>
                     <li>
-                      <Link 
-                        to="/careers" 
+                      <a
+                        href="https://academy.alievsspace.com/vacancies"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-primary"
-                        onClick={scrollToTop}
                       >
                         {t('nav.careers', 'Careers')}
-                      </Link>
+                      </a>
                     </li>
                   </ul>
                 </div>
