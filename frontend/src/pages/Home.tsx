@@ -4,7 +4,6 @@ import HomeHeader from '../components/ui/Home/HomeHeader';
 import Advanteges from '@/components/ui/Home/Advanteges';
 import WeBuild from '@/components/ui/Home/WeBuild';
 import PremiumProcess from '@/components/ui/Home/PremiumProcess';
-import OurProjects from '@/components/ui/Home/OurProjects';
 
 export function Home() {
   const { t } = useI18n();
@@ -24,7 +23,6 @@ export function Home() {
       <Advanteges />
       <WeBuild/>
       <PremiumProcess />
-      <OurProjects />
     </div>
   );
 }

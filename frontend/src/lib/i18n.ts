@@ -437,6 +437,10 @@ const translations: Record<Locale, Record<string, any>> = {
               name: 'Asanyer',
               description: 'A marketplace website built to manage store operations, showcase products, and support a smooth buying experience for customers.',
             },
+            balakenPark: {
+              name: 'Balakən Park',
+              description: 'Presentation site for the Balakən Park residential complex with a project gallery, floor plans, and WhatsApp lead capture.',
+            },
           },
         },
       },
@@ -1692,6 +1696,10 @@ const translations: Record<Locale, Record<string, any>> = {
               name: 'Asanyer',
               description: 'Маркетплейс-сайт, созданный для управления магазинами, представления товаров и удобного покупательского опыта.',
             },
+            balakenPark: {
+              name: 'Balakən Park',
+              description: 'Сайт-презентация жилого комплекса Balakən Park: галерея проекта, планировки квартир и приём заявок через WhatsApp.',
+            },
           },
         },
       },
@@ -2943,6 +2951,10 @@ const translations: Record<Locale, Record<string, any>> = {
             asanyer: {
               name: 'Asanyer',
               description: 'Mağaza əməliyyatlarını idarə etmək, məhsulları təqdim etmək və müştərilər üçün rahat alış təcrübəsi yaratmaq üçün hazırlanmış marketplace platforması.',
+            },
+            balakenPark: {
+              name: 'Balakən Park',
+              description: 'Balakən Park yaşayış kompleksinin təqdimat saytı: layihə qalereyası, mənzil planları və WhatsApp üzərindən müraciət forması.',
             },
           },
         },

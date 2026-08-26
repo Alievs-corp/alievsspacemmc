@@ -1,20 +1,21 @@
-import luxmart from "../../../assets/images/luxmart.png";
-import lmsImage from "../../../assets/images/lms.png";
-import academyImage from "../../../assets/images/academy.png";
-import azennImage from "../../../assets/images/azenn.png";
-import ederaEventsImage from "../../../assets/images/ederaevents.png";
-import ssystemsMb from "../../../assets/images/ssystems-mb.png"
-import turanSK from "../../../assets/images/turanSK.png"
-import dabiCars from "../../../assets/images/dabiCars.png"
-import vdvAutoParts from "../../../assets/images/vdvAutoParts.png"
-import wolfServis from "../../../assets/images/wolfServis.png"
-import leonCasting from "../../../assets/images/leonCasting.png"
-import asanyer from "../../../assets/images/asanyer.png"
-import Container from "../Container";
+import luxmart from "../../assets/images/luxmart.png";
+import lmsImage from "../../assets/images/lms.png";
+import academyImage from "../../assets/images/academy.png";
+import azennImage from "../../assets/images/azenn.png";
+import ederaEventsImage from "../../assets/images/ederaevents.png";
+import ssystemsMb from "../../assets/images/ssystems-mb.png"
+import turanSK from "../../assets/images/turanSK.png"
+import dabiCars from "../../assets/images/dabiCars.png"
+import vdvAutoParts from "../../assets/images/vdvAutoParts.png"
+import wolfServis from "../../assets/images/wolfServis.png"
+import leonCasting from "../../assets/images/leonCasting.png"
+import asanyer from "../../assets/images/asanyer.png"
+import balakenPark from "../../assets/images/balakenPark.png"
+import Container from "./Container";
 import { useI18n } from "@/contexts/I18nContext";
 
 type ProjectCard = {
-  key: 'luxmart' | 'lms' | 'azenn' | 'academy' | 'ederaEvents' | 'ssystemsMb' | 'turanSK' | 'dabiCars' | 'vdvAutoParts' | 'wolfService' | 'leonCasting' | 'asanyer';
+  key: 'luxmart' | 'lms' | 'azenn' | 'academy' | 'ederaEvents' | 'ssystemsMb' | 'turanSK' | 'dabiCars' | 'vdvAutoParts' | 'wolfService' | 'leonCasting' | 'asanyer' | 'balakenPark';
   link: string;
   image: string;
 };
@@ -32,6 +33,7 @@ const PROJECTS: ProjectCard[] = [
   { key: 'wolfService', link: "https://wolfhibridservice.com/", image: wolfServis },
   { key: 'leonCasting', link: "https://leoncasting.az/", image: leonCasting },
   { key: 'asanyer', link: "https://asanyer.com/", image: asanyer },
+  { key: 'balakenPark', link: "https://balakenpark.az/", image: balakenPark },
 ];
 
 const OurProjects = () => {
