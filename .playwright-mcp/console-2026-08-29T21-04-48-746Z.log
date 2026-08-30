@@ -3,3 +3,6 @@
 [   25805ms] [LOG] [vite] server connection lost. Polling for restart... @ http://localhost:5173/@vite/client:864
 [48875946ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/chunk-TKA7E7G6.js?v=779908e4:21608
 [48876077ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8080/api/v1/content?locale=en:0
+[49510275ms] [LOG] [vite] server connection lost. Polling for restart... @ http://localhost:5173/@vite/client:864
+[49510997ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/chunk-TKA7E7G6.js?v=779908e4:21608
+[49511169ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8080/api/v1/content?locale=en:0
