@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useI18n } from '@/contexts/I18nContext';
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import { CurrencySwitcher } from '@/components/ui/CurrencySwitcher';
-import { ORGANIZATION } from '@/lib/site';
+import { ORGANIZATION, phoneForLocale, telHref } from '@/lib/site';
 import alievsspace from '../../assets/images/alievsspace-logo.png';
 import instagram from '../../assets/icons/instagram.svg';
 import linkedin from '../../assets/icons/linkedin.svg';
@@ -45,10 +45,7 @@ export function Footer() {
   const { t, locale } = useI18n();
   const currentYear = new Date().getFullYear();
 
-  // The Slovak number is the contact point advertised to English-speaking markets.
-  const isEnglish = locale === 'en';
-  const phoneHref = isEnglish ? 'tel:+421952480349' : `tel:${ORGANIZATION.phone}`;
-  const phoneText = isEnglish ? '+421 952 480 349' : ORGANIZATION.phoneDisplay;
+  const phone = phoneForLocale(locale);
 
   return (
     <footer className="border-t border-border bg-ink-950">
@@ -113,8 +110,8 @@ export function Footer() {
               </li>
               <li className="flex flex-wrap items-center gap-1.5">
                 <span className="text-text-subtle">{t('public.contactPhone')}:</span>
-                <a href={phoneHref} className={linkClass}>
-                  {phoneText}
+                <a href={telHref(phone)} className={linkClass}>
+                  {phone.display}
                 </a>
               </li>
             </ul>

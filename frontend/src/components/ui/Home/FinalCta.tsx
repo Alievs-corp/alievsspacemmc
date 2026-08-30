@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 import Container from '@/components/ui/Container';
 import { Reveal } from '@/components/ui/Reveal';
 import { useI18n } from '@/contexts/I18nContext';
-import { ORGANIZATION } from '@/lib/site';
+import { phoneForLocale, whatsappHref } from '@/lib/site';
 
 /** Closing conversion block, repeated at the end of the homepage. */
 const FinalCta = () => {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
 
   return (
     <section className="glow-bg border-t border-border bg-ink-950">
@@ -27,7 +27,7 @@ const FinalCta = () => {
               {t('home.finalCta')}
             </Link>
             <a
-              href={`https://wa.me/${ORGANIZATION.whatsapp}`}
+              href={whatsappHref(phoneForLocale(locale))}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-lg border border-border-strong px-7 py-3.5 text-[15px] font-medium text-text transition-colors hover:bg-surface-3"

@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { api } from '@/lib/api';
 import { Seo } from '@/components/Seo';
+import { phoneForLocale, telHref, whatsappHref } from '@/lib/site';
 import { PACKAGE_TIERS } from '@/data/packages';
 import { t as translate } from '@/lib/i18n';
 
@@ -65,21 +66,11 @@ const Contact = () => {
         ? `mailto:${settings.email.trim()}`
         : '';
 
-    const isEnglish = locale === 'en';
-    const defaultPhoneText = t('public.contact.details.phone');
-    const cmsPhoneRaw = settings?.phone?.trim();
-
-    const displayPhoneText = isEnglish
-        ? '+421 952 480 349'
-        : (cmsPhoneRaw || defaultPhoneText);
-
-    const phoneHref = isEnglish
-        ? 'tel:+421952480349'
-        : cmsPhoneRaw
-            ? `tel:${cmsPhoneRaw.replace(/[^\d+]/g, '')}`
-            : `tel:${defaultPhoneText.replace(/[^\d+]/g, '')}`;
-
-    const whatsappNumber = phoneHref.replace(/\D/g, '');
+    // The line shown depends on the language, not on the CMS: a single CMS
+    // field cannot express one number per market.
+    const contactPhone = phoneForLocale(locale);
+    const displayPhoneText = contactPhone.display;
+    const phoneHref = telHref(contactPhone);
 
     const buildWhatsappMessage = () => {
         const lines = [
@@ -129,10 +120,7 @@ const Contact = () => {
         
         if (!isFormValid) return;
 
-        if (whatsappNumber) {
-            const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(buildWhatsappMessage())}`;
-            window.open(waUrl, '_blank', 'noopener,noreferrer');
-        }
+        window.open(whatsappHref(contactPhone, buildWhatsappMessage()), '_blank', 'noopener,noreferrer');
 
         setIsSubmitting(true);
         setSubmitError('');

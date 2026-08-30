@@ -108,6 +108,22 @@ converts them at display time and holds the indicative rates.
 - The tier prices are also quoted in the FAQ answer and in `seo.home.description`
   in every locale, plus `index.html` and `site.webmanifest`. Update those together.
 
+## Contact numbers
+
+Three lines, defined once in `PHONE_NUMBERS` in `src/lib/site.ts` and selected
+by `phoneForLocale()`:
+
+| Language | Number |
+| --- | --- |
+| Georgian (`ka`) | +995 577 271 352 |
+| Azerbaijani (`az`) | +994 51 700 35 00 |
+| Every other language | +421 952 480 349 |
+
+This drives the footer, the contact page and the WhatsApp buttons, and all three
+appear as separate `contactPoint` entries in the Organization JSON-LD. The
+language mapping wins over the CMS `settings.phone` field, which can only hold
+one number and so cannot express a per-market line.
+
 ## SEO
 
 - `<Seo>` (`src/components/Seo.tsx`) sets title, description, canonical,

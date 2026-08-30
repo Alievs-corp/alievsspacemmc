@@ -3,14 +3,53 @@ import { SUPPORTED_LOCALES } from '@/lib/i18n';
 /** Canonical origin. Override per environment with VITE_SITE_URL. */
 export const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://alievsspace.com').replace(/\/$/, '');
 
+export interface PhoneNumber {
+  /** E.164 — used for tel: links and the wa.me path. */
+  e164: string;
+  /** Human-readable form shown on the page. */
+  display: string;
+  /** ISO country code of the line, for structured data. */
+  country: string;
+}
+
+/** The three lines the company answers on. */
+export const PHONE_NUMBERS: Record<'az' | 'ge' | 'intl', PhoneNumber> = {
+  az: { e164: '+994517003500', display: '+994 51 700 35 00', country: 'AZ' },
+  ge: { e164: '+995577271352', display: '+995 577 271 352', country: 'GE' },
+  intl: { e164: '+421952480349', display: '+421 952 480 349', country: 'SK' },
+};
+
+/**
+ * Which line a visitor sees. Georgian speakers get the Tbilisi number and
+ * Azerbaijani speakers the Baku number; every other language gets the
+ * international line.
+ */
+export function phoneForLocale(locale: string): PhoneNumber {
+  if (locale === 'ka') return PHONE_NUMBERS.ge;
+  if (locale === 'az') return PHONE_NUMBERS.az;
+  return PHONE_NUMBERS.intl;
+}
+
+export function telHref(phone: PhoneNumber): string {
+  return `tel:${phone.e164}`;
+}
+
+/** wa.me expects digits only, no leading plus. */
+export function whatsappHref(phone: PhoneNumber, text?: string): string {
+  const digits = phone.e164.replace(/\D/g, '');
+  return text
+    ? `https://wa.me/${digits}?text=${encodeURIComponent(text)}`
+    : `https://wa.me/${digits}`;
+}
+
 export const ORGANIZATION = {
   name: 'Alievs Space MMC',
   legalName: 'Alievs Space LLC',
   alternateName: 'Alievs Space',
   email: 'info@alievsspace.com',
-  phone: '+994517003500',
-  phoneDisplay: '+994 (51) 700 35 00',
-  whatsapp: '994517003500',
+  /** Registered head office line — used where a single number is required. */
+  phone: PHONE_NUMBERS.az.e164,
+  phoneDisplay: PHONE_NUMBERS.az.display,
   foundingDate: '2019',
   street: 'Baku',
   city: 'Baku',

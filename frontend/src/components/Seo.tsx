@@ -2,7 +2,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import { useI18n } from '@/contexts/I18nContext';
-import { absoluteUrl, hreflangAlternates, ORGANIZATION, SITE_URL } from '@/lib/site';
+import { absoluteUrl, hreflangAlternates, ORGANIZATION, PHONE_NUMBERS, SITE_URL } from '@/lib/site';
 import { SUPPORTED_LOCALES } from '@/lib/i18n';
 
 interface SeoProps {
@@ -141,13 +141,31 @@ export function OrganizationSchema() {
           postalCode: ORGANIZATION.postalCode,
           addressCountry: ORGANIZATION.country,
         },
+        // One entry per line we actually answer on, so search engines can show
+        // the right number to the right market.
         contactPoint: [
           {
             '@type': 'ContactPoint',
-            telephone: ORGANIZATION.phone,
+            telephone: PHONE_NUMBERS.az.e164,
             email: ORGANIZATION.email,
             contactType: 'sales',
-            availableLanguage: ['en', 'az', 'ru', 'de', 'fr', 'ka', 'zh', 'ja', 'ko', 'vi'],
+            areaServed: 'AZ',
+            availableLanguage: ['az', 'ru', 'en'],
+          },
+          {
+            '@type': 'ContactPoint',
+            telephone: PHONE_NUMBERS.ge.e164,
+            email: ORGANIZATION.email,
+            contactType: 'sales',
+            areaServed: 'GE',
+            availableLanguage: ['ka', 'ru', 'en'],
+          },
+          {
+            '@type': 'ContactPoint',
+            telephone: PHONE_NUMBERS.intl.e164,
+            email: ORGANIZATION.email,
+            contactType: 'sales',
+            availableLanguage: ['en', 'de', 'fr', 'zh', 'ja', 'ko', 'vi', 'ru'],
           },
         ],
       },
