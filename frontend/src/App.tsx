@@ -3,6 +3,7 @@ import { lazy, Suspense } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { I18nProvider } from './contexts/I18nContext';
 import { CurrencyProvider } from './contexts/CurrencyContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import { ScrollToTop } from './components/ScrollToTop';
 import { ContentProvider } from './contexts/ContentContext';
 import { AuthProvider } from './contexts/AuthContext';
@@ -53,8 +54,9 @@ const AdminAbout = lazy(() => import('./pages/admin/About').then((m) => ({ defau
 function App() {
   return (
     <HelmetProvider>
-      <I18nProvider>
-        <CurrencyProvider>
+      <ThemeProvider>
+        <I18nProvider>
+          <CurrencyProvider>
           <AuthProvider>
             <ContentProvider>
               <BrowserRouter>
@@ -123,8 +125,9 @@ function App() {
               </BrowserRouter>
             </ContentProvider>
           </AuthProvider>
-        </CurrencyProvider>
-      </I18nProvider>
+          </CurrencyProvider>
+        </I18nProvider>
+      </ThemeProvider>
     </HelmetProvider>
   );
 }

@@ -1,5 +1,8 @@
 export const viExtra = {
   ui: {
+    theme: 'Giao diện',
+    themeLight: 'Chế độ sáng',
+    themeDark: 'Chế độ tối',
     language: 'Ngôn ngữ',
     currency: 'Tiền tệ',
     menu: 'Menu',

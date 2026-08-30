@@ -1,5 +1,8 @@
 export const azExtra = {
   ui: {
+    theme: 'Tema',
+    themeLight: 'İşıqlı rejim',
+    themeDark: 'Qaranlıq rejim',
     currency: 'Valyuta',
     skipToContent: 'Məzmuna keç',
   },

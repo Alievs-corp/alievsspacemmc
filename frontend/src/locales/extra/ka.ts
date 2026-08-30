@@ -1,5 +1,8 @@
 export const kaExtra = {
   ui: {
+    theme: 'თემა',
+    themeLight: 'ნათელი რეჟიმი',
+    themeDark: 'მუქი რეჟიმი',
     language: 'ენა',
     currency: 'ვალუტა',
     menu: 'მენიუ',

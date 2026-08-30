@@ -26,7 +26,7 @@ const Backend = () => {
                 className="absolute inset-0"
                 style={{
                 backgroundImage:
-                    `linear-gradient(286.96deg, rgba(11, 11, 11, 0.2) 0.27%, rgba(11, 11, 11, 0.9) 100%), ` +
+                    `linear-gradient(286.96deg, rgb(var(--scrim-rgb) / var(--scrim-1)) 0.27%, rgb(var(--scrim-rgb) / var(--scrim-2)) 100%), ` +
                     `linear-gradient(72.85deg, rgba(253, 82, 4, 0) -0.01%, rgba(253, 82, 4, 0.2) 100%)`,
                 backgroundRepeat: 'no-repeat, no-repeat',
                 backgroundPosition: 'center, center',

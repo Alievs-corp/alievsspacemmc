@@ -1,5 +1,8 @@
 export const ruExtra = {
   ui: {
+    theme: 'Тема',
+    themeLight: 'Светлая тема',
+    themeDark: 'Тёмная тема',
     currency: 'Валюта',
     skipToContent: 'Перейти к содержимому',
   },

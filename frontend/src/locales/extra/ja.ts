@@ -1,5 +1,8 @@
 export const jaExtra = {
   ui: {
+    theme: 'テーマ',
+    themeLight: 'ライトモード',
+    themeDark: 'ダークモード',
     language: '言語',
     currency: '通貨',
     menu: 'メニュー',

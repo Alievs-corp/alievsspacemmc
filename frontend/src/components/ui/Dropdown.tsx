@@ -10,6 +10,8 @@ interface DropdownProps {
   align?: 'left' | 'right';
   className?: string;
   panelClassName?: string;
+  /** Tight trigger used in the mobile header, where space is at a premium. */
+  compact?: boolean;
 }
 
 /**
@@ -24,6 +26,7 @@ export function Dropdown({
   align = 'right',
   className,
   panelClassName,
+  compact = false,
 }: DropdownProps) {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -61,13 +64,22 @@ export function Dropdown({
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-[12px] font-medium text-text transition-colors hover:border-border-strong hover:bg-surface-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus xl:text-[13px]"
+        className={cn(
+          'flex cursor-pointer items-center rounded-lg border border-border font-medium text-text transition-colors hover:border-border-strong hover:bg-surface-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus',
+          compact
+            ? 'h-8 gap-1 px-2 text-[11.5px]'
+            : 'gap-1.5 px-2.5 py-1.5 text-[12px] xl:text-[13px]',
+        )}
       >
         {label}
         <svg
           aria-hidden
           viewBox="0 0 24 24"
-          className={cn('h-3 w-3 text-text-subtle transition-transform', open && 'rotate-180')}
+          className={cn(
+            'h-3 w-3 text-text-subtle transition-transform',
+            compact && 'hidden',
+            open && 'rotate-180',
+          )}
           fill="none"
           stroke="currentColor"
           strokeWidth={2}

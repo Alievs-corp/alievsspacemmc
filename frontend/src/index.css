@@ -101,6 +101,75 @@
   /* ---- Extra animation ---- */
   --animate-reveal: reveal .7s var(--ease-out) both;
   --animate-marquee: marquee 40s linear infinite;
+  --animate-fade-in: fade-in .18s var(--ease-out) both;
+  --animate-slide-up: slide-up .25s var(--ease-out) both;
+  --animate-sheet-up: sheet-up .28s var(--ease-out) both;
+}
+
+/*
+  Light theme. Every component paints through the semantic tokens (and the ink
+  scale behind them), so flipping the scale here re-skins the whole site
+  without touching a single component. `--color-white` / `--color-black` are
+  remapped too because Tailwind resolves `text-white` to those variables.
+  The attribute is set before first paint by the bootstrap script in index.html.
+*/
+:root {
+  color-scheme: dark;
+  /* Scrim laid over hero photographs — light mode needs a light one, and a
+     denser one: dark type over a photo needs more cover than white type did. */
+  --scrim-rgb: 11 11 11;
+  --scrim-1: 0.2;
+  --scrim-2: 0.9;
+  --scrim-hero-1: 0.72;
+  --scrim-hero-2: 0.95;
+  /* The logo mark is drawn for a dark ground; light mode keeps it on a chip. */
+  --logo-chip-bg: transparent;
+  --logo-chip-padding: 0;
+  --icon-adaptive-filter: none;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --color-ink-0:   #FFFFFF;
+  --color-ink-950: #FAF9F6;
+  --color-ink-900: #F5F4F0;
+  --color-ink-850: #F0EFEA;
+  --color-ink-800: #EBEAE4;
+  --color-ink-750: #E4E2DB;
+  --color-ink-700: #D8D6CD;
+  --color-ink-600: #C9C7BD;
+  --color-ink-500: #A2A099;
+  --color-ink-400: #7B7972;
+  --color-ink-300: #5E5C56;
+  --color-ink-200: #3F3E3A;
+  --color-ink-100: #2A2926;
+  --color-ink-50:  #171715;
+
+  --color-white: #171715;
+  --color-black: #FFFFFF;
+
+  /* Orange-500 is too light on white for text-sized type. */
+  --color-primary:        var(--color-orange-600);
+  --color-primary-hover:  var(--color-orange-500);
+  --color-primary-active: var(--color-orange-700);
+  --color-focus:          var(--color-orange-600);
+  /* Keep the dark-on-orange button face from the dark theme. */
+  --color-on-primary:     #1A0D04;
+
+  --shadow-1: 0 1px 2px rgba(23,23,21,.08);
+  --shadow-2: 0 8px 24px rgba(23,23,21,.10);
+  --shadow-3: 0 20px 48px rgba(23,23,21,.14);
+  --shadow-glow-primary: 0 0 0 1px rgba(224,69,3,.30), 0 8px 30px rgba(224,69,3,.16);
+
+  --scrim-rgb: 250 249 246;
+  --scrim-1: 0.80;
+  --scrim-2: 0.95;
+  --scrim-hero-1: 0.88;
+  --scrim-hero-2: 0.97;
+  --logo-chip-bg: var(--color-ink-100);
+  --logo-chip-padding: 2px;
+  --icon-adaptive-filter: invert(1);
 }
 
 @keyframes reveal {
@@ -108,9 +177,47 @@
   to   { opacity: 1; transform: none; }
 }
 
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes sheet-up {
+  from { transform: translateY(100%); }
+  to   { transform: none; }
+}
+
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
+}
+
+/* The theme flip should read as a transition, not a flash. */
+body,
+header,
+footer,
+.card,
+.panel,
+.card-elevated {
+  transition: background-color .2s var(--ease-out), border-color .2s var(--ease-out),
+    color .2s var(--ease-out);
+}
+
+/* White-filled SVG icons: flipped to ink in light mode so they stay visible. */
+.icon-adaptive {
+  filter: var(--icon-adaptive-filter);
+}
+
+/* Logo mark: sits on a dark chip in light mode so the off-white "A" survives. */
+.brand-mark {
+  background-color: var(--logo-chip-bg);
+  padding: var(--logo-chip-padding);
+  border-radius: var(--radius-md);
 }
 
 body {

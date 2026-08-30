@@ -1,5 +1,8 @@
 export const koExtra = {
   ui: {
+    theme: '테마',
+    themeLight: '라이트 모드',
+    themeDark: '다크 모드',
     language: '언어',
     currency: '통화',
     menu: '메뉴',

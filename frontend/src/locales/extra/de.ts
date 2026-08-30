@@ -1,5 +1,8 @@
 export const deExtra = {
   ui: {
+    theme: 'Design',
+    themeLight: 'Heller Modus',
+    themeDark: 'Dunkler Modus',
     language: 'Sprache',
     currency: 'Währung',
     menu: 'Menü',

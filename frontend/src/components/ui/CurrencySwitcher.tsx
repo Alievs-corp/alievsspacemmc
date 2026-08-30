@@ -7,13 +7,20 @@ import { cn } from '@/lib/utils';
  * Header currency picker. Package prices are stored in AZN and converted for
  * display, so switching here re-prices every amount on the site at once.
  */
-export function CurrencySwitcher({ className }: { className?: string }) {
+export function CurrencySwitcher({
+  className,
+  compact = false,
+}: {
+  className?: string;
+  compact?: boolean;
+}) {
   const { t } = useI18n();
   const { currency, meta, setCurrency, currencies } = useCurrency();
 
   return (
     <Dropdown
       className={className}
+      compact={compact}
       ariaLabel={t('ui.currency', 'Currency')}
       label={
         <span className="flex items-center gap-1">

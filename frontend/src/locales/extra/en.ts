@@ -1,7 +1,9 @@
 export const enExtra = {
   ui: {
-    currency: 'Currency',
     theme: 'Theme',
+    themeLight: 'Light mode',
+    themeDark: 'Dark mode',
+    currency: 'Currency',
     skipToContent: 'Skip to content',
   },
   nav: {

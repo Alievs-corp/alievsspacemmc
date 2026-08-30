@@ -27,7 +27,7 @@ const HomeHero = () => {
         className="absolute inset-0 -z-10"
         style={{
           backgroundImage:
-            'linear-gradient(287deg, rgba(11,11,11,.72) 0%, rgba(11,11,11,.95) 100%),' +
+            'linear-gradient(287deg, rgb(var(--scrim-rgb) / var(--scrim-hero-1)) 0%, rgb(var(--scrim-rgb) / var(--scrim-hero-2)) 100%),' +
             'radial-gradient(70% 60% at 85% 15%, rgba(253,82,4,.20), transparent 60%)',
         }}
       />

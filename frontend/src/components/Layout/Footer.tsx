@@ -131,7 +131,7 @@ export function Footer() {
                 aria-label="Instagram"
                 className="opacity-80 transition-opacity hover:opacity-100"
               >
-                <img src={instagram} alt="" aria-hidden />
+                <img src={instagram} alt="" aria-hidden className="icon-adaptive" />
               </a>
               <a
                 href={ORGANIZATION.social[1]}
@@ -140,7 +140,7 @@ export function Footer() {
                 aria-label="LinkedIn"
                 className="opacity-80 transition-opacity hover:opacity-100"
               >
-                <img src={linkedin} alt="" aria-hidden />
+                <img src={linkedin} alt="" aria-hidden className="icon-adaptive" />
               </a>
             </div>
           </div>

@@ -3,12 +3,19 @@ import { Dropdown } from './Dropdown';
 import { cn } from '@/lib/utils';
 
 /** Header language picker. Endonyms only — a reader looks for their own word. */
-export function LanguageSwitcher({ className }: { className?: string }) {
+export function LanguageSwitcher({
+  className,
+  compact = false,
+}: {
+  className?: string;
+  compact?: boolean;
+}) {
   const { t, locale, localeMeta, setLocale, supportedLocales } = useI18n();
 
   return (
     <Dropdown
       className={className}
+      compact={compact}
       ariaLabel={t('ui.language', 'Language')}
       label={
         <span className="flex items-center gap-1.5">

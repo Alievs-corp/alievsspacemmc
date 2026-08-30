@@ -1,5 +1,8 @@
 export const zhExtra = {
   ui: {
+    theme: '主题',
+    themeLight: '浅色模式',
+    themeDark: '深色模式',
     language: '语言',
     currency: '货币',
     menu: '菜单',

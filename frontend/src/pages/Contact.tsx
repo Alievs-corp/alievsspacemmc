@@ -206,15 +206,15 @@ const Contact = () => {
                   <div className="md:w-1/2">
                     <div className="space-y-6">
                       <div className='flex items-center gap-[10px]'>
-                        <img src={phone} alt={t('public.contact.alt.phone')} className="w-5 h-5" />
+                        <img src={phone} alt={t('public.contact.alt.phone')} className="icon-adaptive w-5 h-5" />
                             <a href={phoneHref} className="font-inter text-text-muted text-[16px] hover:text-white transition-colors">{displayPhoneText}</a>
                       </div>
                       <div className='flex items-center gap-[10px]'>
-                        <img src={mail} alt={t('public.contact.alt.mail')} className="w-5 h-5" />
+                        <img src={mail} alt={t('public.contact.alt.mail')} className="icon-adaptive w-5 h-5" />
                             <a href={cleanedEmailHref} className="font-inter text-text-muted text-[16px] hover:text-white transition-colors">{t('public.contact.details.email')}</a>
                       </div>
                       <div className='flex items-center gap-[10px]'>
-                        <img src={location} alt={t('public.contact.alt.location')} className="w-5 h-5" />
+                        <img src={location} alt={t('public.contact.alt.location')} className="icon-adaptive w-5 h-5" />
                         <p className="font-inter text-text-muted text-[16px]"> {t('public.contact.details.location')}</p>
                       </div>
                     </div>

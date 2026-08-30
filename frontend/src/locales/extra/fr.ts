@@ -1,5 +1,8 @@
 export const frExtra = {
   ui: {
+    theme: 'Thème',
+    themeLight: 'Mode clair',
+    themeDark: 'Mode sombre',
     language: 'Langue',
     currency: 'Devise',
     menu: 'Menu',

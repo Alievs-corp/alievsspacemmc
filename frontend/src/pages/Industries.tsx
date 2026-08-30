@@ -84,7 +84,7 @@ export function Industries() {
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <img src={item.icons} alt={item.category} className="w-8 h-8" />
+                  <img src={item.icons} alt={item.category} className="icon-adaptive w-8 h-8" />
                   <h3 className="font-display text-white text-[26px] font-semibold">
                     {item.category}
                   </h3>
