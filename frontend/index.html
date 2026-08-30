@@ -2,21 +2,58 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0B0B0B" />
-    <meta name="description" content="Alievs Space — building premium digital products that scale. Web, mobile, APIs, and real-time systems." />
+
+    <!--
+      Baseline metadata for crawlers that do not execute JavaScript.
+      `data-rh` hands ownership to react-helmet-async, which replaces these
+      tags on mount instead of appending duplicates next to them.
+    -->
+    <title>Alievs Space — Web &amp; Mobile App Development Company</title>
+    <meta data-rh="true"
+      name="description"
+      content="Alievs Space builds websites, online stores, mobile apps and custom platforms. Fixed prices from 1,500 AZN, launch in 2-8 weeks, SEO and support included. Free quote in 24 hours."
+    />
+    <link data-rh="true" rel="canonical" href="https://alievsspace.com/" />
+    <meta data-rh="true" name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="author" content="Alievs Space MMC" />
+
+    <meta data-rh="true" property="og:type" content="website" />
+    <meta data-rh="true" property="og:site_name" content="Alievs Space" />
+    <meta data-rh="true" property="og:title" content="Alievs Space — Web &amp; Mobile App Development Company" />
+    <meta data-rh="true"
+      property="og:description"
+      content="Websites, online stores, mobile apps and custom platforms. Fixed prices, launch in 2-8 weeks, SEO and support included."
+    />
+    <meta data-rh="true" property="og:url" content="https://alievsspace.com/" />
+    <meta data-rh="true" property="og:image" content="https://alievsspace.com/og-image.png" />
+    <meta data-rh="true" name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
+    <link rel="manifest" href="/site.webmanifest" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <title>Alievs Space</title>
-
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <div style="padding: 2rem; font-family: system-ui, sans-serif; color: #f4f3ee; background: #0b0b0b">
+        <h1>Alievs Space — Web &amp; Mobile App Development</h1>
+        <p>
+          We build websites, online stores, mobile applications and custom platforms. Fixed prices,
+          launch in 2-8 weeks, SEO and support included.
+        </p>
+        <p>Email: info@alievsspace.com · Phone: +994 51 700 35 00</p>
+        <p>Please enable JavaScript to use the interactive version of this site.</p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

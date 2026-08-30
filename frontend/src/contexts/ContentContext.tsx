@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { createContext, useContext, useState, useEffect } from 'react';
-import { api, type Content, type Locale } from '@/lib/api';
+import { api, toCmsLocale, type Content, type Locale } from '@/lib/api';
 import { getLocale } from '@/lib/i18n';
 
 interface ContentContextType {
@@ -13,7 +13,7 @@ interface ContentContextType {
 const ContentContext = createContext<ContentContextType | undefined>(undefined);
 
 export function ContentProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(getLocale());
+  const [locale, setLocaleState] = useState<Locale>(toCmsLocale(getLocale()));
   const [content, setContent] = useState<Content | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -32,14 +32,14 @@ export function ContentProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
-    const currentLocale = getLocale();
+    const currentLocale = toCmsLocale(getLocale());
     setLocaleState(currentLocale);
     fetchContent(currentLocale);
   }, []);
 
   useEffect(() => {
     const handleLocaleChange = (e: CustomEvent) => {
-      const newLocale = e.detail as Locale;
+      const newLocale = toCmsLocale(e.detail as string);
       if (newLocale !== locale) {
         setLocaleState(newLocale);
         fetchContent(newLocale);

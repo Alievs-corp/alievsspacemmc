@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { api, type BlogPost, type Locale } from '@/lib/api';
+import { api, type BlogPost, type Locale, toCmsLocale } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 import { ImageUpload } from '@/components/admin/ImageUpload';
@@ -34,7 +34,7 @@ export function AdminBlog() {
   const loadPosts = async () => {
     try {
       setLoading(true);
-      const data = await api.getBlogPosts(locale);
+      const data = await api.getBlogPosts(toCmsLocale(locale));
       setPosts(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : t('admin.failedToLoad'));

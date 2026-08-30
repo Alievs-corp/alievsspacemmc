@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://alievsspace.com/</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alievsspace.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="az" href="https://alievsspace.com/?lang=az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alievsspace.com/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alievsspace.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alievsspace.com/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://alievsspace.com/?lang=ka"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://alievsspace.com/?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alievsspace.com/?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://alievsspace.com/?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://alievsspace.com/?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alievsspace.com/"/>
+  </url>
+  <url>
+    <loc>https://alievsspace.com/packages</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alievsspace.com/packages?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="az" href="https://alievsspace.com/packages?lang=az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alievsspace.com/packages?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alievsspace.com/packages?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alievsspace.com/packages?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://alievsspace.com/packages?lang=ka"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://alievsspace.com/packages?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alievsspace.com/packages?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://alievsspace.com/packages?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://alievsspace.com/packages?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alievsspace.com/packages"/>
+  </url>
+  <url>
+    <loc>https://alievsspace.com/services</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alievsspace.com/services?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="az" href="https://alievsspace.com/services?lang=az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alievsspace.com/services?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alievsspace.com/services?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alievsspace.com/services?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://alievsspace.com/services?lang=ka"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://alievsspace.com/services?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alievsspace.com/services?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://alievsspace.com/services?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://alievsspace.com/services?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alievsspace.com/services"/>
+  </url>
+  <url>
+    <loc>https://alievsspace.com/process</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alievsspace.com/process?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="az" href="https://alievsspace.com/process?lang=az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alievsspace.com/process?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alievsspace.com/process?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alievsspace.com/process?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://alievsspace.com/process?lang=ka"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://alievsspace.com/process?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alievsspace.com/process?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://alievsspace.com/process?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://alievsspace.com/process?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alievsspace.com/process"/>
+  </url>
+  <url>
+    <loc>https://alievsspace.com/case-studies</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alievsspace.com/case-studies?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="az" href="https://alievsspace.com/case-studies?lang=az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alievsspace.com/case-studies?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alievsspace.com/case-studies?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alievsspace.com/case-studies?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://alievsspace.com/case-studies?lang=ka"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://alievsspace.com/case-studies?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alievsspace.com/case-studies?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://alievsspace.com/case-studies?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://alievsspace.com/case-studies?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alievsspace.com/case-studies"/>
+  </url>
+  <url>
+    <loc>https://alievsspace.com/industries</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alievsspace.com/industries?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="az" href="https://alievsspace.com/industries?lang=az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alievsspace.com/industries?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alievsspace.com/industries?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alievsspace.com/industries?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://alievsspace.com/industries?lang=ka"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://alievsspace.com/industries?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alievsspace.com/industries?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://alievsspace.com/industries?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://alievsspace.com/industries?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alievsspace.com/industries"/>
+  </url>
+  <url>
+    <loc>https://alievsspace.com/faq</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alievsspace.com/faq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="az" href="https://alievsspace.com/faq?lang=az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alievsspace.com/faq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alievsspace.com/faq?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alievsspace.com/faq?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://alievsspace.com/faq?lang=ka"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://alievsspace.com/faq?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alievsspace.com/faq?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://alievsspace.com/faq?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://alievsspace.com/faq?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alievsspace.com/faq"/>
+  </url>
+  <url>
+    <loc>https://alievsspace.com/about</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alievsspace.com/about?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="az" href="https://alievsspace.com/about?lang=az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alievsspace.com/about?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alievsspace.com/about?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alievsspace.com/about?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://alievsspace.com/about?lang=ka"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://alievsspace.com/about?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alievsspace.com/about?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://alievsspace.com/about?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://alievsspace.com/about?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alievsspace.com/about"/>
+  </url>
+  <url>
+    <loc>https://alievsspace.com/contact</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alievsspace.com/contact?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="az" href="https://alievsspace.com/contact?lang=az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alievsspace.com/contact?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alievsspace.com/contact?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alievsspace.com/contact?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://alievsspace.com/contact?lang=ka"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://alievsspace.com/contact?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alievsspace.com/contact?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://alievsspace.com/contact?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://alievsspace.com/contact?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alievsspace.com/contact"/>
+  </url>
+  <url>
+    <loc>https://alievsspace.com/case-studies/marketplace-mvp</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alievsspace.com/case-studies/marketplace-mvp?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="az" href="https://alievsspace.com/case-studies/marketplace-mvp?lang=az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alievsspace.com/case-studies/marketplace-mvp?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alievsspace.com/case-studies/marketplace-mvp?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alievsspace.com/case-studies/marketplace-mvp?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://alievsspace.com/case-studies/marketplace-mvp?lang=ka"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://alievsspace.com/case-studies/marketplace-mvp?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alievsspace.com/case-studies/marketplace-mvp?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://alievsspace.com/case-studies/marketplace-mvp?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://alievsspace.com/case-studies/marketplace-mvp?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alievsspace.com/case-studies/marketplace-mvp"/>
+  </url>
+  <url>
+    <loc>https://alievsspace.com/case-studies/fintech-reporting-dashboard</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alievsspace.com/case-studies/fintech-reporting-dashboard?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="az" href="https://alievsspace.com/case-studies/fintech-reporting-dashboard?lang=az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alievsspace.com/case-studies/fintech-reporting-dashboard?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alievsspace.com/case-studies/fintech-reporting-dashboard?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alievsspace.com/case-studies/fintech-reporting-dashboard?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://alievsspace.com/case-studies/fintech-reporting-dashboard?lang=ka"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://alievsspace.com/case-studies/fintech-reporting-dashboard?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alievsspace.com/case-studies/fintech-reporting-dashboard?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://alievsspace.com/case-studies/fintech-reporting-dashboard?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://alievsspace.com/case-studies/fintech-reporting-dashboard?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alievsspace.com/case-studies/fintech-reporting-dashboard"/>
+  </url>
+  <url>
+    <loc>https://alievsspace.com/case-studies/operations-inventory-system</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alievsspace.com/case-studies/operations-inventory-system?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="az" href="https://alievsspace.com/case-studies/operations-inventory-system?lang=az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alievsspace.com/case-studies/operations-inventory-system?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alievsspace.com/case-studies/operations-inventory-system?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alievsspace.com/case-studies/operations-inventory-system?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://alievsspace.com/case-studies/operations-inventory-system?lang=ka"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://alievsspace.com/case-studies/operations-inventory-system?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alievsspace.com/case-studies/operations-inventory-system?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://alievsspace.com/case-studies/operations-inventory-system?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://alievsspace.com/case-studies/operations-inventory-system?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alievsspace.com/case-studies/operations-inventory-system"/>
+  </url>
+  <url>
+    <loc>https://alievsspace.com/privacy-policy</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alievsspace.com/privacy-policy?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="az" href="https://alievsspace.com/privacy-policy?lang=az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alievsspace.com/privacy-policy?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alievsspace.com/privacy-policy?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alievsspace.com/privacy-policy?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://alievsspace.com/privacy-policy?lang=ka"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://alievsspace.com/privacy-policy?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alievsspace.com/privacy-policy?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://alievsspace.com/privacy-policy?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://alievsspace.com/privacy-policy?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alievsspace.com/privacy-policy"/>
+  </url>
+  <url>
+    <loc>https://alievsspace.com/terms-of-service</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alievsspace.com/terms-of-service?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="az" href="https://alievsspace.com/terms-of-service?lang=az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alievsspace.com/terms-of-service?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alievsspace.com/terms-of-service?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alievsspace.com/terms-of-service?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://alievsspace.com/terms-of-service?lang=ka"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://alievsspace.com/terms-of-service?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alievsspace.com/terms-of-service?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://alievsspace.com/terms-of-service?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://alievsspace.com/terms-of-service?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alievsspace.com/terms-of-service"/>
+  </url>
+  <url>
+    <loc>https://alievsspace.com/refund-policy</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alievsspace.com/refund-policy?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="az" href="https://alievsspace.com/refund-policy?lang=az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alievsspace.com/refund-policy?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alievsspace.com/refund-policy?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alievsspace.com/refund-policy?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://alievsspace.com/refund-policy?lang=ka"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://alievsspace.com/refund-policy?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alievsspace.com/refund-policy?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://alievsspace.com/refund-policy?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://alievsspace.com/refund-policy?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alievsspace.com/refund-policy"/>
+  </url>
+  <url>
+    <loc>https://alievsspace.com/cookie-policy</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alievsspace.com/cookie-policy?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="az" href="https://alievsspace.com/cookie-policy?lang=az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alievsspace.com/cookie-policy?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alievsspace.com/cookie-policy?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alievsspace.com/cookie-policy?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://alievsspace.com/cookie-policy?lang=ka"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://alievsspace.com/cookie-policy?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alievsspace.com/cookie-policy?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://alievsspace.com/cookie-policy?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://alievsspace.com/cookie-policy?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alievsspace.com/cookie-policy"/>
+  </url>
+</urlset>

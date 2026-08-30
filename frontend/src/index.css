@@ -93,6 +93,24 @@
   /* ---- Motion ---- */
   --ease-out: cubic-bezier(.16,1,.3,1);
   --ease-in:  cubic-bezier(.4,0,1,1);
+
+  /* ---- Section rhythm (one scale for every page) ---- */
+  --space-section:    5rem;   /* 80  */
+  --space-section-lg: 7.5rem; /* 120 */
+
+  /* ---- Extra animation ---- */
+  --animate-reveal: reveal .7s var(--ease-out) both;
+  --animate-marquee: marquee 40s linear infinite;
+}
+
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 body {
@@ -131,5 +149,95 @@ body {
   /* Canonical form control skin. */
   .field {
     @apply w-full bg-surface border border-border rounded-lg px-4 py-3 text-text placeholder:text-text-subtle transition-colors duration-200 focus:outline-none focus:border-primary focus-visible:ring-2 focus-visible:ring-focus disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+}
+
+
+/* ---- Page furniture ---- */
+::selection {
+  background: var(--color-orange-500);
+  color: var(--color-ink-950);
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Sticky header is 4rem–5rem; keep anchored sections clear of it. */
+  scroll-padding-top: 6rem;
+}
+
+/* Subtle scrollbar that matches the dark shell instead of the OS default. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-ink-600) transparent;
+}
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+  background: var(--color-ink-700);
+  border-radius: 999px;
+  border: 3px solid var(--color-ink-0);
+}
+*::-webkit-scrollbar-thumb:hover { background: var(--color-ink-600); }
+
+@layer components {
+  /* Vertical rhythm: every marketing section uses one of these two. */
+  .section {
+    @apply py-20 md:py-28;
+  }
+  .section-tight {
+    @apply py-14 md:py-20;
+  }
+
+  /* Elevated card used for pricing tiers and testimonials. */
+  .card-elevated {
+    @apply rounded-2xl border border-border bg-surface/70 backdrop-blur-sm transition-all duration-300;
+  }
+  .card-elevated:hover {
+    @apply border-border-strong -translate-y-1;
+    box-shadow: var(--shadow-2);
+  }
+
+  /* Small capsule label above a section title. */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-border bg-surface-2/80 px-3 py-1
+           font-mono text-[11px] uppercase tracking-[0.16em] text-text-muted;
+  }
+
+  /* Warm accent applied to a word inside a heading. */
+  .accent-text {
+    background: linear-gradient(96deg, var(--color-orange-300), var(--color-orange-500));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Ambient glow used behind hero and CTA blocks. */
+  .glow-bg {
+    position: relative;
+    isolation: isolate;
+  }
+  .glow-bg::before {
+    content: '';
+    position: absolute;
+    inset: -20% -10% auto -10%;
+    height: 60%;
+    z-index: -1;
+    background: radial-gradient(50% 60% at 50% 0%, rgba(253, 82, 4, 0.16), transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Hairline divider that fades out, matching the footer treatment. */
+  .rule-fade {
+    @apply h-px w-full;
+    background: linear-gradient(90deg, var(--color-orange-500), transparent);
+  }
+
+  /* Keyboard-only skip target. */
+  .skip-link {
+    @apply sr-only;
+  }
+  .skip-link:focus {
+    @apply not-sr-only fixed left-4 top-4 z-[100] rounded-lg bg-primary px-4 py-2
+           font-medium text-on-primary shadow-lg;
   }
 }

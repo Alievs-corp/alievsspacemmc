@@ -1,218 +1,159 @@
 import { Link } from 'react-router-dom';
 import { useI18n } from '@/contexts/I18nContext';
-import alievsspace from "../../assets/images/alievsspace-logo.png";
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
+import { CurrencySwitcher } from '@/components/ui/CurrencySwitcher';
+import { ORGANIZATION } from '@/lib/site';
+import alievsspace from '../../assets/images/alievsspace-logo.png';
 import instagram from '../../assets/icons/instagram.svg';
 import linkedin from '../../assets/icons/linkedin.svg';
 
+interface FooterLink {
+  to: string;
+  key: string;
+  external?: boolean;
+}
+
+const COLUMNS: Array<{ titleKey: string; links: FooterLink[] }> = [
+  {
+    titleKey: 'nav.company',
+    links: [
+      { to: '/services', key: 'nav.services' },
+      { to: '/packages', key: 'nav.packages' },
+      { to: '/process', key: 'nav.process' },
+      { to: '/case-studies', key: 'nav.caseStudies' },
+      { to: '/industries', key: 'nav.industries' },
+      { to: '/about', key: 'nav.about' },
+      { to: '/faq', key: 'nav.faq' },
+      { to: 'https://academy.alievsspace.com/vacancies', key: 'nav.careers', external: true },
+    ],
+  },
+  {
+    titleKey: 'nav.legal',
+    links: [
+      { to: '/privacy-policy', key: 'nav.privacyPolicy' },
+      { to: '/terms-of-service', key: 'nav.termsOfService' },
+      { to: '/refund-policy', key: 'nav.refundPolicy' },
+      { to: '/cookie-policy', key: 'nav.cookiePolicy' },
+    ],
+  },
+];
+
+const linkClass =
+  'text-[13px] text-text-muted transition-colors duration-200 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus rounded-sm';
+
 export function Footer() {
   const { t, locale } = useI18n();
-
   const currentYear = new Date().getFullYear();
 
+  // The Slovak number is the contact point advertised to English-speaking markets.
   const isEnglish = locale === 'en';
-  const footerPhoneHref = isEnglish ? 'tel:+421952480349' : 'tel:+994517003500';
-  const footerPhoneText = isEnglish ? '+421 952 480 349' : '+994 (51) 700 35 00';
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const phoneHref = isEnglish ? 'tel:+421952480349' : `tel:${ORGANIZATION.phone}`;
+  const phoneText = isEnglish ? '+421 952 480 349' : ORGANIZATION.phoneDisplay;
 
   return (
-    <footer className="bg-ink-950 text-text py-[50px] px-[30px] md:px-[50px] border-t border-border">
-      <div className="max-w-7xl mx-auto">
-        <div>
-          <div className="flex flex-col lg:flex-row justify-between items-start">
-            <div className="mb-8 lg:mb-0">
-              <Link 
-                to="/" 
-                onClick={scrollToTop}
-                className="flex items-center mb-4 cursor-pointer"
-              >
-                <img 
-                  src={alievsspace} 
-                  alt={t('companyName', 'Alievs Space MMC')} 
-                  className="h-10 mr-3"
-                />
-                <div>
-                  <p className='font-display sm:text-[24px] md:text-[18px] leading-none'>{t('companyName', 'ALIEVS SPACE MMC')}</p>
-                  <p className='font-mono text-[9.4px] text-white leading-tight'>{t('public.footerTagline', 'Premium Digital & Commerce Ecosystem')}</p>
-                </div>
-              </Link>
-              <div className="w-52 h-[1px] bg-gradient-to-r from-primary to-transparent my-4"></div>
-              <p className="font-inter text-text-subtle max-w-md">
-                {t('public.footerDesc', 'Premium web & mobile development, e-commerce/marketplace systems, and banking-ready dashboards.')}
-              </p>
-              <div className="w-52 h-[1px] bg-gradient-to-r from-primary to-transparent my-4"></div>
-              <p className="font-inter text-white text-[13px] hidden lg:block">
-                © {currentYear} Alievs Space {t('ui.companyDescription')}. {t('public.copyrightSuffix', 'All rights reserved.')}
-              </p>
-            </div>
-            
-            <div className="flex flex-col lg:flex-row lg:gap-24 w-full lg:w-auto">
-              <div className="grid grid-cols-2 lg:flex lg:flex-row lg:gap-24 w-full">
-                <div className="lg:block">
-                  <h3 className="font-display text-[18px] text-white mb-4">{t('nav.company', 'Company')}</h3>
-                  <ul className="space-y-3">
-                    <li>
-                      <Link 
-                        to="/services" 
-                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-primary"
-                        onClick={scrollToTop}
-                      >
-                        {t('nav.services', 'Services')}
-                      </Link>
-                    </li>
-                    <li>
-                      <Link 
-                        to="/case-studies" 
-                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-primary"
-                        onClick={scrollToTop}
-                      >
-                        {t('nav.caseStudies', 'Case studies')}
-                      </Link>
-                    </li>
-                    <li>
-                      <Link 
-                        to="/about" 
-                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-primary"
-                        onClick={scrollToTop}
-                      >
-                        {t('nav.about', 'About')}
-                      </Link>
-                    </li>
-                    <li>
-                      <a
-                        href="https://academy.alievsspace.com/vacancies"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-primary"
-                      >
-                        {t('nav.careers', 'Careers')}
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+    <footer className="border-t border-border bg-ink-950">
+      <div className="mx-auto max-w-[1400px] px-5 py-14 md:px-8 md:py-16">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+          <div>
+            <Link to="/" className="flex items-center gap-3">
+              <img src={alievsspace} alt={t('public.company', 'Alievs Space')} className="h-10" />
+              <span>
+                <span className="block font-display text-[19px] leading-none text-white">
+                  ALIEVS SPACE
+                </span>
+                <span className="mt-1 block font-sans text-[10px] uppercase tracking-[0.16em] text-text-subtle">
+                  {t('company.tagline', 'Premium Digital & Commerce Ecosystem')}
+                </span>
+              </span>
+            </Link>
 
-                <div className="lg:block">
-                  <h3 className="font-display text-[18px] text-white mb-4">{t('nav.legal', 'Legal')}</h3>
-                  <ul className="space-y-3">
-                    <li>
-                      <Link 
-                        to="/privacy-policy" 
-                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-primary"
-                        onClick={scrollToTop}
-                      >
-                        {t('nav.privacyPolicy', 'Privacy Policy')}
-                      </Link>
-                    </li>
-                    <li>
-                      <Link 
-                        to="/terms-of-service" 
-                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-primary"
-                        onClick={scrollToTop}
-                      >
-                        {t('nav.termsOfService', 'Terms of Service')}
-                      </Link>
-                    </li>
-                    <li>
-                      <Link 
-                        to="/refund-policy" 
-                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-primary"
-                        onClick={scrollToTop}
-                      >
-                        {t('nav.refundPolicy', 'Refund Policy')}
-                      </Link>
-                    </li>
-                    <li>
-                      <Link 
-                        to="/cookie-policy" 
-                        className="font-inter text-[13px] text-white transition-colors duration-300 hover:text-primary"
-                        onClick={scrollToTop}
-                      >
-                        {t('nav.cookiePolicy', 'Cookie Policy')}
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
+            <div className="rule-fade my-5 max-w-[13rem]" />
 
-                <div className="lg:block col-span-2 mt-8 lg:mt-0">
-                  <h3 className="font-display text-[18px] text-white mb-4">{t('nav.contact', 'Contact')}</h3>
-                  <ul className="space-y-3 mb-6">
-                    <li className="flex items-center gap-2">
-                      <p className='font-inter text-white text-[13px] font-semibold whitespace-nowrap'>{t('public.contactEmail', 'Email')}:</p>
-                      <a 
-                        href="mailto:info@alievsspace.com" 
-                        className="font-inter text-white text-[13px] transition-colors duration-300 hover:text-primary break-all"
-                      >
-                        info@alievsspace.com
-                      </a>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <p className='font-inter text-white text-[13px] font-semibold whitespace-nowrap'>{t('public.contactPhone', 'Phone')}:</p>
-                      <a 
-                        href={footerPhoneHref}
-                        className="font-inter text-white text-[13px] transition-colors duration-300 hover:text-primary whitespace-nowrap"
-                      >
-                        {footerPhoneText}
-                      </a>
-                    </li>
-                  </ul>
+            <p className="max-w-sm text-[13px] leading-relaxed text-text-muted">
+              {t('public.footerDesc')}
+            </p>
 
-                  <div className="hidden lg:block w-52 h-[1px] bg-gradient-to-r from-primary to-transparent my-4"></div>
-
-                  <div className="hidden lg:block mt-6">
-                    <div className="flex gap-4 justify-center items-center md:justify-start">
-                      <a 
-                        href="https://www.instagram.com/alievsspace/?igsh=MWRpb3J4NmNoMTA0OQ%3D%3D#" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="hover:opacity-80 transition-opacity duration-300"
-                      >
-                        <img src={instagram} alt="Instagram"/>
-                      </a>
-                      <a 
-                        href="https://www.linkedin.com/company/alievs-space-mmc" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="hover:opacity-80 transition-opacity duration-300"
-                      >
-                        <img src={linkedin} alt="LinkedIn"/>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="block lg:hidden w-full h-[1px] bg-gradient-to-r from-primary to-transparent my-8"></div>
-
-              <div className="block lg:hidden">
-                <div className="flex flex-col items-center">
-                  <div className="flex gap-4 mb-4">
-                    <a 
-                      href="https://www.instagram.com/alievsspace/?igsh=MWRpb3J4NmNoMTA0OQ%3D%3D#" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="hover:opacity-80 transition-opacity duration-300"
-                    >
-                      <img src={instagram} alt="Instagram"/>
-                    </a>
-                    <a 
-                      href="https://www.linkedin.com/company/alievs-space-mmc" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="hover:opacity-80 transition-opacity duration-300"
-                    >
-                      <img src={linkedin} alt="LinkedIn"/>
-                    </a>
-                  </div>
-                  
-                  <p className="font-inter text-white text-[13px] text-center">
-                    © {currentYear} Alievs Space {t('ui.companyDescription')}. {t('public.copyrightSuffix')}
-                  </p>
-                </div>
-              </div>
+            <div className="mt-6 flex flex-wrap items-center gap-2">
+              <LanguageSwitcher />
+              <CurrencySwitcher />
             </div>
           </div>
+
+          {COLUMNS.map((column) => (
+            <nav key={column.titleKey} aria-label={t(column.titleKey)}>
+              <h2 className="font-display text-[15px] font-semibold text-white">
+                {t(column.titleKey)}
+              </h2>
+              <ul className="mt-4 space-y-2.5">
+                {column.links.map((link) => (
+                  <li key={link.to}>
+                    {link.external ? (
+                      <a href={link.to} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                        {t(link.key)}
+                      </a>
+                    ) : (
+                      <Link to={link.to} className={linkClass}>
+                        {t(link.key)}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
+
+          <div>
+            <h2 className="font-display text-[15px] font-semibold text-white">{t('nav.contact')}</h2>
+            <ul className="mt-4 space-y-3 text-[13px]">
+              <li className="flex flex-wrap items-center gap-1.5">
+                <span className="text-text-subtle">{t('public.contactEmail')}:</span>
+                <a href={`mailto:${ORGANIZATION.email}`} className={linkClass}>
+                  {ORGANIZATION.email}
+                </a>
+              </li>
+              <li className="flex flex-wrap items-center gap-1.5">
+                <span className="text-text-subtle">{t('public.contactPhone')}:</span>
+                <a href={phoneHref} className={linkClass}>
+                  {phoneText}
+                </a>
+              </li>
+            </ul>
+
+            <Link
+              to="/contact"
+              className="mt-6 inline-flex rounded-lg bg-primary px-5 py-2.5 text-[13.5px] font-semibold text-on-primary transition-colors hover:bg-primary-hover"
+            >
+              {t('nav.getQuote')}
+            </Link>
+
+            <div className="mt-7 flex gap-4">
+              <a
+                href={ORGANIZATION.social[0]}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="opacity-80 transition-opacity hover:opacity-100"
+              >
+                <img src={instagram} alt="" aria-hidden />
+              </a>
+              <a
+                href={ORGANIZATION.social[1]}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="opacity-80 transition-opacity hover:opacity-100"
+              >
+                <img src={linkedin} alt="" aria-hidden />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 md:flex-row">
+          <p className="text-[12.5px] text-text-subtle">
+            © {currentYear} Alievs Space {t('ui.companyDescription')}. {t('public.copyrightSuffix')}
+          </p>
+          <p className="text-[12px] text-text-disabled">{t('packages.currencyNote')}</p>
         </div>
       </div>
     </footer>

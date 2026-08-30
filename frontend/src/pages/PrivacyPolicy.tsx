@@ -489,7 +489,8 @@ export function PrivacyPolicy() {
   const { locale } = useI18n();
   const currentYear = new Date().getFullYear();
 
-  const content = PRIVACY_CONTENT[locale];
+  // Legal texts exist only in en/ru/az; other UI languages read the English version.
+  const content = PRIVACY_CONTENT[locale as keyof typeof PRIVACY_CONTENT] ?? PRIVACY_CONTENT.en;
 
   return (
     <div className='mt-[60px] flex flex-col justify-center items-center'>

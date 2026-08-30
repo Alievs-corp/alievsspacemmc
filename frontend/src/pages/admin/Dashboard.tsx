@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useI18n } from '@/contexts/I18nContext';
-import { api, type Service, type Project, type BlogPost, type Career, type Employee, type Inquiry } from '@/lib/api';
+import { api, type Service, type Project, type BlogPost, type Career, type Employee, type Inquiry, toCmsLocale } from '@/lib/api';
 import { useState, useEffect } from 'react';
 import {
   Briefcase, FolderKanban, FileText, GraduationCap, Users, Mail, ArrowRight, Inbox,
@@ -24,11 +24,11 @@ export function AdminDashboard() {
       setLoading(true);
       try {
         const [services, projects, blog, careers, employees, inquiries] = await Promise.all([
-          api.getServices(locale) as Promise<Service[]>,
-          api.getProjects(locale) as Promise<Project[]>,
-          api.getBlogPosts(locale) as Promise<BlogPost[]>,
-          api.getCareers(locale) as Promise<Career[]>,
-          api.getEmployees(locale) as Promise<Employee[]>,
+          api.getServices(toCmsLocale(locale)) as Promise<Service[]>,
+          api.getProjects(toCmsLocale(locale)) as Promise<Project[]>,
+          api.getBlogPosts(toCmsLocale(locale)) as Promise<BlogPost[]>,
+          api.getCareers(toCmsLocale(locale)) as Promise<Career[]>,
+          api.getEmployees(toCmsLocale(locale)) as Promise<Employee[]>,
           api.admin.getInquiries() as Promise<Inquiry[]>,
         ]);
         if (!active) return;

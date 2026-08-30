@@ -38,8 +38,14 @@ export default defineConfig({
             return 'vendor'
           }
 
-          if (id.includes('/src/pages/admin') || id.includes('\\src\\pages\\admin')) {
-            return 'admin'
+          // Admin routes are lazy-loaded in App.tsx; forcing them into a named
+          // chunk would drag shared code into it and get it preloaded on every
+          // public page, so leave their splitting to Rollup.
+
+          // Translation bundles are large, shared by every route, and change
+          // independently of app code — keep them cacheable on their own.
+          if (id.includes('/src/locales/') || id.includes('\\src\\locales\\')) {
+            return 'locales'
           }
           return undefined
         },

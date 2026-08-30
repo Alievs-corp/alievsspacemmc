@@ -9,7 +9,7 @@ import logistics from "../assets/icons/logistics.svg";
 import finance from "../assets/icons/finance.svg";
 import startup from "../assets/icons/startup.svg";
 import trustedPeople from "../assets/images/trusted-people.svg";
-import { Helmet } from 'react-helmet-async';
+import { Seo } from '@/components/Seo';
 
 export function Industries() {
   const { t } = useI18n();
@@ -61,13 +61,10 @@ export function Industries() {
 
   return (
     <div className="mt-[60px] flex flex-col justify-center items-center">
-      <Helmet>
-        <title>{`${t('nav.industries', 'Industries')} | Alievs Space MMC`}</title>
-        <meta name="description" content={t('public.industriesIntro')} />
-        <meta property="og:title" content={`${t('nav.industries', 'Industries')}`} />
-        <meta property="og:description" content={t('public.industriesIntro')} />
-        <meta property="og:type" content="website" />
-      </Helmet>
+      <Seo
+        page="industries"
+        breadcrumbs={[{ name: t('nav.industries'), path: '/industries' }]}
+      />
       <Container className="flex flex-col justify-center items-center">
         <h2 className="font-display text-[38px] font-bold text-white">{t('nav.industries', 'Industries')}</h2>
         <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">{t('public.industriesIntro')}</p>

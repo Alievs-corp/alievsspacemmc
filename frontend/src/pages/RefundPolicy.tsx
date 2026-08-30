@@ -203,7 +203,8 @@ export function RefundPolicy() {
   const { locale } = useI18n();
   const currentYear = new Date().getFullYear();
 
-  const content = REFUND_CONTENT[locale];
+  // Legal texts exist only in en/ru/az; other UI languages read the English version.
+  const content = REFUND_CONTENT[locale as keyof typeof REFUND_CONTENT] ?? REFUND_CONTENT.en;
 
   return (
     <div className='mt-[60px] flex flex-col justify-center items-center'>

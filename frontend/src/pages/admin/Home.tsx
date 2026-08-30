@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { api, type Home } from '@/lib/api';
+import { api, type Home, toCmsLocale } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 import { ImageUpload } from '@/components/admin/ImageUpload';
@@ -28,7 +28,7 @@ export function AdminHome() {
   const loadHome = async () => {
     try {
       setLoading(true);
-      const data = await api.getHome(locale);
+      const data = await api.getHome(toCmsLocale(locale));
       setFormData({
         heroTitle: data.heroTitle || '',
         heroSubtitle: data.heroSubtitle || '',
@@ -82,7 +82,7 @@ export function AdminHome() {
         proof,
       };
 
-      await api.admin.updateHome(locale, payload);
+      await api.admin.updateHome(toCmsLocale(locale), payload);
       await loadHome();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to save home content');

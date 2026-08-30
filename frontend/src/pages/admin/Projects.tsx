@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { api, type Project, type Locale } from '@/lib/api';
+import { api, type Project, type Locale, toCmsLocale } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 import { ImageUpload } from '@/components/admin/ImageUpload';
@@ -34,7 +34,7 @@ export function AdminProjects() {
   const loadProjects = async () => {
     try {
       setLoading(true);
-      const data = await api.getProjects(locale);
+      const data = await api.getProjects(toCmsLocale(locale));
       setProjects(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : t('admin.failedToLoad'));

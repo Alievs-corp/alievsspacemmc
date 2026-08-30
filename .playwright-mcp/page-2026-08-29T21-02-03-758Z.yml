@@ -1,0 +1,289 @@
+- generic [ref=f22e3]:
+  - link "本文へスキップ" [ref=f22e4] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f22e5]:
+    - generic [ref=f22e6]:
+      - link "ホーム" [ref=f22e7] [cursor=pointer]:
+        - /url: /
+        - img "ロゴ" [ref=f22e8]
+        - generic [ref=f22e9]:
+          - generic [ref=f22e10]: ALIEVS
+          - generic [ref=f22e11]: Space 有限会社
+      - navigation "Primary" [ref=f22e12]:
+        - list [ref=f22e13]:
+          - listitem [ref=f22e14]:
+            - link "サービス" [ref=f22e15] [cursor=pointer]:
+              - /url: /services
+          - listitem [ref=f22e16]:
+            - link "プラン" [ref=f22e17] [cursor=pointer]:
+              - /url: /packages
+          - listitem [ref=f22e18]:
+            - link "進め方" [ref=f22e19] [cursor=pointer]:
+              - /url: /process
+          - listitem [ref=f22e20]:
+            - link "導入事例" [ref=f22e21] [cursor=pointer]:
+              - /url: /case-studies
+          - listitem [ref=f22e22]:
+            - link "業種" [ref=f22e23] [cursor=pointer]:
+              - /url: /industries
+          - listitem [ref=f22e24]:
+            - link "会社概要" [ref=f22e25] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=f22e26]:
+            - link "よくある質問" [ref=f22e27] [cursor=pointer]:
+              - /url: /faq
+          - listitem [ref=f22e28]:
+            - link "採用情報" [ref=f22e29] [cursor=pointer]:
+              - /url: https://academy.alievsspace.com/vacancies
+      - generic [ref=f22e32]:
+        - button "通貨" [ref=f22e34] [cursor=pointer]:
+          - generic [ref=f22e35]:
+            - generic [ref=f22e36]: $
+            - generic [ref=f22e37]: USD
+        - button "言語" [ref=f22e41] [cursor=pointer]:
+          - generic [ref=f22e42]:
+            - generic [ref=f22e43]: 🇯🇵
+            - generic [ref=f22e44]: JA
+        - button "見積もりを取る" [ref=f22e47] [cursor=pointer]
+  - main [ref=f22e48]:
+    - generic [ref=f22e51]:
+      - generic [ref=f22e52]: サービス
+      - heading "構想から公開まで、私たちがつくるすべて" [level=1] [ref=f22e53]
+      - paragraph [ref=f22e54]: Premium engineering & design across software development, e-commerce/marketplaces, and banking-ready dashboards.
+      - generic [ref=f22e55]:
+        - link "見積もりを取る" [ref=f22e56] [cursor=pointer]:
+          - /url: /contact
+        - link "プランと料金" [ref=f22e57] [cursor=pointer]:
+          - /url: /packages
+      - paragraph [ref=f22e58]: 30分の無料相談 · 24時間以内に返信 · 契約と保証つき
+    - generic [ref=f22e61]:
+      - article [ref=f22e62]:
+        - generic [ref=f22e63]: Software
+        - generic [ref=f22e66]:
+          - heading "Web & Mobile App Development" [level=2] [ref=f22e67]
+          - paragraph [ref=f22e68]: Corporate websites, web apps, mobile apps, admin dashboards, internal platforms.
+          - list [ref=f22e69]:
+            - listitem [ref=f22e70]:
+              - generic [ref=f22e73]: Premium UI systems
+            - listitem [ref=f22e74]:
+              - generic [ref=f22e77]: Performance-first pages
+            - listitem [ref=f22e78]:
+              - generic [ref=f22e81]: Analytics-ready structure
+            - listitem [ref=f22e82]:
+              - generic [ref=f22e85]: Clean documentation
+          - link "このサービスを相談する" [ref=f22e86] [cursor=pointer]:
+            - /url: /contact?service=web-development
+      - article [ref=f22e89]:
+        - generic [ref=f22e90]: Commerce
+        - generic [ref=f22e93]:
+          - heading "E-commerce & Marketplace Systems" [level=2] [ref=f22e94]
+          - paragraph [ref=f22e95]: Online stores and multi-vendor marketplaces with full operational tooling.
+          - list [ref=f22e96]:
+            - listitem [ref=f22e97]:
+              - generic [ref=f22e100]: Catalog + filters + search
+            - listitem [ref=f22e101]:
+              - generic [ref=f22e104]: Cart & checkout flows
+            - listitem [ref=f22e105]:
+              - generic [ref=f22e108]: Commission & payout reporting
+            - listitem [ref=f22e109]:
+              - generic [ref=f22e112]: Store owner dashboards
+          - link "このサービスを相談する" [ref=f22e113] [cursor=pointer]:
+            - /url: /contact?service=ecommerce
+      - article [ref=f22e116]:
+        - generic [ref=f22e117]: Banking
+        - generic [ref=f22e120]:
+          - heading "Banking-ready Dashboards" [level=2] [ref=f22e121]
+          - paragraph [ref=f22e122]: Secure, audit-friendly systems with roles, reporting, and controlled data access.
+          - list [ref=f22e123]:
+            - listitem [ref=f22e124]:
+              - generic [ref=f22e127]: Role-based access control
+            - listitem [ref=f22e128]:
+              - generic [ref=f22e131]: Audit logs & reporting views
+            - listitem [ref=f22e132]:
+              - generic [ref=f22e135]: Secure workflow design
+            - listitem [ref=f22e136]:
+              - generic [ref=f22e139]: Compliance-friendly
+          - link "このサービスを相談する" [ref=f22e140] [cursor=pointer]:
+            - /url: /contact?service=banking-fintech
+    - generic [ref=f22e144]:
+      - generic [ref=f22e145]:
+        - generic [ref=f22e146]: サービス
+        - heading "Website Structure Builder" [level=2] [ref=f22e147]
+        - paragraph [ref=f22e148]: 業種を選ぶと、おすすめのページ構成をご覧いただけます。
+      - generic [ref=f22e149]:
+        - button "Restaurant" [pressed] [ref=f22e150] [cursor=pointer]
+        - button "E-commerce" [ref=f22e153] [cursor=pointer]
+        - button "Banking" [ref=f22e156] [cursor=pointer]
+        - button "Education" [ref=f22e159] [cursor=pointer]
+      - generic [ref=f22e162]:
+        - generic [ref=f22e163]:
+          - heading "Menu" [level=3] [ref=f22e167]
+          - paragraph [ref=f22e168]: Present your restaurant menu on a digital platform with category-based organization and the ability to update it daily.
+        - generic [ref=f22e169]:
+          - heading "Reservation" [level=3] [ref=f22e173]
+          - paragraph [ref=f22e174]: Simplify table booking with an online reservation system that supports automatic confirmations and reminders.
+        - generic [ref=f22e175]:
+          - heading "Gallery" [level=3] [ref=f22e179]
+          - paragraph [ref=f22e180]: Showcase your interior, special events, and signature dishes with a professional photo gallery.
+        - generic [ref=f22e181]:
+          - heading "Location" [level=3] [ref=f22e185]
+          - paragraph [ref=f22e186]: Display your exact location with Google Maps integration, including navigation and driving directions.
+    - generic [ref=f22e188]:
+      - generic [ref=f22e189]:
+        - heading "すべての案件に含まれるもの" [level=2] [ref=f22e190]
+        - paragraph [ref=f22e191]: どのサービスでも同じ三つの段階を踏みます。後から追加で請求することはありません。
+      - generic [ref=f22e192]:
+        - generic [ref=f22e193]:
+          - generic [ref=f22e194]:
+            - generic [ref=f22e195]: "01"
+            - heading "Design" [level=3] [ref=f22e196]
+          - list [ref=f22e197]:
+            - listitem [ref=f22e198]: UI/UX Design
+            - listitem [ref=f22e199]: Wireframing
+            - listitem [ref=f22e200]: Prototyping
+            - listitem [ref=f22e201]: Design System
+            - listitem [ref=f22e202]: Responsive Design
+        - generic [ref=f22e203]:
+          - generic [ref=f22e204]:
+            - generic [ref=f22e205]: "02"
+            - heading "Development" [level=3] [ref=f22e206]
+          - list [ref=f22e207]:
+            - listitem [ref=f22e208]: Frontend (React)
+            - listitem [ref=f22e209]: Backend (Node.js)
+            - listitem [ref=f22e210]: Database
+            - listitem [ref=f22e211]: API Integration
+            - listitem [ref=f22e212]: Testing
+            - listitem [ref=f22e213]: Performance Optimization
+            - listitem [ref=f22e214]: Security
+            - listitem [ref=f22e215]: Version Control
+        - generic [ref=f22e216]:
+          - generic [ref=f22e217]:
+            - generic [ref=f22e218]: "03"
+            - heading "Launch" [level=3] [ref=f22e219]
+          - list [ref=f22e220]:
+            - listitem [ref=f22e221]: Domain Registration
+            - listitem [ref=f22e222]: Hosting Setup
+            - listitem [ref=f22e223]: SSL Certificate
+            - listitem [ref=f22e224]: Deployment
+            - listitem [ref=f22e225]: Monitoring
+            - listitem [ref=f22e226]: Maintenance
+    - generic [ref=f22e228]:
+      - generic [ref=f22e229]:
+        - heading "Delivery model" [level=2] [ref=f22e230]
+        - paragraph [ref=f22e231]: We start with the architecture and UI system. Then we build modules, integrate analytics, and ship in controlled milestones — with ongoing support.
+      - generic [ref=f22e232]:
+        - generic [ref=f22e233]:
+          - generic [ref=f22e234]: "1"
+          - heading "Architecture & UI System" [level=3] [ref=f22e235]
+          - paragraph [ref=f22e236]: Define system architecture and establish a scalable UI design system.
+        - generic [ref=f22e237]:
+          - generic [ref=f22e238]: "2"
+          - heading "Module Development" [level=3] [ref=f22e239]
+          - paragraph [ref=f22e240]: Build core features and modules based on validated requirements.
+        - generic [ref=f22e241]:
+          - generic [ref=f22e242]: "3"
+          - heading "Integration & Analytics" [level=3] [ref=f22e243]
+          - paragraph [ref=f22e244]: Integrate services, analytics, and supporting infrastructure.
+        - generic [ref=f22e245]:
+          - generic [ref=f22e246]: "4"
+          - heading "Controlled Delivery" [level=3] [ref=f22e247]
+          - paragraph [ref=f22e248]: Release in structured milestones with validation at each stage.
+        - generic [ref=f22e249]:
+          - generic [ref=f22e250]: "5"
+          - heading "Ongoing Support" [level=3] [ref=f22e251]
+          - paragraph [ref=f22e252]: Maintain, monitor, and improve the system post-launch.
+      - generic [ref=f22e253]:
+        - paragraph [ref=f22e254]: "Result: predictable delivery, scalable systems, and long-term operational stability."
+        - link "進め方" [ref=f22e255] [cursor=pointer]:
+          - /url: /process
+    - generic [ref=f22e260]:
+      - heading "つくりたいものをお聞かせください" [level=2] [ref=f22e261]
+      - paragraph [ref=f22e262]: プロジェクトの概要を短くお送りください。書面の概算、スケジュール、おすすめプランをお返しします。無料・ご契約義務なし。
+      - generic [ref=f22e263]:
+        - link "無料見積もりを依頼" [ref=f22e264] [cursor=pointer]:
+          - /url: /contact
+        - link "すべてのプランを見る" [ref=f22e265] [cursor=pointer]:
+          - /url: /packages
+  - contentinfo [ref=f22e266]:
+    - generic [ref=f22e267]:
+      - generic [ref=f22e268]:
+        - generic [ref=f22e269]:
+          - link "Alievs Space 有限会社 ALIEVS SPACE Premium Digital & Commerce Ecosystem" [ref=f22e270] [cursor=pointer]:
+            - /url: /
+            - img "Alievs Space 有限会社" [ref=f22e271]
+            - generic [ref=f22e272]:
+              - generic [ref=f22e273]: ALIEVS SPACE
+              - generic [ref=f22e274]: Premium Digital & Commerce Ecosystem
+          - paragraph [ref=f22e276]: ウェブサイトとアプリ、EC・マーケットプレイス、銀行水準のダッシュボードをプレミアム品質で開発します。
+          - generic [ref=f22e277]:
+            - button "言語" [ref=f22e279] [cursor=pointer]:
+              - generic [ref=f22e280]:
+                - generic [ref=f22e281]: 🇯🇵
+                - generic [ref=f22e282]: JA
+            - button "通貨" [ref=f22e286] [cursor=pointer]:
+              - generic [ref=f22e287]:
+                - generic [ref=f22e288]: $
+                - generic [ref=f22e289]: USD
+        - navigation "会社" [ref=f22e292]:
+          - heading "会社" [level=2] [ref=f22e293]
+          - list [ref=f22e294]:
+            - listitem [ref=f22e295]:
+              - link "サービス" [ref=f22e296] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=f22e297]:
+              - link "プラン" [ref=f22e298] [cursor=pointer]:
+                - /url: /packages
+            - listitem [ref=f22e299]:
+              - link "進め方" [ref=f22e300] [cursor=pointer]:
+                - /url: /process
+            - listitem [ref=f22e301]:
+              - link "導入事例" [ref=f22e302] [cursor=pointer]:
+                - /url: /case-studies
+            - listitem [ref=f22e303]:
+              - link "業種" [ref=f22e304] [cursor=pointer]:
+                - /url: /industries
+            - listitem [ref=f22e305]:
+              - link "会社概要" [ref=f22e306] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=f22e307]:
+              - link "よくある質問" [ref=f22e308] [cursor=pointer]:
+                - /url: /faq
+            - listitem [ref=f22e309]:
+              - link "採用情報" [ref=f22e310] [cursor=pointer]:
+                - /url: https://academy.alievsspace.com/vacancies
+        - navigation "法的事項" [ref=f22e311]:
+          - heading "法的事項" [level=2] [ref=f22e312]
+          - list [ref=f22e313]:
+            - listitem [ref=f22e314]:
+              - link "プライバシーポリシー" [ref=f22e315] [cursor=pointer]:
+                - /url: /privacy-policy
+            - listitem [ref=f22e316]:
+              - link "利用規約" [ref=f22e317] [cursor=pointer]:
+                - /url: /terms-of-service
+            - listitem [ref=f22e318]:
+              - link "返金ポリシー" [ref=f22e319] [cursor=pointer]:
+                - /url: /refund-policy
+            - listitem [ref=f22e320]:
+              - link "Cookie ポリシー" [ref=f22e321] [cursor=pointer]:
+                - /url: /cookie-policy
+        - generic [ref=f22e322]:
+          - heading "お問い合わせ" [level=2] [ref=f22e323]
+          - list [ref=f22e324]:
+            - listitem [ref=f22e325]:
+              - generic [ref=f22e326]: "メール:"
+              - link "info@alievsspace.com" [ref=f22e327] [cursor=pointer]:
+                - /url: mailto:info@alievsspace.com
+            - listitem [ref=f22e328]:
+              - generic [ref=f22e329]: "電話:"
+              - link "+994 (51) 700 35 00" [ref=f22e330] [cursor=pointer]:
+                - /url: tel:+994517003500
+          - link "見積もりを取る" [ref=f22e331] [cursor=pointer]:
+            - /url: /contact
+          - generic [ref=f22e332]:
+            - link "Instagram" [ref=f22e333] [cursor=pointer]:
+              - /url: https://www.instagram.com/alievsspace/
+            - link "LinkedIn" [ref=f22e335] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/alievs-space-mmc
+      - generic [ref=f22e337]:
+        - paragraph [ref=f22e338]: © 2026 Alievs Space 有限会社. All rights reserved.
+        - paragraph [ref=f22e339]: 価格はマナト建てで設定し、参考レートで換算しています。最終金額は契約書で確定します。

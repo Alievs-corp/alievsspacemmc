@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { api, type Settings } from '@/lib/api';
+import { api, type Settings, toCmsLocale } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 
@@ -32,7 +32,7 @@ export function AdminSettings() {
   const loadSettings = async () => {
     try {
       setLoading(true);
-      const data = await api.getSettings(locale);
+      const data = await api.getSettings(toCmsLocale(locale));
       setFormData({
         brandName: data.brandName || '',
         tagline: data.tagline || '',
@@ -62,7 +62,7 @@ export function AdminSettings() {
     setError('');
 
     try {
-      await api.admin.updateSettings(locale, formData);
+      await api.admin.updateSettings(toCmsLocale(locale), formData);
       await loadSettings();
     } catch (err) {
       setError(err instanceof Error ? err.message : t('admin.failedToSave'));
@@ -78,14 +78,14 @@ export function AdminSettings() {
     try {
       const [settings, home, about, services, projects, blog, careers, employees, inquiries] =
         await Promise.all([
-          api.getSettings(locale).catch(() => null),
-          api.getHome(locale).catch(() => null),
-          api.getAbout(locale).catch(() => null),
-          api.getServices(locale).catch(() => []),
-          api.getProjects(locale).catch(() => []),
-          api.getBlogPosts(locale).catch(() => []),
-          api.getCareers(locale).catch(() => []),
-          api.getEmployees(locale).catch(() => []),
+          api.getSettings(toCmsLocale(locale)).catch(() => null),
+          api.getHome(toCmsLocale(locale)).catch(() => null),
+          api.getAbout(toCmsLocale(locale)).catch(() => null),
+          api.getServices(toCmsLocale(locale)).catch(() => []),
+          api.getProjects(toCmsLocale(locale)).catch(() => []),
+          api.getBlogPosts(toCmsLocale(locale)).catch(() => []),
+          api.getCareers(toCmsLocale(locale)).catch(() => []),
+          api.getEmployees(toCmsLocale(locale)).catch(() => []),
           api.admin.getInquiries().catch(() => []),
         ]);
 

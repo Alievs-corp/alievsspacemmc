@@ -1,0 +1,289 @@
+- generic [ref=f19e3]:
+  - link "Skip to content" [ref=f19e4] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f19e5]:
+    - generic [ref=f19e6]:
+      - link "Home" [ref=f19e7] [cursor=pointer]:
+        - /url: /
+        - img "Logo" [ref=f19e8]
+        - generic [ref=f19e9]:
+          - generic [ref=f19e10]: ALIEVS
+          - generic [ref=f19e11]: Space LLC
+      - navigation "Primary" [ref=f19e12]:
+        - list [ref=f19e13]:
+          - listitem [ref=f19e14]:
+            - link "Services" [ref=f19e15] [cursor=pointer]:
+              - /url: /services
+          - listitem [ref=f19e16]:
+            - link "Packages" [ref=f19e17] [cursor=pointer]:
+              - /url: /packages
+          - listitem [ref=f19e18]:
+            - link "How we work" [ref=f19e19] [cursor=pointer]:
+              - /url: /process
+          - listitem [ref=f19e20]:
+            - link "Case Studies" [ref=f19e21] [cursor=pointer]:
+              - /url: /case-studies
+          - listitem [ref=f19e22]:
+            - link "Industries" [ref=f19e23] [cursor=pointer]:
+              - /url: /industries
+          - listitem [ref=f19e24]:
+            - link "About" [ref=f19e25] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=f19e26]:
+            - link "FAQ" [ref=f19e27] [cursor=pointer]:
+              - /url: /faq
+          - listitem [ref=f19e28]:
+            - link "Careers" [ref=f19e29] [cursor=pointer]:
+              - /url: https://academy.alievsspace.com/vacancies
+      - generic [ref=f19e32]:
+        - button "Currency" [ref=f19e34] [cursor=pointer]:
+          - generic [ref=f19e35]:
+            - generic [ref=f19e36]: $
+            - generic [ref=f19e37]: USD
+        - button "Language" [ref=f19e41] [cursor=pointer]:
+          - generic [ref=f19e42]:
+            - generic [ref=f19e43]: 🇬🇧
+            - generic [ref=f19e44]: EN
+        - button "Get a quote" [ref=f19e47] [cursor=pointer]
+  - main [ref=f19e48]:
+    - generic [ref=f19e51]:
+      - generic [ref=f19e52]: Services
+      - heading "Everything we build, end to end" [level=1] [ref=f19e53]
+      - paragraph [ref=f19e54]: Premium engineering & design across software development, e-commerce/marketplaces, and banking-ready dashboards.
+      - generic [ref=f19e55]:
+        - link "Get a quote" [ref=f19e56] [cursor=pointer]:
+          - /url: /contact
+        - link "See packages & prices" [ref=f19e57] [cursor=pointer]:
+          - /url: /packages
+      - paragraph [ref=f19e58]: Free 30-minute consultation · Reply within 24 hours · Contract and warranty included
+    - generic [ref=f19e61]:
+      - article [ref=f19e62]:
+        - generic [ref=f19e63]: Software
+        - generic [ref=f19e66]:
+          - heading "Web & Mobile App Development" [level=2] [ref=f19e67]
+          - paragraph [ref=f19e68]: Corporate websites, web apps, mobile apps, admin dashboards, internal platforms.
+          - list [ref=f19e69]:
+            - listitem [ref=f19e70]:
+              - generic [ref=f19e73]: Premium UI systems
+            - listitem [ref=f19e74]:
+              - generic [ref=f19e77]: Performance-first pages
+            - listitem [ref=f19e78]:
+              - generic [ref=f19e81]: Analytics-ready structure
+            - listitem [ref=f19e82]:
+              - generic [ref=f19e85]: Clean documentation
+          - link "Discuss this service" [ref=f19e86] [cursor=pointer]:
+            - /url: /contact?service=web-development
+      - article [ref=f19e89]:
+        - generic [ref=f19e90]: Commerce
+        - generic [ref=f19e93]:
+          - heading "E-commerce & Marketplace Systems" [level=2] [ref=f19e94]
+          - paragraph [ref=f19e95]: Online stores and multi-vendor marketplaces with full operational tooling.
+          - list [ref=f19e96]:
+            - listitem [ref=f19e97]:
+              - generic [ref=f19e100]: Catalog + filters + search
+            - listitem [ref=f19e101]:
+              - generic [ref=f19e104]: Cart & checkout flows
+            - listitem [ref=f19e105]:
+              - generic [ref=f19e108]: Commission & payout reporting
+            - listitem [ref=f19e109]:
+              - generic [ref=f19e112]: Store owner dashboards
+          - link "Discuss this service" [ref=f19e113] [cursor=pointer]:
+            - /url: /contact?service=ecommerce
+      - article [ref=f19e116]:
+        - generic [ref=f19e117]: Banking
+        - generic [ref=f19e120]:
+          - heading "Banking-ready Dashboards" [level=2] [ref=f19e121]
+          - paragraph [ref=f19e122]: Secure, audit-friendly systems with roles, reporting, and controlled data access.
+          - list [ref=f19e123]:
+            - listitem [ref=f19e124]:
+              - generic [ref=f19e127]: Role-based access control
+            - listitem [ref=f19e128]:
+              - generic [ref=f19e131]: Audit logs & reporting views
+            - listitem [ref=f19e132]:
+              - generic [ref=f19e135]: Secure workflow design
+            - listitem [ref=f19e136]:
+              - generic [ref=f19e139]: Compliance-friendly
+          - link "Discuss this service" [ref=f19e140] [cursor=pointer]:
+            - /url: /contact?service=banking-fintech
+    - generic [ref=f19e144]:
+      - generic [ref=f19e145]:
+        - generic [ref=f19e146]: Services
+        - heading "Website Structure Builder" [level=2] [ref=f19e147]
+        - paragraph [ref=f19e148]: Pick a business type to see the page structure we would recommend.
+      - generic [ref=f19e149]:
+        - button "Restaurant" [ref=f19e150] [cursor=pointer]
+        - button "E-commerce" [ref=f19e153] [cursor=pointer]
+        - button "Banking" [active] [pressed] [ref=f19e156] [cursor=pointer]
+        - button "Education" [ref=f19e159] [cursor=pointer]
+      - generic [ref=f19e162]:
+        - generic [ref=f19e340]:
+          - heading "Accounts" [level=3] [ref=f19e344]
+          - paragraph [ref=f19e345]: Manage customer accounts, check balances, execute account-to-account transfers, and generate statements.
+        - generic [ref=f19e346]:
+          - heading "Payments" [level=3] [ref=f19e350]
+          - paragraph [ref=f19e351]: Support utilities, loan repayments, card-to-card transfers, and recurring payments in one system.
+        - generic [ref=f19e352]:
+          - heading "Security" [level=3] [ref=f19e356]
+          - paragraph [ref=f19e357]: Provide two-factor authentication, biometric login, transaction approvals, and anti-fraud monitoring.
+        - generic [ref=f19e358]:
+          - heading "Transactions" [level=3] [ref=f19e362]
+          - paragraph [ref=f19e363]: Give full visibility into financial transaction history with filters and detailed reporting views.
+    - generic [ref=f19e188]:
+      - generic [ref=f19e189]:
+        - heading "Every project includes" [level=2] [ref=f19e190]
+        - paragraph [ref=f19e191]: The same three phases whichever service you choose — none of it is quoted as an extra later.
+      - generic [ref=f19e192]:
+        - generic [ref=f19e193]:
+          - generic [ref=f19e194]:
+            - generic [ref=f19e195]: "01"
+            - heading "Design" [level=3] [ref=f19e196]
+          - list [ref=f19e197]:
+            - listitem [ref=f19e198]: UI/UX Design
+            - listitem [ref=f19e199]: Wireframing
+            - listitem [ref=f19e200]: Prototyping
+            - listitem [ref=f19e201]: Design System
+            - listitem [ref=f19e202]: Responsive Design
+        - generic [ref=f19e203]:
+          - generic [ref=f19e204]:
+            - generic [ref=f19e205]: "02"
+            - heading "Development" [level=3] [ref=f19e206]
+          - list [ref=f19e207]:
+            - listitem [ref=f19e208]: Frontend (React)
+            - listitem [ref=f19e209]: Backend (Node.js)
+            - listitem [ref=f19e210]: Database
+            - listitem [ref=f19e211]: API Integration
+            - listitem [ref=f19e212]: Testing
+            - listitem [ref=f19e213]: Performance Optimization
+            - listitem [ref=f19e214]: Security
+            - listitem [ref=f19e215]: Version Control
+        - generic [ref=f19e216]:
+          - generic [ref=f19e217]:
+            - generic [ref=f19e218]: "03"
+            - heading "Launch" [level=3] [ref=f19e219]
+          - list [ref=f19e220]:
+            - listitem [ref=f19e221]: Domain Registration
+            - listitem [ref=f19e222]: Hosting Setup
+            - listitem [ref=f19e223]: SSL Certificate
+            - listitem [ref=f19e224]: Deployment
+            - listitem [ref=f19e225]: Monitoring
+            - listitem [ref=f19e226]: Maintenance
+    - generic [ref=f19e228]:
+      - generic [ref=f19e229]:
+        - heading "Delivery model" [level=2] [ref=f19e230]
+        - paragraph [ref=f19e231]: We start with the architecture and UI system. Then we build modules, integrate analytics, and ship in controlled milestones — with ongoing support.
+      - generic [ref=f19e232]:
+        - generic [ref=f19e233]:
+          - generic [ref=f19e234]: "1"
+          - heading "Architecture & UI System" [level=3] [ref=f19e235]
+          - paragraph [ref=f19e236]: Define system architecture and establish a scalable UI design system.
+        - generic [ref=f19e237]:
+          - generic [ref=f19e238]: "2"
+          - heading "Module Development" [level=3] [ref=f19e239]
+          - paragraph [ref=f19e240]: Build core features and modules based on validated requirements.
+        - generic [ref=f19e241]:
+          - generic [ref=f19e242]: "3"
+          - heading "Integration & Analytics" [level=3] [ref=f19e243]
+          - paragraph [ref=f19e244]: Integrate services, analytics, and supporting infrastructure.
+        - generic [ref=f19e245]:
+          - generic [ref=f19e246]: "4"
+          - heading "Controlled Delivery" [level=3] [ref=f19e247]
+          - paragraph [ref=f19e248]: Release in structured milestones with validation at each stage.
+        - generic [ref=f19e249]:
+          - generic [ref=f19e250]: "5"
+          - heading "Ongoing Support" [level=3] [ref=f19e251]
+          - paragraph [ref=f19e252]: Maintain, monitor, and improve the system post-launch.
+      - generic [ref=f19e253]:
+        - paragraph [ref=f19e254]: "Result: predictable delivery, scalable systems, and long-term operational stability."
+        - link "How we work" [ref=f19e255] [cursor=pointer]:
+          - /url: /process
+    - generic [ref=f19e260]:
+      - heading "Tell us what you want to build" [level=2] [ref=f19e261]
+      - paragraph [ref=f19e262]: Send a short description of your project. You get a written estimate, a timeline and a recommended package — free, with no obligation.
+      - generic [ref=f19e263]:
+        - link "Request a free quote" [ref=f19e264] [cursor=pointer]:
+          - /url: /contact
+        - link "View all packages" [ref=f19e265] [cursor=pointer]:
+          - /url: /packages
+  - contentinfo [ref=f19e266]:
+    - generic [ref=f19e267]:
+      - generic [ref=f19e268]:
+        - generic [ref=f19e269]:
+          - link "Alievs Space LLC ALIEVS SPACE Premium Digital & Commerce Ecosystem" [ref=f19e270] [cursor=pointer]:
+            - /url: /
+            - img "Alievs Space LLC" [ref=f19e271]
+            - generic [ref=f19e272]:
+              - generic [ref=f19e273]: ALIEVS SPACE
+              - generic [ref=f19e274]: Premium Digital & Commerce Ecosystem
+          - paragraph [ref=f19e276]: Premium web & mobile app, e-commerce/marketplace systems, and banking-ready dashboards.
+          - generic [ref=f19e277]:
+            - button "Language" [ref=f19e279] [cursor=pointer]:
+              - generic [ref=f19e280]:
+                - generic [ref=f19e281]: 🇬🇧
+                - generic [ref=f19e282]: EN
+            - button "Currency" [ref=f19e286] [cursor=pointer]:
+              - generic [ref=f19e287]:
+                - generic [ref=f19e288]: $
+                - generic [ref=f19e289]: USD
+        - navigation "Company" [ref=f19e292]:
+          - heading "Company" [level=2] [ref=f19e293]
+          - list [ref=f19e294]:
+            - listitem [ref=f19e295]:
+              - link "Services" [ref=f19e296] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=f19e297]:
+              - link "Packages" [ref=f19e298] [cursor=pointer]:
+                - /url: /packages
+            - listitem [ref=f19e299]:
+              - link "How we work" [ref=f19e300] [cursor=pointer]:
+                - /url: /process
+            - listitem [ref=f19e301]:
+              - link "Case Studies" [ref=f19e302] [cursor=pointer]:
+                - /url: /case-studies
+            - listitem [ref=f19e303]:
+              - link "Industries" [ref=f19e304] [cursor=pointer]:
+                - /url: /industries
+            - listitem [ref=f19e305]:
+              - link "About" [ref=f19e306] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=f19e307]:
+              - link "FAQ" [ref=f19e308] [cursor=pointer]:
+                - /url: /faq
+            - listitem [ref=f19e309]:
+              - link "Careers" [ref=f19e310] [cursor=pointer]:
+                - /url: https://academy.alievsspace.com/vacancies
+        - navigation "Legal" [ref=f19e311]:
+          - heading "Legal" [level=2] [ref=f19e312]
+          - list [ref=f19e313]:
+            - listitem [ref=f19e314]:
+              - link "Privacy Policy" [ref=f19e315] [cursor=pointer]:
+                - /url: /privacy-policy
+            - listitem [ref=f19e316]:
+              - link "Terms of Service" [ref=f19e317] [cursor=pointer]:
+                - /url: /terms-of-service
+            - listitem [ref=f19e318]:
+              - link "Refund Policy" [ref=f19e319] [cursor=pointer]:
+                - /url: /refund-policy
+            - listitem [ref=f19e320]:
+              - link "Cookie Policy" [ref=f19e321] [cursor=pointer]:
+                - /url: /cookie-policy
+        - generic [ref=f19e322]:
+          - heading "Contact" [level=2] [ref=f19e323]
+          - list [ref=f19e324]:
+            - listitem [ref=f19e325]:
+              - generic [ref=f19e326]: "Email:"
+              - link "info@alievsspace.com" [ref=f19e327] [cursor=pointer]:
+                - /url: mailto:info@alievsspace.com
+            - listitem [ref=f19e328]:
+              - generic [ref=f19e329]: "Phone:"
+              - link "+421 952 480 349" [ref=f19e330] [cursor=pointer]:
+                - /url: tel:+421952480349
+          - link "Get a quote" [ref=f19e331] [cursor=pointer]:
+            - /url: /contact
+          - generic [ref=f19e332]:
+            - link "Instagram" [ref=f19e333] [cursor=pointer]:
+              - /url: https://www.instagram.com/alievsspace/
+            - link "LinkedIn" [ref=f19e335] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/alievs-space-mmc
+      - generic [ref=f19e337]:
+        - paragraph [ref=f19e338]: © 2026 Alievs Space LLC. All rights reserved.
+        - paragraph [ref=f19e339]: Prices are set in AZN and converted at an indicative rate. The final amount is fixed in your contract.

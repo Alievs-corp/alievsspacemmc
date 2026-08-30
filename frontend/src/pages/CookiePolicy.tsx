@@ -197,7 +197,8 @@ export function CookiePolicy() {
   const { locale } = useI18n();
   const currentYear = new Date().getFullYear();
 
-  const content = COOKIE_CONTENT[locale];
+  // Legal texts exist only in en/ru/az; other UI languages read the English version.
+  const content = COOKIE_CONTENT[locale as keyof typeof COOKIE_CONTENT] ?? COOKIE_CONTENT.en;
 
   return (
     <div className='mt-[60px] flex flex-col justify-center items-center'>

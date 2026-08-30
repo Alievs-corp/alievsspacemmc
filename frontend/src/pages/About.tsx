@@ -4,7 +4,7 @@ import AboutHeader from "./../components/ui/About/AboutHeader";
 import WhoWeAre from './../components/ui/About/WhoWeAre';
 import WeDeliver from './../components/ui/About/WeDeliver';
 import OurApproach from './../components/ui/About/OurApproach';
-import { Helmet } from 'react-helmet-async';
+import { Seo } from '@/components/Seo';
 
 export function About() {
   const { t } = useI18n();
@@ -21,13 +21,10 @@ export function About() {
 
   return (
     <div>
-      <Helmet>
-        <title>{`${t('nav.about', 'About')} | Alievs Space MMC`}</title>
-        <meta name="description" content={t('about.headerCopy')} />
-        <meta property="og:title" content={`${t('nav.about', 'About')}`} />
-        <meta property="og:description" content={t('about.headerCopy')} />
-        <meta property="og:type" content="website" />
-      </Helmet>
+      <Seo
+        page="about"
+        breadcrumbs={[{ name: t('nav.about'), path: '/about' }]}
+      />
       <AboutHeader />
       <WhoWeAre />
       <WeDeliver />

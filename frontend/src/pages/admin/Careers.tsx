@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { api, type Career, type Employee, type Locale } from '@/lib/api';
+import { api, type Career, type Employee, type Locale, toCmsLocale } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 import { LocaleTabs } from '@/components/admin/LocaleTabs';
@@ -43,8 +43,8 @@ export function AdminCareers() {
     try {
       setLoading(true);
       const [careersData, employeesData] = await Promise.all([
-        api.getCareers(locale),
-        api.getEmployees(locale),
+        api.getCareers(toCmsLocale(locale)),
+        api.getEmployees(toCmsLocale(locale)),
       ]);
       setCareers(careersData);
       setEmployees(employeesData);

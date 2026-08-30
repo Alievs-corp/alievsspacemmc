@@ -1,0 +1,2 @@
+[     196ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/chunk-TKA7E7G6.js?v=779908e4:21608
+[     251ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:8080/api/v1/content?locale=ru:0

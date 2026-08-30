@@ -1,0 +1,21 @@
+# https://alievsspace.com
+User-agent: *
+Allow: /
+
+# The admin panel and auth screens carry no public content.
+Disallow: /admin
+Disallow: /admin/
+Disallow: /login
+Disallow: /register
+
+# AI crawlers that drive answer-engine referrals are welcome.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://alievsspace.com/sitemap.xml

@@ -1,6 +1,13 @@
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api/v1';
 
-export type Locale = 'en' | 'az' | 'ru';
+/** Locales the CMS backend actually stores content for. */
+export const CMS_LOCALES = ['en', 'az', 'ru'] as const;
+export type Locale = (typeof CMS_LOCALES)[number];
+
+/** The UI supports more languages than the CMS; anything else reads English. */
+export function toCmsLocale(locale: string): Locale {
+  return (CMS_LOCALES as readonly string[]).includes(locale) ? (locale as Locale) : 'en';
+}
 
 export interface Settings {
   brandName: string;

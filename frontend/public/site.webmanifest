@@ -1,0 +1,15 @@
+{
+  "name": "Alievs Space — Web & Mobile App Development",
+  "short_name": "Alievs Space",
+  "description": "Websites, online stores, mobile apps and custom platforms. Fixed prices, launch in 2-8 weeks, SEO and support included.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0B0B0B",
+  "theme_color": "#0B0B0B",
+  "lang": "en",
+  "categories": ["business", "productivity"],
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "48x48", "type": "image/x-icon" }
+  ]
+}

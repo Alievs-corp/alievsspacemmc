@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { api, type Service, type Locale } from '@/lib/api';
+import { api, type Service, type Locale, toCmsLocale } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 import { ImageUpload } from '@/components/admin/ImageUpload';
@@ -34,7 +34,7 @@ export function AdminServices() {
   const loadServices = async () => {
     try {
       setLoading(true);
-      const data = await api.getServices(locale);
+      const data = await api.getServices(toCmsLocale(locale));
       setServices(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : t('admin.failedToLoad'));

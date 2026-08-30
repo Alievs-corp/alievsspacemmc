@@ -5,19 +5,52 @@ import phone from "../assets/icons/phone.svg";
 import mail from "../assets/icons/mail.svg";
 import location from "../assets/icons/location.svg";
 import { useState, useEffect } from 'react'; 
+import { useSearchParams } from 'react-router-dom';
 import { api } from '@/lib/api';
-import { Helmet } from 'react-helmet-async';
+import { Seo } from '@/components/Seo';
+import { PACKAGE_TIERS } from '@/data/packages';
+import { t as translate } from '@/lib/i18n';
+
+/** Service keys used by the "Discuss this service" links on /services. */
+const SERVICE_KEYS: Record<string, string> = {
+    'web-development': 'public.services.items.web.title',
+    ecommerce: 'public.services.items.ecommerce.title',
+    'banking-fintech': 'public.services.items.banking.title',
+};
+
+/**
+ * The package cards link here as /contact?package=business and the service
+ * cards as /contact?service=ecommerce; either one seeds the project field so
+ * the visitor does not have to retype what they just clicked.
+ */
+function initialProjectOverview(packageId: string | null, serviceId: string | null): string {
+    if (packageId) {
+        const tier = PACKAGE_TIERS.find((p) => p.id === packageId);
+        if (tier) {
+            return `${translate('packages.title')} — ${translate(`packages.tiers.${tier.id}.name`)}`;
+        }
+    }
+    if (serviceId && SERVICE_KEYS[serviceId]) {
+        return translate(SERVICE_KEYS[serviceId]);
+    }
+    return '';
+}
 
 const Contact = () => {
-    const [formData, setFormData] = useState({
+    const [searchParams] = useSearchParams();
+
+    const [formData, setFormData] = useState(() => ({
         name: '',
         company: '',
         email: '',
         phone: '',
         industry: '',
-        projectOverview: '',
+        projectOverview: initialProjectOverview(
+            searchParams.get('package'),
+            searchParams.get('service'),
+        ),
         message: ''
-    });
+    }));
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -150,13 +183,10 @@ const Contact = () => {
 
     return (
         <div className='mt-[60px] flex flex-col justify-center items-center'>
-            <Helmet>
-                <title>{`${t('nav.contact', 'Contact')} | Alievs Space MMC`}</title>
-                <meta name="description" content={t('public.contact.heroCopy')} />
-                <meta property="og:title" content={`${t('nav.contact', 'Contact')}`} />
-                <meta property="og:description" content={t('public.contact.heroCopy')} />
-                <meta property="og:type" content="website" />
-            </Helmet>
+            <Seo
+              page="contact"
+              breadcrumbs={[{ name: t('nav.contact'), path: '/contact' }]}
+            />
             <Container className="flex flex-col justify-center items-center mb-12">
                 <h2 className="font-display text-[38px] font-bold text-white text-center">{t('public.contact.heroTitle')}</h2>
                 <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">

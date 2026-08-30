@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { api, type About } from '@/lib/api';
+import { api, type About, toCmsLocale } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 import { ImageUpload } from '@/components/admin/ImageUpload';
@@ -26,7 +26,7 @@ export function AdminAbout() {
   const loadAbout = async () => {
     try {
       setLoading(true);
-      const data = await api.getAbout(locale);
+      const data = await api.getAbout(toCmsLocale(locale));
       setFormData({
         headline: data.headline || '',
         headlineImage: data.headlineImage || '',
@@ -91,7 +91,7 @@ export function AdminAbout() {
         process,
       };
 
-      await api.admin.updateAbout(locale, payload);
+      await api.admin.updateAbout(toCmsLocale(locale), payload);
       await loadAbout();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to save about content');

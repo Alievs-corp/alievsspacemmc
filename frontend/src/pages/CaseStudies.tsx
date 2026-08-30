@@ -3,7 +3,7 @@ import { useContent } from '@/contexts/ContentContext';
 import Container from './../components/ui/Container';
 import OurProjects from '@/components/ui/OurProjects';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import { Seo } from '@/components/Seo';
 
 const CaseStudies = () => {
     const { t } = useI18n();
@@ -60,13 +60,10 @@ const CaseStudies = () => {
 
     return (
         <div className='mt-[60px] flex flex-col justify-center items-center'>
-            <Helmet>
-                <title>{`${t('nav.caseStudies', 'Case Studies')} | Alievs Space MMC`}</title>
-                <meta name="description" content={t('public.caseStudiesIntro')} />
-                <meta property="og:title" content={`${t('nav.caseStudies', 'Case Studies')}`} />
-                <meta property="og:description" content={t('public.caseStudiesIntro')} />
-                <meta property="og:type" content="website" />
-            </Helmet>
+            <Seo
+              page="caseStudies"
+              breadcrumbs={[{ name: t('nav.caseStudies'), path: '/case-studies' }]}
+            />
             <Container className="flex flex-col justify-center items-center mb-12">
                 <h2 className="font-display text-[38px] font-bold text-white">{t('nav.caseStudies', 'Case Studies')}</h2>
                 <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">{t('public.caseStudiesIntro')}</p>

@@ -1,433 +1,271 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useI18n } from '@/contexts/I18nContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/Button';
 import { ProfileMenu } from '@/components/ui/ProfileMenu';
+import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
+import { CurrencySwitcher } from '@/components/ui/CurrencySwitcher';
 import { cn } from '@/lib/utils';
 
 import alievsspace from '../../assets/images/logo-dark.png';
-import translate from '../../assets/icons/translate.svg';
+
+interface NavItem {
+  path: string;
+  key: string;
+  external?: boolean;
+}
+
+/** Ordered by what a buying visitor looks for first. */
+const NAV_LINKS: NavItem[] = [
+  { path: '/services', key: 'services' },
+  { path: '/packages', key: 'packages' },
+  { path: '/process', key: 'process' },
+  { path: '/case-studies', key: 'caseStudies' },
+  { path: '/industries', key: 'industries' },
+  { path: '/about', key: 'about' },
+  { path: '/faq', key: 'faq' },
+];
+
+const EXTERNAL_LINKS: NavItem[] = [
+  { path: 'https://academy.alievsspace.com/vacancies', key: 'careers', external: true },
+  { path: 'https://academy.alievsspace.com', key: 'academy', external: true },
+];
 
 export function Header() {
-  const { t, locale, setLocale, supportedLocales } = useI18n();
+  const { t } = useI18n();
   const navigate = useNavigate();
   const { user } = useAuth();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const navLinks = [
-    { path: '/services', key: 'services' },
-    { path: '/industries', key: 'industries' },
-    { path: '/case-studies', key: 'caseStudies' },
-    { path: '/about', key: 'about' },
-    { path: 'https://academy.alievsspace.com/vacancies', key: 'careers', external: true },
-    { path: 'https://academy.alievsspace.com', key: 'academy', external: true },
-    { path: '/contact', key: 'contact' },
-  ];
+  // The header turns opaque once the hero image is behind it.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  // Prevent the page behind the drawer from scrolling.
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
-  const handleLinkClick = () => {
-    scrollToTop();
-    setMobileMenuOpen(false); 
-  };
+  const closeMenu = () => setMobileMenuOpen(false);
 
-  const handleExternalLinkClick = () => {
-    setMobileMenuOpen(false);
-  };
+  const navLinkClass = ({ isActive }: { isActive: boolean }) =>
+    cn(
+      'relative whitespace-nowrap rounded-md px-2 py-1.5 text-[12px] font-medium transition-colors xl:px-2.5 xl:text-[13.5px]',
+      isActive ? 'text-primary' : 'text-text-muted hover:text-white',
+    );
 
   return (
     <>
-      <header className='sticky top-0 z-40 w-full bg-surface text-text border-b border-border'>
-        <div className='flex items-center justify-between px-4 sm:px-6 lg:px-8 h-20'>
-          <Link 
-            to="/" 
-            className="flex items-center space-x-1 gap-1"
-            onClick={scrollToTop} 
-          >
-            <img 
-              src={alievsspace} 
-              alt={t('ui.logo')} 
-              className="w-16 sm:w-16 md:w-14 lg:w-20" 
-            />
-            <div className="hidden sm:block md:hidden lg:block">
-              <p className='font-display sm:text-[24px] md:text-[18px] lg:text-[26px] xl:text-[28px] leading-none'>ALIEVS</p>
-              <p className='font-mono sm:text-[16px] md:text-[12px] lg:text-[18px] xl:text-[20px] leading-tight'>Space {t('ui.companyDescription')}</p>
-            </div>
-            <div className="flex sm:hidden flex-col gap-1">
-              <p className='font-display text-[15.44px] '>ALIEVS</p>
-              <p className='font-mono text-[11.6px]'>Space {t('ui.companyDescription')}</p>
-            </div>
+      <a href="#main" className="skip-link">
+        {t('ui.skipToContent', 'Skip to content')}
+      </a>
+
+      <header
+        className={cn(
+          'sticky top-0 z-40 w-full border-b transition-colors duration-300',
+          scrolled
+            ? 'border-border bg-ink-950/85 backdrop-blur-xl'
+            : 'border-transparent bg-ink-950/60 backdrop-blur-md',
+        )}
+      >
+        <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-6 lg:h-20 lg:px-8">
+          <Link to="/" className="flex shrink-0 items-center gap-2" aria-label={t('nav.home', 'Home')}>
+            <img src={alievsspace} alt={t('ui.logo')} className="w-11 lg:w-14" />
+            <span>
+              <span className="block font-display text-[16px] leading-none text-white sm:text-[18px] lg:text-[22px]">
+                ALIEVS
+              </span>
+              <span className="block font-sans text-[9.5px] uppercase leading-tight tracking-[0.18em] text-text-subtle sm:text-[10px] lg:text-[11px]">
+                Space {t('ui.companyDescription')}
+              </span>
+            </span>
           </Link>
 
-          <div className="flex items-center md:hidden">
-            <button
-              className="text-white p-2 hover:bg-surface-3 rounded-md transition-colors"
-              aria-label={t('ui.menu')}
-              onClick={() => setMobileMenuOpen(true)}
+          <nav aria-label="Primary" className="hidden flex-1 justify-center lg:flex">
+            <ul className="flex items-center gap-0.5 xl:gap-1.5">
+              {NAV_LINKS.map((link) => (
+                <li key={link.path}>
+                  <NavLink to={link.path} className={navLinkClass}>
+                    {t(`nav.${link.key}`)}
+                  </NavLink>
+                </li>
+              ))}
+              {EXTERNAL_LINKS.slice(0, 1).map((link) => (
+                <li key={link.path}>
+                  <a
+                    href={link.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 whitespace-nowrap rounded-md px-2 py-1.5 text-[12px] font-medium text-text-muted transition-colors hover:text-white xl:px-2.5 xl:text-[13.5px]"
+                  >
+                    {t(`nav.${link.key}`)}
+                    <svg aria-hidden className="h-2.5 w-2.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="hidden items-center gap-2 lg:flex">
+            <CurrencySwitcher />
+            <LanguageSwitcher />
+            <Button
+              size="sm"
+              className="whitespace-nowrap bg-primary px-3 text-[12.5px] font-semibold text-on-primary shadow-[var(--shadow-glow-primary)] hover:bg-primary-hover xl:px-4 xl:text-[13.5px]"
+              onClick={() => navigate('/contact')}
             >
-              <svg
-                className="h-7 w-7"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
+              {t('nav.getQuote')}
+            </Button>
+            {user && <ProfileMenu variant="lg" />}
           </div>
 
-          <nav className="hidden md:flex lg:hidden flex-1 justify-center items-center mx-2">
-            <div className="flex items-center justify-center space-x-0.5">
-              {navLinks.map((link) => (
-                link.external ? (
-                  <a
-                    key={link.path}
-                    href={link.path}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={cn(
-                      'whitespace-nowrap text-[10px] px-1 py-0.5 rounded transition-colors hover:bg-surface-3',
-                      'text-white flex items-center gap-0.5'
-                    )}
-                    onClick={handleExternalLinkClick}
-                  >
-                    {t(`nav.${link.key}`)}
-                    <svg className="w-2 h-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-                ) : (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    className={cn(
-                      'whitespace-nowrap text-[10px] px-1 py-0.5 rounded transition-colors hover:bg-surface-3',
-                      'text-white'
-                    )}
-                    onClick={scrollToTop}
-                  >
-                    {t(`nav.${link.key}`)}
-                  </Link>
-                )
-              ))}
-            </div>
-          </nav>
-
-          <nav className="hidden lg:flex flex-1 justify-center items-center">
-            <div className="flex items-center justify-center space-x-1 xl:space-x-3 2xl:space-x-4">
-              {navLinks.map((link) => (
-                link.external ? (
-                  <a
-                    key={link.path}
-                    href={link.path}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={cn(
-                      'whitespace-nowrap text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-1.5 lg:px-2 xl:px-2.5 2xl:px-3 py-1 lg:py-1.5 xl:py-2 rounded-md transition-colors hover:bg-surface-3',
-                      'text-white flex items-center gap-0.5 lg:gap-1 xl:gap-1.5'
-                    )}
-                    onClick={handleExternalLinkClick}
-                  >
-                    {t(`nav.${link.key}`)}
-                    <svg className="w-2.5 h-2.5 lg:w-3 lg:h-3 xl:w-3.5 xl:h-3.5 2xl:w-4 2xl:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-                ) : (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    className={cn(
-                      'whitespace-nowrap text-[11px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] px-1.5 lg:px-2 xl:px-2.5 2xl:px-3 py-1 lg:py-1.5 xl:py-2 rounded-md transition-colors hover:bg-surface-3',
-                      'text-white'
-                    )}
-                    onClick={scrollToTop}
-                  >
-                    {t(`nav.${link.key}`)}
-                  </Link>
-                )
-              ))}
-            </div>
-          </nav>
-
-          <div className="hidden md:flex items-center space-x-1 lg:space-x-1 xl:space-x-2 2xl:space-x-3">
-            <div className="hidden md:flex lg:hidden items-center space-x-1">
-              <button
-                onClick={() => {
-                  const idx = supportedLocales.findIndex((l) => l.code === locale);
-                  setLocale(
-                    supportedLocales[(idx + 1) % supportedLocales.length].code
-                  );
-                }}
-                className="p-1 rounded-md hover:bg-surface-3 cursor-pointer transition-colors"
-              >
-                <img 
-                  src={translate} 
-                  alt="Translate" 
-                  className="w-3 h-3" 
-                />
-              </button>
-
-              <Button
-                size="sm"
-                className="bg-primary hover:bg-primary-hover text-on-primary font-medium text-[10px] px-1.5 py-1 cursor-pointer min-w-[70px]"
-                onClick={() => {
-                  navigate('/contact');
-                  scrollToTop();
-                }}
-              >
-                {t('nav.contactSales')}
-              </Button>
-              {/* Login düyməsi / profil menyusu */}
-              {user ? (
-                <ProfileMenu variant="md" />
-              ) : (
-                <Button
-                  size="sm"
-                  className="bg-transparent hover:bg-surface-3 text-white text-[10px] px-1.5 py-1 border border-border-strong cursor-pointer min-w-[50px]"
-                  onClick={() => {
-                    navigate('/login');
-                    scrollToTop();
-                  }}
-                >
-                  {t('nav.login')}
-                </Button>
-              )}
-            </div>
-
-            <div className="hidden lg:flex items-center space-x-1 xl:space-x-2 2xl:space-x-3">
-              <button
-                onClick={() => {
-                  const idx = supportedLocales.findIndex((l) => l.code === locale);
-                  setLocale(
-                    supportedLocales[(idx + 1) % supportedLocales.length].code
-                  );
-                }}
-                className="p-1.5 lg:p-1.5 xl:p-2 2xl:p-2 rounded-md hover:bg-surface-3 cursor-pointer transition-colors"
-              >
-                <img 
-                  src={translate} 
-                  alt={t('ui.translate')} 
-                  className="w-3.5 h-3.5 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4 2xl:w-5 2xl:h-5" 
-                />
-              </button>
-
-              <Button
-                size="sm"
-                className="bg-primary hover:bg-primary-hover text-on-primary font-medium px-2 py-1.5 lg:px-2 lg:py-1.5 xl:px-3 xl:py-2 2xl:px-5 2xl:py-2.5 cursor-pointer text-[10px] lg:text-[11px] xl:text-[13px] 2xl:text-base whitespace-nowrap"
-                onClick={() => {
-                  navigate('/contact');
-                  scrollToTop();
-                }}
-              >
-                {t('nav.contactSales')}
-              </Button>
-
-              {/* Login düyməsi / profil menyusu */}
-              {user ? (
-                <ProfileMenu variant="lg" />
-              ) : (
-                <Button
-                  size="sm"
-                  className="bg-transparent hover:bg-surface-3 text-white px-2 py-1.5 lg:px-2 lg:py-1.5 xl:px-3 xl:py-2 2xl:px-5 2xl:py-2.5 border border-border-strong cursor-pointer text-[10px] lg:text-[11px] xl:text-[13px] 2xl:text-base whitespace-nowrap"
-                  onClick={() => {
-                    navigate('/login');
-                    scrollToTop();
-                  }}
-                >
-                  {t('nav.login')}
-                </Button>
-              )}
-            </div>
-          </div>
+          <button
+            type="button"
+            className="-mr-1 rounded-md p-2 text-white transition-colors hover:bg-surface-3 lg:hidden"
+            aria-label={t('ui.menu')}
+            aria-expanded={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+            </svg>
+          </button>
         </div>
       </header>
 
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 md:hidden">
-          <div 
-            className="absolute inset-0 bg-black/50"
-            onClick={() => setMobileMenuOpen(false)}
-          />
-          
-          <div className="absolute right-0 top-0 h-full w-full max-w-sm bg-surface">
-            <div className="sticky top-0 bg-surface px-6 py-5 border-b border-border">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <img 
-                    src={alievsspace} 
-                    alt={t('ui.logo')} 
-                    className="w-12 h-12 rounded-lg object-cover"
-                  />
-                  <div>
-                    <p className='font-display text-lg leading-none text-white'>ALIEVS</p>
-                    <p className='font-mono text-xs leading-tight text-white'>Space MMC</p>
-                  </div>
-                </div>
-                
-                <button 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-md hover:bg-surface-3 transition-colors"
-                >
-                  <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
+        <div className="fixed inset-0 z-50 lg:hidden">
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={closeMenu} />
+
+          <div className="absolute right-0 top-0 flex h-full w-full max-w-sm animate-slide-up flex-col bg-ink-950">
+            <div className="flex items-center justify-between border-b border-border px-5 py-4">
+              <Link to="/" onClick={closeMenu} className="flex items-center gap-2">
+                <img src={alievsspace} alt={t('ui.logo')} className="w-10" />
+                <span>
+                  <span className="block font-display text-[17px] leading-none text-white">ALIEVS</span>
+                  <span className="block font-sans text-[10px] uppercase tracking-[0.18em] text-text-subtle">
+                    Space {t('ui.companyDescription')}
+                  </span>
+                </span>
+              </Link>
+              <button
+                type="button"
+                onClick={closeMenu}
+                aria-label={t('ui.close')}
+                className="rounded-md p-2 text-white transition-colors hover:bg-surface-3"
+              >
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
             </div>
 
-            <div className="h-[calc(100vh-88px)] overflow-y-auto bg-surface">
-              <div className="px-6 py-8">
-                <div className="mb-8">
-                  <p className="text-white font-inter text-sm mb-3">{t('ui.language')}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {supportedLocales.map((l) => (
-                      <button
-                        key={l.code}
-                        onClick={() => {
-                          setLocale(l.code);
-                          setMobileMenuOpen(false);
-                        }}
-                        className={cn(
-                          "px-4 py-2.5 rounded-lg text-sm font-medium transition-all",
-                          locale === l.code
-                            ? "bg-primary text-on-primary"
-                            : "bg-surface-2 text-white hover:bg-surface-3"
-                        )}
-                      >
-                        {l.code.toUpperCase()}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+            <div className="flex-1 overflow-y-auto px-5 py-6">
+              <div className="mb-6 flex items-center gap-2">
+                <LanguageSwitcher className="flex-1 [&>button]:w-full [&>button]:justify-between" />
+                <CurrencySwitcher className="flex-1 [&>button]:w-full [&>button]:justify-between" />
+              </div>
 
-                <div className="mb-8">
-                  <nav className="space-y-3">
-                    {navLinks.map((link) => (
-                      link.external ? (
-                        <a
-                          key={link.path}
-                          href={link.path}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={handleExternalLinkClick}
-                          className="flex items-center justify-between px-4 py-3.5 rounded-lg bg-surface-2 hover:bg-surface-3 text-white transition-all"
-                        >
-                          <span className="font-inter font-medium flex items-center gap-2">
-                            {t(`nav.${link.key}`)}
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg>
-                          </span>
-                          <svg className="w-5 h-5 text-text-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </a>
-                      ) : (
-                        <Link
-                          key={link.path}
-                          to={link.path}
-                          onClick={handleLinkClick}
-                          className="flex items-center justify-between px-4 py-3.5 rounded-lg bg-surface-2 hover:bg-surface-3 text-white transition-all"
-                        >
-                          <span className="font-inter font-medium">
-                            {t(`nav.${link.key}`)}
-                          </span>
-                          <svg className="w-5 h-5 text-text-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </Link>
-                      )
-                    ))}
-                    
-                    {user ? (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setMobileMenuOpen(false);
-                          navigate('/login');
-                          localStorage.removeItem('auth_token');
-                          window.location.reload();
-                        }}
-                        className="flex w-full items-center justify-between px-4 py-3.5 rounded-lg bg-surface-2 hover:bg-surface-3 text-white transition-all cursor-pointer"
+              <nav aria-label="Mobile">
+                <ul className="space-y-1.5">
+                  {NAV_LINKS.map((link) => (
+                    <li key={link.path}>
+                      <NavLink
+                        to={link.path}
+                        onClick={closeMenu}
+                        className={({ isActive }) =>
+                          cn(
+                            'flex items-center justify-between rounded-xl px-4 py-3 text-[15px] font-medium transition-colors',
+                            isActive ? 'bg-surface-2 text-primary' : 'text-text-muted hover:bg-surface-2 hover:text-white',
+                          )
+                        }
                       >
-                        <span className="font-inter font-medium">
-                          {t('nav.logout', 'Logout')}
-                        </span>
-                        <svg className="w-5 h-5 text-text-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7" />
+                        {t(`nav.${link.key}`)}
+                        <svg aria-hidden className="h-4 w-4 text-text-subtle" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                         </svg>
-                      </button>
-                    ) : (
-                      <Link
-                        to="/login"
-                        onClick={handleLinkClick}
-                        className="flex items-center justify-between px-4 py-3.5 rounded-lg bg-surface-2 hover:bg-surface-3 text-white transition-all"
+                      </NavLink>
+                    </li>
+                  ))}
+                  {EXTERNAL_LINKS.map((link) => (
+                    <li key={link.path}>
+                      <a
+                        href={link.path}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={closeMenu}
+                        className="flex items-center justify-between rounded-xl px-4 py-3 text-[15px] font-medium text-text-muted transition-colors hover:bg-surface-2 hover:text-white"
                       >
-                        <span className="font-inter font-medium">
-                          {t('nav.login')}
-                        </span>
-                        <svg className="w-5 h-5 text-text-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        {t(`nav.${link.key}`)}
+                        <svg aria-hidden className="h-3.5 w-3.5 text-text-subtle" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
-                      </Link>
-                    )}
-                  </nav>
-                </div>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
 
-                <div className="mt-12 space-y-3">
-                  <Button
-                    className="w-full bg-primary hover:bg-primary-hover text-on-primary font-medium font-inter font-semibold py-3.5 text-lg rounded-lg"
+              <div className="mt-8 space-y-3">
+                <Button
+                  className="w-full bg-primary py-3.5 text-base font-semibold text-on-primary hover:bg-primary-hover"
+                  onClick={() => {
+                    navigate('/contact');
+                    closeMenu();
+                  }}
+                >
+                  {t('nav.getQuote')}
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full py-3.5 text-base"
+                  onClick={() => {
+                    navigate('/packages');
+                    closeMenu();
+                  }}
+                >
+                  {t('nav.pricing')}
+                </Button>
+              </div>
+
+              <div className="mt-8 border-t border-border pt-5">
+                {user ? (
+                  <button
+                    type="button"
                     onClick={() => {
-                      navigate('/contact');
-                      handleLinkClick();
+                      closeMenu();
+                      localStorage.removeItem('auth_token');
+                      navigate('/login');
+                      window.location.reload();
                     }}
+                    className="w-full cursor-pointer text-left text-[13px] text-text-subtle transition-colors hover:text-white"
                   >
-                    {t('nav.contactSales')}
-                  </Button>
-                  
-                  {user ? (
-                    <Button
-                      className="w-full bg-transparent hover:bg-surface-3 text-white font-inter font-semibold py-3.5 text-lg rounded-lg border border-border-strong"
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        navigate('/login');
-                        localStorage.removeItem('auth_token');
-                        window.location.reload();
-                      }}
-                    >
-                      {t('nav.logout', 'Logout')}
-                    </Button>
-                  ) : (
-                    <Button
-                      className="w-full bg-transparent hover:bg-surface-3 text-white font-inter font-semibold py-3.5 text-lg rounded-lg border border-border-strong"
-                      onClick={() => {
-                        navigate('/login');
-                        handleLinkClick();
-                      }}
-                    >
-                      {t('nav.login')}
-                    </Button>
-                  )}
-                  
-                  <div className="text-center mt-10 pt-6 border-t border-border">
-                    <p className="text-text-subtle text-sm font-inter">
-                      © {new Date().getFullYear()} ALIEVS Space MMC
-                    </p>
-                    <p className="text-text-subtle text-xs mt-2 font-inter">
-                      {t('company.tagline')}
-                    </p>
-                  </div>
-                </div>
+                    {t('nav.logout', 'Logout')}
+                  </button>
+                ) : (
+                  <Link
+                    to="/login"
+                    onClick={closeMenu}
+                    className="text-[13px] text-text-subtle transition-colors hover:text-white"
+                  >
+                    {t('nav.login')}
+                  </Link>
+                )}
+                <p className="mt-4 text-[12px] text-text-subtle">
+                  © {new Date().getFullYear()} Alievs Space {t('ui.companyDescription')}
+                </p>
               </div>
             </div>
           </div>

@@ -1,0 +1,289 @@
+- generic [ref=f23e3]:
+  - link "本文へスキップ" [ref=f23e4] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f23e5]:
+    - generic [ref=f23e6]:
+      - link "ホーム" [ref=f23e7] [cursor=pointer]:
+        - /url: /
+        - img "ロゴ" [ref=f23e8]
+        - generic [ref=f23e9]:
+          - generic [ref=f23e10]: ALIEVS
+          - generic [ref=f23e11]: Space 有限会社
+      - navigation "Primary" [ref=f23e12]:
+        - list [ref=f23e13]:
+          - listitem [ref=f23e14]:
+            - link "サービス" [ref=f23e15] [cursor=pointer]:
+              - /url: /services
+          - listitem [ref=f23e16]:
+            - link "プラン" [ref=f23e17] [cursor=pointer]:
+              - /url: /packages
+          - listitem [ref=f23e18]:
+            - link "進め方" [ref=f23e19] [cursor=pointer]:
+              - /url: /process
+          - listitem [ref=f23e20]:
+            - link "導入事例" [ref=f23e21] [cursor=pointer]:
+              - /url: /case-studies
+          - listitem [ref=f23e22]:
+            - link "業種" [ref=f23e23] [cursor=pointer]:
+              - /url: /industries
+          - listitem [ref=f23e24]:
+            - link "会社概要" [ref=f23e25] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=f23e26]:
+            - link "よくある質問" [ref=f23e27] [cursor=pointer]:
+              - /url: /faq
+          - listitem [ref=f23e28]:
+            - link "採用情報" [ref=f23e29] [cursor=pointer]:
+              - /url: https://academy.alievsspace.com/vacancies
+      - generic [ref=f23e32]:
+        - button "通貨" [ref=f23e34] [cursor=pointer]:
+          - generic [ref=f23e35]:
+            - generic [ref=f23e36]: $
+            - generic [ref=f23e37]: USD
+        - button "言語" [ref=f23e41] [cursor=pointer]:
+          - generic [ref=f23e42]:
+            - generic [ref=f23e43]: 🇯🇵
+            - generic [ref=f23e44]: JA
+        - button "見積もりを取る" [ref=f23e47] [cursor=pointer]
+  - main [ref=f23e48]:
+    - generic [ref=f23e51]:
+      - generic [ref=f23e52]: サービス
+      - heading "構想から公開まで、私たちがつくるすべて" [level=1] [ref=f23e53]
+      - paragraph [ref=f23e54]: ソフトウェア開発、EC・マーケットプレイス、銀行水準のダッシュボードにわたる上質なエンジニアリングとデザイン。
+      - generic [ref=f23e55]:
+        - link "見積もりを取る" [ref=f23e56] [cursor=pointer]:
+          - /url: /contact
+        - link "プランと料金" [ref=f23e57] [cursor=pointer]:
+          - /url: /packages
+      - paragraph [ref=f23e58]: 30分の無料相談 · 24時間以内に返信 · 契約と保証つき
+    - generic [ref=f23e61]:
+      - article [ref=f23e62]:
+        - generic [ref=f23e63]: ソフトウェア
+        - generic [ref=f23e66]:
+          - heading "ウェブ・モバイルアプリ開発" [level=2] [ref=f23e67]
+          - paragraph [ref=f23e68]: コーポレートサイト、ウェブアプリ、モバイルアプリ、管理画面、社内プラットフォーム。
+          - list [ref=f23e69]:
+            - listitem [ref=f23e70]:
+              - generic [ref=f23e73]: 上質なUIシステム
+            - listitem [ref=f23e74]:
+              - generic [ref=f23e77]: 速度を最優先した画面
+            - listitem [ref=f23e78]:
+              - generic [ref=f23e81]: 計測にすぐ使える構造
+            - listitem [ref=f23e82]:
+              - generic [ref=f23e85]: 整理されたドキュメント
+          - link "このサービスを相談する" [ref=f23e86] [cursor=pointer]:
+            - /url: /contact?service=web-development
+      - article [ref=f23e89]:
+        - generic [ref=f23e90]: コマース
+        - generic [ref=f23e93]:
+          - heading "EC・マーケットプレイスシステム" [level=2] [ref=f23e94]
+          - paragraph [ref=f23e95]: 運用に必要な機能を揃えたオンラインストアとマルチベンダー型マーケットプレイス。
+          - list [ref=f23e96]:
+            - listitem [ref=f23e97]:
+              - generic [ref=f23e100]: カタログ・絞り込み・検索
+            - listitem [ref=f23e101]:
+              - generic [ref=f23e104]: カートと決済の導線
+            - listitem [ref=f23e105]:
+              - generic [ref=f23e108]: 手数料と支払いのレポート
+            - listitem [ref=f23e109]:
+              - generic [ref=f23e112]: 出店者向け管理画面
+          - link "このサービスを相談する" [ref=f23e113] [cursor=pointer]:
+            - /url: /contact?service=ecommerce
+      - article [ref=f23e116]:
+        - generic [ref=f23e117]: バンキング
+        - generic [ref=f23e120]:
+          - heading "銀行水準のダッシュボード" [level=2] [ref=f23e121]
+          - paragraph [ref=f23e122]: 権限、レポート、統制されたデータ参照を備えた、安全で監査に耐えるシステム。
+          - list [ref=f23e123]:
+            - listitem [ref=f23e124]:
+              - generic [ref=f23e127]: 権限管理（RBAC）
+            - listitem [ref=f23e128]:
+              - generic [ref=f23e131]: 監査ログとレポート画面
+            - listitem [ref=f23e132]:
+              - generic [ref=f23e135]: 安全な業務フロー設計
+            - listitem [ref=f23e136]:
+              - generic [ref=f23e139]: コンプライアンス対応
+          - link "このサービスを相談する" [ref=f23e140] [cursor=pointer]:
+            - /url: /contact?service=banking-fintech
+    - generic [ref=f23e144]:
+      - generic [ref=f23e145]:
+        - generic [ref=f23e146]: サービス
+        - heading "Website Structure Builder" [level=2] [ref=f23e147]
+        - paragraph [ref=f23e148]: 業種を選ぶと、おすすめのページ構成をご覧いただけます。
+      - generic [ref=f23e149]:
+        - button "Restaurant" [pressed] [ref=f23e150] [cursor=pointer]
+        - button "E-commerce" [ref=f23e153] [cursor=pointer]
+        - button "Banking" [ref=f23e156] [cursor=pointer]
+        - button "Education" [ref=f23e159] [cursor=pointer]
+      - generic [ref=f23e162]:
+        - generic [ref=f23e163]:
+          - heading "Menu" [level=3] [ref=f23e167]
+          - paragraph [ref=f23e168]: Present your restaurant menu on a digital platform with category-based organization and the ability to update it daily.
+        - generic [ref=f23e169]:
+          - heading "Reservation" [level=3] [ref=f23e173]
+          - paragraph [ref=f23e174]: Simplify table booking with an online reservation system that supports automatic confirmations and reminders.
+        - generic [ref=f23e175]:
+          - heading "Gallery" [level=3] [ref=f23e179]
+          - paragraph [ref=f23e180]: Showcase your interior, special events, and signature dishes with a professional photo gallery.
+        - generic [ref=f23e181]:
+          - heading "Location" [level=3] [ref=f23e185]
+          - paragraph [ref=f23e186]: Display your exact location with Google Maps integration, including navigation and driving directions.
+    - generic [ref=f23e188]:
+      - generic [ref=f23e189]:
+        - heading "すべての案件に含まれるもの" [level=2] [ref=f23e190]
+        - paragraph [ref=f23e191]: どのサービスでも同じ三つの段階を踏みます。後から追加で請求することはありません。
+      - generic [ref=f23e192]:
+        - generic [ref=f23e193]:
+          - generic [ref=f23e194]:
+            - generic [ref=f23e195]: "01"
+            - heading "Design" [level=3] [ref=f23e196]
+          - list [ref=f23e197]:
+            - listitem [ref=f23e198]: UI/UX Design
+            - listitem [ref=f23e199]: Wireframing
+            - listitem [ref=f23e200]: Prototyping
+            - listitem [ref=f23e201]: Design System
+            - listitem [ref=f23e202]: Responsive Design
+        - generic [ref=f23e203]:
+          - generic [ref=f23e204]:
+            - generic [ref=f23e205]: "02"
+            - heading "Development" [level=3] [ref=f23e206]
+          - list [ref=f23e207]:
+            - listitem [ref=f23e208]: Frontend (React)
+            - listitem [ref=f23e209]: Backend (Node.js)
+            - listitem [ref=f23e210]: Database
+            - listitem [ref=f23e211]: API Integration
+            - listitem [ref=f23e212]: Testing
+            - listitem [ref=f23e213]: Performance Optimization
+            - listitem [ref=f23e214]: Security
+            - listitem [ref=f23e215]: Version Control
+        - generic [ref=f23e216]:
+          - generic [ref=f23e217]:
+            - generic [ref=f23e218]: "03"
+            - heading "Launch" [level=3] [ref=f23e219]
+          - list [ref=f23e220]:
+            - listitem [ref=f23e221]: Domain Registration
+            - listitem [ref=f23e222]: Hosting Setup
+            - listitem [ref=f23e223]: SSL Certificate
+            - listitem [ref=f23e224]: Deployment
+            - listitem [ref=f23e225]: Monitoring
+            - listitem [ref=f23e226]: Maintenance
+    - generic [ref=f23e228]:
+      - generic [ref=f23e229]:
+        - heading "Delivery model" [level=2] [ref=f23e230]
+        - paragraph [ref=f23e231]: We start with the architecture and UI system. Then we build modules, integrate analytics, and ship in controlled milestones — with ongoing support.
+      - generic [ref=f23e232]:
+        - generic [ref=f23e233]:
+          - generic [ref=f23e234]: "1"
+          - heading "Architecture & UI System" [level=3] [ref=f23e235]
+          - paragraph [ref=f23e236]: Define system architecture and establish a scalable UI design system.
+        - generic [ref=f23e237]:
+          - generic [ref=f23e238]: "2"
+          - heading "Module Development" [level=3] [ref=f23e239]
+          - paragraph [ref=f23e240]: Build core features and modules based on validated requirements.
+        - generic [ref=f23e241]:
+          - generic [ref=f23e242]: "3"
+          - heading "Integration & Analytics" [level=3] [ref=f23e243]
+          - paragraph [ref=f23e244]: Integrate services, analytics, and supporting infrastructure.
+        - generic [ref=f23e245]:
+          - generic [ref=f23e246]: "4"
+          - heading "Controlled Delivery" [level=3] [ref=f23e247]
+          - paragraph [ref=f23e248]: Release in structured milestones with validation at each stage.
+        - generic [ref=f23e249]:
+          - generic [ref=f23e250]: "5"
+          - heading "Ongoing Support" [level=3] [ref=f23e251]
+          - paragraph [ref=f23e252]: Maintain, monitor, and improve the system post-launch.
+      - generic [ref=f23e253]:
+        - paragraph [ref=f23e254]: "Result: predictable delivery, scalable systems, and long-term operational stability."
+        - link "進め方" [ref=f23e255] [cursor=pointer]:
+          - /url: /process
+    - generic [ref=f23e260]:
+      - heading "つくりたいものをお聞かせください" [level=2] [ref=f23e261]
+      - paragraph [ref=f23e262]: プロジェクトの概要を短くお送りください。書面の概算、スケジュール、おすすめプランをお返しします。無料・ご契約義務なし。
+      - generic [ref=f23e263]:
+        - link "無料見積もりを依頼" [ref=f23e264] [cursor=pointer]:
+          - /url: /contact
+        - link "すべてのプランを見る" [ref=f23e265] [cursor=pointer]:
+          - /url: /packages
+  - contentinfo [ref=f23e266]:
+    - generic [ref=f23e267]:
+      - generic [ref=f23e268]:
+        - generic [ref=f23e269]:
+          - link "Alievs Space 有限会社 ALIEVS SPACE Premium Digital & Commerce Ecosystem" [ref=f23e270] [cursor=pointer]:
+            - /url: /
+            - img "Alievs Space 有限会社" [ref=f23e271]
+            - generic [ref=f23e272]:
+              - generic [ref=f23e273]: ALIEVS SPACE
+              - generic [ref=f23e274]: Premium Digital & Commerce Ecosystem
+          - paragraph [ref=f23e276]: ウェブサイトとアプリ、EC・マーケットプレイス、銀行水準のダッシュボードをプレミアム品質で開発します。
+          - generic [ref=f23e277]:
+            - button "言語" [ref=f23e279] [cursor=pointer]:
+              - generic [ref=f23e280]:
+                - generic [ref=f23e281]: 🇯🇵
+                - generic [ref=f23e282]: JA
+            - button "通貨" [ref=f23e286] [cursor=pointer]:
+              - generic [ref=f23e287]:
+                - generic [ref=f23e288]: $
+                - generic [ref=f23e289]: USD
+        - navigation "会社" [ref=f23e292]:
+          - heading "会社" [level=2] [ref=f23e293]
+          - list [ref=f23e294]:
+            - listitem [ref=f23e295]:
+              - link "サービス" [ref=f23e296] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=f23e297]:
+              - link "プラン" [ref=f23e298] [cursor=pointer]:
+                - /url: /packages
+            - listitem [ref=f23e299]:
+              - link "進め方" [ref=f23e300] [cursor=pointer]:
+                - /url: /process
+            - listitem [ref=f23e301]:
+              - link "導入事例" [ref=f23e302] [cursor=pointer]:
+                - /url: /case-studies
+            - listitem [ref=f23e303]:
+              - link "業種" [ref=f23e304] [cursor=pointer]:
+                - /url: /industries
+            - listitem [ref=f23e305]:
+              - link "会社概要" [ref=f23e306] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=f23e307]:
+              - link "よくある質問" [ref=f23e308] [cursor=pointer]:
+                - /url: /faq
+            - listitem [ref=f23e309]:
+              - link "採用情報" [ref=f23e310] [cursor=pointer]:
+                - /url: https://academy.alievsspace.com/vacancies
+        - navigation "法的事項" [ref=f23e311]:
+          - heading "法的事項" [level=2] [ref=f23e312]
+          - list [ref=f23e313]:
+            - listitem [ref=f23e314]:
+              - link "プライバシーポリシー" [ref=f23e315] [cursor=pointer]:
+                - /url: /privacy-policy
+            - listitem [ref=f23e316]:
+              - link "利用規約" [ref=f23e317] [cursor=pointer]:
+                - /url: /terms-of-service
+            - listitem [ref=f23e318]:
+              - link "返金ポリシー" [ref=f23e319] [cursor=pointer]:
+                - /url: /refund-policy
+            - listitem [ref=f23e320]:
+              - link "Cookie ポリシー" [ref=f23e321] [cursor=pointer]:
+                - /url: /cookie-policy
+        - generic [ref=f23e322]:
+          - heading "お問い合わせ" [level=2] [ref=f23e323]
+          - list [ref=f23e324]:
+            - listitem [ref=f23e325]:
+              - generic [ref=f23e326]: "メール:"
+              - link "info@alievsspace.com" [ref=f23e327] [cursor=pointer]:
+                - /url: mailto:info@alievsspace.com
+            - listitem [ref=f23e328]:
+              - generic [ref=f23e329]: "電話:"
+              - link "+994 (51) 700 35 00" [ref=f23e330] [cursor=pointer]:
+                - /url: tel:+994517003500
+          - link "見積もりを取る" [ref=f23e331] [cursor=pointer]:
+            - /url: /contact
+          - generic [ref=f23e332]:
+            - link "Instagram" [ref=f23e333] [cursor=pointer]:
+              - /url: https://www.instagram.com/alievsspace/
+            - link "LinkedIn" [ref=f23e335] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/alievs-space-mmc
+      - generic [ref=f23e337]:
+        - paragraph [ref=f23e338]: © 2026 Alievs Space 有限会社. All rights reserved.
+        - paragraph [ref=f23e339]: 価格はマナト建てで設定し、参考レートで換算しています。最終金額は契約書で確定します。
