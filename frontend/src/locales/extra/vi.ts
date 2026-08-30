@@ -304,12 +304,12 @@ export const viExtra = {
       title: 'Dịch vụ bổ sung',
       subtitle: 'Có thể thêm vào bất kỳ gói nào. Chi phí được cộng vào tổng giá gói.',
       items: [
-        { name: 'Thêm một ngôn ngữ', desc: 'Dịch đầy đủ, URL bản địa hóa và thẻ hreflang', price: 400 },
-        { name: 'Ứng dụng di động (iOS + Android)', desc: 'Ứng dụng React Native kết nối với backend sẵn có', price: 9000 },
-        { name: 'Chương trình SEO hằng tháng', desc: 'Nội dung, xây dựng liên kết và báo cáo thứ hạng hằng tháng', price: 900, unit: 'month' },
-        { name: 'Gói chăm sóc và hosting', desc: 'Hosting, sao lưu, cập nhật, giám sát và hỗ trợ ưu tiên', price: 250, unit: 'month' },
-        { name: 'Nhận diện thương hiệu', desc: 'Logo, hệ màu, kiểu chữ và bộ quy chuẩn thương hiệu', price: 1500 },
-        { name: 'Viết nội dung', desc: 'Nội dung bán hàng chuyên nghiệp cho từng trang', price: 600 },
+        { name: 'Thêm một ngôn ngữ', desc: 'Dịch đầy đủ, URL bản địa hóa và thẻ hreflang' },
+        { name: 'Ứng dụng di động (iOS + Android)', desc: 'Ứng dụng React Native kết nối với backend sẵn có' },
+        { name: 'Chương trình SEO hằng tháng', desc: 'Nội dung, xây dựng liên kết và báo cáo thứ hạng hằng tháng' },
+        { name: 'Gói chăm sóc và hosting', desc: 'Hosting, sao lưu, cập nhật, giám sát và hỗ trợ ưu tiên' },
+        { name: 'Nhận diện thương hiệu', desc: 'Logo, hệ màu, kiểu chữ và bộ quy chuẩn thương hiệu' },
+        { name: 'Viết nội dung', desc: 'Nội dung bán hàng chuyên nghiệp cho từng trang' },
       ],
     },
     guarantee: {
@@ -333,7 +333,7 @@ export const viExtra = {
     items: [
       {
         q: 'Làm một website tốn bao nhiêu?',
-        a: 'Trang đích từ 1.500 AZN, website doanh nghiệp từ 3.500 AZN và cửa hàng trực tuyến từ 7.500 AZN. Nền tảng riêng được báo giá theo từng trường hợp. Dùng bộ chọn tiền tệ ở đầu trang để xem các mức giá này bằng USD, EUR hoặc GEL. Giá được ấn định trong hợp đồng trước khi bắt đầu.',
+        a: 'Trang đích từ 690 AZN, website doanh nghiệp từ 1.490 AZN và cửa hàng trực tuyến từ 2.990 AZN. Nền tảng riêng từ 6.900 AZN và được báo giá theo từng trường hợp. Dùng bộ chọn tiền tệ ở đầu trang để xem các mức giá này bằng USD, EUR hoặc GEL. Giá được ấn định trong hợp đồng trước khi bắt đầu.',
       },
       {
         q: 'Mất bao lâu để hoàn thành một website?',
@@ -436,7 +436,7 @@ export const viExtra = {
     home: {
       title: 'Công ty thiết kế web tại Baku — Website, ứng dụng và thương mại điện tử',
       description:
-        'Alievs Space xây dựng website, cửa hàng trực tuyến, ứng dụng di động và nền tảng riêng. Giá cố định từ 1.500 AZN, ra mắt trong 2–8 tuần, kèm SEO và hỗ trợ. Báo giá miễn phí trong 24 giờ.',
+        'Alievs Space xây dựng website, cửa hàng trực tuyến, ứng dụng di động và nền tảng riêng. Giá cố định từ 690 AZN, ra mắt trong 2–8 tuần, kèm SEO và hỗ trợ. Báo giá miễn phí trong 24 giờ.',
     },
     packages: {
       title: 'Gói và bảng giá thiết kế website',

@@ -97,9 +97,16 @@ other UI language to English for those requests.
 
 ## Pricing and currency
 
-Package prices live in `src/data/packages.ts` in **AZN** and are converted at
-display time by `src/lib/currency.ts`, which holds the indicative rates. Update
-the rates there when they drift; the amounts on every page follow automatically.
+Package and add-on prices live in `src/data/packages.ts` in **AZN** — never in
+the locale bundles, which hold only names and descriptions. `src/lib/currency.ts`
+converts them at display time and holds the indicative rates.
+
+- AZN is shown exactly as set (it is the contractual figure); other currencies
+  are rounded to price-tag numbers.
+- USD is effectively fixed: the manat is pegged at 1.70 AZN = 1 USD. EUR and GEL
+  float — re-check those two rates a few times a year.
+- The tier prices are also quoted in the FAQ answer and in `seo.home.description`
+  in every locale, plus `index.html` and `site.webmanifest`. Update those together.
 
 ## SEO
 

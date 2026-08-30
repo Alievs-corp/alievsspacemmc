@@ -7,15 +7,13 @@ import { Section, SectionHeading } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { Accordion, type AccordionItem } from '@/components/ui/Accordion';
 import { CurrencySwitcher } from '@/components/ui/CurrencySwitcher';
-import { COMPARISON_ROWS, PACKAGE_TIERS, type PackageTier } from '@/data/packages';
+import { ADDONS, COMPARISON_ROWS, PACKAGE_TIERS, type PackageTier } from '@/data/packages';
 import { absoluteUrl } from '@/lib/site';
 import { cn } from '@/lib/utils';
 
-interface AddonItem {
+interface AddonCopy {
   name: string;
   desc: string;
-  price: number;
-  unit?: 'month';
 }
 
 function CheckIcon({ className }: { className?: string }) {
@@ -175,7 +173,7 @@ export function Packages() {
   const { t, tRaw } = useI18n();
   const { format } = useCurrency();
 
-  const addons = tRaw<AddonItem[]>('packages.addons.items', []) || [];
+  const addonCopy = tRaw<AddonCopy[]>('packages.addons.items', []) || [];
   const guarantees = tRaw<string[]>('packages.guarantee.items', []) || [];
   const faqItems = (tRaw<AccordionItem[]>('faq.items', []) || []).slice(0, 5);
 
@@ -264,26 +262,30 @@ export function Packages() {
           className="mb-10"
         />
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {addons.map((addon, i) => (
-            <Reveal
-              key={addon.name}
-              delay={i * 60}
-              className="flex flex-col justify-between gap-4 rounded-xl border border-border bg-surface/50 p-5 transition-colors hover:border-border-strong"
-            >
-              <div>
-                <h3 className="font-display text-[16px] font-semibold text-white">{addon.name}</h3>
-                <p className="mt-2 text-[13px] leading-relaxed text-text-muted">{addon.desc}</p>
-              </div>
-              <p className="font-display text-[20px] font-bold text-primary">
-                {format(addon.price)}
-                {addon.unit === 'month' && (
-                  <span className="ml-1 text-[12px] font-normal text-text-subtle">
-                    / {t('packages.perMonth')}
-                  </span>
-                )}
-              </p>
-            </Reveal>
-          ))}
+          {addonCopy.map((addon, i) => {
+            const pricing = ADDONS[i];
+            if (!pricing) return null;
+            return (
+              <Reveal
+                key={addon.name}
+                delay={i * 60}
+                className="flex flex-col justify-between gap-4 rounded-xl border border-border bg-surface/50 p-5 transition-colors hover:border-border-strong"
+              >
+                <div>
+                  <h3 className="font-display text-[16px] font-semibold text-white">{addon.name}</h3>
+                  <p className="mt-2 text-[13px] leading-relaxed text-text-muted">{addon.desc}</p>
+                </div>
+                <p className="font-display text-[20px] font-bold text-primary">
+                  {format(pricing.price)}
+                  {pricing.recurring && (
+                    <span className="ml-1 text-[12px] font-normal text-text-subtle">
+                      / {t('packages.perMonth')}
+                    </span>
+                  )}
+                </p>
+              </Reveal>
+            );
+          })}
         </div>
       </Section>
 

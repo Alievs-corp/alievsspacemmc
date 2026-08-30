@@ -14,13 +14,18 @@ export interface CurrencyMeta {
  * Indicative rates, updated manually. Prices are contractually set in AZN —
  * other currencies are a convenience for the visitor and are re-confirmed on
  * the invoice, which is what `packages.currencyNote` tells the reader.
- * Last reviewed: 2026-08.
+ *
+ * Last reviewed 2026-08:
+ *  - USD: the manat is pegged at 1.70 AZN = 1 USD, so this rate is stable.
+ *  - EUR: floating, ~1.96 AZN per euro.
+ *  - GEL: floating, derived through USD (~2.60 GEL per USD).
+ * Re-check the two floating rates a few times a year.
  */
 export const CURRENCIES: CurrencyMeta[] = [
   { code: 'AZN', symbol: '₼', rate: 1, position: 'after', flag: '🇦🇿' },
   { code: 'USD', symbol: '$', rate: 0.588, position: 'before', flag: '🇺🇸' },
-  { code: 'EUR', symbol: '€', rate: 0.545, position: 'before', flag: '🇪🇺' },
-  { code: 'GEL', symbol: '₾', rate: 1.59, position: 'after', flag: '🇬🇪' },
+  { code: 'EUR', symbol: '€', rate: 0.51, position: 'before', flag: '🇪🇺' },
+  { code: 'GEL', symbol: '₾', rate: 1.53, position: 'after', flag: '🇬🇪' },
 ];
 
 export const DEFAULT_CURRENCY: CurrencyCode = 'AZN';
@@ -56,11 +61,15 @@ export function guessCurrency(locale: string): CurrencyCode {
 function roundPrice(value: number): number {
   if (value >= 1000) return Math.round(value / 50) * 50;
   if (value >= 100) return Math.round(value / 10) * 10;
-  return Math.round(value);
+  // Small monthly figures: $71 reads like a calculation, $70 like a price.
+  return Math.round(value / 5) * 5;
 }
 
 export function convert(amountAzn: number, code: CurrencyCode): number {
-  return roundPrice(amountAzn * getCurrencyMeta(code).rate);
+  const { rate } = getCurrencyMeta(code);
+  // AZN is the contractual price — show it exactly as set, never rounded.
+  if (rate === 1) return amountAzn;
+  return roundPrice(amountAzn * rate);
 }
 
 export function formatAmount(amountAzn: number, code: CurrencyCode, localeTag = 'en'): string {

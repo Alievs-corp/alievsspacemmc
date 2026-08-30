@@ -207,12 +207,12 @@ export const azExtra = {
       title: 'Əlavələr',
       subtitle: 'İstənilən paketi genişləndirir. Qiymət paketin üzərinə əlavə olunur.',
       items: [
-        { name: 'Əlavə dil', desc: 'Tam tərcümə, lokallaşdırılmış URL-lər və hreflang teqləri', price: 400 },
-        { name: 'Mobil tətbiq (iOS + Android)', desc: 'Mövcud bekendinizə qoşulan React Native tətbiqi', price: 9000 },
-        { name: 'Aylıq SEO proqramı', desc: 'Məzmun, keçid qurma və aylıq mövqe hesabatları', price: 900, unit: 'month' },
-        { name: 'Baxım və hostinq planı', desc: 'Hostinq, ehtiyat nüsxə, yeniləmə, monitorinq və prioritet düzəlişlər', price: 250, unit: 'month' },
-        { name: 'Brend kimliyi', desc: 'Loqo, rəng sistemi, tipoqrafiya və brend qaydaları', price: 1500 },
-        { name: 'Mətn yazımı', desc: 'Səhifələriniz üçün peşəkar satış mətnləri', price: 600 },
+        { name: 'Əlavə dil', desc: 'Tam tərcümə, lokallaşdırılmış URL-lər və hreflang teqləri' },
+        { name: 'Mobil tətbiq (iOS + Android)', desc: 'Mövcud bekendinizə qoşulan React Native tətbiqi' },
+        { name: 'Aylıq SEO proqramı', desc: 'Məzmun, keçid qurma və aylıq mövqe hesabatları' },
+        { name: 'Baxım və hostinq planı', desc: 'Hostinq, ehtiyat nüsxə, yeniləmə, monitorinq və prioritet düzəlişlər' },
+        { name: 'Brend kimliyi', desc: 'Loqo, rəng sistemi, tipoqrafiya və brend qaydaları' },
+        { name: 'Mətn yazımı', desc: 'Səhifələriniz üçün peşəkar satış mətnləri' },
       ],
     },
     guarantee: {
@@ -236,7 +236,7 @@ export const azExtra = {
     items: [
       {
         q: 'Sayt neçəyə başa gəlir?',
-        a: 'Lendinq 1 500 AZN-dən, korporativ sayt 3 500 AZN-dən, onlayn mağaza 7 500 AZN-dən başlayır. Fərdi platformalar ayrıca qiymətləndirilir. Yuxarıdakı valyuta seçicisi ilə bu məbləğləri USD, EUR və ya GEL-də görə bilərsiniz. Qiymət işə başlamazdan əvvəl müqavilədə sabitlənir.',
+        a: 'Lendinq 690 AZN-dən, korporativ sayt 1 490 AZN-dən, onlayn mağaza 2 990 AZN-dən başlayır. Fərdi platformalar 6 900 AZN-dən başlayır və ayrıca qiymətləndirilir. Yuxarıdakı valyuta seçicisi ilə bu məbləğləri USD, EUR və ya GEL-də görə bilərsiniz. Qiymət işə başlamazdan əvvəl müqavilədə sabitlənir.',
       },
       {
         q: 'Sayt neçə vaxta hazırlanır?',
@@ -338,7 +338,7 @@ export const azExtra = {
     home: {
       title: 'Bakıda sayt hazırlanması — saytlar, tətbiqlər və onlayn mağazalar',
       description:
-        'Alievs Space saytlar, onlayn mağazalar, mobil tətbiqlər və fərdi platformalar qurur. 1 500 AZN-dən sabit qiymətlər, 2–8 həftəyə buraxılış, SEO və dəstək daxildir.',
+        'Alievs Space saytlar, onlayn mağazalar, mobil tətbiqlər və fərdi platformalar qurur. 690 AZN-dən sabit qiymətlər, 2–8 həftəyə buraxılış, SEO və dəstək daxildir.',
     },
     packages: {
       title: 'Sayt hazırlanması paketləri və qiymətləri',

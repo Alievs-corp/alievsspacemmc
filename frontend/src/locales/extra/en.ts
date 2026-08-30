@@ -212,12 +212,12 @@ export const enExtra = {
       title: 'Add-ons',
       subtitle: 'Extend any package. Prices are added to the package total.',
       items: [
-        { name: 'Extra language', desc: 'Full translation, localised URLs and hreflang tags', price: 400 },
-        { name: 'Mobile app (iOS + Android)', desc: 'React Native application connected to your existing backend', price: 9000 },
-        { name: 'Monthly SEO programme', desc: 'Content, link building and monthly ranking reports', price: 900, unit: 'month' },
-        { name: 'Care & hosting plan', desc: 'Hosting, backups, updates, monitoring and priority fixes', price: 250, unit: 'month' },
-        { name: 'Brand identity', desc: 'Logo, colour system, typography and brand guidelines', price: 1500 },
-        { name: 'Copywriting', desc: 'Professional sales copy written for your pages', price: 600 },
+        { name: 'Extra language', desc: 'Full translation, localised URLs and hreflang tags' },
+        { name: 'Mobile app (iOS + Android)', desc: 'React Native application connected to your existing backend' },
+        { name: 'Monthly SEO programme', desc: 'Content, link building and monthly ranking reports' },
+        { name: 'Care & hosting plan', desc: 'Hosting, backups, updates, monitoring and priority fixes' },
+        { name: 'Brand identity', desc: 'Logo, colour system, typography and brand guidelines' },
+        { name: 'Copywriting', desc: 'Professional sales copy written for your pages' },
       ],
     },
     guarantee: {
@@ -241,7 +241,7 @@ export const enExtra = {
     items: [
       {
         q: 'How much does a website cost?',
-        a: 'A landing page starts at 1,500 AZN, a corporate website at 3,500 AZN, and an online store at 7,500 AZN. Custom platforms are quoted individually. Use the currency switcher in the header to see these amounts in USD, EUR or GEL. The price is fixed in your contract before work starts.',
+        a: 'A landing page starts at 690 AZN, a corporate website at 1,490 AZN, and an online store at 2,990 AZN. Custom platforms start at 6,900 AZN and are quoted individually. Use the currency switcher in the header to see these amounts in USD, EUR or GEL. The price is fixed in your contract before work starts.',
       },
       {
         q: 'How long does it take to build a website?',
@@ -344,7 +344,7 @@ export const enExtra = {
     home: {
       title: 'Web Development Company in Baku — Websites, Apps & E-commerce',
       description:
-        'Alievs Space builds websites, online stores, mobile apps and custom platforms. Fixed prices from 1,500 AZN, launch in 2–8 weeks, SEO and support included. Free quote in 24 hours.',
+        'Alievs Space builds websites, online stores, mobile apps and custom platforms. Fixed prices from 690 AZN, launch in 2–8 weeks, SEO and support included. Free quote in 24 hours.',
     },
     packages: {
       title: 'Website Development Packages & Prices',

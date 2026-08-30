@@ -16,11 +16,38 @@ export interface PackageTier {
   accent: string;
 }
 
+/**
+ * Positioned against the Baku market (reviewed August 2026): local studios
+ * advertise corporate sites from ~350-1,000 AZN and online stores from
+ * ~1,500 AZN, mostly template-based. These sit above that floor because every
+ * tier is custom-designed and carries a warranty, but well inside reach for a
+ * local SMB — the average monthly wage in Baku is roughly 1,375 AZN.
+ */
 export const PACKAGE_TIERS: PackageTier[] = [
-  { id: 'landing', price: 1500, startingAt: false, accent: 'from-ink-700 to-ink-800' },
-  { id: 'business', price: 3500, startingAt: false, featured: true, accent: 'from-orange-600 to-orange-800' },
-  { id: 'ecommerce', price: 7500, startingAt: false, accent: 'from-ink-700 to-ink-800' },
-  { id: 'platform', price: 15000, startingAt: true, accent: 'from-ink-700 to-ink-800' },
+  { id: 'landing', price: 690, startingAt: false, accent: 'from-ink-700 to-ink-800' },
+  { id: 'business', price: 1490, startingAt: false, featured: true, accent: 'from-orange-600 to-orange-800' },
+  { id: 'ecommerce', price: 2990, startingAt: false, accent: 'from-ink-700 to-ink-800' },
+  { id: 'platform', price: 6900, startingAt: true, accent: 'from-ink-700 to-ink-800' },
+];
+
+/**
+ * Add-on prices in AZN. Names and descriptions stay in the locale bundles
+ * under `packages.addons.items`, matched to this list by position — prices
+ * must not live in ten translation files that can drift apart.
+ */
+export interface Addon {
+  /** Index into `packages.addons.items` in the locale bundle. */
+  price: number;
+  recurring?: boolean;
+}
+
+export const ADDONS: Addon[] = [
+  { price: 190 },                    // extra language
+  { price: 3900 },                   // mobile app (iOS + Android)
+  { price: 390, recurring: true },   // monthly SEO programme
+  { price: 120, recurring: true },   // care & hosting plan
+  { price: 590 },                    // brand identity
+  { price: 290 },                    // copywriting
 ];
 
 /** Rows of the comparison table; values map tier id → cell content. */

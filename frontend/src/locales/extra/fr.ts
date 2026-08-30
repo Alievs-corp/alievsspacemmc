@@ -304,12 +304,12 @@ export const frExtra = {
       title: 'Options',
       subtitle: "Elles complètent n'importe quel forfait. Leur prix s'ajoute au total.",
       items: [
-        { name: 'Langue supplémentaire', desc: 'Traduction complète, URL localisées et balises hreflang', price: 400 },
-        { name: 'Application mobile (iOS + Android)', desc: 'Application React Native connectée à votre back-end existant', price: 9000 },
-        { name: 'Programme SEO mensuel', desc: 'Contenus, netlinking et rapports de positionnement mensuels', price: 900, unit: 'month' },
-        { name: 'Maintenance et hébergement', desc: 'Hébergement, sauvegardes, mises à jour, supervision et support prioritaire', price: 250, unit: 'month' },
-        { name: 'Identité de marque', desc: 'Logo, système de couleurs, typographie et charte graphique', price: 1500 },
-        { name: 'Rédaction', desc: 'Textes commerciaux professionnels pour vos pages', price: 600 },
+        { name: 'Langue supplémentaire', desc: 'Traduction complète, URL localisées et balises hreflang' },
+        { name: 'Application mobile (iOS + Android)', desc: 'Application React Native connectée à votre back-end existant' },
+        { name: 'Programme SEO mensuel', desc: 'Contenus, netlinking et rapports de positionnement mensuels' },
+        { name: 'Maintenance et hébergement', desc: 'Hébergement, sauvegardes, mises à jour, supervision et support prioritaire' },
+        { name: 'Identité de marque', desc: 'Logo, système de couleurs, typographie et charte graphique' },
+        { name: 'Rédaction', desc: 'Textes commerciaux professionnels pour vos pages' },
       ],
     },
     guarantee: {
@@ -333,7 +333,7 @@ export const frExtra = {
     items: [
       {
         q: 'Combien coûte un site web ?',
-        a: "Une landing page démarre à 1 500 AZN, un site vitrine à 3 500 AZN et une boutique en ligne à 7 500 AZN. Les plateformes sur mesure sont chiffrées individuellement. Le sélecteur de devise en haut de page affiche ces montants en USD, EUR ou GEL. Le prix est fixé au contrat avant le démarrage.",
+        a: 'Une landing page démarre à 690 AZN, un site vitrine à 1 490 AZN et une boutique en ligne à 2 990 AZN. Les plateformes sur mesure démarrent à 6 900 AZN et sont chiffrées individuellement. Le sélecteur de devise en haut de page affiche ces montants en USD, EUR ou GEL. Le prix est fixé au contrat avant le démarrage.',
       },
       {
         q: 'Combien de temps faut-il pour créer un site ?',
@@ -436,7 +436,7 @@ export const frExtra = {
     home: {
       title: 'Développement web à Bakou — sites, applications et e-commerce',
       description:
-        "Alievs Space crée des sites web, des boutiques en ligne, des applications mobiles et des plateformes sur mesure. Prix fixes dès 1 500 AZN, mise en ligne en 2 à 8 semaines, SEO et support inclus. Devis gratuit sous 24 heures.",
+        "Alievs Space crée des sites web, des boutiques en ligne, des applications mobiles et des plateformes sur mesure. Prix fixes dès 690 AZN, mise en ligne en 2 à 8 semaines, SEO et support inclus. Devis gratuit sous 24 heures.",
     },
     packages: {
       title: 'Forfaits et tarifs de création de site web',

@@ -304,12 +304,12 @@ export const deExtra = {
       title: 'Zusatzleistungen',
       subtitle: 'Erweitern jedes Paket. Die Preise kommen zum Paketpreis hinzu.',
       items: [
-        { name: 'Weitere Sprache', desc: 'Vollständige Übersetzung, lokalisierte URLs und hreflang-Tags', price: 400 },
-        { name: 'Mobile App (iOS + Android)', desc: 'React-Native-App, verbunden mit Ihrem bestehenden Backend', price: 9000 },
-        { name: 'Monatliches SEO-Programm', desc: 'Inhalte, Linkaufbau und monatliche Ranking-Berichte', price: 900, unit: 'month' },
-        { name: 'Wartung & Hosting', desc: 'Hosting, Backups, Updates, Monitoring und bevorzugter Support', price: 250, unit: 'month' },
-        { name: 'Markenauftritt', desc: 'Logo, Farbsystem, Typografie und Markenrichtlinien', price: 1500 },
-        { name: 'Texterstellung', desc: 'Professionelle Verkaufstexte für Ihre Seiten', price: 600 },
+        { name: 'Weitere Sprache', desc: 'Vollständige Übersetzung, lokalisierte URLs und hreflang-Tags' },
+        { name: 'Mobile App (iOS + Android)', desc: 'React-Native-App, verbunden mit Ihrem bestehenden Backend' },
+        { name: 'Monatliches SEO-Programm', desc: 'Inhalte, Linkaufbau und monatliche Ranking-Berichte' },
+        { name: 'Wartung & Hosting', desc: 'Hosting, Backups, Updates, Monitoring und bevorzugter Support' },
+        { name: 'Markenauftritt', desc: 'Logo, Farbsystem, Typografie und Markenrichtlinien' },
+        { name: 'Texterstellung', desc: 'Professionelle Verkaufstexte für Ihre Seiten' },
       ],
     },
     guarantee: {
@@ -333,7 +333,7 @@ export const deExtra = {
     items: [
       {
         q: 'Was kostet eine Website?',
-        a: 'Eine Landingpage beginnt bei 1.500 AZN, eine Unternehmenswebsite bei 3.500 AZN und ein Onlineshop bei 7.500 AZN. Individuelle Plattformen werden gesondert kalkuliert. Über die Währungsauswahl oben sehen Sie die Beträge in USD, EUR oder GEL. Der Preis wird vor Projektbeginn im Vertrag fixiert.',
+        a: 'Eine Landingpage beginnt bei 690 AZN, eine Unternehmenswebsite bei 1.490 AZN und ein Onlineshop bei 2.990 AZN. Individuelle Plattformen starten bei 6.900 AZN und werden gesondert kalkuliert. Über die Währungsauswahl oben sehen Sie die Beträge in USD, EUR oder GEL. Der Preis wird vor Projektbeginn im Vertrag fixiert.',
       },
       {
         q: 'Wie lange dauert die Entwicklung?',
@@ -436,7 +436,7 @@ export const deExtra = {
     home: {
       title: 'Webentwicklung in Baku — Websites, Apps und Onlineshops',
       description:
-        'Alievs Space entwickelt Websites, Onlineshops, mobile Apps und individuelle Plattformen. Festpreise ab 1.500 AZN, Launch in 2–8 Wochen, SEO und Support inklusive. Kostenloses Angebot in 24 Stunden.',
+        'Alievs Space entwickelt Websites, Onlineshops, mobile Apps und individuelle Plattformen. Festpreise ab 690 AZN, Launch in 2–8 Wochen, SEO und Support inklusive. Kostenloses Angebot in 24 Stunden.',
     },
     packages: {
       title: 'Website-Pakete und Preise',
