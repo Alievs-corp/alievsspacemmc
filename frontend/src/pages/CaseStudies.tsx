@@ -1,220 +1,137 @@
+import { Link } from 'react-router-dom';
+import { ArrowRight, Boxes, ShieldCheck, Store } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { useI18n } from '@/contexts/I18nContext';
 import { useContent } from '@/contexts/ContentContext';
-import Container from './../components/ui/Container';
+import { Section, SectionHeading } from '@/components/ui/Section';
+import { Reveal } from '@/components/ui/Reveal';
 import OurProjects from '@/components/ui/OurProjects';
-import { Link } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
 
+/** One entry per delivered project; copy lives in the locale bundles. */
+const CASES: Array<{ id: string; key: string; Icon: LucideIcon }> = [
+  { id: 'marketplace-mvp', key: 'marketplace', Icon: Store },
+  { id: 'fintech-reporting-dashboard', key: 'fintech', Icon: ShieldCheck },
+  { id: 'operations-inventory-system', key: 'operations', Icon: Boxes },
+];
+
 const CaseStudies = () => {
-    const { t } = useI18n();
+  const { t, tRaw } = useI18n();
+  const { loading } = useContent();
 
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    const info = [
-        {
-            id: 'marketplace-mvp',
-            category: t('public.caseStudies.items.marketplace.category'),
-            title: t('public.caseStudies.items.marketplace.title'),
-            description: t('public.caseStudies.items.marketplace.description'),
-            focus: [
-                t('public.caseStudies.items.marketplace.focus.0'),
-                t('public.caseStudies.items.marketplace.focus.1'),
-                t('public.caseStudies.items.marketplace.focus.2'),
-            ]
-        },
-        {
-            id: 'fintech-reporting-dashboard',
-            category: t('public.caseStudies.items.fintech.category'),
-            title: t('public.caseStudies.items.fintech.title'),
-            description: t('public.caseStudies.items.fintech.description'),
-            focus: [
-                t('public.caseStudies.items.fintech.focus.0'),
-                t('public.caseStudies.items.fintech.focus.1'),
-                t('public.caseStudies.items.fintech.focus.2'),
-            ]
-        },
-        {
-            id: 'operations-inventory-system',
-            category: t('public.caseStudies.items.operations.category'),
-            title: t('public.caseStudies.items.operations.title'),
-            description: t('public.caseStudies.items.operations.description'),
-            focus: [
-                t('public.caseStudies.items.operations.focus.0'),
-                t('public.caseStudies.items.operations.focus.1'),
-                t('public.caseStudies.items.operations.focus.2'),
-            ]
-        },
-    ]
-
-    const { loading } = useContent();
-
-    if (loading) {
-        return (
-            <div className="flex min-h-screen items-center justify-center">
-                <div className="text-white">{t('admin.loading')}</div>
-            </div>
-        );
-    }
-
+  if (loading) {
     return (
-        <div className='mt-[60px] flex flex-col justify-center items-center'>
-            <Seo
-              page="caseStudies"
-              breadcrumbs={[{ name: t('nav.caseStudies'), path: '/case-studies' }]}
-            />
-            <Container className="flex flex-col justify-center items-center mb-12">
-                <h2 className="font-display text-[38px] font-bold text-white">{t('nav.caseStudies', 'Case Studies')}</h2>
-                <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">{t('public.caseStudiesIntro')}</p>
-            </Container>
-
-            <Container className="w-full mb-24">
-                <div className="flex flex-col items-center">
-                    <div className="flex flex-col gap-6 md:gap-8 w-full lg:hidden">
-                        {info.map((item, index) => (
-                            <div 
-                                key={index}
-                                className="card p-6 flex flex-col w-full max-w-[520px] mx-auto hover:border-border-strong transition-all duration-300"
-                            >
-                                <div className="mb-4">
-                                    <span className="font-inter text-white text-[13px] font-semibold">
-                                        {item.category}
-                                    </span>
-                                </div>
-
-                                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-4">
-                                    {item.title}
-                                </h3>
-
-                                <p className="font-inter text-text-muted text-[18px] mb-6 leading-relaxed">
-                                    {item.description}
-                                </p>
-
-                                <div className="mb-8 flex-grow">
-                                    <h4 className="font-display text-white text-[16px] font-semibold mb-4">
-                                        {t('public.caseStudies.keyFocusLabel')}
-                                    </h4>
-                                    <ul className="space-y-3">
-                                        {item.focus.map((focusItem, idx) => (
-                                            <li key={idx} className="flex items-start">
-                                                <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                                <span className="font-inter text-text-muted text-[18px]">{focusItem}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-
-                                <Link 
-                                    to={`/case-studies/${item.id}`}
-                                    onClick={scrollToTop}
-                                    className="mt-auto w-full bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-4 rounded-md transition-colors duration-300 cursor-pointer text-center"
-                                >
-                                    {t('public.caseStudies.viewCta')}
-                                </Link>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="hidden lg:flex flex-col items-center w-full">
-                        <div className="flex gap-8 w-full max-w-[1080px] mb-8">
-                            {info.slice(0, 2).map((item, index) => (
-                                <div 
-                                    key={index}
-                                    className="card p-6 flex flex-col w-[520px] hover:border-border-strong transition-all duration-300"
-                                >
-                                    <div className="mb-4">
-                                        <span className="font-inter text-white text-[13px] font-semibold">
-                                            {item.category}
-                                        </span>
-                                    </div>
-
-                                    <h3 className="font-display text-white text-[26px] font-semibold mb-4">
-                                        {item.title}
-                                    </h3>
-
-                                    <div className="mb-6">
-                                        <p className="font-inter text-text-muted text-[18px] leading-relaxed">
-                                            {item.description}
-                                        </p>
-                                    </div>
-
-                                    <div className="mb-6">
-                                        <h4 className="font-display text-white text-[16px] font-semibold mb-3">
-                                            {t('public.caseStudies.keyFocusLabel')}
-                                        </h4>
-                                        <ul className="space-y-2">
-                                            {item.focus.map((focusItem, idx) => (
-                                                <li key={idx} className="flex items-start">
-                                                    <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                                    <span className="font-inter text-text-muted text-[18px] line-clamp-1">{focusItem}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-
-                                    <Link 
-                                        to={`/case-studies/${item.id}`}
-                                        onClick={scrollToTop}
-                                        className="mt-auto w-full bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-4 rounded-md transition-colors duration-300 cursor-pointer text-center"
-                                    >
-                                        {t('public.caseStudies.viewCta')}
-                                    </Link>
-                                </div>
-                            ))}
-                        </div>
-
-                        {info[2] && (
-                            <div className="flex justify-center w-full">
-                                <div 
-                                    className="card p-6 flex flex-col w-[520px] hover:border-border-strong transition-all duration-300"
-                                >
-                                    <div className="mb-4">
-                                        <span className="font-inter text-white text-[13px] font-semibold">
-                                            {info[2].category}
-                                        </span>
-                                    </div>
-                                    
-                                    <h3 className="font-display text-white text-[26px] font-semibold mb-4">
-                                        {info[2].title}
-                                    </h3>
-                                    
-                                    <div className="mb-6">
-                                        <p className="font-inter text-text-muted text-[18px] leading-relaxed">
-                                            {info[2].description}
-                                        </p>
-                                    </div>
-                                    
-                                    <div className="mb-6">
-                                        <h4 className="font-display text-white text-[16px] font-semibold mb-3">
-                                            {t('public.caseStudies.keyFocusLabel')}
-                                        </h4>
-                                        <ul className="space-y-2">
-                                            {info[2].focus.map((focusItem, idx) => (
-                                                <li key={idx} className="flex items-start">
-                                                    <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                                                    <span className="font-inter text-text-muted text-[18px]">{focusItem}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                    
-                                    <Link 
-                                        to={`/case-studies/${info[2].id}`}
-                                        onClick={scrollToTop}
-                                        className="mt-auto w-full bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-4 rounded-md transition-colors duration-300 cursor-pointer text-center"
-                                    >
-                                        {t('public.caseStudies.viewCta')}
-                                    </Link>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </Container>
-            <OurProjects />
-        </div>
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-text">{t('admin.loading')}</div>
+      </div>
     );
-}
+  }
+
+  return (
+    <>
+      <Seo page="caseStudies" breadcrumbs={[{ name: t('nav.caseStudies'), path: '/case-studies' }]} />
+
+      <Section tight className="glow-bg">
+        <SectionHeading
+          eyebrow={t('public.caseStudies.eyebrow', 'Selected work')}
+          title={t('public.caseStudies.heading', t('nav.caseStudies'))}
+          subtitle={t('public.caseStudiesIntro')}
+        />
+      </Section>
+
+      <Section tight className="pt-0">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {CASES.map(({ id, key, Icon }, i) => {
+            const focus = tRaw<string[]>(`public.caseStudies.items.${key}.focus`, []) || [];
+
+            return (
+              <Reveal
+                as="article"
+                key={id}
+                delay={i * 80}
+                className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface/50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-border-strong hover:shadow-[var(--shadow-2)] focus-within:border-border-strong"
+              >
+                {/* Warm bloom that answers the hover, kept behind the content. */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute -right-20 -top-20 h-44 w-44 rounded-full bg-primary/15 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100"
+                />
+
+                <div className="relative flex items-start justify-between">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-surface-2 text-primary">
+                    <Icon aria-hidden className="h-5 w-5" strokeWidth={1.8} />
+                  </span>
+                  <span className="font-mono text-[11px] tracking-[0.16em] text-text-subtle">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                </div>
+
+                <p className="relative mt-5 font-mono text-[10.5px] uppercase tracking-[0.16em] text-primary">
+                  {t(`public.caseStudies.items.${key}.category`)}
+                </p>
+
+                <h3 className="relative mt-2 font-display text-[20px] font-semibold leading-snug text-white md:text-[22px]">
+                  {t(`public.caseStudies.items.${key}.title`)}
+                </h3>
+
+                {/* Clamped so three cards of unequal copy still line up. */}
+                <p className="relative mt-3 line-clamp-4 text-[13.5px] leading-relaxed text-text-muted">
+                  {t(`public.caseStudies.items.${key}.description`)}
+                </p>
+
+                <div className="relative mt-6">
+                  <p className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-text-subtle">
+                    {t('public.caseStudies.keyFocusLabel')}
+                  </p>
+                  <ul className="mt-2.5 flex flex-wrap gap-1.5">
+                    {focus.map((item) => (
+                      <li
+                        key={item}
+                        className="rounded-full border border-border bg-surface-2/70 px-2.5 py-1 text-[11.5px] text-text-muted"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* `after` stretches the hit area over the whole card. */}
+                <Link
+                  to={`/case-studies/${id}`}
+                  className="relative mt-auto inline-flex items-center gap-1.5 pt-6 text-[13.5px] font-semibold text-primary after:absolute after:inset-0 after:content-[''] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
+                >
+                  {t('public.caseStudies.viewCta')}
+                  <ArrowRight
+                    aria-hidden
+                    className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                  />
+                </Link>
+              </Reveal>
+            );
+          })}
+        </div>
+      </Section>
+
+      <Section tight className="pt-0">
+        <Reveal className="glow-bg relative overflow-hidden rounded-2xl border border-border bg-surface/60 px-6 py-12 text-center md:px-12 md:py-14">
+          <h2 className="font-display text-[24px] font-bold leading-tight text-white md:text-[32px]">
+            {t('public.caseStudies.requestTitle')}
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-[13.5px] leading-relaxed text-text-muted md:text-[16px]">
+            {t('public.caseStudies.requestCopy')}
+          </p>
+          <Link
+            to="/contact"
+            className="mt-8 inline-flex rounded-lg bg-primary px-7 py-3.5 text-[14px] font-semibold text-on-primary shadow-[var(--shadow-glow-primary)] transition-colors hover:bg-primary-hover md:text-[15px]"
+          >
+            {t('nav.getQuote')}
+          </Link>
+        </Reveal>
+      </Section>
+
+      <OurProjects />
+    </>
+  );
+};
 
 export default CaseStudies;

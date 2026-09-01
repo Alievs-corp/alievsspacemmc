@@ -975,6 +975,8 @@ export const en = {
       caseStudiesIntro:
         'We showcase real-world projects where structured architecture, thoughtful UX, and disciplined engineering resulted in stable, production-ready systems. Our case studies focus on practical challenges, design decisions, and delivery outcomes that support scalable growth and operational clarity.',
       caseStudies: {
+        eyebrow: 'Selected work',
+        heading: 'Systems we designed, built and shipped',
         viewCta: 'View case study',
         keyFocusLabel: 'Key focus',
         requestTitle: 'Request project review',

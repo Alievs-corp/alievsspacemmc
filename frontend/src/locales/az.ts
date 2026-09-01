@@ -960,6 +960,8 @@ export const az = {
       caseStudiesIntro:
         'Biz strukturlu arxitektura, düşünülmüş istifadəçi təcrübəsi və disiplinli mühəndisliyin sabit, istehsalata hazır sistemlər yaratdığı real layihələri təqdim edirik. Bizim tədqiqat nümunələrimiz praktik çətinliklərə, dizayn qərarlarına və ölçülə bilən artımı və əməliyyat aydınlığını dəstəkləyən çatdırılma nəticələrinə fokuslanır.',
       caseStudies: {
+        eyebrow: 'Seçilmiş işlər',
+        heading: 'Layihələndirdiyimiz və istifadəyə verdiyimiz sistemlər',
         viewCta: 'İş nümunələrinə bax',
         keyFocusLabel: 'Əsas fokus',
         requestTitle: 'Layihə nəzərdən keçirmə sorğusu',

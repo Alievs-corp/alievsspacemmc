@@ -11,7 +11,9 @@ import wolfServis from "../../assets/images/wolfServis.png"
 import leonCasting from "../../assets/images/leonCasting.png"
 import asanyer from "../../assets/images/asanyer.png"
 import balakenPark from "../../assets/images/balakenPark.png"
-import Container from "./Container";
+import { ArrowUpRight } from "lucide-react";
+import { Section, SectionHeading } from "./Section";
+import { Reveal } from "./Reveal";
 import { useI18n } from "@/contexts/I18nContext";
 
 type ProjectCard = {
@@ -36,56 +38,81 @@ const PROJECTS: ProjectCard[] = [
   { key: 'balakenPark', link: "https://balakenpark.az/", image: balakenPark },
 ];
 
+const normalizeUrl = (url: string) => {
+  const u = url.trim();
+  return u.startsWith("http") ? u : "https://" + u;
+};
+
+/** Bare domain, shown on the screenshot so each card names its live site. */
+const hostOf = (url: string) => {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+  }
+};
+
 const OurProjects = () => {
   const { t } = useI18n();
 
-  const normalizeUrl = (url: string) => {
-    const u = url.trim();
-    return u.startsWith("http") ? u : "https://" + u;
-  };
-
   return (
-    <section className="mt-[80px] md:mt-[100px] lg:mt-[120px] mb-16 md:mb-24 px-4">
-      <Container className="flex flex-col justify-center items-center">
-        <div className="w-full flex flex-col justify-center items-center gap-[10px] text-center">
-          <h2 className="text-white font-display text-[26px] md:text-[38px] font-bold">
-            {t("public.home.projects.title")}
-          </h2>
-          <p className="font-inter text-text-muted max-w-[370px] md:max-w-[800px] text-center text-[13px] md:text-[18px]">
-            {t("public.home.projects.copy")}
-          </p>
-        </div>
+    <Section>
+      <SectionHeading
+        title={t("public.home.projects.title")}
+        subtitle={t("public.home.projects.copy")}
+        className="mb-12 md:mb-16"
+      />
 
-        <div className="mt-[60px] w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[40px] lg:gap-[20px]">
-          {PROJECTS.map((project) => {
-            const href = normalizeUrl(project.link);
-            const name = t(`public.home.projects.items.${project.key}.name`);
-            const description = t(`public.home.projects.items.${project.key}.description`);
-            return (
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {PROJECTS.map((project, i) => {
+          const href = normalizeUrl(project.link);
+          const name = t(`public.home.projects.items.${project.key}.name`);
+          const description = t(`public.home.projects.items.${project.key}.description`);
+
+          return (
+            <Reveal as="article" key={project.key} delay={(i % 3) * 80}>
               <a
-                key={project.key}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-full flex-col gap-3 card card-interactive p-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
+                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface/50 transition-all duration-300 hover:-translate-y-1 hover:border-border-strong hover:shadow-[var(--shadow-2)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
               >
-                <img
-                  src={project.image}
-                  alt={name}
-                  className="w-full h-[140px] md:h-[160px] object-cover rounded-md bg-surface-2"
-                />
-                <h4 className="font-display text-white text-[20px] md:text-[24px] font-semibold">
-                  {name}
-                </h4>
-                <p className="font-inter text-text-muted text-[13px] md:text-[16px]">
-                  {description}
-                </p>
+                {/* Screenshots are ~2:1 and anchored to the top, so every card
+                    shows the site's hero rather than a slice of its middle. */}
+                <div className="relative aspect-16/10 overflow-hidden border-b border-border bg-surface-2">
+                  <img
+                    src={project.image}
+                    alt={name}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+                  />
+                  <span className="absolute right-3 top-3 rounded-full border border-border bg-bg/80 px-2.5 py-1 font-mono text-[10.5px] text-text backdrop-blur-sm">
+                    {hostOf(href)}
+                  </span>
+                </div>
+
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="font-display text-[17px] font-semibold text-white md:text-[18px]">
+                    {name}
+                  </h3>
+                  <p className="mt-2 flex-1 text-[13px] leading-relaxed text-text-muted">
+                    {description}
+                  </p>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-primary">
+                    {t("ui.openSite")}
+                    <ArrowUpRight
+                      aria-hidden
+                      className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    />
+                  </span>
+                </div>
               </a>
-            );
-          })}
-        </div>
-      </Container>
-    </section>
+            </Reveal>
+          );
+        })}
+      </div>
+    </Section>
   );
 };
 
