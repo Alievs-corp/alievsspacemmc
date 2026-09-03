@@ -3,6 +3,7 @@ import { lazy, Suspense } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { I18nProvider } from './contexts/I18nContext';
 import { CurrencyProvider } from './contexts/CurrencyContext';
+import { MarketProvider } from './contexts/MarketContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ScrollToTop } from './components/ScrollToTop';
 import { ContentProvider } from './contexts/ContentContext';
@@ -57,6 +58,7 @@ function App() {
       <ThemeProvider>
         <I18nProvider>
           <CurrencyProvider>
+            <MarketProvider>
           <AuthProvider>
             <ContentProvider>
               <BrowserRouter>
@@ -125,6 +127,7 @@ function App() {
               </BrowserRouter>
             </ContentProvider>
           </AuthProvider>
+            </MarketProvider>
           </CurrencyProvider>
         </I18nProvider>
       </ThemeProvider>

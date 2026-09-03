@@ -1,13 +1,16 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useI18n } from '@/contexts/I18nContext';
 import { useCurrency } from '@/contexts/CurrencyContext';
+import { useMarket } from '@/contexts/MarketContext';
 import { Seo } from '@/components/Seo';
 import Container from '@/components/ui/Container';
 import { Section, SectionHeading } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { Accordion, type AccordionItem } from '@/components/ui/Accordion';
 import { CurrencySwitcher } from '@/components/ui/CurrencySwitcher';
+import { CountrySwitcher } from '@/components/ui/CountrySwitcher';
 import { ADDONS, COMPARISON_ROWS, PACKAGE_TIERS, type PackageTier } from '@/data/packages';
+import { convert } from '@/lib/currency';
 import { absoluteUrl } from '@/lib/site';
 import { cn } from '@/lib/utils';
 
@@ -26,7 +29,7 @@ function CheckIcon({ className }: { className?: string }) {
 
 function TierCard({ tier, index }: { tier: PackageTier; index: number }) {
   const { t, tRaw } = useI18n();
-  const { format } = useCurrency();
+  const { formatPrice } = useMarket();
   const navigate = useNavigate();
 
   const base = `packages.tiers.${tier.id}`;
@@ -57,7 +60,7 @@ function TierCard({ tier, index }: { tier: PackageTier; index: number }) {
           <span className="text-[13px] text-text-subtle">{t('packages.from')}</span>
         )}
         <span className="font-display text-[32px] font-bold leading-none text-white lg:text-[38px]">
-          {format(tier.price)}
+          {formatPrice(tier.price)}
         </span>
       </div>
       <p className="mt-1 text-[12px] text-text-subtle">{t('packages.perProject')}</p>
@@ -171,7 +174,8 @@ function ComparisonTable() {
 
 export function Packages() {
   const { t, tRaw } = useI18n();
-  const { format } = useCurrency();
+  const { market, priceOf } = useMarket();
+  const { currency, format } = useCurrency();
 
   const addonCopy = tRaw<AddonCopy[]>('packages.addons.items', []) || [];
   const guarantees = tRaw<string[]>('packages.guarantee.items', []) || [];
@@ -191,8 +195,8 @@ export function Packages() {
         '@type': 'Offer',
         name: t(`packages.tiers.${tier.id}.name`),
         description: t(`packages.tiers.${tier.id}.summary`),
-        price: tier.price,
-        priceCurrency: 'AZN',
+        price: convert(priceOf(tier.price), currency),
+        priceCurrency: currency,
         url: absoluteUrl('/packages'),
         availability: 'https://schema.org/InStock',
       })),
@@ -231,10 +235,19 @@ export function Packages() {
               {t('packages.intro')}
             </p>
 
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-              <span className="text-[13px] text-text-subtle">{t('currency.label')}:</span>
-              <CurrencySwitcher />
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+              <div className="flex items-center gap-3">
+                <span className="text-[13px] text-text-subtle">{t('market.label')}:</span>
+                <CountrySwitcher />
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-[13px] text-text-subtle">{t('currency.label')}:</span>
+                <CurrencySwitcher />
+              </div>
             </div>
+            <p className="mx-auto mt-4 max-w-2xl text-[12.5px] leading-relaxed text-text-subtle">
+              {t('market.priceNote').replace('{country}', t(`market.countries.${market.code}`))}
+            </p>
           </Reveal>
         </Container>
       </div>
@@ -246,7 +259,7 @@ export function Packages() {
           ))}
         </div>
         <p className="mt-6 text-center text-[12.5px] text-text-subtle">
-          {t('packages.currencyNote')} {t('packages.vatNote')}
+          {t('market.note')} {t('packages.vatNote')}
         </p>
       </Section>
 
@@ -276,7 +289,7 @@ export function Packages() {
                   <p className="mt-2 text-[13px] leading-relaxed text-text-muted">{addon.desc}</p>
                 </div>
                 <p className="font-display text-[20px] font-bold text-primary">
-                  {format(pricing.price)}
+                  {format(priceOf(pricing.price))}
                   {pricing.recurring && (
                     <span className="ml-1 text-[12px] font-normal text-text-subtle">
                       / {t('packages.perMonth')}

@@ -47,6 +47,29 @@ export const frExtra = {
     usd: 'Dollar américain',
     eur: 'Euro',
     gel: 'Lari géorgien',
+    gbp: 'Livre sterling',
+    rub: 'Rouble russe',
+    cny: 'Yuan chinois',
+    jpy: 'Yen japonais',
+    krw: 'Won sud-coréen',
+    vnd: 'Dong vietnamien',
+  },
+  market: {
+    label: 'Pays',
+    note: 'Les prix sont adaptés au marché sélectionné et restent en dessous des tarifs des agences locales. Le montant final est fixé dans votre contrat.',
+    priceNote: 'Prix affichés pour : {country}. Choisissez un autre pays pour recalculer la liste selon ce marché.',
+    countries: {
+      az: 'Azerbaïdjan',
+      ge: 'Géorgie',
+      ru: 'Russie',
+      vn: 'Vietnam',
+      cn: 'Chine',
+      kr: 'Corée du Sud',
+      jp: 'Japon',
+      fr: 'France',
+      gb: 'Royaume-Uni',
+      de: 'Allemagne',
+    },
   },
   public: {
     servicesIntro:
@@ -212,7 +235,7 @@ export const frExtra = {
     subtitle:
       'Des tarifs transparents dans votre devise. Chaque forfait comprend le design, le développement, la configuration SEO, la formation et une garantie.',
     intro:
-      "Les prix ci-dessous correspondent à un projet complet et mis en ligne — ce ne sont pas des estimations horaires. Choisissez votre devise en haut de page : les montants se mettent à jour sur tout le site.",
+      'Les prix ci-dessous correspondent à un projet complet et mis en ligne — ce ne sont pas des estimations horaires. Choisissez ci-dessous votre pays et votre devise : toute la grille est recalculée pour ce marché.',
     currencyNote:
       'Les prix sont fixés en AZN et convertis à un taux indicatif. Le montant final est fixé dans votre contrat.',
     vatNote: 'Prix hors TVA le cas échéant.',
@@ -336,7 +359,7 @@ export const frExtra = {
     items: [
       {
         q: 'Combien coûte un site web ?',
-        a: 'Une landing page démarre à 690 AZN, un site vitrine à 1 490 AZN et une boutique en ligne à 2 990 AZN. Les plateformes sur mesure démarrent à 6 900 AZN et sont chiffrées individuellement. Le sélecteur de devise en haut de page affiche ces montants en USD, EUR ou GEL. Le prix est fixé au contrat avant le démarrage.',
+        a: 'Une landing page démarre à 480 AZN, un site vitrine à 1 040 AZN et une boutique en ligne à 2 090 AZN. Les plateformes sur mesure démarrent à 4 830 AZN et sont chiffrées individuellement. Le sélecteur de devise en haut de page affiche ces montants en USD, EUR ou GEL. Le prix est fixé au contrat avant le démarrage.',
       },
       {
         q: 'Combien de temps faut-il pour créer un site ?',
@@ -439,7 +462,7 @@ export const frExtra = {
     home: {
       title: 'Développement web à Bakou — sites, applications et e-commerce',
       description:
-        "Alievs Space crée des sites web, des boutiques en ligne, des applications mobiles et des plateformes sur mesure. Prix fixes dès 690 AZN, mise en ligne en 2 à 8 semaines, SEO et support inclus. Devis gratuit sous 24 heures.",
+        "Alievs Space crée des sites web, des boutiques en ligne, des applications mobiles et des plateformes sur mesure. Prix fixes dès 480 AZN, mise en ligne en 2 à 8 semaines, SEO et support inclus. Devis gratuit sous 24 heures.",
     },
     packages: {
       title: 'Forfaits et tarifs de création de site web',

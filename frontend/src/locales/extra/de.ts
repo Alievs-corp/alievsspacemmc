@@ -47,6 +47,29 @@ export const deExtra = {
     usd: 'US-Dollar',
     eur: 'Euro',
     gel: 'Georgischer Lari',
+    gbp: 'Britisches Pfund',
+    rub: 'Russischer Rubel',
+    cny: 'Chinesischer Yuan',
+    jpy: 'Japanischer Yen',
+    krw: 'Südkoreanischer Won',
+    vnd: 'Vietnamesischer Dong',
+  },
+  market: {
+    label: 'Land',
+    note: 'Die Preise sind an den gewählten Markt angepasst und bleiben unter dem lokalen Agenturniveau. Der endgültige Betrag wird im Vertrag festgelegt.',
+    priceNote: 'Angezeigt werden die Preise für {country}. Wählen Sie ein anderes Land, um die Liste für diesen Markt neu zu berechnen.',
+    countries: {
+      az: 'Aserbaidschan',
+      ge: 'Georgien',
+      ru: 'Russland',
+      vn: 'Vietnam',
+      cn: 'China',
+      kr: 'Südkorea',
+      jp: 'Japan',
+      fr: 'Frankreich',
+      gb: 'Vereinigtes Königreich',
+      de: 'Deutschland',
+    },
   },
   public: {
     servicesIntro:
@@ -212,7 +235,7 @@ export const deExtra = {
     subtitle:
       'Transparente Preise in Ihrer Währung. Jedes Paket enthält Design, Entwicklung, SEO-Einrichtung, Schulung und Gewährleistung.',
     intro:
-      'Die Preise gelten für ein fertiges, live geschaltetes Projekt — keine Stundenschätzung. Wählen Sie oben Ihre Währung; die Beträge werden auf der gesamten Website aktualisiert.',
+      'Die Preise gelten für ein fertiges, live geschaltetes Projekt — keine Stundenschätzung. Wählen Sie unten Ihr Land und Ihre Währung; die gesamte Liste wird für diesen Markt neu berechnet.',
     currencyNote:
       'Die Preise sind in AZN festgelegt und werden zu einem Richtkurs umgerechnet. Der endgültige Betrag wird im Vertrag fixiert.',
     vatNote: 'Preise verstehen sich zuzüglich Mehrwertsteuer, sofern anwendbar.',
@@ -336,7 +359,7 @@ export const deExtra = {
     items: [
       {
         q: 'Was kostet eine Website?',
-        a: 'Eine Landingpage beginnt bei 690 AZN, eine Unternehmenswebsite bei 1.490 AZN und ein Onlineshop bei 2.990 AZN. Individuelle Plattformen starten bei 6.900 AZN und werden gesondert kalkuliert. Über die Währungsauswahl oben sehen Sie die Beträge in USD, EUR oder GEL. Der Preis wird vor Projektbeginn im Vertrag fixiert.',
+        a: 'Eine Landingpage beginnt bei 480 AZN, eine Unternehmenswebsite bei 1.040 AZN und ein Onlineshop bei 2.090 AZN. Individuelle Plattformen starten bei 4.830 AZN und werden gesondert kalkuliert. Über die Währungsauswahl oben sehen Sie die Beträge in USD, EUR oder GEL. Der Preis wird vor Projektbeginn im Vertrag fixiert.',
       },
       {
         q: 'Wie lange dauert die Entwicklung?',
@@ -439,7 +462,7 @@ export const deExtra = {
     home: {
       title: 'Webentwicklung in Baku — Websites, Apps und Onlineshops',
       description:
-        'Alievs Space entwickelt Websites, Onlineshops, mobile Apps und individuelle Plattformen. Festpreise ab 690 AZN, Launch in 2–8 Wochen, SEO und Support inklusive. Kostenloses Angebot in 24 Stunden.',
+        'Alievs Space entwickelt Websites, Onlineshops, mobile Apps und individuelle Plattformen. Festpreise ab 480 AZN, Launch in 2–8 Wochen, SEO und Support inklusive. Kostenloses Angebot in 24 Stunden.',
     },
     packages: {
       title: 'Website-Pakete und Preise',

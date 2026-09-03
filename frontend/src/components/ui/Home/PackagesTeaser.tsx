@@ -2,14 +2,14 @@ import { Link } from 'react-router-dom';
 import { Section, SectionHeading } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { useI18n } from '@/contexts/I18nContext';
-import { useCurrency } from '@/contexts/CurrencyContext';
+import { useMarket } from '@/contexts/MarketContext';
 import { PACKAGE_TIERS } from '@/data/packages';
 import { cn } from '@/lib/utils';
 
 /** Compact price cards. Full detail lives on /packages. */
 const PackagesTeaser = () => {
   const { t } = useI18n();
-  const { format } = useCurrency();
+  const { formatPrice } = useMarket();
 
   return (
     <Section id="packages">
@@ -47,7 +47,7 @@ const PackagesTeaser = () => {
               {tier.startingAt && (
                 <span className="text-[12px] text-text-subtle">{t('packages.from')}</span>
               )}
-              <span className="font-display text-[27px] font-bold text-white">{format(tier.price)}</span>
+              <span className="font-display text-[27px] font-bold text-white">{formatPrice(tier.price)}</span>
             </p>
 
             <p className="mt-4 flex-1 text-[13px] leading-relaxed text-text-muted">

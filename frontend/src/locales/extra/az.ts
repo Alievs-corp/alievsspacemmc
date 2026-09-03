@@ -21,6 +21,29 @@ export const azExtra = {
     usd: 'ABŞ dolları',
     eur: 'Avro',
     gel: 'Gürcü larisi',
+    gbp: 'Britaniya funtu',
+    rub: 'Rusiya rublu',
+    cny: 'Çin yuanı',
+    jpy: 'Yapon yeni',
+    krw: 'Cənubi Koreya vonu',
+    vnd: 'Vyetnam donqu',
+  },
+  market: {
+    label: 'Ölkə',
+    note: 'Qiymətlər seçdiyiniz bazara uyğunlaşdırılıb və yerli studiyaların qiymətlərindən aşağı qalır. Yekun məbləğ müqavilədə sabitlənir.',
+    priceNote: '{country} üçün qiymətlər göstərilir. Başqa ölkə seçin — siyahı həmin bazar üçün yenidən hesablanacaq.',
+    countries: {
+      az: 'Azərbaycan',
+      ge: 'Gürcüstan',
+      ru: 'Rusiya',
+      vn: 'Vyetnam',
+      cn: 'Çin',
+      kr: 'Cənubi Koreya',
+      jp: 'Yaponiya',
+      fr: 'Fransa',
+      gb: 'Böyük Britaniya',
+      de: 'Almaniya',
+    },
   },
   home: {
     badge: '2019-cu ildən etibarlı texnoloji tərəfdaş',
@@ -116,7 +139,7 @@ export const azExtra = {
     subtitle:
       'Öz valyutanızda şəffaf qiymətlər. Hər paketə dizayn, işləmə, SEO quraşdırması, təlim və zəmanət müddəti daxildir.',
     intro:
-      'Aşağıdakı qiymətlər saatlıq qiymətləndirmə deyil, tam hazır və istifadəyə verilmiş layihə üçündür. Yuxarıdan valyutanı seçin — məbləğlər bütün saytda yenilənəcək.',
+      'Aşağıdakı qiymətlər saatlıq qiymətləndirmə deyil, tam hazır və istifadəyə verilmiş layihə üçündür. Aşağıdan ölkənizi və valyutanı seçin — bütün siyahı həmin bazar üçün yenidən hesablanacaq.',
     currencyNote: 'Qiymətlər manatla təyin olunur və təxmini məzənnə ilə çevrilir. Yekun məbləğ müqavilədə sabitlənir.',
     vatNote: 'Qiymətlərə ƏDV daxil deyil (tətbiq olunduğu hallarda).',
     from: 'başlayır',
@@ -239,7 +262,7 @@ export const azExtra = {
     items: [
       {
         q: 'Sayt neçəyə başa gəlir?',
-        a: 'Lendinq 690 AZN-dən, korporativ sayt 1 490 AZN-dən, onlayn mağaza 2 990 AZN-dən başlayır. Fərdi platformalar 6 900 AZN-dən başlayır və ayrıca qiymətləndirilir. Yuxarıdakı valyuta seçicisi ilə bu məbləğləri USD, EUR və ya GEL-də görə bilərsiniz. Qiymət işə başlamazdan əvvəl müqavilədə sabitlənir.',
+        a: 'Lendinq 480 AZN-dən, korporativ sayt 1 040 AZN-dən, onlayn mağaza 2 090 AZN-dən başlayır. Fərdi platformalar 4 830 AZN-dən başlayır və ayrıca qiymətləndirilir. Yuxarıdakı valyuta seçicisi ilə bu məbləğləri USD, EUR və ya GEL-də görə bilərsiniz. Qiymət işə başlamazdan əvvəl müqavilədə sabitlənir.',
       },
       {
         q: 'Sayt neçə vaxta hazırlanır?',
@@ -341,7 +364,7 @@ export const azExtra = {
     home: {
       title: 'Bakıda sayt hazırlanması — saytlar, tətbiqlər və onlayn mağazalar',
       description:
-        'Alievs Space saytlar, onlayn mağazalar, mobil tətbiqlər və fərdi platformalar qurur. 690 AZN-dən sabit qiymətlər, 2–8 həftəyə buraxılış, SEO və dəstək daxildir.',
+        'Alievs Space saytlar, onlayn mağazalar, mobil tətbiqlər və fərdi platformalar qurur. 480 AZN-dən sabit qiymətlər, 2–8 həftəyə buraxılış, SEO və dəstək daxildir.',
     },
     packages: {
       title: 'Sayt hazırlanması paketləri və qiymətləri',

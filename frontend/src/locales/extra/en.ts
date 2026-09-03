@@ -21,6 +21,29 @@ export const enExtra = {
     usd: 'US dollar',
     eur: 'Euro',
     gel: 'Georgian lari',
+    gbp: 'British pound',
+    rub: 'Russian rouble',
+    cny: 'Chinese yuan',
+    jpy: 'Japanese yen',
+    krw: 'South Korean won',
+    vnd: 'Vietnamese dong',
+  },
+  market: {
+    label: 'Country',
+    note: 'Prices are adapted to the market you selected and stay below the local studio rate. The final amount is fixed in your contract.',
+    priceNote: 'Showing prices for {country}. Pick another country to see the list re-priced for that market.',
+    countries: {
+      az: 'Azerbaijan',
+      ge: 'Georgia',
+      ru: 'Russia',
+      vn: 'Vietnam',
+      cn: 'China',
+      kr: 'South Korea',
+      jp: 'Japan',
+      fr: 'France',
+      gb: 'United Kingdom',
+      de: 'Germany',
+    },
   },
   home: {
     badge: 'Trusted software partner since 2019',
@@ -118,7 +141,7 @@ export const enExtra = {
     subtitle:
       'Transparent pricing in your currency. Every package includes design, development, SEO setup, training and a warranty period.',
     intro:
-      'Prices below are for a complete, launched project — not an hourly estimate. Choose your currency in the header; the amount updates everywhere on the site.',
+      'Prices below are for a complete, launched project — not an hourly estimate. Pick your country and currency below; the whole list re-prices for that market.',
     currencyNote: 'Prices are set in AZN and converted at an indicative rate. The final amount is fixed in your contract.',
     vatNote: 'Prices exclude VAT where applicable.',
     from: 'from',
@@ -243,7 +266,7 @@ export const enExtra = {
     items: [
       {
         q: 'How much does a website cost?',
-        a: 'A landing page starts at 690 AZN, a corporate website at 1,490 AZN, and an online store at 2,990 AZN. Custom platforms start at 6,900 AZN and are quoted individually. Use the currency switcher in the header to see these amounts in USD, EUR or GEL. The price is fixed in your contract before work starts.',
+        a: 'A landing page starts at 480 AZN, a corporate website at 1,040 AZN, and an online store at 2,090 AZN. Custom platforms start at 4,830 AZN and are quoted individually. Use the currency switcher in the header to see these amounts in USD, EUR or GEL. The price is fixed in your contract before work starts.',
       },
       {
         q: 'How long does it take to build a website?',
@@ -346,7 +369,7 @@ export const enExtra = {
     home: {
       title: 'Web Development Company in Baku — Websites, Apps & E-commerce',
       description:
-        'Alievs Space builds websites, online stores, mobile apps and custom platforms. Fixed prices from 690 AZN, launch in 2–8 weeks, SEO and support included. Free quote in 24 hours.',
+        'Alievs Space builds websites, online stores, mobile apps and custom platforms. Fixed prices from 480 AZN, launch in 2–8 weeks, SEO and support included. Free quote in 24 hours.',
     },
     packages: {
       title: 'Website Development Packages & Prices',

@@ -22,12 +22,18 @@ export interface PackageTier {
  * ~1,500 AZN, mostly template-based. These sit above that floor because every
  * tier is custom-designed and carries a warranty, but well inside reach for a
  * local SMB — the average monthly wage in Baku is roughly 1,375 AZN.
+ *
+ * Cut by 30% across the board in September 2026 (690/1,490/2,990/6,900 →
+ * 480/1,040/2,090/4,830, rounded to the nearest 10 AZN). Every market inherits
+ * the cut: `markets.ts` indexes these figures rather than storing its own.
+ * The FAQ answer and the meta description in each locale quote these same
+ * numbers, so a change here means editing that copy too.
  */
 export const PACKAGE_TIERS: PackageTier[] = [
-  { id: 'landing', price: 690, startingAt: false, accent: 'from-ink-700 to-ink-800' },
-  { id: 'business', price: 1490, startingAt: false, featured: true, accent: 'from-orange-600 to-orange-800' },
-  { id: 'ecommerce', price: 2990, startingAt: false, accent: 'from-ink-700 to-ink-800' },
-  { id: 'platform', price: 6900, startingAt: true, accent: 'from-ink-700 to-ink-800' },
+  { id: 'landing', price: 480, startingAt: false, accent: 'from-ink-700 to-ink-800' },
+  { id: 'business', price: 1040, startingAt: false, featured: true, accent: 'from-orange-600 to-orange-800' },
+  { id: 'ecommerce', price: 2090, startingAt: false, accent: 'from-ink-700 to-ink-800' },
+  { id: 'platform', price: 4830, startingAt: true, accent: 'from-ink-700 to-ink-800' },
 ];
 
 /**
