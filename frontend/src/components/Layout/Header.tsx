@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { LogIn } from 'lucide-react';
 import { useI18n } from '@/contexts/I18nContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/Button';
@@ -33,6 +34,22 @@ const EXTERNAL_LINKS: NavItem[] = [
   { path: 'https://academy.alievsspace.com', key: 'academy', external: true },
 ];
 
+function LoginIcon({ label, className }: { label: string; className?: string }) {
+  return (
+    <Link
+      to="/login"
+      title={label}
+      aria-label={label}
+      className={cn(
+        'flex items-center justify-center rounded-full border border-border text-text transition-colors hover:bg-surface-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus',
+        className,
+      )}
+    >
+      <LogIn aria-hidden className="h-4 w-4" />
+    </Link>
+  );
+}
+
 export function Header() {
   const { t } = useI18n();
   const navigate = useNavigate();
@@ -50,7 +67,7 @@ export function Header() {
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     cn(
-      'relative whitespace-nowrap rounded-md px-2 py-1.5 text-[12px] font-medium transition-colors xl:px-2.5 xl:text-[13.5px]',
+      'relative whitespace-nowrap rounded-md px-2 py-1.5 text-[12px] lg:px-1.5 font-medium transition-colors xl:px-2.5 xl:text-[13.5px]',
       isActive ? 'text-primary' : 'text-text-muted hover:text-text',
     );
 
@@ -69,9 +86,10 @@ export function Header() {
         )}
       >
         <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-2 px-4 sm:px-6 lg:h-20 lg:gap-3 lg:px-8">
-          <Link to="/" className="flex min-w-0 shrink items-center gap-2" aria-label={t('nav.home', 'Home')}>
+          <Link to="/" className="flex min-w-0 shrink items-center gap-2 lg:shrink-0" aria-label={t('nav.home', 'Home')}>
             <img src={alievsspace} alt={t('ui.logo')} className="brand-mark w-10 sm:w-11 lg:w-14" />
-            <span className="min-w-0">
+            {/* Wordmark hidden on 1024–1279px, where the full nav and actions need the room. */}
+            <span className="min-w-0 lg:hidden xl:block">
               <span className="block font-display text-[15px] leading-none text-white sm:text-[18px] lg:text-[22px]">
                 ALIEVS
               </span>
@@ -82,7 +100,7 @@ export function Header() {
           </Link>
 
           <nav aria-label="Primary" className="hidden flex-1 justify-center lg:flex">
-            <ul className="flex items-center gap-0.5 xl:gap-1.5">
+            <ul className="flex items-center gap-0.5 xl:gap-1 2xl:gap-1.5">
               {NAV_LINKS.map((link) => (
                 <li key={link.path}>
                   <NavLink to={link.path} className={navLinkClass}>
@@ -96,7 +114,7 @@ export function Header() {
                     href={link.path}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 whitespace-nowrap rounded-md px-2 py-1.5 text-[12px] font-medium text-text-muted transition-colors hover:text-text xl:px-2.5 xl:text-[13.5px]"
+                    className="flex items-center gap-1 whitespace-nowrap rounded-md px-2 py-1.5 text-[12px] lg:px-1.5 font-medium text-text-muted transition-colors hover:text-text xl:px-2.5 xl:text-[13.5px]"
                   >
                     {t(`nav.${link.key}`)}
                     <svg aria-hidden className="h-2.5 w-2.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -110,8 +128,16 @@ export function Header() {
 
           <div className="hidden items-center gap-2 lg:flex">
             <ThemeToggle />
-            <CurrencySwitcher />
-            <LanguageSwitcher />
+            {/* Full switchers need ~90px more than the compact ones; below
+                1360px that space is what keeps the logo and nav from colliding. */}
+            <div className="flex items-center gap-2 min-[1360px]:hidden">
+              <CurrencySwitcher compact />
+              <LanguageSwitcher compact />
+            </div>
+            <div className="hidden items-center gap-2 min-[1360px]:flex">
+              <CurrencySwitcher />
+              <LanguageSwitcher />
+            </div>
             <Button
               size="sm"
               className="whitespace-nowrap bg-primary px-3 text-[12.5px] font-semibold text-on-primary shadow-[var(--shadow-glow-primary)] hover:bg-primary-hover xl:px-4 xl:text-[13.5px]"
@@ -119,15 +145,20 @@ export function Header() {
             >
               {t('nav.getQuote')}
             </Button>
-            {user && <ProfileMenu variant="lg" />}
+            {user ? (
+              <ProfileMenu variant="lg" />
+            ) : (
+              <LoginIcon label={t('nav.login', 'Login')} className="ml-1 h-9 w-9" />
+            )}
           </div>
 
-          {/* Phones: no burger — theme, currency and language only. Pages live
-              on the bottom tab bar. */}
+          {/* Phones: no burger — theme, currency, language and account only.
+              Pages live on the bottom tab bar. */}
           <div className="flex shrink-0 items-center gap-1.5 lg:hidden">
             <ThemeToggle />
             <CurrencySwitcher compact />
             <LanguageSwitcher compact />
+            {user ? <ProfileMenu /> : <LoginIcon label={t('nav.login', 'Login')} className="h-8 w-8" />}
           </div>
         </div>
       </header>
