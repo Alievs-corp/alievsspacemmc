@@ -70,7 +70,7 @@ const NAV: Array<{ key: string; label: string; superOnly?: boolean; items: NavIt
   {
     key: 'crm.nav.tools', label: 'Tools',
     items: [
-      { path: '/crm/ai', labelKey: 'crm.nav.ai', label: 'AI Assistant', icon: Sparkles, permissions: ['content.create'], soon: true },
+      { path: '/crm/ai', labelKey: 'crm.nav.ai', label: 'AI Assistant', icon: Sparkles, permissions: ['content.create', 'content.edit'] },
       { path: '/crm/notifications', labelKey: 'crm.nav.notifications', label: 'Notifications', icon: Bell, soon: true },
     ],
   },
