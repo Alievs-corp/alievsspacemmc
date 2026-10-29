@@ -3,6 +3,8 @@
  * the translations, keyed by the full path under `crm.` and nested when merged
  * in `@/lib/i18n`. Languages not listed fall back to English.
  */
+import { contentAz, contentRu } from './crmContent';
+
 const ru: Record<string, string> = {
   'access.grants': 'выдач доступа',
   'access.subtitle': 'Зарегистрированные пользователи не получают доступ к CRM, пока их не добавят здесь. Каждая строка — роль в компании или в одном из её проектов.',
@@ -562,4 +564,4 @@ function nest(flat: Record<string, string>): Record<string, unknown> {
   return { crm: out };
 }
 
-export const CRM: Record<string, Record<string, unknown>> = { ru: nest(ru), az: nest(az) };
+export const CRM: Record<string, Record<string, unknown>> = { ru: nest({ ...ru, ...contentRu }), az: nest({ ...az, ...contentAz }) };

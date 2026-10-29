@@ -2,10 +2,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import { ScrollText } from 'lucide-react';
 import { useI18n } from '@/contexts/I18nContext';
-import { crm, type Activity, type TaskStatus } from '@/lib/crm';
+import { crm, type Activity, type Platform, type TaskStatus } from '@/lib/crm';
 import { t as tr } from '@/lib/i18n';
 import { EmptyState, ErrorState, LoadingRows, PageHeader, RefreshButton, errorMessage, formatDate } from '@/components/admin/ui';
-import { Avatar, roleName, taskStatusLabel } from '@/components/crm/ui';
+import { Avatar, PLATFORM_META, roleName, taskStatusLabel } from '@/components/crm/ui';
 
 function parse(details: string): Record<string, unknown> | null {
   try {
@@ -14,6 +14,10 @@ function parse(details: string): Record<string, unknown> | null {
   } catch {
     return null;
   }
+}
+
+function platformName(p: string): string {
+  return PLATFORM_META[p as Platform]?.label ?? p;
 }
 
 /** One readable line for a CRM history entry. */
@@ -55,6 +59,29 @@ export function describeActivity(a: Activity): string {
     case 'role.created': return `${tr('crm.act.roleCreated', 'created role')} ${a.entityId}`;
     case 'role.updated': return `${tr('crm.act.roleUpdated', 'changed permissions of role')} ${roleName(a.entityId)}`;
     case 'role.deleted': return `${tr('crm.act.roleDeleted', 'deleted role')} ${a.entityId}`;
+    case 'project.approval_flow_updated': return tr('crm.act.flowUpdated', 'changed the approval chain');
+    case 'content.created': return `${tr('crm.act.contentCreated', 'created content')} “${d?.title ?? ''}”`;
+    case 'content.updated': return tr('crm.act.contentUpdated', 'edited content details');
+    case 'content.deleted': return `${tr('crm.act.contentDeleted', 'deleted content')} “${text}”`;
+    case 'content.platform_added': return `${tr('crm.act.platformAdded', 'added platform')} ${platformName(text)}`;
+    case 'content.platform_removed': return `${tr('crm.act.platformRemoved', 'removed platform')} ${platformName(text)}`;
+    case 'content.publication_edited': return `${tr('crm.act.publicationEdited', 'edited the post for')} ${platformName(text)}`;
+    case 'content.rescheduled': return `${tr('crm.act.rescheduled', 'moved the date for')} ${platformName(String(d?.platform ?? ''))}`;
+    case 'content.scheduled': return `${tr('crm.act.scheduled', 'scheduled the post for')} ${platformName(String(d?.platform ?? ''))}`;
+    case 'content.unscheduled': return `${tr('crm.act.unscheduled', 'unscheduled the post for')} ${platformName(text)}`;
+    case 'content.published': return `${tr('crm.act.published', 'marked as published on')} ${platformName(String(d?.platform ?? ''))}`;
+    case 'content.version_saved': return `${tr('crm.act.versionSaved', 'saved version')} v${d?.number ?? ''}`;
+    case 'content.version_restored': return `${tr('crm.act.versionRestored', 'restored version')} v${d?.number ?? ''}`;
+    case 'content.submitted': return tr('crm.act.submitted', 'sent content for approval');
+    case 'content.withdrawn': return tr('crm.act.withdrawn', 'withdrew content from review');
+    case 'content.step_approved': return `${tr('crm.act.stepApproved', 'approved step')} “${d?.step ?? ''}”`;
+    case 'content.approved': return tr('crm.act.approved', 'approved the content');
+    case 'content.changes_requested': return `${tr('crm.act.changesRequested', 'requested changes')}: ${d?.comment ?? ''}`;
+    case 'content.rejected': return `${tr('crm.act.rejected', 'rejected the content')}: ${d?.comment ?? ''}`;
+    case 'media.uploaded': return `${tr('crm.act.mediaUploaded', 'uploaded')} ${text}`;
+    case 'media.version_uploaded': return `${tr('crm.act.mediaVersion', 'uploaded a new version of')} ${d?.name ?? ''}`;
+    case 'media.updated': return tr('crm.act.mediaUpdated', 'renamed or moved a file');
+    case 'media.deleted': return `${tr('crm.act.mediaDeleted', 'deleted file')} ${text}`;
     default: return a.action;
   }
 }

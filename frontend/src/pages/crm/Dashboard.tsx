@@ -156,10 +156,11 @@ export function CrmDashboard({ global = false }: { global?: boolean }) {
             </section>
           </div>
 
+          <ContentOverview stats={data.content} />
+
           {/* Blocks that depend on later stages: shown as empty, never with made-up numbers. */}
-          <section className="grid gap-3 md:grid-cols-3">
+          <section className="grid gap-3 md:grid-cols-2">
             {[
-              { icon: Clapperboard, title: t('crm.dashboard.content', 'Content overview'), body: t('crm.dashboard.contentSoon', 'Publications, drafts and approvals appear here once Content Studio and the calendar are enabled.') },
               { icon: BarChart3, title: t('crm.dashboard.analytics', 'Analytics overview'), body: t('crm.dashboard.analyticsSoon', 'Reach, views and engagement appear once social accounts are connected through their official APIs.') },
               { icon: Bell, title: t('crm.nav.notifications', 'Notifications'), body: t('crm.dashboard.notificationsSoon', 'Task, approval and publishing notifications are part of a later stage.') },
             ].map((b) => (
@@ -172,5 +173,41 @@ export function CrmDashboard({ global = false }: { global?: boolean }) {
         </>
       )}
     </div>
+  );
+}
+
+function ContentOverview({ stats }: { stats: Dashboard['content'] }) {
+  const { t } = useI18n();
+  const { can } = useCrm();
+  const drafts = (stats.byStatus.idea ?? 0) + (stats.byStatus.in_progress ?? 0) + (stats.byStatus.changes_requested ?? 0) + (stats.byStatus.rejected ?? 0);
+  const rows: Array<{ label: string; value: number; to: string; tone?: string }> = [
+    { label: t('crm.dashboard.postsToday', 'Planned today'), value: stats.today, to: '/crm/calendar' },
+    { label: t('crm.dashboard.postsWeek', 'Next 7 days'), value: stats.thisWeek, to: '/crm/calendar' },
+    { label: t('crm.dashboard.drafts', 'In work'), value: drafts, to: '/crm/studio' },
+    { label: t('crm.cstatus.ready_for_review', 'Ready for Review'), value: stats.byStatus.ready_for_review ?? 0, to: '/crm/approvals' },
+    { label: t('crm.cstatus.approved', 'Approved'), value: stats.byStatus.approved ?? 0, to: '/crm/studio' },
+    { label: t('crm.cstatus.scheduled', 'Scheduled'), value: stats.scheduled, to: '/crm/calendar' },
+    { label: t('crm.dashboard.published30', 'Published, 30 days'), value: stats.publishedLast30Days, to: '/crm/calendar' },
+    { label: t('crm.cstatus.failed', 'Failed'), value: stats.failed, to: '/crm/calendar', tone: stats.failed ? 'text-danger' : undefined },
+  ];
+  return (
+    <section className="card p-0">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border px-4 py-3">
+        <h2 className="flex items-center gap-2 font-display font-semibold text-text"><Clapperboard className="h-4 w-4 text-text-subtle" /> {t('crm.dashboard.content', 'Content overview')}</h2>
+        {can('content.approve') && stats.pendingMyApproval > 0 && (
+          <Link to="/crm/approvals" className="inline-flex items-center gap-1 rounded-full bg-warning/15 px-2.5 py-1 text-xs font-medium text-warning">
+            {stats.pendingMyApproval} {t('crm.dashboard.waitingForYou', 'waiting for your approval')} <ArrowRight className="h-3 w-3" />
+          </Link>
+        )}
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 [&>*]:border-b [&>*]:border-border">
+        {rows.map((r) => (
+          <Link key={r.label} to={r.to} className="px-4 py-3 hover:bg-surface-2">
+            <p className="text-xs text-text-muted">{r.label}</p>
+            <p className={cn('font-display text-xl font-bold tabular-nums text-text', r.tone)}>{r.value}</p>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 }

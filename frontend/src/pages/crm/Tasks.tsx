@@ -281,7 +281,7 @@ function TaskCalendar({ tasks, onOpen, onReschedule }: { tasks: Task[]; onOpen: 
       <div className="flex items-center gap-2">
         <button onClick={() => setMonth(new Date(month.getFullYear(), month.getMonth() - 1, 1))} className={btn.secondary} aria-label={t('admin.prev', 'Prev')}><ChevronLeft className="h-4 w-4" /></button>
         <button onClick={() => setMonth(new Date(month.getFullYear(), month.getMonth() + 1, 1))} className={btn.secondary} aria-label={t('admin.next', 'Next')}><ChevronRight className="h-4 w-4" /></button>
-        <h3 className="font-display text-lg font-semibold capitalize text-text">{month.toLocaleDateString(locale, { month: 'long', year: 'numeric' })}</h3>
+        <h3 className="font-display text-lg font-semibold text-text first-letter:uppercase">{month.toLocaleDateString(locale, { month: 'long', year: 'numeric' })}</h3>
         <button onClick={() => { const d = new Date(); setMonth(new Date(d.getFullYear(), d.getMonth(), 1)); }} className={cn(btn.secondary, 'ml-auto')}>{t('crm.today', 'Today')}</button>
       </div>
       <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
