@@ -11,6 +11,7 @@ import {
   House,
   LayoutGrid,
   LogIn,
+  UserCircle,
   LogOut,
   Mail,
   Package,
@@ -205,6 +206,19 @@ export function MobileTabBar() {
                 >
                   {t('nav.getQuote')}
                 </Button>
+                {user && (
+                  <Button
+                    variant="outline"
+                    className="w-full py-3.5 text-[15px]"
+                    onClick={() => {
+                      closeSheet();
+                      navigate('/profile');
+                    }}
+                  >
+                    <UserCircle aria-hidden className="h-4 w-4" />
+                    {t('nav.profile', 'Profile')}
+                  </Button>
+                )}
                 {user ? (
                   <Button
                     variant="outline"

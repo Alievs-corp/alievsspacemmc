@@ -50,6 +50,13 @@ const AdminInquiries = lazy(() => import('./pages/admin/Inquiry').then((m) => ({
 const AdminSettings = lazy(() => import('./pages/admin/Settings').then((m) => ({ default: m.AdminSettings })));
 const AdminHome = lazy(() => import('./pages/admin/Home').then((m) => ({ default: m.AdminHome })));
 const AdminAbout = lazy(() => import('./pages/admin/About').then((m) => ({ default: m.AdminAbout })));
+const AdminUsers = lazy(() => import('./pages/admin/Users').then((m) => ({ default: m.AdminUsers })));
+const AdminAdmins = lazy(() => import('./pages/admin/Users').then((m) => ({ default: m.AdminAdmins })));
+const AdminApplications = lazy(() => import('./pages/admin/Applications').then((m) => ({ default: m.AdminApplications })));
+const AdminIntegrations = lazy(() => import('./pages/admin/Integrations').then((m) => ({ default: m.AdminIntegrations })));
+const AdminSystem = lazy(() => import('./pages/admin/System').then((m) => ({ default: m.AdminSystem })));
+const AdminAuditLog = lazy(() => import('./pages/admin/AuditLog').then((m) => ({ default: m.AdminAuditLog })));
+const Profile = lazy(() => import('./pages/Profile'));
 
 
 function App() {
@@ -72,14 +79,21 @@ function App() {
                           <AdminLayout>
                           <Routes>
                             <Route path="/" element={<AdminDashboard />} />
-                            <Route path="/services" element={<AdminServices />} />
-                            <Route path="/projects" element={<AdminProjects />} />
-                            <Route path="/blog" element={<AdminBlog />} />
-                            <Route path="/careers" element={<AdminCareers />} />
-                            <Route path="/inquiries" element={<AdminInquiries />} />
-                            <Route path="/settings" element={<AdminSettings />} />
-                            <Route path="/home" element={<AdminHome />} />
-                            <Route path="/about" element={<AdminAbout />} />
+                            <Route path="/services" element={<ProtectedRoute permissions={['content']}><AdminServices /></ProtectedRoute>} />
+                            <Route path="/projects" element={<ProtectedRoute permissions={['content']}><AdminProjects /></ProtectedRoute>} />
+                            <Route path="/blog" element={<ProtectedRoute permissions={['content']}><AdminBlog /></ProtectedRoute>} />
+                            <Route path="/careers" element={<ProtectedRoute permissions={['content']}><AdminCareers /></ProtectedRoute>} />
+                            <Route path="/settings" element={<ProtectedRoute permissions={['content']}><AdminSettings /></ProtectedRoute>} />
+                            <Route path="/home" element={<ProtectedRoute permissions={['content']}><AdminHome /></ProtectedRoute>} />
+                            <Route path="/about" element={<ProtectedRoute permissions={['content']}><AdminAbout /></ProtectedRoute>} />
+                            <Route path="/inquiries" element={<ProtectedRoute permissions={['inquiries']}><AdminInquiries /></ProtectedRoute>} />
+                            <Route path="/applications" element={<ProtectedRoute permissions={['applications']}><AdminApplications /></ProtectedRoute>} />
+                            <Route path="/users" element={<ProtectedRoute permissions={['users.view', 'users.manage']}><AdminUsers /></ProtectedRoute>} />
+                            <Route path="/admins" element={<ProtectedRoute requireSuperAdmin><AdminAdmins /></ProtectedRoute>} />
+                            <Route path="/api" element={<ProtectedRoute requireSuperAdmin><AdminIntegrations /></ProtectedRoute>} />
+                            <Route path="/system" element={<ProtectedRoute requireSuperAdmin><AdminSystem /></ProtectedRoute>} />
+                            <Route path="/audit" element={<ProtectedRoute requireSuperAdmin><AdminAuditLog /></ProtectedRoute>} />
+                            <Route path="*" element={<Navigate to="/admin" replace />} />
                           </Routes>
                           </AdminLayout>
                         </Suspense>
@@ -95,6 +109,7 @@ function App() {
                           <Route path="/" element={<Home />} />
                           <Route path="/login" element={<Login />} />
                           <Route path="/register" element={<Register />} />
+                          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                           <Route path="/about" element={<About />} />
                           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                           <Route path="/terms-of-service" element={<TermsOfService />} />

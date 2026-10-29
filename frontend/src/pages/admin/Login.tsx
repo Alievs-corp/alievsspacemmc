@@ -1,13 +1,15 @@
-import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { Eye, EyeOff, AlertCircle, Loader2 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useI18n } from '@/contexts/I18nContext';
+import { ApiError, isAdminRole } from '@/lib/api';
 import logoMark from '../../assets/images/logo-dark.png';
 
 export function Login() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const location = useLocation();
+  const { login, user } = useAuth();
   const { t } = useI18n();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,15 +17,37 @@ export function Login() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  // Where ProtectedRoute bounced the visitor from, if anywhere.
+  const from = (location.state as { from?: { pathname?: string } } | null)?.from?.pathname;
+
+  // An already signed-in visitor doesn't need this page. Skipped right after
+  // submitting, where handleSubmit picks the destination itself.
+  const submitted = useRef(false);
+  useEffect(() => {
+    if (user && !submitted.current) navigate(isAdminRole(user.role) ? '/admin' : '/profile', { replace: true });
+  }, [user, navigate]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
+    submitted.current = true;
     try {
-      const user = await login({ email, password });
-      navigate(user?.role === 'admin' ? '/admin' : '/');
+      const signedIn = await login({ email, password });
+      const home = isAdminRole(signedIn?.role) ? '/admin' : '/profile';
+      const target = from && (!from.startsWith('/admin') || isAdminRole(signedIn?.role)) ? from : home;
+      navigate(target, { replace: true });
     } catch (err) {
-      setError(err instanceof Error ? err.message : t('auth.login.error', 'Login failed'));
+      if (err instanceof ApiError && err.code === 'account_blocked') {
+        setError(t('account.errors.blocked', 'This account has been blocked. Contact support if you think this is a mistake.'));
+      } else if (err instanceof ApiError && err.status === 429) {
+        setError(t('account.errors.tooMany', 'Too many attempts. Please wait a few minutes and try again.'));
+      } else if (err instanceof ApiError && err.status === 401) {
+        setError(t('account.errors.invalidCredentials', 'Incorrect email or password.'));
+      } else {
+        setError(err instanceof Error ? err.message : t('auth.login.error', 'Login failed'));
+      }
+      submitted.current = false;
     } finally {
       setLoading(false);
     }
@@ -40,9 +64,6 @@ export function Login() {
           <h1 className="font-display text-4xl font-bold tracking-tight">
             ALIEVS <span className="text-primary">Space</span>
           </h1>
-          <p className="mt-3 font-mono text-xs uppercase tracking-[0.2em] text-text-subtle">
-            {t('admin.panel', 'Admin Panel')}
-          </p>
           <p className="mt-6 leading-relaxed text-text-muted">{t('auth.login.brandTagline')}</p>
         </div>
       </div>

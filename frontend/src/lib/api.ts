@@ -101,13 +101,123 @@ export interface Inquiry {
   message?: string;
 }
 
+export type Role = 'user' | 'admin' | 'super_admin';
+
+/** Admin areas an ADMIN can be granted; SUPER_ADMIN implicitly has all. */
+export const PERMISSIONS = ['content', 'inquiries', 'applications', 'academy', 'users.view', 'users.manage'] as const;
+export type Permission = (typeof PERMISSIONS)[number];
+
 export interface User {
   id: string;
   email: string;
   name: string;
   phone?: string;
   company?: string;
-  role: 'admin' | 'user';
+  role: Role;
+  permissions: Permission[];
+  blocked: boolean;
+  lastLoginAt?: string;
+  createdAt: string;
+}
+
+export function isAdminRole(role?: Role): boolean {
+  return role === 'admin' || role === 'super_admin';
+}
+
+export function hasPermission(user: User | null | undefined, p: Permission): boolean {
+  if (!user || user.blocked) return false;
+  if (user.role === 'super_admin') return true;
+  return user.role === 'admin' && (user.permissions || []).includes(p);
+}
+
+export interface Paginated<T> {
+  data: T[];
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+}
+
+export interface AuditLog {
+  id: string;
+  actorId: string;
+  actorEmail: string;
+  action: string;
+  targetType: string;
+  targetId: string;
+  details: string;
+  ip: string;
+  status: number;
+  createdAt: string;
+}
+
+export interface SystemSettings {
+  registrationEnabled: boolean;
+  inquiriesEnabled: boolean;
+  jobApplicationsEnabled: boolean;
+  academyRegistrationEnabled: boolean;
+  maintenanceMessage: string;
+}
+
+export interface ServiceStatus {
+  name: string;
+  status: 'ok' | 'down' | 'disabled' | 'unknown' | 'warning';
+  latencyMs: number;
+  message?: string;
+}
+
+export interface SystemOverview {
+  users?: {
+    total: number;
+    byRole: Record<Role, number>;
+    blocked: number;
+    newLast7Days: number;
+    newLast30Days: number;
+    activeLast7Days: number;
+  };
+  counts: { inquiries?: number; applications?: number; academyRegistrations?: number };
+  services: ServiceStatus[];
+  requests: { total: number; failed: number; uptimeSeconds: number };
+  modules: SystemSettings;
+  recentActivity?: AuditLog[];
+}
+
+export interface IntegrationSetting {
+  key: string;
+  value: string;
+  secret: boolean;
+  isSet: boolean;
+}
+
+export interface Integration {
+  id: string;
+  name: string;
+  description: string;
+  status: ServiceStatus['status'];
+  message?: string;
+  latencyMs: number;
+  settings: IntegrationSetting[];
+}
+
+export interface ApiErrorEntry {
+  time: string;
+  method: string;
+  path: string;
+  status: number;
+  latencyMs: number;
+  error?: string;
+}
+
+export interface JobApplication {
+  id: string;
+  careerId: string;
+  name: string;
+  email: string;
+  phone: string;
+  coverLetter: string;
+  resumeUrl: string;
+  status: string;
+  createdAt: string;
 }
 
 export interface LoginResponse {
@@ -148,6 +258,17 @@ function getAuthToken(): string | null {
   return localStorage.getItem('auth_token');
 }
 
+/** Thrown for non-2xx responses; `code` is the API's machine-readable reason. */
+export class ApiError extends Error {
+  status: number;
+  code?: string;
+  constructor(message: string, status: number, code?: string) {
+    super(message);
+    this.status = status;
+    this.code = code;
+  }
+}
+
 async function fetchAPI<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const url = `${API_BASE_URL}${endpoint}`;
   const token = getAuthToken();
@@ -168,10 +289,19 @@ async function fetchAPI<T>(endpoint: string, options?: RequestInit): Promise<T> 
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({ error: response.statusText }));
-    throw new Error(error.error || `API error: ${response.statusText}`);
+    throw new ApiError(error.error || `API error: ${response.statusText}`, response.status, error.code);
   }
 
   return response.json();
+}
+
+function qs(params: Record<string, string | number | undefined>): string {
+  const q = new URLSearchParams();
+  for (const [k, v] of Object.entries(params)) {
+    if (v !== undefined && v !== '') q.set(k, String(v));
+  }
+  const s = q.toString();
+  return s ? `?${s}` : '';
 }
 
 /**
@@ -231,6 +361,8 @@ export const api = {
   getEmployee: (id: string, locale: Locale = 'en'): Promise<Employee> => 
     fetchAPI<Employee>(`/employees/${id}?locale=${locale}`),
 
+  getSystemStatus: (): Promise<SystemSettings> => fetchAPI<SystemSettings>('/system/status'),
+
   createInquiry: (inquiry: Inquiry): Promise<any> => 
     fetchAPI('/inquiries', {
       method: 'POST',
@@ -267,11 +399,14 @@ export const api = {
         body: JSON.stringify(data),
       }),
 
-    changePassword: (data: PasswordChangeRequest): Promise<void> => 
-      fetchAPI<void>('/user/password', {
+    /** Signs out every other session; the response carries a fresh token for this one. */
+    changePassword: (data: PasswordChangeRequest): Promise<{ message: string; token: string }> =>
+      fetchAPI('/user/password', {
         method: 'PUT',
         body: JSON.stringify(data),
       }),
+
+    logoutEverywhere: (): Promise<void> => fetchAPI<void>('/user/logout-all', { method: 'POST' }),
   },
 
   admin: {
@@ -405,10 +540,67 @@ export const api = {
 
     // User Management
     getUsers: (): Promise<User[]> =>
-      fetchList<User>('/admin/users'),
+      fetchList<User>('/admin/users?limit=100'),
+
+    searchUsers: (params: { q?: string; role?: Role | 'staff' | ''; status?: 'active' | 'blocked' | ''; page?: number; limit?: number }): Promise<Paginated<User>> =>
+      fetchAPI<Paginated<User>>(`/admin/users${qs(params)}`),
+
+    getUser: (id: string): Promise<User> => fetchAPI<User>(`/admin/users/${encodeURIComponent(id)}`),
+
+    setUserRole: (id: string, role: Role, permissions: Permission[] = []): Promise<User> =>
+      fetchAPI<User>(`/admin/users/${encodeURIComponent(id)}/role`, {
+        method: 'PUT',
+        body: JSON.stringify({ role, permissions }),
+      }),
+
+    setUserPermissions: (id: string, permissions: Permission[]): Promise<User> =>
+      fetchAPI<User>(`/admin/users/${encodeURIComponent(id)}/permissions`, {
+        method: 'PUT',
+        body: JSON.stringify({ permissions }),
+      }),
+
+    setUserBlocked: (id: string, blocked: boolean): Promise<User> =>
+      fetchAPI<User>(`/admin/users/${encodeURIComponent(id)}/block`, {
+        method: 'PUT',
+        body: JSON.stringify({ blocked }),
+      }),
+
+    revokeUserSessions: (id: string): Promise<void> =>
+      fetchAPI<void>(`/admin/users/${encodeURIComponent(id)}/revoke-sessions`, { method: 'POST' }),
+
+    // System
+    getOverview: (): Promise<SystemOverview> => fetchAPI<SystemOverview>('/admin/system/overview'),
+
+    getIntegrations: (): Promise<{ integrations: Integration[]; runtime: { goVersion: string; port: string } }> =>
+      fetchAPI('/admin/system/integrations'),
+
+    getRecentErrors: (): Promise<ApiErrorEntry[]> => fetchList<ApiErrorEntry>('/admin/system/errors'),
+
+    getAuditLogs: (params: { q?: string; actorId?: string; page?: number; limit?: number }): Promise<Paginated<AuditLog>> =>
+      fetchAPI<Paginated<AuditLog>>(`/admin/audit-logs${qs(params)}`),
+
+    getSystemSettings: (): Promise<SystemSettings> => fetchAPI<SystemSettings>('/admin/system/settings'),
+
+    updateSystemSettings: (settings: SystemSettings): Promise<SystemSettings> =>
+      fetchAPI<SystemSettings>('/admin/system/settings', {
+        method: 'PUT',
+        body: JSON.stringify(settings),
+      }),
+
+    // Job applications
+    getApplications: (): Promise<JobApplication[]> => fetchList<JobApplication>('/admin/applications?limit=100'),
+
+    updateApplicationStatus: (id: string, status: string): Promise<void> =>
+      fetchAPI<void>(`/admin/applications/${encodeURIComponent(id)}/status`, {
+        method: 'PUT',
+        body: JSON.stringify({ status }),
+      }),
+
+    deleteApplication: (id: string): Promise<void> =>
+      fetchAPI<void>(`/admin/applications/${encodeURIComponent(id)}`, { method: 'DELETE' }),
 
     deleteUser: (email: string): Promise<void> => 
-      fetchAPI<void>(`/admin/users/${email}`, { 
+      fetchAPI<void>(`/admin/users/${encodeURIComponent(email)}`, { 
         method: 'DELETE' 
       }),
 
