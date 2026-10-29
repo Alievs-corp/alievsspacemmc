@@ -3,6 +3,8 @@ import en from '@/locales/en';
 import ru from '@/locales/ru';
 import az from '@/locales/az';
 import { EXTRA } from '@/locales/extra/index';
+import { PANEL } from '@/locales/panel';
+import { CRM } from '@/locales/crm';
 
 export type Locale =
   | 'en'
@@ -145,7 +147,7 @@ const BASE: Partial<Record<Locale, Record<string, any>>> = { en, ru, az };
 const translations = SUPPORTED_LOCALES.reduce((acc, { code }) => {
   // Locales without a full base bundle inherit English and override what they translate.
   const base = BASE[code] || (en as Record<string, any>);
-  acc[code] = merge(base, EXTRA[code] || {});
+  acc[code] = merge(merge(merge(base, EXTRA[code] || {}), (PANEL[code] as Record<string, any>) || {}), (CRM[code] as Record<string, any>) || {});
   return acc;
 }, {} as Record<Locale, Record<string, any>>);
 

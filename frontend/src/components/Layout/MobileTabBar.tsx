@@ -11,6 +11,7 @@ import {
   House,
   LayoutGrid,
   LogIn,
+  UserCircle,
   LogOut,
   Mail,
   Package,
@@ -18,6 +19,7 @@ import {
   Shield,
   Users,
   Workflow,
+  SquareKanban,
   X,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
@@ -47,6 +49,7 @@ const MORE_PAGES: TabItem[] = [
   { path: '/industries', key: 'industries', Icon: Building },
   { path: '/about', key: 'about', Icon: Users },
   { path: '/faq', key: 'faq', Icon: CircleHelp },
+  { path: '/crm', key: 'crm', Icon: SquareKanban },
 ];
 
 const MORE_EXTERNAL: TabItem[] = [
@@ -205,6 +208,19 @@ export function MobileTabBar() {
                 >
                   {t('nav.getQuote')}
                 </Button>
+                {user && (
+                  <Button
+                    variant="outline"
+                    className="w-full py-3.5 text-[15px]"
+                    onClick={() => {
+                      closeSheet();
+                      navigate('/profile');
+                    }}
+                  >
+                    <UserCircle aria-hidden className="h-4 w-4" />
+                    {t('nav.profile', 'Profile')}
+                  </Button>
+                )}
                 {user ? (
                   <Button
                     variant="outline"

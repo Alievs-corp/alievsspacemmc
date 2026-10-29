@@ -58,6 +58,17 @@ Environment variables:
 > The backend API (`alievsspacemmc-api`) and academy app (`alievsspace-academy`)
 > live in their own repositories.
 
+## Accounts, roles and the admin panel
+
+- `/register`, `/login` and `/profile` are open to everyone; every new account is a **USER**.
+- `/admin/*` is the admin panel (own layout, separate bundle). **ADMIN** sees only the sections a
+  super admin granted (content, inquiries, applications, academy, users); **SUPER ADMIN** also gets
+  Administrators, API & integrations, System settings and the Audit log.
+- The browser only hides what a role can't use — every permission is enforced by the API
+  (`alievsspacemmc-api`), which also writes the audit log.
+- The first super admin is granted on the API server with
+  `alievsspacemmc-admin promote-super-admin --email <email>` (see the API README).
+
 ## Contributing
 
 Contributions follow a feature-branch + Pull Request workflow with

@@ -20,13 +20,9 @@ export function ProfileMenu({ variant = 'md' }: ProfileMenuProps) {
     setOpen((prev) => !prev);
   };
 
-  const handleGoToDashboard = () => {
+  const go = (path: string) => {
     setOpen(false);
-    if (isAdmin) {
-      navigate('/admin');
-    } else {
-      navigate('/');
-    }
+    navigate(path);
   };
 
   const handleLogout = () => {
@@ -68,7 +64,7 @@ export function ProfileMenu({ variant = 'md' }: ProfileMenuProps) {
         aria-label={t('nav.profile', 'Profile')}
       >
         <svg
-          className={`${iconSizeClasses} text-white`}
+          className={`${iconSizeClasses} text-text`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -83,16 +79,28 @@ export function ProfileMenu({ variant = 'md' }: ProfileMenuProps) {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-40 rounded-md bg-surface-2 border border-surface-3 shadow-lg z-50">
+        <div className="absolute right-0 mt-2 w-56 rounded-md bg-surface-2 border border-surface-3 shadow-lg z-50">
+          <div className="px-3 py-2">
+            <p className="truncate text-sm font-medium text-text">{user.name || user.email}</p>
+            <p className="truncate text-xs text-text-subtle">{user.email}</p>
+          </div>
+          <div className="h-px bg-surface-3" />
           <button
             type="button"
-            onClick={handleGoToDashboard}
-            className="w-full px-3 py-2 text-left text-sm font-inter text-white hover:bg-surface-3 cursor-pointer"
+            onClick={() => go('/profile')}
+            className="w-full px-3 py-2 text-left text-sm font-inter text-text hover:bg-surface-3 cursor-pointer"
           >
-            {isAdmin
-              ? t('nav.adminPanel', 'Admin panel')
-              : t('nav.profile', 'Profile')}
+            {t('nav.profile', 'Profile')}
           </button>
+          {isAdmin && (
+            <button
+              type="button"
+              onClick={() => go('/admin')}
+              className="w-full px-3 py-2 text-left text-sm font-inter text-text hover:bg-surface-3 cursor-pointer"
+            >
+              {t('nav.adminPanel', 'Admin panel')}
+            </button>
+          )}
           <div className="h-px bg-surface-3" />
           <button
             type="button"
