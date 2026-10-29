@@ -12,6 +12,8 @@ export const btn = {
     'inline-flex items-center justify-center gap-2 rounded-md bg-primary px-3.5 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-bg',
   secondary:
     'inline-flex items-center justify-center gap-2 rounded-md border border-border px-3.5 py-2 text-sm text-text-muted transition-colors hover:bg-surface-3 hover:text-text disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus',
+  ghost:
+    'inline-flex items-center justify-center gap-2 rounded-md px-2.5 py-2 text-sm text-text-muted transition-colors hover:bg-surface-3 hover:text-text disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus',
   danger:
     'inline-flex items-center justify-center gap-2 rounded-md border border-danger/40 px-3.5 py-2 text-sm text-danger transition-colors hover:bg-danger/10 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus',
 };

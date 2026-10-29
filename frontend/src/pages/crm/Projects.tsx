@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { FolderKanban, Plus, Pencil, Trash2, ArrowLeft, CalendarRange, ListChecks, Users, ScrollText, LayoutGrid } from 'lucide-react';
+import { FolderKanban, Plus, Pencil, Trash2, ArrowLeft, CalendarRange, ListChecks, Users, ScrollText, LayoutGrid, Clapperboard, Images } from 'lucide-react';
 import { useI18n } from '@/contexts/I18nContext';
 import { useCrm } from '@/contexts/CrmContext';
 import { crm, PLATFORMS, PROJECT_STATUSES, scopeCan, type Company, type Member, type Platform, type Project, type ProjectInput } from '@/lib/crm';
@@ -12,6 +12,9 @@ import { useLoad } from '@/components/crm/useLoad';
 import { TaskBoard } from './Tasks';
 import { TeamList } from './Team';
 import { ActivityFeed } from './Activity';
+import { ContentList } from './Studio';
+import { MediaLibrary } from './Media';
+import { ApprovalFlowCard } from './Approvals';
 
 export function ProjectForm({ project, companyId, open, onClose, onSaved }: {
   project: Project | null; companyId?: string; open: boolean; onClose: () => void; onSaved: (p: Project) => void;
@@ -205,7 +208,7 @@ export function CrmProjects() {
   );
 }
 
-type Tab = 'overview' | 'tasks' | 'team' | 'activity';
+type Tab = 'overview' | 'content' | 'media' | 'tasks' | 'team' | 'activity';
 
 export function CrmProjectWorkspace() {
   const { id = '' } = useParams();
@@ -240,6 +243,8 @@ export function CrmProjectWorkspace() {
 
   const tabs: Array<{ value: Tab; label: string; icon: React.ReactNode }> = [
     { value: 'overview', label: t('crm.tabs.overview', 'Overview'), icon: <LayoutGrid className="h-4 w-4" /> },
+    ...(scopeCan(project.scope, 'content.view') ? [{ value: 'content' as Tab, label: t('crm.tabs.content', 'Content'), icon: <Clapperboard className="h-4 w-4" /> }] : []),
+    ...(scopeCan(project.scope, 'media.view') ? [{ value: 'media' as Tab, label: t('crm.tabs.media', 'Media'), icon: <Images className="h-4 w-4" /> }] : []),
     { value: 'tasks', label: t('crm.nav.tasks', 'Tasks'), icon: <ListChecks className="h-4 w-4" /> },
     { value: 'team', label: t('crm.nav.team', 'Team'), icon: <Users className="h-4 w-4" /> },
     { value: 'activity', label: t('crm.tabs.history', 'History'), icon: <ScrollText className="h-4 w-4" /> },
@@ -291,9 +296,12 @@ export function CrmProjectWorkspace() {
                 {project.scope.platforms && project.scope.platforms.length > 0 && <> · {project.scope.platforms.map((p) => PLATFORM_META[p]?.label).join(', ')}</>}</p>
             </div>
           </section>
-          <div className="lg:col-span-3"><ActivityFeed projectId={project.id} compact /></div>
+          <div className="lg:col-span-1"><ApprovalFlowCard project={project} /></div>
+          <div className="lg:col-span-2"><ActivityFeed projectId={project.id} compact /></div>
         </div>
       )}
+      {tab === 'content' && <ContentList projectId={project.id} />}
+      {tab === 'media' && <MediaLibrary projectId={project.id} />}
       {tab === 'tasks' && <TaskBoard projectId={project.id} />}
       {tab === 'team' && <TeamList projectId={project.id} companyId={project.companyId} />}
       {tab === 'activity' && <ActivityFeed projectId={project.id} />}

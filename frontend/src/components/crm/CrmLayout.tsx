@@ -37,9 +37,9 @@ const NAV: Array<{ key: string; label: string; superOnly?: boolean; items: NavIt
       { path: '/crm', labelKey: 'crm.nav.dashboard', label: 'Dashboard', icon: LayoutDashboard, exact: true },
       { path: '/crm/companies', labelKey: 'crm.nav.companies', label: 'Companies', adminLabelKey: 'crm.nav.allCompanies', adminLabel: 'All companies', icon: Building2 },
       { path: '/crm/projects', labelKey: 'crm.nav.projects', label: 'Projects', adminLabelKey: 'crm.nav.allProjects', adminLabel: 'All projects', icon: FolderKanban },
-      { path: '/crm/calendar', labelKey: 'crm.nav.calendar', label: 'Content Calendar', icon: CalendarDays, permissions: ['calendar.view'], soon: true },
-      { path: '/crm/studio', labelKey: 'crm.nav.studio', label: 'Content Studio', icon: Clapperboard, permissions: ['content.create', 'content.edit'], soon: true },
-      { path: '/crm/media', labelKey: 'crm.nav.media', label: 'Media Library', icon: Images, permissions: ['media.view'], soon: true },
+      { path: '/crm/calendar', labelKey: 'crm.nav.calendar', label: 'Content Calendar', icon: CalendarDays, permissions: ['calendar.view'] },
+      { path: '/crm/studio', labelKey: 'crm.nav.studio', label: 'Content Studio', icon: Clapperboard, permissions: ['content.view', 'content.create', 'content.edit'] },
+      { path: '/crm/media', labelKey: 'crm.nav.media', label: 'Media Library', icon: Images, permissions: ['media.view'] },
     ],
   },
   {
@@ -56,7 +56,7 @@ const NAV: Array<{ key: string; label: string; superOnly?: boolean; items: NavIt
     items: [
       { path: '/crm/tasks', labelKey: 'crm.nav.tasks', label: 'Tasks', icon: ListChecks },
       { path: '/crm/team', labelKey: 'crm.nav.team', label: 'Team', adminLabelKey: 'crm.nav.allEmployees', adminLabel: 'All employees', icon: Users, permissions: ['team.view', 'team.manage'] },
-      { path: '/crm/approvals', labelKey: 'crm.nav.approvals', label: 'Approvals', icon: CheckCheck, permissions: ['content.approve'], soon: true },
+      { path: '/crm/approvals', labelKey: 'crm.nav.approvals', label: 'Approvals', icon: CheckCheck, permissions: ['content.approve'] },
       { path: '/crm/inbox', labelKey: 'crm.nav.inbox', label: 'Social Inbox', icon: Inbox, permissions: ['inbox.view'], soon: true },
     ],
   },

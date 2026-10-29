@@ -72,17 +72,18 @@ const CrmTeam = lazy(() => import('./pages/crm/Team').then((m) => ({ default: m.
 const CrmAccess = lazy(() => import('./pages/crm/Team').then((m) => ({ default: m.CrmAccess })));
 const CrmRoles = lazy(() => import('./pages/crm/Roles').then((m) => ({ default: m.CrmRoles })));
 const CrmActivity = lazy(() => import('./pages/crm/Activity').then((m) => ({ default: m.CrmActivity })));
+const CrmStudio = lazy(() => import('./pages/crm/Studio').then((m) => ({ default: m.CrmStudio })));
+const CrmContentEditor = lazy(() => import('./pages/crm/Studio').then((m) => ({ default: m.CrmContentEditor })));
+const CrmMedia = lazy(() => import('./pages/crm/Media').then((m) => ({ default: m.CrmMedia })));
+const CrmCalendar = lazy(() => import('./pages/crm/Calendar').then((m) => ({ default: m.CrmCalendar })));
+const CrmApprovals = lazy(() => import('./pages/crm/Approvals').then((m) => ({ default: m.CrmApprovals })));
 
 /** Modules of later CRM stages: routed so links work, rendered as "coming". */
 const CRM_SOON: Array<[string, string, string]> = [
-  ['calendar', 'crm.nav.calendar', 'Content Calendar'],
-  ['studio', 'crm.nav.studio', 'Content Studio'],
-  ['media', 'crm.nav.media', 'Media Library'],
   ['instagram', 'crm.nav.instagram', 'Instagram'],
   ['tiktok', 'crm.nav.tiktok', 'TikTok'],
   ['youtube', 'crm.nav.youtube', 'YouTube'],
   ['linkedin', 'crm.nav.linkedin', 'LinkedIn'],
-  ['approvals', 'crm.nav.approvals', 'Approvals'],
   ['inbox', 'crm.nav.inbox', 'Social Inbox'],
   ['analytics', 'crm.nav.analyticsOverview', 'Analytics'],
   ['reports', 'crm.nav.reports', 'Reports'],
@@ -159,6 +160,11 @@ function App() {
                                 <Route path="/access" element={<SuperOnly><CrmAccess /></SuperOnly>} />
                                 <Route path="/roles" element={<SuperOnly><CrmRoles /></SuperOnly>} />
                                 <Route path="/activity" element={<CrmActivity />} />
+                                <Route path="/studio" element={<CrmStudio />} />
+                                <Route path="/studio/:id" element={<CrmContentEditor />} />
+                                <Route path="/media" element={<CrmMedia />} />
+                                <Route path="/calendar" element={<CrmCalendar />} />
+                                <Route path="/approvals" element={<CrmApprovals />} />
                                 {CRM_SOON.map(([path, key, label]) => (
                                   <Route key={path} path={`/${path}`} element={<SoonPage titleKey={key} title={label} />} />
                                 ))}
