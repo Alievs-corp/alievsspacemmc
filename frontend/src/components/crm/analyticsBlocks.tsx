@@ -7,7 +7,7 @@ import { PLATFORMS, type EffectiveStatus, type Platform } from '@/lib/crm';
 import {
   PERIOD_PRESETS, presetRange, type AnalyticsData, type AnalyticsFilter, type AnalyticsOption, type Bucket, type PeriodPreset,
 } from '@/lib/crmAnalytics';
-import { Avatar, PLATFORM_META, StatCard } from './ui';
+import { Avatar, PLATFORM_META, StatCard, plural } from './ui';
 import { CONTENT_STATUS_DOT, contentStatusLabel, stepLabel } from './content';
 import { ChartCard, ColumnChart, DataTable, Legend, LineChart, SplitBar, bucketLabel, type Series } from './charts';
 
@@ -245,7 +245,7 @@ export function ApprovalsBlock({ data }: { data: AnalyticsData }) {
         <p className="text-sm text-text-muted">{t('crm.analytics.noSubmissions', 'Nothing was submitted for approval in this period.')}</p>
       ) : (
         <div className="grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-3">
-          <Metric label={t('crm.analytics.submitted', 'Submitted')} value={a.submitted} hint={`${a.items} ${t('crm.analytics.items', 'items')}`} />
+          <Metric label={t('crm.analytics.submitted', 'Submitted')} value={a.submitted} hint={`${a.items} ${plural(a.items, 'items', 'item', 'items')}`} />
           <Metric label={t('crm.analytics.avgToApprove', 'Average to approval')} value={hours(a.avgHoursToApprove)} hint={`${t('crm.analytics.median', 'median')} ${hours(a.medianHoursToApprove)}`} />
           <Metric label={t('crm.analytics.rounds', 'Rounds to approval')} value={a.avgRoundsToApprove ?? '—'} hint={t('crm.analytics.roundsHint', '1 = approved first time')} />
           <Metric label={t('crm.cstatus.approved', 'Approved')} value={a.approved} />

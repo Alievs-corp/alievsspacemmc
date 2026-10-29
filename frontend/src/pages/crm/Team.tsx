@@ -4,11 +4,11 @@ import { Users, UserPlus, Pencil, Trash2, Eye, Search, KeyRound } from 'lucide-r
 import { useI18n } from '@/contexts/I18nContext';
 import { useCrm } from '@/contexts/CrmContext';
 import {
-  crm, PLATFORMS, type Company, type CrmPermission, type Member, type MemberInput, type PermissionInfo, type Platform, type Project, type Role, type UserBrief,
+  crm, PLATFORMS, scopeCan, type Company, type CrmPermission, type Member, type MemberInput, type PermissionInfo, type Platform, type Project, type Role, type UserBrief,
 } from '@/lib/crm';
 import { ApiError } from '@/lib/api';
 import { EmptyState, ErrorState, LoadingRows, Notice, PageHeader, Spinner, Toggle, btn, errorMessage, formatDate } from '@/components/admin/ui';
-import { Avatar, Drawer, Field, PLATFORM_META, PlatformIcons, permissionGroupName, permissionName, roleName } from '@/components/crm/ui';
+import { Avatar, Drawer, Field, PLATFORM_META, PlatformIcons, permissionGroupName, permissionName, plural, roleName } from '@/components/crm/ui';
 import { cn } from '@/lib/utils';
 import { useLoad } from '@/components/crm/useLoad';
 
@@ -42,7 +42,7 @@ export function CrmAccess() {
 
 export function TeamList({ companyId, projectId, title, groupByUser }: { companyId?: string; projectId?: string; title?: string; groupByUser?: boolean }) {
   const { t } = useI18n();
-  const { adminMode, readOnly, can, startViewAs } = useCrm();
+  const { adminMode, readOnly, can, startViewAs, me } = useCrm();
   const [actionError, setActionError] = useState<string | null>(null);
   const [editing, setEditing] = useState<Member | 'new' | null>(null);
   const [q, setQ] = useState('');
@@ -72,6 +72,10 @@ export function TeamList({ companyId, projectId, title, groupByUser }: { company
   }, [filtered, groupByUser]);
 
   const canAdd = !readOnly && can('team.manage');
+  // Mirrors the server's checkGrant: team.manage where the membership
+  // applies, and never on your own access.
+  const canManage = (m: Member) => !readOnly && !!me && (me.superAdmin || (m.userId !== me.user.id &&
+    me.memberships.some((own) => own.companyId === m.companyId && (!own.projectId || own.projectId === m.projectId) && own.permissions.includes('team.manage'))));
   const roleLabel = (key: string) => roleName(key, roles.find((r) => r.key === key)?.name);
 
   const remove = async (m: Member) => {
@@ -106,7 +110,7 @@ export function TeamList({ companyId, projectId, title, groupByUser }: { company
         <p className="font-medium text-text">{roleLabel(m.role)}</p>
         {(m.extraPermissions.length > 0 || m.deniedPermissions.length > 0) && (
           <p className="text-xs text-text-subtle">
-            {m.extraPermissions.length > 0 && `+${m.extraPermissions.length}`} {m.deniedPermissions.length > 0 && `−${m.deniedPermissions.length}`} {t('crm.permissionsLower', 'permissions')}
+            {m.extraPermissions.length > 0 && `+${m.extraPermissions.length}`} {m.deniedPermissions.length > 0 && `−${m.deniedPermissions.length}`} {plural(m.deniedPermissions.length || m.extraPermissions.length, 'permissions', 'permission', 'permissions')}
           </p>
         )}
       </td>
@@ -120,7 +124,7 @@ export function TeamList({ companyId, projectId, title, groupByUser }: { company
               <Eye className="h-4 w-4" />
             </button>
           )}
-          {!readOnly && (
+          {canManage(m) && (
             <>
               <button onClick={() => setEditing(m)} className="rounded-md p-2 text-text-subtle hover:bg-surface-3 hover:text-text" aria-label={t('crm.edit', 'Edit')}><Pencil className="h-4 w-4" /></button>
               <button onClick={() => remove(m)} className="rounded-md p-2 text-text-subtle hover:bg-danger/10 hover:text-danger" aria-label={t('panel.users.delete', 'Delete')}><Trash2 className="h-4 w-4" /></button>
@@ -230,7 +234,7 @@ function MemberDrawer({ open, member, companyId, projectId, roles, onClose, onSa
       : { companyId: companyId ?? '', projectId: projectId ?? '', role: 'viewer', platforms: [], extraPermissions: [], deniedPermissions: [], active: true });
     crm.permissions().then((r) => setCatalog(r.permissions)).catch(() => setCatalog([]));
     if (!member && !companyId) {
-      crm.companies('active').then((list) => setCompanies(list.filter((c) => adminMode || c.scope.permissions.includes('team.manage')))).catch(() => setCompanies([]));
+      crm.companies('active').then((list) => setCompanies(list.filter((c) => adminMode || scopeCan(c.scope, 'team.manage')))).catch(() => setCompanies([]));
     }
   }, [open, member, companyId, projectId, adminMode]);
 

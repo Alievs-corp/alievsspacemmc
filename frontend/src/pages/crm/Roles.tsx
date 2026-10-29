@@ -4,7 +4,7 @@ import { useI18n } from '@/contexts/I18nContext';
 import { useCrm } from '@/contexts/CrmContext';
 import { crm, type CrmPermission, type PermissionInfo, type Role } from '@/lib/crm';
 import { ErrorState, LoadingRows, Notice, PageHeader, Spinner, btn, errorMessage } from '@/components/admin/ui';
-import { Drawer, Field, permissionGroupName, permissionName, roleName } from '@/components/crm/ui';
+import { Drawer, Field, permissionGroupName, permissionName, plural, roleName } from '@/components/crm/ui';
 import { cn } from '@/lib/utils';
 
 /** Roles & Permissions (super admin). The server rejects edits from anyone else. */
@@ -90,7 +90,7 @@ export function CrmRoles() {
                   <ShieldCheck className={cn('h-4 w-4 shrink-0', r.key === selected ? 'text-primary' : 'text-text-subtle')} />
                   <span className="min-w-0 flex-1">
                     <span className="block truncate font-medium text-text">{roleName(r.key, r.name)}</span>
-                    <span className="block text-xs text-text-subtle">{r.permissions.length} {t('crm.permissionsLower', 'permissions')} · {r.memberCount} {t('crm.peopleLower', 'people')}</span>
+                    <span className="block text-xs text-text-subtle">{r.permissions.length} {plural(r.permissions.length, 'permissions', 'permission', 'permissions')} · {r.memberCount} {t('crm.peopleLower', 'people')}</span>
                   </span>
                   {r.system && <Lock className="h-3.5 w-3.5 text-text-subtle" aria-label={t('crm.roles.builtIn', 'Built-in')} />}
                 </button>

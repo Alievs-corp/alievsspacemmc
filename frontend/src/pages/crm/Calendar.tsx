@@ -34,7 +34,7 @@ function rangeFor(view: View, anchor: Date): [Date, Date] {
 export function CrmCalendar() {
   const { t, locale } = useI18n();
   const navigate = useNavigate();
-  const { readOnly, can } = useCrm();
+  const { readOnly, can, me } = useCrm();
   const [view, setView] = useState<View>(storedView);
   const [anchor, setAnchor] = useState(() => startOfDay(new Date()));
   const [f, setF] = useState({ projectId: '', platform: '', assigneeId: '', status: '' });
@@ -115,7 +115,7 @@ export function CrmCalendar() {
         </select>
         <select value={f.platform} onChange={(e) => setF({ ...f, platform: e.target.value })} className="field w-auto py-2 text-sm" aria-label={t('crm.fields.platform', 'Platform')}>
           <option value="">{t('crm.filters.allPlatforms', 'All platforms')}</option>
-          {PLATFORMS.map((p) => <option key={p} value={p}>{PLATFORM_META[p].label}</option>)}
+          {PLATFORMS.filter((p) => !me || me.platforms.includes(p)).map((p) => <option key={p} value={p}>{PLATFORM_META[p].label}</option>)}
         </select>
         <select value={f.assigneeId} onChange={(e) => setF({ ...f, assigneeId: e.target.value })} className="field w-auto py-2 text-sm" aria-label={t('crm.fields.assignee', 'Assignee')}>
           <option value="">{t('crm.filters.everyone', 'Everyone')}</option>

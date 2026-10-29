@@ -6,7 +6,7 @@ import { useCrm } from '@/contexts/CrmContext';
 import { crm, PLATFORMS, PROJECT_STATUSES, scopeCan, type Company, type Member, type Platform, type Project, type ProjectInput } from '@/lib/crm';
 import { ApiError } from '@/lib/api';
 import { EmptyState, ErrorState, LoadingRows, Notice, PageHeader, Spinner, btn, errorMessage, formatDate } from '@/components/admin/ui';
-import { Avatar, Drawer, Field, PLATFORM_META, PlatformIcons, ProjectStatusBadge, Segmented, fromDateInput, projectStatusLabel, toDateInput } from '@/components/crm/ui';
+import { Avatar, Drawer, Field, PLATFORM_META, PlatformIcons, ProjectStatusBadge, Segmented, fromDateInput, plural, projectStatusLabel, toDateInput } from '@/components/crm/ui';
 import { cn } from '@/lib/utils';
 import { useLoad } from '@/components/crm/useLoad';
 import { TaskBoard } from './Tasks';
@@ -35,7 +35,7 @@ export function ProjectForm({ project, companyId, open, onClose, onSaved }: {
           startDate: toDateInput(project.startDate), dueDate: toDateInput(project.dueDate) }
       : { companyId: companyId ?? '', status: 'active', platforms: [] });
     if (!project) {
-      crm.companies('active').then((list) => setCompanies(list.filter((c) => adminMode || c.scope.permissions.includes('company.manage')))).catch(() => setCompanies([]));
+      crm.companies('active').then((list) => setCompanies(list.filter((c) => adminMode || scopeCan(c.scope, 'company.manage')))).catch(() => setCompanies([]));
     }
   }, [open, project, companyId, adminMode]);
 
@@ -181,7 +181,7 @@ export function ProjectList({ companyId, canCreate }: { companyId?: string; canC
               {p.description && <p className="line-clamp-2 text-sm text-text-muted">{p.description}</p>}
               <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-text-subtle">
                 <PlatformIcons platforms={p.platforms} />
-                <span><b className="text-text">{p.openTasks}</b> {t('crm.openTasksLower', 'open tasks')}</span>
+                <span><b className="text-text">{p.openTasks}</b> {plural(p.openTasks, 'openTasks', 'open task', 'open tasks')}</span>
                 <span><b className="text-text">{p.memberCount}</b> {t('crm.peopleLower', 'people')}</span>
                 {p.manager && <span className="ml-auto flex items-center gap-1.5"><Avatar size="sm" name={p.manager.name} email={p.manager.email} /></span>}
               </div>
@@ -292,7 +292,7 @@ export function CrmProjectWorkspace() {
             <div className="flex justify-between gap-3"><span className="text-text-muted">{t('crm.fields.created', 'Created')}</span><span className="text-text">{formatDate(project.createdAt)}</span></div>
             <div className="border-t border-border pt-3">
               <p className="mb-1 text-text-muted">{t('crm.projects.yourAccess', 'Your access here')}</p>
-              <p className="text-xs text-text-subtle">{project.scope.permissions.length} {t('crm.permissionsLower', 'permissions')}
+              <p className="text-xs text-text-subtle">{project.scope.permissions.length} {plural(project.scope.permissions.length, 'permissions', 'permission', 'permissions')}
                 {project.scope.platforms && project.scope.platforms.length > 0 && <> · {project.scope.platforms.map((p) => PLATFORM_META[p]?.label).join(', ')}</>}</p>
             </div>
           </section>

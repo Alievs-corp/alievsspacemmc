@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { X } from 'lucide-react';
 import { FaInstagram, FaLinkedin, FaTiktok, FaYoutube } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
-import { t } from '@/lib/i18n';
+import { getLocale, t, tRaw } from '@/lib/i18n';
 import type { CrmPermission, Platform, ProjectStatus, TaskPriority, TaskStatus } from '@/lib/crm';
 
 /** Shared CRM building blocks; the admin panel's ui.tsx covers buttons and states. */
@@ -110,6 +110,17 @@ export function Avatar({ name, email, size = 'md' }: { name?: string; email?: st
       {initials}
     </span>
   );
+}
+
+/**
+ * The noun that goes after a count, by the language's plural rules
+ * ("1 проект", "3 проекта", "5 проектов"). Translations live under
+ * `crm.plural.<name>.<one|few|many|other>`; English uses one/other.
+ */
+export function plural(n: number, name: string, one: string, other: string): string {
+  const rule = new Intl.PluralRules(getLocale()).select(Math.abs(n));
+  const word = tRaw<unknown>(`crm.plural.${name}.${rule}`) ?? tRaw<unknown>(`crm.plural.${name}.other`);
+  return typeof word === 'string' ? word : rule === 'one' ? one : other;
 }
 
 export function roleName(key: string, fallback?: string): string {
@@ -226,6 +237,8 @@ export function Segmented<T extends string>({ value, options, onChange, label }:
           key={o.value}
           role="tab"
           aria-selected={value === o.value}
+          aria-label={o.label}
+          title={o.label}
           onClick={() => onChange(o.value)}
           className={cn('inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm transition-colors',
             value === o.value ? 'bg-surface text-text shadow-sm' : 'text-text-muted hover:text-text')}

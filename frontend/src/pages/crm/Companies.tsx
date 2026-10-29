@@ -7,7 +7,7 @@ import { crm, scopeCan, type Company, type CompanyInput } from '@/lib/crm';
 import { ApiError } from '@/lib/api';
 import { EmptyState, ErrorState, LoadingRows, Notice, PageHeader, Spinner, btn, errorMessage } from '@/components/admin/ui';
 import { useLoad } from '@/components/crm/useLoad';
-import { Drawer, Field, ProjectStatusBadge } from '@/components/crm/ui';
+import { Drawer, Field, ProjectStatusBadge, plural } from '@/components/crm/ui';
 import { ProjectList } from './Projects';
 import { TeamList } from './Team';
 import { ActivityFeed } from './Activity';
@@ -133,7 +133,7 @@ export function CrmCompanies() {
               </div>
               {c.description && <p className="line-clamp-2 text-sm text-text-muted">{c.description}</p>}
               <div className="mt-auto flex gap-4 text-xs text-text-subtle">
-                <span><b className="text-text">{c.projectCount}</b> {t('crm.projectsLower', 'projects')}</span>
+                <span><b className="text-text">{c.projectCount}</b> {plural(c.projectCount, 'projects', 'project', 'projects')}</span>
                 <span><b className="text-text">{c.memberCount}</b> {t('crm.peopleLower', 'people')}</span>
               </div>
             </Link>

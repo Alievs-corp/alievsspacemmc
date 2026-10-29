@@ -440,10 +440,10 @@ export const crm = {
   mediaFolders: (projectId: string) => request<Array<{ name: string; count: number }>>('GET', `/media/folders${qs({ projectId })}`),
   uploadMedia: (projectId: string, file: File, folder = '') => {
     const form = new FormData();
-    form.set('projectId', projectId);
     form.set('folder', folder);
     form.set('file', file);
-    return upload<MediaFile>('/media', form);
+    // In the query so the server checks access before reading the file.
+    return upload<MediaFile>(`/media${qs({ projectId })}`, form);
   },
   uploadMediaVersion: (id: string, file: File) => {
     const form = new FormData();
@@ -531,7 +531,7 @@ export interface NotificationSettings {
 
 /** Mirrors Access.Can on the server for one scope (UI only). */
 export function scopeCan(scope: Scope | undefined, p: CrmPermission): boolean {
-  return !!scope && scope.permissions.includes(p);
+  return !!scope?.permissions?.includes(p);
 }
 
 /** Shared request helper for CRM modules kept in their own client files. */
