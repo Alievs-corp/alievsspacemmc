@@ -81,6 +81,7 @@ const CrmAnalytics = lazy(() => import('./pages/crm/Analytics').then((m) => ({ d
 const CrmReports = lazy(() => import('./pages/crm/Reports').then((m) => ({ default: m.CrmReports })));
 const CrmNotifications = lazy(() => import('./pages/crm/Notifications').then((m) => ({ default: m.CrmNotifications })));
 const CrmSettings = lazy(() => import('./pages/crm/Settings').then((m) => ({ default: m.CrmSettings })));
+const CrmAI = lazy(() => import('./pages/crm/AI').then((m) => ({ default: m.CrmAI })));
 
 /** Modules of later CRM stages: routed so links work, rendered as "coming". */
 const CRM_SOON: Array<[string, string, string]> = [
@@ -89,7 +90,6 @@ const CRM_SOON: Array<[string, string, string]> = [
   ['youtube', 'crm.nav.youtube', 'YouTube'],
   ['linkedin', 'crm.nav.linkedin', 'LinkedIn'],
   ['inbox', 'crm.nav.inbox', 'Social Inbox'],
-  ['ai', 'crm.nav.ai', 'AI Assistant'],
 ];
 
 function SuperOnly({ children }: { children: ReactNode }) {
@@ -169,6 +169,7 @@ function App() {
                                 <Route path="/reports" element={<CrmReports />} />
                                 <Route path="/notifications" element={<CrmNotifications />} />
                                 <Route path="/settings" element={<CrmSettings />} />
+                                <Route path="/ai" element={<CrmAI />} />
                                 {CRM_SOON.map(([path, key, label]) => (
                                   <Route key={path} path={`/${path}`} element={<SoonPage titleKey={key} title={label} />} />
                                 ))}

@@ -533,3 +533,6 @@ export interface NotificationSettings {
 export function scopeCan(scope: Scope | undefined, p: CrmPermission): boolean {
   return !!scope && scope.permissions.includes(p);
 }
+
+/** Shared request helper for CRM modules kept in their own client files. */
+export { request as crmRequest };

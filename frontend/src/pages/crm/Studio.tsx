@@ -17,6 +17,7 @@ import {
   CONTENT_STATUS_DOT, ContentStatusBadge, MediaPicker, MediaThumb, contentStatusLabel, formatLabel, fromDateTimeInput, stepLabel, toDateTimeInput, versionNote,
 } from '@/components/crm/content';
 import { useLoad } from '@/components/crm/useLoad';
+import { AiPanel } from '@/components/crm/ai';
 import { cn } from '@/lib/utils';
 
 export function CrmStudio() {
@@ -488,6 +489,12 @@ function PublicationEditor({ item, pub, busy, readOnly, onAct, onDirty }: {
         <Field label={t('crm.studio.hashtags', 'Hashtags')} htmlFor={`ph-${pub.id}`} hint={`${hashtags.length}/${MAX_HASHTAGS} · ${t('crm.studio.hashtagsHint', 'separate with spaces or commas')}`}>
           <input id={`ph-${pub.id}`} disabled={!editable} value={tags} onChange={(e) => setTags(e.target.value)} className="field" placeholder="#brand #launch" />
         </Field>
+        {editable && (
+          <AiPanel projectId={item.projectId} platform={pub.platform} title={item.title} brief={item.brief} caption={caption}
+            sources={item.publications.filter((p) => p.id !== pub.id && p.caption.trim() !== '').map((p) => ({ platform: p.platform, caption: p.caption }))}
+            onCaption={setCaption}
+            onHashtags={(list) => setTags(parseHashtags([tags, ...list].join(' ')).map((h) => `#${h}`).join(' '))} />
+        )}
 
         <div className="space-y-2">
           <div className="flex items-center justify-between">

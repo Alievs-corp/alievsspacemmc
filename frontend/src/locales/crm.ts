@@ -6,6 +6,7 @@
 import { contentAz, contentRu } from './crmContent';
 import { analyticsAz, analyticsRu } from './crmAnalytics';
 import { notificationsAz, notificationsRu } from './crmNotifications';
+import { aiAz, aiRu } from './crmAi';
 
 const ru: Record<string, string> = {
   'access.grants': 'выдач доступа',
@@ -567,6 +568,6 @@ function nest(flat: Record<string, string>): Record<string, unknown> {
 }
 
 export const CRM: Record<string, Record<string, unknown>> = {
-  ru: nest({ ...ru, ...contentRu, ...analyticsRu, ...notificationsRu }),
-  az: nest({ ...az, ...contentAz, ...analyticsAz, ...notificationsAz }),
+  ru: nest({ ...ru, ...contentRu, ...analyticsRu, ...notificationsRu, ...aiRu }),
+  az: nest({ ...az, ...contentAz, ...analyticsAz, ...notificationsAz, ...aiAz }),
 };
