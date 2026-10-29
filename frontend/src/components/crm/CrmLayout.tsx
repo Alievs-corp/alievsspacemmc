@@ -13,6 +13,7 @@ import { useI18n } from '@/contexts/I18nContext';
 import { cn } from '@/lib/utils';
 import type { CrmPermission } from '@/lib/crm';
 import { Avatar } from './ui';
+import { NotificationBell } from './notifications';
 import logoMark from '../../assets/images/logo-dark.png';
 
 interface NavItem {
@@ -63,21 +64,21 @@ const NAV: Array<{ key: string; label: string; superOnly?: boolean; items: NavIt
   {
     key: 'crm.nav.analytics', label: 'Analytics',
     items: [
-      { path: '/crm/analytics', labelKey: 'crm.nav.analyticsOverview', label: 'Overview', icon: BarChart3, permissions: ['analytics.view'], soon: true },
-      { path: '/crm/reports', labelKey: 'crm.nav.reports', label: 'Reports', icon: FileBarChart, permissions: ['analytics.view'], soon: true },
+      { path: '/crm/analytics', labelKey: 'crm.nav.analyticsOverview', label: 'Overview', icon: BarChart3, permissions: ['analytics.view'] },
+      { path: '/crm/reports', labelKey: 'crm.nav.reports', label: 'Reports', icon: FileBarChart, permissions: ['analytics.view'] },
     ],
   },
   {
     key: 'crm.nav.tools', label: 'Tools',
     items: [
-      { path: '/crm/ai', labelKey: 'crm.nav.ai', label: 'AI Assistant', icon: Sparkles, permissions: ['content.create'], soon: true },
-      { path: '/crm/notifications', labelKey: 'crm.nav.notifications', label: 'Notifications', icon: Bell, soon: true },
+      { path: '/crm/ai', labelKey: 'crm.nav.ai', label: 'AI Assistant', icon: Sparkles, permissions: ['content.create', 'content.edit'] },
+      { path: '/crm/notifications', labelKey: 'crm.nav.notifications', label: 'Notifications', icon: Bell },
     ],
   },
   {
     key: 'crm.nav.system', label: 'System',
     items: [
-      { path: '/crm/settings', labelKey: 'crm.nav.settings', label: 'Settings', icon: Settings, soon: true },
+      { path: '/crm/settings', labelKey: 'crm.nav.settings', label: 'Settings', icon: Settings },
       { path: '/profile', labelKey: 'crm.nav.profile', label: 'My Profile', icon: UserCircle },
     ],
   },
@@ -216,6 +217,7 @@ export function CrmLayout({ children }: { children: ReactNode }) {
                 <span className="hidden md:inline">{t('admin.panel', 'Admin Panel')}</span>
               </Link>
             )}
+            <NotificationBell />
             <Link to="/profile" className="flex items-center gap-2 rounded-md px-1.5 py-1 hover:bg-surface-3" title={t('account.profile.title', 'My profile')}>
               <Avatar name={user?.name} email={user?.email} />
               <span className="hidden text-right md:block">

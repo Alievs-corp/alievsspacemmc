@@ -4,6 +4,7 @@ import { ScrollText } from 'lucide-react';
 import { useI18n } from '@/contexts/I18nContext';
 import { crm, type Activity, type Platform, type TaskStatus } from '@/lib/crm';
 import { t as tr } from '@/lib/i18n';
+import { aiFeatureName } from '@/lib/crmAi';
 import { EmptyState, ErrorState, LoadingRows, PageHeader, RefreshButton, errorMessage, formatDate } from '@/components/admin/ui';
 import { Avatar, PLATFORM_META, roleName, taskStatusLabel } from '@/components/crm/ui';
 
@@ -72,6 +73,7 @@ export function describeActivity(a: Activity): string {
     case 'content.published': return `${tr('crm.act.published', 'marked as published on')} ${platformName(String(d?.platform ?? ''))}`;
     case 'content.version_saved': return `${tr('crm.act.versionSaved', 'saved version')} v${d?.number ?? ''}`;
     case 'content.version_restored': return `${tr('crm.act.versionRestored', 'restored version')} v${d?.number ?? ''}`;
+    case 'report.exported': return `${tr('crm.act.reportExported', 'exported a report for')} ${d?.from ?? ''} – ${d?.to ?? ''} (CSV)`;
     case 'content.submitted': return tr('crm.act.submitted', 'sent content for approval');
     case 'content.withdrawn': return tr('crm.act.withdrawn', 'withdrew content from review');
     case 'content.step_approved': return `${tr('crm.act.stepApproved', 'approved step')} “${d?.step ?? ''}”`;
@@ -82,7 +84,9 @@ export function describeActivity(a: Activity): string {
     case 'media.version_uploaded': return `${tr('crm.act.mediaVersion', 'uploaded a new version of')} ${d?.name ?? ''}`;
     case 'media.updated': return tr('crm.act.mediaUpdated', 'renamed or moved a file');
     case 'media.deleted': return `${tr('crm.act.mediaDeleted', 'deleted file')} ${text}`;
-    default: return a.action;
+    default:
+      if (a.action.startsWith('ai.')) return `${tr('crm.act.aiUsed', 'used the AI assistant for')} ${aiFeatureName(a.action.slice(3))}`;
+      return a.action;
   }
 }
 

@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 
 export function CrmDashboard({ global = false }: { global?: boolean }) {
   const { t } = useI18n();
-  const { me, adminMode } = useCrm();
+  const { me, adminMode, can } = useCrm();
   const [data, setData] = useState<Dashboard | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -161,12 +161,18 @@ export function CrmDashboard({ global = false }: { global?: boolean }) {
           {/* Blocks that depend on later stages: shown as empty, never with made-up numbers. */}
           <section className="grid gap-3 md:grid-cols-2">
             {[
-              { icon: BarChart3, title: t('crm.dashboard.analytics', 'Analytics overview'), body: t('crm.dashboard.analyticsSoon', 'Reach, views and engagement appear once social accounts are connected through their official APIs.') },
+              { icon: BarChart3, title: t('crm.dashboard.analytics', 'Analytics overview'), body: t('crm.dashboard.analyticsSoon', 'Reach, views and engagement appear once social accounts are connected through their official APIs.'),
+                link: can('analytics.view') ? { to: '/crm/analytics', label: t('crm.dashboard.openAnalytics', 'Content output, approvals and workload') } : undefined },
               { icon: Bell, title: t('crm.nav.notifications', 'Notifications'), body: t('crm.dashboard.notificationsSoon', 'Task, approval and publishing notifications are part of a later stage.') },
             ].map((b) => (
               <div key={b.title} className="rounded-xl border border-dashed border-border p-4">
                 <p className="flex items-center gap-2 font-medium text-text"><b.icon className="h-4 w-4 text-text-subtle" /> {b.title}</p>
                 <p className="mt-1 text-sm text-text-muted">{b.body}</p>
+                {b.link && (
+                  <Link to={b.link.to} className="mt-2 inline-flex items-center gap-1 text-sm text-primary hover:text-primary-hover">
+                    {b.link.label} <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                )}
               </div>
             ))}
           </section>

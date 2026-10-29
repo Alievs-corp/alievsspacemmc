@@ -1,0 +1,71 @@
+/*
+  Chart colors for CRM analytics. Categorical slots in a fixed order (one
+  per platform, never cycled), validated for colorblind separation on both
+  surfaces. The site is dark by default; light mode is data-theme="light".
+  Light slots 2-4 are below 3:1 on the surface, so every chart also has a
+  table view and a legend.
+*/
+.crm-viz {
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --viz-grid: var(--color-border-strong);
+  --viz-axis: var(--color-border);
+  --viz-planned: var(--color-text-muted);
+  --viz-good: var(--color-success);
+  --viz-warn: var(--color-warning);
+  --viz-neutral: var(--color-ink-400);
+}
+
+:root[data-theme='light'] .crm-viz {
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+}
+
+/* Report print view: only the report itself goes to paper / PDF, always
+   on the light palette so a dark-theme screen still prints dark on white. */
+@media print {
+  :root:has(.crm-report-print) {
+    --color-ink-0:   #FFFFFF;
+    --color-ink-950: #FAF9F6;
+    --color-ink-900: #FFFFFF;
+    --color-ink-850: #F0EFEA;
+    --color-ink-800: #F5F4F0;
+    --color-ink-750: #E4E2DB;
+    --color-ink-700: #D8D6CD;
+    --color-ink-600: #C9C7BD;
+    --color-ink-500: #A2A099;
+    --color-ink-400: #7B7972;
+    --color-ink-300: #5E5C56;
+    --color-ink-200: #3F3E3A;
+    --color-ink-100: #2A2926;
+    --color-ink-50:  #171715;
+    --color-white: #171715;
+    --color-black: #FFFFFF;
+    --color-primary: var(--color-orange-600);
+  }
+  :root:has(.crm-report-print) .crm-viz {
+    --series-1: #2a78d6;
+    --series-2: #eb6834;
+    --series-3: #1baf7a;
+    --series-4: #eda100;
+  }
+  body:has(.crm-report-print) aside,
+  body:has(.crm-report-print) header.sticky,
+  body:has(.crm-report-print) .crm-no-print {
+    display: none !important;
+  }
+  body:has(.crm-report-print) main {
+    padding: 0 !important;
+  }
+  body:has(.crm-report-print) {
+    background: #fff !important;
+  }
+  .crm-report-print .card {
+    break-inside: avoid;
+    box-shadow: none !important;
+  }
+}

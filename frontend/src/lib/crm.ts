@@ -330,8 +330,9 @@ export function fileUrl(m: Pick<MediaFile, 'url'>): string {
 /** Set by CrmContext while a super admin uses "View as user". */
 let viewAsUserId: string | null = null;
 export function setViewAs(id: string | null) { viewAsUserId = id; }
+export function viewAsId(): string | null { return viewAsUserId; }
 
-async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
+export async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
   const token = localStorage.getItem('auth_token');
   if (token) headers.Authorization = `Bearer ${token}`;
@@ -361,7 +362,7 @@ async function upload<T>(path: string, form: FormData): Promise<T> {
   return res.json();
 }
 
-function qs(params: Record<string, string | number | boolean | undefined | null>): string {
+export function qs(params: Record<string, string | number | boolean | undefined | null>): string {
   const q = new URLSearchParams();
   for (const [k, v] of Object.entries(params)) {
     if (v !== undefined && v !== null && v !== '' && v !== false) q.set(k, String(v));
@@ -480,9 +481,58 @@ export const crm = {
 
   activity: (f: { projectId?: string; companyId?: string; entityType?: string; entityId?: string } = {}) =>
     request<Activity[]>('GET', `/activity${qs(f)}`),
+
+  notifications: (f: NotificationFilter = {}) =>
+    request<NotificationPage>('GET', `/notifications${qs({ ...f, unread: f.unread ? 1 : undefined })}`),
+  unreadCount: () => request<{ count: number }>('GET', '/notifications/unread-count'),
+  markNotificationRead: (id: string) => request<CrmNotification>('POST', `/notifications/${id}/read`),
+  markAllNotificationsRead: () => request<{ updated: number }>('POST', '/notifications/read-all'),
+  deleteNotification: (id: string) => request<void>('DELETE', `/notifications/${id}`),
+  notificationSettings: () => request<NotificationSettings>('GET', '/settings/notifications'),
+  updateNotificationSettings: (types: Partial<Record<NotificationType, boolean>>) =>
+    request<NotificationSettings>('PUT', '/settings/notifications', { types }),
 };
+
+export type NotificationType =
+  | 'task.assigned' | 'task.status' | 'task.comment' | 'task.due_soon' | 'task.overdue'
+  | 'content.assigned' | 'approval.requested' | 'approval.decided'
+  | 'publication.scheduled' | 'publication.unscheduled' | 'publication.missed'
+  | 'access.granted';
+
+export interface CrmNotification {
+  id: string;
+  type: NotificationType;
+  companyId: string;
+  projectId: string;
+  projectName: string;
+  entityType: 'task' | 'content' | 'publication' | 'member';
+  entityId: string;
+  actorId: string;
+  actor: UserBrief | null;
+  /** Snapshot taken when the notice was created (title, platform, step...). */
+  payload: Record<string, unknown>;
+  readAt: string | null;
+  createdAt: string;
+}
+
+export interface NotificationPage {
+  items: CrmNotification[];
+  total: number;
+  hasMore: boolean;
+}
+
+export type NotificationFilter = { unread?: boolean; type?: string; limit?: number; offset?: number };
+
+export interface NotificationSettings {
+  types: Array<{ type: NotificationType; group: 'tasks' | 'content' | 'access'; enabled: boolean }>;
+  /** Only in-app delivery exists today; email is listed as not available. */
+  channels: Array<{ key: 'in_app' | 'email'; available: boolean }>;
+}
 
 /** Mirrors Access.Can on the server for one scope (UI only). */
 export function scopeCan(scope: Scope | undefined, p: CrmPermission): boolean {
   return !!scope && scope.permissions.includes(p);
 }
+
+/** Shared request helper for CRM modules kept in their own client files. */
+export { request as crmRequest };
