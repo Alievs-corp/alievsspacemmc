@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, type ReactNode } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { I18nProvider } from './contexts/I18nContext';
 import { CurrencyProvider } from './contexts/CurrencyContext';
@@ -9,7 +9,8 @@ import { ScrollToTop } from './components/ScrollToTop';
 import { ContentProvider } from './contexts/ContentContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { Layout } from './components/Layout';
-import { ProtectedRoute } from './components/ProtectedRoute';
+import { ProtectedRoute, AccessDenied } from './components/ProtectedRoute';
+import { CrmProvider, useCrm } from './contexts/CrmContext';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { Services } from './pages/Services';
@@ -58,6 +59,43 @@ const AdminSystem = lazy(() => import('./pages/admin/System').then((m) => ({ def
 const AdminAuditLog = lazy(() => import('./pages/admin/AuditLog').then((m) => ({ default: m.AdminAuditLog })));
 const Profile = lazy(() => import('./pages/Profile'));
 
+/* CRM: its own layout and chunk, entered from the header's CRM tab. */
+const CrmGate = lazy(() => import('./pages/crm/Gate').then((m) => ({ default: m.CrmGate })));
+const SoonPage = lazy(() => import('./pages/crm/Gate').then((m) => ({ default: m.SoonPage })));
+const CrmDashboard = lazy(() => import('./pages/crm/Dashboard').then((m) => ({ default: m.CrmDashboard })));
+const CrmCompanies = lazy(() => import('./pages/crm/Companies').then((m) => ({ default: m.CrmCompanies })));
+const CrmCompanyDetail = lazy(() => import('./pages/crm/Companies').then((m) => ({ default: m.CrmCompanyDetail })));
+const CrmProjects = lazy(() => import('./pages/crm/Projects').then((m) => ({ default: m.CrmProjects })));
+const CrmProjectWorkspace = lazy(() => import('./pages/crm/Projects').then((m) => ({ default: m.CrmProjectWorkspace })));
+const CrmTasks = lazy(() => import('./pages/crm/Tasks').then((m) => ({ default: m.CrmTasks })));
+const CrmTeam = lazy(() => import('./pages/crm/Team').then((m) => ({ default: m.CrmTeam })));
+const CrmAccess = lazy(() => import('./pages/crm/Team').then((m) => ({ default: m.CrmAccess })));
+const CrmRoles = lazy(() => import('./pages/crm/Roles').then((m) => ({ default: m.CrmRoles })));
+const CrmActivity = lazy(() => import('./pages/crm/Activity').then((m) => ({ default: m.CrmActivity })));
+
+/** Modules of later CRM stages: routed so links work, rendered as "coming". */
+const CRM_SOON: Array<[string, string, string]> = [
+  ['calendar', 'crm.nav.calendar', 'Content Calendar'],
+  ['studio', 'crm.nav.studio', 'Content Studio'],
+  ['media', 'crm.nav.media', 'Media Library'],
+  ['instagram', 'crm.nav.instagram', 'Instagram'],
+  ['tiktok', 'crm.nav.tiktok', 'TikTok'],
+  ['youtube', 'crm.nav.youtube', 'YouTube'],
+  ['linkedin', 'crm.nav.linkedin', 'LinkedIn'],
+  ['approvals', 'crm.nav.approvals', 'Approvals'],
+  ['inbox', 'crm.nav.inbox', 'Social Inbox'],
+  ['analytics', 'crm.nav.analyticsOverview', 'Analytics'],
+  ['reports', 'crm.nav.reports', 'Reports'],
+  ['ai', 'crm.nav.ai', 'AI Assistant'],
+  ['notifications', 'crm.nav.notifications', 'Notifications'],
+  ['settings', 'crm.nav.settings', 'Settings'],
+];
+
+function SuperOnly({ children }: { children: ReactNode }) {
+  const { me } = useCrm();
+  return me?.superAdmin ? <>{children}</> : <AccessDenied />;
+}
+
 
 function App() {
   return (
@@ -93,11 +131,43 @@ function App() {
                             <Route path="/api" element={<ProtectedRoute requireSuperAdmin><AdminIntegrations /></ProtectedRoute>} />
                             <Route path="/system" element={<ProtectedRoute requireSuperAdmin><AdminSystem /></ProtectedRoute>} />
                             <Route path="/audit" element={<ProtectedRoute requireSuperAdmin><AdminAuditLog /></ProtectedRoute>} />
+                            <Route path="/crm-access" element={<ProtectedRoute requireSuperAdmin><CrmProvider><CrmAccess /></CrmProvider></ProtectedRoute>} />
+                            <Route path="/crm-roles" element={<ProtectedRoute requireSuperAdmin><CrmProvider><CrmRoles /></CrmProvider></ProtectedRoute>} />
                             <Route path="*" element={<Navigate to="/admin" replace />} />
                           </Routes>
                           </AdminLayout>
                         </Suspense>
                       </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/crm/*"
+                    element={
+                      <CrmProvider>
+                        <Suspense fallback={<div className="min-h-dvh bg-bg" />}>
+                          <CrmGate>
+                            <Suspense fallback={<div className="p-8 text-text-muted">…</div>}>
+                              <Routes>
+                                <Route path="/" element={<CrmDashboard />} />
+                                <Route path="/global" element={<SuperOnly><CrmDashboard global /></SuperOnly>} />
+                                <Route path="/companies" element={<CrmCompanies />} />
+                                <Route path="/companies/:id" element={<CrmCompanyDetail />} />
+                                <Route path="/projects" element={<CrmProjects />} />
+                                <Route path="/projects/:id" element={<CrmProjectWorkspace />} />
+                                <Route path="/tasks" element={<CrmTasks />} />
+                                <Route path="/team" element={<CrmTeam />} />
+                                <Route path="/access" element={<SuperOnly><CrmAccess /></SuperOnly>} />
+                                <Route path="/roles" element={<SuperOnly><CrmRoles /></SuperOnly>} />
+                                <Route path="/activity" element={<CrmActivity />} />
+                                {CRM_SOON.map(([path, key, label]) => (
+                                  <Route key={path} path={`/${path}`} element={<SoonPage titleKey={key} title={label} />} />
+                                ))}
+                                <Route path="*" element={<Navigate to="/crm" replace />} />
+                              </Routes>
+                            </Suspense>
+                          </CrmGate>
+                        </Suspense>
+                      </CrmProvider>
                     }
                   />
                   <Route

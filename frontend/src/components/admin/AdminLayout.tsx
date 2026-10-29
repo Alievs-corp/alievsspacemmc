@@ -5,6 +5,7 @@ import {
   LayoutDashboard, Home as HomeIcon, Info, Briefcase, FolderKanban, FileText,
   GraduationCap, Mail, Users, Settings, Menu, X, Globe, LogOut, ExternalLink,
   UserCircle, ChevronLeft, ChevronRight, FileUser, ShieldCheck, Plug, SlidersHorizontal, ScrollText,
+  Workflow, KeyRound, ShieldHalf, ArrowLeftRight,
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useI18n } from '@/contexts/I18nContext';
@@ -58,6 +59,14 @@ const navGroups: Array<{ labelKey: string; label: string; items: NavItem[] }> = 
     items: [
       { path: '/admin/users', labelKey: 'admin.users', label: 'Users', icon: Users, permissions: ['users.view', 'users.manage'] },
       { path: '/admin/admins', labelKey: 'panel.nav.admins', label: 'Administrators', icon: ShieldCheck, superOnly: true },
+    ],
+  },
+  {
+    labelKey: 'panel.nav.crmGroup', label: 'CRM',
+    items: [
+      { path: '/crm', labelKey: 'panel.nav.crmWorkspace', label: 'CRM Workspace', icon: Workflow, superOnly: true },
+      { path: '/admin/crm-access', labelKey: 'panel.nav.crmAccess', label: 'CRM access', icon: KeyRound, superOnly: true },
+      { path: '/admin/crm-roles', labelKey: 'panel.nav.crmRoles', label: 'CRM roles', icon: ShieldHalf, superOnly: true },
     ],
   },
   {
@@ -224,6 +233,14 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           </div>
 
           <div className="flex items-center gap-1.5 sm:gap-2">
+            <Link
+              to="/crm"
+              className="flex items-center gap-1.5 rounded-md border border-border px-2.5 py-2 text-sm text-text-muted transition-colors hover:bg-surface-3 hover:text-text"
+              title={t('panel.switchToCrm', 'Switch to CRM Workspace')}
+            >
+              <ArrowLeftRight className="h-4 w-4" />
+              <span className="hidden md:inline">CRM</span>
+            </Link>
             <button
               onClick={() => {
                 const idx = supportedLocales.findIndex((l) => l.code === locale);

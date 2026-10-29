@@ -123,6 +123,12 @@ export function Header() {
                   </a>
                 </li>
               ))}
+              {/* Guests land on login, users without access on "Access restricted". */}
+              <li>
+                <NavLink to="/crm" className={navLinkClass} title={t('nav.crm', 'CRM System')}>
+                  {t('nav.crmShort', 'CRM')}
+                </NavLink>
+              </li>
             </ul>
           </nav>
 
