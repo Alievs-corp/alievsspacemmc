@@ -19,6 +19,7 @@ import {
   Shield,
   Users,
   Workflow,
+  SquareKanban,
   X,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
@@ -48,6 +49,7 @@ const MORE_PAGES: TabItem[] = [
   { path: '/industries', key: 'industries', Icon: Building },
   { path: '/about', key: 'about', Icon: Users },
   { path: '/faq', key: 'faq', Icon: CircleHelp },
+  { path: '/crm', key: 'crm', Icon: SquareKanban },
 ];
 
 const MORE_EXTERNAL: TabItem[] = [
