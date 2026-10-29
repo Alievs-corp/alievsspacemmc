@@ -330,8 +330,9 @@ export function fileUrl(m: Pick<MediaFile, 'url'>): string {
 /** Set by CrmContext while a super admin uses "View as user". */
 let viewAsUserId: string | null = null;
 export function setViewAs(id: string | null) { viewAsUserId = id; }
+export function viewAsId(): string | null { return viewAsUserId; }
 
-async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
+export async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
   const token = localStorage.getItem('auth_token');
   if (token) headers.Authorization = `Bearer ${token}`;
@@ -361,7 +362,7 @@ async function upload<T>(path: string, form: FormData): Promise<T> {
   return res.json();
 }
 
-function qs(params: Record<string, string | number | boolean | undefined | null>): string {
+export function qs(params: Record<string, string | number | boolean | undefined | null>): string {
   const q = new URLSearchParams();
   for (const [k, v] of Object.entries(params)) {
     if (v !== undefined && v !== null && v !== '' && v !== false) q.set(k, String(v));

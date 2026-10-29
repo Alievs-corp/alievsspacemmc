@@ -4,6 +4,7 @@
  * in `@/lib/i18n`. Languages not listed fall back to English.
  */
 import { contentAz, contentRu } from './crmContent';
+import { analyticsAz, analyticsRu } from './crmAnalytics';
 
 const ru: Record<string, string> = {
   'access.grants': 'выдач доступа',
@@ -564,4 +565,4 @@ function nest(flat: Record<string, string>): Record<string, unknown> {
   return { crm: out };
 }
 
-export const CRM: Record<string, Record<string, unknown>> = { ru: nest({ ...ru, ...contentRu }), az: nest({ ...az, ...contentAz }) };
+export const CRM: Record<string, Record<string, unknown>> = { ru: nest({ ...ru, ...contentRu, ...analyticsRu }), az: nest({ ...az, ...contentAz, ...analyticsAz }) };
