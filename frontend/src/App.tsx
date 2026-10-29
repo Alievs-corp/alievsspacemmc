@@ -77,6 +77,8 @@ const CrmContentEditor = lazy(() => import('./pages/crm/Studio').then((m) => ({ 
 const CrmMedia = lazy(() => import('./pages/crm/Media').then((m) => ({ default: m.CrmMedia })));
 const CrmCalendar = lazy(() => import('./pages/crm/Calendar').then((m) => ({ default: m.CrmCalendar })));
 const CrmApprovals = lazy(() => import('./pages/crm/Approvals').then((m) => ({ default: m.CrmApprovals })));
+const CrmAnalytics = lazy(() => import('./pages/crm/Analytics').then((m) => ({ default: m.CrmAnalytics })));
+const CrmReports = lazy(() => import('./pages/crm/Reports').then((m) => ({ default: m.CrmReports })));
 
 /** Modules of later CRM stages: routed so links work, rendered as "coming". */
 const CRM_SOON: Array<[string, string, string]> = [
@@ -85,8 +87,6 @@ const CRM_SOON: Array<[string, string, string]> = [
   ['youtube', 'crm.nav.youtube', 'YouTube'],
   ['linkedin', 'crm.nav.linkedin', 'LinkedIn'],
   ['inbox', 'crm.nav.inbox', 'Social Inbox'],
-  ['analytics', 'crm.nav.analyticsOverview', 'Analytics'],
-  ['reports', 'crm.nav.reports', 'Reports'],
   ['ai', 'crm.nav.ai', 'AI Assistant'],
   ['notifications', 'crm.nav.notifications', 'Notifications'],
   ['settings', 'crm.nav.settings', 'Settings'],
@@ -165,6 +165,8 @@ function App() {
                                 <Route path="/media" element={<CrmMedia />} />
                                 <Route path="/calendar" element={<CrmCalendar />} />
                                 <Route path="/approvals" element={<CrmApprovals />} />
+                                <Route path="/analytics" element={<CrmAnalytics />} />
+                                <Route path="/reports" element={<CrmReports />} />
                                 {CRM_SOON.map(([path, key, label]) => (
                                   <Route key={path} path={`/${path}`} element={<SoonPage titleKey={key} title={label} />} />
                                 ))}

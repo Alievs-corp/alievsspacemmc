@@ -72,6 +72,7 @@ export function describeActivity(a: Activity): string {
     case 'content.published': return `${tr('crm.act.published', 'marked as published on')} ${platformName(String(d?.platform ?? ''))}`;
     case 'content.version_saved': return `${tr('crm.act.versionSaved', 'saved version')} v${d?.number ?? ''}`;
     case 'content.version_restored': return `${tr('crm.act.versionRestored', 'restored version')} v${d?.number ?? ''}`;
+    case 'report.exported': return `${tr('crm.act.reportExported', 'exported a report for')} ${d?.from ?? ''} – ${d?.to ?? ''} (CSV)`;
     case 'content.submitted': return tr('crm.act.submitted', 'sent content for approval');
     case 'content.withdrawn': return tr('crm.act.withdrawn', 'withdrew content from review');
     case 'content.step_approved': return `${tr('crm.act.stepApproved', 'approved step')} “${d?.step ?? ''}”`;

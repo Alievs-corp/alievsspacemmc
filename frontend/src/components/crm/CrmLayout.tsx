@@ -63,8 +63,8 @@ const NAV: Array<{ key: string; label: string; superOnly?: boolean; items: NavIt
   {
     key: 'crm.nav.analytics', label: 'Analytics',
     items: [
-      { path: '/crm/analytics', labelKey: 'crm.nav.analyticsOverview', label: 'Overview', icon: BarChart3, permissions: ['analytics.view'], soon: true },
-      { path: '/crm/reports', labelKey: 'crm.nav.reports', label: 'Reports', icon: FileBarChart, permissions: ['analytics.view'], soon: true },
+      { path: '/crm/analytics', labelKey: 'crm.nav.analyticsOverview', label: 'Overview', icon: BarChart3, permissions: ['analytics.view'] },
+      { path: '/crm/reports', labelKey: 'crm.nav.reports', label: 'Reports', icon: FileBarChart, permissions: ['analytics.view'] },
     ],
   },
   {
