@@ -46,7 +46,7 @@ function useSaveError() {
 export function ContentList({ projectId }: { projectId?: string }) {
   const { t } = useI18n();
   const navigate = useNavigate();
-  const { readOnly } = useCrm();
+  const { readOnly, me } = useCrm();
   const { data: projects } = useLoad<Project[]>(() => crm.projects(), []);
   const [f, setF] = useState({ projectId: '', status: '', platform: '', mine: false, q: '' });
   const [query, setQuery] = useState('');
@@ -79,7 +79,7 @@ export function ContentList({ projectId }: { projectId?: string }) {
         </select>
         <select value={f.platform} onChange={(e) => setF({ ...f, platform: e.target.value })} className="field w-auto py-2 text-sm" aria-label={t('crm.fields.platform', 'Platform')}>
           <option value="">{t('crm.filters.allPlatforms', 'All platforms')}</option>
-          {PLATFORMS.map((p) => <option key={p} value={p}>{PLATFORM_META[p].label}</option>)}
+          {PLATFORMS.filter((p) => !me || me.platforms.includes(p)).map((p) => <option key={p} value={p}>{PLATFORM_META[p].label}</option>)}
         </select>
         <label className="flex items-center gap-2 text-sm text-text-muted">
           <input type="checkbox" checked={f.mine} onChange={(e) => setF({ ...f, mine: e.target.checked })} className="h-4 w-4 accent-[var(--color-primary)]" />

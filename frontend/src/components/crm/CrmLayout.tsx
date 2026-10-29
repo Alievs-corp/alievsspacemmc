@@ -12,7 +12,7 @@ import { useCrm } from '@/contexts/CrmContext';
 import { useI18n } from '@/contexts/I18nContext';
 import { cn } from '@/lib/utils';
 import type { CrmPermission } from '@/lib/crm';
-import { Avatar } from './ui';
+import { Avatar, roleName } from './ui';
 import { NotificationBell } from './notifications';
 import logoMark from '../../assets/images/logo-dark.png';
 
@@ -223,7 +223,7 @@ export function CrmLayout({ children }: { children: ReactNode }) {
               <span className="hidden text-right md:block">
                 <span className="block max-w-[160px] truncate text-sm font-medium text-text">{user?.name || user?.email}</span>
                 <span className="block text-xs text-text-subtle">
-                  {me?.superAdmin || isSuperAdmin ? 'Super admin' : me?.memberships[0]?.roleName ?? ''}
+                  {me?.superAdmin || isSuperAdmin ? 'Super admin' : me?.memberships[0] ? roleName(me.memberships[0].role, me.memberships[0].roleName) : ''}
                 </span>
               </span>
             </Link>

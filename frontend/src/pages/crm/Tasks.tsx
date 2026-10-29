@@ -5,7 +5,7 @@ import { useI18n } from '@/contexts/I18nContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCrm } from '@/contexts/CrmContext';
 import {
-  crm, TASK_PRIORITIES, TASK_STATUSES, type Activity, type Project, type Task, type TaskComment, type TaskInput, type TaskStatus, type UserBrief,
+  crm, scopeCan, TASK_PRIORITIES, TASK_STATUSES, type Activity, type Project, type Task, type TaskComment, type TaskInput, type TaskStatus, type UserBrief,
 } from '@/lib/crm';
 import { EmptyState, ErrorState, LoadingRows, Notice, PageHeader, Spinner, btn, errorMessage, formatDate } from '@/components/admin/ui';
 import {
@@ -61,7 +61,7 @@ export function TaskBoard({ projectId }: { projectId?: string }) {
 
   const canCreate = !readOnly && (projectId
     ? true // the server answers 403 if the project scope lacks tasks.create
-    : projects.some((p) => p.scope.permissions.includes('tasks.create')));
+    : projects.some((p) => scopeCan(p.scope, 'tasks.create')));
 
   const patch = async (task: Task, data: TaskInput) => {
     setActionError(null);
@@ -390,7 +390,7 @@ function TaskDrawer({ open, taskId, projectId, projects, currentUser, onClose, o
 
   const can = task?.can ?? { edit: true, status: true, assign: true, delete: false };
   const editable = !readOnly && (isNew || can.edit);
-  const projectOptions = projects.filter((p) => p.scope.permissions.includes('tasks.create'));
+  const projectOptions = projects.filter((p) => scopeCan(p.scope, 'tasks.create'));
 
   const save = async (e: React.FormEvent) => {
     e.preventDefault();

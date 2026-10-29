@@ -98,8 +98,8 @@ export function CrmDashboard({ global = false }: { global?: boolean }) {
             </section>
           )}
 
-          <div className="grid gap-4 lg:grid-cols-3">
-            <section className="card p-0 lg:col-span-2">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+            <section className="card min-w-0 p-0 lg:col-span-2">
               <div className="flex items-center justify-between border-b border-border px-4 py-3">
                 <h2 className="flex items-center gap-2 font-display font-semibold text-text"><CalendarClock className="h-4 w-4 text-text-subtle" /> {t('crm.dashboard.deadlines', 'Upcoming deadlines')}</h2>
                 <Link to="/crm/tasks" className="inline-flex items-center gap-1 text-sm text-primary hover:text-primary-hover">{t('crm.dashboard.allTasks', 'All tasks')} <ArrowRight className="h-3.5 w-3.5" /></Link>
@@ -128,7 +128,7 @@ export function CrmDashboard({ global = false }: { global?: boolean }) {
               )}
             </section>
 
-            <section className="card space-y-4 p-4">
+            <section className="card min-w-0 space-y-4 p-4">
               <h2 className="font-display font-semibold text-text">{t('crm.dashboard.projects', 'Projects overview')}</h2>
               <dl className="space-y-2 text-sm">
                 {(['active', 'paused', 'completed', 'archived'] as const).map((s) => (
@@ -158,12 +158,13 @@ export function CrmDashboard({ global = false }: { global?: boolean }) {
 
           <ContentOverview stats={data.content} />
 
-          {/* Blocks that depend on later stages: shown as empty, never with made-up numbers. */}
+          {/* Social metrics need connected accounts: shown as empty, never with made-up numbers. */}
           <section className="grid gap-3 md:grid-cols-2">
             {[
               { icon: BarChart3, title: t('crm.dashboard.analytics', 'Analytics overview'), body: t('crm.dashboard.analyticsSoon', 'Reach, views and engagement appear once social accounts are connected through their official APIs.'),
                 link: can('analytics.view') ? { to: '/crm/analytics', label: t('crm.dashboard.openAnalytics', 'Content output, approvals and workload') } : undefined },
-              { icon: Bell, title: t('crm.nav.notifications', 'Notifications'), body: t('crm.dashboard.notificationsSoon', 'Task, approval and publishing notifications are part of a later stage.') },
+              { icon: Bell, title: t('crm.nav.notifications', 'Notifications'), body: t('crm.dashboard.notificationsLive', 'Assignments, approval requests, publishing changes and deadline reminders arrive in your notifications.'),
+                link: { to: '/crm/notifications', label: t('crm.dashboard.openNotifications', 'Open notifications') } },
             ].map((b) => (
               <div key={b.title} className="rounded-xl border border-dashed border-border p-4">
                 <p className="flex items-center gap-2 font-medium text-text"><b.icon className="h-4 w-4 text-text-subtle" /> {b.title}</p>
