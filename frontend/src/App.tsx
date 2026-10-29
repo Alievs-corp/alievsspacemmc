@@ -77,6 +77,8 @@ const CrmContentEditor = lazy(() => import('./pages/crm/Studio').then((m) => ({ 
 const CrmMedia = lazy(() => import('./pages/crm/Media').then((m) => ({ default: m.CrmMedia })));
 const CrmCalendar = lazy(() => import('./pages/crm/Calendar').then((m) => ({ default: m.CrmCalendar })));
 const CrmApprovals = lazy(() => import('./pages/crm/Approvals').then((m) => ({ default: m.CrmApprovals })));
+const CrmNotifications = lazy(() => import('./pages/crm/Notifications').then((m) => ({ default: m.CrmNotifications })));
+const CrmSettings = lazy(() => import('./pages/crm/Settings').then((m) => ({ default: m.CrmSettings })));
 
 /** Modules of later CRM stages: routed so links work, rendered as "coming". */
 const CRM_SOON: Array<[string, string, string]> = [
@@ -88,8 +90,6 @@ const CRM_SOON: Array<[string, string, string]> = [
   ['analytics', 'crm.nav.analyticsOverview', 'Analytics'],
   ['reports', 'crm.nav.reports', 'Reports'],
   ['ai', 'crm.nav.ai', 'AI Assistant'],
-  ['notifications', 'crm.nav.notifications', 'Notifications'],
-  ['settings', 'crm.nav.settings', 'Settings'],
 ];
 
 function SuperOnly({ children }: { children: ReactNode }) {
@@ -165,6 +165,8 @@ function App() {
                                 <Route path="/media" element={<CrmMedia />} />
                                 <Route path="/calendar" element={<CrmCalendar />} />
                                 <Route path="/approvals" element={<CrmApprovals />} />
+                                <Route path="/notifications" element={<CrmNotifications />} />
+                                <Route path="/settings" element={<CrmSettings />} />
                                 {CRM_SOON.map(([path, key, label]) => (
                                   <Route key={path} path={`/${path}`} element={<SoonPage titleKey={key} title={label} />} />
                                 ))}
