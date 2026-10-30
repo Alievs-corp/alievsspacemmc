@@ -100,10 +100,10 @@ export function AdminDashboard() {
         <section className="space-y-3">
           <h2 className="font-mono text-xs uppercase tracking-wider text-text-subtle">{t('panel.dashboard.users', 'Users & activity')}</h2>
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-            <Kpi icon={Users} value={u?.total} label={t('panel.dashboard.totalUsers', 'Registered users')} to="/admin/users" loading={loading} />
+            <Kpi icon={Users} value={u?.total} label={t('panel.dashboard.totalUsers', 'Registered users')} to="/panel/users" loading={loading} />
             <Kpi icon={UserPlus} value={u?.newLast7Days} label={t('panel.dashboard.new7', 'New in 7 days')} loading={loading} />
             <Kpi icon={Activity} value={u?.activeLast7Days} label={t('panel.dashboard.active7', 'Signed in, 7 days')} loading={loading} />
-            <Kpi icon={ShieldCheck} value={u ? u.byRole.admin + u.byRole.super_admin : undefined} label={t('panel.dashboard.admins', 'Administrators')} to={isSuperAdmin ? '/admin/admins' : undefined} loading={loading} />
+            <Kpi icon={ShieldCheck} value={u ? u.byRole.admin + u.byRole.super_admin : undefined} label={t('panel.dashboard.admins', 'Administrators')} to={isSuperAdmin ? '/panel/admins' : undefined} loading={loading} />
           </div>
           {u && u.blocked > 0 && (
             <p className="flex items-center gap-1.5 text-sm text-text-muted">
@@ -144,7 +144,7 @@ export function AdminDashboard() {
           <div className="mb-4 flex items-center justify-between">
             <h2 className="font-display text-lg font-semibold text-text">{t('panel.dashboard.modules', 'Modules')}</h2>
             {isSuperAdmin && (
-              <Link to="/admin/system" className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary-hover">
+              <Link to="/panel/system" className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary-hover">
                 {t('panel.dashboard.manage', 'Manage')} <ArrowRight className="h-4 w-4" />
               </Link>
             )}
@@ -159,8 +159,8 @@ export function AdminDashboard() {
           </ul>
           <div className="mt-4 grid grid-cols-3 gap-3 text-center">
             {[
-              { v: overview?.counts.inquiries, l: t('admin.inquiries', 'Inquiries'), to: '/admin/inquiries' },
-              { v: overview?.counts.applications, l: t('panel.nav.applications', 'Applications'), to: '/admin/applications' },
+              { v: overview?.counts.inquiries, l: t('admin.inquiries', 'Inquiries'), to: '/panel/inquiries' },
+              { v: overview?.counts.applications, l: t('panel.nav.applications', 'Applications'), to: '/panel/applications' },
               { v: overview?.counts.academyRegistrations, l: t('panel.dashboard.academy', 'Academy'), to: undefined },
             ].filter((c) => c.v !== undefined).map((c) => {
               const inner = (
@@ -182,11 +182,11 @@ export function AdminDashboard() {
         <section className="space-y-3">
           <h2 className="font-mono text-xs uppercase tracking-wider text-text-subtle">{t('panel.dashboard.content', 'Site content')}</h2>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
-            <Kpi icon={Briefcase} value={content?.services} label={t('admin.services', 'Services')} to="/admin/services" loading={loading} />
-            <Kpi icon={FolderKanban} value={content?.projects} label={t('admin.projects', 'Projects')} to="/admin/projects" loading={loading} />
-            <Kpi icon={FileText} value={content?.blog} label={t('admin.blog', 'Blog')} to="/admin/blog" loading={loading} />
-            <Kpi icon={GraduationCap} value={content?.careers} label={t('admin.careers', 'Careers')} to="/admin/careers" loading={loading} />
-            <Kpi icon={FileUser} value={content?.employees} label={t('admin.team', 'Team')} to="/admin/careers" loading={loading} />
+            <Kpi icon={Briefcase} value={content?.services} label={t('admin.services', 'Services')} to="/panel/services" loading={loading} />
+            <Kpi icon={FolderKanban} value={content?.projects} label={t('admin.projects', 'Projects')} to="/panel/projects" loading={loading} />
+            <Kpi icon={FileText} value={content?.blog} label={t('admin.blog', 'Blog')} to="/panel/blog" loading={loading} />
+            <Kpi icon={GraduationCap} value={content?.careers} label={t('admin.careers', 'Careers')} to="/panel/careers" loading={loading} />
+            <Kpi icon={FileUser} value={content?.employees} label={t('admin.team', 'Team')} to="/panel/careers" loading={loading} />
           </div>
         </section>
       )}
@@ -196,7 +196,7 @@ export function AdminDashboard() {
           <section className="card p-5">
             <div className="mb-4 flex items-center justify-between">
               <h2 className="font-display text-lg font-semibold text-text">{t('admin.recentInquiries', 'Recent inquiries')}</h2>
-              <Link to="/admin/inquiries" className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary-hover">
+              <Link to="/panel/inquiries" className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary-hover">
                 {t('admin.viewAll', 'View all')} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -225,7 +225,7 @@ export function AdminDashboard() {
           <section className="card p-5">
             <div className="mb-4 flex items-center justify-between">
               <h2 className="font-display text-lg font-semibold text-text">{t('panel.dashboard.activity', 'Recent admin activity')}</h2>
-              <Link to="/admin/audit" className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary-hover">
+              <Link to="/panel/audit" className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary-hover">
                 {t('admin.viewAll', 'View all')} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

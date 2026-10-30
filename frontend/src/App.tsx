@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { lazy, Suspense, type ReactNode } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { I18nProvider } from './contexts/I18nContext';
@@ -97,6 +97,10 @@ function SuperOnly({ children }: { children: ReactNode }) {
   return me?.superAdmin ? <>{children}</> : <AccessDenied />;
 }
 
+function LegacyAdminRedirect() {
+  const { pathname, search } = useLocation();
+  return <Navigate to={pathname.replace(/^\/admin/, '/panel') + search} replace />;
+}
 
 function App() {
   return (
@@ -110,10 +114,11 @@ function App() {
               <BrowserRouter>
                 <ScrollToTop />
                 <Routes>
+                  <Route path="/admin/*" element={<LegacyAdminRedirect />} />
                   <Route
-                    path="/admin/*"
+                    path="/panel/*"
                     element={
-                      <ProtectedRoute requireAdmin>
+                      <ProtectedRoute requireSuperAdmin fallback="/crm">
                         <Suspense fallback={<div className="p-8 text-text-muted">…</div>}>
                           <AdminLayout>
                           <Routes>
@@ -134,7 +139,7 @@ function App() {
                             <Route path="/audit" element={<ProtectedRoute requireSuperAdmin><AdminAuditLog /></ProtectedRoute>} />
                             <Route path="/crm-access" element={<ProtectedRoute requireSuperAdmin><CrmProvider><CrmAccess /></CrmProvider></ProtectedRoute>} />
                             <Route path="/crm-roles" element={<ProtectedRoute requireSuperAdmin><CrmProvider><CrmRoles /></CrmProvider></ProtectedRoute>} />
-                            <Route path="*" element={<Navigate to="/admin" replace />} />
+                            <Route path="*" element={<Navigate to="/panel" replace />} />
                           </Routes>
                           </AdminLayout>
                         </Suspense>

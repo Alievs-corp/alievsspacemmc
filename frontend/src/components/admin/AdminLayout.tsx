@@ -33,48 +33,48 @@ interface NavItem {
 const navGroups: Array<{ labelKey: string; label: string; items: NavItem[] }> = [
   {
     labelKey: 'panel.nav.overview', label: 'Overview',
-    items: [{ path: '/admin', labelKey: 'admin.dashboard', label: 'Dashboard', icon: LayoutDashboard, exact: true }],
+    items: [{ path: '/panel', labelKey: 'admin.dashboard', label: 'Dashboard', icon: LayoutDashboard, exact: true }],
   },
   {
     labelKey: 'panel.nav.content', label: 'Content',
     items: [
-      { path: '/admin/home', labelKey: 'admin.home', label: 'Home', icon: HomeIcon, permissions: ['content'] },
-      { path: '/admin/about', labelKey: 'admin.about', label: 'About', icon: Info, permissions: ['content'] },
-      { path: '/admin/services', labelKey: 'admin.services', label: 'Services', icon: Briefcase, permissions: ['content'] },
-      { path: '/admin/projects', labelKey: 'admin.projects', label: 'Projects', icon: FolderKanban, permissions: ['content'] },
-      { path: '/admin/blog', labelKey: 'admin.blog', label: 'Blog', icon: FileText, permissions: ['content'] },
-      { path: '/admin/careers', labelKey: 'admin.careers', label: 'Careers', icon: GraduationCap, permissions: ['content'] },
-      { path: '/admin/settings', labelKey: 'panel.nav.siteSettings', label: 'Site settings', icon: Settings, permissions: ['content'] },
+      { path: '/panel/home', labelKey: 'admin.home', label: 'Home', icon: HomeIcon, permissions: ['content'] },
+      { path: '/panel/about', labelKey: 'admin.about', label: 'About', icon: Info, permissions: ['content'] },
+      { path: '/panel/services', labelKey: 'admin.services', label: 'Services', icon: Briefcase, permissions: ['content'] },
+      { path: '/panel/projects', labelKey: 'admin.projects', label: 'Projects', icon: FolderKanban, permissions: ['content'] },
+      { path: '/panel/blog', labelKey: 'admin.blog', label: 'Blog', icon: FileText, permissions: ['content'] },
+      { path: '/panel/careers', labelKey: 'admin.careers', label: 'Careers', icon: GraduationCap, permissions: ['content'] },
+      { path: '/panel/settings', labelKey: 'panel.nav.siteSettings', label: 'Site settings', icon: Settings, permissions: ['content'] },
     ],
   },
   {
     labelKey: 'panel.nav.submissions', label: 'Submissions',
     items: [
-      { path: '/admin/inquiries', labelKey: 'admin.inquiries', label: 'Inquiries', icon: Mail, permissions: ['inquiries'] },
-      { path: '/admin/applications', labelKey: 'panel.nav.applications', label: 'Applications', icon: FileUser, permissions: ['applications'] },
+      { path: '/panel/inquiries', labelKey: 'admin.inquiries', label: 'Inquiries', icon: Mail, permissions: ['inquiries'] },
+      { path: '/panel/applications', labelKey: 'panel.nav.applications', label: 'Applications', icon: FileUser, permissions: ['applications'] },
     ],
   },
   {
     labelKey: 'panel.nav.people', label: 'People',
     items: [
-      { path: '/admin/users', labelKey: 'admin.users', label: 'Users', icon: Users, permissions: ['users.view', 'users.manage'] },
-      { path: '/admin/admins', labelKey: 'panel.nav.admins', label: 'Administrators', icon: ShieldCheck, superOnly: true },
+      { path: '/panel/users', labelKey: 'admin.users', label: 'Users', icon: Users, permissions: ['users.view', 'users.manage'] },
+      { path: '/panel/admins', labelKey: 'panel.nav.admins', label: 'Administrators', icon: ShieldCheck, superOnly: true },
     ],
   },
   {
     labelKey: 'panel.nav.crmGroup', label: 'CRM',
     items: [
       { path: '/crm', labelKey: 'panel.nav.crmWorkspace', label: 'CRM Workspace', icon: Workflow, superOnly: true },
-      { path: '/admin/crm-access', labelKey: 'panel.nav.crmAccess', label: 'CRM access', icon: KeyRound, superOnly: true },
-      { path: '/admin/crm-roles', labelKey: 'panel.nav.crmRoles', label: 'CRM roles', icon: ShieldHalf, superOnly: true },
+      { path: '/panel/crm-access', labelKey: 'panel.nav.crmAccess', label: 'CRM access', icon: KeyRound, superOnly: true },
+      { path: '/panel/crm-roles', labelKey: 'panel.nav.crmRoles', label: 'CRM roles', icon: ShieldHalf, superOnly: true },
     ],
   },
   {
     labelKey: 'panel.nav.systemGroup', label: 'System',
     items: [
-      { path: '/admin/api', labelKey: 'panel.nav.api', label: 'API & integrations', icon: Plug, superOnly: true },
-      { path: '/admin/system', labelKey: 'panel.nav.system', label: 'System settings', icon: SlidersHorizontal, superOnly: true },
-      { path: '/admin/audit', labelKey: 'panel.nav.audit', label: 'Audit log', icon: ScrollText, superOnly: true },
+      { path: '/panel/api', labelKey: 'panel.nav.api', label: 'API & integrations', icon: Plug, superOnly: true },
+      { path: '/panel/system', labelKey: 'panel.nav.system', label: 'System settings', icon: SlidersHorizontal, superOnly: true },
+      { path: '/panel/audit', labelKey: 'panel.nav.audit', label: 'Audit log', icon: ScrollText, superOnly: true },
     ],
   },
 ];
@@ -140,7 +140,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       >
         {/* Brand */}
         <div className={cn('flex h-16 items-center border-b border-border px-4', collapsed && 'lg:justify-center lg:px-0')}>
-          <Link to="/admin" className="flex min-w-0 items-center gap-2.5">
+          <Link to="/panel" className="flex min-w-0 items-center gap-2.5">
             <img src={logoMark} alt="" className="h-8 w-8 shrink-0 object-contain" />
             {!collapsed && (
               <span className="min-w-0">

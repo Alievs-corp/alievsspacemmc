@@ -4,7 +4,9 @@ Allow: /
 
 # The admin panel and auth screens carry no public content.
 Disallow: /admin
+Disallow: /panel
 Disallow: /admin/
+Disallow: /panel/
 Disallow: /login
 Disallow: /register
 

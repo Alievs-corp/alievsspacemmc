@@ -103,7 +103,7 @@ export function AdminIntegrations() {
           <span>
             {t('panel.api.keysNote', 'Keys and passwords are read from the server environment (.env) and are changed there, then the API is restarted. The panel only shows whether each one is set, so a compromised admin session cannot read them.')}
             {' '}
-            <Link to="/admin/system" className="font-medium text-primary hover:text-primary-hover">{t('panel.api.modulesLink', 'Public API modules can be switched on and off in System settings.')}</Link>
+            <Link to="/panel/system" className="font-medium text-primary hover:text-primary-hover">{t('panel.api.modulesLink', 'Public API modules can be switched on and off in System settings.')}</Link>
           </span>
         </p>
       </div>

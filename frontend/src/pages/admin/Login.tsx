@@ -3,7 +3,7 @@ import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { Eye, EyeOff, AlertCircle, Loader2 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useI18n } from '@/contexts/I18nContext';
-import { ApiError, isAdminRole } from '@/lib/api';
+import { ApiError, homePath } from '@/lib/api';
 import logoMark from '../../assets/images/logo-dark.png';
 
 export function Login() {
@@ -24,7 +24,7 @@ export function Login() {
   // submitting, where handleSubmit picks the destination itself.
   const submitted = useRef(false);
   useEffect(() => {
-    if (user && !submitted.current) navigate(isAdminRole(user.role) ? '/admin' : '/profile', { replace: true });
+    if (user && !submitted.current) navigate(homePath(user.role), { replace: true });
   }, [user, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -34,8 +34,8 @@ export function Login() {
     submitted.current = true;
     try {
       const signedIn = await login({ email, password });
-      const home = isAdminRole(signedIn?.role) ? '/admin' : '/profile';
-      const target = from && (!from.startsWith('/admin') || isAdminRole(signedIn?.role)) ? from : home;
+      const home = homePath(signedIn?.role);
+      const target = from && (!from.startsWith('/panel') || signedIn?.role === 'super_admin') ? from : home;
       navigate(target, { replace: true });
     } catch (err) {
       if (err instanceof ApiError && err.code === 'account_blocked') {
