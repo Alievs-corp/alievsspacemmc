@@ -9,7 +9,7 @@ interface ProfileMenuProps {
 }
 
 export function ProfileMenu({ variant = 'md' }: ProfileMenuProps) {
-  const { user, isAdmin, logout } = useAuth();
+  const { user, isAdmin, isSuperAdmin, logout } = useAuth();
   const { t } = useI18n();
   const navigate = useNavigate();
 
@@ -95,10 +95,10 @@ export function ProfileMenu({ variant = 'md' }: ProfileMenuProps) {
           {isAdmin && (
             <button
               type="button"
-              onClick={() => go('/admin')}
+              onClick={() => go(isSuperAdmin ? '/panel' : '/crm')}
               className="w-full px-3 py-2 text-left text-sm font-inter text-text hover:bg-surface-3 cursor-pointer"
             >
-              {t('nav.adminPanel', 'Admin panel')}
+              {isSuperAdmin ? t('nav.adminPanel', 'Admin panel') : 'CRM'}
             </button>
           )}
           <div className="h-px bg-surface-3" />

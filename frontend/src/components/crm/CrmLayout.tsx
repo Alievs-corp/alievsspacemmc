@@ -89,7 +89,7 @@ const NAV: Array<{ key: string; label: string; superOnly?: boolean; items: NavIt
       { path: '/crm/access', labelKey: 'crm.nav.access', label: 'CRM Access Management', icon: KeyRound },
       { path: '/crm/roles', labelKey: 'crm.nav.roles', label: 'Roles & Permissions', icon: ShieldCheck },
       { path: '/crm/activity', labelKey: 'crm.nav.activity', label: 'Activity Logs', icon: ScrollText },
-      { path: '/admin', labelKey: 'crm.nav.openAdmin', label: 'Open Admin Panel', icon: ShieldHalf },
+      { path: '/panel', labelKey: 'crm.nav.openAdmin', label: 'Open Admin Panel', icon: ShieldHalf },
     ],
   },
 ];
@@ -97,7 +97,7 @@ const NAV: Array<{ key: string; label: string; superOnly?: boolean; items: NavIt
 export function CrmLayout({ children }: { children: ReactNode }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, logout, isSuperAdmin, isAdmin } = useAuth();
+  const { user, logout, isSuperAdmin } = useAuth();
   const { me, can, adminMode, viewingAs, stopViewAs } = useCrm();
   const { t } = useI18n();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -207,9 +207,9 @@ export function CrmLayout({ children }: { children: ReactNode }) {
           </div>
 
           <div className="flex items-center gap-1.5 sm:gap-2">
-            {(isSuperAdmin || isAdmin) && (
+            {isSuperAdmin && (
               <Link
-                to="/admin"
+                to="/panel"
                 className="flex items-center gap-1.5 rounded-md border border-border px-2.5 py-2 text-sm text-text-muted transition-colors hover:bg-surface-3 hover:text-text"
                 title={t('crm.switchToAdmin', 'Switch to Admin Panel')}
               >

@@ -119,8 +119,8 @@ export function Profile() {
           </div>
           <div className="flex flex-wrap gap-2">
             {isAdminRole(user.role) && (
-              <Link to="/admin" className={btn.primary}>
-                <ShieldCheck className="h-4 w-4" /> {t('nav.adminPanel', 'Admin panel')}
+              <Link to={user.role === 'super_admin' ? '/panel' : '/crm'} className={btn.primary}>
+                <ShieldCheck className="h-4 w-4" /> {user.role === 'super_admin' ? t('nav.adminPanel', 'Admin panel') : 'CRM'}
               </Link>
             )}
             <button onClick={() => { logout(); navigate('/login'); }} className={btn.secondary}>

@@ -124,6 +124,13 @@ export function isAdminRole(role?: Role): boolean {
   return role === 'admin' || role === 'super_admin';
 }
 
+/** Where a role lands after signing in: the admin panel is super-admin only. */
+export function homePath(role?: Role): string {
+  if (role === 'super_admin') return '/panel';
+  if (role === 'admin') return '/crm';
+  return '/profile';
+}
+
 export function hasPermission(user: User | null | undefined, p: Permission): boolean {
   if (!user || user.blocked) return false;
   if (user.role === 'super_admin') return true;

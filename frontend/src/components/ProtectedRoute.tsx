@@ -11,13 +11,15 @@ interface ProtectedRouteProps {
   requireSuperAdmin?: boolean;
   /** Passes if the user holds any of these. */
   permissions?: Permission[];
+  /** Sends a signed-in admin who lacks access here instead of showing "denied". */
+  fallback?: string;
 }
 
 /**
  * Client-side gate for routes. It only decides what to render — every API call
  * behind these pages is authorised again on the server.
  */
-export function ProtectedRoute({ children, requireAdmin = false, requireSuperAdmin = false, permissions }: ProtectedRouteProps) {
+export function ProtectedRoute({ children, requireAdmin = false, requireSuperAdmin = false, permissions, fallback }: ProtectedRouteProps) {
   const { user, loading, isAdmin, isSuperAdmin, hasPermission } = useAuth();
   const location = useLocation();
 
@@ -35,6 +37,10 @@ export function ProtectedRoute({ children, requireAdmin = false, requireSuperAdm
 
   if ((requireAdmin || requireSuperAdmin || permissions) && !isAdmin) {
     return <Navigate to="/" replace />;
+  }
+
+  if (fallback && requireSuperAdmin && !isSuperAdmin) {
+    return <Navigate to={fallback} replace />;
   }
 
   const allowed =

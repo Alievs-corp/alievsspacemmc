@@ -78,9 +78,9 @@ export function AdminSystem() {
   };
 
   const contentLinks = [
-    { to: '/admin/settings', icon: SettingsIcon, label: t('panel.system.siteSettings', 'Site settings — brand, contacts, social links') },
-    { to: '/admin/home', icon: HomeIcon, label: t('panel.system.homeContent', 'Home page content') },
-    { to: '/admin/about', icon: Info, label: t('panel.system.aboutContent', 'About page content') },
+    { to: '/panel/settings', icon: SettingsIcon, label: t('panel.system.siteSettings', 'Site settings — brand, contacts, social links') },
+    { to: '/panel/home', icon: HomeIcon, label: t('panel.system.homeContent', 'Home page content') },
+    { to: '/panel/about', icon: Info, label: t('panel.system.aboutContent', 'About page content') },
   ];
 
   return (
