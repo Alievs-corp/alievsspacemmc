@@ -99,7 +99,15 @@ function getStoredLocale(): Locale | null {
  */
 let current: Locale | null = null;
 
+/**
+ * A section of the app (the CRM) can speak its own language without touching
+ * the visitor's site choice. While set, it wins over `current` and is never
+ * persisted under the site key.
+ */
+let scoped: Locale | null = null;
+
 export function getLocale(): Locale {
+  if (scoped) return scoped;
   if (current) return current;
   if (typeof window === 'undefined') return DEFAULT_LOCALE;
   // Priority on first load: shared link > previous choice > browser > default.
@@ -116,9 +124,43 @@ export function setLocale(code: Locale): void {
   } catch {
     /* private mode — the choice simply won't persist */
   }
-  const meta = getLocaleMeta(code);
+  applyDocumentLocale();
+}
+
+function applyDocumentLocale(): void {
+  const meta = getLocaleMeta(getLocale());
   document.documentElement.lang = meta.tag;
   document.documentElement.dir = meta.dir || 'ltr';
+}
+
+/** Overrides the site language for one section; `null` hands it back. */
+export function setScopedLocale(code: Locale | null): void {
+  scoped = code && isSupported(code) ? code : null;
+  if (typeof window !== 'undefined') applyDocumentLocale();
+}
+
+/** The CRM is staffed in Baku: Azerbaijani first, Russian and English on request. */
+export const CRM_LOCALES: Locale[] = ['az', 'ru', 'en'];
+export const CRM_DEFAULT_LOCALE: Locale = 'az';
+const CRM_LOCALE_KEY = 'alievs_crm_locale';
+
+export function getCrmLocale(): Locale {
+  try {
+    const stored = localStorage.getItem(CRM_LOCALE_KEY);
+    if (stored && CRM_LOCALES.includes(stored as Locale)) return stored as Locale;
+  } catch {
+    /* storage blocked — use the default */
+  }
+  return CRM_DEFAULT_LOCALE;
+}
+
+export function saveCrmLocale(code: Locale): void {
+  if (!CRM_LOCALES.includes(code)) return;
+  try {
+    localStorage.setItem(CRM_LOCALE_KEY, code);
+  } catch {
+    /* private mode — the choice simply won't persist */
+  }
 }
 
 /** Deep-merges the add-on bundle over the base bundle (add-on wins). */

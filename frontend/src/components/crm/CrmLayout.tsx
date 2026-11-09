@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils';
 import type { CrmPermission } from '@/lib/crm';
 import { Avatar, roleName } from './ui';
 import { NotificationBell } from './notifications';
+import { CrmLanguageSwitcher } from './language';
 import logoMark from '../../assets/images/logo-dark.png';
 
 interface NavItem {
@@ -217,6 +218,7 @@ export function CrmLayout({ children }: { children: ReactNode }) {
                 <span className="hidden md:inline">{t('admin.panel', 'Admin Panel')}</span>
               </Link>
             )}
+            <CrmLanguageSwitcher />
             <NotificationBell />
             <Link to="/profile" className="flex items-center gap-2 rounded-md px-1.5 py-1 hover:bg-surface-3" title={t('account.profile.title', 'My profile')}>
               <Avatar name={user?.name} email={user?.email} />

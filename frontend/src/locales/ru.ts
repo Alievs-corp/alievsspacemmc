@@ -6,6 +6,7 @@ export const ru = {
       close: 'Закрыть',
       openSite: 'Открыть сайт',
       logout: 'Выйти',
+      cancel: 'Отмена',
       logo: 'Логотип',
       translate: 'Перевести',
       companyDescription: 'ООО',

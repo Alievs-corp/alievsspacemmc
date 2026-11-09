@@ -183,7 +183,7 @@ const Contact = () => {
                 
                 <div className="mt-12 flex flex-col md:flex-row gap-12">
                   <div className="md:w-1/2">
-                    <ul className="space-y-4 w-[366px]">
+                    <ul className="space-y-4 w-full max-w-[366px]">
                       <li className="flex items-start">
                          <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
                          <h3 className="font-display text-text-muted text-[18px]">{t('public.contact.hero.items.premiumUi')}</h3>

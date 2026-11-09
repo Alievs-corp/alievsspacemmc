@@ -11,6 +11,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { Layout } from './components/Layout';
 import { ProtectedRoute, AccessDenied } from './components/ProtectedRoute';
 import { CrmProvider, useCrm } from './contexts/CrmContext';
+import { CrmLocaleScope } from './components/crm/language';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { Services } from './pages/Services';
@@ -149,6 +150,7 @@ function App() {
                   <Route
                     path="/crm/*"
                     element={
+                      <CrmLocaleScope>
                       <CrmProvider>
                         <Suspense fallback={<div className="min-h-dvh bg-bg" />}>
                           <CrmGate>
@@ -184,6 +186,7 @@ function App() {
                           </CrmGate>
                         </Suspense>
                       </CrmProvider>
+                      </CrmLocaleScope>
                     }
                   />
                   <Route

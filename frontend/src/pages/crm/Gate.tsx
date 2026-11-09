@@ -24,6 +24,7 @@ export function CrmGate({ children }: { children: ReactNode }) {
   const { user, loading: authLoading } = useAuth();
   const { me, loading, error, reload } = useCrm();
   const location = useLocation();
+  const { t } = useI18n();
 
   if (authLoading) return <FullScreenSpinner />;
   if (!user) return <Navigate to="/login" state={{ from: location }} replace />;
@@ -31,7 +32,7 @@ export function CrmGate({ children }: { children: ReactNode }) {
   if (error || !me) {
     return (
       <div className="flex min-h-dvh items-center justify-center bg-bg p-4">
-        <ErrorState message={error || 'CRM is unavailable'} onRetry={reload} />
+        <ErrorState message={error || t('crm.unavailable', 'CRM is unavailable')} onRetry={reload} />
       </div>
     );
   }
