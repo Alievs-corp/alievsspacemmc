@@ -651,6 +651,9 @@ function PublicationEditor({ item, pub, busy, readOnly, onAct, onDirty }: {
         {pub.can.publish && pub.publishStatus !== 'published' && (
           <p className="text-xs text-text-subtle">{t('crm.studio.manualPublishHint', 'Automatic publishing starts once the account is connected through the official API. Until then, post manually and mark it as published.')}</p>
         )}
+        <p className="text-xs text-text-subtle">
+          {t('crm.studio.mediaRetention', 'Media files are deleted from storage one day after every platform that uses them is published.')}
+        </p>
       </div>
 
       <PostPreview platform={pub.platform} title={title} caption={caption} hashtags={hashtags} media={cover && needsCover ? [cover, ...media] : media} />

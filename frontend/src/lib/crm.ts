@@ -163,6 +163,8 @@ export interface Activity {
   action: string;
   details: string;
   createdAt: string;
+  /** Empty for entries made by the system (e.g. the media purge). */
+  actorId: string;
   actor: UserBrief | null;
 }
 
