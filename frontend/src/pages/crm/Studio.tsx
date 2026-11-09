@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import {
-  ArrowLeft, CalendarClock, Check, CheckCircle2, Clapperboard, ExternalLink, History, ImagePlus, Plus, RotateCcw, Save, Search, Send, Trash2, Undo2, X, XCircle,
+  ArrowLeft, CalendarClock, Check, CheckCircle2, Clapperboard, ExternalLink, History, ImagePlus, Plus, RotateCcw, Save, Search, Send, Trash2, Undo2, Upload, X, XCircle,
 } from 'lucide-react';
 import { useI18n } from '@/contexts/I18nContext';
 import { useAuth } from '@/contexts/AuthContext';
@@ -14,7 +14,8 @@ import {
 import { EmptyState, ErrorState, LoadingRows, Notice, PageHeader, Spinner, btn, errorMessage, formatDate } from '@/components/admin/ui';
 import { Avatar, Drawer, Field, PLATFORM_META, PlatformIcons } from '@/components/crm/ui';
 import {
-  CONTENT_STATUS_DOT, ContentStatusBadge, MediaPicker, MediaThumb, contentStatusLabel, formatLabel, fromDateTimeInput, stepLabel, toDateTimeInput, versionNote,
+  ACCEPT_MEDIA, CONTENT_STATUS_DOT, ContentStatusBadge, MediaPicker, MediaThumb, UploadButton, contentStatusLabel, formatBytes, formatLabel, fromDateTimeInput,
+  stepLabel, toDateTimeInput, uploadError, versionNote,
 } from '@/components/crm/content';
 import { useLoad } from '@/components/crm/useLoad';
 import { AiPanel } from '@/components/crm/ai';
@@ -100,7 +101,7 @@ export function ContentList({ projectId }: { projectId?: string }) {
       )}
 
       <NewContentDrawer open={creating} onClose={() => setCreating(false)} projects={creatable} projectId={projectId}
-        onCreated={(it) => navigate(`/crm/studio/${it.id}`)} />
+        onCreated={(it, uploadErrors) => navigate(`/crm/studio/${it.id}`, { state: uploadErrors.length > 0 ? { uploadErrors } : undefined })} />
     </section>
   );
 }
@@ -150,11 +151,20 @@ function creatablePlatforms(p: Project | undefined): Platform[] {
   return list.filter((x) => !allowed || allowed.includes(x));
 }
 
+/** A publication holds at most this many media files (the server enforces the same). */
+const MAX_MEDIA = 20;
+
 function NewContentDrawer({ open, onClose, projects, projectId, onCreated }: {
-  open: boolean; onClose: () => void; projects: Project[]; projectId?: string; onCreated: (it: ContentItem) => void;
+  open: boolean; onClose: () => void; projects: Project[]; projectId?: string;
+  /** `uploadErrors` lists files that could not be uploaded or attached; the content exists either way. */
+  onCreated: (it: ContentItem, uploadErrors: string[]) => void;
 }) {
   const { t } = useI18n();
+  const { can } = useCrm();
+  const canUpload = can('media.manage');
   const [form, setForm] = useState({ projectId: '', title: '', brief: '', format: 'post' as ContentFormat, platforms: [] as Platform[] });
+  const [files, setFiles] = useState<File[]>([]);
+  const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [wasOpen, setWasOpen] = useState(false);
@@ -163,30 +173,64 @@ function NewContentDrawer({ open, onClose, projects, projectId, onCreated }: {
     if (open) {
       const pid = projectId || projects[0]?.id || '';
       setForm({ projectId: pid, title: '', brief: '', format: 'post', platforms: creatablePlatforms(projects.find((p) => p.id === pid)) });
+      setFiles([]);
       setError(null);
     }
   }
   const project = projects.find((p) => p.id === form.projectId);
   const options = creatablePlatforms(project);
+  const addFiles = (list: FileList | null) => {
+    // Copied now: the FileList is live and empties once the input is reset.
+    const picked = Array.from(list ?? []);
+    if (picked.length) setFiles((cur) => [...cur, ...picked].slice(0, MAX_MEDIA));
+  };
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
     setError(null);
+    let created: ContentItem;
     try {
-      onCreated(await crm.createContent(form));
+      created = await crm.createContent(form);
     } catch (err) {
       setError(errorMessage(err, t('crm.saveFailed', 'Could not save.')));
-    } finally {
       setSaving(false);
+      return;
     }
+    // The content exists from here on: upload problems are reported in the editor, not retried here.
+    const failed: string[] = [];
+    if (files.length > 0) {
+      setUploading(true);
+      const ids: string[] = [];
+      for (const f of files) {
+        try {
+          ids.push((await crm.uploadMedia(created.projectId, f)).rootId);
+        } catch (err) {
+          failed.push(`${f.name}: ${uploadError(err)}`);
+        }
+      }
+      if (ids.length > 0) {
+        for (const p of created.publications) {
+          try {
+            created = await crm.updatePublication(p.id, { mediaIds: ids });
+          } catch (err) {
+            failed.push(`${PLATFORM_META[p.platform].label}: ${errorMessage(err, t('crm.saveFailed', 'Could not save.'))}`);
+          }
+        }
+      }
+      setUploading(false);
+    }
+    setSaving(false);
+    onCreated(created, failed);
   };
 
   return (
     <Drawer open={open} onClose={onClose} title={t('crm.studio.new', 'New content')}
       footer={<>
         <button onClick={onClose} className={btn.secondary}>{t('admin.cancel', 'Cancel')}</button>
-        <button form="new-content" disabled={saving || !form.title.trim() || form.platforms.length === 0} className={btn.primary}>{saving && <Spinner />} {t('crm.create', 'Create')}</button>
+        <button form="new-content" disabled={saving || !form.title.trim() || form.platforms.length === 0} className={btn.primary}>
+          {saving && <Spinner />} {uploading ? t('crm.studio.uploadingFiles', 'Uploading files…') : t('crm.create', 'Create')}
+        </button>
       </>}>
       <form id="new-content" onSubmit={submit} className="space-y-4">
         {error && <Notice>{error}</Notice>}
@@ -226,6 +270,31 @@ function NewContentDrawer({ open, onClose, projects, projectId, onCreated }: {
         <Field label={t('crm.studio.brief', 'Brief')} htmlFor="nc-brief" hint={t('crm.studio.briefHint', 'Idea, goal and notes for the team. Not published.')}>
           <textarea id="nc-brief" rows={4} value={form.brief} onChange={(e) => setForm({ ...form, brief: e.target.value })} className="field" />
         </Field>
+        {canUpload && (
+          <Field label={t('crm.studio.files', 'Files')} htmlFor="nc-files"
+            hint={t('crm.studio.filesHint', 'Uploaded to the project media library and attached to every platform. You can change them per platform later.')}>
+            <label htmlFor="nc-files" onDragOver={(e) => e.preventDefault()} onDrop={(e) => { e.preventDefault(); addFiles(e.dataTransfer.files); }}
+              className={cn('flex flex-col items-center justify-center gap-1.5 rounded-lg border border-dashed border-border px-4 py-6 text-center text-sm text-text-muted transition-colors',
+                files.length < MAX_MEDIA ? 'cursor-pointer hover:border-border-strong hover:bg-surface-3' : 'opacity-50')}>
+              <Upload className="h-5 w-5" aria-hidden />
+              {t('crm.studio.chooseFiles', 'Choose files or drop them here')}
+            </label>
+            <input id="nc-files" type="file" multiple accept={ACCEPT_MEDIA} disabled={files.length >= MAX_MEDIA} className="sr-only"
+              onChange={(e) => { addFiles(e.target.files); e.target.value = ''; }} />
+            {files.length > 0 && (
+              <ul className="space-y-1">
+                {files.map((f, i) => (
+                  <li key={`${f.name}-${f.size}-${i}`} className="flex items-center gap-2 rounded-md bg-surface-2 px-2.5 py-1.5 text-sm">
+                    <span className="min-w-0 flex-1 truncate text-text">{f.name}</span>
+                    <span className="shrink-0 text-xs tabular-nums text-text-subtle">{formatBytes(f.size)}</span>
+                    <button type="button" onClick={() => setFiles(files.filter((_, j) => j !== i))} aria-label={t('crm.remove', 'Remove')}
+                      className="rounded p-0.5 text-text-muted hover:text-danger"><X className="h-3.5 w-3.5" /></button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </Field>
+        )}
       </form>
     </Drawer>
   );
@@ -245,7 +314,11 @@ export function CrmContentEditor() {
   const [form, setForm] = useState({ title: '', brief: '', format: 'post' as ContentFormat, assigneeId: '' });
   const [loadedId, setLoadedId] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
-  const [actionError, setActionError] = useState<string | null>(null);
+  const location = useLocation();
+  const [actionError, setActionError] = useState<string | null>(() => {
+    const failed = (location.state as { uploadErrors?: string[] } | null)?.uploadErrors;
+    return failed?.length ? `${t('crm.studio.uploadFailedSome', 'The content was created, but some files were not added:')} ${failed.join('; ')}` : null;
+  });
   const [notice, setNotice] = useState<string | null>(null);
   const [people, setPeople] = useState<UserBrief[]>([]);
   const [historyTick, setHistoryTick] = useState(0);
@@ -257,6 +330,11 @@ export function CrmContentEditor() {
     setForm({ title: item.title, brief: item.brief, format: item.format, assigneeId: item.assigneeId });
   }
   const pub = item?.publications.find((p) => p.platform === tab) ?? item?.publications[0] ?? null;
+
+  // The upload report is shown once; drop it from history so a reload does not repeat it.
+  useEffect(() => {
+    if (location.state) navigate(location.pathname + location.search, { replace: true, state: null });
+  }, [location.state, location.pathname, location.search, navigate]);
 
   useEffect(() => {
     if (!item?.projectId) return;
@@ -419,6 +497,7 @@ function PublicationEditor({ item, pub, busy, readOnly, onAct, onDirty }: {
   item: ContentItem; pub: Publication; busy: boolean; readOnly: boolean; onAct: Act; onDirty: (dirty: boolean) => void;
 }) {
   const { t } = useI18n();
+  const { can } = useCrm();
   const [title, setTitle] = useState(pub.title);
   const [caption, setCaption] = useState(pub.caption);
   const [tags, setTags] = useState(pub.hashtags.map((h) => `#${h}`).join(' '));
@@ -446,7 +525,7 @@ function PublicationEditor({ item, pub, busy, readOnly, onAct, onDirty }: {
   const locked = item.status === 'approved' || item.status === 'ready_for_review';
   useEffect(() => { onDirty(textDirty || dateDirty); }, [textDirty, dateDirty, onDirty]);
   useEffect(() => () => onDirty(false), [onDirty]);
-  const canMedia = editable && media.length < 20;
+  const canMedia = editable && media.length < MAX_MEDIA;
   const needsCover = ['reel', 'video', 'short'].includes(item.format);
 
   const save = () => {
@@ -499,7 +578,15 @@ function PublicationEditor({ item, pub, busy, readOnly, onAct, onDirty }: {
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium text-text">{t('crm.studio.media', 'Media')}</span>
-            {canMedia && <button type="button" onClick={() => setPicker('media')} className={btn.secondary}><ImagePlus className="h-4 w-4" /> {t('crm.studio.addMedia', 'Add media')}</button>}
+            {canMedia && (
+              <div className="flex flex-wrap items-start justify-end gap-2">
+                {can('media.manage') && (
+                  <UploadButton projectId={item.projectId} variant="secondary"
+                    onUploaded={(m) => setMedia((cur) => (cur.length < MAX_MEDIA && !cur.some((x) => x.rootId === m.rootId) ? [...cur, m] : cur))} />
+                )}
+                <button type="button" onClick={() => setPicker('media')} className={btn.secondary}><ImagePlus className="h-4 w-4" /> {t('crm.studio.addMedia', 'Add media')}</button>
+              </div>
+            )}
           </div>
           {media.length === 0 ? <p className="text-sm text-text-subtle">{t('crm.studio.noMedia', 'No media attached.')}</p> : (
             <ul className="flex flex-wrap gap-2">
@@ -564,6 +651,9 @@ function PublicationEditor({ item, pub, busy, readOnly, onAct, onDirty }: {
         {pub.can.publish && pub.publishStatus !== 'published' && (
           <p className="text-xs text-text-subtle">{t('crm.studio.manualPublishHint', 'Automatic publishing starts once the account is connected through the official API. Until then, post manually and mark it as published.')}</p>
         )}
+        <p className="text-xs text-text-subtle">
+          {t('crm.studio.mediaRetention', 'Media files are deleted from storage one day after every platform that uses them is published.')}
+        </p>
       </div>
 
       <PostPreview platform={pub.platform} title={title} caption={caption} hashtags={hashtags} media={cover && needsCover ? [cover, ...media] : media} />

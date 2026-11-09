@@ -96,8 +96,8 @@ export function MediaThumb({ media, className }: { media: MediaFile | null | und
 export const ACCEPT_MEDIA = 'image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm,video/quicktime,application/pdf';
 
 /** Upload button that sends files one by one and reports each result. */
-export function UploadButton({ projectId, folder, onUploaded, disabled, label }: {
-  projectId: string; folder?: string; onUploaded: (m: MediaFile) => void; disabled?: boolean; label?: string;
+export function UploadButton({ projectId, folder, onUploaded, disabled, label, variant = 'primary' }: {
+  projectId: string; folder?: string; onUploaded: (m: MediaFile) => void; disabled?: boolean; label?: string; variant?: 'primary' | 'secondary';
 }) {
   const input = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(0);
@@ -122,7 +122,7 @@ export function UploadButton({ projectId, folder, onUploaded, disabled, label }:
   return (
     <span className="inline-flex flex-col items-end gap-1">
       <input ref={input} type="file" multiple accept={ACCEPT_MEDIA} className="hidden" onChange={(e) => send(e.target.files)} />
-      <button type="button" disabled={disabled || busy > 0} onClick={() => input.current?.click()} className={btn.primary}>
+      <button type="button" disabled={disabled || busy > 0} onClick={() => input.current?.click()} className={variant === 'secondary' ? btn.secondary : btn.primary}>
         {busy > 0 ? <Spinner /> : <Upload className="h-4 w-4" />} {label ?? t('crm.media.upload', 'Upload')}
       </button>
       {error && <span className="max-w-xs text-right text-xs text-danger">{error}</span>}

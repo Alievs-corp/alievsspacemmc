@@ -84,6 +84,7 @@ export function describeActivity(a: Activity): string {
     case 'media.version_uploaded': return `${tr('crm.act.mediaVersion', 'uploaded a new version of')} ${d?.name ?? ''}`;
     case 'media.updated': return tr('crm.act.mediaUpdated', 'renamed or moved a file');
     case 'media.deleted': return `${tr('crm.act.mediaDeleted', 'deleted file')} ${text}`;
+    case 'media.purged': return `${tr('crm.act.mediaPurged', 'removed from storage a day after publishing:')} ${text}`;
     default:
       if (a.action.startsWith('ai.')) return `${tr('crm.act.aiUsed', 'used the AI assistant for')} ${aiFeatureName(a.action.slice(3))}`;
       return a.action;
@@ -126,7 +127,7 @@ export function ActivityFeed({ projectId, companyId, compact }: { projectId?: st
             <li key={a.id} className="flex items-start gap-3 px-4 py-3">
               <Avatar size="sm" name={a.actor?.name} email={a.actor?.email} />
               <p className="min-w-0 flex-1 text-sm text-text-muted">
-                <span className="font-medium text-text">{a.actor?.name || a.actor?.email || '—'}</span> {describeActivity(a)}
+                <span className="font-medium text-text">{a.actor?.name || a.actor?.email || (a.actorId ? '—' : t('crm.activity.system', 'System'))}</span> {describeActivity(a)}
               </p>
               <time className="shrink-0 text-xs text-text-subtle" dateTime={a.createdAt}>{formatDate(a.createdAt, true)}</time>
             </li>
