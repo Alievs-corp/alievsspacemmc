@@ -6,6 +6,7 @@ export const en = {
       close: 'Close',
       openSite: 'Open Website',
       logout: 'Logout',
+      cancel: 'Cancel',
       logo: 'Logo',
       translate: 'Translate',
       companyDescription: "LLC"

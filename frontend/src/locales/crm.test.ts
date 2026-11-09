@@ -2,6 +2,10 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { CRM } from './crm';
+import az from './az';
+import ru from './ru';
+import { EXTRA } from './extra/index';
+import { PANEL } from './panel';
 
 // Every CRM string used in the code needs a Russian and an Azerbaijani
 // translation; English is the fallback written next to each t() call.
@@ -35,6 +39,26 @@ describe('CRM translations', () => {
   for (const lang of ['ru', 'az']) {
     it(`has every key in ${lang}`, () => {
       const missing = [...keys].filter((k) => typeof lookup(lang, k) !== 'string');
+      expect(missing).toEqual([]);
+    });
+  }
+
+  // Shared keys (ui.*, admin.*, panel.*…) used on CRM pages. Looked up in the
+  // language's own bundles, without the English fallback t() would apply.
+  const crmSources = files(SRC)
+    .filter((f) => /[\\/](pages|components)[\\/]crm[\\/]|CrmContext|[\\/]admin[\\/]ui\.tsx$/.test(f))
+    .map((f) => readFileSync(f, 'utf8'));
+  const shared = new Set<string>();
+  for (const s of crmSources) {
+    for (const m of s.matchAll(/\bt\(\s*'((?!crm\.)[A-Za-z0-9_.]+)'/g)) shared.add(m[1]);
+  }
+  const bundles: Record<string, unknown[]> = { az: [az, EXTRA.az, PANEL.az], ru: [ru, EXTRA.ru, PANEL.ru] };
+  const path = (o: unknown, k: string) => k.split('.').reduce<unknown>((n, p) => (n && typeof n === 'object' ? (n as Record<string, unknown>)[p] : undefined), o);
+
+  for (const lang of ['ru', 'az']) {
+    it(`has every shared key used on CRM pages in ${lang}`, () => {
+      expect(shared.size).toBeGreaterThan(5);
+      const missing = [...shared].filter((k) => !bundles[lang].some((b) => typeof path(b, k) === 'string'));
       expect(missing).toEqual([]);
     });
   }
