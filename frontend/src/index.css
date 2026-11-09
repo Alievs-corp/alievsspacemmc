@@ -322,6 +322,9 @@ html {
   .glow-bg {
     position: relative;
     isolation: isolate;
+    /* The glow is wider than the section; clip the sides (not the top) so it
+       never widens the page on phones. */
+    overflow-x: clip;
   }
   .glow-bg::before {
     content: '';
