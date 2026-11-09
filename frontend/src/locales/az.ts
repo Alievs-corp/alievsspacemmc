@@ -6,6 +6,7 @@ export const az = {
       close: 'Bağla',
       openSite: 'Saytı aç',
       logout: 'Çıxış',
+      cancel: 'Ləğv et',
       logo: 'Loqo',
       translate: 'Tərcümə et',
       companyDescription: 'MMC',
