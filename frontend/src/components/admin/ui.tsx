@@ -63,12 +63,13 @@ export function LoadingRows({ rows = 5 }: { rows?: number }) {
   );
 }
 
-export function EmptyState({ icon, title, hint }: { icon: ReactNode; title: string; hint?: string }) {
+export function EmptyState({ icon, title, hint, action }: { icon: ReactNode; title: string; hint?: string; action?: ReactNode }) {
   return (
     <div className="card flex flex-col items-center justify-center gap-3 p-14 text-center">
       <div className="text-text-subtle">{icon}</div>
       <p className="font-medium text-text">{title}</p>
       {hint && <p className="max-w-md text-sm text-text-muted">{hint}</p>}
+      {action && <div className="mt-2">{action}</div>}
     </div>
   );
 }
