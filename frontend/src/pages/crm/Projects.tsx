@@ -147,7 +147,12 @@ export function ProjectForm({ project, companyId, open, onClose, onSaved }: {
 /** Project cards; reused on the company page. */
 export function ProjectList({ companyId, canCreate }: { companyId?: string; canCreate?: boolean }) {
   const { t } = useI18n();
-  const [creating, setCreating] = useState(false);
+  const [params, setParams] = useSearchParams();
+  // ?new=1 (from the empty Content Studio) opens the form straight away.
+  const [creating, setCreating] = useState(() => !!canCreate && params.get('new') === '1');
+  useEffect(() => {
+    if (params.has('new')) setParams((p) => { p.delete('new'); return p; }, { replace: true });
+  }, [params, setParams]);
   const [status, setStatus] = useState('');
   const navigate = useNavigate();
 

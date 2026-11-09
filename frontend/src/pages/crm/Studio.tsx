@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import {
-  ArrowLeft, CalendarClock, Check, CheckCircle2, Clapperboard, ExternalLink, History, ImagePlus, Plus, RotateCcw, Save, Search, Send, Trash2, Undo2, Upload, X, XCircle,
+  ArrowLeft, CalendarClock, Check, CheckCircle2, Clapperboard, ExternalLink, FolderKanban, History, ImagePlus, Plus, RotateCcw, Save, Search, Send, Trash2, Undo2, Upload, X, XCircle,
 } from 'lucide-react';
 import { useI18n } from '@/contexts/I18nContext';
 import { useAuth } from '@/contexts/AuthContext';
@@ -47,7 +47,7 @@ function useSaveError() {
 export function ContentList({ projectId }: { projectId?: string }) {
   const { t } = useI18n();
   const navigate = useNavigate();
-  const { readOnly, me } = useCrm();
+  const { readOnly, me, can } = useCrm();
   const { data: projects } = useLoad<Project[]>(() => crm.projects(), []);
   const [f, setF] = useState({ projectId: '', status: '', platform: '', mine: false, q: '' });
   const [query, setQuery] = useState('');
@@ -91,7 +91,17 @@ export function ContentList({ projectId }: { projectId?: string }) {
         )}
       </div>
 
-      {error ? <ErrorState message={error} onRetry={reload} /> : !items ? <LoadingRows /> : items.length === 0 ? (
+      {error ? <ErrorState message={error} onRetry={reload} /> : !items ? <LoadingRows /> : items.length === 0 && !projectId && projects && creatable.length === 0 ? (
+        // Content always belongs to a project: without one there is nothing to create here yet.
+        can('company.manage') ? (
+          <EmptyState icon={<FolderKanban className="h-12 w-12" />} title={t('crm.studio.noProjectTitle', 'Create a project first')}
+            hint={t('crm.studio.noProjectHint', 'Content belongs to a project. Once a project exists, you can create content for it here.')}
+            action={!readOnly && <Link to="/crm/projects?new=1" className={btn.primary}><Plus className="h-4 w-4" /> {t('crm.projects.new', 'New project')}</Link>} />
+        ) : (
+          <EmptyState icon={<FolderKanban className="h-12 w-12" />} title={t('crm.studio.noProjectAccessTitle', 'No project to create content in')}
+            hint={t('crm.studio.noProjectAccessHint', 'Ask your administrator to add you to a project with the right to create content.')} />
+        )
+      ) : items.length === 0 ? (
         <EmptyState icon={<Clapperboard className="h-12 w-12" />} title={t('crm.studio.empty', 'No content yet')}
           hint={t('crm.studio.emptyHint', 'Create content, write captions per platform, attach media and send it for approval.')} />
       ) : (
