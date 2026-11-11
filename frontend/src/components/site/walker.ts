@@ -26,9 +26,22 @@ export const WALK = {
   center: 0.5,
 };
 
-// Versioned folder: served with a one-year immutable cache (see public/_headers).
-const BASE = `${import.meta.env.BASE_URL || '/'}walk/v1/`;
-const src = (i: number) => `${BASE}w${String(i).padStart(3, '0')}.webp`;
+/**
+ * Two copies of the cycle, in versioned folders served with a one-year
+ * immutable cache (see public/_headers): v1 at full size, and v2 at 388×736
+ * (about 40% fewer bytes) for canvases that are no taller than that — phones
+ * and ordinary desktop screens. Publish changed frames under a new folder.
+ */
+const FULL = { dir: 'walk/v1/', w: WALK.w, h: WALK.h };
+const SMALL = { dir: 'walk/v2/', w: 388, h: 736 };
+/** A canvas up to 3% taller still takes the small set; the stretch is not visible. */
+const SMALL_MAX_H = Math.round(SMALL.h * 1.03);
+/** The set in use; chosen when the first frame is requested. */
+let set: typeof FULL | null = null;
+/** Bumped when the set changes: downloads of the old one are ignored. */
+let generation = 0;
+
+const src = (i: number) => `${import.meta.env.BASE_URL || '/'}${(set || FULL).dir}w${String(i).padStart(3, '0')}.webp`;
 const mod = (i: number) => ((i % WALK.count) + WALK.count) % WALK.count;
 
 function lowBandwidth(): boolean {
@@ -47,16 +60,42 @@ export const STRIDE = typeof navigator !== 'undefined' && lowBandwidth() ? 2 : 1
 const blobs: Array<Blob | undefined> = new Array(WALK.count);
 const fetches: Array<Promise<void> | undefined> = new Array(WALK.count);
 
+function tallestCanvas(): number {
+  let h = 0;
+  walkers.forEach((w) => (h = Math.max(h, w.canvas.height)));
+  return h;
+}
+
 function fetchFrame(i: number): Promise<void> {
+  if (!set) {
+    const h = tallestCanvas();
+    set = h > 0 && h <= SMALL_MAX_H ? SMALL : FULL;
+  }
+  const g = generation;
   return (fetches[i] ??= fetch(src(i), { priority: i === 0 ? 'high' : 'low' })
     .then((r) => (r.ok ? r.blob() : Promise.reject(new Error(String(r.status)))))
     .then(
       (blob) => {
+        if (g !== generation) return;
         blobs[i] = blob;
         schedule();
       },
       () => {},
     ));
+}
+
+/** A walker outgrew the small set (rotation, bigger window): start over with the full one. */
+function upgrade() {
+  if (set !== SMALL) return;
+  set = FULL;
+  generation++;
+  blobs.fill(undefined);
+  fetches.fill(undefined);
+  const wasStreaming = !!streaming;
+  streaming = null;
+  walkers.forEach((w) => w.reset());
+  if (wasStreaming) loadAllFrames();
+  else loadFirstFrame();
 }
 
 let streaming: Promise<void> | null = null;
@@ -69,6 +108,7 @@ export function loadFirstFrame(): Promise<void> {
 /** Streams the whole cycle in small batches, never ahead of the page's own assets. */
 export function loadAllFrames(): Promise<void> {
   if (streaming) return streaming;
+  const g = generation;
   streaming = loadFirstFrame().then(
     () =>
       new Promise<void>((resolve) => {
@@ -90,6 +130,7 @@ export function loadAllFrames(): Promise<void> {
           (window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number })
             .requestIdleCallback || ((cb: () => void) => window.setTimeout(cb, 16));
         const pump = () => {
+          if (g !== generation) return resolve();
           while (inFlight < MAX && queue.length) {
             const i = queue.shift()!;
             inFlight++;
@@ -306,7 +347,18 @@ export class Walker {
     this.pictures.forEach(release);
     this.pictures.clear();
     this.pending.clear();
+    if (h > SMALL_MAX_H) upgrade();
     schedule();
+  }
+
+  /** @internal The frame set changed: drop every frame, keep the pose on screen until its copy arrives. */
+  reset() {
+    this.epoch++;
+    this.pictures.forEach(release);
+    this.pictures.clear();
+    this.pending.clear();
+    this.failed.clear();
+    if (this.drawn >= 0) this.stale = true;
   }
 
   frameAt(dist: number) {
@@ -366,8 +418,9 @@ export class Walker {
 
   /** How many frames ahead of / behind the pose stay decoded. */
   private window(): { ahead: number; behind: number } {
-    const fit = scaled() && this.canvas.width <= WALK.w;
-    const bytes = (fit ? this.canvas.width * this.canvas.height : WALK.w * WALK.h) * 4;
+    const from = set || FULL;
+    const fit = scaled() && this.canvas.width <= from.w;
+    const bytes = (fit ? this.canvas.width * this.canvas.height : from.w * from.h) * 4;
     const room = Math.max(24, Math.floor(budgetBytes() / Math.max(bytes, 1)));
     const cap = active && active !== this ? IDLE_FRAMES : Math.min(WALK.count, room);
     if (cap >= WALK.count) return { ahead: WALK.count - 1, behind: 0 };
@@ -401,7 +454,7 @@ export class Walker {
   request(i: number) {
     const epoch = this.epoch;
     const started = performance.now();
-    const fit = scaled() && this.canvas.width <= WALK.w;
+    const fit = scaled() && this.canvas.width <= (set || FULL).w;
     this.pending.add(i);
     decoding++;
     decode(blobs[i]!, fit ? this.canvas.width : 0, fit ? this.canvas.height : 0).then((picture) => {

@@ -3,7 +3,7 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Walk-cycle frames: the folder is versioned (v1) — publish changed frames
+# Walk-cycle frames: versioned folders (v1 full size, v2 small) — publish changed frames
 # under a new folder instead of overwriting these.
 /walk/*
   Cache-Control: public, max-age=31536000, immutable
