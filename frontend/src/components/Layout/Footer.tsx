@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useI18n } from '@/contexts/I18nContext';
 import { ORGANIZATION, phoneForLocale, telHref } from '@/lib/site';
 import { prefersReducedMotion, reloadHome, useScrollFrame } from '@/components/site/scroll';
+import wordmark from '@/assets/images/alievsspace-logo.png';
 
 interface FooterLink {
   to: string;
@@ -69,7 +70,7 @@ export function Footer() {
       <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
         <div className="grid content-start gap-4">
           <Link to="/" className="flex items-center gap-2.5" onClick={reloadHome}>
-            <span className="as-brand-mark" aria-hidden />
+            <img src={wordmark} alt="" className="h-10 w-auto" width={57} height={40} loading="lazy" decoding="async" />
             <span className="as-brand-name">
               Alievs<b>Space</b>
             </span>

@@ -11,6 +11,7 @@ import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { reloadHome, useLenis, useScrollFrame } from '@/components/site/scroll';
 import { ORGANIZATION, phoneForLocale, telHref } from '@/lib/site';
 import { cn } from '@/lib/utils';
+import logoMark from '@/assets/images/logo-dark.png';
 
 interface NavItem {
   path: string;
@@ -177,7 +178,9 @@ export function Header() {
           aria-label={t('nav.home', 'Home')}
           onClick={reloadHome}
         >
-          <span className="as-brand-mark" aria-hidden />
+          <span className="as-brand-logo" aria-hidden>
+            <img src={logoMark} alt="" width={60} height={60} decoding="async" />
+          </span>
           <span className="as-brand-name">
             Alievs<b>Space</b>
           </span>

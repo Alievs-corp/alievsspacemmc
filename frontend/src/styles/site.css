@@ -804,6 +804,9 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
   .as-brand-mark { width: 22px; height: 22px; border-radius: 50%; border: 2px solid currentColor; position: relative; flex: none; transition: transform .6s var(--as-ease); }
   .as-brand-mark::after { content: ""; position: absolute; width: 8px; height: 8px; border-radius: 50%; background: currentColor; right: -5px; top: -3px; transition: transform .6s var(--as-ease); }
   .as-brand:hover .as-brand-mark { transform: rotate(-35deg); }
+  /* The original "AS" mark: its off-white A needs the dark chip on light headers. */
+  .as-brand-logo { position: relative; width: 36px; height: 36px; flex: none; overflow: hidden; border-radius: 10px; background: #1e1611; }
+  .as-brand-logo img { position: absolute; left: 50%; top: 50%; width: 60px; height: 60px; max-width: none; transform: translate(-50%, -48%); }
   .as-brand-name { font-family: var(--as-display); font-stretch: 125%; font-weight: 800; font-size: 15px; letter-spacing: -.01em; text-transform: uppercase; white-space: nowrap; }
   .as-brand-name b { font-weight: 300; margin-left: .3em; }
   .as-nav { display: flex; gap: clamp(12px, 1.4vw, 24px); font-size: 14px; font-weight: 500; }
