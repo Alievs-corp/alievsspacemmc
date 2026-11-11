@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Copy, Check, KeyRound, LogOut, ShieldCheck, UserCircle, MonitorSmartphone } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import type { CSSProperties } from 'react';
+import { Copy, Check, KeyRound, LogOut, ShieldCheck, MonitorSmartphone } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useI18n } from '@/contexts/I18nContext';
 import { ApiError, isAdminRole } from '@/lib/api';
 import { Seo } from '@/components/Seo';
-import { btn, formatDate, Notice, RoleBadge, Spinner, errorMessage } from '@/components/admin/ui';
+import { formatDate, RoleBadge, Spinner, errorMessage } from '@/components/admin/ui';
+import { PageHero, Pill, useReveal } from '@/components/site/blocks';
+import { AccNotice, FieldLabel } from '@/components/site/account/ui';
 
 const MIN_PASSWORD = 8;
 
@@ -28,6 +31,8 @@ export function Profile() {
   useEffect(() => {
     if (user) setDetails({ name: user.name || '', phone: user.phone || '', company: user.company || '' });
   }, [user]);
+
+  const gridRef = useReveal<HTMLDivElement>();
 
   if (!user) return null;
 
@@ -101,140 +106,150 @@ export function Profile() {
     }
   };
 
-  const label = 'mb-1.5 block text-sm font-medium text-text-muted';
+  const initial = (user.name || user.email || '?').trim().charAt(0).toLocaleUpperCase();
+  const reveal = (i: number) => ({ 'data-reveal': true, style: { '--d': `${i * 90}ms` } as CSSProperties });
 
   return (
     <>
       <Seo title={t('account.profile.title', 'My profile')} noindex />
-      <div className="mx-auto w-full max-w-4xl px-4 pb-24 pt-28 sm:px-6 lg:pt-32">
-        <header className="mb-8 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex min-w-0 items-center gap-4">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-border bg-surface-2">
-              <UserCircle className="h-7 w-7 text-text-muted" />
-            </div>
-            <div className="min-w-0">
-              <h1 className="truncate font-display text-2xl font-bold text-text sm:text-3xl">{user.name || user.email}</h1>
-              <p className="truncate text-sm text-text-muted">{user.email}</p>
-            </div>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {isAdminRole(user.role) && (
-              <Link to={user.role === 'super_admin' ? '/panel' : '/crm'} className={btn.primary}>
-                <ShieldCheck className="h-4 w-4" /> {user.role === 'super_admin' ? t('nav.adminPanel', 'Admin panel') : 'CRM'}
-              </Link>
-            )}
-            <button onClick={() => { logout(); navigate('/login'); }} className={btn.secondary}>
-              <LogOut className="h-4 w-4" /> {t('nav.logout', 'Logout')}
-            </button>
-          </div>
-        </header>
 
-        <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr]">
+      <PageHero
+        short
+        tone="burnt"
+        word={t('site.account.profile.word')}
+        num={initial}
+        eyebrow={t('account.profile.title', 'My profile')}
+        title={user.name || user.email}
+        lead={user.name ? user.email : undefined}
+        actions={
+          <>
+            {isAdminRole(user.role) && (
+              <Pill to={user.role === 'super_admin' ? '/panel' : '/crm'} variant="light">
+                <span className="inline-flex items-center gap-2">
+                  <ShieldCheck className="h-4 w-4" aria-hidden /> {user.role === 'super_admin' ? t('nav.adminPanel', 'Admin panel') : 'CRM'}
+                </span>
+              </Pill>
+            )}
+            <Pill variant="ghost" arrow={false} onClick={() => { logout(); navigate('/login'); }}>
+              <span className="inline-flex items-center gap-2">
+                <LogOut className="h-4 w-4" aria-hidden /> {t('nav.logout', 'Logout')}
+              </span>
+            </Pill>
+          </>
+        }
+      />
+
+      <section className="as-section--tight">
+        <div ref={gridRef} className="as-wrap grid max-w-[1240px] gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.45fr)] lg:gap-8">
           {/* Account facts */}
-          <section className="card h-fit p-5">
-            <h2 className="mb-4 font-display text-lg font-semibold text-text">{t('account.profile.account', 'Account')}</h2>
-            <dl className="space-y-4 text-sm">
+          <section className="as-box h-fit lg:sticky lg:top-[calc(var(--as-header-h)+24px)]" {...reveal(0)}>
+            <h2 className="as-h3 mb-6">{t('account.profile.account', 'Account')}</h2>
+            <dl className="acc-facts">
               <div>
-                <dt className="text-text-subtle">{t('account.fields.id', 'User ID')}</dt>
-                <dd className="mt-1 flex items-center gap-2">
-                  <code className="min-w-0 break-all font-mono text-xs text-text">{user.id}</code>
-                  <button onClick={copyId} className="shrink-0 rounded-md p-1.5 text-text-subtle hover:bg-surface-3 hover:text-text" aria-label={t('account.profile.copyId', 'Copy ID')}>
-                    {copied ? <Check className="h-4 w-4 text-success" /> : <Copy className="h-4 w-4" />}
+                <dt>{t('account.fields.id', 'User ID')}</dt>
+                <dd className="flex items-center gap-2">
+                  <code className="min-w-0 break-all font-mono text-xs">{user.id}</code>
+                  <button onClick={copyId} className="acc-eye !static !translate-y-0 shrink-0" aria-label={t('account.profile.copyId', 'Copy ID')}>
+                    {copied ? <Check className="h-4 w-4 text-[var(--acc-ok)]" /> : <Copy className="h-4 w-4" />}
                   </button>
                 </dd>
               </div>
               <div>
-                <dt className="text-text-subtle">{t('account.fields.email', 'Email')}</dt>
-                <dd className="mt-1 break-all text-text">{user.email}</dd>
+                <dt>{t('account.fields.email', 'Email')}</dt>
+                <dd className="break-all">{user.email}</dd>
               </div>
               <div>
-                <dt className="text-text-subtle">{t('account.fields.role', 'Role')}</dt>
-                <dd className="mt-1"><RoleBadge role={user.role} /></dd>
+                <dt>{t('account.fields.role', 'Role')}</dt>
+                <dd><RoleBadge role={user.role} /></dd>
               </div>
               <div>
-                <dt className="text-text-subtle">{t('account.fields.registered', 'Registered')}</dt>
-                <dd className="mt-1 text-text">{formatDate(user.createdAt, true)}</dd>
+                <dt>{t('account.fields.registered', 'Registered')}</dt>
+                <dd>{formatDate(user.createdAt, true)}</dd>
               </div>
               <div>
-                <dt className="text-text-subtle">{t('account.fields.lastLogin', 'Last sign-in')}</dt>
-                <dd className="mt-1 text-text">{formatDate(user.lastLoginAt, true)}</dd>
+                <dt>{t('account.fields.lastLogin', 'Last sign-in')}</dt>
+                <dd>{formatDate(user.lastLoginAt, true)}</dd>
               </div>
             </dl>
           </section>
 
-          <div className="space-y-6">
+          <div className="grid min-w-0 gap-6 lg:gap-8">
             {/* Personal details */}
-            <form onSubmit={saveDetails} className="card space-y-4 p-5">
-              <h2 className="font-display text-lg font-semibold text-text">{t('account.profile.details', 'Personal details')}</h2>
-              {detailsMsg && <Notice tone={detailsMsg.tone}>{detailsMsg.text}</Notice>}
+            <form onSubmit={saveDetails} className="as-tile grid gap-5" {...reveal(1)}>
+              <h2 className="as-h3">{t('account.profile.details', 'Personal details')}</h2>
+              {detailsMsg && <AccNotice tone={detailsMsg.tone}>{detailsMsg.text}</AccNotice>}
               <div>
-                <label htmlFor="p-name" className={label}>{t('account.fields.username', 'Name')}</label>
-                <input id="p-name" className="field" maxLength={255} autoComplete="name" value={details.name}
+                <FieldLabel htmlFor="p-name">{t('account.fields.username', 'Name')}</FieldLabel>
+                <input id="p-name" className="acc-input" maxLength={255} autoComplete="name" value={details.name}
                   onChange={(e) => setDetails((d) => ({ ...d, name: e.target.value }))} />
               </div>
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-5 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="p-phone" className={label}>{t('account.fields.phone', 'Phone')}</label>
-                  <input id="p-phone" className="field" type="tel" maxLength={64} autoComplete="tel" value={details.phone}
+                  <FieldLabel htmlFor="p-phone">{t('account.fields.phone', 'Phone')}</FieldLabel>
+                  <input id="p-phone" className="acc-input" type="tel" maxLength={64} autoComplete="tel" value={details.phone}
                     onChange={(e) => setDetails((d) => ({ ...d, phone: e.target.value }))} />
                 </div>
                 <div>
-                  <label htmlFor="p-company" className={label}>{t('account.fields.company', 'Company')}</label>
-                  <input id="p-company" className="field" maxLength={255} autoComplete="organization" value={details.company}
+                  <FieldLabel htmlFor="p-company">{t('account.fields.company', 'Company')}</FieldLabel>
+                  <input id="p-company" className="acc-input" maxLength={255} autoComplete="organization" value={details.company}
                     onChange={(e) => setDetails((d) => ({ ...d, company: e.target.value }))} />
                 </div>
               </div>
-              <p className="text-xs text-text-subtle">{t('account.profile.emailFixed', 'Email is used to sign in and cannot be changed here.')}</p>
-              <button type="submit" disabled={!dirty || savingDetails} className={btn.primary}>
-                {savingDetails && <Spinner />} {t('account.profile.save', 'Save changes')}
-              </button>
+              <p className="text-[13px] text-[var(--as-fg-soft)]">{t('account.profile.emailFixed', 'Email is used to sign in and cannot be changed here.')}</p>
+              <div>
+                <button type="submit" disabled={!dirty || savingDetails} className="as-btn as-btn--sm">
+                  {savingDetails && <Spinner />} <span>{t('account.profile.save', 'Save changes')}</span>
+                </button>
+              </div>
             </form>
 
             {/* Password */}
-            <form onSubmit={savePassword} className="card space-y-4 p-5">
-              <h2 className="flex items-center gap-2 font-display text-lg font-semibold text-text">
-                <KeyRound className="h-5 w-5 text-text-subtle" /> {t('account.password.title', 'Change password')}
+            <form onSubmit={savePassword} className="as-tile grid gap-5" {...reveal(2)}>
+              <h2 className="as-h3 flex items-center gap-3">
+                <KeyRound className="h-5 w-5 shrink-0 text-[var(--as-accent)]" aria-hidden /> {t('account.password.title', 'Change password')}
               </h2>
-              {pwMsg && <Notice tone={pwMsg.tone}>{pwMsg.text}</Notice>}
+              {pwMsg && <AccNotice tone={pwMsg.tone}>{pwMsg.text}</AccNotice>}
               <div>
-                <label htmlFor="pw-current" className={label}>{t('account.password.current', 'Current password')}</label>
-                <input id="pw-current" type="password" className="field" autoComplete="current-password" value={pw.current}
+                <FieldLabel htmlFor="pw-current">{t('account.password.current', 'Current password')}</FieldLabel>
+                <input id="pw-current" type="password" className="acc-input" autoComplete="current-password" value={pw.current}
                   onChange={(e) => setPw((d) => ({ ...d, current: e.target.value }))} />
               </div>
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-5 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="pw-next" className={label}>{t('account.password.new', 'New password')}</label>
-                  <input id="pw-next" type="password" className="field" autoComplete="new-password" maxLength={72} value={pw.next}
+                  <FieldLabel htmlFor="pw-next">{t('account.password.new', 'New password')}</FieldLabel>
+                  <input id="pw-next" type="password" className="acc-input" autoComplete="new-password" maxLength={72} value={pw.next}
                     onChange={(e) => setPw((d) => ({ ...d, next: e.target.value }))} />
                 </div>
                 <div>
-                  <label htmlFor="pw-confirm" className={label}>{t('account.fields.confirmPassword', 'Confirm password')}</label>
-                  <input id="pw-confirm" type="password" className="field" autoComplete="new-password" maxLength={72} value={pw.confirm}
+                  <FieldLabel htmlFor="pw-confirm">{t('account.fields.confirmPassword', 'Confirm password')}</FieldLabel>
+                  <input id="pw-confirm" type="password" className="acc-input" autoComplete="new-password" maxLength={72} value={pw.confirm}
                     onChange={(e) => setPw((d) => ({ ...d, confirm: e.target.value }))} />
                 </div>
               </div>
-              {pwError && <p className="text-xs text-danger">{pwError}</p>}
-              <button type="submit" disabled={savingPw || !pw.current || !pw.next || !pw.confirm} className={btn.primary}>
-                {savingPw && <Spinner />} {t('account.password.submit', 'Update password')}
-              </button>
+              {pwError && <p className="acc-hint acc-hint--bad !mt-0">{pwError}</p>}
+              <div>
+                <button type="submit" disabled={savingPw || !pw.current || !pw.next || !pw.confirm} className="as-btn as-btn--sm">
+                  {savingPw && <Spinner />} <span>{t('account.password.submit', 'Update password')}</span>
+                </button>
+              </div>
             </form>
 
             {/* Sessions */}
-            <section className="card flex flex-wrap items-center justify-between gap-4 p-5">
+            <section className="as-tile flex flex-wrap items-center justify-between gap-5" {...reveal(3)}>
               <div className="flex min-w-0 items-start gap-3">
-                <MonitorSmartphone className="mt-0.5 h-5 w-5 shrink-0 text-text-subtle" />
-                <div>
-                  <h2 className="font-display text-lg font-semibold text-text">{t('account.sessions.title', 'Sessions')}</h2>
-                  <p className="text-sm text-text-muted">{t('account.sessions.body', 'Lost a device? Sign out of your account everywhere.')}</p>
+                <MonitorSmartphone className="mt-1 h-5 w-5 shrink-0 text-[var(--as-accent)]" aria-hidden />
+                <div className="min-w-0">
+                  <h2 className="as-h3">{t('account.sessions.title', 'Sessions')}</h2>
+                  <p className="mt-1 text-[15px] text-[var(--as-fg-soft)]">{t('account.sessions.body', 'Lost a device? Sign out of your account everywhere.')}</p>
                 </div>
               </div>
-              <button onClick={signOutEverywhere} disabled={signingOut} className={btn.danger}>
-                {signingOut && <Spinner />} {t('account.sessions.action', 'Sign out everywhere')}
+              <button onClick={signOutEverywhere} disabled={signingOut} className="as-btn as-btn--sm as-btn--ghost acc-btn-danger">
+                {signingOut && <Spinner />} <span>{t('account.sessions.action', 'Sign out everywhere')}</span>
               </button>
             </section>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }

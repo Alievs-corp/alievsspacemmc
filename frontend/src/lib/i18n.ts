@@ -5,6 +5,7 @@ import az from '@/locales/az';
 import { EXTRA } from '@/locales/extra/index';
 import { PANEL } from '@/locales/panel';
 import { CRM } from '@/locales/crm';
+import { SITE } from '@/locales/site';
 
 export type Locale =
   | 'en'
@@ -186,12 +187,25 @@ function merge<T extends Record<string, any>>(base: T, extra: Record<string, any
 
 const BASE: Partial<Record<Locale, Record<string, any>>> = { en, ru, az };
 
-const translations = SUPPORTED_LOCALES.reduce((acc, { code }) => {
-  // Locales without a full base bundle inherit English and override what they translate.
-  const base = BASE[code] || (en as Record<string, any>);
-  acc[code] = merge(merge(merge(base, EXTRA[code] || {}), (PANEL[code] as Record<string, any>) || {}), (CRM[code] as Record<string, any>) || {});
-  return acc;
-}, {} as Record<Locale, Record<string, any>>);
+/**
+ * Each locale's dictionary is merged the first time it is needed (usually the
+ * visitor's language plus the English fallback) instead of all ten at start-up,
+ * which keeps that work off the first render.
+ */
+const merged: Partial<Record<Locale, Record<string, any>>> = {};
+const translations = new Proxy({} as Record<Locale, Record<string, any>>, {
+  get(_, code: Locale) {
+    if (!merged[code]) {
+      // Locales without a full base bundle inherit English and override what they translate.
+      const base = BASE[code] || (en as Record<string, any>);
+      merged[code] = merge(
+        merge(merge(merge(base, EXTRA[code] || {}), (PANEL[code] as Record<string, any>) || {}), (CRM[code] as Record<string, any>) || {}),
+        SITE[code] || {},
+      );
+    }
+    return merged[code];
+  },
+});
 
 function getPath(obj: any, path: string): any {
   return path.split('.').reduce((acc, part) => (acc && acc[part] !== undefined ? acc[part] : undefined), obj);

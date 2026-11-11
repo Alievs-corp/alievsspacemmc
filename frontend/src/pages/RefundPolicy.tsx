@@ -1,6 +1,5 @@
-import Container from '../components/ui/Container';
 import { useI18n } from '@/contexts/I18nContext';
-import { Helmet } from 'react-helmet-async';
+import { LegalContactCard, LegalLayout, LegalList } from '@/components/site/account/LegalLayout';
 
 const REFUND_CONTENT = {
   en: {
@@ -200,128 +199,69 @@ const REFUND_CONTENT = {
 } as const;
 
 export function RefundPolicy() {
-  const { locale } = useI18n();
+  const { locale, t } = useI18n();
   const currentYear = new Date().getFullYear();
 
   // Legal texts exist only in en/ru/az; other UI languages read the English version.
   const content = REFUND_CONTENT[locale as keyof typeof REFUND_CONTENT] ?? REFUND_CONTENT.en;
+  const s = content.sections;
 
   return (
-    <div className='mt-[60px] flex flex-col justify-center items-center'>
-      <Helmet>
-        <title>{`${content.metaTitle} | ${content.companyName}`}</title>
-        <meta name="description" content={content.metaDescription} />
-        <meta property="og:title" content={`${content.metaTitle} | ${content.companyName}`} />
-        <meta property="og:description" content={content.metaDescription} />
-        <meta property="og:type" content="website" />
-      </Helmet>
-
-      <Container className="flex flex-col justify-center items-center mb-12">
-        <h2 className="font-display text-[38px] font-bold text-white">{content.title}</h2>
-        <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">
-          {content.companyName}
-        </p>
-        <p className="font-inter text-[16px] text-text-muted text-center max-w-[800px] mt-2">
-          {content.lastUpdatedLabel} {currentYear}
-        </p>
-      </Container>
-
-      <Container className="w-full mb-24">
-        <div className="flex flex-col items-center">
-          <div className="panel p-8 md:p-10 flex flex-col w-full max-w-4xl mx-auto hover:border-border-strong transition-all duration-300">
-
-            <p className="font-inter text-text-muted text-[16px] md:text-[18px] leading-relaxed mb-8 border-l-4 border-primary pl-4">
-              {content.intro}
-            </p>
-            <div className="space-y-8">
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.nature.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.nature.body}</p>
-              </div>
-
-              <hr className="border-surface-3" />
-
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.deposits.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.deposits.body}</p>
-              </div>
-
-              <hr className="border-surface-3" />
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.eligibility.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.eligibility.intro}</p>
-                <ul className="list-disc pl-6 space-y-1">
-                  {content.sections.eligibility.list.map((item) => (
-                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <hr className="border-surface-3" />
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.partial.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.partial.intro}</p>
-                <ul className="list-disc pl-6 space-y-1">
-                  {content.sections.partial.list.map((item) => (
-                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <hr className="border-surface-3" />
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.nonRefundable.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.nonRefundable.intro}</p>
-                <ul className="list-disc pl-6 space-y-1">
-                  {content.sections.nonRefundable.list.map((item) => (
-                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <hr className="border-surface-3" />
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.disputes.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.disputes.body}</p>
-              </div>
-
-              <hr className="border-surface-3" />
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.processing.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.processing.body}</p>
-              </div>
-
-              <hr className="border-surface-3" />
-
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.contact.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.contact.intro}</p>
-                <div className="bg-surface p-4 rounded-lg mt-2 border border-surface-3">
-                  <p className="font-inter text-white text-[16px] md:text-[18px] font-semibold">{content.companyName}</p>
-                  <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.contact.emailLabel} info@alievsspace.com</p>
-                  <p className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                    {content.sections.contact.websiteLabel}{' '}
-                    <a
-                      href="https://alievsspace.com"
-                      className="text-primary hover:underline"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      https://alievsspace.com
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Container>
-    </div>
+    <LegalLayout
+      meta={{ title: content.metaTitle, description: content.metaDescription }}
+      title={content.title}
+      companyName={content.companyName}
+      lastUpdated={`${content.lastUpdatedLabel} ${currentYear}`}
+      word={t('site.account.legal.words.refund')}
+      num="03"
+      tone="amber"
+      callout={content.intro}
+      sections={[
+        { id: 'digital-service-nature', title: s.nature.title, body: <p>{s.nature.body}</p> },
+        { id: 'deposit-payments', title: s.deposits.title, body: <p>{s.deposits.body}</p> },
+        {
+          id: 'refund-eligibility',
+          title: s.eligibility.title,
+          body: (
+            <>
+              <p>{s.eligibility.intro}</p>
+              <LegalList items={s.eligibility.list} />
+            </>
+          ),
+        },
+        {
+          id: 'partial-refunds',
+          title: s.partial.title,
+          body: (
+            <>
+              <p>{s.partial.intro}</p>
+              <LegalList items={s.partial.list} />
+            </>
+          ),
+        },
+        {
+          id: 'non-refundable',
+          title: s.nonRefundable.title,
+          body: (
+            <>
+              <p>{s.nonRefundable.intro}</p>
+              <LegalList items={s.nonRefundable.list} />
+            </>
+          ),
+        },
+        { id: 'payment-disputes', title: s.disputes.title, body: <p>{s.disputes.body}</p> },
+        { id: 'refund-processing', title: s.processing.title, body: <p>{s.processing.body}</p> },
+        {
+          id: 'contact',
+          title: s.contact.title,
+          body: (
+            <>
+              <p>{s.contact.intro}</p>
+              <LegalContactCard companyName={content.companyName} emailLabel={s.contact.emailLabel} websiteLabel={s.contact.websiteLabel} />
+            </>
+          ),
+        },
+      ]}
+    />
   );
 }

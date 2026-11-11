@@ -1,16 +1,16 @@
+import type { CSSProperties } from 'react';
 import { useI18n } from '@/contexts/I18nContext';
 import { useContent } from '@/contexts/ContentContext';
-import Container from './../components/ui/Container';
-import phone from "../assets/icons/phone.svg";
-import mail from "../assets/icons/mail.svg";
-import location from "../assets/icons/location.svg";
-import { useState, useEffect } from 'react'; 
+import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { Loader2 } from 'lucide-react';
 import { api } from '@/lib/api';
 import { Seo } from '@/components/Seo';
 import { phoneForLocale, telHref, whatsappHref } from '@/lib/site';
 import { PACKAGE_TIERS } from '@/data/packages';
 import { t as translate } from '@/lib/i18n';
+import { PageHero, Pill, SectionHead, Ticker, useReveal, WordsReveal } from '@/components/site/blocks';
+import { AccNotice, FieldLabel } from '@/components/site/account/ui';
 
 /** Service keys used by the "Discuss this service" links on /services. */
 const SERVICE_KEYS: Record<string, string> = {
@@ -56,9 +56,8 @@ const Contact = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
     const [submitError, setSubmitError] = useState('');
-    const [isFormValid, setIsFormValid] = useState(false); 
 
-    const { t, locale } = useI18n();
+    const { t, tRaw, locale } = useI18n();
     const { content, loading } = useContent();
     const settings = content?.settings;
 
@@ -98,13 +97,11 @@ const Contact = () => {
         return lines.join('\n');
     };
 
-    useEffect(() => {
-        const requiredFields = ['name', 'email', 'industry', 'projectOverview', 'message'];
-        const isValid = requiredFields.every(field => 
-            formData[field as keyof typeof formData]?.trim() !== ''
-        );
-        setIsFormValid(isValid);
-    }, [formData]);
+    // Derived on every render, so the submit button tracks the fields exactly.
+    const requiredFields = ['name', 'email', 'industry', 'projectOverview', 'message'];
+    const isFormValid = requiredFields.every(field =>
+        formData[field as keyof typeof formData]?.trim() !== ''
+    );
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -138,7 +135,7 @@ const Contact = () => {
             };
 
             await api.createInquiry(leadData);
-        } catch (error: any) {
+        } catch (error) {
             console.error('Failed to save lead in CRM:', error);
         }
 
@@ -161,228 +158,203 @@ const Contact = () => {
         setIsSubmitting(false);
     };
 
+    const accent = tRaw<string[]>('site.account.contact.accent', []);
+    const splitRef = useReveal<HTMLDivElement>();
+    const whyRef = useReveal<HTMLDivElement>();
+
+    const whyItems = [
+        t('public.contact.hero.items.premiumUi'),
+        t('public.contact.hero.items.scalableBackend'),
+        t('public.contact.hero.items.marketplaceInfra'),
+        t('public.contact.hero.items.adminDashboards'),
+    ];
+
     if (loading) {
         return (
-            <div className="flex min-h-screen items-center justify-center">
-                <div className="text-white">{t('public.contact.loading')}</div>
+            <div className="flex min-h-[70svh] items-center justify-center">
+                <div className="as-mono text-[var(--as-fg-soft)]">{t('public.contact.loading')}</div>
             </div>
         );
     }
 
+    const channels = [
+        { label: t('site.account.contact.phone'), value: displayPhoneText, href: phoneHref },
+        { label: t('site.account.contact.email'), value: t('public.contact.details.email'), href: cleanedEmailHref || `mailto:${t('public.contact.details.email').trim()}` },
+        {
+            label: t('site.account.contact.whatsapp'),
+            value: t('site.account.contact.openChat'),
+            href: whatsappHref(contactPhone),
+            external: true,
+        },
+        { label: t('site.account.contact.office'), value: t('public.contact.details.location') },
+    ];
+
+    const fieldProps = {
+        onChange: handleInputChange,
+        disabled: isSubmitting,
+        className: 'acc-input',
+    };
+
     return (
-        <div className='mt-[60px] flex flex-col justify-center items-center'>
+        <>
             <Seo
               page="contact"
               breadcrumbs={[{ name: t('nav.contact'), path: '/contact' }]}
             />
-            <Container className="flex flex-col justify-center items-center mb-12">
-                <h2 className="font-display text-[38px] font-bold text-white text-center">{t('public.contact.heroTitle')}</h2>
-                <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">
-                    {t('public.contact.heroCopy')}
-                </p>
-                
-                <div className="mt-12 flex flex-col md:flex-row gap-12">
-                  <div className="md:w-1/2">
-                    <ul className="space-y-4 w-full max-w-[366px]">
-                      <li className="flex items-start">
-                         <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                         <h3 className="font-display text-text-muted text-[18px]">{t('public.contact.hero.items.premiumUi')}</h3>
-                      </li>
-                      <li className="flex items-start">
-                          <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          <h3 className="font-display text-text-muted text-[18px]">{t('public.contact.hero.items.scalableBackend')}</h3>
-                      </li>
-                      <li className="flex items-start">
-                          <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          <h3 className="font-display text-text-muted  text-[18px]">{t('public.contact.hero.items.marketplaceInfra')}</h3>
-                      </li>
-                      <li className="flex items-start">
-                          <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                          <h3 className="font-display text-text-muted text-[18px]">{t('public.contact.hero.items.adminDashboards')}</h3>
-                      </li>
-                    </ul>
-                  </div>
-                  
-                  <div className="md:w-1/2">
-                    <div className="space-y-6">
-                      <div className='flex items-center gap-[10px]'>
-                        <img src={phone} alt={t('public.contact.alt.phone')} className="icon-adaptive w-5 h-5" />
-                            <a href={phoneHref} className="font-inter text-text-muted text-[16px] hover:text-white transition-colors">{displayPhoneText}</a>
-                      </div>
-                      <div className='flex items-center gap-[10px]'>
-                        <img src={mail} alt={t('public.contact.alt.mail')} className="icon-adaptive w-5 h-5" />
-                            <a href={cleanedEmailHref} className="font-inter text-text-muted text-[16px] hover:text-white transition-colors">{t('public.contact.details.email')}</a>
-                      </div>
-                      <div className='flex items-center gap-[10px]'>
-                        <img src={location} alt={t('public.contact.alt.location')} className="icon-adaptive w-5 h-5" />
-                        <p className="font-inter text-text-muted text-[16px]"> {t('public.contact.details.location')}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            </Container>
 
-            <Container className='mb-[60px] md:mb-[100px]'>
-                <div className="max-w-[800px] mx-auto">
-                    <div className="mb-10 text-center">
-                        <h2 className="font-display text-[26px] font-bold text-white mb-4">{t('public.contact.form.title')}</h2>
-                        <p className="font-inter text-[18px] text-text-muted">
-                            {t('public.contact.form.copy')}
-                        </p>
+            <PageHero
+                short
+                tone="rust"
+                word={t('site.account.contact.word')}
+                num="@"
+                eyebrow={t('nav.contact')}
+                title={t('site.account.contact.title')}
+                accent={accent}
+                lead={t('site.account.contact.lead')}
+                actions={
+                    <>
+                        <Pill href="#contact-form" variant="light">{t('public.contact.form.title')}</Pill>
+                        <Pill href={whatsappHref(contactPhone)} variant="ghost" target="_blank" rel="noopener noreferrer">
+                            {t('site.account.contact.whatsapp')}
+                        </Pill>
+                    </>
+                }
+            />
+
+            <section className="as-section--tight">
+                <div ref={splitRef} className="as-wrap grid gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-[clamp(48px,6vw,110px)]">
+                    {/* Direct lines */}
+                    <div className="min-w-0 lg:sticky lg:top-[calc(var(--as-header-h)+32px)] lg:self-start">
+                        <p className="as-eyebrow mb-6" data-reveal>{t('site.account.contact.channels')}</p>
+                        <ul className="acc-rows">
+                            {channels.map((c, i) => (
+                                <li key={c.label} data-reveal="left" style={{ '--d': `${i * 80}ms` } as CSSProperties}>
+                                    {c.href ? (
+                                        <a
+                                            href={c.href}
+                                            className="acc-row acc-row--stack"
+                                            {...(c.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                                        >
+                                            <span className="acc-row__label">{c.label}</span>
+                                            <span className="acc-row__value">{c.value}</span>
+                                            <span className="acc-row__arrow" aria-hidden>→</span>
+                                        </a>
+                                    ) : (
+                                        <div className="acc-row acc-row--stack">
+                                            <span className="acc-row__label">{c.label}</span>
+                                            <span className="acc-row__value">{c.value}</span>
+                                        </div>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
                     </div>
 
-                    {submitSuccess && (
-                        <div className="mb-6 p-4 bg-green-900/20 border border-green-500 rounded-lg">
-                            <p className="text-green-400 font-inter text-center">
-                                {t('public.contact.form.success') || 'Thank you! Your message has been sent successfully. We will contact you soon.'}
-                            </p>
-                        </div>
-                    )}
+                    {/* Request form */}
+                    <div id="contact-form" className="as-box min-w-0 !p-[clamp(22px,3.4vw,48px)]" data-reveal="scale">
+                        <p className="as-eyebrow">{t('site.account.contact.formEyebrow')}</p>
+                        <h2 className="as-title as-title--sm mt-4">{t('public.contact.form.title')}</h2>
+                        <p className="as-lead mt-4 !text-[16px]">{t('public.contact.form.copy')}</p>
 
-                    {submitError && (
-                        <div className="mb-6 p-4 bg-red-900/20 border border-red-500 rounded-lg">
-                            <p className="text-red-400 font-inter text-center">
-                                {submitError}
-                            </p>
+                        <div className="mt-8 grid gap-3 empty:hidden">
+                            {submitSuccess && <AccNotice tone="success">{t('site.account.contact.success')}</AccNotice>}
+                            {submitError && <AccNotice>{submitError}</AccNotice>}
                         </div>
-                    )}
 
-                    <form onSubmit={handleSubmit} className="space-y-8">
-                        <div className="space-y-6">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <form onSubmit={handleSubmit} className="mt-8 grid gap-6">
+                            <div className="grid gap-6 md:grid-cols-2">
                                 <div>
-                                    <label className="font-inter text-white text-[16px] font-semibold mb-2 block">
-                                        {t('public.contact.form.labels.name')} *
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        value={formData.name}
-                                        onChange={handleInputChange}
-                                        required
-                                        disabled={isSubmitting}
-                                        placeholder={t('public.contact.form.placeholders.name')}
-                                        className="field font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                                    />
+                                    <FieldLabel htmlFor="c-name" required>{t('public.contact.form.labels.name')}</FieldLabel>
+                                    <input id="c-name" type="text" name="name" value={formData.name} required autoComplete="name"
+                                        placeholder={t('public.contact.form.placeholders.name')} {...fieldProps} />
                                 </div>
                                 <div>
-                                    <label className="font-inter text-white text-[16px] font-semibold mb-2 block">
-                                        {t('public.contact.form.labels.company')}
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="company"
-                                        value={formData.company}
-                                        onChange={handleInputChange}
-                                        disabled={isSubmitting}
-                                        placeholder={t('public.contact.form.placeholders.company')}
-                                        className="field font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                                    />
+                                    <FieldLabel htmlFor="c-company">{t('public.contact.form.labels.company')}</FieldLabel>
+                                    <input id="c-company" type="text" name="company" value={formData.company} autoComplete="organization"
+                                        placeholder={t('public.contact.form.placeholders.company')} {...fieldProps} />
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="grid gap-6 md:grid-cols-2">
                                 <div>
-                                    <label className="font-inter text-white text-[16px] font-semibold mb-2 block">
-                                        {t('public.contact.form.labels.email')} *
-                                    </label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleInputChange}
-                                        required
-                                        disabled={isSubmitting}
-                                        placeholder={t('public.contact.form.placeholders.email')}
-                                        className="field font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                                    />
+                                    <FieldLabel htmlFor="c-email" required>{t('public.contact.form.labels.email')}</FieldLabel>
+                                    <input id="c-email" type="email" name="email" value={formData.email} required autoComplete="email"
+                                        placeholder={t('public.contact.form.placeholders.email')} {...fieldProps} />
                                 </div>
                                 <div>
-                                    <label className="font-inter text-white text-[16px] font-semibold mb-2 block">
-                                        {t('public.contact.form.labels.phone')}
-                                    </label>
-                                    <input
-                                        type="tel"
-                                        name="phone"
-                                        value={formData.phone}
-                                        onChange={handleInputChange}
-                                        disabled={isSubmitting}
-                                        placeholder={t('public.contact.form.placeholders.phone')}
-                                        className="field font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                                    />
+                                    <FieldLabel htmlFor="c-phone">{t('public.contact.form.labels.phone')}</FieldLabel>
+                                    <input id="c-phone" type="tel" name="phone" value={formData.phone} autoComplete="tel"
+                                        placeholder={t('public.contact.form.placeholders.phone')} {...fieldProps} />
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="grid gap-6 md:grid-cols-2">
                                 <div>
-                                    <label className="font-inter text-white text-[16px] font-semibold mb-2 block">
-                                        {t('public.contact.form.labels.industry')} *
-                                    </label>
-                                    <select
-                                        name="industry"
-                                        value={formData.industry}
-                                        onChange={handleInputChange}
-                                        required
-                                        disabled={isSubmitting}
-                                        className="field font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                                    >
-                                        <option value="" className="bg-surface">{t('public.contact.form.options.choose')}</option>
-                                        <option value="banking" className="bg-surface">{t('public.contact.form.options.banking')}</option>
-                                        <option value="ecommerce" className="bg-surface">{t('public.contact.form.options.ecommerce')}</option>
-                                        <option value="software" className="bg-surface">{t('public.contact.form.options.software')}</option>
+                                    <FieldLabel htmlFor="c-industry" required>{t('public.contact.form.labels.industry')}</FieldLabel>
+                                    <select id="c-industry" name="industry" value={formData.industry} required {...fieldProps}>
+                                        <option value="">{t('public.contact.form.options.choose')}</option>
+                                        <option value="banking">{t('public.contact.form.options.banking')}</option>
+                                        <option value="ecommerce">{t('public.contact.form.options.ecommerce')}</option>
+                                        <option value="software">{t('public.contact.form.options.software')}</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="font-inter text-white text-[16px] font-semibold mb-2 block">
-                                        {t('public.contact.form.labels.projectOverview')} *
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="projectOverview"
-                                        value={formData.projectOverview}
-                                        onChange={handleInputChange}
-                                        required
-                                        disabled={isSubmitting}
-                                        placeholder={t('public.contact.form.placeholders.projectOverview')}
-                                        className="field font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                                    />
+                                    <FieldLabel htmlFor="c-project" required>{t('public.contact.form.labels.projectOverview')}</FieldLabel>
+                                    <input id="c-project" type="text" name="projectOverview" value={formData.projectOverview} required
+                                        placeholder={t('public.contact.form.placeholders.projectOverview')} {...fieldProps} />
                                 </div>
                             </div>
 
                             <div>
-                                <label className="font-inter text-white text-[16px] font-semibold mb-2 block">
-                                    {t('public.contact.form.labels.message')} *
-                                </label>
-                                <textarea
-                                    name="message"
-                                    value={formData.message}
-                                    onChange={handleInputChange}
-                                    required
-                                    disabled={isSubmitting}
-                                    rows={6}
-                                    placeholder={t('public.contact.form.placeholders.message')}
-                                    className="field font-inter text-text-subtle font-bold text-[13px] placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                                />
+                                <FieldLabel htmlFor="c-message" required>{t('public.contact.form.labels.message')}</FieldLabel>
+                                <textarea id="c-message" name="message" value={formData.message} required rows={6}
+                                    placeholder={t('public.contact.form.placeholders.message')} {...fieldProps} />
                             </div>
-                            <p className='font-inter text-[10px] text-text-subtle font-bold'>{t('public.contact.form.tip')} * - {t('public.contact.form.required')}</p>
-                        </div>
 
-                        <div className="flex flex-col items-end gap-2 pt-4">
-                            <button
-                                type="submit"
-                                disabled={!isFormValid || isSubmitting}
-                                className={`bg-primary hover:bg-primary-hover text-on-primary font-inter py-3 px-8 rounded-md transition-colors duration-300 cursor-pointer text-[18px] whitespace-nowrap ${!isFormValid || isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
-                            >
-                                {isSubmitting ? t('public.contact.form.submitting') || 'Sending...' : t('public.contact.form.submit')}
-                            </button>
-                            <p className="font-inter text-text-subtle text-[10px] text-right">
-                                {t('public.contact.form.privacy')}
+                            <p className="text-[13px] leading-relaxed text-[var(--as-fg-soft)]">
+                                {t('public.contact.form.tip')}{' '}
+                                <span className="as-mono whitespace-nowrap text-[var(--as-accent)]">* — {t('site.account.contact.required')}</span>
                             </p>
-                        </div>
-                    </form>
+
+                            <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[var(--as-line)] pt-6">
+                                <p className="max-w-[40ch] text-[12.5px] leading-relaxed text-[var(--as-fg-soft)]">
+                                    {t('public.contact.form.privacy')}
+                                </p>
+                                <button type="submit" disabled={!isFormValid || isSubmitting} className="as-btn as-btn--accent">
+                                    {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" aria-hidden />}
+                                    <span>{isSubmitting ? t('site.account.contact.submitting') : t('public.contact.form.submit')}</span>
+                                    {!isSubmitting && <span className="as-arrow" aria-hidden>→</span>}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </Container>
-        </div>
+            </section>
+
+            <Ticker items={whyItems} duration={28} />
+
+            <section className="as-section as-bg-cream">
+                <div ref={whyRef} className="as-wrap grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-[clamp(48px,6vw,110px)]">
+                    <SectionHead
+                        eyebrow={t('site.account.contact.whyEyebrow')}
+                        title={t('public.contact.heroTitle')}
+                        size="sm"
+                        className="content-start lg:sticky lg:top-[calc(var(--as-header-h)+32px)] lg:self-start"
+                    />
+                    <div className="grid gap-10">
+                        <WordsReveal text={t('public.contact.heroCopy')} className="!text-[clamp(22px,2.6vw,38px)]" />
+                        <ul className="as-steps">
+                            {whyItems.map((item, i) => (
+                                <li key={item} data-reveal style={{ '--d': `${i * 70}ms` } as CSSProperties}>
+                                    <span className="as-step-n">{String(i + 1).padStart(2, '0')}</span>
+                                    <h3 className="as-h3 self-center">{item}</h3>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </>
     );
 }
 

@@ -1,57 +1,63 @@
-import Container from './../Container'
-import eCommerce from '../../../assets/images/eCommerce.svg'
-import software from '../../../assets/images/software.svg'
-import banking from '../../../assets/images/banking.svg'
-import { useI18n } from '@/contexts/I18nContext'
+import eCommerce from '../../../assets/images/eCommerce.svg';
+import software from '../../../assets/images/software.svg';
+import banking from '../../../assets/images/banking.svg';
+import { useI18n } from '@/contexts/I18nContext';
+import { Pill, SectionHead, StackCards, type StackItem } from '@/components/site/blocks';
 
+const ITEMS = [
+  { key: 'ecommerce', img: eCommerce, tone: 'mustard' },
+  { key: 'software', img: software, tone: 'burnt' },
+  { key: 'banking', img: banking, tone: 'rust' },
+] as const;
 
+/** The three service lines as sticky plaster cards that pile up while scrolling. */
 const WeBuild = () => {
-  const { t } = useI18n()
-  const items = [
-    {
-      img: eCommerce,
-      alt: t('public.home.build.items.ecommerce.alt'),
-      title: t('public.home.build.items.ecommerce.title'),
-      text: t('public.home.build.items.ecommerce.text'),
-    },
-    {
-      img: software,
-      alt: t('public.home.build.items.software.alt'),
-      title: t('public.home.build.items.software.title'),
-      text: t('public.home.build.items.software.text'),
-    },
-    {
-      img: banking,
-      alt: t('public.home.build.items.banking.alt'),
-      title: t('public.home.build.items.banking.title'),
-      text: t('public.home.build.items.banking.text'),
-    },
-  ] as const;
-  return (
-    <div className='mt-[80px] md:mt-[100px] lg:mt-[120px]'>
-        <Container className='flex flex-col justify-center items-center'>
-            <div className='w-full flex flex-col justify-center items-center gap-[10px]'>
-              <h3 className='font-display text-white text-[26px] md:text-[38px] font-bold'>{t('public.buildWhat')}</h3>
-              <p className='font-inter text-text-muted max-w-[370px] md:max-w-[800px] text-center text-[13px] md:text-[18px]'>
-                {t('public.buildDesc')}
-              </p>
-            </div>
-            <div className='mt-[60px] w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[40px] lg:gap-[20px]'>
-              {items.map((item, idx) => (
-                <div
-                  key={idx}
-                  tabIndex={0}
-                  className='flex h-full flex-col gap-3 card card-interactive p-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus'
-                >
-                  <img src={item.img} alt={item.alt} />
-                  <h4 className='font-display text-white text-[20px] md:text-[24px] font-semibold max-w-[250px]'>{item.title}</h4>
-                  <p className='font-inter text-text-muted text-[13px] md:text-[16px]'>{item.text}</p>
-                </div>
-              ))}
-            </div>
-        </Container>
-    </div>
-  )
-}
+  const { t, tRaw } = useI18n();
+  const lines = tRaw<string[]>('site.home.servicesTitle', []) || [];
+  const words = tRaw<string[]>('site.home.serviceWords', []) || [];
 
-export default WeBuild
+  const items: StackItem[] = ITEMS.map((it, i) => ({
+    word: words[i] || '',
+    tone: it.tone,
+    to: '/services',
+    title: t(`public.home.build.items.${it.key}.title`),
+    text: t(`public.home.build.items.${it.key}.text`),
+    tags: tRaw<string[]>(`site.home.serviceTags.${it.key}`, []) || [],
+    extra: (
+      <img
+        src={it.img}
+        alt={t(`public.home.build.items.${it.key}.alt`)}
+        width={300}
+        height={172}
+        loading="lazy"
+        decoding="async"
+        className="absolute right-[clamp(18px,2.6vw,32px)] top-[clamp(18px,2.6vw,32px)] h-auto w-[clamp(120px,22vw,300px)] rounded-[14px] border border-[rgba(255,244,225,.35)] object-cover shadow-[0_18px_40px_rgba(40,18,4,.28)]"
+      />
+    ),
+  }));
+
+  return (
+    <section id="services" aria-labelledby="home-services-title" className="as-wrap pb-[clamp(72px,12svh,140px)]">
+      <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-6 pb-9">
+        <SectionHead
+          id="home-services-title"
+          eyebrow={t('public.buildWhat')}
+          title={
+            <>
+              {lines[0]}
+              <br />
+              <em>{lines[1]}</em>
+            </>
+          }
+          lead={t('public.buildDesc')}
+        />
+        <Pill to="/services" variant="ghost" size="sm">
+          {t('public.home.ctas.services')}
+        </Pill>
+      </div>
+      <StackCards items={items} />
+    </section>
+  );
+};
+
+export default WeBuild;

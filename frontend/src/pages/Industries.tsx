@@ -1,130 +1,163 @@
-import Container from "../components/ui/Container";
+import type { CSSProperties } from 'react';
 import { useI18n } from '@/contexts/I18nContext';
-import { useNavigate } from 'react-router-dom';
-import eCommerce from "../assets/icons/e-commerce.svg";
-import beauty from "../assets/icons/beauty.svg";
-import marketplaces from "../assets/icons/marketplaces.svg";
-import manufacturing from "../assets/icons/manufacturing.svg";
-import logistics from "../assets/icons/logistics.svg";
-import finance from "../assets/icons/finance.svg";
-import startup from "../assets/icons/startup.svg";
-import trustedPeople from "../assets/images/trusted-people.svg";
+import eCommerce from '../assets/icons/e-commerce.svg';
+import beauty from '../assets/icons/beauty.svg';
+import marketplaces from '../assets/icons/marketplaces.svg';
+import manufacturing from '../assets/icons/manufacturing.svg';
+import logistics from '../assets/icons/logistics.svg';
+import finance from '../assets/icons/finance.svg';
+import startup from '../assets/icons/startup.svg';
+import trustedPeople from '../assets/images/trusted-people.svg';
 import { Seo } from '@/components/Seo';
+import { CtaWalk, PageHero, Pill, SectionHead, Ticker, useReveal, WALL, type WallTone } from '@/components/site/blocks';
+import { cn } from '@/lib/utils';
+import '@/components/site/company/company.css';
+
+const ITEMS = [
+  ['retail', eCommerce],
+  ['marketplaces', marketplaces],
+  ['banking', finance],
+  ['manufacturing', manufacturing],
+  ['beauty', beauty],
+  ['logistics', logistics],
+  ['startup', startup],
+] as const;
+
+const TONES: WallTone[] = ['amber', 'burnt', 'mustard', 'rust'];
 
 export function Industries() {
-  const { t } = useI18n();
-  const navigate = useNavigate();
-  const industries = [
-    {
-      icons: eCommerce,
-      category: t('public.industries.items.retail.category'),
-      title: t('public.industries.items.retail.title'),
-      description: t('public.industries.items.retail.description'),
-    },
-    {
-      icons: marketplaces,
-      category: t('public.industries.items.marketplaces.category'),
-      title: t('public.industries.items.marketplaces.title'),
-      description: t('public.industries.items.marketplaces.description'),
-    },
-    {
-      icons: finance,
-      category: t('public.industries.items.banking.category'),
-      title: t('public.industries.items.banking.title'),
-      description: t('public.industries.items.banking.description'),
-    },
-        {
-      icons: manufacturing,
-      category: t('public.industries.items.manufacturing.category'),
-      title: t('public.industries.items.manufacturing.title'),
-      description: t('public.industries.items.manufacturing.description'),
-    },
-    {
-      icons: beauty,
-      category: t('public.industries.items.beauty.category'),
-      title: t('public.industries.items.beauty.title'),
-      description: t('public.industries.items.beauty.description'),
-    },
-    {
-      icons: logistics,
-      category: t('public.industries.items.logistics.category'),
-      title: t('public.industries.items.logistics.title'),
-      description: t('public.industries.items.logistics.description'),
-    },
-    {
-      icons: startup,
-      category: t('public.industries.items.startup.category'),
-      title: t('public.industries.items.startup.title'),
-      description: t('public.industries.items.startup.description'),
-    },
-  ];
+  const { t, tRaw } = useI18n();
+  const gridRef = useReveal<HTMLDivElement>();
+  const trustRef = useReveal<HTMLDivElement>();
+  const cta = tRaw<string[]>('site.company.industries.ctaTitle', []) || [];
+
+  const industries = ITEMS.map(([key, icon]) => ({
+    key,
+    icon,
+    category: t(`public.industries.items.${key}.category`),
+    title: t(`public.industries.items.${key}.title`),
+    description: t(`public.industries.items.${key}.description`),
+  }));
+  const total = String(industries.length).padStart(2, '0');
 
   return (
-    <div className="mt-[60px] flex flex-col justify-center items-center">
-      <Seo
-        page="industries"
-        breadcrumbs={[{ name: t('nav.industries'), path: '/industries' }]}
+    <>
+      <Seo page="industries" breadcrumbs={[{ name: t('nav.industries'), path: '/industries' }]} />
+
+      <PageHero
+        tone="amber"
+        word={t('site.company.industries.word')}
+        num={String(industries.length)}
+        eyebrow={t('site.company.industries.eyebrow')}
+        title={t('nav.industries', 'Industries')}
+        lead={t('public.industriesIntro')}
+        crumbs={[{ label: t('nav.home'), to: '/' }, { label: t('nav.industries') }]}
+        actions={
+          <Pill to="/contact" variant="light">
+            {t('public.industriesCta')}
+          </Pill>
+        }
       />
-      <Container className="flex flex-col justify-center items-center">
-        <h2 className="font-display text-[38px] font-bold text-white">{t('nav.industries', 'Industries')}</h2>
-        <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">{t('public.industriesIntro')}</p>
-      </Container>
 
-      <Container>
-        <div className="mt-[60px] w-full grid grid-cols-1 md:grid-cols-2 gap-[100px] place-items-center">
+      {/* Sector tiles: a 3-column bento (first and last span two) revealed with a stagger. */}
+      <section className="as-section" aria-label={t('nav.industries', 'Industries')}>
+        <div ref={gridRef} className="as-wrap grid gap-4 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
           {industries.map((item, idx) => {
-            const isLastSingle =
-              industries.length % 2 === 1 && idx === industries.length - 1;
-
+            const tone = WALL[TONES[idx % TONES.length]];
+            const wide = idx === 0 || idx === industries.length - 1;
             return (
               <div
-                key={item.category}
-                className={`w-full max-w-[520px] h-full card card-interactive p-6 flex flex-col gap-[14px] ${
-                  isLastSingle ? "md:col-span-2 md:justify-self-center" : ""
-                }`}
+                key={item.key}
+                data-reveal
+                style={{ '--d': `${Math.min(idx, 6) * 70}ms` } as CSSProperties}
+                className={cn('flex min-w-0', wide && 'lg:col-span-2', idx === industries.length - 1 && 'md:col-span-2')}
               >
-                <div className="flex items-center gap-3">
-                  <img src={item.icons} alt={item.category} className="icon-adaptive w-8 h-8" />
-                  <h3 className="font-display text-white text-[26px] font-semibold">
-                    {item.category}
-                  </h3>
-                </div>
-
-                <div className="max-w-[450px] flex flex-col gap-[10px]">
-                  <h4 className="font-display text-white text-[22px] font-bold">
-                    {item.title}
-                  </h4>
-                  <p className="font-inter text-text-muted text-[18px] flex-1">
-                    {item.description}
-                  </p>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => navigate('/contact')}
-                  className="bg-primary hover:bg-primary-hover rounded-md px-4 py-2.5 font-inter font-medium text-on-primary cursor-pointer self-center md:self-start transition-colors"
-                >
-                  {t('public.industriesCta')}
-                </button>
+                <article className="as-tile as-tile--hover cmp-ind flex w-full min-w-0 flex-col gap-4">
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="cmp-ind__icon as-stucco" style={{ '--c': tone.c } as CSSProperties}>
+                      <img src={item.icon} alt={item.category} width={28} height={28} loading="lazy" decoding="async" />
+                    </span>
+                    <span className="as-mono text-[var(--as-fg-soft)]">
+                      {String(idx + 1).padStart(2, '0')} / {total}
+                    </span>
+                  </div>
+                  <h2 className="as-mono mt-4 text-[var(--as-accent)]">{item.category}</h2>
+                  <h3 className={cn('as-h3', wide && 'lg:max-w-[18ch] lg:text-[clamp(26px,2.8vw,40px)]')}>{item.title}</h3>
+                  <p className={cn('flex-1 leading-relaxed text-[var(--as-fg-soft)]', wide && 'lg:max-w-[52ch]')}>{item.description}</p>
+                  <div className="pt-2">
+                    <Pill to="/contact" variant="ghost" size="sm">
+                      {t('public.industriesCta')}
+                    </Pill>
+                  </div>
+                  <span className="cmp-ind__ghost" aria-hidden>
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
+                </article>
               </div>
             );
           })}
         </div>
-      </Container>
+      </section>
 
-      <Container className="flex justify-between mt-[120px] flex-col md:flex-row gap-[40px] md:gap-0 items-center md:items-start mb-[60px] md:mb-[100px]">
-        <div className="flex flex-col gap-[10px] max-w-[586px] justify-center w-full md:w-auto ">
-          <h3 className="font-display text-white text-[21px] md:text-[26px] font-semibold text-center md:text-left">{t('public.industries.trustedTitle')}</h3>
-          <p className="font-inter text-[10px] md:text-[13px] text-text-muted text-center md:text-left">{t('public.industries.trustedCopy1')}</p>
-          <p className="font-inter text-[10px] md:text-[13px] text-text-muted text-center md:text-left">{t('public.industries.trustedCopy2')}</p>
+      <Ticker items={industries.map((i) => i.category)} duration={40} />
+
+      <section className="as-section as-bg-cream" aria-labelledby="industries-trusted">
+        <div ref={trustRef} className="as-wrap grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-7">
+            <SectionHead
+              eyebrow={t('site.company.industries.trustedEyebrow')}
+              title={t('public.industries.trustedTitle')}
+              id="industries-trusted"
+              size="sm"
+            />
+            <div className="mt-8 grid gap-5 text-[16px] leading-[1.7] text-[var(--as-fg-soft)] md:text-[17px]">
+              <p data-reveal style={{ '--d': '160ms' } as CSSProperties}>
+                {t('public.industries.trustedCopy1')}
+              </p>
+              <p data-reveal style={{ '--d': '240ms' } as CSSProperties}>
+                {t('public.industries.trustedCopy2')}
+              </p>
+            </div>
+          </div>
+          <div className="lg:col-span-5">
+            <div className="cmp-photo mx-auto aspect-square max-w-[460px]" data-reveal="scale" style={{ '--d': '120ms' } as CSSProperties}>
+              <img
+                src={trustedPeople}
+                alt={t('site.company.industries.imgAlt', 'Trusted People')}
+                width={243}
+                height={243}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
         </div>
+      </section>
 
-        <img
-          src={trustedPeople}
-          alt="Trusted People"
-          className="w-[308px] h-[168px] md:w-auto md:h-auto max-w-[586px] "
-        />
-      </Container>
-    </div>
+      <CtaWalk
+        tone="rust"
+        eyebrow={t('site.company.industries.ctaEyebrow')}
+        title={
+          <>
+            {cta[0]}
+            <br />
+            <em>{cta[1]}</em>
+            <br />
+            {cta[2]}
+          </>
+        }
+        lead={t('site.company.industries.ctaLead')}
+        actions={
+          <>
+            <Pill to="/contact" variant="light">
+              {t('public.industriesCta')}
+            </Pill>
+            <Pill to="/case-studies" variant="ghost">
+              {t('nav.caseStudies')}
+            </Pill>
+          </>
+        }
+      />
+    </>
   );
 }

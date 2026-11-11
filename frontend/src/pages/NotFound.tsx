@@ -1,45 +1,67 @@
-import { Link } from 'react-router-dom';
+import type { CSSProperties } from 'react';
+import { useRef } from 'react';
 import { useI18n } from '@/contexts/I18nContext';
 import { Seo } from '@/components/Seo';
-import Container from '@/components/ui/Container';
+import { Pill, WALL } from '@/components/site/blocks';
+import { prefersReducedMotion, useScrollFrame } from '@/components/site/scroll';
+import '@/components/site/company/company.css';
 
+/**
+ * 404: one burnt plaster wall. The digits drop onto the floor one by one and
+ * the zero keeps wobbling; the vertical wall word says where you ended up.
+ */
 export function NotFound() {
   const { t } = useI18n();
+  const wordRef = useRef<HTMLSpanElement>(null);
+  const code = t('notFound.code', '404');
+  const tone = WALL.burnt;
+
+  useScrollFrame((y) => {
+    if (prefersReducedMotion() || !wordRef.current) return;
+    wordRef.current.style.transform = `rotate(180deg) translate3d(0, ${(Math.min(y, 900) * 0.12).toFixed(1)}px, 0)`;
+  });
 
   return (
     <>
       <Seo page="notFound" noindex />
-      <Container className="glow-bg flex min-h-[60vh] flex-col items-center justify-center py-24 text-center">
-        <p className="font-display text-[72px] font-bold leading-none text-primary md:text-[110px]">
-          {t('notFound.code', '404')}
-        </p>
-        <h1 className="mt-4 font-display text-[24px] font-bold text-white md:text-[34px]">
-          {t('notFound.title')}
-        </h1>
-        <p className="mt-4 max-w-md text-[14px] leading-relaxed text-text-muted md:text-[16px]">
-          {t('notFound.copy')}
-        </p>
-        <div className="mt-9 flex flex-wrap justify-center gap-3">
-          <Link
-            to="/"
-            className="rounded-lg bg-primary px-6 py-3 text-[14px] font-semibold text-on-primary transition-colors hover:bg-primary-hover"
-          >
-            {t('notFound.home')}
-          </Link>
-          <Link
-            to="/packages"
-            className="rounded-lg border border-border-strong px-6 py-3 text-[14px] font-medium text-text transition-colors hover:bg-surface-3"
-          >
-            {t('notFound.packages')}
-          </Link>
-          <Link
-            to="/contact"
-            className="rounded-lg border border-border-strong px-6 py-3 text-[14px] font-medium text-text transition-colors hover:bg-surface-3"
-          >
-            {t('notFound.contact')}
-          </Link>
+      <section
+        className="as-hero cmp-404 as-stucco as-on-color"
+        style={{ '--c': tone.c, '--c-num': tone.num } as CSSProperties}
+        data-hero
+      >
+        <span className="cmp-404__num" aria-hidden>
+          {[...code].map((ch, i) => (
+            <span key={i} style={{ '--i': i } as CSSProperties}>
+              {ch}
+            </span>
+          ))}
+        </span>
+        <span ref={wordRef} className="as-hero__word" aria-hidden>
+          {t('site.company.notFound.word')}
+        </span>
+        <div className="as-hero__light" aria-hidden />
+        <div className="as-hero__floor as-concrete" aria-hidden />
+        <div className="as-hero__body">
+          <p className="as-eyebrow as-eyebrow--on-color as-page-enter">{t('site.company.notFound.eyebrow')}</p>
+          <h1 className="as-hero__title as-page-enter" style={{ animationDelay: '.15s' }}>
+            {t('notFound.title')}
+          </h1>
+          <p className="as-lead as-page-enter" style={{ animationDelay: '.25s' }}>
+            {t('notFound.copy')}
+          </p>
+          <div className="as-hero__actions as-page-enter" style={{ animationDelay: '.35s' }}>
+            <Pill to="/" variant="light">
+              {t('notFound.home')}
+            </Pill>
+            <Pill to="/packages" variant="ghost">
+              {t('notFound.packages')}
+            </Pill>
+            <Pill to="/contact" variant="ghost">
+              {t('notFound.contact')}
+            </Pill>
+          </div>
         </div>
-      </Container>
+      </section>
     </>
   );
 }

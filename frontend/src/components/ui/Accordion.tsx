@@ -13,21 +13,27 @@ interface AccordionProps {
   className?: string;
 }
 
+const EASE = 'ease-[cubic-bezier(.2,.7,.1,1)]';
+
 /**
  * Disclosure list used for the FAQ. Native buttons + aria-expanded so the
  * questions stay reachable by keyboard and readable by search crawlers —
  * answers are always in the DOM, only visually collapsed.
+ *
+ * Look: ruled rows (reference "steps" table), a mono index, and a round +
+ * that turns into × as its row opens; the answer slides open by animating
+ * grid-template-rows 0fr → 1fr.
  */
 export function Accordion({ items, defaultOpen = 0, className }: AccordionProps) {
   const [open, setOpen] = useState<number | null>(defaultOpen);
   const baseId = useId();
 
   return (
-    <div className={cn('divide-y divide-border overflow-hidden rounded-2xl border border-border bg-surface/60', className)}>
+    <div className={cn('border-t-[1.5px] border-[var(--as-line-strong,var(--color-border-strong))]', className)}>
       {items.map((item, i) => {
         const expanded = open === i;
         return (
-          <div key={item.q}>
+          <div key={item.q} className="border-b-[1.5px] border-[var(--as-line,var(--color-border))]">
             <h3>
               <button
                 type="button"
@@ -35,21 +41,36 @@ export function Accordion({ items, defaultOpen = 0, className }: AccordionProps)
                 aria-expanded={expanded}
                 aria-controls={`${baseId}-panel-${i}`}
                 onClick={() => setOpen(expanded ? null : i)}
-                className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-5 text-left transition-colors hover:bg-surface-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus md:px-7 md:py-6"
+                className="group flex w-full cursor-pointer items-start gap-3 py-5 text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--as-accent,var(--color-focus))] md:gap-5 md:py-7"
               >
-                <span className="font-display text-[15px] font-semibold text-white md:text-[18px]">
+                <span
+                  aria-hidden
+                  className="w-7 shrink-0 pt-[.55em] font-mono text-[11px] tracking-[.06em] text-[var(--as-fg-soft,var(--color-text-muted))] md:w-9"
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span
+                  className={cn(
+                    'min-w-0 flex-1 font-display text-[17px] font-bold leading-[1.18] tracking-[-.015em] [font-stretch:112%] transition-[color,transform] duration-500 md:text-[23px]',
+                    EASE,
+                    'group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0',
+                    expanded ? 'text-[var(--as-accent,var(--color-primary))]' : 'text-[var(--as-fg,var(--color-text))]',
+                  )}
+                >
                   {item.q}
                 </span>
                 <span
                   aria-hidden
                   className={cn(
-                    'flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border text-text-muted transition-transform duration-300',
-                    expanded && 'rotate-45 border-primary text-primary',
+                    'relative grid h-10 w-10 shrink-0 place-items-center rounded-full border-[1.5px] transition-[transform,background-color,border-color,color] duration-500 motion-reduce:transition-none md:h-12 md:w-12',
+                    EASE,
+                    expanded
+                      ? 'rotate-[135deg] border-[var(--as-accent,var(--color-primary))] bg-[var(--as-accent,var(--color-primary))] text-[var(--as-bg,var(--color-bg))]'
+                      : 'border-[var(--as-line-strong,var(--color-border-strong))] text-[var(--as-fg,var(--color-text))] group-hover:rotate-90',
                   )}
                 >
-                  <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" d="M12 5v14M5 12h14" />
-                  </svg>
+                  <span className="absolute h-[2px] w-[38%] rounded-full bg-current" />
+                  <span className="absolute h-[38%] w-[2px] rounded-full bg-current" />
                 </span>
               </button>
             </h3>
@@ -58,12 +79,19 @@ export function Accordion({ items, defaultOpen = 0, className }: AccordionProps)
               role="region"
               aria-labelledby={`${baseId}-btn-${i}`}
               className={cn(
-                'grid transition-all duration-300 ease-out',
+                'grid transition-[grid-template-rows,opacity] duration-500 motion-reduce:transition-none',
+                EASE,
                 expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0',
               )}
             >
-              <div className="overflow-hidden">
-                <p className="px-5 pb-6 text-[14px] leading-relaxed text-text-muted md:px-7 md:text-[16px]">
+              <div className="min-h-0 overflow-hidden">
+                <p
+                  className={cn(
+                    'max-w-[68ch] pb-7 pl-10 pr-2 text-[15px] leading-[1.65] text-[var(--as-fg-soft,var(--color-text-muted))] transition-transform duration-500 motion-reduce:transition-none md:pb-9 md:pl-14 md:pr-16 md:text-[17px]',
+                    EASE,
+                    expanded ? 'translate-y-0' : '-translate-y-3',
+                  )}
+                >
                   {item.a}
                 </p>
               </div>

@@ -1,14 +1,30 @@
-import { Link } from 'react-router-dom';
+import type { CSSProperties, MouseEvent } from 'react';
+import { useEffect, useRef } from 'react';
 import { useI18n } from '@/contexts/I18nContext';
 import { Seo } from '@/components/Seo';
-import Container from '@/components/ui/Container';
-import { Section } from '@/components/ui/Section';
-import { Reveal } from '@/components/ui/Reveal';
 import { Accordion, type AccordionItem } from '@/components/ui/Accordion';
+import { CtaWalk, PageHero, Pill, useReveal } from '@/components/site/blocks';
+import { scrollToTarget, useScrollFrame } from '@/components/site/scroll';
+import '@/components/site/company/company.css';
+
+/**
+ * Questions are grouped into topics by their position in `faq.items` (the
+ * list has the same order in every language). Anything not listed here lands
+ * in the last topic, so a longer list never loses a question.
+ */
+const TOPICS: number[][] = [
+  [0, 1, 7],
+  [11, 2, 10],
+  [6, 4, 5, 3],
+  [8, 9],
+];
 
 export function Faq() {
   const { t, tRaw } = useI18n();
   const items = tRaw<AccordionItem[]>('faq.items', []) || [];
+  const names = tRaw<string[]>('site.company.faq.groups', []) || [];
+  const navRef = useRef<HTMLElement>(null);
+  const bodyRef = useReveal<HTMLDivElement>();
 
   // FAQPage markup is what earns the expandable Q&A block in search results.
   const faqSchema = {
@@ -21,54 +37,126 @@ export function Faq() {
     })),
   };
 
+  const used = new Set(TOPICS.flat());
+  const groups = TOPICS.map((idx, g) => {
+    const extra = g === TOPICS.length - 1 ? items.map((_, i) => i).filter((i) => !used.has(i)) : [];
+    return {
+      id: `faq-topic-${g + 1}`,
+      name: names[g] || '',
+      items: [...idx, ...extra].map((i) => items[i]).filter(Boolean),
+    };
+  }).filter((g) => g.items.length > 0);
+
+  // Topic positions, re-read when the layout changes (accordions opening,
+  // fonts, resize) instead of on every scroll frame.
+  const tops = useRef<number[]>([]);
+  const groupIds = groups.map((g) => g.id).join('|');
+  useEffect(() => {
+    const read = () => {
+      tops.current = groupIds.split('|').map((id) => {
+        const el = document.getElementById(id);
+        return el ? el.getBoundingClientRect().top + window.scrollY : Infinity;
+      });
+    };
+    const ro = new ResizeObserver(read);
+    ro.observe(document.body);
+    read();
+    return () => ro.disconnect();
+  }, [groupIds]);
+
+  // Highlight the topic currently in view (class toggles only, no re-render).
+  useScrollFrame((y) => {
+    const nav = navRef.current;
+    if (!nav) return;
+    const line = y + window.innerHeight * 0.4;
+    let current = 0;
+    tops.current.forEach((top, i) => {
+      if (top < line) current = i;
+    });
+    nav.querySelectorAll('a').forEach((a, i) => a.classList.toggle('is-on', i === current));
+  });
+
+  const jump = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    scrollToTarget(el);
+  };
+
   return (
     <>
       <Seo page="faq" schema={faqSchema} breadcrumbs={[{ name: t('nav.faq'), path: '/faq' }]} />
 
-      <div className="glow-bg">
-        <Container className="pb-4 pt-16 md:pt-24">
-          <Reveal className="mx-auto max-w-3xl text-center">
-            <span className="eyebrow">{t('nav.faq')}</span>
-            <h1 className="mt-5 font-display text-[32px] font-bold leading-tight text-white md:text-[48px]">
-              {t('faq.title')}
-            </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-[14px] leading-relaxed text-text-muted md:text-[17px]">
-              {t('faq.subtitle')}
-            </p>
-          </Reveal>
-        </Container>
-      </div>
+      <PageHero
+        short
+        tone="mustard"
+        word={t('site.company.faq.word')}
+        num="?"
+        eyebrow={t('nav.faq')}
+        title={t('faq.title')}
+        lead={t('faq.subtitle')}
+        crumbs={[{ label: t('nav.home'), to: '/' }, { label: t('nav.faq') }]}
+      />
 
-      <Section tight>
-        <div className="mx-auto max-w-3xl">
-          <Accordion items={items} />
-        </div>
-      </Section>
+      <section className="as-section">
+        <div ref={bodyRef} className="as-wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <aside className="lg:col-span-4">
+            <nav
+              ref={navRef}
+              aria-label={t('site.company.faq.topics')}
+              className="lg:sticky lg:top-[calc(var(--as-header-h)+32px)]"
+              data-reveal
+            >
+              <p className="as-eyebrow mb-5">{t('site.company.faq.topics')}</p>
+              <ul className="cmp-topics">
+                {groups.map((g) => (
+                  <li key={g.id}>
+                    <a href={`#${g.id}`} onClick={(e) => jump(e, g.id)}>
+                      <span>{g.name}</span>
+                      <span className="as-mono">{String(g.items.length).padStart(2, '0')}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </aside>
 
-      <Section tight className="glow-bg bg-ink-950">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <h2 className="font-display text-[26px] font-bold text-white md:text-[34px]">
-            {t('faq.ctaTitle')}
-          </h2>
-          <p className="mx-auto mt-4 text-[14px] leading-relaxed text-text-muted md:text-[16px]">
-            {t('faq.ctaCopy')}
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link
-              to="/contact"
-              className="rounded-lg bg-primary px-7 py-3.5 text-[15px] font-semibold text-on-primary transition-colors hover:bg-primary-hover"
-            >
-              {t('faq.ctaButton')}
-            </Link>
-            <Link
-              to="/packages"
-              className="rounded-lg border border-border-strong px-7 py-3.5 text-[15px] font-medium text-text transition-colors hover:bg-surface-3"
-            >
-              {t('nav.pricing')}
-            </Link>
+          <div className="grid gap-16 md:gap-24 lg:col-span-8">
+            {groups.map((g, gi) => (
+              <section key={g.id} id={g.id} aria-labelledby={`${g.id}-title`} className="scroll-mt-[calc(var(--as-header-h)+24px)]">
+                <div className="mb-6 flex items-end justify-between gap-4 md:mb-8" data-reveal style={{ '--d': '60ms' } as CSSProperties}>
+                  <h2 id={`${g.id}-title`} className="as-title as-title--sm">
+                    {g.name}
+                  </h2>
+                  <span className="as-mono shrink-0 pb-1 text-[var(--as-fg-soft)]">
+                    {String(gi + 1).padStart(2, '0')} / {String(groups.length).padStart(2, '0')}
+                  </span>
+                </div>
+                <div data-reveal style={{ '--d': '120ms' } as CSSProperties}>
+                  <Accordion items={g.items} defaultOpen={gi === 0 ? 0 : null} />
+                </div>
+              </section>
+            ))}
           </div>
-        </Reveal>
-      </Section>
+        </div>
+      </section>
+
+      <CtaWalk
+        tone="burnt"
+        eyebrow={t('site.company.faq.ctaEyebrow')}
+        title={t('faq.ctaTitle')}
+        lead={t('faq.ctaCopy')}
+        actions={
+          <>
+            <Pill to="/contact" variant="light">
+              {t('faq.ctaButton')}
+            </Pill>
+            <Pill to="/packages" variant="ghost">
+              {t('nav.pricing')}
+            </Pill>
+          </>
+        }
+      />
     </>
   );
 }

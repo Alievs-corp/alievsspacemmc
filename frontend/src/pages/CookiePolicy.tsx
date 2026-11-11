@@ -1,6 +1,5 @@
-import Container from '../components/ui/Container';
 import { useI18n } from '@/contexts/I18nContext';
-import { Helmet } from 'react-helmet-async';
+import { LegalContactCard, LegalLayout, LegalList } from '@/components/site/account/LegalLayout';
 
 const COOKIE_CONTENT = {
   en: {
@@ -194,147 +193,80 @@ const COOKIE_CONTENT = {
 } as const;
 
 export function CookiePolicy() {
-  const { locale } = useI18n();
+  const { locale, t } = useI18n();
   const currentYear = new Date().getFullYear();
 
   // Legal texts exist only in en/ru/az; other UI languages read the English version.
   const content = COOKIE_CONTENT[locale as keyof typeof COOKIE_CONTENT] ?? COOKIE_CONTENT.en;
+  const s = content.sections;
 
   return (
-    <div className='mt-[60px] flex flex-col justify-center items-center'>
-      <Helmet>
-        <title>{`${content.metaTitle} | ${content.companyName}`}</title>
-        <meta name="description" content={content.metaDescription} />
-        <meta property="og:title" content={`${content.metaTitle} | ${content.companyName}`} />
-        <meta property="og:description" content={content.metaDescription} />
-        <meta property="og:type" content="website" />
-      </Helmet>
-
-      <Container className="flex flex-col justify-center items-center mb-12">
-        <h2 className="font-display text-[38px] font-bold text-white">{content.title}</h2>
-        <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">
-          {content.companyName}
-        </p>
-        <p className="font-inter text-[16px] text-text-muted text-center max-w-[800px] mt-2">
-          {content.lastUpdatedLabel} {currentYear}
-        </p>
-      </Container>
-
-      <Container className="w-full mb-24">
-        <div className="flex flex-col items-center">
-          <div className="panel p-8 md:p-10 flex flex-col w-full max-w-4xl mx-auto hover:border-border-strong transition-all duration-300">
-            <p className="font-inter text-text-muted text-[16px] md:text-[18px] leading-relaxed mb-8 border-l-4 border-primary pl-4">
-              {content.intro}
-            </p>
-            <div className="space-y-8">
-              
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.whatAreCookies.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.whatAreCookies.body}</p>
-              </div>
-
-              <hr className="border-surface-3" />
-
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.types.title}</h3>
-
-                <h4 className="font-display text-white text-[18px] md:text-[20px] font-semibold mt-4 mb-2">{content.sections.types.essentialTitle}</h4>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.types.essentialBody}</p>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.types.essentialExamplesLabel}</p>
-                <ul className="list-disc pl-6 space-y-1 mb-4">
-                  {content.sections.types.essentialExamples.map((item) => (
-                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-
-                <h4 className="font-display text-white text-[18px] md:text-[20px] font-semibold mt-4 mb-2">{content.sections.types.analyticsTitle}</h4>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.types.analyticsBody}</p>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.types.analyticsExamplesLabel}</p>
-                <ul className="list-disc pl-6 space-y-1 mb-4">
-                  {content.sections.types.analyticsExamples.map((item) => (
-                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-
-                <h4 className="font-display text-white text-[18px] md:text-[20px] font-semibold mt-4 mb-2">{content.sections.types.marketingTitle}</h4>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.types.marketingBody}</p>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.types.marketingExamplesLabel}</p>
-                <ul className="list-disc pl-6 space-y-1">
-                  {content.sections.types.marketingExamples.map((item) => (
-                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <hr className="border-surface-3" />
-
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.thirdParty.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.thirdParty.body}</p>
-                <ul className="list-disc pl-6 space-y-1">
-                  {content.sections.thirdParty.list.map((item) => (
-                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mt-2">{content.sections.thirdParty.footer}</p>
-              </div>
-
-              <hr className="border-surface-3" />
-
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.managing.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.managing.body}</p>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.managing.body2}</p>
-                <ul className="list-disc pl-6 space-y-1">
-                  {content.sections.managing.list.map((item) => (
-                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mt-2">{content.sections.managing.footer}</p>
-              </div>
-
-              <hr className="border-surface-3" />
-
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.updates.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.updates.body}</p>
-              </div>
-
-              <hr className="border-surface-3" />
-
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.contact.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.contact.body}</p>
-                <div className="bg-surface p-4 rounded-lg mt-2 border border-surface-3">
-                  <p className="font-inter text-white text-[16px] md:text-[18px] font-semibold">{content.companyName}</p>
-                  <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.contact.emailLabel} info@alievsspace.com</p>
-                  <p className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                    {content.sections.contact.websiteLabel}{' '}
-                    <a
-                      href="https://alievsspace.com"
-                      className="text-primary hover:underline"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      https://alievsspace.com
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Container>
-    </div>
+    <LegalLayout
+      meta={{ title: content.metaTitle, description: content.metaDescription }}
+      title={content.title}
+      companyName={content.companyName}
+      lastUpdated={`${content.lastUpdatedLabel} ${currentYear}`}
+      word={t('site.account.legal.words.cookie')}
+      num="04"
+      tone="rust"
+      callout={content.intro}
+      sections={[
+        { id: 'what-are-cookies', title: s.whatAreCookies.title, body: <p>{s.whatAreCookies.body}</p> },
+        {
+          id: 'types-of-cookies',
+          title: s.types.title,
+          body: (
+            <>
+              <h3>{s.types.essentialTitle}</h3>
+              <p>{s.types.essentialBody}</p>
+              <p>{s.types.essentialExamplesLabel}</p>
+              <LegalList items={s.types.essentialExamples} />
+              <h3>{s.types.analyticsTitle}</h3>
+              <p>{s.types.analyticsBody}</p>
+              <p>{s.types.analyticsExamplesLabel}</p>
+              <LegalList items={s.types.analyticsExamples} />
+              <h3>{s.types.marketingTitle}</h3>
+              <p>{s.types.marketingBody}</p>
+              <p>{s.types.marketingExamplesLabel}</p>
+              <LegalList items={s.types.marketingExamples} />
+            </>
+          ),
+        },
+        {
+          id: 'third-party-cookies',
+          title: s.thirdParty.title,
+          body: (
+            <>
+              <p>{s.thirdParty.body}</p>
+              <LegalList items={s.thirdParty.list} />
+              <p>{s.thirdParty.footer}</p>
+            </>
+          ),
+        },
+        {
+          id: 'managing-cookies',
+          title: s.managing.title,
+          body: (
+            <>
+              <p>{s.managing.body}</p>
+              <p>{s.managing.body2}</p>
+              <LegalList items={s.managing.list} />
+              <p>{s.managing.footer}</p>
+            </>
+          ),
+        },
+        { id: 'updates', title: s.updates.title, body: <p>{s.updates.body}</p> },
+        {
+          id: 'contact',
+          title: s.contact.title,
+          body: (
+            <>
+              <p>{s.contact.body}</p>
+              <LegalContactCard companyName={content.companyName} emailLabel={s.contact.emailLabel} websiteLabel={s.contact.websiteLabel} />
+            </>
+          ),
+        },
+      ]}
+    />
   );
 }

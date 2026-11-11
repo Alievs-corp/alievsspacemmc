@@ -1,31 +1,25 @@
-import { Link } from 'react-router-dom';
-import { Section, SectionHeading } from '@/components/ui/Section';
-import { Reveal } from '@/components/ui/Reveal';
-import { Accordion, type AccordionItem } from '@/components/ui/Accordion';
 import { useI18n } from '@/contexts/I18nContext';
+import { Pill, SectionHead } from '@/components/site/blocks';
+import { FaqList, type FaqItem } from '@/components/site/home/FaqList';
 
-/** The six questions that most often block a decision. */
+/** The six questions that most often block a decision (also in the page's FAQPage schema). */
 const FaqTeaser = () => {
   const { t, tRaw } = useI18n();
-  const items = (tRaw<AccordionItem[]>('faq.items', []) || []).slice(0, 6);
+  const items = (tRaw<FaqItem[]>('faq.items', []) || []).slice(0, 6);
 
   return (
-    <Section>
-      <SectionHeading
-        eyebrow={t('nav.faq')}
-        title={t('home.faqTitle')}
-        subtitle={t('home.faqSubtitle')}
-        className="mb-12"
-      />
-      <div className="mx-auto max-w-3xl">
-        <Accordion items={items} />
-        <Reveal className="mt-7 text-center">
-          <Link to="/faq" className="text-[14px] font-medium text-primary hover:underline">
-            {t('home.faqCta')} →
-          </Link>
-        </Reveal>
+    <section id="faq" className="as-section">
+      <div className="as-wrap grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
+        <div className="lg:sticky lg:top-[calc(var(--as-header-h)+40px)] lg:self-start">
+          <SectionHead eyebrow={t('nav.faq')} title={t('home.faqTitle')} lead={t('home.faqSubtitle')} size="sm">
+            <Pill to="/faq" variant="ghost" size="sm" className="mt-3">
+              {t('home.faqCta')}
+            </Pill>
+          </SectionHead>
+        </div>
+        <FaqList items={items} />
       </div>
-    </Section>
+    </section>
   );
 };
 

@@ -7,8 +7,8 @@ export type Theme = 'light' | 'dark';
 const THEME_KEY = 'alievs_space_theme';
 
 const THEME_COLOR: Record<Theme, string> = {
-  dark: '#0B0B0B',
-  light: '#FFFFFF',
+  dark: '#17110d',
+  light: '#f6f1e8',
 };
 
 interface ThemeContextType {

@@ -1,12 +1,16 @@
 import { useLocation } from 'react-router-dom';
-import { useState, useEffect, type ChangeEvent, type FormEvent } from 'react';
-import Container from '../components/ui/Container';
+import { useState, useEffect, type ChangeEvent, type CSSProperties, type FormEvent } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useI18n } from '@/contexts/I18nContext';
+import { PageHero, Pill, useReveal } from '@/components/site/blocks';
+import { fill } from '@/components/site/work/text';
+import { cn } from '@/lib/utils';
+import '@/components/site/work/work.css';
 
 const Apply = () => {
   const { t } = useI18n();
   const location = useLocation();
+  const formRef = useReveal();
   const [position, setPosition] = useState('');
   const [formData, setFormData] = useState<{
     name: string;
@@ -22,48 +26,46 @@ const Apply = () => {
     resume: null,
   });
   type PositionKey = 'frontend-developer' | 'backend-developer' | 'ui-ux-designer';
-  
+
   const positionTitles: Record<PositionKey, string> = {
     'frontend-developer': 'Frontend Developer',
-    'backend-developer': 'Backend Developer', 
-    'ui-ux-designer': 'UX/UI Designer'
+    'backend-developer': 'Backend Developer',
+    'ui-ux-designer': 'UX/UI Designer',
   };
 
   const fullPositionTitles: Record<PositionKey, string> = {
     'frontend-developer': 'Frontend Developer',
     'backend-developer': 'Backend Developer',
-    'ui-ux-designer': 'UX/UI Designer'
+    'ui-ux-designer': 'UX/UI Designer',
   };
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const positionFromURL = queryParams.get('position') as PositionKey | null;
-    
+
     if (positionFromURL && positionFromURL in positionTitles) {
       setPosition(positionFromURL);
-      
-      setFormData(prev => ({
+
+      setFormData((prev) => ({
         ...prev,
-        position: positionTitles[positionFromURL]
+        position: positionTitles[positionFromURL],
       }));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
-
 
   const getPositionTitle = () => {
     if (position && position in fullPositionTitles) {
       return fullPositionTitles[position as PositionKey];
     }
-    return 'Position';
+    return '';
   };
 
-  const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -71,8 +73,17 @@ const Apply = () => {
     e.preventDefault();
   };
 
+  const positionTitle = getPositionTitle();
+  const heroTitle = positionTitle ? fill(t('site.work.apply.titleFor'), { position: positionTitle }) : t('site.work.apply.titleGeneric');
+  const req = (
+    <span className="wk-req" aria-hidden>
+      *
+    </span>
+  );
+  const rise = (i: number) => ({ '--d': `${i * 70}ms` }) as CSSProperties;
+
   return (
-    <div className="mt-[60px] flex flex-col justify-center items-center">
+    <>
       <Helmet>
         <title>{`${t('public.apply', 'Apply')} | Alievs Space MMC`}</title>
         <meta name="description" content={t('careersIntro')} />
@@ -80,130 +91,171 @@ const Apply = () => {
         <meta property="og:description" content={t('careersIntro')} />
         <meta property="og:type" content="website" />
       </Helmet>
-      <Container className="w-full">
-        <div className="max-w-[800px] mx-auto">
-          <div className="mb-10 text-center">
-            <h2 className="font-display text-[26px] md:text-[38px] font-bold text-white mb-4">
-              Apply for {getPositionTitle()}
-            </h2>
-            <p className="font-inter text-[13px] md:text-[18px] text-text-muted">
-              We review every application manually. No automated filters.
-            </p>
-          </div>
 
-          <form onSubmit={handleSubmit} className="space-y-8">
-            <div className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="font-inter text-white text-[13px] mb-2 block">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                    placeholder="Your full name"
-                    className="field font-inter text-white placeholder:text-text-muted/50 focus:outline-none focus:border-primary transition-colors duration-300"
-                  />
-                </div>
-                <div>
-                  <label className="font-inter text-white text-[13px] mb-2 block">
-                    Upload CV *
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="file"
-                      name="resume"
-                      onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                        setFormData(prev => ({
-                          ...prev,
-                          resume: e.target.files?.[0] ?? null,
-                        }))
-                      }
-                      required
-                      accept=".pdf,.doc,.docx"
-                      aria-label="Upload CV"
-                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                    />
-                    <div className="field font-inter text-white focus:outline-none transition-colors duration-300">
-                      {formData.resume ? (
-                        <span className="text-white/90">Selected: {formData.resume.name}</span>
-                      ) : (
-                        <span className="text-text-muted/60">Upload here</span>
-                      )}
-                    </div>
-                  </div>
-                  <p className="font-inter text-text-muted text-[13px] mt-2">
-                    Upload CV (PDF, max 10MB)
-                  </p>
-                </div>
-              </div>
+      <PageHero
+        short
+        word={t('site.work.apply.word')}
+        num="A"
+        tone="rust"
+        eyebrow={t('nav.careers')}
+        title={heroTitle}
+        accent={positionTitle ? positionTitle.split(/\s+/) : heroTitle.split(/\s+/).slice(-1)}
+        lead={t('site.work.apply.lead')}
+        crumbs={[{ label: t('nav.careers'), to: '/careers' }, { label: t('public.apply', 'Apply') }]}
+      />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="font-inter text-white text-[13px] mb-2 block">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    placeholder="your.email@example.com"
-                    className="field font-inter text-white placeholder:text-text-muted/50 focus:outline-none focus:border-primary transition-colors duration-300"
-                  />
-                </div>
-                <div>
-                  <label className="font-inter text-white text-[13px] mb-2 block">
-                    Portfolio / GitHub / LinkedIn
-                  </label>
-                  <input
-                    type="url"
-                    name="profileUrl"
-                    value={formData.profileUrl}
-                    onChange={handleInputChange}
-                    placeholder="https:// ..."
-                    className="field font-inter text-white placeholder:text-text-muted/50 focus:outline-none focus:border-primary transition-colors duration-300"
-                  />
-                </div>
-              </div>
+      <section className="as-section">
+        <div ref={formRef} className="as-wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
+          {/* Which role this is for, and what happens next. */}
+          <aside className="grid content-start gap-6 lg:col-span-4" data-reveal>
+            <div className="as-box grid gap-4">
+              <p className="as-eyebrow">{t('site.work.apply.positionLabel')}</p>
+              <p className="as-h3">{positionTitle || t('site.work.apply.openApplication')}</p>
+            </div>
+            <Pill to="/careers" variant="ghost" size="sm" arrow={false} className="justify-self-start">
+              {t('public.careers.back', '← Back to Careers')}
+            </Pill>
+          </aside>
 
-              {/* Short Message */}
-              <div>
-                <label className="font-inter text-white text-[13px] mb-2 block">
-                  Short Message
+          <form onSubmit={handleSubmit} className="grid gap-8 lg:col-span-8">
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="wk-field" data-reveal style={rise(0)}>
+                <label htmlFor="apply-name" className="wk-label">
+                  {t('site.work.apply.name')} {req}
+                  <span className="sr-only">({t('site.work.apply.required')})</span>
                 </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
+                <input
+                  id="apply-name"
+                  type="text"
+                  name="name"
+                  value={formData.name}
                   onChange={handleInputChange}
-                  rows={4}
-                  placeholder="Brief note about your experience or motivation"
-                  className="field font-inter text-white placeholder:text-text-muted/50 focus:outline-none focus:border-primary transition-colors duration-300"
+                  required
+                  autoComplete="name"
+                  placeholder={t('site.work.apply.namePh')}
+                  className="wk-input placeholder:text-[var(--as-fg-soft)]/60"
                 />
+                <p id="apply-name-err" className="wk-err">
+                  {t('site.work.apply.errRequired')}
+                </p>
+              </div>
+
+              <div className="wk-field" data-reveal style={rise(1)}>
+                <label htmlFor="apply-cv" className="wk-label">
+                  {t('site.work.apply.cv')} {req}
+                  <span className="sr-only">({t('site.work.apply.required')})</span>
+                </label>
+                <div className="relative">
+                  <input
+                    id="apply-cv"
+                    type="file"
+                    name="resume"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        resume: e.target.files?.[0] ?? null,
+                      }))
+                    }
+                    required
+                    accept=".pdf,.doc,.docx"
+                    aria-describedby="apply-cv-hint"
+                    className="absolute inset-0 z-10 h-full w-full cursor-pointer opacity-0"
+                  />
+                  <div className={cn('wk-input wk-file', formData.resume && 'is-set')}>
+                    <span className="wk-file__icon" aria-hidden>
+                      {formData.resume ? '✓' : '↑'}
+                    </span>
+                    {formData.resume ? (
+                      <span className="wk-file__text">
+                        <span className="text-[var(--as-fg-soft)]">{t('site.work.apply.cvSelected')}</span> {formData.resume.name}
+                      </span>
+                    ) : (
+                      <span className="wk-file__text text-[var(--as-fg-soft)]">{t('site.work.apply.cvPh')}</span>
+                    )}
+                  </div>
+                </div>
+                <p id="apply-cv-hint" className="wk-hint">
+                  {t('site.work.apply.cvHint')}
+                </p>
+                <p id="apply-cv-err" className="wk-err">
+                  {t('site.work.apply.errCv')}
+                </p>
+              </div>
+
+              <div className="wk-field" data-reveal style={rise(2)}>
+                <label htmlFor="apply-email" className="wk-label">
+                  {t('site.work.apply.email')} {req}
+                  <span className="sr-only">({t('site.work.apply.required')})</span>
+                </label>
+                <input
+                  id="apply-email"
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  autoComplete="email"
+                  placeholder={t('site.work.apply.emailPh')}
+                  className="wk-input placeholder:text-[var(--as-fg-soft)]/60"
+                />
+                <p id="apply-email-err" className="wk-err">
+                  {t('site.work.apply.errEmail')}
+                </p>
+              </div>
+
+              <div className="wk-field" data-reveal style={rise(3)}>
+                <label htmlFor="apply-profile" className="wk-label">
+                  {t('site.work.apply.profile')} <span className="wk-opt">({t('site.work.apply.optional')})</span>
+                </label>
+                <input
+                  id="apply-profile"
+                  type="url"
+                  name="profileUrl"
+                  value={formData.profileUrl}
+                  onChange={handleInputChange}
+                  autoComplete="url"
+                  placeholder={t('site.work.apply.profilePh')}
+                  className="wk-input placeholder:text-[var(--as-fg-soft)]/60"
+                />
+                <p id="apply-profile-err" className="wk-err">
+                  {t('site.work.apply.errUrl')}
+                </p>
               </div>
             </div>
 
-            {/* Submit Button & Note */}
-            <div className="flex flex-col items-end gap-2 pt-4 border-t border-border">
-              <button
-                type="submit"
-                className="bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-8 rounded-md transition-colors duration-300 cursor-pointer text-[16px] whitespace-nowrap"
-              >
-                Submit Application
+            <div className="wk-field" data-reveal style={rise(4)}>
+              <label htmlFor="apply-message" className="wk-label">
+                {t('site.work.apply.message')} <span className="wk-opt">({t('site.work.apply.optional')})</span>
+              </label>
+              <textarea
+                id="apply-message"
+                name="message"
+                value={formData.message}
+                onChange={handleInputChange}
+                rows={4}
+                placeholder={t('site.work.apply.messagePh')}
+                className="wk-input placeholder:text-[var(--as-fg-soft)]/60"
+              />
+            </div>
+
+            <div
+              className="flex flex-col gap-4 border-t-[1.5px] border-[var(--as-line-strong)] pt-8 sm:flex-row sm:items-center sm:justify-between"
+              data-reveal
+              style={rise(5)}
+            >
+              <p className="max-w-[44ch] text-[14px] leading-relaxed text-[var(--as-fg-soft)]">{t('site.work.apply.note')}</p>
+              <button type="submit" className="as-btn as-btn--accent shrink-0">
+                <span>{t('site.work.apply.submit')}</span>
+                <span className="as-arrow" aria-hidden>
+                  →
+                </span>
               </button>
-              <p className="font-inter text-text-muted text-[14px] text-right">
-                We'll review your application and contact you within 3-5 business days.
-              </p>
             </div>
           </form>
         </div>
-      </Container>
-    </div>
+      </section>
+    </>
   );
-}
+};
 
 export default Apply;

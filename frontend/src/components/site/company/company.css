@@ -1,0 +1,185 @@
+/*
+  Styles for the company pages (About, Industries, FAQ, 404) on top of the
+  shared `as-*` system in src/styles/site.css. Everything is prefixed `cmp-`
+  and lives in the components layer so Tailwind utilities still win.
+*/
+@layer components {
+  /* ---------- About: values as a ruled list of big words ---------- */
+  .cmp-values { border-top: 1.5px solid var(--as-line-strong); }
+  .cmp-values > li {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding: clamp(14px, 1.8vw, 24px) 0;
+    border-bottom: 1.5px solid var(--as-line);
+  }
+  .cmp-values h3 {
+    font-family: var(--as-display);
+    font-weight: 800;
+    font-stretch: 125%;
+    font-size: clamp(20px, 2.2vw, 30px);
+    line-height: 1.08;
+    letter-spacing: -.035em;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+    transition: transform .6s var(--as-ease), color .4s var(--as-ease);
+  }
+  .cmp-values li:hover h3 { transform: translateX(14px); color: var(--as-accent); }
+  .cmp-values .as-mono { color: var(--as-fg-soft); flex: none; }
+
+  /* ---------- About: delivery stages with a photo per row ---------- */
+  .cmp-deliver > li { align-items: start; }
+  .cmp-deliver__img {
+    overflow: hidden;
+    border-radius: 14px;
+    aspect-ratio: 245 / 146;
+    background: var(--as-bg-2);
+    max-width: 360px;
+  }
+  @media (max-width: 767px) { .cmp-deliver__img { max-width: 240px; } }
+  .cmp-deliver__img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.05);
+    transform: scale(1.04);
+    transition: filter .7s var(--as-ease), transform .9s var(--as-ease);
+  }
+  .cmp-deliver > li:hover .cmp-deliver__img img,
+  .cmp-deliver > li:focus-within .cmp-deliver__img img { filter: none; transform: none; }
+  .cmp-deliver > li .as-h3 { transition: color .4s var(--as-ease); }
+  .cmp-deliver > li:hover .as-h3 { color: var(--as-accent); }
+  @media (hover: none) {
+    .cmp-deliver__img img { filter: none; transform: none; }
+  }
+
+  /* ---------- Industries: icon chip + ghost index on each tile ---------- */
+  .cmp-ind { overflow: hidden; isolation: isolate; }
+  .cmp-ind__icon {
+    display: grid;
+    place-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    flex: none;
+    transition: transform .7s var(--as-ease);
+  }
+  .cmp-ind__icon img { width: 28px; height: 28px; }
+  .cmp-ind:hover .cmp-ind__icon { transform: rotate(-12deg) scale(1.06); }
+  .cmp-ind__ghost {
+    position: absolute;
+    z-index: -1;
+    right: -.04em;
+    bottom: -.2em;
+    font-family: var(--as-display);
+    font-weight: 300;
+    font-size: clamp(120px, 14vw, 220px);
+    line-height: 1;
+    letter-spacing: -.05em;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--as-line);
+    pointer-events: none;
+    user-select: none;
+    transition: transform .9s var(--as-ease);
+  }
+  .cmp-ind:hover .cmp-ind__ghost { transform: translateY(-10px); }
+
+  .cmp-photo {
+    overflow: hidden;
+    border-radius: 22px;
+    background: var(--as-bg);
+  }
+  .cmp-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.05);
+    transition: filter .8s var(--as-ease), transform 1.1s var(--as-ease);
+  }
+  .cmp-photo:hover img { filter: none; transform: scale(1.03); }
+  @media (hover: none) {
+    .cmp-photo img { filter: none; }
+  }
+
+  /* ---------- FAQ: topic index ---------- */
+  .cmp-topics { border-top: 1.5px solid var(--as-line-strong); }
+  .cmp-topics a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1.5px solid var(--as-line);
+    color: var(--as-fg-soft);
+    text-decoration: none;
+    font-family: var(--as-display);
+    font-weight: 700;
+    font-stretch: 112%;
+    font-size: 17px;
+    line-height: 1.15;
+    letter-spacing: -.01em;
+    transition: color .3s var(--as-ease), padding .5s var(--as-ease);
+  }
+  .cmp-topics a .as-mono { flex: none; }
+  .cmp-topics a:hover, .cmp-topics a.is-on { color: var(--as-fg); padding-left: 10px; }
+  .cmp-topics a.is-on { color: var(--as-accent); }
+
+  /* ---------- 404 wall ---------- */
+  .cmp-404__num {
+    position: absolute;
+    z-index: 0;
+    right: clamp(-8px, -1vw, 0px);
+    top: calc(var(--as-header-h) + 2svh);
+    display: flex;
+    font-family: var(--as-display);
+    font-weight: 800;
+    font-stretch: 112%;
+    font-size: min(44vw, 34svh);
+    line-height: .76;
+    letter-spacing: -.06em;
+    color: color-mix(in srgb, var(--as-rust) 78%, transparent);
+    -webkit-text-stroke: 1.5px rgba(255, 244, 225, .3);
+    user-select: none;
+    pointer-events: none;
+  }
+  .cmp-404__num > span {
+    display: inline-block;
+    transform-origin: 50% 92%;
+    animation: cmp-drop 1.1s var(--as-ease) both;
+    animation-delay: calc(var(--i, 0) * 110ms + 120ms);
+  }
+  .cmp-404__num > span:nth-child(2) {
+    animation: cmp-drop 1.1s var(--as-ease) both, cmp-wobble 4.2s ease-in-out 1.6s infinite;
+    animation-delay: 230ms, 1.6s;
+  }
+  .cmp-404 .as-hero__body { padding-top: calc(var(--as-header-h) + min(44vw, 34svh) * .8 + 32px); }
+  @media (min-width: 1024px) {
+    .cmp-404__num { font-size: min(36vw, 62svh); top: auto; bottom: calc(clamp(40px, 8svh, 84px) - .1em); }
+    .cmp-404 .as-hero__body { padding-top: calc(var(--as-header-h) + 48px); max-width: 62%; }
+  }
+}
+
+/* Unlayered on purpose: site.css sets the phone size of the wall word outside any layer. */
+@media (max-width: 760px) {
+  .cmp-404 .as-hero__word { font-size: clamp(48px, 8svh, 62px); }
+}
+
+@keyframes cmp-drop {
+  from { opacity: 0; transform: translateY(-36%) rotate(-10deg); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes cmp-wobble {
+  0%, 100% { transform: rotate(0deg); }
+  30% { transform: rotate(-7deg); }
+  60% { transform: rotate(4deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cmp-404__num > span, .cmp-404__num > span:nth-child(2) { animation: none; }
+  .cmp-values h3, .cmp-deliver__img img, .cmp-photo img, .cmp-ind__icon, .cmp-ind__ghost { transition: none; }
+  .cmp-values li:hover h3 { transform: none; }
+}

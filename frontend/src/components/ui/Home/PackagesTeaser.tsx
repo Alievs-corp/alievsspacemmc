@@ -1,76 +1,88 @@
+import type { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
-import { Section, SectionHeading } from '@/components/ui/Section';
-import { Reveal } from '@/components/ui/Reveal';
 import { useI18n } from '@/contexts/I18nContext';
 import { useMarket } from '@/contexts/MarketContext';
 import { PACKAGE_TIERS } from '@/data/packages';
+import { SectionHead, useReveal } from '@/components/site/blocks';
 import { cn } from '@/lib/utils';
 
-/** Compact price cards. Full detail lives on /packages. */
+/**
+ * Compact price cards (full detail lives on /packages). Prices go through the
+ * market/currency switcher exactly as on the packages page; the featured tier
+ * is a burnt plaster card.
+ */
 const PackagesTeaser = () => {
   const { t } = useI18n();
   const { formatPrice } = useMarket();
+  const ref = useReveal();
 
   return (
-    <Section id="packages">
-      <SectionHeading
-        eyebrow={t('nav.pricing')}
-        title={t('home.packagesTitle')}
-        subtitle={t('home.packagesSubtitle')}
-        className="mb-12 md:mb-16"
-      />
+    <section id="packages" className="as-bg-cream as-section">
+      <div className="as-wrap">
+        <div className="grid gap-6 pb-12 md:pb-16 lg:grid-cols-[1.25fr_1fr] lg:items-end lg:gap-16">
+          <SectionHead eyebrow={t('nav.pricing')} title={t('home.packagesTitle')} size="md" />
+          <p className="as-lead lg:pb-2">{t('home.packagesSubtitle')}</p>
+        </div>
 
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
-        {PACKAGE_TIERS.map((tier, i) => (
-          <Reveal
-            as="article"
-            key={tier.id}
-            delay={i * 70}
-            className={cn(
-              'relative flex flex-col rounded-2xl border p-6 transition-all duration-300',
-              tier.featured
-                ? 'border-primary/60 bg-gradient-to-b from-orange-900/25 to-surface'
-                : 'border-border bg-surface/50 hover:-translate-y-1 hover:border-border-strong',
-            )}
-          >
-            {tier.featured && (
-              <span className="absolute -top-3 left-6 rounded-full bg-primary px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-on-primary">
-                {t('packages.mostPopular')}
-              </span>
-            )}
-            <h3 className="font-display text-[19px] font-bold text-white">
-              {t(`packages.tiers.${tier.id}.name`)}
-            </h3>
-            <p className="mt-1 text-[12.5px] text-primary">{t(`packages.tiers.${tier.id}.tagline`)}</p>
-
-            <p className="mt-5 flex items-baseline gap-1.5">
-              {tier.startingAt && (
-                <span className="text-[12px] text-text-subtle">{t('packages.from')}</span>
+        <div ref={ref} className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          {PACKAGE_TIERS.map((tier, i) => (
+            <Link
+              key={tier.id}
+              to="/packages"
+              data-reveal
+              style={{ '--d': `${i * 80}ms` } as CSSProperties}
+              className={cn(
+                'as-tile group flex min-w-0 flex-col',
+                tier.featured
+                  ? 'as-on-color border-transparent text-[var(--as-white)] [background-color:var(--as-burnt)] [background-image:url(/tex/v2/stucco.webp)] [background-size:384px]'
+                  : 'bg-[var(--as-bg)]',
               )}
-              <span className="font-display text-[27px] font-bold text-white">{formatPrice(tier.price)}</span>
-            </p>
+            >
+              <div className="flex items-start justify-between gap-3">
+                <span className="as-mono opacity-70">{String(i + 1).padStart(2, '0')}</span>
+                {tier.featured && (
+                  <span className="as-tag border-[rgba(255,244,225,.55)] bg-[var(--as-white)] text-[var(--as-ink)]">
+                    {t('packages.mostPopular')}
+                  </span>
+                )}
+              </div>
+              <h3 className="as-h3 mt-8 text-[clamp(22px,2vw,28px)]">{t(`packages.tiers.${tier.id}.name`)}</h3>
+              <p className={cn('mt-1.5 text-[14px]', tier.featured ? 'font-medium text-[var(--as-white)]' : 'text-[var(--as-accent)]')}>
+                {t(`packages.tiers.${tier.id}.tagline`)}
+              </p>
 
-            <p className="mt-4 flex-1 text-[13px] leading-relaxed text-text-muted">
-              {t(`packages.tiers.${tier.id}.summary`)}
-            </p>
+              <p className="mt-7 flex flex-wrap items-baseline gap-x-2 border-t border-[var(--as-line)] pt-5">
+                {tier.startingAt && <span className="as-mono opacity-75">{t('packages.from')}</span>}
+                <span className="font-[family-name:var(--as-display)] text-[clamp(30px,2.6vw,40px)] font-extrabold leading-none tracking-[-.03em] [font-stretch:112%]">
+                  {formatPrice(tier.price)}
+                </span>
+              </p>
 
-            <p className="mt-4 font-mono text-[11.5px] text-text-subtle">
-              {t('packages.timeline')}: {t(`packages.tiers.${tier.id}.timeline`)}
-            </p>
-          </Reveal>
-        ))}
+              <p className="mt-4 flex-1 text-[14px] leading-relaxed text-[var(--as-fg-soft)]">{t(`packages.tiers.${tier.id}.summary`)}</p>
+
+              <p className="as-mono mt-6 flex items-center justify-between gap-3 opacity-80">
+                <span>
+                  {t('packages.timeline')}: {t(`packages.tiers.${tier.id}.timeline`)}
+                </span>
+                <span aria-hidden className="text-[15px] transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
+              </p>
+            </Link>
+          ))}
+        </div>
+
+        <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+          <Link to="/packages" className="as-btn">
+            <span>{t('home.packagesCta')}</span>
+            <span className="as-arrow" aria-hidden>
+              →
+            </span>
+          </Link>
+          <p className="max-w-[60ch] text-[13px] leading-relaxed text-[var(--as-fg-soft)]">{t('packages.currencyNote')}</p>
+        </div>
       </div>
-
-      <Reveal className="mt-10 flex flex-wrap items-center justify-center gap-4">
-        <Link
-          to="/packages"
-          className="rounded-lg bg-primary px-7 py-3.5 text-[14px] font-semibold text-on-primary transition-colors hover:bg-primary-hover md:text-[15px]"
-        >
-          {t('home.packagesCta')}
-        </Link>
-        <span className="text-center text-[12px] text-text-subtle">{t('packages.currencyNote')}</span>
-      </Reveal>
-    </Section>
+    </section>
   );
 };
 
