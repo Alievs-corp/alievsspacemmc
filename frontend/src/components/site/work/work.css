@@ -352,5 +352,5 @@
 }
 
 @media (max-width: 560px) {
-  .site .wk-cta-fit { font-size: min(40px, 7.8vw); }
+  .site .wk-cta-fit { font-size: min(30px, 6.4vw); }
 }

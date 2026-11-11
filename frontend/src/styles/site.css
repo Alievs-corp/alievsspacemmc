@@ -225,31 +225,31 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
     font-family: var(--as-display);
     font-weight: 800;
     font-stretch: 125%;
-    font-size: clamp(34px, 6vw, 92px);
-    line-height: .92;
-    letter-spacing: -.035em;
+    font-size: clamp(24px, 2.6vw, 35px);
+    line-height: 1.1;
+    letter-spacing: -.03em;
     text-transform: uppercase;
     overflow-wrap: anywhere;
     hyphens: auto;
   }
-  .as-title--md { font-size: clamp(30px, 4.6vw, 68px); }
-  .as-title--sm { font-size: clamp(26px, 3.4vw, 48px); line-height: .96; }
+  .as-title--md { font-size: clamp(22px, 2.4vw, 32px); }
+  .as-title--sm { font-size: clamp(20px, 2vw, 28px); line-height: 1.12; }
   .as-title em, .as-accent { font-style: normal; color: var(--as-accent); }
 
   .as-display {
     font-family: var(--as-display);
     font-weight: 700;
     font-stretch: 112%;
-    font-size: clamp(30px, 5.2vw, 78px);
-    line-height: 1.02;
-    letter-spacing: -.035em;
+    font-size: clamp(24px, 3.8vw, 58px);
+    line-height: 1.14;
+    letter-spacing: -.03em;
   }
   .as-h3 {
     font-family: var(--as-display);
     font-weight: 700;
     font-stretch: 112%;
-    font-size: clamp(21px, 2.3vw, 32px);
-    line-height: 1.08;
+    font-size: clamp(20px, 2vw, 28px);
+    line-height: 1.18;
     letter-spacing: -.02em;
   }
   .as-lead {
@@ -433,13 +433,13 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
   /* ---------- Inner-page hero (a single wall panel) ---------- */
   .as-hero {
     position: relative;
-    min-height: min(100svh, 920px);
+    min-height: min(82svh, 780px);
     display: flex;
     align-items: flex-end;
     overflow: hidden;
     isolation: isolate;
   }
-  .as-hero--short { min-height: min(72svh, 680px); }
+  .as-hero--short { min-height: min(64svh, 600px); }
   .as-hero__word {
     position: absolute;
     z-index: 1;
@@ -503,11 +503,11 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
     font-family: var(--as-display);
     font-weight: 800;
     font-stretch: 125%;
-    font-size: clamp(36px, 6.4vw, 104px);
-    line-height: .96;
-    letter-spacing: -.04em;
+    font-size: clamp(26px, 3vw, 35px);
+    line-height: 1.12;
+    letter-spacing: -.03em;
     text-transform: uppercase;
-    max-width: 16ch;
+    max-width: 24ch;
     overflow-wrap: anywhere;
     hyphens: auto;
   }
@@ -594,9 +594,9 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
     font-family: var(--as-display);
     font-weight: 800;
     font-stretch: 125%;
-    font-size: clamp(26px, 3.4vw, 52px);
-    line-height: .95;
-    letter-spacing: -.035em;
+    font-size: clamp(22px, 2.6vw, 35px);
+    line-height: 1.12;
+    letter-spacing: -.03em;
     text-transform: uppercase;
   }
   .as-intro p { font-size: clamp(14px, 1.2vw, 17px); line-height: 1.45; max-width: 44ch; color: rgba(255, 248, 238, .92); }
@@ -677,7 +677,7 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
   .as-scard__index { font-family: var(--as-mono); font-size: 12px; opacity: .85; margin-bottom: auto; }
   .as-scard h3 {
     font-family: var(--as-display); font-weight: 700; font-stretch: 100%;
-    font-size: clamp(28px, 4vw, 58px); line-height: .98; letter-spacing: -.03em;
+    font-size: clamp(22px, 2.4vw, 32px); line-height: 1.12; letter-spacing: -.02em;
   }
   .as-scard p { font-size: clamp(15px, 1.4vw, 19px); line-height: 1.42; max-width: 40ch; opacity: .95; }
 
@@ -701,7 +701,7 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
   }
   .as-cta-title {
     font-family: var(--as-display); font-weight: 800; font-stretch: 125%;
-    font-size: clamp(40px, 8vw, 128px); line-height: .9; letter-spacing: -.04em; text-transform: uppercase;
+    font-size: clamp(26px, 3vw, 35px); line-height: 1.12; letter-spacing: -.03em; text-transform: uppercase;
     overflow-wrap: anywhere;
   }
   .as-cta-title em { font-style: normal; color: var(--as-mustard-hi); }
@@ -713,6 +713,12 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
     overflow: hidden;
   }
   .as-cta-walk__floor { position: absolute; left: 0; right: 0; bottom: 0; height: 46px; }
+  /* Without the figure the band just ends on its concrete floor. */
+  .as-cta-floor {
+    width: calc(100% + var(--as-gutter) * 2);
+    margin: clamp(48px, 7vw, 96px) calc(var(--as-gutter) * -1) 0;
+    height: 46px;
+  }
   .as-cta-walk .as-walker { z-index: 1; }
 
   /* ---------- Header ---------- */
@@ -838,7 +844,7 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
 @layer components {
 @media (max-width: 1023px) {
   .as-intro { width: calc(100% - var(--as-gutter) * 2); top: calc(var(--as-header-h) + 2svh); }
-  .as-intro h1 { font-size: clamp(24px, 6.4vw, 40px); }
+  .as-intro h1 { font-size: clamp(22px, 6vw, 30px); }
   .as-note { width: calc(100% - var(--as-gutter) * 2); top: calc(var(--as-header-h) + 2svh); }
 }
 }
@@ -862,11 +868,11 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
   .as-scard { grid-template-columns: 30% 1fr; border-radius: 18px; }
   .as-scard__body { padding: 22px 18px 22px 4px; }
   .as-steps > li { grid-template-columns: 52px 1fr; }
-  .as-cta-title { font-size: clamp(30px, 8.6vw, 44px); }
+  .as-cta-title { font-size: clamp(22px, 6.4vw, 30px); }
   .as-step-n { font-size: 34px; }
   .as-hero__body { padding-left: max(var(--as-gutter), 92px); }
   .as-hero__word { left: 8px; font-size: clamp(48px, 8.4svh, 68px); }
-  .as-hero__title { font-size: clamp(28px, 7.6vw, 44px); overflow-wrap: break-word; }
+  .as-hero__title { font-size: clamp(24px, 6.6vw, 30px); overflow-wrap: break-word; }
 }
 }
 

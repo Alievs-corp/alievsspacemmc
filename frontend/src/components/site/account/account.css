@@ -192,8 +192,8 @@
     font-family: var(--as-display);
     font-weight: 800;
     font-stretch: 125%;
-    font-size: clamp(34px, 6vw, 96px);
-    line-height: .88;
+    font-size: clamp(28px, 3.2vw, 44px);
+    line-height: 1.02;
     letter-spacing: -.04em;
     text-transform: uppercase;
   }
@@ -212,8 +212,8 @@
     font-family: var(--as-display);
     font-weight: 800;
     font-stretch: 125%;
-    font-size: clamp(28px, 3vw, 42px);
-    line-height: .95;
+    font-size: clamp(24px, 2.4vw, 34px);
+    line-height: 1.08;
     letter-spacing: -.035em;
     text-transform: uppercase;
     overflow-wrap: anywhere;
@@ -300,7 +300,7 @@
   .acc-auth__card { justify-self: start; }
   .acc-auth__num { font-size: min(44svh, 70vw); left: auto; right: -6vw; top: 3svh; }
   .acc-auth__wall { align-self: start; padding-top: 8px; }
-  .acc-auth__brand { font-size: clamp(30px, 9vw, 56px); }
+  .acc-auth__brand { font-size: clamp(26px, 8vw, 38px); }
 }
 
 @media (max-width: 640px) {

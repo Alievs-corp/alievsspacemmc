@@ -469,6 +469,8 @@ export interface CtaWalkProps {
   actions: ReactNode;
   tone?: WallTone;
   id?: string;
+  /** Show the walking figure on the floor (home page only). */
+  walker?: boolean;
 }
 
 /**
@@ -476,7 +478,7 @@ export interface CtaWalkProps {
  * figure walking across the floor as the band scrolls past. Frames load only
  * when the band approaches the viewport.
  */
-export function CtaWalk({ eyebrow, title, lead, actions, tone = 'rust', id }: CtaWalkProps) {
+export function CtaWalk({ eyebrow, title, lead, actions, tone = 'rust', id, walker: withWalker = false }: CtaWalkProps) {
   const bandRef = useRef<HTMLDivElement>(null);
   const walkerRef = useRef<HTMLDivElement>(null);
   const walker = useRef<Walker | null>(null);
@@ -508,7 +510,7 @@ export function CtaWalk({ eyebrow, title, lead, actions, tone = 'rust', id }: Ct
 
   useEffect(() => {
     const band = bandRef.current;
-    if (!band || !walkerRef.current) return;
+    if (!withWalker || !band || !walkerRef.current) return;
     walker.current = new Walker(walkerRef.current);
     measure();
     let rt = 0;
@@ -543,7 +545,7 @@ export function CtaWalk({ eyebrow, title, lead, actions, tone = 'rust', id }: Ct
       window.removeEventListener('resize', onResize);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [withWalker]);
 
   useScrollFrame(update);
 
@@ -565,13 +567,17 @@ export function CtaWalk({ eyebrow, title, lead, actions, tone = 'rust', id }: Ct
       <div className="flex flex-wrap gap-3" data-reveal style={{ '--d': '200ms' } as CSSProperties}>
         {actions}
       </div>
-      <div ref={bandRef} className="as-cta-walk" aria-hidden>
-        <div ref={walkerRef} className="as-walker">
-          <div className="as-walker-shadow" />
-          <canvas />
+      {withWalker ? (
+        <div ref={bandRef} className="as-cta-walk" aria-hidden>
+          <div ref={walkerRef} className="as-walker">
+            <div className="as-walker-shadow" />
+            <canvas />
+          </div>
+          <div className="as-cta-walk__floor as-concrete" />
         </div>
-        <div className="as-cta-walk__floor as-concrete" />
-      </div>
+      ) : (
+        <div className="as-cta-floor as-concrete" aria-hidden />
+      )}
     </section>
   );
 }

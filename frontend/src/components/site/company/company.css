@@ -18,8 +18,8 @@
     font-family: var(--as-display);
     font-weight: 800;
     font-stretch: 125%;
-    font-size: clamp(24px, 3.6vw, 54px);
-    line-height: .95;
+    font-size: clamp(20px, 2.2vw, 30px);
+    line-height: 1.08;
     letter-spacing: -.035em;
     text-transform: uppercase;
     overflow-wrap: anywhere;

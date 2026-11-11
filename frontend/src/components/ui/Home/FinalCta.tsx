@@ -9,6 +9,7 @@ const FinalCta = () => {
 
   return (
     <CtaWalk
+      walker
       tone="burnt"
       eyebrow={t('site.home.ctaEyebrow')}
       title={

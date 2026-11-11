@@ -68,7 +68,7 @@
     font-weight: 800;
     font-stretch: 125%;
     font-size: clamp(24px, 2vw, 30px);
-    line-height: .95;
+    line-height: 1.08;
     letter-spacing: -.03em;
     text-transform: uppercase;
     overflow-wrap: anywhere;
@@ -284,8 +284,8 @@
     font-family: var(--as-display);
     font-weight: 800;
     font-stretch: 125%;
-    font-size: clamp(26px, 3.3vw, 48px);
-    line-height: .95;
+    font-size: clamp(22px, 2.5vw, 35px);
+    line-height: 1.08;
     letter-spacing: -.035em;
     text-transform: uppercase;
     overflow-wrap: anywhere;
