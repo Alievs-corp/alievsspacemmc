@@ -288,6 +288,56 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
     background-image: url("/tex/stucco.webp");
     background-size: 384px;
   }
+  /* Glass-screen finish, after the tablet promo video (Blender: emission +
+     Fresnel-weighted gloss): every plaster surface reads like a lit device
+     screen — fine pixel grain, a soft specular streak and warm reflections of
+     the orange rim lights. Both layers sit above the content (like glass),
+     ignore the pointer, and never trigger layout. */
+  :where(.as-stucco) { position: relative; overflow: hidden; isolation: isolate; }
+  .as-stucco::before,
+  .as-stucco::after {
+    content: "";
+    position: absolute;
+    z-index: 7;
+    pointer-events: none;
+  }
+  /* Screen grain. */
+  .as-stucco::before {
+    inset: 0;
+    background: url("/tex/grain.webp") 0 0 / 160px;
+    mix-blend-mode: overlay;
+    opacity: .24;
+  }
+  /* Specular streak + rim-light reflections, wider than the surface so it can slide. */
+  .as-stucco::after {
+    inset: -10% -60%;
+    background:
+      linear-gradient(112deg, transparent 35%, rgba(255, 248, 238, .26) 44%, rgba(255, 248, 238, .08) 48.5%, transparent 55%),
+      linear-gradient(112deg, transparent 57.5%, rgba(255, 248, 238, .13) 60%, transparent 62.5%),
+      radial-gradient(circle at 70% 16%, rgba(255, 168, 80, .34), rgba(255, 140, 50, .12) 9%, transparent 17%),
+      radial-gradient(circle at 34% 84%, rgba(255, 184, 104, .22), transparent 11%),
+      radial-gradient(60% 40% at 50% 0%, rgba(255, 240, 220, .1), transparent 70%);
+    mix-blend-mode: screen;
+    transform: translate3d(-6%, 0, 0);
+  }
+  /* Fresnel rim on cards and tiles: the edge catches the light. */
+  .as-scard, .as-tile.as-stucco {
+    box-shadow: inset 0 1px 0 rgba(255, 250, 240, .28), inset 0 0 0 1px rgba(255, 250, 240, .07), 0 18px 40px -24px rgba(40, 18, 4, .55);
+  }
+  /* Where the browser can tie it to scrolling, the streak slides as the
+     surface moves through the viewport — like tilting the device. Elsewhere
+     it stays put, so nothing animates on its own. */
+  @supports (animation-timeline: view()) {
+    /* The surface itself drives the timeline; a pseudo-element's own view()
+       never progresses. */
+    .as-stucco { view-timeline: --as-surface block; }
+    .as-stucco::after {
+      animation: as-sheen linear both;
+      animation-timeline: --as-surface;
+      animation-range: cover;
+    }
+  }
+
   .as-on-color { color: var(--as-white); --as-fg: var(--as-white); --as-fg-soft: rgba(255, 248, 238, .86); --as-line: rgba(255, 244, 225, .35); --as-line-strong: rgba(255, 244, 225, .8); --as-accent: var(--as-mustard-hi); }
   .as-concrete {
     background-color: var(--as-concrete);
@@ -830,6 +880,7 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
 }
 
 @keyframes as-ticker { to { transform: translateX(-50%); } }
+@keyframes as-sheen { from { transform: translate3d(-22%, 0, 0); } to { transform: translate3d(18%, 0, 0); } }
 @keyframes as-rise { to { transform: none; } }
 @keyframes as-cue { 0% { transform: scaleX(0); } 50% { transform: scaleX(1); } 100% { transform: scaleX(1); opacity: 0; } }
 @keyframes as-curtain {
@@ -882,7 +933,7 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .as-ticker-track, .as-scroll-cue::before { animation: none; }
+  .as-ticker-track, .as-scroll-cue::before, .as-stucco::after { animation: none; }
   [data-reveal] { opacity: 1; transform: none; clip-path: none; transition: none; }
   .as-words .w { opacity: 1; }
   .as-rise .as-rise-w > span { transform: none; animation: none; }
