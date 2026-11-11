@@ -69,6 +69,8 @@ export function Header() {
   const lenis = useLenis();
   const headerRef = useRef<HTMLElement>(null);
   const [open, setOpen] = useState(false);
+  /** The open menu is scrolled: the header gets a solid bar so links never run under the logo. */
+  const [menuScrolled, setMenuScrolled] = useState(false);
   const last = useRef(0);
   const phone = phoneForLocale(locale);
 
@@ -77,6 +79,7 @@ export function Header() {
   if (menuPath !== pathname) {
     setMenuPath(pathname);
     setOpen(false);
+    setMenuScrolled(false);
   }
 
   useEffect(() => {
@@ -171,7 +174,7 @@ export function Header() {
         {t('ui.skipToContent', 'Skip to content')}
       </a>
 
-      <header ref={headerRef} className={cn('as-header', open && 'is-menu')} data-open={open || undefined}>
+      <header ref={headerRef} className={cn('as-header', open && 'is-menu', open && menuScrolled && 'is-menu-scrolled')} data-open={open || undefined}>
         <Link
           to="/"
           className="as-brand"
@@ -231,6 +234,7 @@ export function Header() {
         aria-hidden={!open}
         {...(open ? {} : ({ inert: '' } as object))}
         data-lenis-prevent
+        onScroll={(e) => setMenuScrolled(e.currentTarget.scrollTop > 4)}
       >
         <nav className="as-menu-links" aria-label="Menu">
           {menuLinks.map((link, i) => (
@@ -247,11 +251,11 @@ export function Header() {
           ))}
         </nav>
         <div className="as-menu-foot">
-          <div className="flex flex-wrap items-center gap-2">
-            <ThemeToggle />
-            <CurrencySwitcher />
-            <LanguageSwitcher />
-            {!user && <LoginIcon label={t('nav.login', 'Login')} className="h-9 w-9" />}
+          <div className="as-menu-tools">
+            <ThemeToggle className="as-menu-tool" />
+            <CurrencySwitcher fitViewport triggerClassName="as-menu-tool" />
+            <LanguageSwitcher fitViewport triggerClassName="as-menu-tool" />
+            {!user && <LoginIcon label={t('nav.login', 'Login')} className="as-menu-tool" />}
           </div>
           <div className="grid gap-1 text-[14px]">
             <a href={`mailto:${ORGANIZATION.email}`}>{ORGANIZATION.email}</a>

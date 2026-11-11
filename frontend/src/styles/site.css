@@ -837,6 +837,7 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
   .as-header.is-menu .as-menu-btn span:first-child { transform: translateY(3.5px) rotate(45deg); }
   .as-header.is-menu .as-menu-btn span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
   .as-header.is-menu .as-header-tools, .as-header.is-menu .as-header-cta { visibility: hidden; }
+  .as-header.is-menu.is-menu-scrolled { background-color: var(--as-burnt); box-shadow: 0 1px 0 rgba(255, 244, 225, .16); }
   .as-menu {
     --c: var(--as-burnt);
     position: fixed; inset: 0; z-index: 45;
@@ -853,7 +854,8 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
   .as-menu-links a {
     display: flex; align-items: baseline; gap: 14px;
     font-family: var(--as-display); font-weight: 800; font-stretch: 125%;
-    font-size: clamp(28px, 7.4vw, 64px); line-height: 1; letter-spacing: -.035em; text-transform: uppercase;
+    /* Short screens (small phones, landscape) shrink the links so the pickers stay in view. */
+    font-size: clamp(20px, min(7.4vw, 5.2svh), 64px); line-height: 1; letter-spacing: -.035em; text-transform: uppercase;
     color: inherit; text-decoration: none;
     opacity: 0; transform: translateY(40px);
     transition: opacity .5s var(--as-ease), transform .7s var(--as-ease), color .3s;
@@ -863,7 +865,18 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
   .as-menu-n { font-family: var(--as-mono); font-size: 11px; font-weight: 500; letter-spacing: .06em; opacity: .7; min-width: 2.2em; }
   .as-menu-foot { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; }
   .as-menu-foot a:not(.as-btn) { color: inherit; }
-  .as-menu-foot button { color: inherit; background: transparent; border-color: rgba(255, 244, 225, .55); }
+  /* Theme, currency, language and login: light on the plaster, 44px touch targets.
+     !important: the shared pickers set their colours with utility classes. */
+  .as-menu-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .as-menu-tools .as-menu-tool {
+    min-width: 44px; height: 44px; padding: 0 14px; justify-content: center;
+    border-radius: 999px; font-size: 14px;
+    color: var(--as-white) !important; background: transparent;
+    border: 1.5px solid rgba(255, 244, 225, .6) !important;
+  }
+  .as-menu-tools .as-menu-tool:hover, .as-menu-tools .as-menu-tool[aria-expanded="true"] { background: rgba(255, 244, 225, .14) !important; }
+  .as-menu-tools .as-menu-tool svg { color: inherit !important; }
+  .as-menu-tools button.as-menu-tool[data-theme-toggle], .as-menu-tools a.as-menu-tool { width: 44px; padding: 0; }
 
   /* ---------- Footer ---------- */
   .as-footer { background: var(--as-ink); color: var(--as-cream); padding: 64px var(--as-gutter) 28px; overflow: hidden; --as-fg: var(--as-cream); --as-fg-soft: rgba(242, 235, 223, .7); --as-line: rgba(242, 235, 223, .16); }
