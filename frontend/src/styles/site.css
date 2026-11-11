@@ -609,6 +609,10 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
     .as-num--line { font-size: min(calc(var(--H) * .78), calc(var(--P) * .95)); left: auto; right: 3%; top: 21svh; }
     .as-panel:nth-child(5) .as-num--line { left: auto; right: 18%; }
     .as-num--fill { font-size: min(calc(var(--H) * .5), calc(var(--P) * 1.1)); left: 12%; top: 52svh; }
+    /* Phones: a panel is narrower than the figure, so the words sit in the band
+       above its head (sized in WalkHero) where it never walks in front of them. */
+    .as-vword--up { bottom: auto; top: 18svh; }
+    .as-vword--down { top: 18svh; }
   }
   .as-floor { position: absolute; left: 0; right: 0; bottom: 0; height: 12svh; z-index: 3; }
   .as-light {

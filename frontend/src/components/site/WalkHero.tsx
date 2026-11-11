@@ -118,7 +118,8 @@ export function WalkHero({ words, notes, intro, cue, label }: WalkHeroProps) {
     stage.appendChild(probe);
     const wordW = probe.getBoundingClientRect().width || 1;
     probe.remove();
-    const size = Math.min((H * (portrait ? 0.5 : 0.56)) / (wordW / 100), (P * 0.4) / 0.8);
+    // Portrait: the words live between the note and the figure's head (see site.css).
+    const size = Math.min((H * (portrait ? 0.25 : 0.56)) / (wordW / 100), (P * 0.4) / 0.8);
     stage.style.setProperty('--word-size', `${size.toFixed(1)}px`);
 
     // Phones keep the figure smaller so the intro above it stays clear.
