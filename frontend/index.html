@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#dd9411" />
+    <meta name="theme-color" content="#eb9703" />
 
     <!--
       Baseline metadata for crawlers that do not execute JavaScript.
@@ -41,6 +41,11 @@
       Theme is applied before first paint so a light-mode visitor never sees a
       dark flash. Keeps `alievs_space_theme` in sync with ThemeContext.
     -->
+    <script>
+      /* A reload always opens at the first section: the browser must not
+         restore the old scroll position (the walk hero would start mid-way). */
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    </script>
     <script>
       (function () {
         try {

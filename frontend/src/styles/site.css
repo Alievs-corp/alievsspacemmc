@@ -36,14 +36,14 @@
 
 /* ---------- Tokens ---------- */
 .site {
-  --as-mustard: #dd9411;
-  --as-mustard-hi: #eaab42;
-  --as-burnt: #ae3b07;
-  --as-burnt-lo: #952d02;
-  --as-amber: #cf6a0e;
-  --as-amber-hi: #e0893e;
-  --as-rust: #8a2e07;
-  --as-rust-lo: #712203;
+  --as-mustard: #eb9703;
+  --as-mustard-hi: #f6b242;
+  --as-burnt: #ac3600;
+  --as-burnt-lo: #882800;
+  --as-amber: #dc6901;
+  --as-amber-hi: #ec8f3d;
+  --as-rust: #832600;
+  --as-rust-lo: #641c00;
   --as-concrete: #a58f74;
   --as-cream: #f2ebdf;
   --as-paper: #f6f1e8;
@@ -291,39 +291,36 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
   /* Glass-screen finish, after the tablet promo video (Blender: emission +
      Fresnel-weighted gloss): every plaster surface reads like a lit device
      screen — fine pixel grain, a soft specular streak and warm reflections of
-     the orange rim lights. Both layers sit above the content (like glass),
-     ignore the pointer, and never trigger layout. */
+     the orange rim lights. Both layers lie on the colour, under the words and
+     photos, ignore the pointer, and never trigger layout. */
   :where(.as-stucco) { position: relative; overflow: hidden; isolation: isolate; }
   .as-stucco::before,
-  .as-stucco::after,
-  .as-light::before,
-  .as-light::after {
+  .as-stucco::after {
     content: "";
     position: absolute;
-    z-index: 7;
+    /* Just above the surface's own colour, below every word, numeral and photo
+       on it (the surface is isolated, so -1 stays inside it). */
+    z-index: -1;
     pointer-events: none;
   }
   /* Screen grain: light/dark specks with their own alpha, so it blends
      normally (no mix-blend-mode — that forced costly compositing). */
-  .as-stucco::before, .as-light::before {
+  .as-stucco::before {
     inset: 0;
     background: url("/tex/grain.webp") 0 0 / 160px;
-    opacity: .55;
+    opacity: .5;
   }
-  /* Specular streak + rim-light reflections, a little wider than the surface so it can slide. */
-  .as-stucco::after, .as-light::after {
+  /* Specular streak + rim-light reflections, a little wider than the surface
+     so it can slide. Warm-tinted and narrow: a white haze would grey the walls. */
+  .as-stucco::after {
     inset: 0 -30%;
     background:
-      linear-gradient(112deg, transparent 33%, rgba(255, 248, 238, .2) 43%, rgba(255, 248, 238, .06) 48%, transparent 55%),
-      linear-gradient(112deg, transparent 58%, rgba(255, 248, 238, .1) 60.5%, transparent 63%),
-      radial-gradient(circle at 70% 16%, rgba(255, 176, 92, .3), rgba(255, 150, 60, .1) 9%, transparent 17%),
-      radial-gradient(circle at 34% 84%, rgba(255, 190, 112, .18), transparent 11%),
-      radial-gradient(60% 40% at 50% 0%, rgba(255, 240, 220, .08), transparent 70%);
+      linear-gradient(112deg, transparent 39%, rgba(255, 232, 196, .2) 44%, rgba(255, 232, 196, .05) 47.5%, transparent 51%),
+      linear-gradient(112deg, transparent 58.5%, rgba(255, 232, 196, .1) 60.2%, transparent 62%),
+      radial-gradient(circle at 70% 16%, rgba(255, 150, 40, .32), rgba(255, 128, 24, .1) 9%, transparent 17%),
+      radial-gradient(circle at 34% 84%, rgba(255, 168, 64, .2), transparent 11%);
     transform: translate3d(-4%, 0, 0);
   }
-  /* The home wall slides sideways: its panels skip their own glass and the
-     stage carries one stationary pane over the whole screen instead. */
-  .as-panel.as-stucco::before, .as-panel.as-stucco::after { display: none; }
   /* Fresnel rim on cards and tiles: the edge catches the light. */
   .as-scard, .as-tile.as-stucco {
     box-shadow: inset 0 1px 0 rgba(255, 250, 240, .28), inset 0 0 0 1px rgba(255, 250, 240, .07), 0 18px 40px -24px rgba(40, 18, 4, .55);
