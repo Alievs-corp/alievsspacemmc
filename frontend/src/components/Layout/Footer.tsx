@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useI18n } from '@/contexts/I18nContext';
 import { ORGANIZATION, phoneForLocale, telHref } from '@/lib/site';
-import { onSamePageTop, prefersReducedMotion, useScrollFrame } from '@/components/site/scroll';
+import { prefersReducedMotion, reloadHome, useScrollFrame } from '@/components/site/scroll';
 
 interface FooterLink {
   to: string;
@@ -38,7 +38,6 @@ const COLUMNS: Array<{ titleKey: string; links: FooterLink[] }> = [
 /** Ink footer: link columns, contact, and the giant two-tone wordmark. */
 export function Footer() {
   const { t, locale } = useI18n();
-  const { pathname } = useLocation();
   const phone = phoneForLocale(locale);
   const wordRef = useRef<HTMLParagraphElement>(null);
   const docH = useRef(0);
@@ -69,7 +68,7 @@ export function Footer() {
     <footer className="as-footer">
       <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
         <div className="grid content-start gap-4">
-          <Link to="/" className="flex items-center gap-2.5" onClick={(e) => onSamePageTop(e, pathname)}>
+          <Link to="/" className="flex items-center gap-2.5" onClick={reloadHome}>
             <span className="as-brand-mark" aria-hidden />
             <span className="as-brand-name">
               Alievs<b>Space</b>

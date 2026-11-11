@@ -46,13 +46,13 @@ export function scrollToTopNow() {
 }
 
 /**
- * Click handler for links to the current page's top (the logo): the route
- * does not change, so nothing else would scroll — jump to the first section.
+ * Logo click: a full page load of the home page, so it always opens fresh at
+ * the first section. Modified clicks (new tab/window) keep the browser default.
  */
-export function onSamePageTop(e: { preventDefault: () => void }, pathname: string, to = '/') {
-  if (pathname !== to) return;
+export function reloadHome(e: { preventDefault: () => void; button: number; metaKey: boolean; ctrlKey: boolean; shiftKey: boolean; altKey: boolean }) {
+  if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
   e.preventDefault();
-  scrollToTopNow();
+  window.location.assign('/');
 }
 
 export function scrollToTarget(target: string | HTMLElement | number) {

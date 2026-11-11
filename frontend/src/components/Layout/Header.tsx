@@ -8,7 +8,7 @@ import { ProfileMenu } from '@/components/ui/ProfileMenu';
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import { CurrencySwitcher } from '@/components/ui/CurrencySwitcher';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
-import { onSamePageTop, useLenis, useScrollFrame } from '@/components/site/scroll';
+import { reloadHome, useLenis, useScrollFrame } from '@/components/site/scroll';
 import { ORGANIZATION, phoneForLocale, telHref } from '@/lib/site';
 import { cn } from '@/lib/utils';
 
@@ -175,10 +175,7 @@ export function Header() {
           to="/"
           className="as-brand"
           aria-label={t('nav.home', 'Home')}
-          onClick={(e) => {
-            setOpen(false);
-            onSamePageTop(e, pathname);
-          }}
+          onClick={reloadHome}
         >
           <span className="as-brand-mark" aria-hidden />
           <span className="as-brand-name">
