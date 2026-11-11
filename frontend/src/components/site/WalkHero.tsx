@@ -155,9 +155,9 @@ export function WalkHero({ words, notes, intro, footLeft, footRight, cue, label 
     const off = onFramesChange(redraw);
     loadFirstFrame().then(() => {
       redraw();
-      // The rest of the cycle waits until the page has finished loading.
-      if (document.readyState === 'complete') loadAllFrames();
-      else window.addEventListener('load', () => loadAllFrames(), { once: true });
+      // Start streaming right away (low priority, coarse frames first) so the
+      // figure can walk as soon as the visitor scrolls.
+      loadAllFrames();
     });
     return () => {
       off();

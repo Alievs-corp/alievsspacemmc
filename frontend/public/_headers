@@ -1,0 +1,15 @@
+# Cloudflare Pages response headers.
+# Vite's hashed bundles never change under the same name.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Walk-cycle frames: the folder is versioned (v1) — publish changed frames
+# under a new folder instead of overwriting these.
+/walk/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
+
+/tex/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
