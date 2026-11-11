@@ -36,14 +36,14 @@
 
 /* ---------- Tokens ---------- */
 .site {
-  --as-mustard: #d4911a;
-  --as-mustard-hi: #e2a94a;
-  --as-burnt: #a63e0f;
-  --as-burnt-lo: #8e3009;
-  --as-amber: #c66a17;
-  --as-amber-hi: #d98a45;
-  --as-rust: #84300d;
-  --as-rust-lo: #6c2408;
+  --as-mustard: #dd9411;
+  --as-mustard-hi: #eaab42;
+  --as-burnt: #ae3b07;
+  --as-burnt-lo: #952d02;
+  --as-amber: #cf6a0e;
+  --as-amber-hi: #e0893e;
+  --as-rust: #8a2e07;
+  --as-rust-lo: #712203;
   --as-concrete: #a58f74;
   --as-cream: #f2ebdf;
   --as-paper: #f6f1e8;
@@ -295,31 +295,35 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
      ignore the pointer, and never trigger layout. */
   :where(.as-stucco) { position: relative; overflow: hidden; isolation: isolate; }
   .as-stucco::before,
-  .as-stucco::after {
+  .as-stucco::after,
+  .as-light::before,
+  .as-light::after {
     content: "";
     position: absolute;
     z-index: 7;
     pointer-events: none;
   }
-  /* Screen grain. */
-  .as-stucco::before {
+  /* Screen grain: light/dark specks with their own alpha, so it blends
+     normally (no mix-blend-mode — that forced costly compositing). */
+  .as-stucco::before, .as-light::before {
     inset: 0;
     background: url("/tex/grain.webp") 0 0 / 160px;
-    mix-blend-mode: overlay;
-    opacity: .24;
+    opacity: .55;
   }
-  /* Specular streak + rim-light reflections, wider than the surface so it can slide. */
-  .as-stucco::after {
-    inset: -10% -60%;
+  /* Specular streak + rim-light reflections, a little wider than the surface so it can slide. */
+  .as-stucco::after, .as-light::after {
+    inset: 0 -30%;
     background:
-      linear-gradient(112deg, transparent 35%, rgba(255, 248, 238, .26) 44%, rgba(255, 248, 238, .08) 48.5%, transparent 55%),
-      linear-gradient(112deg, transparent 57.5%, rgba(255, 248, 238, .13) 60%, transparent 62.5%),
-      radial-gradient(circle at 70% 16%, rgba(255, 168, 80, .34), rgba(255, 140, 50, .12) 9%, transparent 17%),
-      radial-gradient(circle at 34% 84%, rgba(255, 184, 104, .22), transparent 11%),
-      radial-gradient(60% 40% at 50% 0%, rgba(255, 240, 220, .1), transparent 70%);
-    mix-blend-mode: screen;
-    transform: translate3d(-6%, 0, 0);
+      linear-gradient(112deg, transparent 33%, rgba(255, 248, 238, .2) 43%, rgba(255, 248, 238, .06) 48%, transparent 55%),
+      linear-gradient(112deg, transparent 58%, rgba(255, 248, 238, .1) 60.5%, transparent 63%),
+      radial-gradient(circle at 70% 16%, rgba(255, 176, 92, .3), rgba(255, 150, 60, .1) 9%, transparent 17%),
+      radial-gradient(circle at 34% 84%, rgba(255, 190, 112, .18), transparent 11%),
+      radial-gradient(60% 40% at 50% 0%, rgba(255, 240, 220, .08), transparent 70%);
+    transform: translate3d(-4%, 0, 0);
   }
+  /* The home wall slides sideways: its panels skip their own glass and the
+     stage carries one stationary pane over the whole screen instead. */
+  .as-panel.as-stucco::before, .as-panel.as-stucco::after { display: none; }
   /* Fresnel rim on cards and tiles: the edge catches the light. */
   .as-scard, .as-tile.as-stucco {
     box-shadow: inset 0 1px 0 rgba(255, 250, 240, .28), inset 0 0 0 1px rgba(255, 250, 240, .07), 0 18px 40px -24px rgba(40, 18, 4, .55);
@@ -330,8 +334,8 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
   @supports (animation-timeline: view()) {
     /* The surface itself drives the timeline; a pseudo-element's own view()
        never progresses. */
-    .as-stucco { view-timeline: --as-surface block; }
-    .as-stucco::after {
+    .as-stucco:not(.as-panel) { view-timeline: --as-surface block; }
+    .as-stucco:not(.as-panel)::after {
       animation: as-sheen linear both;
       animation-timeline: --as-surface;
       animation-range: cover;
@@ -597,9 +601,15 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
     font-size: calc(var(--H) * .78);
     left: 24%; top: 17svh;
     color: color-mix(in srgb, var(--c-num) 70%, transparent);
-    -webkit-text-stroke: 1.5px rgba(255, 244, 225, .38);
+    -webkit-text-stroke: 1.5px rgba(255, 244, 225, .5);
   }
   .as-num--fill { font-weight: 800; font-stretch: 100%; font-size: calc(var(--H) * .5); left: 14%; top: 49svh; color: var(--c-num); }
+  /* Narrow (portrait) panels: size the numerals to the panel width so the
+     whole digit stays on its own wall instead of running off the edge. */
+  @media (max-aspect-ratio: 1/1) {
+    .as-num--line { font-size: min(calc(var(--H) * .78), calc(var(--P) * .95)); left: auto; right: 3%; top: 21svh; }
+    .as-num--fill { font-size: min(calc(var(--H) * .5), calc(var(--P) * 1.1)); left: 12%; top: 52svh; }
+  }
   .as-floor { position: absolute; left: 0; right: 0; bottom: 0; height: 12svh; z-index: 3; }
   .as-light {
     position: absolute; inset: 0; pointer-events: none; z-index: 4;
@@ -679,7 +689,7 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
   .as-walk-foot {
     position: absolute; left: 0; right: 0; bottom: 0; z-index: 6;
     height: 12svh;
-    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
     padding: 0 var(--as-gutter);
     font-size: 12px; font-weight: 500;
     color: rgba(255, 248, 238, .92);
@@ -880,7 +890,7 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
 }
 
 @keyframes as-ticker { to { transform: translateX(-50%); } }
-@keyframes as-sheen { from { transform: translate3d(-22%, 0, 0); } to { transform: translate3d(18%, 0, 0); } }
+@keyframes as-sheen { from { transform: translate3d(-14%, 0, 0); } to { transform: translate3d(12%, 0, 0); } }
 @keyframes as-rise { to { transform: none; } }
 @keyframes as-cue { 0% { transform: scaleX(0); } 50% { transform: scaleX(1); } 100% { transform: scaleX(1); opacity: 0; } }
 @keyframes as-curtain {

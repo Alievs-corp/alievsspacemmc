@@ -1,7 +1,6 @@
 import { useI18n } from '@/contexts/I18nContext';
 import { WalkHero } from '@/components/site/WalkHero';
 import { Pill } from '@/components/site/blocks';
-import { SITE_URL } from '@/lib/site';
 
 /**
  * Above the fold: the h1, the pitch and the two next actions sit on the first
@@ -18,8 +17,6 @@ const HomeHero = () => {
       cue={t('site.walk.cue')}
       words={words}
       notes={notes}
-      footLeft="@alievsspace"
-      footRight={SITE_URL.replace(/^https?:\/\//, '')}
       intro={
         <>
           <p className="as-eyebrow as-eyebrow--on-color as-page-enter">{t('home.badge')}</p>

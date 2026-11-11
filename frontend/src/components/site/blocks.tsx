@@ -166,13 +166,27 @@ export function WordsReveal({
   const words = text.split(/\s+/).filter(Boolean);
   const lit = useRef(-1);
 
+  // Position cached on layout changes; the scroll frame only does arithmetic.
+  const box = useRef({ top: 0, h: 0 });
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const read = () => {
+      const r = el.getBoundingClientRect();
+      box.current = { top: r.top + window.scrollY, h: r.height };
+    };
+    const ro = new ResizeObserver(read);
+    ro.observe(document.body);
+    read();
+    return () => ro.disconnect();
+  }, []);
+
   useScrollFrame((y) => {
     const el = ref.current;
     if (!el) return;
-    const r = el.getBoundingClientRect();
-    const top = r.top + y;
+    const { top, h } = box.current;
     const H = window.innerHeight;
-    const sp = prefersReducedMotion() ? 1 : clamp((y + H * 0.82 - top) / (r.height + H * 0.25), 0, 1);
+    const sp = prefersReducedMotion() ? 1 : clamp((y + H * 0.82 - top) / (h + H * 0.25), 0, 1);
     const n = Math.round(sp * words.length);
     if (n === lit.current) return;
     lit.current = n;

@@ -1,5 +1,5 @@
 import type { CSSProperties, MouseEvent } from 'react';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useI18n } from '@/contexts/I18nContext';
 import { Seo } from '@/components/Seo';
 import { Accordion, type AccordionItem } from '@/components/ui/Accordion';
@@ -47,15 +47,31 @@ export function Faq() {
     };
   }).filter((g) => g.items.length > 0);
 
+  // Topic positions, re-read when the layout changes (accordions opening,
+  // fonts, resize) instead of on every scroll frame.
+  const tops = useRef<number[]>([]);
+  const groupIds = groups.map((g) => g.id).join('|');
+  useEffect(() => {
+    const read = () => {
+      tops.current = groupIds.split('|').map((id) => {
+        const el = document.getElementById(id);
+        return el ? el.getBoundingClientRect().top + window.scrollY : Infinity;
+      });
+    };
+    const ro = new ResizeObserver(read);
+    ro.observe(document.body);
+    read();
+    return () => ro.disconnect();
+  }, [groupIds]);
+
   // Highlight the topic currently in view (class toggles only, no re-render).
-  useScrollFrame(() => {
+  useScrollFrame((y) => {
     const nav = navRef.current;
     if (!nav) return;
-    const line = window.innerHeight * 0.4;
+    const line = y + window.innerHeight * 0.4;
     let current = 0;
-    groups.forEach((g, i) => {
-      const el = document.getElementById(g.id);
-      if (el && el.getBoundingClientRect().top < line) current = i;
+    tops.current.forEach((top, i) => {
+      if (top < line) current = i;
     });
     nav.querySelectorAll('a').forEach((a, i) => a.classList.toggle('is-on', i === current));
   });

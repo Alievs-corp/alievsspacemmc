@@ -91,15 +91,29 @@ export function Header() {
     };
   }, [open, lenis]);
 
-  const evaluate = (y: number) => {
+  // Hero geometry is measured only when the page changes (mount, resize, DOM
+  // mutations) — never inside the scroll frame, where a layout read right
+  // after other effects' writes would force a style recalc on every frame.
+  const geo = useRef({ hero: false, sticky: false, heroEnd: 0, h: 72 });
+  const measure = () => {
     const el = headerRef.current;
     if (!el) return;
     const hero = document.querySelector<HTMLElement>('[data-hero]');
-    const heroEnd = hero ? hero.getBoundingClientRect().bottom + y : 0;
-    // The walk hero's stage is sticky, so its copy never slides under the
-    // header; on ordinary heroes the header turns solid as soon as content moves.
-    const sticky = hero?.dataset.hero === 'walk';
-    const over = !!hero && (sticky ? y < heroEnd - el.offsetHeight : y < 24);
+    geo.current = {
+      hero: !!hero,
+      // The walk hero's stage is sticky, so its copy never slides under the
+      // header; on ordinary heroes the header turns solid as soon as content moves.
+      sticky: hero?.dataset.hero === 'walk',
+      heroEnd: hero ? hero.getBoundingClientRect().bottom + window.scrollY : 0,
+      h: el.offsetHeight,
+    };
+  };
+
+  const evaluate = (y: number) => {
+    const el = headerRef.current;
+    if (!el) return;
+    const { hero, sticky, heroEnd, h } = geo.current;
+    const over = hero && (sticky ? y < heroEnd - h : y < 24);
     el.classList.toggle('is-over', over);
     const delta = y - last.current;
     if (Math.abs(delta) > 4) {
@@ -122,12 +136,21 @@ export function Header() {
       if (queued) return;
       queued = requestAnimationFrame(() => {
         queued = 0;
+        measure();
         evaluate(window.scrollY);
       });
     });
     mo.observe(main, { childList: true, subtree: true });
+    const ro = new ResizeObserver(() => {
+      measure();
+      evaluate(window.scrollY);
+    });
+    ro.observe(document.body);
+    measure();
+    evaluate(window.scrollY);
     return () => {
       mo.disconnect();
+      ro.disconnect();
       cancelAnimationFrame(queued);
     };
   }, []);

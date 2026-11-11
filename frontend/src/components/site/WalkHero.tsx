@@ -21,8 +21,6 @@ export interface WalkHeroProps {
   notes: Array<{ title: string; body: string }>;
   /** Above-the-fold copy (eyebrow, h1, lead, actions); fades out once walking starts. */
   intro: ReactNode;
-  footLeft?: ReactNode;
-  footRight?: ReactNode;
   cue: string;
   label: string;
 }
@@ -47,7 +45,7 @@ interface Layout {
  * figure walks along the floor in step with the scroll. Sticky stage, one
  * canvas, transforms only — nothing here triggers layout while scrolling.
  */
-export function WalkHero({ words, notes, intro, footLeft, footRight, cue, label }: WalkHeroProps) {
+export function WalkHero({ words, notes, intro, cue, label }: WalkHeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const wallRef = useRef<HTMLDivElement>(null);
@@ -58,6 +56,7 @@ export function WalkHero({ words, notes, intro, footLeft, footRight, cue, label 
   const notesRef = useRef<HTMLDivElement>(null);
 
   const walker = useRef<Walker | null>(null);
+  const nums = useRef<HTMLElement[]>([]);
   const L = useRef<Layout | null>(null);
   const state = useRef({ note: -1, intro: true });
 
@@ -74,9 +73,12 @@ export function WalkHero({ words, notes, intro, footLeft, footRight, cue, label 
     hero.draw(f.idx);
     hero.place(l.xStart + f.q - off, l.feetY);
     wallRef.current.style.transform = `translate3d(${(-off).toFixed(2)}px,0,0)`;
-    const par = (off * 0.14).toFixed(2);
-    wallRef.current.querySelectorAll<HTMLElement>('.as-num').forEach((n) => {
-      n.style.transform = `translate3d(${par}px,0,0)`;
+    // Each numeral drifts relative to its own panel and sits at its designed
+    // spot when that panel is mid-screen, so late panels (5, 6) are not
+    // pushed out of their wall by an ever-growing offset.
+    nums.current.forEach((n, i) => {
+      const par = clamp((off - (i - 0.5) * l.P) * 0.14, -l.P * 0.18, l.P * 0.18);
+      n.style.transform = `translate3d(${par.toFixed(2)}px,0,0)`;
     });
 
     const showIntro = w < 0.015;
@@ -99,6 +101,7 @@ export function WalkHero({ words, notes, intro, footLeft, footRight, cue, label 
     const section = sectionRef.current;
     const stage = stageRef.current;
     if (!section || !stage || !walker.current) return;
+    nums.current = [...stage.querySelectorAll<HTMLElement>('.as-num')];
     const W = stage.clientWidth;
     const H = stage.clientHeight;
     const portrait = H > W;
@@ -207,11 +210,9 @@ export function WalkHero({ words, notes, intro, footLeft, footRight, cue, label 
         </div>
 
         <div className="as-walk-foot">
-          <span>{footLeft}</span>
           <span ref={cueRef} className="as-scroll-cue">
             {cue}
           </span>
-          <span>{footRight}</span>
         </div>
         <div ref={barRef} className="as-walk-progress" aria-hidden />
       </div>

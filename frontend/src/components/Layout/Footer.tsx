@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useI18n } from '@/contexts/I18nContext';
 import { ORGANIZATION, phoneForLocale, telHref } from '@/lib/site';
@@ -40,13 +40,23 @@ export function Footer() {
   const { t, locale } = useI18n();
   const phone = phoneForLocale(locale);
   const wordRef = useRef<HTMLParagraphElement>(null);
+  const docH = useRef(0);
+
+  // Page height, read when it changes rather than on every scroll frame.
+  useEffect(() => {
+    const read = () => (docH.current = document.documentElement.scrollHeight);
+    const ro = new ResizeObserver(read);
+    ro.observe(document.body);
+    read();
+    return () => ro.disconnect();
+  }, []);
 
   // The wordmark lines slide together as the footer comes into view.
   useScrollFrame(() => {
     const el = wordRef.current;
     if (!el || prefersReducedMotion()) return;
     // 0 when the footer is a screen away from the page end, 1 at the very bottom.
-    const remaining = document.documentElement.scrollHeight - (window.scrollY + window.innerHeight);
+    const remaining = docH.current - (window.scrollY + window.innerHeight);
     const p = Math.min(1, Math.max(0, 1 - remaining / (window.innerHeight * 0.9)));
     const off = ((1 - p) * 18).toFixed(2);
     const spans = el.children as HTMLCollectionOf<HTMLElement>;
