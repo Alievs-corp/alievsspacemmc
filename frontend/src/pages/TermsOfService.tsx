@@ -1,6 +1,5 @@
-import Container from '../components/ui/Container';
 import { useI18n } from '@/contexts/I18nContext';
-import { Helmet } from 'react-helmet-async';
+import { LegalContactCard, LegalLayout, LegalList } from '@/components/site/account/LegalLayout';
 
 const TERMS_CONTENT = {
   en: {
@@ -395,216 +394,129 @@ const TERMS_CONTENT = {
 } as const;
 
 export function TermsOfService() {
-  const { locale } = useI18n();
+  const { locale, t } = useI18n();
   const currentYear = new Date().getFullYear();
 
   // Legal texts exist only in en/ru/az; other UI languages read the English version.
   const content = TERMS_CONTENT[locale as keyof typeof TERMS_CONTENT] ?? TERMS_CONTENT.en;
+  const s = content.sections;
 
   return (
-    <div className='mt-[60px] flex flex-col justify-center items-center'>
-      <Helmet>
-        <title>{`${content.metaTitle} | ${content.companyName}`}</title>
-        <meta name="description" content={content.metaDescription} />
-        <meta property="og:title" content={`${content.metaTitle} | ${content.companyName}`} />
-        <meta property="og:description" content={content.metaDescription} />
-        <meta property="og:type" content="website" />
-      </Helmet>
-
-      <Container className="flex flex-col justify-center items-center mb-12">
-        <h2 className="font-display text-[38px] font-bold text-white">{content.title}</h2>
-        <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">
-          {content.companyName}
-        </p>
-        <p className="font-inter text-[16px] text-text-muted text-center max-w-[800px] mt-2">
-          {content.lastUpdatedLabel} {currentYear}
-        </p>
-      </Container>
-
-      <Container className="w-full mb-24">
-        <div className="flex flex-col items-center">
-          <div className="panel p-8 md:p-10 flex flex-col w-full max-w-4xl mx-auto hover:border-border-strong transition-all duration-300">
-
-            <p className="font-inter text-text-muted text-[16px] md:text-[18px] leading-relaxed mb-4">
-              {content.intro1}
-            </p>
-            <p className="font-inter text-text-muted text-[16px] md:text-[18px] leading-relaxed mb-8 border-l-4 border-primary pl-4">
-              {content.intro2}
-            </p>
-
-            <div className="space-y-8">
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.companyInfo.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.companyInfo.intro}</p>
-                <ul className="list-disc pl-6 space-y-1">
-                  {content.sections.companyInfo.list.map((item) => (
-                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <hr className="border-surface-3" />
-
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.eligibility.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.eligibility.intro}</p>
-                <ul className="list-disc pl-6 space-y-1">
-                  {content.sections.eligibility.list.map((item) => (
-                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <hr className="border-surface-3" />
-
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.services.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.services.intro}</p>
-                <ul className="list-disc pl-6 space-y-1">
-                  {content.sections.services.list.map((item) => (
-                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mt-2">{content.sections.services.footer}</p>
-              </div>
-
-              <hr className="border-surface-3" />
-
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.payments.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.payments.intro}</p>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.payments.methodsIntro}</p>
-                <ul className="list-disc pl-6 space-y-1">
-                  {content.sections.payments.methods.map((item) => (
-                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mt-2">{content.sections.payments.projectPaymentsIntro}</p>
-                <ul className="list-disc pl-6 space-y-1">
-                  {content.sections.payments.projectPayments.map((item) => (
-                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mt-2">{content.sections.payments.footer}</p>
-              </div>
-
-              <hr className="border-surface-3" />
-
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.clientResponsibilities.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.clientResponsibilities.intro}</p>
-                <ul className="list-disc pl-6 space-y-1">
-                  {content.sections.clientResponsibilities.list.map((item) => (
-                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mt-2">{content.sections.clientResponsibilities.footer}</p>
-              </div>
-
-              <hr className="border-surface-3" />
-
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.ip.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.ip.intro}</p>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.ip.intro2}</p>
-                <ul className="list-disc pl-6 space-y-1">
-                  {content.sections.ip.list.map((item) => (
-                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mt-2">{content.sections.ip.footer}</p>
-              </div>
-
-              <hr className="border-surface-3" />
-
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.revisions.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.revisions.body}</p>
-              </div>
-
-              <hr className="border-surface-3" />
-
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.limitation.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.limitation.intro}</p>
-                <ul className="list-disc pl-6 space-y-1">
-                  {content.sections.limitation.list.map((item) => (
-                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mt-2">{content.sections.limitation.footer}</p>
-              </div>
-
-              <hr className="border-surface-3" />
-
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.termination.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.termination.intro}</p>
-                <ul className="list-disc pl-6 space-y-1">
-                  {content.sections.termination.list.map((item) => (
-                    <li key={item} className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mt-2">{content.sections.termination.footer}</p>
-              </div>
-
-              <hr className="border-surface-3" />
-
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.law.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.law.body}</p>
-              </div>
-
-              <hr className="border-surface-3" />
-
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.changes.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.changes.body}</p>
-              </div>
-
-              <hr className="border-surface-3" />
-
-              <div>
-                <h3 className="font-display text-white text-[22px] md:text-[26px] font-semibold mb-3">{content.sections.contact.title}</h3>
-                <p className="font-inter text-text-muted text-[14px] md:text-[16px] mb-2">{content.sections.contact.intro}</p>
-                <div className="bg-surface p-4 rounded-lg mt-2 border border-surface-3">
-                  <p className="font-inter text-white text-[16px] md:text-[18px] font-semibold">{content.companyName}</p>
-                  <p className="font-inter text-text-muted text-[14px] md:text-[16px]">{content.sections.contact.emailLabel} info@alievsspace.com</p>
-                  <p className="font-inter text-text-muted text-[14px] md:text-[16px]">
-                    {content.sections.contact.websiteLabel}{' '}
-                    <a
-                      href="https://alievsspace.com"
-                      className="text-primary hover:underline"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      https://alievsspace.com
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Container>
-    </div>
+    <LegalLayout
+      meta={{ title: content.metaTitle, description: content.metaDescription }}
+      title={content.title}
+      companyName={content.companyName}
+      lastUpdated={`${content.lastUpdatedLabel} ${currentYear}`}
+      word={t('site.account.legal.words.terms')}
+      num="02"
+      tone="burnt"
+      intro={content.intro1}
+      callout={content.intro2}
+      sections={[
+        {
+          id: 'company-information',
+          title: s.companyInfo.title,
+          body: (
+            <>
+              <p>{s.companyInfo.intro}</p>
+              <LegalList items={s.companyInfo.list} />
+            </>
+          ),
+        },
+        {
+          id: 'eligibility',
+          title: s.eligibility.title,
+          body: (
+            <>
+              <p>{s.eligibility.intro}</p>
+              <LegalList items={s.eligibility.list} />
+            </>
+          ),
+        },
+        {
+          id: 'services',
+          title: s.services.title,
+          body: (
+            <>
+              <p>{s.services.intro}</p>
+              <LegalList items={s.services.list} />
+              <p>{s.services.footer}</p>
+            </>
+          ),
+        },
+        {
+          id: 'payments',
+          title: s.payments.title,
+          body: (
+            <>
+              <p>{s.payments.intro}</p>
+              <p>{s.payments.methodsIntro}</p>
+              <LegalList items={s.payments.methods} />
+              <p>{s.payments.projectPaymentsIntro}</p>
+              <LegalList items={s.payments.projectPayments} />
+              <p>{s.payments.footer}</p>
+            </>
+          ),
+        },
+        {
+          id: 'client-responsibilities',
+          title: s.clientResponsibilities.title,
+          body: (
+            <>
+              <p>{s.clientResponsibilities.intro}</p>
+              <LegalList items={s.clientResponsibilities.list} />
+              <p>{s.clientResponsibilities.footer}</p>
+            </>
+          ),
+        },
+        {
+          id: 'intellectual-property',
+          title: s.ip.title,
+          body: (
+            <>
+              <p>{s.ip.intro}</p>
+              <p>{s.ip.intro2}</p>
+              <LegalList items={s.ip.list} />
+              <p>{s.ip.footer}</p>
+            </>
+          ),
+        },
+        { id: 'revisions', title: s.revisions.title, body: <p>{s.revisions.body}</p> },
+        {
+          id: 'limitation-of-liability',
+          title: s.limitation.title,
+          body: (
+            <>
+              <p>{s.limitation.intro}</p>
+              <LegalList items={s.limitation.list} />
+              <p>{s.limitation.footer}</p>
+            </>
+          ),
+        },
+        {
+          id: 'termination',
+          title: s.termination.title,
+          body: (
+            <>
+              <p>{s.termination.intro}</p>
+              <LegalList items={s.termination.list} />
+              <p>{s.termination.footer}</p>
+            </>
+          ),
+        },
+        { id: 'governing-law', title: s.law.title, body: <p>{s.law.body}</p> },
+        { id: 'changes', title: s.changes.title, body: <p>{s.changes.body}</p> },
+        {
+          id: 'contact',
+          title: s.contact.title,
+          body: (
+            <>
+              <p>{s.contact.intro}</p>
+              <LegalContactCard companyName={content.companyName} emailLabel={s.contact.emailLabel} websiteLabel={s.contact.websiteLabel} />
+            </>
+          ),
+        },
+      ]}
+    />
   );
 }

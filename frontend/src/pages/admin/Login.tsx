@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { Eye, EyeOff, AlertCircle, Loader2 } from 'lucide-react';
+import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useI18n } from '@/contexts/I18nContext';
 import { ApiError, homePath } from '@/lib/api';
-import logoMark from '../../assets/images/logo-dark.png';
+import { AuthShell } from '@/components/site/account/AuthShell';
+import { AccNotice, FieldLabel } from '@/components/site/account/ui';
 
 export function Login() {
   const navigate = useNavigate();
@@ -54,96 +55,66 @@ export function Login() {
   };
 
   return (
-    <div className="grid min-h-dvh bg-bg text-text lg:grid-cols-2">
-      {/* Brand panel */}
-      <div className="relative hidden overflow-hidden border-r border-border lg:flex lg:flex-col lg:items-center lg:justify-center lg:p-12">
-        <div aria-hidden className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary/20 blur-3xl" />
-        <div aria-hidden className="pointer-events-none absolute -bottom-28 -left-24 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
-        <div className="relative z-10 max-w-md text-center">
-          <img src={logoMark} alt="" className="mx-auto mb-6 h-24 w-24 object-contain" />
-          <h1 className="font-display text-4xl font-bold tracking-tight">
-            ALIEVS <span className="text-primary">Space</span>
-          </h1>
-          <p className="mt-6 leading-relaxed text-text-muted">{t('auth.login.brandTagline')}</p>
+    <AuthShell word={t('site.account.auth.loginWord')} num="A" tone="mustard" tagline={t('auth.login.brandTagline')}>
+      <h1 className="acc-auth__title">{t('auth.login.title')}</h1>
+      <p className="acc-auth__switch">
+        {t('auth.login.noAccount')}{' '}
+        <Link to="/register" className="as-link">
+          {t('auth.login.signUp')}
+        </Link>
+      </p>
+
+      <form onSubmit={handleSubmit} className="mt-8 grid gap-5">
+        {error && <AccNotice>{error}</AccNotice>}
+
+        <div>
+          <FieldLabel htmlFor="email">{t('auth.login.fields.email')}</FieldLabel>
+          <input
+            id="email"
+            type="email"
+            required
+            autoComplete="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="acc-input"
+            placeholder="admin@alievsspace.com"
+          />
         </div>
-      </div>
 
-      {/* Form */}
-      <div className="flex items-center justify-center p-6 sm:p-10">
-        <div className="w-full max-w-sm">
-          <div className="mb-8 text-center lg:hidden">
-            <img src={logoMark} alt="" className="mx-auto mb-3 h-14 w-14 object-contain" />
-          </div>
-
-          <h2 className="font-display text-2xl font-bold text-text">{t('auth.login.title')}</h2>
-          <p className="mt-1 text-sm text-text-muted">
-            {t('auth.login.noAccount')}{' '}
-            <Link to="/register" className="font-medium text-primary hover:text-primary-hover">
-              {t('auth.login.signUp')}
-            </Link>
-          </p>
-
-          <form onSubmit={handleSubmit} className="mt-8 space-y-5">
-            {error && (
-              <div role="alert" className="flex items-start gap-2 rounded-lg border border-danger/40 bg-danger/10 p-3 text-sm text-danger">
-                <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
-                <span className="break-words">{error}</span>
-              </div>
-            )}
-
-            <div>
-              <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-text-muted">
-                {t('auth.login.fields.email')}
-              </label>
-              <input
-                id="email"
-                type="email"
-                required
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="field"
-                placeholder="admin@alievsspace.com"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="password" className="mb-1.5 block text-sm font-medium text-text-muted">
-                {t('auth.login.fields.password')}
-              </label>
-              <div className="relative">
-                <input
-                  id="password"
-                  type={showPassword ? 'text' : 'password'}
-                  required
-                  autoComplete="current-password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="field pr-11"
-                  placeholder="••••••••"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword((v) => !v)}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-1.5 text-text-subtle transition-colors hover:text-text"
-                  aria-label={showPassword ? t('auth.login.hidePassword') : t('auth.login.showPassword')}
-                >
-                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                </button>
-              </div>
-            </div>
-
+        <div>
+          <FieldLabel htmlFor="password">{t('auth.login.fields.password')}</FieldLabel>
+          <div className="relative">
+            <input
+              id="password"
+              type={showPassword ? 'text' : 'password'}
+              required
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="acc-input pr-14"
+              placeholder="••••••••"
+            />
             <button
-              type="submit"
-              disabled={loading}
-              className="flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-3 font-semibold text-on-primary transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+              type="button"
+              onClick={() => setShowPassword((v) => !v)}
+              className="acc-eye"
+              aria-label={showPassword ? t('auth.login.hidePassword') : t('auth.login.showPassword')}
             >
-              {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-              {loading ? t('auth.login.submitting') : t('auth.login.submit')}
+              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
-          </form>
+          </div>
         </div>
-      </div>
-    </div>
+
+        <button type="submit" disabled={loading} className="as-btn as-btn--accent as-btn--block mt-2">
+          {loading && <Loader2 className="h-4 w-4 animate-spin" aria-hidden />}
+          <span>{loading ? t('auth.login.submitting') : t('auth.login.submit')}</span>
+          {!loading && (
+            <span className="as-arrow" aria-hidden>
+              →
+            </span>
+          )}
+        </button>
+      </form>
+    </AuthShell>
   );
 }

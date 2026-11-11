@@ -1,45 +1,42 @@
-import { Link } from 'react-router-dom';
-import Container from '@/components/ui/Container';
-import { Reveal } from '@/components/ui/Reveal';
 import { useI18n } from '@/contexts/I18nContext';
+import { CtaWalk, Pill } from '@/components/site/blocks';
 import { phoneForLocale, whatsappHref } from '@/lib/site';
 
-/** Closing conversion block, repeated at the end of the homepage. */
+/** Closing band of the homepage: plaster wall, the invitation and the figure walking off to launch. */
 const FinalCta = () => {
-  const { t, locale } = useI18n();
+  const { t, tRaw, locale } = useI18n();
+  const lines = tRaw<string[]>('site.home.ctaLines', []) || [];
 
   return (
-    <section className="glow-bg border-t border-border bg-ink-950">
-      <Container className="py-20 text-center md:py-28">
-        <Reveal className="mx-auto max-w-2xl">
-          <h2 className="font-display text-[28px] font-bold leading-tight text-white md:text-[42px]">
-            {t('home.finalTitle')}
-          </h2>
-          <p className="mx-auto mt-5 text-[14px] leading-relaxed text-text-muted md:text-[17px]">
-            {t('home.finalCopy')}
-          </p>
-
-          <div className="mt-9 flex flex-wrap justify-center gap-3">
-            <Link
-              to="/contact"
-              className="rounded-lg bg-primary px-7 py-3.5 text-[15px] font-semibold text-on-primary shadow-[var(--shadow-glow-primary)] transition-colors hover:bg-primary-hover"
-            >
-              {t('home.finalCta')}
-            </Link>
-            <a
-              href={whatsappHref(phoneForLocale(locale))}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg border border-border-strong px-7 py-3.5 text-[15px] font-medium text-text transition-colors hover:bg-surface-3"
-            >
-              {t('home.finalSecondary')}
-            </a>
-          </div>
-
-          <p className="mt-6 text-[12.5px] text-text-subtle">{t('home.finalNote')}</p>
-        </Reveal>
-      </Container>
-    </section>
+    <CtaWalk
+      tone="burnt"
+      eyebrow={t('site.home.ctaEyebrow')}
+      title={
+        lines.length === 3 ? (
+          <>
+            {lines[0]}
+            <br />
+            <em>{lines[1]}</em>
+            <br />
+            {lines[2]}
+          </>
+        ) : (
+          t('home.finalTitle')
+        )
+      }
+      lead={t('home.finalCopy')}
+      actions={
+        <>
+          <Pill to="/contact" variant="light">
+            {t('home.finalCta')}
+          </Pill>
+          <Pill href={whatsappHref(phoneForLocale(locale))} target="_blank" rel="noopener noreferrer" variant="ghost" arrow={false}>
+            {t('home.finalSecondary')}
+          </Pill>
+          <p className="basis-full pt-1 text-[13px] text-[rgba(255,248,238,.82)]">{t('home.finalNote')}</p>
+        </>
+      }
+    />
   );
 };
 

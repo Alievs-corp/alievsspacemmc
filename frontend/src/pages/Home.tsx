@@ -1,5 +1,7 @@
 import { useI18n } from '@/contexts/I18nContext';
 import { Seo } from '@/components/Seo';
+import { Ticker } from '@/components/site/blocks';
+import HomeStatement from '@/components/site/home/HomeStatement';
 import HomeHero from '@/components/ui/Home/HomeHero';
 import StatsBand from '@/components/ui/Home/StatsBand';
 import WeBuild from '@/components/ui/Home/WeBuild';
@@ -24,17 +26,20 @@ export function Home() {
       acceptedAnswer: { '@type': 'Answer', text: item.a },
     })),
   };
+  const ticker = tRaw<string[]>('site.home.ticker', []) || [];
 
   return (
     <>
       <Seo page="home" path="/" schema={faqSchema} />
-      {/* h1 lives in the hero; the rest of the page is a flat list of sections. */}
+      {/* h1 lives in the walk hero; everything after it is h2 sections. */}
       <HomeHero />
-      <StatsBand />
+      <HomeStatement />
       <WeBuild />
+      <Ticker items={ticker} duration={28} />
+      <StatsBand />
       <ValueProps />
-      <PackagesTeaser />
       <PremiumProcess />
+      <PackagesTeaser />
       <Testimonials />
       <FaqTeaser />
       <FinalCta />

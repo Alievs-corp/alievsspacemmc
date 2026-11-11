@@ -1,78 +1,76 @@
-import Container from './../Container'
-import { useI18n } from '@/contexts/I18nContext'
-import analysis from "../../../assets/images/analysis.svg"
-import uxUi from "../../../assets/images/ux-ui.svg"
-import development from "../../../assets/images/development.svg"
-import qualityControl from "../../../assets/images/qualityControl.svg"
-import launch from "../../../assets/images/launch.svg"
-import support from "../../../assets/images/support.svg"
+import type { CSSProperties } from 'react';
+import { useI18n } from '@/contexts/I18nContext';
+import { SectionHead, useReveal } from '@/components/site/blocks';
+import analysis from '../../../assets/images/analysis.svg';
+import uxUi from '../../../assets/images/ux-ui.svg';
+import development from '../../../assets/images/development.svg';
+import qualityControl from '../../../assets/images/qualityControl.svg';
+import launch from '../../../assets/images/launch.svg';
+import support from '../../../assets/images/support.svg';
 
+const STAGES = [
+  ['analysis', analysis],
+  ['uxui', uxUi],
+  ['development', development],
+  ['quality', qualityControl],
+  ['launch', launch],
+  ['support', support],
+] as const;
 
+/**
+ * How we deliver: the six stages as the reference ruled list. Each row carries
+ * its photo, which comes into colour when the row is hovered (always in colour
+ * on touch screens).
+ */
 const WeDeliver = () => {
   const { t } = useI18n();
-  const items = [
-    {
-      img: analysis,
-      alt: t('public.about.deliver.items.analysis.alt'),
-      title: t('public.about.deliver.items.analysis.title'),
-      text: t('public.about.deliver.items.analysis.text'),
-    },
-    {
-      img: uxUi,
-      alt: t('public.about.deliver.items.uxui.alt'),
-      title: t('public.about.deliver.items.uxui.title'),
-      text: t('public.about.deliver.items.uxui.text'),
-    },
-    {
-      img: development,
-      alt: t('public.about.deliver.items.development.alt'),
-      title: t('public.about.deliver.items.development.title'),
-      text: t('public.about.deliver.items.development.text'),
-    },
-    {
-      img: qualityControl,
-      alt: t('public.about.deliver.items.quality.alt'),
-      title: t('public.about.deliver.items.quality.title'),
-      text: t('public.about.deliver.items.quality.text'),
-    },
-    {
-      img: launch,
-      alt: t('public.about.deliver.items.launch.alt'),
-      title: t('public.about.deliver.items.launch.title'),
-      text: t('public.about.deliver.items.launch.text'),
-    },
-    {
-      img: support,
-      alt: t('public.about.deliver.items.support.alt'),
-      title: t('public.about.deliver.items.support.title'),
-      text: t('public.about.deliver.items.support.text'),
-    },
-  ] as const;
-  return (
-    <div className='mt-[80px] md:mt-[100px] lg:mt-[120px]'>
-        <Container className='flex flex-col justify-center items-center'>
-            <div className='w-full flex flex-col justify-center items-center gap-[10px]'>
-              <h3 className='font-display text-white text-[26px] md:text-[38px] font-bold'>{t('public.about.deliverTitle')}</h3>
-              <p className='font-inter text-text-muted max-w-[370px] md:max-w-[800px] text-center text-[13px] md:text-[18px]'>
-                {t('public.about.deliverIntro')}
-              </p>
-            </div>
-            <div className='mt-[60px] w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[50px] place-items-center'>
-              {items.map((item, idx) => (
-                <div
-                  key={idx}
-                  tabIndex={0}
-                  className='flex justify-center items-center card h-full flex-col gap-[14px] p-6 cursor-pointer transition-all duration-200 ease-out hover:bg-surface-2 hover:border-border-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus max-w-[317px]'
-                >
-                    <h4 className='font-display text-white text-[20px] md:text-[21px] font-semibold max-w-[250px]'>{item.title}</h4>
-                    <img src={item.img} alt={item.alt} />
-                    <p className='font-inter text-text-muted text-[13px] '>{item.text}</p>
-                </div>
-              ))}
-            </div>
-        </Container>
-    </div>
-  )
-}
+  const listRef = useReveal<HTMLOListElement>();
 
-export default WeDeliver
+  return (
+    <section className="as-section as-bg-cream" aria-labelledby="about-deliver">
+      <div className="as-wrap">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-4">
+            <div className="lg:sticky lg:top-[calc(var(--as-header-h)+32px)]">
+              <SectionHead
+                eyebrow={t('site.company.about.deliverEyebrow')}
+                title={t('public.about.deliverTitle')}
+                lead={t('public.about.deliverIntro')}
+                id="about-deliver"
+                size="sm"
+              />
+            </div>
+          </div>
+          <ol ref={listRef} className="as-steps cmp-deliver lg:col-span-8">
+            {STAGES.map(([key, img], i) => (
+              <li
+                key={key}
+                data-reveal
+                style={{ '--d': `${Math.min(i, 5) * 70}ms` } as CSSProperties}
+                className="md:grid-cols-[74px_1fr_minmax(150px,220px)] md:gap-6"
+              >
+                <span className="as-step-n">{String(i + 1).padStart(2, '0')}</span>
+                <div className="min-w-0">
+                  <h3 className="as-h3">{t(`public.about.deliver.items.${key}.title`)}</h3>
+                  <p>{t(`public.about.deliver.items.${key}.text`)}</p>
+                </div>
+                <div className="cmp-deliver__img col-start-2 mt-2 md:col-start-3 md:row-start-1 md:mt-0">
+                  <img
+                    src={img}
+                    alt={t(`public.about.deliver.items.${key}.alt`)}
+                    width={245}
+                    height={146}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default WeDeliver;

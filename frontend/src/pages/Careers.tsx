@@ -1,33 +1,29 @@
+import type { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
-import { useI18n } from '@/contexts/I18nContext';
-// "Our Team" section is temporarily disabled.
-// import { useState } from 'react';
-import Container from '../components/ui/Container';
-import workWithUs from '../assets/images/work-with-us.svg';
-// import ismat from "../assets/images/ismat.jpeg";
-// import ismayil from "../assets/images/ismayil.jpeg";
-// import elshan from "../assets/images/elsen.jpeg";
-// import elmar from "../assets/images/elmar.jpeg";
-// import ravena from "../assets/images/ravena.jpeg";
-// import zehra from "../assets/images/zehra.jpg";
-// import parvin from "../assets/images/pervin.jpeg"
-// import aygun from "../assets/images/aygun.jpeg"
-// import fuad from "../assets/images/fuad-elizade.jpeg"
-// import yunis from "../assets/images/yunis.jpeg"
-// import selen from "../assets/images/selen.jpeg"
-// import nicat from "../assets/images/nicat.jpeg"
 import { Helmet } from 'react-helmet-async';
+import { useI18n } from '@/contexts/I18nContext';
+import workWithUs from '../assets/images/work-with-us.svg';
+import { CtaWalk, PageHero, Pill, RevealGrid, SectionHead, Ticker, useReveal, WordsReveal } from '@/components/site/blocks';
+import { scrollToTarget } from '@/components/site/scroll';
+import { accentLast } from '@/components/site/work/text';
+import '@/components/site/work/work.css';
+
+// The "Our Team" section (member cards, role filter, photo preview) is
+// temporarily disabled; its data and markup are kept at the end of this file.
+
+/** Shared reasons to join, drawn from the "what you get" lists of the role pages. */
+const PERKS = [
+  'public.frontend.get.items.realProduction',
+  'public.frontend.get.items.ownership',
+  'public.backend.get.items.cleanArchitecture',
+  'public.uiux.get.items.spaceToIterate',
+  'public.uiux.get.items.professionalEnvironment',
+  'public.frontend.location.items.format',
+];
 
 export function Careers() {
-  const { t } = useI18n();
-  // const [showAllTeam, setShowAllTeam] = useState(false);
-  // const [selectedRole, setSelectedRole] = useState<string>('all');
-  // const [previewMemberId, setPreviewMemberId] = useState<string | null>(null);
-  // const [imageLoading, setImageLoading] = useState(true);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const { t, tRaw } = useI18n();
+  const rolesRef = useReveal<HTMLOListElement>();
 
   const vacancies = [
     {
@@ -38,8 +34,8 @@ export function Careers() {
       requirements: [
         t('public.careers.vacancies.frontend.reqs.htmlCssJs'),
         t('public.careers.vacancies.frontend.reqs.uiSense'),
-        t('public.careers.vacancies.frontend.reqs.cleanCode')
-      ]
+        t('public.careers.vacancies.frontend.reqs.cleanCode'),
+      ],
     },
     {
       id: 'backend-developer',
@@ -49,8 +45,8 @@ export function Careers() {
       requirements: [
         t('public.careers.vacancies.backend.reqs.restSql'),
         t('public.careers.vacancies.backend.reqs.authRbacSense'),
-        t('public.careers.vacancies.backend.reqs.performanceMindset')
-      ]
+        t('public.careers.vacancies.backend.reqs.performanceMindset'),
+      ],
     },
     {
       id: 'ui-ux-designer',
@@ -60,12 +56,165 @@ export function Careers() {
       requirements: [
         t('public.careers.vacancies.uiux.reqs.figma'),
         t('public.careers.vacancies.uiux.reqs.designSystems'),
-        t('public.careers.vacancies.uiux.reqs.webMobileUx')
-      ]
+        t('public.careers.vacancies.uiux.reqs.webMobileUx'),
+      ],
     },
   ];
 
-  /* --- "Our Team" section temporarily disabled ---
+  const careersTitle = t('nav.careers', 'Careers');
+
+  return (
+    <>
+      <Helmet>
+        <title>{`${t('nav.careers', 'Careers')} | Alievs Space MMC`}</title>
+        <meta name="description" content={t('public.careersIntro')} />
+        <meta property="og:title" content={`${t('nav.careers', 'Careers')}`} />
+        <meta property="og:description" content={t('public.careersIntro')} />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
+      <PageHero
+        word={t('site.work.careers.word')}
+        num={String(vacancies.length)}
+        tone="mustard"
+        eyebrow="Alievs Space"
+        title={careersTitle}
+        lead={t('public.careersIntro')}
+        crumbs={[{ label: t('nav.home'), to: '/' }, { label: careersTitle }]}
+        actions={
+          <>
+            <Pill variant="light" onClick={() => scrollToTarget('#roles')}>
+              {t('site.work.careers.rolesCta')}
+            </Pill>
+            <Pill to="/apply" variant="ghost">
+              {t('public.apply', 'Apply')}
+            </Pill>
+          </>
+        }
+      />
+
+      {/* Culture: the "why work with us" copy as a scroll-lit statement. */}
+      <section className="as-section" aria-labelledby="careers-why">
+        <div className="as-wrap grid gap-12 lg:grid-cols-12 lg:items-end lg:gap-16">
+          <div className="grid gap-8 lg:col-span-8">
+            <SectionHead id="careers-why" eyebrow={careersTitle} title={t('public.careers.whyTitle')} size="sm" />
+            <WordsReveal
+              text={t('public.careers.whyCopy')}
+              highlight={tRaw<string[]>('site.work.careers.highlight', [])}
+              className="max-w-[24ch] !text-[clamp(28px,4.2vw,64px)]"
+            />
+          </div>
+          <RevealGrid className="lg:col-span-4">
+            <div className="as-box grid place-items-center">
+              <img
+                src={workWithUs}
+                alt={t('public.careers.workWithUsAlt')}
+                loading="lazy"
+                decoding="async"
+                width={242}
+                height={162}
+                className="h-auto w-full max-w-[420px] rounded-[14px]"
+              />
+            </div>
+          </RevealGrid>
+        </div>
+      </section>
+
+      <Ticker items={vacancies.map((v) => v.title)} duration={26} />
+
+      {/* Open roles as ruled rows; the whole row links to the role page. */}
+      <section id="roles" className="as-section as-bg-cream" aria-labelledby="careers-roles">
+        <div className="as-wrap grid gap-12 md:gap-16">
+          <SectionHead id="careers-roles" eyebrow={t('site.work.careers.rolesEyebrow')} title={t('site.work.careers.rolesTitle')} size="md" />
+          <ol ref={rolesRef} className="wk-roles">
+            {vacancies.map((vacancy, index) => (
+              <li key={vacancy.id} data-reveal style={{ '--d': `${index * 90}ms` } as CSSProperties}>
+                <Link to={`/careers/${vacancy.id}`} className="wk-role wk-hover" aria-label={`${vacancy.title}: ${t('public.careers.viewRoleCta')}`}>
+                  <span className="wk-role__n" aria-hidden>
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <div className="grid content-start gap-3">
+                    <h3 className="wk-role__title as-h3">{vacancy.title}</h3>
+                    <p className="max-w-[48ch] text-[16px] leading-relaxed text-[var(--as-fg-soft)]">{vacancy.description}</p>
+                    <p className="as-mono text-[var(--as-fg-soft)]">{vacancy.location}</p>
+                  </div>
+                  <div className="wk-role__meta">
+                    <p className="as-mono text-[var(--as-fg-soft)]">{t('public.requirements')}</p>
+                    <ul className="as-tags">
+                      {vacancy.requirements.map((requirement, idx) => (
+                        <li key={idx}>{requirement}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <span className="wk-role__go inline-flex items-center gap-4 font-semibold">
+                    <span className="wk-arrow" aria-hidden>
+                      <span>→</span>
+                      <span>→</span>
+                    </span>
+                    <span className="lg:sr-only">{t('public.careers.viewRoleCta')}</span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* What working here looks like. */}
+      <section className="as-section" aria-labelledby="careers-perks">
+        <div className="as-wrap grid gap-12 md:gap-16">
+          <SectionHead id="careers-perks" eyebrow={t('site.work.careers.perksEyebrow')} title={t('public.frontend.whatYouGetTitle')} size="md" />
+          <RevealGrid className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {PERKS.map((key, i) => (
+              <div key={key} className="as-tile as-tile--hover grid h-full content-between gap-10">
+                <span className="wk-num-line text-[64px]" aria-hidden>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <p className="as-h3 !text-[clamp(19px,1.7vw,24px)]">{t(key)}</p>
+              </div>
+            ))}
+          </RevealGrid>
+        </div>
+      </section>
+
+      <CtaWalk
+        tone="burnt"
+        eyebrow={careersTitle}
+        title={accentLast(t('public.frontend.applyTitle'))}
+        lead={t('site.work.careers.ctaLead')}
+        actions={
+          <Pill to="/apply" variant="light">
+            {t('public.apply', 'Apply')}
+          </Pill>
+        }
+      />
+    </>
+  );
+}
+
+/* --- "Our Team" section temporarily disabled ---
+   To bring it back: restore these imports and state, then render the markup
+   below (restyled with the `as-*` classes) after the perks section.
+
+   import { useState } from 'react';
+   import ismat from "../assets/images/ismat.jpeg";
+   import ismayil from "../assets/images/ismayil.jpeg";
+   import elshan from "../assets/images/elsen.jpeg";
+   import elmar from "../assets/images/elmar.jpeg";
+   import ravena from "../assets/images/ravena.jpeg";
+   import zehra from "../assets/images/zehra.jpg";
+   import parvin from "../assets/images/pervin.jpeg"
+   import aygun from "../assets/images/aygun.jpeg"
+   import fuad from "../assets/images/fuad-elizade.jpeg"
+   import yunis from "../assets/images/yunis.jpeg"
+   import selen from "../assets/images/selen.jpeg"
+   import nicat from "../assets/images/nicat.jpeg"
+
+   // const [showAllTeam, setShowAllTeam] = useState(false);
+   // const [selectedRole, setSelectedRole] = useState<string>('all');
+   // const [previewMemberId, setPreviewMemberId] = useState<string | null>(null);
+   // const [imageLoading, setImageLoading] = useState(true);
+
   const teamMembers = [
     {
       id: 'ismat',
@@ -217,88 +366,7 @@ export function Careers() {
   const previewMember = previewMemberId
     ? teamMembers.find((member) => member.id === previewMemberId) || null
     : null;
-  --- end of disabled "Our Team" data --- */
 
-  return (
-    <div className="mt-[60px] flex flex-col justify-center items-center">
-      <Helmet>
-        <title>{`${t('nav.careers', 'Careers')} | Alievs Space MMC`}</title>
-        <meta name="description" content={t('public.careersIntro')} />
-        <meta property="og:title" content={`${t('nav.careers', 'Careers')}`} />
-        <meta property="og:description" content={t('public.careersIntro')} />
-        <meta property="og:type" content="website" />
-      </Helmet>
-      
-      <Container className="flex flex-col justify-center items-center">
-        <h2 className="font-display text-[38px] font-bold text-white">{t('nav.careers')}</h2>
-        <p className="font-inter text-[18px] text-text-muted text-center max-w-[800px]">
-          {t('public.careersIntro')}
-        </p>
-      </Container>
-
-      <Container className="mt-[60px] w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {vacancies.map((vacancy, index) => (
-            <div 
-              key={index}
-              className="card p-6 flex flex-col h-full hover:border-border-strong transition-all duration-300"
-            >
-              <h3 className="font-display text-white text-[22px] md:text-[24px] font-bold mb-3">
-                {vacancy.title}
-              </h3>
-              
-              <p className="font-inter text-text-muted text-[16px] mb-4">
-                {vacancy.description}
-              </p>
-              
-              <div className="mb-6">
-                <div className="flex items-center gap-2 text-text-muted font-inter text-[14px]">
-                  <span className="font-medium">{vacancy.location}</span>
-                </div>
-              </div>
-              
-              <div className="mb-6 flex-grow">
-                <h4 className="font-display text-white text-[16px] font-semibold mb-3">{t('public.requirements')}</h4>
-                <ul className="space-y-2">
-                  {vacancy.requirements.map((requirement, idx) => (
-                    <li key={idx} className="flex items-start">
-                      <span className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                      <span className="font-inter text-text-muted text-[14px]">{requirement}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              <Link 
-                to={`/careers/${vacancy.id}`}
-                onClick={scrollToTop}
-                className="mt-auto w-full bg-primary hover:bg-primary-hover text-on-primary font-inter font-semibold py-3 px-4 rounded-md transition-colors duration-300 cursor-pointer text-center"
-              >
-                {t('public.careers.viewRoleCta')}
-              </Link>
-            </div>
-          ))}
-        </div>
-      </Container>
-
-      <Container className="flex justify-between mt-[120px] mb-[60px] md:mb-[100px] flex-col md:flex-row gap-[40px] md:gap-0 items-center md:items-start">
-        <div className="flex flex-col gap-[10px] max-w-[586px] justify-center w-full md:w-auto">
-          <h3 className="font-display text-white text-[21px] md:text-[26px] font-semibold text-center md:text-left">
-            {t('public.careers.whyTitle')}
-          </h3>
-          <p className="font-inter text-[10px] md:text-[13px] text-text-muted text-center md:text-left">
-            {t('public.careers.whyCopy')}
-          </p>
-        </div>
-
-        <img
-          src={workWithUs}
-          alt={t('public.careers.workWithUsAlt')}
-          className="w-[308px] h-[168px] md:w-auto md:h-auto max-w-[586px]"
-        />
-      </Container>
-
-      {/* --- "Our Team" section temporarily disabled ---
       <Container className='w-full mt-[120px] mb-[60px] md:mb-[100px]'>
         <div className="flex flex-col justify-center items-center mb-12">
           <h3 className="font-display text-[38px] font-bold text-white">{t('public.teamTitle')}</h3>
@@ -457,7 +525,4 @@ export function Careers() {
           </div>
         )}
       </Container>
-      --- end of disabled "Our Team" section --- */}
-    </div>
-  );
-}
+--- end of disabled "Our Team" section --- */

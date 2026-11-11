@@ -6,6 +6,7 @@ import { CurrencyProvider } from './contexts/CurrencyContext';
 import { MarketProvider } from './contexts/MarketContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ScrollToTop } from './components/ScrollToTop';
+import { LegacyFonts } from './components/LegacyFonts';
 import { ContentProvider } from './contexts/ContentContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { Layout } from './components/Layout';
@@ -120,6 +121,7 @@ function App() {
                     path="/panel/*"
                     element={
                       <ProtectedRoute requireSuperAdmin fallback="/crm">
+                        <LegacyFonts />
                         <Suspense fallback={<div className="p-8 text-text-muted">…</div>}>
                           <AdminLayout>
                           <Routes>
@@ -151,6 +153,7 @@ function App() {
                     path="/crm/*"
                     element={
                       <CrmLocaleScope>
+                      <LegacyFonts />
                       <CrmProvider>
                         <Suspense fallback={<div className="min-h-dvh bg-bg" />}>
                           <CrmGate>

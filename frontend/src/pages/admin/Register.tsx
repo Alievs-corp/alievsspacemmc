@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Eye, EyeOff, AlertCircle, Loader2, Check } from 'lucide-react';
+import { Eye, EyeOff, Loader2, Check } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useI18n } from '@/contexts/I18nContext';
 import { api, ApiError } from '@/lib/api';
 import { cn } from '@/lib/utils';
-import logoMark from '../../assets/images/logo-dark.png';
+import { AuthShell } from '@/components/site/account/AuthShell';
+import { AccNotice, FieldLabel } from '@/components/site/account/ui';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_PASSWORD = 8;
@@ -67,125 +68,91 @@ export function Register() {
     }
   };
 
-  const fieldClass = (k: Field) => cn('field', show(k) && 'border-danger focus:border-danger');
-
   return (
-    <div className="grid min-h-dvh bg-bg text-text lg:grid-cols-2">
-      {/* Brand panel */}
-      <div className="relative hidden overflow-hidden border-r border-border lg:flex lg:flex-col lg:items-center lg:justify-center lg:p-12">
-        <div aria-hidden className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary/20 blur-3xl" />
-        <div aria-hidden className="pointer-events-none absolute -bottom-28 -left-24 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
-        <div className="relative z-10 max-w-md text-center">
-          <img src={logoMark} alt="" className="mx-auto mb-6 h-24 w-24 object-contain" />
-          <h1 className="font-display text-4xl font-bold tracking-tight">
-            ALIEVS <span className="text-primary">Space</span>
-          </h1>
-          <p className="mt-6 leading-relaxed text-text-muted">
-            {t('auth.register.brandTagline', 'Premium Digital & Commerce Ecosystems')}
-          </p>
-        </div>
-      </div>
+    <AuthShell
+      word={t('site.account.auth.registerWord')}
+      num="+"
+      tone="amber"
+      tagline={t('auth.register.brandTagline', 'Premium Digital & Commerce Ecosystems')}
+    >
+      <h1 className="acc-auth__title">{t('auth.register.title', 'Create your account')}</h1>
+      <p className="acc-auth__switch">
+        {t('auth.register.haveAccount', 'Already have an account?')}{' '}
+        <Link to="/login" className="as-link">
+          {t('auth.register.signIn', 'Sign in')}
+        </Link>
+      </p>
 
-      {/* Form */}
-      <div className="flex items-center justify-center p-6 sm:p-10">
-        <div className="w-full max-w-md">
-          <div className="mb-8 text-center lg:hidden">
-            <img src={logoMark} alt="" className="mx-auto mb-3 h-14 w-14 object-contain" />
+      {disabled ? (
+        <AccNotice tone="warning" className="mt-8">
+          {t('account.registrationClosed', 'Registration is temporarily closed. Please try again later.')}
+        </AccNotice>
+      ) : (
+        <form onSubmit={handleSubmit} noValidate className="mt-8 grid gap-5">
+          {error && <AccNotice>{error}</AccNotice>}
+
+          <div>
+            <FieldLabel htmlFor="name">{t('account.fields.username', 'Name')}</FieldLabel>
+            <input id="name" type="text" autoComplete="name" maxLength={255} value={form.name} onChange={set('name')} onBlur={blur('name')}
+              aria-invalid={!!show('name')} aria-describedby="name-err" className="acc-input" />
+            {show('name') && <p id="name-err" className="acc-hint acc-hint--bad">{errors.name}</p>}
           </div>
 
-          <h2 className="font-display text-2xl font-bold text-text">{t('auth.register.title', 'Create your account')}</h2>
-          <p className="mt-1 text-sm text-text-muted">
-            {t('auth.register.haveAccount', 'Already have an account?')}{' '}
-            <Link to="/login" className="font-medium text-primary hover:text-primary-hover">
-              {t('auth.register.signIn', 'Sign in')}
-            </Link>
-          </p>
+          <div>
+            <FieldLabel htmlFor="email">{t('auth.login.fields.email', 'Email')}</FieldLabel>
+            <input id="email" type="email" autoComplete="email" maxLength={255} value={form.email} onChange={set('email')} onBlur={blur('email')}
+              placeholder="you@example.com" aria-invalid={!!show('email')} aria-describedby="email-err" className="acc-input" />
+            {show('email') && <p id="email-err" className="acc-hint acc-hint--bad">{errors.email}</p>}
+          </div>
 
-          {disabled ? (
-            <div role="status" className="mt-8 flex items-start gap-2 rounded-lg border border-warning/40 bg-warning/10 p-4 text-sm text-warning">
-              <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
-              <span>{t('account.registrationClosed', 'Registration is temporarily closed. Please try again later.')}</span>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-5">
-              {error && (
-                <div role="alert" className="flex items-start gap-2 rounded-lg border border-danger/40 bg-danger/10 p-3 text-sm text-danger">
-                  <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
-                  <span className="break-words">{error}</span>
-                </div>
-              )}
-
-              <div>
-                <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-text-muted">
-                  {t('account.fields.username', 'Name')}
-                </label>
-                <input id="name" type="text" autoComplete="name" maxLength={255} value={form.name} onChange={set('name')} onBlur={blur('name')}
-                  aria-invalid={!!show('name')} aria-describedby="name-err" className={fieldClass('name')} />
-                {show('name') && <p id="name-err" className="mt-1.5 text-xs text-danger">{errors.name}</p>}
-              </div>
-
-              <div>
-                <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-text-muted">
-                  {t('auth.login.fields.email', 'Email')}
-                </label>
-                <input id="email" type="email" autoComplete="email" maxLength={255} value={form.email} onChange={set('email')} onBlur={blur('email')}
-                  placeholder="you@example.com" aria-invalid={!!show('email')} aria-describedby="email-err" className={fieldClass('email')} />
-                {show('email') && <p id="email-err" className="mt-1.5 text-xs text-danger">{errors.email}</p>}
-              </div>
-
-              <div>
-                <label htmlFor="password" className="mb-1.5 block text-sm font-medium text-text-muted">
-                  {t('auth.login.fields.password', 'Password')}
-                </label>
-                <div className="relative">
-                  <input
-                    id="password"
-                    type={showPassword ? 'text' : 'password'}
-                    autoComplete="new-password"
-                    maxLength={72}
-                    value={form.password}
-                    onChange={set('password')}
-                    onBlur={blur('password')}
-                    aria-invalid={!!show('password')}
-                    aria-describedby="password-hint"
-                    className={cn(fieldClass('password'), 'pr-11')}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword((v) => !v)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-1.5 text-text-subtle transition-colors hover:text-text"
-                    aria-label={showPassword ? t('auth.register.hidePassword', 'Hide password') : t('auth.register.showPassword', 'Show password')}
-                  >
-                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  </button>
-                </div>
-                <p id="password-hint" className={cn('mt-1.5 flex items-center gap-1 text-xs', show('password') ? 'text-danger' : form.password.length >= MIN_PASSWORD ? 'text-success' : 'text-text-subtle')}>
-                  {form.password.length >= MIN_PASSWORD && <Check className="h-3.5 w-3.5" />}
-                  {t('account.validation.passwordShort', 'At least 8 characters')}
-                </p>
-              </div>
-
-              <div>
-                <label htmlFor="confirm" className="mb-1.5 block text-sm font-medium text-text-muted">
-                  {t('account.fields.confirmPassword', 'Confirm password')}
-                </label>
-                <input id="confirm" type={showPassword ? 'text' : 'password'} autoComplete="new-password" maxLength={72} value={form.confirm}
-                  onChange={set('confirm')} onBlur={blur('confirm')} aria-invalid={!!show('confirm')} aria-describedby="confirm-err" className={fieldClass('confirm')} />
-                {show('confirm') && <p id="confirm-err" className="mt-1.5 text-xs text-danger">{errors.confirm}</p>}
-              </div>
-
+          <div>
+            <FieldLabel htmlFor="password">{t('auth.login.fields.password', 'Password')}</FieldLabel>
+            <div className="relative">
+              <input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                autoComplete="new-password"
+                maxLength={72}
+                value={form.password}
+                onChange={set('password')}
+                onBlur={blur('password')}
+                aria-invalid={!!show('password')}
+                aria-describedby="password-hint"
+                className="acc-input pr-14"
+              />
               <button
-                type="submit"
-                disabled={loading}
-                className="flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-3 font-semibold text-on-primary transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                className="acc-eye"
+                aria-label={showPassword ? t('auth.register.hidePassword', 'Hide password') : t('auth.register.showPassword', 'Show password')}
               >
-                {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-                {loading ? t('auth.register.submitting', 'Creating account…') : t('auth.register.submit', 'Create account')}
+                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
-            </form>
-          )}
-        </div>
-      </div>
-    </div>
+            </div>
+            <p id="password-hint" className={cn('acc-hint', show('password') ? 'acc-hint--bad' : form.password.length >= MIN_PASSWORD && 'acc-hint--ok')}>
+              {form.password.length >= MIN_PASSWORD && <Check className="h-3.5 w-3.5" />}
+              {t('account.validation.passwordShort', 'At least 8 characters')}
+            </p>
+          </div>
+
+          <div>
+            <FieldLabel htmlFor="confirm">{t('account.fields.confirmPassword', 'Confirm password')}</FieldLabel>
+            <input id="confirm" type={showPassword ? 'text' : 'password'} autoComplete="new-password" maxLength={72} value={form.confirm}
+              onChange={set('confirm')} onBlur={blur('confirm')} aria-invalid={!!show('confirm')} aria-describedby="confirm-err" className="acc-input" />
+            {show('confirm') && <p id="confirm-err" className="acc-hint acc-hint--bad">{errors.confirm}</p>}
+          </div>
+
+          <button type="submit" disabled={loading} className="as-btn as-btn--accent as-btn--block mt-2">
+            {loading && <Loader2 className="h-4 w-4 animate-spin" aria-hidden />}
+            <span>{loading ? t('auth.register.submitting', 'Creating account…') : t('auth.register.submit', 'Create account')}</span>
+            {!loading && (
+              <span className="as-arrow" aria-hidden>
+                →
+              </span>
+            )}
+          </button>
+        </form>
+      )}
+    </AuthShell>
   );
 }

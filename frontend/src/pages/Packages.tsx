@@ -1,14 +1,14 @@
-import { Link, useNavigate } from 'react-router-dom';
+import type { CSSProperties } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useI18n } from '@/contexts/I18nContext';
 import { useCurrency } from '@/contexts/CurrencyContext';
 import { useMarket } from '@/contexts/MarketContext';
 import { Seo } from '@/components/Seo';
-import Container from '@/components/ui/Container';
-import { Section, SectionHeading } from '@/components/ui/Section';
-import { Reveal } from '@/components/ui/Reveal';
-import { Accordion, type AccordionItem } from '@/components/ui/Accordion';
+import type { AccordionItem } from '@/components/ui/Accordion';
 import { CurrencySwitcher } from '@/components/ui/CurrencySwitcher';
 import { CountrySwitcher } from '@/components/ui/CountrySwitcher';
+import { CtaWalk, Pill, PageHero, SectionHead, Ticker, useReveal, WALL } from '@/components/site/blocks';
+import { Check, Disclosure } from '@/components/site/offer/parts';
 import { ADDONS, COMPARISON_ROWS, PACKAGE_TIERS, type PackageTier } from '@/data/packages';
 import { convert } from '@/lib/currency';
 import { absoluteUrl } from '@/lib/site';
@@ -17,14 +17,6 @@ import { cn } from '@/lib/utils';
 interface AddonCopy {
   name: string;
   desc: string;
-}
-
-function CheckIcon({ className }: { className?: string }) {
-  return (
-    <svg aria-hidden viewBox="0 0 24 24" className={cn('h-4 w-4 shrink-0', className)} fill="none" stroke="currentColor" strokeWidth={2.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-    </svg>
-  );
 }
 
 function TierCard({ tier, index }: { tier: PackageTier; index: number }) {
@@ -36,139 +28,118 @@ function TierCard({ tier, index }: { tier: PackageTier; index: number }) {
   const features = tRaw<string[]>(`${base}.features`, []) || [];
 
   return (
-    <Reveal
-      as="article"
-      delay={index * 80}
-      className={cn(
-        'relative flex flex-col rounded-2xl border p-6 transition-all duration-300 lg:p-7',
-        tier.featured
-          ? 'border-primary/60 bg-gradient-to-b from-orange-900/25 to-surface shadow-[var(--shadow-glow-primary)]'
-          : 'border-border bg-surface/60 hover:-translate-y-1 hover:border-border-strong',
-      )}
-    >
-      {tier.featured && (
-        <span className="absolute -top-3 left-6 rounded-full bg-primary px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-on-primary">
-          {t('packages.mostPopular')}
-        </span>
-      )}
-
-      <h3 className="font-display text-[22px] font-bold text-white">{t(`${base}.name`)}</h3>
-      <p className="mt-1 text-[13px] text-primary">{t(`${base}.tagline`)}</p>
-
-      <div className="mt-5 flex items-baseline gap-2">
-        {tier.startingAt && (
-          <span className="text-[13px] text-text-subtle">{t('packages.from')}</span>
-        )}
-        <span className="font-display text-[32px] font-bold leading-none text-white lg:text-[38px]">
-          {formatPrice(tier.price)}
-        </span>
-      </div>
-      <p className="mt-1 text-[12px] text-text-subtle">{t('packages.perProject')}</p>
-
-      <p className="mt-5 text-[13.5px] leading-relaxed text-text-muted">{t(`${base}.summary`)}</p>
-
-      {/* Stacked rather than inline: the label/value columns get too narrow
-          to read once four cards share a row. */}
-      <dl className="mt-5 space-y-3 border-y border-border py-4 text-[12.5px]">
-        <div>
-          <dt className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-text-subtle">
-            {t('packages.timeline')}
-          </dt>
-          <dd className="mt-1 text-[13px] text-text">{t(`${base}.timeline`)}</dd>
-        </div>
-        <div>
-          <dt className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-text-subtle">
-            {t('packages.bestFor')}
-          </dt>
-          <dd className="mt-1 text-[13px] text-text">{t(`${base}.bestFor`)}</dd>
-        </div>
-      </dl>
-
-      <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.14em] text-text-subtle">
-        {t('packages.includes')}
-      </p>
-      <ul className="mt-3 flex-1 space-y-2.5">
-        {features.map((feature) => (
-          <li key={feature} className="flex gap-2.5 text-[13.5px] leading-snug text-text-muted">
-            <CheckIcon className="mt-0.5 text-primary" />
-            <span>{feature}</span>
-          </li>
-        ))}
-      </ul>
-
-      <button
-        type="button"
-        onClick={() => navigate(`/contact?package=${tier.id}`)}
-        className={cn(
-          'mt-7 w-full cursor-pointer rounded-lg px-4 py-3 text-[14px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus',
-          tier.featured
-            ? 'bg-primary text-on-primary hover:bg-primary-hover'
-            : 'border border-border-strong text-text hover:bg-surface-3',
-        )}
+    <div data-reveal style={{ '--d': `${index * 90}ms` } as CSSProperties} className="min-w-0">
+      <article
+        style={tier.featured ? ({ '--c': WALL.burnt.c } as CSSProperties) : undefined}
+        className={cn('ofr-tier', tier.featured && 'ofr-tier--featured as-stucco as-on-color')}
       >
-        {t('packages.choose')}
-      </button>
-    </Reveal>
+        {tier.featured && <span className="ofr-tier__badge">{t('packages.mostPopular')}</span>}
+
+        <h3 className="ofr-tier__name">{t(`${base}.name`)}</h3>
+        <p className="ofr-tier__tag">{t(`${base}.tagline`)}</p>
+
+        <div className="mt-6 flex flex-wrap items-baseline gap-x-2">
+          {tier.startingAt && <span className="as-mono opacity-80">{t('packages.from')}</span>}
+          <span className="ofr-tier__price">{formatPrice(tier.price)}</span>
+        </div>
+        <p className="as-mono mt-2 opacity-70">{t('packages.perProject')}</p>
+
+        <p className="mt-5 text-[14.5px] leading-relaxed text-[var(--as-fg-soft)]">{t(`${base}.summary`)}</p>
+
+        {/* Stacked rather than inline: the label/value columns get too narrow
+          to read once four cards share a row. */}
+        <dl className="ofr-tier__meta">
+          <div>
+            <dt>{t('packages.timeline')}</dt>
+            <dd>{t(`${base}.timeline`)}</dd>
+          </div>
+          <div>
+            <dt>{t('packages.bestFor')}</dt>
+            <dd>{t(`${base}.bestFor`)}</dd>
+          </div>
+        </dl>
+
+        <p className="as-mono mt-5 opacity-80">{t('packages.includes')}</p>
+        <ul className="ofr-tier__features">
+          {features.map((feature) => (
+            <li key={feature}>
+              <Check />
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
+
+        <button
+          type="button"
+          onClick={() => navigate(`/contact?package=${tier.id}`)}
+          className={cn('as-btn as-btn--block mt-8', tier.featured ? 'as-btn--light' : 'as-btn--ghost')}
+        >
+          <span>{t('packages.choose')}</span>
+          <span className="as-arrow" aria-hidden>
+            →
+          </span>
+        </button>
+      </article>
+    </div>
   );
 }
 
 function ComparisonTable() {
   const { t } = useI18n();
+  const ref = useReveal();
 
   return (
-    <Reveal className="overflow-x-auto rounded-2xl border border-border">
-      <table className="w-full min-w-[720px] border-collapse text-left">
-        <caption className="sr-only">{t('packages.compare')}</caption>
-        <thead>
-          <tr className="bg-surface-2">
-            <th scope="col" className="px-5 py-4 text-[12px] font-medium uppercase tracking-wider text-text-subtle">
-              {t('packages.feature')}
-            </th>
-            {PACKAGE_TIERS.map((tier) => (
-              <th
-                key={tier.id}
-                scope="col"
-                className={cn(
-                  'px-5 py-4 text-center font-display text-[15px] font-semibold',
-                  tier.featured ? 'text-primary' : 'text-white',
-                )}
-              >
-                {t(`packages.tiers.${tier.id}.name`)}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-border">
-          {COMPARISON_ROWS.map((row) => (
-            <tr key={row.labelKey} className="transition-colors hover:bg-surface-2/60">
-              <th scope="row" className="px-5 py-3.5 text-[13.5px] font-normal text-text-muted">
-                {t(`packages.${row.labelKey}`)}
-              </th>
-              {PACKAGE_TIERS.map((tier) => {
-                const value = row.values[tier.id];
-                return (
-                  <td key={tier.id} className="px-5 py-3.5 text-center text-[13.5px] text-text">
-                    {typeof value === 'boolean' ? (
-                      value ? (
-                        <CheckIcon className="mx-auto text-primary" />
-                      ) : (
-                        <span aria-label="—" className="text-text-disabled">
-                          —
-                        </span>
-                      )
-                    ) : value.startsWith('compareLabels.') ? (
-                      t(`packages.${value}`)
-                    ) : (
-                      value
-                    )}
-                  </td>
-                );
-              })}
+    <div ref={ref} data-reveal>
+      <p className="as-mono mb-4 text-text-muted lg:hidden">{t('site.offer.packages.swipeHint')} →</p>
+      <div className="ofr-compare__scroll">
+        <table className="ofr-table">
+          <caption className="sr-only">{t('packages.compare')}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{t('packages.feature')}</th>
+              {PACKAGE_TIERS.map((tier) => (
+                <th key={tier.id} scope="col" className={cn(tier.featured && 'is-featured')}>
+                  {t(`packages.tiers.${tier.id}.name`)}
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </Reveal>
+          </thead>
+          <tbody>
+            {COMPARISON_ROWS.map((row) => (
+              <tr key={row.labelKey}>
+                <th scope="row">{t(`packages.${row.labelKey}`)}</th>
+                {PACKAGE_TIERS.map((tier) => {
+                  const value = row.values[tier.id];
+                  return (
+                    <td key={tier.id} className={cn(tier.featured && 'is-featured')}>
+                      {typeof value === 'boolean' ? (
+                        value ? (
+                          <>
+                            <Check />
+                            <span className="sr-only">{t('site.offer.packages.included')}</span>
+                          </>
+                        ) : (
+                          <>
+                            <span aria-hidden className="ofr-table__no">
+                              —
+                            </span>
+                            <span className="sr-only">{t('site.offer.packages.notIncluded')}</span>
+                          </>
+                        )
+                      ) : value.startsWith('compareLabels.') ? (
+                        t(`packages.${value}`)
+                      ) : (
+                        value
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
 
@@ -176,6 +147,9 @@ export function Packages() {
   const { t, tRaw } = useI18n();
   const { market, priceOf } = useMarket();
   const { currency, format } = useCurrency();
+  const tiersRef = useReveal();
+  const addonsRef = useReveal<HTMLUListElement>();
+  const guaranteeRef = useReveal<HTMLOListElement>();
 
   const addonCopy = tRaw<AddonCopy[]>('packages.addons.items', []) || [];
   const guarantees = tRaw<string[]>('packages.guarantee.items', []) || [];
@@ -215,137 +189,152 @@ export function Packages() {
 
   return (
     <>
-      <Seo
-        page="packages"
-        schema={[offerSchema, faqSchema]}
-        breadcrumbs={[{ name: t('nav.packages'), path: '/packages' }]}
+      <Seo page="packages" schema={[offerSchema, faqSchema]} breadcrumbs={[{ name: t('nav.packages'), path: '/packages' }]} />
+
+      <PageHero
+        word={t('site.offer.packages.word')}
+        num={String(PACKAGE_TIERS.length)}
+        tone="mustard"
+        eyebrow={t('nav.pricing')}
+        title={t('packages.title')}
+        lead={t('packages.subtitle')}
+        crumbs={[{ label: t('nav.home'), to: '/' }, { label: t('nav.packages') }]}
       />
 
-      <div className="glow-bg relative z-20">
-        <Container className="pb-4 pt-16 md:pt-24">
-          <Reveal className="mx-auto max-w-3xl text-center">
-            <span className="eyebrow">{t('nav.pricing')}</span>
-            <h1 className="mt-5 font-display text-[32px] font-bold leading-tight text-white md:text-[48px]">
-              {t('packages.title')}
-            </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-[14px] leading-relaxed text-text-muted md:text-[17px]">
-              {t('packages.subtitle')}
-            </p>
-            <p className="mx-auto mt-4 max-w-2xl text-[13px] leading-relaxed text-text-subtle">
-              {t('packages.intro')}
-            </p>
-
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-              <div className="flex items-center gap-3">
-                <span className="text-[13px] text-text-subtle">{t('market.label')}:</span>
-                <CountrySwitcher />
+      {/* Market + currency pickers: the whole page re-prices from here. */}
+      <div className="as-wrap">
+        <div className="ofr-controls">
+          <div className="grid gap-2">
+            <p className="as-eyebrow">{t('site.offer.packages.controlsEyebrow')}</p>
+            <p className="max-w-[70ch] text-[14.5px] leading-relaxed text-text-muted">{t('packages.intro')}</p>
+          </div>
+          <div className="grid gap-3 lg:justify-items-end">
+            <div className="ofr-controls__pickers">
+              <div>
+                <span className="as-mono text-text-muted">{t('market.label')}</span>
+                <CountrySwitcher align="left" />
               </div>
-              <div className="flex items-center gap-3">
-                <span className="text-[13px] text-text-subtle">{t('currency.label')}:</span>
+              <div>
+                <span className="as-mono text-text-muted">{t('currency.label')}</span>
                 <CurrencySwitcher />
               </div>
             </div>
-            <p className="mx-auto mt-4 max-w-2xl text-[12.5px] leading-relaxed text-text-subtle">
+            <p className="max-w-[52ch] text-[12.5px] leading-relaxed text-text-subtle lg:text-right">
               {t('market.priceNote').replace('{country}', t(`market.countries.${market.code}`))}
             </p>
-          </Reveal>
-        </Container>
+          </div>
+        </div>
       </div>
 
-      <Section tight>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {PACKAGE_TIERS.map((tier, i) => (
-            <TierCard key={tier.id} tier={tier} index={i} />
-          ))}
+      {/* Tiers. */}
+      <section className="as-section--tight">
+        <div className="as-wrap">
+          <SectionHead
+            eyebrow={t('site.offer.packages.tiersEyebrow')}
+            title={t('site.offer.packages.tiersTitle')}
+            size="md"
+            className="mb-10 md:mb-14"
+          />
+          <div ref={tiersRef} className="ofr-tiers">
+            {PACKAGE_TIERS.map((tier, i) => (
+              <TierCard key={tier.id} tier={tier} index={i} />
+            ))}
+          </div>
+          <p className="mt-8 max-w-[80ch] text-[12.5px] leading-relaxed text-text-subtle">
+            {t('market.note')} {t('packages.vatNote')}
+          </p>
         </div>
-        <p className="mt-6 text-center text-[12.5px] text-text-subtle">
-          {t('market.note')} {t('packages.vatNote')}
-        </p>
-      </Section>
+      </section>
 
-      <Section tight className="bg-ink-950">
-        <SectionHeading title={t('packages.compare')} className="mb-10" />
-        <ComparisonTable />
-      </Section>
+      <Ticker items={PACKAGE_TIERS.map((tier) => t(`packages.tiers.${tier.id}.tagline`))} duration={36} />
 
-      <Section tight>
-        <SectionHeading
-          title={t('packages.addons.title')}
-          subtitle={t('packages.addons.subtitle')}
-          className="mb-10"
-        />
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {addonCopy.map((addon, i) => {
-            const pricing = ADDONS[i];
-            if (!pricing) return null;
-            return (
-              <Reveal
-                key={addon.name}
-                delay={i * 60}
-                className="flex flex-col justify-between gap-4 rounded-xl border border-border bg-surface/50 p-5 transition-colors hover:border-border-strong"
-              >
-                <div>
-                  <h3 className="font-display text-[16px] font-semibold text-white">{addon.name}</h3>
-                  <p className="mt-2 text-[13px] leading-relaxed text-text-muted">{addon.desc}</p>
-                </div>
-                <p className="font-display text-[20px] font-bold text-primary">
-                  {format(priceOf(pricing.price))}
-                  {pricing.recurring && (
-                    <span className="ml-1 text-[12px] font-normal text-text-subtle">
-                      / {t('packages.perMonth')}
-                    </span>
-                  )}
-                </p>
-              </Reveal>
-            );
-          })}
+      {/* Comparison table. */}
+      <section className="as-section as-bg-cream">
+        <div className="as-wrap">
+          <SectionHead
+            eyebrow={t('site.offer.packages.compareEyebrow')}
+            title={t('packages.compare')}
+            size="md"
+            className="mb-10 md:mb-14"
+          />
+          <ComparisonTable />
         </div>
-      </Section>
+      </section>
 
-      <Section tight className="bg-ink-950">
-        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-16">
-          <SectionHeading align="left" title={t('packages.guarantee.title')} />
-          <Reveal>
-            <ul className="space-y-4">
-              {guarantees.map((item) => (
-                <li key={item} className="flex gap-3 text-[14px] leading-relaxed text-text-muted md:text-[15.5px]">
-                  <CheckIcon className="mt-1 text-primary" />
-                  <span>{item}</span>
+      {/* Add-ons as a ruled price list. */}
+      <section className="as-section">
+        <div className="as-wrap grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+          <div className="lg:sticky lg:top-[calc(var(--as-header-h)+40px)] lg:self-start">
+            <SectionHead
+              eyebrow={t('site.offer.packages.addonsEyebrow')}
+              title={t('packages.addons.title')}
+              lead={t('packages.addons.subtitle')}
+              size="sm"
+            />
+          </div>
+          <ul ref={addonsRef} className="ofr-addons">
+            {addonCopy.map((addon, i) => {
+              const pricing = ADDONS[i];
+              if (!pricing) return null;
+              return (
+                <li key={addon.name} data-reveal style={{ '--d': `${Math.min(i, 5) * 70}ms` } as CSSProperties}>
+                  <div className="min-w-0">
+                    <h3 className="as-h3 text-[clamp(19px,1.8vw,26px)]">{addon.name}</h3>
+                    <p>{addon.desc}</p>
+                  </div>
+                  <p className="ofr-addons__price m-0">
+                    {format(priceOf(pricing.price))}
+                    {pricing.recurring && <span className="ofr-addons__per">/ {t('packages.perMonth')}</span>}
+                  </p>
                 </li>
-              ))}
-            </ul>
-          </Reveal>
+              );
+            })}
+          </ul>
         </div>
-      </Section>
+      </section>
 
-      <Section tight>
-        <SectionHeading title={t('faq.title')} subtitle={t('faq.subtitle')} className="mb-10" />
-        <div className="mx-auto max-w-3xl">
-          <Accordion items={faqItems} />
-          <p className="mt-6 text-center">
-            <Link to="/faq" className="text-[14px] font-medium text-primary hover:underline">
-              {t('home.faqCta')} →
-            </Link>
-          </p>
+      {/* Guarantees on a plaster wall. */}
+      <section className="as-section as-stucco as-on-color" style={{ '--c': WALL.amber.c } as CSSProperties}>
+        <div className="as-wrap grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+          <div className="grid content-start justify-items-start gap-4">
+            <p className="as-eyebrow">{t('site.offer.packages.guaranteeEyebrow')}</p>
+            <h2 className="as-title as-title--sm">{t('packages.guarantee.title')}</h2>
+          </div>
+          <ol ref={guaranteeRef} className="as-steps">
+            {guarantees.map((item, i) => (
+              <li key={item} data-reveal style={{ '--d': `${Math.min(i, 5) * 70}ms` } as CSSProperties}>
+                <span className="as-step-n text-[var(--as-white)]">{String(i + 1).padStart(2, '0')}</span>
+                <p className="mt-1 max-w-none text-[clamp(17px,1.5vw,21px)] font-semibold leading-snug text-[var(--as-white)]">{item}</p>
+              </li>
+            ))}
+          </ol>
         </div>
-      </Section>
+      </section>
 
-      <Section tight className="glow-bg bg-ink-950">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <h2 className="font-display text-[26px] font-bold text-white md:text-[36px]">
-            {t('packages.ctaTitle')}
-          </h2>
-          <p className="mx-auto mt-4 text-[14px] leading-relaxed text-text-muted md:text-[16px]">
-            {t('packages.ctaCopy')}
-          </p>
-          <Link
-            to="/contact"
-            className="mt-8 inline-flex items-center justify-center rounded-lg bg-primary px-7 py-3.5 text-[15px] font-semibold text-on-primary transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
-          >
+      {/* FAQ. */}
+      <section className="as-section">
+        <div className="as-wrap grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+          <div className="grid content-start justify-items-start gap-6 lg:sticky lg:top-[calc(var(--as-header-h)+40px)] lg:self-start">
+            <SectionHead eyebrow={t('site.offer.packages.faqEyebrow')} title={t('faq.title')} lead={t('faq.subtitle')} size="sm" />
+            <Pill to="/faq" variant="ghost" size="sm">
+              {t('home.faqCta')}
+            </Pill>
+          </div>
+          <Disclosure items={faqItems} />
+        </div>
+      </section>
+
+      <CtaWalk
+        tone="burnt"
+        eyebrow={t('site.offer.packages.ctaEyebrow')}
+        title={t('packages.ctaTitle')}
+        lead={t('packages.ctaCopy')}
+        actions={
+          <Pill to="/contact" variant="light">
             {t('packages.ctaButton')}
-          </Link>
-        </Reveal>
-      </Section>
+          </Pill>
+        }
+      />
     </>
   );
 }

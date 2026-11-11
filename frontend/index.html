@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0B0B0B" />
+    <meta name="theme-color" content="#d4911a" />
 
     <!--
       Baseline metadata for crawlers that do not execute JavaScript.
@@ -34,12 +34,9 @@
     <link rel="apple-touch-icon" href="/favicon.ico" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Self-hosted variable fonts for the public site (Latin + Azerbaijani). -->
+    <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/archivo-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
     <!--
       Theme is applied before first paint so a light-mode visitor never sees a
       dark flash. Keeps `alievs_space_theme` in sync with ThemeContext.
@@ -55,10 +52,6 @@
                 ? 'light'
                 : 'dark';
           document.documentElement.setAttribute('data-theme', theme);
-          if (theme === 'light') {
-            var meta = document.querySelector('meta[name="theme-color"]');
-            if (meta) meta.setAttribute('content', '#FFFFFF');
-          }
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'dark');
         }
@@ -68,7 +61,7 @@
   <body>
     <div id="root"></div>
     <noscript>
-      <div style="padding: 2rem; font-family: system-ui, sans-serif; color: #f4f3ee; background: #0b0b0b">
+      <div style="padding: 2rem; font-family: system-ui, sans-serif; color: #1e1611; background: #f6f1e8">
         <h1>Alievs Space — Web &amp; Mobile App Development</h1>
         <p>
           We build websites, online stores, mobile applications and custom platforms. Fixed prices,

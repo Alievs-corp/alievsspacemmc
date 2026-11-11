@@ -1,45 +1,31 @@
-import Container from "./../Container";
-import aboutBg from "@/assets/images/about-bg.jpg";
-import { useI18n } from "@/contexts/I18nContext";
+import { useI18n } from '@/contexts/I18nContext';
+import { PageHero, Pill } from '@/components/site/blocks';
 
+/** About opener: a rust plaster wall with the studio word and the page h1. */
 const AboutHeader = () => {
-  const { t } = useI18n();
+  const { t, tRaw } = useI18n();
   return (
-    <div className="relative w-full">
-      <img 
-        src={aboutBg} 
-        alt="About background" 
-        className="w-full h-[762px] sm:h-[500px] md:h-[600px] lg:h-[700px] object-cover" 
-      />
+    <PageHero
+      tone="rust"
+      word={t('site.company.about.word')}
+      num="A"
+      eyebrow={t('site.company.about.eyebrow')}
+      title={t('public.about.headerTitle')}
+      accent={tRaw<string[]>('site.company.about.heroAccent', []) || []}
+      lead={t('public.about.headerCopy')}
+      crumbs={[{ label: t('nav.home'), to: '/' }, { label: t('nav.about') }]}
+      actions={
+        <>
+          <Pill to="/contact" variant="light">
+            {t('nav.cta')}
+          </Pill>
+          <Pill to="/case-studies" variant="ghost">
+            {t('nav.caseStudies')}
+          </Pill>
+        </>
+      }
+    />
+  );
+};
 
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            `linear-gradient(286.96deg, rgb(var(--scrim-rgb) / var(--scrim-1)) 0.27%, rgb(var(--scrim-rgb) / var(--scrim-2)) 100%), ` +
-            `linear-gradient(72.85deg, rgba(253, 82, 4, 0) -0.01%, rgba(253, 82, 4, 0.2) 100%)`,
-          backgroundRepeat: 'no-repeat, no-repeat',
-          backgroundPosition: 'center, center',
-          backgroundSize: 'cover, cover'
-        }}
-      />
-
-      <div className="absolute inset-0 pt-[130px] pb-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
-        <Container className="px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-[80px] h-full justify-start xs:justify-center">
-            <div className="flex flex-col gap-3 sm:gap-4 md:gap-5">
-                <h2 className="font-display text-[38px] md:text-5xl lg:text-5xl xl:text-6xl text-white font-bold max-w-full sm:max-w-[370px] md:max-w-[800px] lg:max-w-[900px] xl:max-w-[1000px] leading-tight sm:leading-normal">
-                  {t('public.about.headerTitle')}
-                </h2>
-                <p className="text-text-muted text-[13px] sm:text-base md:text-lg lg:text-xl max-w-full sm:max-w-[90%] md:max-w-[647px] leading-relaxed">
-                  {t('public.about.headerCopy')}
-                </p>
-            </div>
-          </div>
-        </Container>
-      </div>
-    </div>
-  )
-}
-
-export default AboutHeader
+export default AboutHeader;
