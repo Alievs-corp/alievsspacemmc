@@ -4,7 +4,7 @@ import { Children, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { prefersReducedMotion, useScrollFrame } from './scroll';
-import { loadAllFrames, loadFirstFrame, onFramesChange, Walker } from './walker';
+import { loadAllFrames, loadFirstFrame, Walker } from './walker';
 
 const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
 
@@ -533,11 +533,6 @@ export function CtaWalk({ eyebrow, title, lead, actions, tone = 'rust', id, walk
       rt = window.setTimeout(measure, 120);
     };
     window.addEventListener('resize', onResize);
-    const redraw = () => {
-      if (walker.current) walker.current.drawn = null;
-      update(window.scrollY);
-    };
-    const off = onFramesChange(redraw);
     // Page height can change after mount (images, fonts, lazy content).
     const ro = new ResizeObserver(() => measure());
     ro.observe(document.body);
@@ -552,7 +547,8 @@ export function CtaWalk({ eyebrow, title, lead, actions, tone = 'rust', id, walk
     );
     io.observe(band);
     return () => {
-      off();
+      walker.current?.destroy();
+      walker.current = null;
       ro.disconnect();
       io.disconnect();
       clearTimeout(rt);

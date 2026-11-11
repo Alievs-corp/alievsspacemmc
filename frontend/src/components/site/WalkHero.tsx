@@ -1,7 +1,7 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { useEffect, useRef } from 'react';
 import { useScrollFrame } from './scroll';
-import { loadAllFrames, loadFirstFrame, onFramesChange, Walker } from './walker';
+import { loadAllFrames, loadFirstFrame, Walker } from './walker';
 
 export type WallColor = 'mustard' | 'burnt' | 'amber' | 'rust';
 
@@ -151,19 +151,13 @@ export function WalkHero({ words, notes, intro, cue, label }: WalkHeroProps) {
     };
     window.addEventListener('resize', onResize);
     document.fonts?.ready.then(measure);
-    const redraw = () => {
-      if (walker.current) walker.current.drawn = null;
-      update(window.scrollY);
-    };
-    const off = onFramesChange(redraw);
-    loadFirstFrame().then(() => {
-      redraw();
-      // Start streaming right away (low priority, coarse frames first) so the
-      // figure can walk as soon as the visitor scrolls.
-      loadAllFrames();
-    });
+    // The walker paints itself as frames become ready. Start streaming right
+    // away (low priority, coarse frames first) so the figure can walk as soon
+    // as the visitor scrolls.
+    loadFirstFrame().then(() => loadAllFrames());
     return () => {
-      off();
+      walker.current?.destroy();
+      walker.current = null;
       clearTimeout(rt);
       window.removeEventListener('resize', onResize);
     };
