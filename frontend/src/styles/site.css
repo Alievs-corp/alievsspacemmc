@@ -601,10 +601,13 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
     -webkit-text-stroke: 1.5px rgba(255, 244, 225, .5);
   }
   .as-num--fill { font-weight: 800; font-stretch: 100%; font-size: calc(var(--H) * .5); left: 14%; top: 49svh; color: var(--c-num); }
+  /* The LAUNCH panel's 5 sits 15% further left so the figure never covers it. */
+  .as-panel:nth-child(5) .as-num--line { left: 9%; }
   /* Narrow (portrait) panels: size the numerals to the panel width so the
      whole digit stays on its own wall instead of running off the edge. */
   @media (max-aspect-ratio: 1/1) {
     .as-num--line { font-size: min(calc(var(--H) * .78), calc(var(--P) * .95)); left: auto; right: 3%; top: 21svh; }
+    .as-panel:nth-child(5) .as-num--line { left: auto; right: 18%; }
     .as-num--fill { font-size: min(calc(var(--H) * .5), calc(var(--P) * 1.1)); left: 12%; top: 52svh; }
   }
   .as-floor { position: absolute; left: 0; right: 0; bottom: 0; height: 12svh; z-index: 3; }
