@@ -10,9 +10,14 @@ import { cn } from '@/lib/utils';
 export function CurrencySwitcher({
   className,
   compact = false,
+  fitViewport = false,
+  triggerClassName,
 }: {
   className?: string;
   compact?: boolean;
+  /** Keep the open list on screen (pickers inside the mobile menu). */
+  fitViewport?: boolean;
+  triggerClassName?: string;
 }) {
   const { t } = useI18n();
   const { currency, meta, setCurrency, currencies } = useCurrency();
@@ -21,6 +26,8 @@ export function CurrencySwitcher({
     <Dropdown
       className={className}
       compact={compact}
+      fitViewport={fitViewport}
+      triggerClassName={triggerClassName}
       ariaLabel={t('ui.currency', 'Currency')}
       label={
         <span className="flex items-center gap-1">
