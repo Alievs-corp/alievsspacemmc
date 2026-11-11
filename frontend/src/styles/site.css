@@ -285,7 +285,7 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
   /* Coloured plaster surface (`--c` sets the colour). */
   .as-stucco {
     background-color: var(--c, var(--as-mustard));
-    background-image: url("/tex/stucco.webp");
+    background-image: url("/tex/v2/stucco.webp");
     background-size: 384px;
   }
   /* Glass-screen finish, after the tablet promo video (Blender: emission +
@@ -307,7 +307,7 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
      normally (no mix-blend-mode — that forced costly compositing). */
   .as-stucco::before {
     inset: 0;
-    background: url("/tex/grain.webp") 0 0 / 160px;
+    background: url("/tex/v2/grain.webp") 0 0 / 160px;
     opacity: .32;
   }
   /* Specular streak + rim-light reflections, a little wider than the surface
@@ -342,7 +342,7 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
   .as-on-color { color: var(--as-white); --as-fg: var(--as-white); --as-fg-soft: rgba(255, 248, 238, .86); --as-line: rgba(255, 244, 225, .35); --as-line-strong: rgba(255, 244, 225, .8); --as-accent: var(--as-mustard-hi); }
   .as-concrete {
     background-color: var(--as-concrete);
-    background-image: linear-gradient(rgba(40, 24, 10, .28), rgba(40, 24, 10, 0) 26%), url("/tex/concrete.webp");
+    background-image: linear-gradient(rgba(40, 24, 10, .28), rgba(40, 24, 10, 0) 26%), url("/tex/v2/concrete.webp");
     background-size: auto, 256px;
   }
 
@@ -437,7 +437,7 @@ html.is-site { scroll-padding-top: calc(var(--as-header-h, 72px) + 16px); }
   a.as-tile, .as-tile--hover { text-decoration: none; color: inherit; }
   a.as-tile:hover, .as-tile--hover:hover { transform: translateY(-4px); border-color: var(--as-line-strong); }
   /* A plaster tile (e.g. a featured card) keeps its colour and light type. */
-  .as-tile.as-stucco { background-color: var(--c, var(--as-mustard)); background-image: url("/tex/stucco.webp"); background-size: 384px; border-color: transparent; }
+  .as-tile.as-stucco { background-color: var(--c, var(--as-mustard)); background-image: url("/tex/v2/stucco.webp"); background-size: 384px; border-color: transparent; }
   a.as-tile.as-on-color, .as-tile.as-on-color { color: var(--as-white); }
 
   /* Ruled list (the reference "steps" table). */
