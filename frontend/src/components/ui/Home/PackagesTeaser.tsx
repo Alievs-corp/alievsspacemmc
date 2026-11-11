@@ -34,7 +34,7 @@ const PackagesTeaser = () => {
               className={cn(
                 'as-tile group flex min-w-0 flex-col',
                 tier.featured
-                  ? 'as-on-color border-transparent text-[var(--as-white)] [background-color:var(--as-burnt)] [background-image:url(/tex/stucco.webp)] [background-size:384px]'
+                  ? 'as-on-color border-transparent text-[var(--as-white)] [background-color:var(--as-burnt)] [background-image:url(/tex/v2/stucco.webp)] [background-size:384px]'
                   : 'bg-[var(--as-bg)]',
               )}
             >
