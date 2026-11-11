@@ -8,7 +8,7 @@ import { ProfileMenu } from '@/components/ui/ProfileMenu';
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import { CurrencySwitcher } from '@/components/ui/CurrencySwitcher';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
-import { useLenis, useScrollFrame } from '@/components/site/scroll';
+import { onSamePageTop, useLenis, useScrollFrame } from '@/components/site/scroll';
 import { ORGANIZATION, phoneForLocale, telHref } from '@/lib/site';
 import { cn } from '@/lib/utils';
 
@@ -171,7 +171,15 @@ export function Header() {
       </a>
 
       <header ref={headerRef} className={cn('as-header', open && 'is-menu')} data-open={open || undefined}>
-        <Link to="/" className="as-brand" aria-label={t('nav.home', 'Home')}>
+        <Link
+          to="/"
+          className="as-brand"
+          aria-label={t('nav.home', 'Home')}
+          onClick={(e) => {
+            setOpen(false);
+            onSamePageTop(e, pathname);
+          }}
+        >
           <span className="as-brand-mark" aria-hidden />
           <span className="as-brand-name">
             Alievs<b>Space</b>

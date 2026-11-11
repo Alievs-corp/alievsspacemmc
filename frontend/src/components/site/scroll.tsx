@@ -45,6 +45,16 @@ export function scrollToTopNow() {
   else window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
 }
 
+/**
+ * Click handler for links to the current page's top (the logo): the route
+ * does not change, so nothing else would scroll — jump to the first section.
+ */
+export function onSamePageTop(e: { preventDefault: () => void }, pathname: string, to = '/') {
+  if (pathname !== to) return;
+  e.preventDefault();
+  scrollToTopNow();
+}
+
 export function scrollToTarget(target: string | HTMLElement | number) {
   if (active) active.scrollTo(target, { duration: 1.4, offset: typeof target === 'number' ? 0 : -16 });
   else if (typeof target === 'number') window.scrollTo({ top: target, behavior: 'smooth' });
