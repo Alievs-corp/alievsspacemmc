@@ -2,7 +2,7 @@
 export default {
   en: {
     panel: {
-      audit: { tabFinance: 'Finance', tabLog: 'Activity log', title: 'Audit' },
+      audit: { tabSalaries: 'Salaries', tabDebts: 'Debts', tabIncome: 'Income', tabLog: 'Log', title: 'Audit' },
       finance: {
         subtitle: 'Salaries, debts and payments, income and expected payments. Visible to super admins only.',
         currency: 'Currency',
@@ -100,7 +100,7 @@ export default {
   },
   ru: {
     panel: {
-      audit: { tabFinance: 'Финансы', tabLog: 'Журнал действий', title: 'Аудит' },
+      audit: { tabSalaries: 'Зарплаты', tabDebts: 'Долги', tabIncome: 'Доходы', tabLog: 'Журнал', title: 'Аудит' },
       finance: {
         subtitle: 'Зарплаты, долги и оплаты, доходы и ожидаемые оплаты. Видно только супер-админам.',
         currency: 'Валюта',
@@ -198,7 +198,7 @@ export default {
   },
   az: {
     panel: {
-      audit: { tabFinance: 'Maliyyə', tabLog: 'Fəaliyyət jurnalı', title: 'Audit' },
+      audit: { tabSalaries: 'Maaşlar', tabDebts: 'Borclar', tabIncome: 'Gəlir', tabLog: 'Jurnal', title: 'Audit' },
       finance: {
         subtitle: 'Maaşlar, borclar və ödənişlər, gəlir və gözlənilən ödənişlər. Yalnız super adminlərə görünür.',
         currency: 'Valyuta',
