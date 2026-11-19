@@ -12,6 +12,7 @@ import { useI18n } from '@/contexts/I18nContext';
 import { cn } from '@/lib/utils';
 import type { Permission } from '@/lib/api';
 import { roleLabel } from './ui';
+import { LanguageModal } from './LanguageModal';
 import logoMark from '../../assets/images/logo-dark.png';
 
 interface AdminLayoutProps {
@@ -83,9 +84,10 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const { logout, user, isAdmin, isSuperAdmin, hasPermission, loading } = useAuth();
-  const { locale, setLocale, supportedLocales, t } = useI18n();
+  const { locale, t } = useI18n();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
 
   useEffect(() => {
     if (!loading && (!user || !isAdmin)) navigate('/', { replace: true });
@@ -242,10 +244,9 @@ export function AdminLayout({ children }: AdminLayoutProps) {
               <span className="hidden md:inline">CRM</span>
             </Link>
             <button
-              onClick={() => {
-                const idx = supportedLocales.findIndex((l) => l.code === locale);
-                setLocale(supportedLocales[(idx + 1) % supportedLocales.length].code);
-              }}
+              onClick={() => setLangOpen(true)}
+              aria-haspopup="dialog"
+              aria-label={t('ui.language')}
               className="flex items-center gap-1.5 rounded-md px-2.5 py-2 text-sm text-text-muted transition-colors hover:bg-surface-3 hover:text-text"
               title={t('ui.language')}
             >
@@ -275,6 +276,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
 
         <main className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
       </div>
+      <LanguageModal open={langOpen} onClose={() => setLangOpen(false)} />
     </div>
   );
 }
