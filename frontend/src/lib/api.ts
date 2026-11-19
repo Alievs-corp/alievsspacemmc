@@ -170,6 +170,37 @@ export interface Paginated<T> {
   totalPages: number;
 }
 
+export interface FinanceSalary {
+  name: string;
+  card: number;
+  cash: number;
+  bonus: number;
+  description: string;
+}
+
+export interface FinanceDebt {
+  name: string;
+  kind: 'debt' | 'payment';
+  amount: number;
+  date: string;
+  description: string;
+}
+
+export interface FinanceIncome {
+  name: string;
+  kind: 'income' | 'expected';
+  amount: number;
+  date: string;
+  description: string;
+}
+
+export interface Finance {
+  currency: string;
+  salaries: FinanceSalary[];
+  debts: FinanceDebt[];
+  income: FinanceIncome[];
+}
+
 export interface AuditLog {
   id: string;
   actorId: string;
@@ -616,6 +647,11 @@ export const api = {
       fetchAPI('/admin/system/integrations'),
 
     getRecentErrors: (): Promise<ApiErrorEntry[]> => fetchList<ApiErrorEntry>('/admin/system/errors'),
+
+    getFinance: (): Promise<Finance> => fetchAPI<Finance>('/admin/finance'),
+
+    updateFinance: (data: Finance): Promise<Finance> =>
+      fetchAPI<Finance>('/admin/finance', { method: 'PUT', body: JSON.stringify(data) }),
 
     getAuditLogs: (params: { q?: string; actorId?: string; page?: number; limit?: number }): Promise<Paginated<AuditLog>> =>
       fetchAPI<Paginated<AuditLog>>(`/admin/audit-logs${qs(params)}`),

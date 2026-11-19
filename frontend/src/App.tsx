@@ -59,7 +59,7 @@ const AdminAdmins = lazy(() => import('./pages/admin/Users').then((m) => ({ defa
 const AdminApplications = lazy(() => import('./pages/admin/Applications').then((m) => ({ default: m.AdminApplications })));
 const AdminIntegrations = lazy(() => import('./pages/admin/Integrations').then((m) => ({ default: m.AdminIntegrations })));
 const AdminSystem = lazy(() => import('./pages/admin/System').then((m) => ({ default: m.AdminSystem })));
-const AdminAuditLog = lazy(() => import('./pages/admin/AuditLog').then((m) => ({ default: m.AdminAuditLog })));
+const AdminAudit = lazy(() => import('./pages/admin/Audit').then((m) => ({ default: m.AdminAudit })));
 const Profile = lazy(() => import('./pages/Profile'));
 
 /* CRM: its own layout and chunk, entered from the header's CRM tab. */
@@ -140,7 +140,7 @@ function App() {
                             <Route path="/admins" element={<ProtectedRoute requireSuperAdmin><AdminAdmins /></ProtectedRoute>} />
                             <Route path="/api" element={<ProtectedRoute requireSuperAdmin><AdminIntegrations /></ProtectedRoute>} />
                             <Route path="/system" element={<ProtectedRoute requireSuperAdmin><AdminSystem /></ProtectedRoute>} />
-                            <Route path="/audit" element={<ProtectedRoute requireSuperAdmin><AdminAuditLog /></ProtectedRoute>} />
+                            <Route path="/audit" element={<ProtectedRoute requireSuperAdmin><AdminAudit /></ProtectedRoute>} />
                             <Route path="/crm-access" element={<ProtectedRoute requireSuperAdmin><CrmProvider><CrmAccess /></CrmProvider></ProtectedRoute>} />
                             <Route path="/crm-roles" element={<ProtectedRoute requireSuperAdmin><CrmProvider><CrmRoles /></CrmProvider></ProtectedRoute>} />
                             <Route path="*" element={<Navigate to="/panel" replace />} />
