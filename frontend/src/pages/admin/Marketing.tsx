@@ -185,8 +185,8 @@ export function AdminMarketing() {
           {doc.partners.map((p, i) => (
             <div key={i} className="space-y-3 rounded-md border border-surface-3 bg-surface-2/30 p-4">
               <div className="flex items-start gap-3">
-                <div className="grid h-16 w-24 shrink-0 place-items-center overflow-hidden rounded border border-surface-3 bg-surface">
-                  {p.logo ? <img src={p.logo} alt="" className="max-h-full max-w-full object-contain" /> : <ImageIcon className="h-6 w-6 text-text-subtle" />}
+                <div className="grid h-16 w-24 shrink-0 place-items-center overflow-hidden rounded border border-surface-3 bg-surface p-1.5">
+                  {p.logo ? <img src={p.logo} alt="" className="h-full w-full object-contain" /> : <ImageIcon className="h-6 w-6 text-text-subtle" />}
                 </div>
                 <div className="min-w-0 flex-1 space-y-2">
                   <input className={inputCls} placeholder={t('panel.marketing.partnerName')} value={p.name} onChange={(e) => patchShared('partners', i, { name: e.target.value })} />
