@@ -46,6 +46,28 @@ export interface About {
   process: Array<{ title: string; desc: string; image?: string }>;
 }
 
+export interface MarketingPartner {
+  name: string;
+  logo: string;
+  link: string;
+  desc: string;
+}
+
+export interface MarketingMedia {
+  kind: 'image' | 'video';
+  /** Image URL, uploaded video file, or a YouTube/Vimeo link. */
+  url: string;
+  poster: string;
+  caption: string;
+}
+
+export interface Marketing {
+  headline: string;
+  intro: string;
+  partners: MarketingPartner[];
+  gallery: MarketingMedia[];
+}
+
 export interface Service {
   id: string;
   category: string;
@@ -341,6 +363,9 @@ export const api = {
   getAbout: (locale: Locale = 'en'): Promise<About> => 
     fetchAPI<About>(`/about?locale=${locale}`),
   
+  getMarketing: (locale: Locale = 'en'): Promise<Marketing> =>
+    fetchAPI<Marketing>(`/marketing?locale=${locale}`),
+
   getServices: (locale: Locale = 'en'): Promise<Service[]> => 
     fetchList<Service>(`/services?locale=${locale}`),
 
@@ -436,6 +461,12 @@ export const api = {
       fetchAPI<About>(`/admin/about?locale=${locale}`, {
         method: 'PUT',
         body: JSON.stringify(about),
+      }),
+
+    updateMarketing: (locale: Locale, data: Marketing): Promise<Marketing> =>
+      fetchAPI<Marketing>(`/admin/marketing?locale=${locale}`, {
+        method: 'PUT',
+        body: JSON.stringify(data),
       }),
 
     // Services Management

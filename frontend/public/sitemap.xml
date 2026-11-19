@@ -87,6 +87,23 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://alievsspace.com/case-studies"/>
   </url>
   <url>
+    <loc>https://alievsspace.com/marketing</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://alievsspace.com/marketing?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="az" href="https://alievsspace.com/marketing?lang=az"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://alievsspace.com/marketing?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://alievsspace.com/marketing?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://alievsspace.com/marketing?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://alievsspace.com/marketing?lang=ka"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://alievsspace.com/marketing?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://alievsspace.com/marketing?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://alievsspace.com/marketing?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="vi" href="https://alievsspace.com/marketing?lang=vi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://alievsspace.com/marketing"/>
+  </url>
+  <url>
     <loc>https://alievsspace.com/industries</loc>
     <lastmod>2026-08-30</lastmod>
     <changefreq>monthly</changefreq>
