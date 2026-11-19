@@ -221,6 +221,19 @@ export function tRaw<T = any>(key: string, fallback?: T): T {
   return fallback as T;
 }
 
+/** Lookup in a specific language (English fills gaps), regardless of the visitor's choice. */
+export function tRawFor<T = any>(lang: Locale, key: string, fallback?: T): T {
+  const primary = getPath(translations[lang], key);
+  if (primary !== undefined) return primary as T;
+  const fallbackLang = getPath(translations[FALLBACK_LOCALE], key);
+  return (fallbackLang !== undefined ? fallbackLang : fallback) as T;
+}
+
+export function tFor(lang: Locale, key: string, fallback = ''): string {
+  const val = tRawFor<any>(lang, key);
+  return typeof val === 'string' ? val : fallback;
+}
+
 export function t(key: string, fallback = ''): string {
   const val = tRaw<any>(key);
   if (typeof val === 'string') return val;

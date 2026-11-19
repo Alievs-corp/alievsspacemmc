@@ -23,6 +23,8 @@ import {
 } from 'react-icons/fa';
 
 import { useI18n } from '@/contexts/I18nContext';
+import { useContent } from '@/contexts/ContentContext';
+import { SERVICE_DEFS } from '@/lib/siteContent';
 import { Seo } from '@/components/Seo';
 import {
   CtaWalk,
@@ -42,31 +44,13 @@ import { cn } from '@/lib/utils';
 interface ServiceCard {
   id: string;
   tone: WallTone;
-  baseKey: string;
-  /** Leaf names under `<baseKey>.reqs`. */
-  reqs: string[];
+  title: string;
+  category: string;
+  text: string;
+  tags: string[];
 }
 
-const SERVICES: ServiceCard[] = [
-  {
-    id: 'web-development',
-    tone: 'mustard',
-    baseKey: 'public.services.items.web',
-    reqs: ['premiumUi', 'performancePages', 'analyticsReady', 'cleanDocs'],
-  },
-  {
-    id: 'ecommerce',
-    tone: 'burnt',
-    baseKey: 'public.services.items.ecommerce',
-    reqs: ['catalogFiltersSearch', 'cartCheckout', 'commissionPayout', 'ownerDashboards'],
-  },
-  {
-    id: 'banking-fintech',
-    tone: 'rust',
-    baseKey: 'public.services.items.banking',
-    reqs: ['rbac', 'auditReporting', 'secureWorkflow', 'complianceFriendly'],
-  },
-];
+const SERVICE_TONES: WallTone[] = ['mustard', 'burnt', 'rust'];
 
 /** Phases every engagement runs through, with the tag keys under each. */
 const PHASES: Array<{ id: string; tags: string[] }> = [
@@ -137,7 +121,28 @@ const BUSINESS_TYPES: BusinessType[] = [
 
 export function Services() {
   const { t, tRaw } = useI18n();
+  const { content } = useContent();
   const wallWords = tRaw<string[]>('site.offer.services.words', []) || [];
+
+  // Services managed in the admin panel win; the built-in set shows until there are any.
+  const cms = content?.services ?? [];
+  const SERVICES: ServiceCard[] = cms.length
+    ? cms.map((s, i) => ({
+        id: s.id,
+        tone: SERVICE_TONES[i % SERVICE_TONES.length],
+        title: s.title,
+        category: s.category,
+        text: s.desc,
+        tags: s.bullets || [],
+      }))
+    : SERVICE_DEFS.map((d, i) => ({
+        id: d.id,
+        tone: SERVICE_TONES[i % SERVICE_TONES.length],
+        title: t(`${d.baseKey}.title`),
+        category: t(`${d.baseKey}.category`),
+        text: t(`${d.baseKey}.description`),
+        tags: d.reqs.map((r) => t(`${d.baseKey}.reqs.${r}`)),
+      }));
   const [activeBusiness, setActiveBusiness] = useState(BUSINESS_TYPES[0].id);
   const phasesRef = useReveal();
   const resultRef = useReveal();
@@ -153,16 +158,16 @@ export function Services() {
       position: i + 1,
       item: {
         '@type': 'Service',
-        name: t(`${service.baseKey}.title`),
-        description: t(`${service.baseKey}.description`),
-        serviceType: t(`${service.baseKey}.category`),
+        name: service.title,
+        description: service.text,
+        serviceType: service.category,
         provider: { '@type': 'Organization', name: 'Alievs Space MMC', url: absoluteUrl('/') },
         url: absoluteUrl('/services'),
       },
     })),
   };
 
-  const tickerItems = [...SERVICES.map((s) => t(`${s.baseKey}.category`)), ...PHASES.map((p) => t(`public.servicesProcess.${p.id}.title`))];
+  const tickerItems = [...SERVICES.map((s) => s.category), ...PHASES.map((p) => t(`public.servicesProcess.${p.id}.title`))];
 
   return (
     <>
@@ -201,11 +206,11 @@ export function Services() {
           />
           <StackCards
             items={SERVICES.map((service, i) => ({
-              word: wallWords[i] || t(`${service.baseKey}.category`).toLocaleUpperCase(),
+              word: wallWords[i] || service.category.toLocaleUpperCase(),
               tone: service.tone,
-              title: t(`${service.baseKey}.title`),
-              text: t(`${service.baseKey}.description`),
-              tags: service.reqs.map((req) => t(`${service.baseKey}.reqs.${req}`)),
+              title: service.title,
+              text: service.text,
+              tags: service.tags,
               extra: (
                 <div className="pt-2">
                   <Pill to={`/contact?service=${service.id}`} variant="light" size="sm">

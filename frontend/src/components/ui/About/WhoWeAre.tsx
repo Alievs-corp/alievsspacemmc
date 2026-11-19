@@ -1,17 +1,23 @@
 import type { CSSProperties } from 'react';
 import { useI18n } from '@/contexts/I18nContext';
+import { useContent } from '@/contexts/ContentContext';
 import { SectionHead, useReveal, WordsReveal } from '@/components/site/blocks';
 
 /** Who we are: a scroll-lit statement, then the five values as a ruled list of big words. */
 const WhoWeAre = () => {
   const { t, tRaw } = useI18n();
-  const values = [
+  const { content } = useContent();
+  const builtInValues = [
     t('public.about.who.values.responsibility'),
     t('public.about.who.values.transparency'),
     t('public.about.who.values.premiumQuality'),
     t('public.about.who.values.securityReliability'),
     t('public.about.who.values.longTermPartnership'),
   ];
+  const cmsValues = (content?.about?.values ?? []).filter(Boolean);
+  const values = cmsValues.length ? cmsValues : builtInValues;
+  const builtInCopy = t('public.about.whoCopy');
+  const copy = (content?.about?.paragraphs ?? []).filter(Boolean).join(' ').trim() || builtInCopy;
   const listRef = useReveal<HTMLDivElement>();
 
   return (
@@ -27,8 +33,8 @@ const WhoWeAre = () => {
           />
           <WordsReveal
             className="text-[clamp(21px,2.45vw,38px)] leading-[1.22] lg:col-span-8"
-            text={t('public.about.whoCopy')}
-            highlight={tRaw<string[]>('site.company.about.whoHighlight', []) || []}
+            text={copy}
+            highlight={copy === builtInCopy ? tRaw<string[]>('site.company.about.whoHighlight', []) || [] : []}
           />
         </div>
 

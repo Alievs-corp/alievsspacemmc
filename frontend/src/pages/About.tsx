@@ -10,7 +10,8 @@ import '@/components/site/company/company.css';
 
 export function About() {
   const { t, tRaw } = useI18n();
-  const { loading } = useContent();
+  const { loading, content } = useContent();
+  const cmsValues = (content?.about?.values ?? []).filter(Boolean);
   const cta = tRaw<string[]>('site.company.about.ctaTitle', []) || [];
 
   if (loading) {
@@ -27,7 +28,7 @@ export function About() {
       <AboutHeader />
       <WhoWeAre />
       <Ticker
-        items={[
+        items={cmsValues.length ? cmsValues : [
           t('public.about.who.values.responsibility'),
           t('public.about.who.values.transparency'),
           t('public.about.who.values.premiumQuality'),

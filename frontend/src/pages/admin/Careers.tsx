@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { api, type Career, type Employee, type Locale, toCmsLocale } from '@/lib/api';
+import { api, CMS_LOCALES, type Career, type Employee, type Locale, toCmsLocale } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 import { LocaleTabs } from '@/components/admin/LocaleTabs';
@@ -7,7 +7,9 @@ import { cn } from '@/lib/utils';
 import { CheckCircle2 } from 'lucide-react';
 
 export function AdminCareers() {
-  const { locale, supportedLocales, t } = useI18n();
+  const { locale, supportedLocales: siteLocales, t } = useI18n();
+  // The CMS stores en/az/ru only; the site's other languages read English.
+  const supportedLocales = siteLocales.filter((l) => (CMS_LOCALES as readonly string[]).includes(l.code));
   const [careers, setCareers] = useState<Career[]>([]);
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [loading, setLoading] = useState(true);

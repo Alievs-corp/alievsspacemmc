@@ -3,6 +3,8 @@ import { api, type About, toCmsLocale } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 import { ImageUpload } from '@/components/admin/ImageUpload';
+import { ImportBuiltIn } from '@/components/admin/ImportBuiltIn';
+import { hasAbout } from '@/lib/siteContent';
 
 export function AdminAbout() {
   const { locale, t } = useI18n();
@@ -17,6 +19,7 @@ export function AdminAbout() {
   });
   const [paragraphsText, setParagraphsText] = useState<string>('');
   const [valuesText, setValuesText] = useState<string>('');
+  const [isEmpty, setIsEmpty] = useState(false);
   const [processItems, setProcessItems] = useState<Array<{ title: string; desc: string; image: string }>>([]);
 
   useEffect(() => {
@@ -27,6 +30,7 @@ export function AdminAbout() {
     try {
       setLoading(true);
       const data = await api.getAbout(toCmsLocale(locale));
+      setIsEmpty(!hasAbout(data));
       setFormData({
         headline: data.headline || '',
         headlineImage: data.headlineImage || '',
@@ -112,6 +116,8 @@ export function AdminAbout() {
           Edit about page content.
         </p>
       </div>
+
+      {isEmpty && !error && <ImportBuiltIn kind="about" onDone={loadAbout} />}
 
       {error && (
         <div className="rounded-md bg-red-900/20 border border-red-800 p-3 text-sm text-red-400">
