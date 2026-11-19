@@ -171,10 +171,21 @@ export interface Paginated<T> {
 }
 
 export interface FinanceSalary {
+  id: string;
   name: string;
   card: number;
   cash: number;
   bonus: number;
+  description: string;
+}
+
+/** One (possibly partial) salary payment; `month` is YYYY-MM, `date` is YYYY-MM-DD. */
+export interface FinancePayment {
+  id: string;
+  salaryId: string;
+  month: string;
+  date: string;
+  amount: number;
   description: string;
 }
 
@@ -197,6 +208,7 @@ export interface FinanceIncome {
 export interface Finance {
   currency: string;
   salaries: FinanceSalary[];
+  payments: FinancePayment[];
   debts: FinanceDebt[];
   income: FinanceIncome[];
 }
