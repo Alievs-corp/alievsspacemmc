@@ -16,7 +16,7 @@ function describe(a: AuditLog, t: (k: string, f: string) => string): string {
   return a.action;
 }
 
-export function AdminAuditLog() {
+export function AdminAuditLog({ embedded = false }: { embedded?: boolean } = {}) {
   const { t } = useI18n();
   const [q, setQ] = useState('');
   const [query, setQuery] = useState('');
@@ -49,11 +49,18 @@ export function AdminAuditLog() {
 
   return (
     <div className="space-y-6">
-      <PageHeader
-        title={t('panel.nav.audit', 'Audit log')}
-        subtitle={t('panel.audit.subtitle', 'Every administrative change: sign-ins, roles, blocks, content edits and settings. Entries cannot be edited or deleted from the panel.')}
-        actions={<RefreshButton onClick={load} loading={loading} />}
-      />
+      {embedded ? (
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="max-w-2xl text-text-muted">{t('panel.audit.subtitle', 'Every administrative change: sign-ins, roles, blocks, content edits and settings. Entries cannot be edited or deleted from the panel.')}</p>
+          <RefreshButton onClick={load} loading={loading} />
+        </div>
+      ) : (
+        <PageHeader
+          title={t('panel.nav.audit', 'Audit log')}
+          subtitle={t('panel.audit.subtitle', 'Every administrative change: sign-ins, roles, blocks, content edits and settings. Entries cannot be edited or deleted from the panel.')}
+          actions={<RefreshButton onClick={load} loading={loading} />}
+        />
+      )}
 
       <div className="relative">
         <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-subtle" />
