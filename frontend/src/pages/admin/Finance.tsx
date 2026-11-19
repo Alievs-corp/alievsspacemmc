@@ -1,18 +1,19 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { CheckCircle2, Plus, Trash2 } from 'lucide-react';
+import { CalendarDays, CheckCircle2, Plus, Trash2 } from 'lucide-react';
 import { api, type Finance } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { ErrorState, LoadingRows, btn, errorMessage } from '@/components/admin/ui';
 import { cn } from '@/lib/utils';
+import { MonthlyPayments, type PayRow } from './FinancePayments';
 
 /*
  * Amounts are kept as the text the user typed (so "0." and "12,5" can be
  * entered) and turned into numbers only for totals and when saving.
  */
-interface SalaryRow { name: string; card: string; cash: string; bonus: string; description: string }
+interface SalaryRow { id: string; name: string; card: string; cash: string; bonus: string; description: string }
 interface DebtRow { name: string; kind: 'debt' | 'payment'; amount: string; date: string; description: string }
 interface IncomeRow { name: string; kind: 'income' | 'expected'; amount: string; date: string; description: string }
-interface Sheet { currency: string; salaries: SalaryRow[]; debts: DebtRow[]; income: IncomeRow[] }
+interface Sheet { currency: string; salaries: SalaryRow[]; payments: PayRow[]; debts: DebtRow[]; income: IncomeRow[] }
 
 const CURRENCIES = ['AZN', 'USD', 'EUR', 'RUB', 'TRY', 'GEL'];
 
@@ -21,27 +22,37 @@ const num = (s: string) => {
   return Number.isFinite(n) ? n : 0;
 };
 const txt = (n: number) => (n ? String(n) : '');
+const uid = () => (typeof crypto !== 'undefined' && 'randomUUID' in crypto ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`);
 
 const toSheet = (f: Finance): Sheet => ({
   currency: f.currency || 'AZN',
-  salaries: (f.salaries || []).map((r) => ({ name: r.name, card: txt(r.card), cash: txt(r.cash), bonus: txt(r.bonus), description: r.description || '' })),
+  salaries: (f.salaries || []).map((r) => ({ id: r.id || uid(), name: r.name, card: txt(r.card), cash: txt(r.cash), bonus: txt(r.bonus), description: r.description || '' })),
+  payments: (f.payments || []).map((r) => ({ id: r.id || uid(), salaryId: r.salaryId, month: r.month, date: r.date, amount: txt(r.amount), description: r.description || '' })),
   debts: (f.debts || []).map((r) => ({ name: r.name, kind: r.kind === 'payment' ? 'payment' : 'debt', amount: txt(r.amount), date: r.date || '', description: r.description || '' })),
   income: (f.income || []).map((r) => ({ name: r.name, kind: r.kind === 'expected' ? 'expected' : 'income', amount: txt(r.amount), date: r.date || '', description: r.description || '' })),
 });
 
 /** Empty rows (no name and no amounts) are dropped on save. */
-const toFinance = (s: Sheet): Finance => ({
-  currency: s.currency,
-  salaries: s.salaries
+const toFinance = (s: Sheet): Finance => {
+  const salaries = s.salaries
     .filter((r) => r.name.trim() || num(r.card) || num(r.cash) || num(r.bonus))
-    .map((r) => ({ name: r.name.trim(), card: num(r.card), cash: num(r.cash), bonus: num(r.bonus), description: r.description.trim() })),
-  debts: s.debts
-    .filter((r) => r.name.trim() || num(r.amount))
-    .map((r) => ({ name: r.name.trim(), kind: r.kind, amount: num(r.amount), date: r.date, description: r.description.trim() })),
-  income: s.income
-    .filter((r) => r.name.trim() || num(r.amount))
-    .map((r) => ({ name: r.name.trim(), kind: r.kind, amount: num(r.amount), date: r.date, description: r.description.trim() })),
-});
+    .map((r) => ({ id: r.id, name: r.name.trim(), card: num(r.card), cash: num(r.cash), bonus: num(r.bonus), description: r.description.trim() }));
+  const kept = new Set(salaries.map((r) => r.id));
+  return {
+    currency: s.currency,
+    salaries,
+    // Payments of a dropped (empty) employee row go with it; blank payments are not stored.
+    payments: s.payments
+      .filter((p) => kept.has(p.salaryId) && num(p.amount) > 0)
+      .map((p) => ({ id: p.id, salaryId: p.salaryId, month: p.month, date: p.date || `${p.month}-01`, amount: num(p.amount), description: p.description.trim() })),
+    debts: s.debts
+      .filter((r) => r.name.trim() || num(r.amount))
+      .map((r) => ({ name: r.name.trim(), kind: r.kind, amount: num(r.amount), date: r.date, description: r.description.trim() })),
+    income: s.income
+      .filter((r) => r.name.trim() || num(r.amount))
+      .map((r) => ({ name: r.name.trim(), kind: r.kind, amount: num(r.amount), date: r.date, description: r.description.trim() })),
+  };
+};
 
 const sum = (xs: number[]) => xs.reduce((a, b) => a + b, 0);
 
@@ -49,7 +60,7 @@ function money(n: number, currency: string) {
   return `${n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${currency}`;
 }
 
-function Section({ title, hint, addLabel, onAdd, children, totals }: { title: string; hint: string; addLabel: string; onAdd: () => void; children: ReactNode; totals: Array<{ label: string; value: string; tone?: 'good' | 'bad' }> }) {
+function Section({ title, hint, addLabel, onAdd, extra, children, totals }: { title: string; hint: string; addLabel: string; onAdd: () => void; extra?: ReactNode; children: ReactNode; totals: Array<{ label: string; value: string; tone?: 'good' | 'bad' }> }) {
   return (
     <section className="card space-y-4 p-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -57,9 +68,12 @@ function Section({ title, hint, addLabel, onAdd, children, totals }: { title: st
           <h2 className="font-display text-lg font-semibold text-text">{title}</h2>
           <p className="mt-0.5 text-sm text-text-muted">{hint}</p>
         </div>
-        <button type="button" onClick={onAdd} className={btn.primary}>
-          <Plus className="h-4 w-4" /> {addLabel}
-        </button>
+        <div className="flex flex-wrap items-center gap-2">
+          {extra}
+          <button type="button" onClick={onAdd} className={btn.primary}>
+            <Plus className="h-4 w-4" /> {addLabel}
+          </button>
+        </div>
       </div>
       {children}
       <dl className="flex flex-wrap gap-x-8 gap-y-2 border-t border-border pt-3">
@@ -107,6 +121,7 @@ export function FinanceSheet() {
   const [dirty, setDirty] = useState(false);
   const [saved, setSaved] = useState(false);
   const [saveError, setSaveError] = useState('');
+  const [showPayments, setShowPayments] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -135,8 +150,14 @@ export function FinanceSheet() {
     edit((s) => ({ ...s, [key]: s[key].map((r, idx) => (idx === i ? { ...r, ...p } : r)) }));
 
   const remove = (key: 'salaries' | 'debts' | 'income', i: number) => {
-    if (!confirm(t('panel.finance.confirmRemove'))) return;
-    edit((s) => ({ ...s, [key]: s[key].filter((_, idx) => idx !== i) }));
+    const sid = key === 'salaries' ? sheet?.salaries[i]?.id : undefined;
+    const withPayments = !!sid && !!sheet?.payments.some((p) => p.salaryId === sid);
+    if (!confirm(t(withPayments ? 'panel.finance.confirmRemoveSalary' : 'panel.finance.confirmRemove'))) return;
+    edit((s) => ({
+      ...s,
+      [key]: s[key].filter((_, idx) => idx !== i),
+      payments: sid ? s.payments.filter((p) => p.salaryId !== sid) : s.payments,
+    }));
   };
 
   const save = async () => {
@@ -204,7 +225,12 @@ export function FinanceSheet() {
       {/* 1. Salaries */}
       <Section
         title={t(S + 'title')} hint={t(S + 'hint')} addLabel={t(S + 'add')}
-        onAdd={() => edit((s) => ({ ...s, salaries: [...s.salaries, { name: '', card: '', cash: '', bonus: '', description: '' }] }))}
+        extra={
+          <button type="button" onClick={() => setShowPayments((v) => !v)} aria-expanded={showPayments} className={showPayments ? btn.primary : btn.secondary}>
+            <CalendarDays className="h-4 w-4" /> {t('panel.finance.payments.open')}
+          </button>
+        }
+        onAdd={() => edit((s) => ({ ...s, salaries: [...s.salaries, { id: uid(), name: '', card: '', cash: '', bonus: '', description: '' }] }))}
         totals={[
           { label: t(S + 'card'), value: m(totals.card) }, { label: t(S + 'cash'), value: m(totals.cash) },
           { label: t(S + 'bonus'), value: m(totals.bonus) }, { label: t('panel.finance.total'), value: m(totals.all) },
@@ -229,6 +255,16 @@ export function FinanceSheet() {
           </div>
         )}
       </Section>
+
+      {showPayments && (
+        <MonthlyPayments
+          salaries={sheet.salaries}
+          payments={sheet.payments}
+          currency={cur}
+          onChange={(payments) => edit((s) => ({ ...s, payments }))}
+          onClose={() => setShowPayments(false)}
+        />
+      )}
 
       {/* 2. Debts and payments */}
       <Section
