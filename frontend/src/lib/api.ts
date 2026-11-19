@@ -189,12 +189,21 @@ export interface FinancePayment {
   description: string;
 }
 
+/** A (partial) payment against a debt (paid out) or an expected income (received). */
+export interface FinanceSettlement {
+  id: string;
+  date: string;
+  amount: number;
+  description: string;
+}
+
 export interface FinanceDebt {
   name: string;
   kind: 'debt' | 'payment';
   amount: number;
   date: string;
   description: string;
+  settlements: FinanceSettlement[];
 }
 
 export interface FinanceIncome {
@@ -203,6 +212,7 @@ export interface FinanceIncome {
   amount: number;
   date: string;
   description: string;
+  settlements: FinanceSettlement[];
 }
 
 export interface Finance {

@@ -3,16 +3,11 @@ import { CalendarDays, ChevronLeft, ChevronRight, Plus, Trash2, X } from 'lucide
 import { useI18n } from '@/contexts/I18nContext';
 import { btn } from '@/components/admin/ui';
 import { cn } from '@/lib/utils';
+import { num, sum, uid } from './financeUtils';
 
 export interface PaySalary { id: string; name: string; card: string; cash: string; bonus: string }
 export interface PayRow { id: string; salaryId: string; month: string; date: string; amount: string; description: string }
 
-const num = (s: string) => {
-  const n = parseFloat(String(s).replace(/\s/g, '').replace(',', '.'));
-  return Number.isFinite(n) ? n : 0;
-};
-const sum = (xs: number[]) => xs.reduce((a, b) => a + b, 0);
-const uid = () => (typeof crypto !== 'undefined' && 'randomUUID' in crypto ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`);
 
 const pad = (n: number) => String(n).padStart(2, '0');
 const monthOf = (d: Date) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}`;
