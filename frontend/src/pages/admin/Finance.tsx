@@ -1,35 +1,48 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { CalendarDays, CheckCircle2, Plus, Trash2 } from 'lucide-react';
-import { api, type Finance } from '@/lib/api';
+import { api, type Finance, type FinanceDebt, type FinanceIncome, type FinanceSettlement } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { ErrorState, LoadingRows, btn, errorMessage } from '@/components/admin/ui';
 import { cn } from '@/lib/utils';
 import { MonthlyPayments, type PayRow } from './FinancePayments';
+import { num, sum, uid } from './financeUtils';
+import { DealsSection, type DealRow, type SettleRow } from './FinanceDeals';
 
 /*
  * Amounts are kept as the text the user typed (so "0." and "12,5" can be
  * entered) and turned into numbers only for totals and when saving.
  */
 interface SalaryRow { id: string; name: string; card: string; cash: string; bonus: string; description: string }
-interface DebtRow { name: string; kind: 'debt' | 'payment'; amount: string; date: string; description: string }
-interface IncomeRow { name: string; kind: 'income' | 'expected'; amount: string; date: string; description: string }
-interface Sheet { currency: string; salaries: SalaryRow[]; payments: PayRow[]; debts: DebtRow[]; income: IncomeRow[] }
+interface Sheet { currency: string; salaries: SalaryRow[]; payments: PayRow[]; debts: DealRow[]; income: DealRow[] }
 
 const CURRENCIES = ['AZN', 'USD', 'EUR', 'RUB', 'TRY', 'GEL'];
 
-const num = (s: string) => {
-  const n = parseFloat(String(s).replace(/\s/g, '').replace(',', '.'));
-  return Number.isFinite(n) ? n : 0;
-};
 const txt = (n: number) => (n ? String(n) : '');
-const uid = () => (typeof crypto !== 'undefined' && 'randomUUID' in crypto ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`);
+
+/**
+ * Debts and expected payments are "an amount, partly settled". Entries saved
+ * earlier as already paid / already received (`settledKind`) become one full
+ * settlement, so their totals are unchanged.
+ */
+const toDeal = (r: FinanceDebt | FinanceIncome, settledKind: string): DealRow => {
+  const settlements: SettleRow[] = (r.settlements || []).map((x) => ({ id: x.id || uid(), date: x.date || '', amount: txt(x.amount), description: x.description || '' }));
+  if (settlements.length === 0 && r.kind === settledKind && r.amount > 0) {
+    settlements.push({ id: uid(), date: r.date || '', amount: txt(r.amount), description: '' });
+  }
+  return { id: uid(), name: r.name, amount: txt(r.amount), date: r.date || '', description: r.description || '', settlements };
+};
+
+const toSettlements = (r: DealRow): FinanceSettlement[] =>
+  r.settlements
+    .filter((x) => num(x.amount) > 0)
+    .map((x) => ({ id: x.id, date: x.date, amount: num(x.amount), description: x.description.trim() }));
 
 const toSheet = (f: Finance): Sheet => ({
   currency: f.currency || 'AZN',
   salaries: (f.salaries || []).map((r) => ({ id: r.id || uid(), name: r.name, card: txt(r.card), cash: txt(r.cash), bonus: txt(r.bonus), description: r.description || '' })),
   payments: (f.payments || []).map((r) => ({ id: r.id || uid(), salaryId: r.salaryId, month: r.month, date: r.date, amount: txt(r.amount), description: r.description || '' })),
-  debts: (f.debts || []).map((r) => ({ name: r.name, kind: r.kind === 'payment' ? 'payment' : 'debt', amount: txt(r.amount), date: r.date || '', description: r.description || '' })),
-  income: (f.income || []).map((r) => ({ name: r.name, kind: r.kind === 'expected' ? 'expected' : 'income', amount: txt(r.amount), date: r.date || '', description: r.description || '' })),
+  debts: (f.debts || []).map((r) => toDeal(r, 'payment')),
+  income: (f.income || []).map((r) => toDeal(r, 'income')),
 });
 
 /** Empty rows (no name and no amounts) are dropped on save. */
@@ -45,16 +58,15 @@ const toFinance = (s: Sheet): Finance => {
     payments: s.payments
       .filter((p) => kept.has(p.salaryId) && num(p.amount) > 0)
       .map((p) => ({ id: p.id, salaryId: p.salaryId, month: p.month, date: p.date || `${p.month}-01`, amount: num(p.amount), description: p.description.trim() })),
+    // Debts are money we owe; income entries are money we expect (what was received sits in settlements).
     debts: s.debts
       .filter((r) => r.name.trim() || num(r.amount))
-      .map((r) => ({ name: r.name.trim(), kind: r.kind, amount: num(r.amount), date: r.date, description: r.description.trim() })),
+      .map((r) => ({ name: r.name.trim(), kind: 'debt' as const, amount: num(r.amount), date: r.date, description: r.description.trim(), settlements: toSettlements(r) })),
     income: s.income
       .filter((r) => r.name.trim() || num(r.amount))
-      .map((r) => ({ name: r.name.trim(), kind: r.kind, amount: num(r.amount), date: r.date, description: r.description.trim() })),
+      .map((r) => ({ name: r.name.trim(), kind: 'expected' as const, amount: num(r.amount), date: r.date, description: r.description.trim(), settlements: toSettlements(r) })),
   };
 };
-
-const sum = (xs: number[]) => xs.reduce((a, b) => a + b, 0);
 
 function money(n: number, currency: string) {
   return `${n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${currency}`;
@@ -181,12 +193,7 @@ export function FinanceSheet() {
     const card = sum(sheet.salaries.map((r) => num(r.card)));
     const cash = sum(sheet.salaries.map((r) => num(r.cash)));
     const bonus = sum(sheet.salaries.map((r) => num(r.bonus)));
-    const by = <T extends { kind: string; amount: string }>(rows: T[], kind: string) => sum(rows.filter((r) => r.kind === kind).map((r) => num(r.amount)));
-    return {
-      card, cash, bonus, all: card + cash + bonus,
-      debt: by(sheet.debts, 'debt'), paid: by(sheet.debts, 'payment'),
-      income: by(sheet.income, 'income'), expected: by(sheet.income, 'expected'),
-    };
+    return { card, cash, bonus, all: card + cash + bonus };
   }, [sheet]);
 
   if (error) return <ErrorState message={error} onRetry={load} />;
@@ -195,11 +202,8 @@ export function FinanceSheet() {
   const cur = sheet.currency;
   const m = (n: number) => money(n, cur);
   const S = 'panel.finance.salaries.';
-  const D = 'panel.finance.debts.';
-  const I = 'panel.finance.income.';
 
   const salCols = 'md:grid-cols-[minmax(0,1.3fr)_minmax(0,.8fr)_minmax(0,.8fr)_minmax(0,.8fr)_minmax(0,.9fr)_minmax(0,1.6fr)_2rem]';
-  const dealCols = 'md:grid-cols-[minmax(0,1.3fr)_minmax(0,.8fr)_minmax(0,.9fr)_minmax(0,.9fr)_minmax(0,1.8fr)_2rem]';
 
   const del = (onClick: () => void) => (
     <button type="button" onClick={onClick} aria-label={t('panel.finance.remove')} title={t('panel.finance.remove')}
@@ -266,65 +270,9 @@ export function FinanceSheet() {
         />
       )}
 
-      {/* 2. Debts and payments */}
-      <Section
-        title={t(D + 'title')} hint={t(D + 'hint')} addLabel={t(D + 'add')}
-        onAdd={() => edit((s) => ({ ...s, debts: [...s.debts, { name: '', kind: 'debt', amount: '', date: '', description: '' }] }))}
-        totals={[{ label: t(D + 'totalDebt'), value: m(totals.debt), tone: 'bad' }, { label: t(D + 'totalPayment'), value: m(totals.paid), tone: 'good' }]}
-      >
-        {sheet.debts.length === 0 ? (
-          <p className="py-4 text-center text-sm text-text-subtle">{t(D + 'empty')}</p>
-        ) : (
-          <div className="space-y-3">
-            <HeaderRow cols={dealCols} labels={[t('panel.finance.name'), t('panel.finance.type'), t('panel.finance.amount'), t('panel.finance.date'), t('panel.finance.description'), '']} />
-            {sheet.debts.map((r, i) => (
-              <RowShell key={i} cols={dealCols}>
-                <Cell label={t('panel.finance.name')}><input className="field" value={r.name} onChange={(e) => patch('debts', i, { name: e.target.value })} aria-label={t('panel.finance.name')} /></Cell>
-                <Cell label={t('panel.finance.type')}>
-                  <select className="field" value={r.kind} onChange={(e) => patch('debts', i, { kind: e.target.value as DebtRow['kind'] })} aria-label={t('panel.finance.type')}>
-                    <option value="debt">{t(D + 'debt')}</option>
-                    <option value="payment">{t(D + 'payment')}</option>
-                  </select>
-                </Cell>
-                <Cell label={t('panel.finance.amount')}><input className="field" inputMode="decimal" value={r.amount} onChange={(e) => patch('debts', i, { amount: e.target.value })} aria-label={t('panel.finance.amount')} placeholder="0" /></Cell>
-                <Cell label={t('panel.finance.date')}><input className="field" type="date" value={r.date} onChange={(e) => patch('debts', i, { date: e.target.value })} aria-label={t('panel.finance.date')} /></Cell>
-                <Cell label={t('panel.finance.description')}><input className="field" value={r.description} onChange={(e) => patch('debts', i, { description: e.target.value })} aria-label={t('panel.finance.description')} /></Cell>
-                {del(() => remove('debts', i))}
-              </RowShell>
-            ))}
-          </div>
-        )}
-      </Section>
-
-      {/* 3. Income and expected payments */}
-      <Section
-        title={t(I + 'title')} hint={t(I + 'hint')} addLabel={t(I + 'add')}
-        onAdd={() => edit((s) => ({ ...s, income: [...s.income, { name: '', kind: 'income', amount: '', date: '', description: '' }] }))}
-        totals={[{ label: t(I + 'totalIncome'), value: m(totals.income), tone: 'good' }, { label: t(I + 'totalExpected'), value: m(totals.expected) }]}
-      >
-        {sheet.income.length === 0 ? (
-          <p className="py-4 text-center text-sm text-text-subtle">{t(I + 'empty')}</p>
-        ) : (
-          <div className="space-y-3">
-            <HeaderRow cols={dealCols} labels={[t('panel.finance.name'), t('panel.finance.type'), t('panel.finance.amount'), t('panel.finance.date'), t('panel.finance.description'), '']} />
-            {sheet.income.map((r, i) => (
-              <RowShell key={i} cols={dealCols}>
-                <Cell label={t('panel.finance.name')}><input className="field" value={r.name} onChange={(e) => patch('income', i, { name: e.target.value })} aria-label={t('panel.finance.name')} /></Cell>
-                <Cell label={t('panel.finance.type')}>
-                  <select className="field" value={r.kind} onChange={(e) => patch('income', i, { kind: e.target.value as IncomeRow['kind'] })} aria-label={t('panel.finance.type')}>
-                    <option value="income">{t(I + 'income')}</option>
-                    <option value="expected">{t(I + 'expected')}</option>
-                  </select>
-                </Cell>
-                <Cell label={t('panel.finance.amount')}><input className="field" inputMode="decimal" value={r.amount} onChange={(e) => patch('income', i, { amount: e.target.value })} aria-label={t('panel.finance.amount')} placeholder="0" /></Cell>
-                <Cell label={t('panel.finance.date')}><input className="field" type="date" value={r.date} onChange={(e) => patch('income', i, { date: e.target.value })} aria-label={t('panel.finance.date')} /></Cell>
-                <Cell label={t('panel.finance.description')}><input className="field" value={r.description} onChange={(e) => patch('income', i, { description: e.target.value })} aria-label={t('panel.finance.description')} /></Cell>
-                {del(() => remove('income', i))}
-              </RowShell>
-            ))}
-          </div>
-        )}
-      </Section>
+      {/* 2. Debts and 3. Expected payments: stats on top of each, independent of salaries */}
+      <DealsSection ns="panel.finance.debts." rows={sheet.debts} onRows={(debts) => edit((x) => ({ ...x, debts }))} currency={cur} tone="debt" />
+      <DealsSection ns="panel.finance.income." rows={sheet.income} onRows={(income) => edit((x) => ({ ...x, income }))} currency={cur} tone="income" />
 
       <div className="sticky bottom-4 z-10 flex flex-wrap items-center gap-3 rounded-lg border border-border bg-surface/95 p-3 shadow-lg backdrop-blur">
         <button type="button" onClick={save} disabled={saving || !dirty} className={btn.primary}>
