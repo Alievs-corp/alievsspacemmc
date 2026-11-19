@@ -9,6 +9,9 @@ export function toCmsLocale(locale: string): Locale {
   return (CMS_LOCALES as readonly string[]).includes(locale) ? (locale as Locale) : 'en';
 }
 
+/** Create/update bodies carry every language at once: { en: {...}, az: {...}, ru: {...} }. */
+export type MultiLocale<T> = Partial<Record<Locale, Partial<T>>>;
+
 export interface Settings {
   brandName: string;
   tagline: string;
@@ -436,16 +439,16 @@ export const api = {
       }),
 
     // Services Management
-    createService: (locale: Locale, service: Partial<Service>): Promise<Service> => 
-      fetchAPI<Service>(`/admin/services?locale=${locale}`, {
+    createService: (data: MultiLocale<Service>): Promise<MultiLocale<Service>> =>
+      fetchAPI<MultiLocale<Service>>(`/admin/services`, {
         method: 'POST',
-        body: JSON.stringify(service),
+        body: JSON.stringify(data),
       }),
 
-    updateService: (id: string, locale: Locale, service: Partial<Service>): Promise<Service> => 
-      fetchAPI<Service>(`/admin/services/${id}?locale=${locale}`, {
+    updateService: (id: string, data: MultiLocale<Service>): Promise<MultiLocale<Service>> =>
+      fetchAPI<MultiLocale<Service>>(`/admin/services/${id}`, {
         method: 'PUT',
-        body: JSON.stringify(service),
+        body: JSON.stringify(data),
       }),
 
     deleteService: (id: string): Promise<void> => 
@@ -454,16 +457,16 @@ export const api = {
       }),
 
     // Projects Management
-    createProject: (locale: Locale, project: Partial<Project>): Promise<Project> => 
-      fetchAPI<Project>(`/admin/projects?locale=${locale}`, {
+    createProject: (data: MultiLocale<Project>): Promise<MultiLocale<Project>> =>
+      fetchAPI<MultiLocale<Project>>(`/admin/projects`, {
         method: 'POST',
-        body: JSON.stringify(project),
+        body: JSON.stringify(data),
       }),
 
-    updateProject: (id: string, locale: Locale, project: Partial<Project>): Promise<Project> => 
-      fetchAPI<Project>(`/admin/projects/${id}?locale=${locale}`, {
+    updateProject: (id: string, data: MultiLocale<Project>): Promise<MultiLocale<Project>> =>
+      fetchAPI<MultiLocale<Project>>(`/admin/projects/${id}`, {
         method: 'PUT',
-        body: JSON.stringify(project),
+        body: JSON.stringify(data),
       }),
 
     deleteProject: (id: string): Promise<void> => 
@@ -472,16 +475,16 @@ export const api = {
       }),
 
     // Blog Management
-    createBlogPost: (locale: Locale, post: Partial<BlogPost>): Promise<BlogPost> => 
-      fetchAPI<BlogPost>(`/admin/blog?locale=${locale}`, {
+    createBlogPost: (data: MultiLocale<BlogPost>): Promise<MultiLocale<BlogPost>> =>
+      fetchAPI<MultiLocale<BlogPost>>(`/admin/blog`, {
         method: 'POST',
-        body: JSON.stringify(post),
+        body: JSON.stringify(data),
       }),
 
-    updateBlogPost: (id: string, locale: Locale, post: Partial<BlogPost>): Promise<BlogPost> => 
-      fetchAPI<BlogPost>(`/admin/blog/${id}?locale=${locale}`, {
+    updateBlogPost: (id: string, data: MultiLocale<BlogPost>): Promise<MultiLocale<BlogPost>> =>
+      fetchAPI<MultiLocale<BlogPost>>(`/admin/blog/${id}`, {
         method: 'PUT',
-        body: JSON.stringify(post),
+        body: JSON.stringify(data),
       }),
 
     deleteBlogPost: (id: string): Promise<void> => 
@@ -490,16 +493,16 @@ export const api = {
       }),
 
     // Careers Management
-    createCareer: (locale: Locale, career: Partial<Career>): Promise<Career> => 
-      fetchAPI<Career>(`/admin/careers?locale=${locale}`, {
+    createCareer: (data: MultiLocale<Career>): Promise<MultiLocale<Career>> =>
+      fetchAPI<MultiLocale<Career>>(`/admin/careers`, {
         method: 'POST',
-        body: JSON.stringify(career),
+        body: JSON.stringify(data),
       }),
 
-    updateCareer: (id: string, locale: Locale, career: Partial<Career>): Promise<Career> => 
-      fetchAPI<Career>(`/admin/careers/${id}?locale=${locale}`, {
+    updateCareer: (id: string, data: MultiLocale<Career>): Promise<MultiLocale<Career>> =>
+      fetchAPI<MultiLocale<Career>>(`/admin/careers/${id}`, {
         method: 'PUT',
-        body: JSON.stringify(career),
+        body: JSON.stringify(data),
       }),
 
     deleteCareer: (id: string): Promise<void> => 
@@ -508,16 +511,16 @@ export const api = {
       }),
 
     // Employees Management
-    createEmployee: (locale: Locale, employee: Partial<Employee>): Promise<Employee> => 
-      fetchAPI<Employee>(`/admin/employees?locale=${locale}`, {
+    createEmployee: (data: MultiLocale<Employee>): Promise<MultiLocale<Employee>> =>
+      fetchAPI<MultiLocale<Employee>>(`/admin/employees`, {
         method: 'POST',
-        body: JSON.stringify(employee),
+        body: JSON.stringify(data),
       }),
 
-    updateEmployee: (id: string, locale: Locale, employee: Partial<Employee>): Promise<Employee> => 
-      fetchAPI<Employee>(`/admin/employees/${id}?locale=${locale}`, {
+    updateEmployee: (id: string, data: MultiLocale<Employee>): Promise<MultiLocale<Employee>> =>
+      fetchAPI<MultiLocale<Employee>>(`/admin/employees/${id}`, {
         method: 'PUT',
-        body: JSON.stringify(employee),
+        body: JSON.stringify(data),
       }),
 
     deleteEmployee: (id: string): Promise<void> => 

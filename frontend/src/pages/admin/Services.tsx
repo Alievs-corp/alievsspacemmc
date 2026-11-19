@@ -102,7 +102,7 @@ export function AdminServices() {
 
     try {
       // Save per-locale using API signatures
-      let id = editingId;
+      const body: Partial<Record<Locale, Partial<Service>>> = {};
       for (const loc of supportedLocales.map((l) => l.code as Locale)) {
         const bullets = bulletsText[loc]
           .split(',')
@@ -114,13 +114,12 @@ export function AdminServices() {
           bullets,
         };
 
-        if (id) {
-          await api.admin.updateService(id, loc, payload);
-        } else {
-          // First language creates the record; the rest update that same id.
-          id = (await api.admin.createService(loc, payload)).id;
-        }
+        body[loc] = payload;
       }
+
+      // One request carries every language.
+      if (editingId) await api.admin.updateService(editingId, body);
+      else await api.admin.createService(body);
 
       await loadServices();
       handleNew();
