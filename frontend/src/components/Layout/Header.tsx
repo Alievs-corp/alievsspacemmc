@@ -25,6 +25,7 @@ const NAV_LINKS: NavItem[] = [
   { path: '/packages', key: 'packages' },
   { path: '/process', key: 'process' },
   { path: '/case-studies', key: 'caseStudies' },
+  { path: '/marketing', key: 'marketing' },
   { path: '/industries', key: 'industries' },
   { path: '/about', key: 'about' },
   { path: '/faq', key: 'faq' },

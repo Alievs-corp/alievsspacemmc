@@ -19,6 +19,7 @@ const COLUMNS: Array<{ titleKey: string; links: FooterLink[] }> = [
       { to: '/packages', key: 'nav.packages' },
       { to: '/process', key: 'nav.process' },
       { to: '/case-studies', key: 'nav.caseStudies' },
+      { to: '/marketing', key: 'nav.marketing' },
       { to: '/industries', key: 'nav.industries' },
       { to: '/about', key: 'nav.about' },
       { to: '/faq', key: 'nav.faq' },

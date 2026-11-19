@@ -19,6 +19,7 @@ import { Services } from './pages/Services';
 import Contact  from './pages/Contact';
 import { Industries } from './pages/Industries';
 import CaseStudies from './pages/CaseStudies';
+import Marketing from './pages/Marketing';
 import Packages from './pages/Packages';
 import Faq from './pages/Faq';
 import Process from './pages/Process';
@@ -51,6 +52,7 @@ const AdminCareers = lazy(() => import('./pages/admin/Careers').then((m) => ({ d
 const AdminInquiries = lazy(() => import('./pages/admin/Inquiry').then((m) => ({ default: m.AdminInquiries })));
 const AdminSettings = lazy(() => import('./pages/admin/Settings').then((m) => ({ default: m.AdminSettings })));
 const AdminHome = lazy(() => import('./pages/admin/Home').then((m) => ({ default: m.AdminHome })));
+const AdminMarketing = lazy(() => import('./pages/admin/Marketing').then((m) => ({ default: m.AdminMarketing })));
 const AdminAbout = lazy(() => import('./pages/admin/About').then((m) => ({ default: m.AdminAbout })));
 const AdminUsers = lazy(() => import('./pages/admin/Users').then((m) => ({ default: m.AdminUsers })));
 const AdminAdmins = lazy(() => import('./pages/admin/Users').then((m) => ({ default: m.AdminAdmins })));
@@ -131,6 +133,7 @@ function App() {
                             <Route path="/settings" element={<ProtectedRoute permissions={['content']}><AdminSettings /></ProtectedRoute>} />
                             <Route path="/home" element={<ProtectedRoute permissions={['content']}><AdminHome /></ProtectedRoute>} />
                             <Route path="/about" element={<ProtectedRoute permissions={['content']}><AdminAbout /></ProtectedRoute>} />
+                            <Route path="/marketing" element={<ProtectedRoute permissions={['content']}><AdminMarketing /></ProtectedRoute>} />
                             <Route path="/inquiries" element={<ProtectedRoute permissions={['inquiries']}><AdminInquiries /></ProtectedRoute>} />
                             <Route path="/applications" element={<ProtectedRoute permissions={['applications']}><AdminApplications /></ProtectedRoute>} />
                             <Route path="/users" element={<ProtectedRoute permissions={['users.view', 'users.manage']}><AdminUsers /></ProtectedRoute>} />
@@ -207,6 +210,7 @@ function App() {
                           <Route path="/cookie-policy" element={<CookiePolicy />} />
                           <Route path="/services" element={<Services />} />
                           <Route path="/case-studies" element={<CaseStudies />} />
+                          <Route path="/marketing" element={<Marketing />} />
                           <Route path="/case-studies/marketplace-mvp" element={<MarketplaceMVP />} />
                           <Route path="/case-studies/fintech-reporting-dashboard" element={<FintechReportingDashboard />} />
                           <Route path="/case-studies/operations-inventory-system" element={<InventorySystem />} />
