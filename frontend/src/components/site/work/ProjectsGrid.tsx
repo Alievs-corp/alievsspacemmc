@@ -1,5 +1,7 @@
 import type { CSSProperties } from 'react';
 import { useI18n } from '@/contexts/I18nContext';
+import { useContent } from '@/contexts/ContentContext';
+import { builtInProjectImage } from '@/lib/siteContent';
 import { SectionHead, useReveal } from '../blocks';
 import { hostOf, PROJECTS } from './projects';
 import './work.css';
@@ -10,7 +12,26 @@ import './work.css';
  */
 export function ProjectsGrid() {
   const { t } = useI18n();
+  const { content } = useContent();
   const ref = useReveal();
+
+  // Projects managed in the admin panel win; the built-in set shows until there are any.
+  const cms = content?.projects ?? [];
+  const items = cms.length
+    ? cms.map((p) => ({
+        key: p.id,
+        link: p.link || '#',
+        image: p.image || builtInProjectImage(p.link) || '',
+        name: p.title,
+        description: p.summary,
+      }))
+    : PROJECTS.map((p) => ({
+        key: p.key,
+        link: p.link,
+        image: p.image as string,
+        name: t(`public.home.projects.items.${p.key}.name`),
+        description: t(`public.home.projects.items.${p.key}.description`),
+      }));
 
   return (
     <section className="as-section" aria-labelledby="work-projects-title">
@@ -23,8 +44,8 @@ export function ProjectsGrid() {
           size="md"
         />
         <div ref={ref} className="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 md:mt-16 lg:grid-cols-3">
-          {PROJECTS.map((p, i) => {
-            const name = t(`public.home.projects.items.${p.key}.name`);
+          {items.map((p, i) => {
+            const name = p.name;
             const host = hostOf(p.link);
             const delay = { '--d': `${(i % 3) * 110}ms` } as CSSProperties;
             return (
@@ -32,7 +53,7 @@ export function ProjectsGrid() {
                 <a href={p.link} target="_blank" rel="noopener noreferrer" className="wk-proj group">
                   <div className="wk-wipe" data-reveal style={delay}>
                     <div className="wk-shot wk-wipe__in">
-                      <img src={p.image} alt={name} loading="lazy" decoding="async" width={1900} height={938} />
+                      {p.image ? <img src={p.image} alt={name} loading="lazy" decoding="async" width={1900} height={938} /> : null}
                       <span className="wk-shot__host">{host}</span>
                     </div>
                   </div>
@@ -41,7 +62,7 @@ export function ProjectsGrid() {
                       <h3 className="wk-proj__name as-h3 !text-[clamp(20px,1.8vw,26px)]">{name}</h3>
                       <span className="as-mono shrink-0 text-[var(--as-fg-soft)]">{String(i + 1).padStart(2, '0')}</span>
                     </div>
-                    <p className="text-[15px] leading-relaxed text-[var(--as-fg-soft)]">{t(`public.home.projects.items.${p.key}.description`)}</p>
+                    <p className="text-[15px] leading-relaxed text-[var(--as-fg-soft)]">{p.description}</p>
                     <span className="as-mono mt-1 inline-flex items-center gap-2 text-[var(--as-accent)]">
                       {t('ui.openSite')}
                       <span aria-hidden className="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">

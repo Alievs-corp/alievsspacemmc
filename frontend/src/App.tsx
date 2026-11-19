@@ -47,7 +47,6 @@ const AdminDashboard = lazy(() => import('./pages/admin/Dashboard').then((m) => 
 const AdminLayout = lazy(() => import('./components/admin/AdminLayout').then((m) => ({ default: m.AdminLayout })));
 const AdminServices = lazy(() => import('./pages/admin/Services').then((m) => ({ default: m.AdminServices })));
 const AdminProjects = lazy(() => import('./pages/admin/Projects').then((m) => ({ default: m.AdminProjects })));
-const AdminBlog = lazy(() => import('./pages/admin/Blog').then((m) => ({ default: m.AdminBlog })));
 const AdminCareers = lazy(() => import('./pages/admin/Careers').then((m) => ({ default: m.AdminCareers })));
 const AdminInquiries = lazy(() => import('./pages/admin/Inquiry').then((m) => ({ default: m.AdminInquiries })));
 const AdminSettings = lazy(() => import('./pages/admin/Settings').then((m) => ({ default: m.AdminSettings })));
@@ -128,7 +127,6 @@ function App() {
                             <Route path="/" element={<AdminDashboard />} />
                             <Route path="/services" element={<ProtectedRoute permissions={['content']}><AdminServices /></ProtectedRoute>} />
                             <Route path="/projects" element={<ProtectedRoute permissions={['content']}><AdminProjects /></ProtectedRoute>} />
-                            <Route path="/blog" element={<ProtectedRoute permissions={['content']}><AdminBlog /></ProtectedRoute>} />
                             <Route path="/careers" element={<ProtectedRoute permissions={['content']}><AdminCareers /></ProtectedRoute>} />
                             <Route path="/settings" element={<ProtectedRoute permissions={['content']}><AdminSettings /></ProtectedRoute>} />
                             <Route path="/home" element={<ProtectedRoute permissions={['content']}><AdminHome /></ProtectedRoute>} />

@@ -63,6 +63,13 @@ const en = {
     profile: "Profile",
   },
   panel: {
+    siteImport: {
+      title: "This section is empty in the admin panel",
+      text: "The live site is currently showing its built-in content. Import it to see everything that is on the site here and to add, edit or delete it. Nothing changes on the site.",
+      button: "Import current site content",
+      busy: "Importing…",
+      done: "Imported. The site content is now managed here.",
+    },
     admins: {
       all: "All administrators",
       noPerms: "No sections granted",
@@ -315,6 +322,13 @@ const ru = {
     profile: "Профиль",
   },
   panel: {
+    siteImport: {
+      title: "В админке этот раздел пока пуст",
+      text: "Сейчас сайт показывает встроенный контент. Импортируйте его, чтобы увидеть здесь всё, что есть на сайте, и добавлять, редактировать и удалять. На сайте ничего не изменится.",
+      button: "Импортировать текущий контент сайта",
+      busy: "Импорт…",
+      done: "Готово. Контент сайта теперь управляется отсюда.",
+    },
     admins: {
       all: "Все администраторы",
       noPerms: "Разделы не назначены",
@@ -567,6 +581,13 @@ const az = {
     profile: "Profil",
   },
   panel: {
+    siteImport: {
+      title: "Admin paneldə bu bölmə hələ boşdur",
+      text: "Sayt hazırda daxili kontenti göstərir. Saytdakı hər şeyi burada görmək, əlavə etmək, redaktə etmək və silmək üçün onu idxal edin. Saytda heç nə dəyişmir.",
+      button: "Saytın cari kontentini idxal et",
+      busy: "İdxal edilir…",
+      done: "Hazırdır. Saytın kontenti artıq buradan idarə olunur.",
+    },
     admins: {
       all: "Bütün adminlər",
       noPerms: "Bölmə təyin edilməyib",

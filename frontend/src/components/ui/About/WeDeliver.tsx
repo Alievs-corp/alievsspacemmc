@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react';
 import { useI18n } from '@/contexts/I18nContext';
+import { useContent } from '@/contexts/ContentContext';
 import { SectionHead, useReveal } from '@/components/site/blocks';
 import analysis from '../../../assets/images/analysis.svg';
 import uxUi from '../../../assets/images/ux-ui.svg';
@@ -24,6 +25,23 @@ const STAGES = [
  */
 const WeDeliver = () => {
   const { t } = useI18n();
+  const { content } = useContent();
+  const cms = (content?.about?.process ?? []).filter((p) => p && typeof p === 'object' && p.title);
+  const steps = cms.length
+    ? cms.map((p, i) => ({
+        key: `cms-${i}`,
+        title: p.title,
+        text: p.desc,
+        alt: p.title,
+        img: p.image || STAGES[i % STAGES.length][1],
+      }))
+    : STAGES.map(([key, img]) => ({
+        key,
+        title: t(`public.about.deliver.items.${key}.title`),
+        text: t(`public.about.deliver.items.${key}.text`),
+        alt: t(`public.about.deliver.items.${key}.alt`),
+        img,
+      }));
   const listRef = useReveal<HTMLOListElement>();
 
   return (
@@ -42,7 +60,7 @@ const WeDeliver = () => {
             </div>
           </div>
           <ol ref={listRef} className="as-steps cmp-deliver lg:col-span-8">
-            {STAGES.map(([key, img], i) => (
+            {steps.map(({ key, img, title, text, alt }, i) => (
               <li
                 key={key}
                 data-reveal
@@ -51,13 +69,13 @@ const WeDeliver = () => {
               >
                 <span className="as-step-n">{String(i + 1).padStart(2, '0')}</span>
                 <div className="min-w-0">
-                  <h3 className="as-h3">{t(`public.about.deliver.items.${key}.title`)}</h3>
-                  <p>{t(`public.about.deliver.items.${key}.text`)}</p>
+                  <h3 className="as-h3">{title}</h3>
+                  <p>{text}</p>
                 </div>
                 <div className="cmp-deliver__img col-start-2 mt-2 md:col-start-3 md:row-start-1 md:mt-0">
                   <img
                     src={img}
-                    alt={t(`public.about.deliver.items.${key}.alt`)}
+                    alt={alt}
                     width={245}
                     height={146}
                     loading="lazy"

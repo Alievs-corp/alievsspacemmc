@@ -4,13 +4,13 @@ import { useI18n } from '@/contexts/I18nContext';
 import { api, type Inquiry, type SystemOverview, toCmsLocale } from '@/lib/api';
 import { useState, useEffect, useCallback } from 'react';
 import {
-  Briefcase, FolderKanban, FileText, GraduationCap, Users, Mail, ArrowRight, Inbox,
+  Briefcase, FolderKanban, GraduationCap, Users, Mail, ArrowRight, Inbox,
   UserPlus, Activity, ShieldCheck, Ban, FileUser, ToggleRight,
 } from 'lucide-react';
 import { PageHeader, RefreshButton, StatusBadge, formatDate } from '@/components/admin/ui';
 
 interface ContentStats {
-  services: number; projects: number; blog: number; careers: number; employees: number;
+  services: number; projects: number; careers: number; employees: number;
 }
 
 function formatUptime(seconds: number): string {
@@ -61,14 +61,14 @@ export function AdminDashboard() {
       const [ov, stats, inquiries] = await Promise.allSettled([
         api.admin.getOverview(),
         canContent
-          ? Promise.all([api.getServices(cms), api.getProjects(cms), api.getBlogPosts(cms), api.getCareers(cms), api.getEmployees(cms)])
+          ? Promise.all([api.getServices(cms), api.getProjects(cms), api.getCareers(cms), api.getEmployees(cms)])
           : Promise.resolve(null),
         canInquiries ? api.admin.getInquiries() : Promise.resolve([] as Inquiry[]),
       ]);
       if (ov.status === 'fulfilled') setOverview(ov.value);
       if (stats.status === 'fulfilled' && stats.value) {
-        const [services, projects, blog, careers, employees] = stats.value;
-        setContent({ services: services.length, projects: projects.length, blog: blog.length, careers: careers.length, employees: employees.length });
+        const [services, projects, careers, employees] = stats.value;
+        setContent({ services: services.length, projects: projects.length, careers: careers.length, employees: employees.length });
       }
       if (inquiries.status === 'fulfilled') setRecent(inquiries.value.slice(0, 5));
     } finally {
@@ -181,10 +181,9 @@ export function AdminDashboard() {
       {canContent && (
         <section className="space-y-3">
           <h2 className="font-mono text-xs uppercase tracking-wider text-text-subtle">{t('panel.dashboard.content', 'Site content')}</h2>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
             <Kpi icon={Briefcase} value={content?.services} label={t('admin.services', 'Services')} to="/panel/services" loading={loading} />
             <Kpi icon={FolderKanban} value={content?.projects} label={t('admin.projects', 'Projects')} to="/panel/projects" loading={loading} />
-            <Kpi icon={FileText} value={content?.blog} label={t('admin.blog', 'Blog')} to="/panel/blog" loading={loading} />
             <Kpi icon={GraduationCap} value={content?.careers} label={t('admin.careers', 'Careers')} to="/panel/careers" loading={loading} />
             <Kpi icon={FileUser} value={content?.employees} label={t('admin.team', 'Team')} to="/panel/careers" loading={loading} />
           </div>

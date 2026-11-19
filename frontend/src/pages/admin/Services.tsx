@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
-import { api, type Service, type Locale, toCmsLocale } from '@/lib/api';
+import { api, CMS_LOCALES, type Service, type Locale, toCmsLocale } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
 import { ImageUpload } from '@/components/admin/ImageUpload';
 import { LocaleTabs } from '@/components/admin/LocaleTabs';
+import { ImportBuiltIn } from '@/components/admin/ImportBuiltIn';
 import { cn } from '@/lib/utils';
 import { CheckCircle2 } from 'lucide-react';
 
 export function AdminServices() {
-  const { locale, supportedLocales, t } = useI18n();
+  const { locale, supportedLocales: siteLocales, t } = useI18n();
+  // The CMS stores en/az/ru only; the site's other languages read English.
+  const supportedLocales = siteLocales.filter((l) => (CMS_LOCALES as readonly string[]).includes(l.code));
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -99,6 +102,7 @@ export function AdminServices() {
 
     try {
       // Save per-locale using API signatures
+      let id = editingId;
       for (const loc of supportedLocales.map((l) => l.code as Locale)) {
         const bullets = bulletsText[loc]
           .split(',')
@@ -110,10 +114,11 @@ export function AdminServices() {
           bullets,
         };
 
-        if (editingId) {
-          await api.admin.updateService(editingId, loc, payload);
+        if (id) {
+          await api.admin.updateService(id, loc, payload);
         } else {
-          await api.admin.createService(loc, payload);
+          // First language creates the record; the rest update that same id.
+          id = (await api.admin.createService(loc, payload)).id;
         }
       }
 
@@ -143,6 +148,8 @@ export function AdminServices() {
         </div>
         <Button onClick={handleNew}>{t('admin.newService')}</Button>
       </div>
+
+      {services.length === 0 && !error && <ImportBuiltIn kind="services" onDone={loadServices} />}
 
       {error && (
         <div className="rounded-md bg-red-900/20 border border-red-800 p-3 text-sm text-red-400">

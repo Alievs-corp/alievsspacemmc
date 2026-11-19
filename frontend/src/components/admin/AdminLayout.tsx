@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
-  LayoutDashboard, Home as HomeIcon, Info, Briefcase, FolderKanban, FileText,
+  LayoutDashboard, Home as HomeIcon, Info, Briefcase, FolderKanban,
   GraduationCap, Mail, Users, Settings, Menu, X, Globe, LogOut, ExternalLink,
   UserCircle, ChevronLeft, ChevronRight, FileUser, ShieldCheck, Plug, SlidersHorizontal, ScrollText,
   Workflow, KeyRound, ShieldHalf, ArrowLeftRight,
@@ -42,7 +42,6 @@ const navGroups: Array<{ labelKey: string; label: string; items: NavItem[] }> = 
       { path: '/panel/about', labelKey: 'admin.about', label: 'About', icon: Info, permissions: ['content'] },
       { path: '/panel/services', labelKey: 'admin.services', label: 'Services', icon: Briefcase, permissions: ['content'] },
       { path: '/panel/projects', labelKey: 'admin.projects', label: 'Projects', icon: FolderKanban, permissions: ['content'] },
-      { path: '/panel/blog', labelKey: 'admin.blog', label: 'Blog', icon: FileText, permissions: ['content'] },
       { path: '/panel/careers', labelKey: 'admin.careers', label: 'Careers', icon: GraduationCap, permissions: ['content'] },
       { path: '/panel/settings', labelKey: 'panel.nav.siteSettings', label: 'Site settings', icon: Settings, permissions: ['content'] },
     ],
