@@ -15,6 +15,8 @@ import { DealsSection, type DealRow, type SettleRow } from './FinanceDeals';
 interface SalaryRow { id: string; name: string; card: string; cash: string; bonus: string; description: string }
 interface Sheet { currency: string; salaries: SalaryRow[]; payments: PayRow[]; debts: DealRow[]; income: DealRow[] }
 
+export type FinanceSection = 'salaries' | 'debts' | 'income';
+
 const CURRENCIES = ['AZN', 'USD', 'EUR', 'RUB', 'TRY', 'GEL'];
 
 const txt = (n: number) => (n ? String(n) : '');
@@ -69,30 +71,34 @@ const toFinance = (s: Sheet): Finance => {
 };
 
 function money(n: number, currency: string) {
-  return `${n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${currency}`;
+  return `${n.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 })} ${currency}`;
 }
 
-function Section({ title, hint, addLabel, onAdd, extra, children, totals }: { title: string; hint: string; addLabel: string; onAdd: () => void; extra?: ReactNode; children: ReactNode; totals: Array<{ label: string; value: string; tone?: 'good' | 'bad' }> }) {
+/** Compact on phones (small type, tight padding), roomier from `sm` up. */
+const addBtn = cn(btn.primary, 'px-2.5 py-1.5 text-xs sm:px-3.5 sm:py-2 sm:text-sm');
+const ghostBtn = cn(btn.secondary, 'px-2.5 py-1.5 text-xs sm:px-3.5 sm:py-2 sm:text-sm');
+
+function Section({ title, hint, addLabel, onAdd, extra, children, totals }: { title: string; hint: string; addLabel: string; onAdd: () => void; extra?: ReactNode; children: ReactNode; totals: Array<{ label: string; value: string }> }) {
   return (
-    <section className="card space-y-4 p-5">
-      <div className="flex flex-wrap items-start justify-between gap-3">
+    <section className="card space-y-3 p-3 sm:space-y-4 sm:p-5">
+      <div className="flex flex-wrap items-start justify-between gap-2 sm:gap-3">
         <div className="min-w-0">
-          <h2 className="font-display text-lg font-semibold text-text">{title}</h2>
-          <p className="mt-0.5 text-sm text-text-muted">{hint}</p>
+          <h2 className="font-display text-base font-semibold text-text sm:text-lg">{title}</h2>
+          <p className="mt-0.5 text-xs text-text-muted sm:text-sm">{hint}</p>
         </div>
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
           {extra}
-          <button type="button" onClick={onAdd} className={btn.primary}>
-            <Plus className="h-4 w-4" /> {addLabel}
+          <button type="button" onClick={onAdd} className={addBtn}>
+            <Plus className="h-3.5 w-3.5 sm:h-4 sm:w-4" /> {addLabel}
           </button>
         </div>
       </div>
       {children}
-      <dl className="flex flex-wrap gap-x-8 gap-y-2 border-t border-border pt-3">
+      <dl className="grid grid-cols-2 gap-x-4 gap-y-2 border-t border-border pt-3 sm:flex sm:flex-wrap sm:gap-x-8">
         {totals.map((tot) => (
-          <div key={tot.label}>
-            <dt className="text-xs uppercase tracking-wider text-text-subtle">{tot.label}</dt>
-            <dd className={cn('font-mono text-base font-semibold', tot.tone === 'good' && 'text-success', tot.tone === 'bad' && 'text-danger', !tot.tone && 'text-text')}>{tot.value}</dd>
+          <div key={tot.label} className="min-w-0">
+            <dt className="text-[10px] uppercase leading-tight tracking-wider text-text-subtle sm:text-xs">{tot.label}</dt>
+            <dd className="truncate font-mono text-sm font-semibold text-text sm:text-base">{tot.value}</dd>
           </div>
         ))}
       </dl>
@@ -104,7 +110,7 @@ function Section({ title, hint, addLabel, onAdd, extra, children, totals }: { ti
 function Cell({ label, children, className }: { label: string; children: ReactNode; className?: string }) {
   return (
     <label className={cn('block min-w-0', className)}>
-      <span className="mb-1 block text-xs text-text-subtle md:hidden">{label}</span>
+      <span className="mb-0.5 block text-[10px] text-text-subtle sm:text-xs md:hidden">{label}</span>
       {children}
     </label>
   );
@@ -120,11 +126,7 @@ function HeaderRow({ cols, labels }: { cols: string; labels: string[] }) {
   );
 }
 
-const RowShell = ({ cols, children }: { cols: string; children: ReactNode }) => (
-  <div className={cn('grid gap-3 rounded-md border border-border bg-surface-2/40 p-3 md:items-center md:border-0 md:bg-transparent md:p-0', cols)}>{children}</div>
-);
-
-export function FinanceSheet() {
+export function FinanceSheet({ section, hidden = false }: { section: FinanceSection; hidden?: boolean }) {
   const { t } = useI18n();
   const [sheet, setSheet] = useState<Sheet | null>(null);
   const [loading, setLoading] = useState(true);
@@ -158,16 +160,16 @@ export function FinanceSheet() {
     setSaved(false);
   };
 
-  const patch = <K extends 'salaries' | 'debts' | 'income'>(key: K, i: number, p: Partial<Sheet[K][number]>) =>
-    edit((s) => ({ ...s, [key]: s[key].map((r, idx) => (idx === i ? { ...r, ...p } : r)) }));
+  const patch = (i: number, p: Partial<SalaryRow>) =>
+    edit((s) => ({ ...s, salaries: s.salaries.map((r, idx) => (idx === i ? { ...r, ...p } : r)) }));
 
-  const remove = (key: 'salaries' | 'debts' | 'income', i: number) => {
-    const sid = key === 'salaries' ? sheet?.salaries[i]?.id : undefined;
+  const removeSalary = (i: number) => {
+    const sid = sheet?.salaries[i]?.id;
     const withPayments = !!sid && !!sheet?.payments.some((p) => p.salaryId === sid);
     if (!confirm(t(withPayments ? 'panel.finance.confirmRemoveSalary' : 'panel.finance.confirmRemove'))) return;
     edit((s) => ({
       ...s,
-      [key]: s[key].filter((_, idx) => idx !== i),
+      salaries: s.salaries.filter((_, idx) => idx !== i),
       payments: sid ? s.payments.filter((p) => p.salaryId !== sid) : s.payments,
     }));
   };
@@ -196,8 +198,8 @@ export function FinanceSheet() {
     return { card, cash, bonus, all: card + cash + bonus };
   }, [sheet]);
 
-  if (error) return <ErrorState message={error} onRetry={load} />;
-  if (loading || !sheet || !totals) return <LoadingRows rows={6} />;
+  if (error) return <div className={cn(hidden && 'hidden')}><ErrorState message={error} onRetry={load} /></div>;
+  if (loading || !sheet || !totals) return <div className={cn(hidden && 'hidden')}><LoadingRows rows={6} /></div>;
 
   const cur = sheet.currency;
   const m = (n: number) => money(n, cur);
@@ -205,20 +207,13 @@ export function FinanceSheet() {
 
   const salCols = 'md:grid-cols-[minmax(0,1.3fr)_minmax(0,.8fr)_minmax(0,.8fr)_minmax(0,.8fr)_minmax(0,.9fr)_minmax(0,1.6fr)_2rem]';
 
-  const del = (onClick: () => void) => (
-    <button type="button" onClick={onClick} aria-label={t('panel.finance.remove')} title={t('panel.finance.remove')}
-      className="grid h-8 w-8 place-items-center justify-self-end rounded-md text-text-subtle transition-colors hover:bg-danger/10 hover:text-danger focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus">
-      <Trash2 className="h-4 w-4" />
-    </button>
-  );
-
   return (
-    <div className="space-y-6 pb-24">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="max-w-2xl text-text-muted">{t('panel.finance.subtitle')}</p>
-        <label className="flex items-center gap-2 text-sm text-text-muted">
+    <div className={cn('fin space-y-3 pb-20 sm:space-y-6 sm:pb-24', hidden && 'hidden')}>
+      <div className="flex items-center justify-between gap-3">
+        <p className="hidden max-w-2xl text-sm text-text-muted sm:block">{t('panel.finance.subtitle')}</p>
+        <label className="ml-auto flex items-center gap-2 text-xs text-text-muted sm:text-sm">
           {t('panel.finance.currency')}
-          <select className="field w-auto" value={cur} onChange={(e) => edit((s) => ({ ...s, currency: e.target.value }))}>
+          <select className="field w-auto" value={cur} onChange={(e) => edit((x) => ({ ...x, currency: e.target.value }))}>
             {(CURRENCIES.includes(cur) ? CURRENCIES : [cur, ...CURRENCIES]).map((c) => (
               <option key={c} value={c}>{c}</option>
             ))}
@@ -226,65 +221,78 @@ export function FinanceSheet() {
         </label>
       </div>
 
-      {/* 1. Salaries */}
-      <Section
-        title={t(S + 'title')} hint={t(S + 'hint')} addLabel={t(S + 'add')}
-        extra={
-          <button type="button" onClick={() => setShowPayments((v) => !v)} aria-expanded={showPayments} className={showPayments ? btn.primary : btn.secondary}>
-            <CalendarDays className="h-4 w-4" /> {t('panel.finance.payments.open')}
-          </button>
-        }
-        onAdd={() => edit((s) => ({ ...s, salaries: [...s.salaries, { id: uid(), name: '', card: '', cash: '', bonus: '', description: '' }] }))}
-        totals={[
-          { label: t(S + 'card'), value: m(totals.card) }, { label: t(S + 'cash'), value: m(totals.cash) },
-          { label: t(S + 'bonus'), value: m(totals.bonus) }, { label: t('panel.finance.total'), value: m(totals.all) },
-        ]}
-      >
-        {sheet.salaries.length === 0 ? (
-          <p className="py-4 text-center text-sm text-text-subtle">{t(S + 'empty')}</p>
-        ) : (
-          <div className="space-y-3">
-            <HeaderRow cols={salCols} labels={[t(S + 'employee'), t(S + 'card'), t(S + 'cash'), t(S + 'bonus'), t('panel.finance.total'), t('panel.finance.description'), '']} />
-            {sheet.salaries.map((r, i) => (
-              <RowShell key={i} cols={salCols}>
-                <Cell label={t(S + 'employee')}><input className="field" value={r.name} onChange={(e) => patch('salaries', i, { name: e.target.value })} aria-label={t(S + 'employee')} /></Cell>
-                <Cell label={t(S + 'card')}><input className="field" inputMode="decimal" value={r.card} onChange={(e) => patch('salaries', i, { card: e.target.value })} aria-label={t(S + 'card')} placeholder="0" /></Cell>
-                <Cell label={t(S + 'cash')}><input className="field" inputMode="decimal" value={r.cash} onChange={(e) => patch('salaries', i, { cash: e.target.value })} aria-label={t(S + 'cash')} placeholder="0" /></Cell>
-                <Cell label={t(S + 'bonus')}><input className="field" inputMode="decimal" value={r.bonus} onChange={(e) => patch('salaries', i, { bonus: e.target.value })} aria-label={t(S + 'bonus')} placeholder="0" /></Cell>
-                <Cell label={t('panel.finance.total')}><output className="block px-1 font-mono text-sm text-text">{m(num(r.card) + num(r.cash) + num(r.bonus))}</output></Cell>
-                <Cell label={t('panel.finance.description')}><input className="field" value={r.description} onChange={(e) => patch('salaries', i, { description: e.target.value })} aria-label={t('panel.finance.description')} /></Cell>
-                {del(() => remove('salaries', i))}
-              </RowShell>
-            ))}
-          </div>
-        )}
-      </Section>
+      {section === 'salaries' && (
+        <>
+          <Section
+            title={t(S + 'title')} hint={t(S + 'hint')} addLabel={t(S + 'add')}
+            extra={
+              <button type="button" onClick={() => setShowPayments((v) => !v)} aria-expanded={showPayments} className={showPayments ? addBtn : ghostBtn}>
+                <CalendarDays className="h-3.5 w-3.5 sm:h-4 sm:w-4" /> {t('panel.finance.payments.open')}
+              </button>
+            }
+            onAdd={() => edit((x) => ({ ...x, salaries: [...x.salaries, { id: uid(), name: '', card: '', cash: '', bonus: '', description: '' }] }))}
+            totals={[
+              { label: t(S + 'card'), value: m(totals.card) }, { label: t(S + 'cash'), value: m(totals.cash) },
+              { label: t(S + 'bonus'), value: m(totals.bonus) }, { label: t('panel.finance.total'), value: m(totals.all) },
+            ]}
+          >
+            {sheet.salaries.length === 0 ? (
+              <p className="py-3 text-center text-xs text-text-subtle sm:py-4 sm:text-sm">{t(S + 'empty')}</p>
+            ) : (
+              <div className="space-y-2 sm:space-y-3">
+                <HeaderRow cols={salCols} labels={[t(S + 'employee'), t(S + 'card'), t(S + 'cash'), t(S + 'bonus'), t('panel.finance.total'), t('panel.finance.description'), '']} />
+                {sheet.salaries.map((r, i) => (
+                  <div key={r.id} className={cn('relative grid grid-cols-6 gap-x-2 gap-y-1.5 rounded-md border border-border bg-surface-2/40 p-2 md:grid-cols-none md:items-center md:gap-3 md:border-0 md:bg-transparent md:p-0', salCols)}>
+                    <Cell label={t(S + 'employee')} className="col-span-6 pr-8 md:col-span-1 md:pr-0"><input className="field" value={r.name} onChange={(e) => patch(i, { name: e.target.value })} aria-label={t(S + 'employee')} /></Cell>
+                    <Cell label={t(S + 'card')} className="col-span-2 md:col-span-1"><input className="field" inputMode="decimal" value={r.card} onChange={(e) => patch(i, { card: e.target.value })} aria-label={t(S + 'card')} placeholder="0" /></Cell>
+                    <Cell label={t(S + 'cash')} className="col-span-2 md:col-span-1"><input className="field" inputMode="decimal" value={r.cash} onChange={(e) => patch(i, { cash: e.target.value })} aria-label={t(S + 'cash')} placeholder="0" /></Cell>
+                    <Cell label={t(S + 'bonus')} className="col-span-2 md:col-span-1"><input className="field" inputMode="decimal" value={r.bonus} onChange={(e) => patch(i, { bonus: e.target.value })} aria-label={t(S + 'bonus')} placeholder="0" /></Cell>
+                    <div className="col-span-6 flex items-center justify-between text-xs md:col-span-1 md:block md:text-sm">
+                      <span className="text-text-subtle md:hidden">{t('panel.finance.total')}</span>
+                      <output className="block px-1 font-mono text-text">{m(num(r.card) + num(r.cash) + num(r.bonus))}</output>
+                    </div>
+                    <Cell label={t('panel.finance.description')} className="col-span-6 md:col-span-1"><input className="field" value={r.description} onChange={(e) => patch(i, { description: e.target.value })} aria-label={t('panel.finance.description')} /></Cell>
+                    <button type="button" onClick={() => removeSalary(i)} aria-label={t('panel.finance.remove')} title={t('panel.finance.remove')}
+                      className="absolute right-1 top-1 grid h-7 w-7 place-items-center rounded-md text-text-subtle transition-colors hover:bg-danger/10 hover:text-danger focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus md:static md:h-8 md:w-8 md:justify-self-end">
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </Section>
 
-      {showPayments && (
-        <MonthlyPayments
-          salaries={sheet.salaries}
-          payments={sheet.payments}
-          currency={cur}
-          onChange={(payments) => edit((s) => ({ ...s, payments }))}
-          onClose={() => setShowPayments(false)}
-        />
+          {showPayments && (
+            <MonthlyPayments
+              salaries={sheet.salaries}
+              payments={sheet.payments}
+              currency={cur}
+              onChange={(payments) => edit((x) => ({ ...x, payments }))}
+              onClose={() => setShowPayments(false)}
+            />
+          )}
+        </>
       )}
 
-      {/* 2. Debts and 3. Expected payments: stats on top of each, independent of salaries */}
-      <DealsSection ns="panel.finance.debts." rows={sheet.debts} onRows={(debts) => edit((x) => ({ ...x, debts }))} currency={cur} tone="debt" />
-      <DealsSection ns="panel.finance.income." rows={sheet.income} onRows={(income) => edit((x) => ({ ...x, income }))} currency={cur} tone="income" />
+      {/* Debts and expected payments: stats on top of each, independent of salaries */}
+      {section === 'debts' && (
+        <DealsSection ns="panel.finance.debts." rows={sheet.debts} onRows={(debts) => edit((x) => ({ ...x, debts }))} currency={cur} tone="debt" />
+      )}
+      {section === 'income' && (
+        <DealsSection ns="panel.finance.income." rows={sheet.income} onRows={(income) => edit((x) => ({ ...x, income }))} currency={cur} tone="income" />
+      )}
 
-      <div className="sticky bottom-4 z-10 flex flex-wrap items-center gap-3 rounded-lg border border-border bg-surface/95 p-3 shadow-lg backdrop-blur">
-        <button type="button" onClick={save} disabled={saving || !dirty} className={btn.primary}>
+      <div className="sticky bottom-3 z-10 flex flex-wrap items-center gap-2 rounded-lg border border-border bg-surface/95 p-2 shadow-lg backdrop-blur sm:bottom-4 sm:gap-3 sm:p-3">
+        <button type="button" onClick={save} disabled={saving || !dirty} className={addBtn}>
           {saving ? t('admin.saving') : t('panel.finance.save')}
         </button>
-        {dirty && !saving && <span className="text-sm text-text-subtle">{t('panel.finance.unsaved')}</span>}
+        {dirty && !saving && <span className="text-xs text-text-subtle sm:text-sm">{t('panel.finance.unsaved')}</span>}
         {saved && (
-          <span className="inline-flex items-center gap-1.5 text-sm text-success">
+          <span className="inline-flex items-center gap-1.5 text-xs text-success sm:text-sm">
             <CheckCircle2 className="h-4 w-4" /> {t('panel.finance.saved')}
           </span>
         )}
-        {saveError && <span className="text-sm text-danger">{saveError}</span>}
+        {saveError && <span className="text-xs text-danger sm:text-sm">{saveError}</span>}
       </div>
     </div>
   );

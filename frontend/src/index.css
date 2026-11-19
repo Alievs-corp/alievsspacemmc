@@ -261,6 +261,15 @@ body {
 }
 
 
+/* Finance sheet: smaller controls on phones so more fits on screen. */
+@media (max-width: 767px) {
+  .fin .field {
+    padding: 0.4rem 0.6rem;
+    font-size: 13px;
+    border-radius: 0.5rem;
+  }
+}
+
 /* ---- Page furniture ---- */
 ::selection {
   background: var(--color-orange-500);
