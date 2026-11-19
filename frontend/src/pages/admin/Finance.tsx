@@ -51,7 +51,7 @@ function money(n: number, currency: string) {
 
 function Section({ title, hint, addLabel, onAdd, children, totals }: { title: string; hint: string; addLabel: string; onAdd: () => void; children: ReactNode; totals: Array<{ label: string; value: string; tone?: 'good' | 'bad' }> }) {
   return (
-    <section className="card space-y-4">
+    <section className="card space-y-4 p-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <h2 className="font-display text-lg font-semibold text-text">{title}</h2>
