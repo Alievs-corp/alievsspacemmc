@@ -157,6 +157,7 @@ export function AdminCareers() {
     setError('');
 
     try {
+      const body: Partial<Record<Locale, Partial<Career>>> = {};
       for (const loc of supportedLocales.map((l) => l.code as Locale)) {
         const requirements = requirementsText[loc]
           .split(',')
@@ -168,12 +169,11 @@ export function AdminCareers() {
           requirements,
         };
 
-        if (editingCareerId) {
-          await api.admin.updateCareer(editingCareerId, loc, payload);
-        } else {
-          await api.admin.createCareer(loc, payload);
-        }
+        body[loc] = payload;
       }
+
+      if (editingCareerId) await api.admin.updateCareer(editingCareerId, body);
+      else await api.admin.createCareer(body);
 
       await loadData();
       handleNewCareer();
@@ -192,15 +192,13 @@ export function AdminCareers() {
     setError('');
 
     try {
+      const body: Partial<Record<Locale, Partial<Employee>>> = {};
       for (const loc of supportedLocales.map((l) => l.code as Locale)) {
-        const payload: Partial<Employee> = employeeFormData[loc];
-
-        if (editingEmployeeId) {
-          await api.admin.updateEmployee(editingEmployeeId, loc, payload);
-        } else {
-          await api.admin.createEmployee(loc, payload);
-        }
+        body[loc] = employeeFormData[loc];
       }
+
+      if (editingEmployeeId) await api.admin.updateEmployee(editingEmployeeId, body);
+      else await api.admin.createEmployee(body);
 
       await loadData();
       handleNewEmployee();

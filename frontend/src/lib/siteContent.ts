@@ -1,4 +1,4 @@
-import { api, CMS_LOCALES, type About, type Locale, type Project, type Service } from '@/lib/api';
+import { api, CMS_LOCALES, type About, type Locale, type MultiLocale, type Project, type Service } from '@/lib/api';
 import { tFor } from '@/lib/i18n';
 import { PROJECTS } from '@/components/site/work/projects';
 
@@ -62,8 +62,7 @@ export type ImportKind = 'services' | 'projects' | 'about';
 
 /**
  * Copies the site's built-in content into the CMS in every CMS language.
- * The first language creates the record, the others update the same id, so
- * each item is stored once rather than once per language.
+ * Each item is created once, with all languages in a single request.
  */
 export async function importBuiltInContent(kind: ImportKind): Promise<number> {
   if (kind === 'about') {
@@ -71,20 +70,18 @@ export async function importBuiltInContent(kind: ImportKind): Promise<number> {
     return 1;
   }
 
+  // One create request per item, carrying every CMS language.
   const items = kind === 'services' ? [...SERVICE_DEFS] : [...PROJECTS];
   for (const item of items) {
-    const build = (lang: Locale) =>
-      kind === 'services'
-        ? builtInService(lang, item as (typeof SERVICE_DEFS)[number])
-        : builtInProject(lang, item as (typeof PROJECTS)[number]);
-    const [first, ...rest] = CMS_LOCALES;
-    const created = (kind === 'services'
-      ? await api.admin.createService(first, build(first) as Partial<Service>)
-      : await api.admin.createProject(first, build(first) as Partial<Project>)) as { id: string };
-    for (const lang of rest) {
-      if (kind === 'services') await api.admin.updateService(created.id, lang, build(lang) as Partial<Service>);
-      else await api.admin.updateProject(created.id, lang, build(lang) as Partial<Project>);
+    const body: Record<string, Partial<Service> | Partial<Project>> = {};
+    for (const lang of CMS_LOCALES) {
+      body[lang] =
+        kind === 'services'
+          ? builtInService(lang, item as (typeof SERVICE_DEFS)[number])
+          : builtInProject(lang, item as (typeof PROJECTS)[number]);
     }
+    if (kind === 'services') await api.admin.createService(body as MultiLocale<Service>);
+    else await api.admin.createProject(body as MultiLocale<Project>);
   }
   return items.length;
 }
