@@ -1,3 +1,5 @@
+import { BIG_UPLOAD_THRESHOLD, bigUpload } from './bigUpload';
+
 export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api/v1';
 
 /** Locales the CMS backend actually stores content for. */
@@ -704,7 +706,15 @@ export const api = {
       }),
 
     // File Upload
-    uploadFile: (file: File, folder?: string, isPublic?: boolean): Promise<{ url: string; filename: string; size: number }> => {
+    uploadFile: (file: File, folder?: string, isPublic?: boolean, opts?: { onProgress?: (fraction: number) => void; signal?: AbortSignal }): Promise<{ url: string; filename: string; size: number }> => {
+      // Big files (videos up to 1000 GB) go to storage in parts instead of one request.
+      if (file.size > BIG_UPLOAD_THRESHOLD) {
+        return bigUpload(
+          <T,>(path: string, body: unknown) => fetchAPI<T>(path, { method: 'POST', body: JSON.stringify(body) }),
+          file,
+          { folder, isPublic, onProgress: opts?.onProgress, signal: opts?.signal },
+        );
+      }
       const formData = new FormData();
       formData.append('file', file);
       

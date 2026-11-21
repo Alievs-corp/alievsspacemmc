@@ -1,5 +1,5 @@
-/** Largest photo or video the admin panel uploads (matches the API default). */
-export const MAX_UPLOAD_BYTES = 1024 * 1024 * 1024;
+/** Largest photo or video the admin panel uploads: 1000 GB (matches the API). */
+export const MAX_UPLOAD_BYTES = 1000 * 1024 ** 3;
 
 const IMAGE_EXT = /\.(jpe?g|jfif|png|gif|webp|avif|heic|heif|bmp|tiff?|svg|ico)$/i;
 const VIDEO_EXT = /\.(mp4|m4v|mov|webm|mkv|avi|wmv|flv|mpe?g|3gp|3g2|ogv|mts|m2ts|ts)$/i;

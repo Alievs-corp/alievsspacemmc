@@ -19,6 +19,7 @@ export function MediaUpload({ accept, onUploaded, label, folder = 'marketing', c
   const input = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+  const [progress, setProgress] = useState<number | null>(null);
 
   const onFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -34,13 +35,15 @@ export function MediaUpload({ accept, onUploaded, label, folder = 'marketing', c
     }
     setBusy(true);
     setError('');
+    setProgress(0);
     try {
-      const res = await api.admin.uploadFile(file, folder, true);
+      const res = await api.admin.uploadFile(file, folder, true, { onProgress: setProgress });
       onUploaded(res.url);
     } catch (err) {
       setError(err instanceof Error ? err.message : t('panel.marketing.failedUpload'));
     } finally {
       setBusy(false);
+      setProgress(null);
     }
   };
 
@@ -54,7 +57,7 @@ export function MediaUpload({ accept, onUploaded, label, folder = 'marketing', c
         className="inline-flex items-center gap-2 rounded-md border border-surface-3 bg-surface-2/50 px-3 py-2 text-sm text-text transition-colors hover:border-primary hover:text-primary disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
       >
         <Upload className="h-4 w-4" />
-        {busy ? t('panel.marketing.uploading') : label}
+        {busy ? `${t('panel.marketing.uploading')}${progress !== null && progress > 0 ? ` ${Math.round(progress * 100)}%` : ''}` : label}
       </button>
       {error && <p className="text-sm text-red-400">{error}</p>}
     </div>
