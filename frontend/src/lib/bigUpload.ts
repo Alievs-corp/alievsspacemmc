@@ -1,5 +1,5 @@
 /**
- * Browser side of the large-file upload (videos up to 1000 GB).
+ * Browser side of the large-file upload (videos up to 40 GB).
  *
  * The file is cut into parts that go straight to object storage through
  * short-lived signed URLs, several at a time, each retried on failure. The API
