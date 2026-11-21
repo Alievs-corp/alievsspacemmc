@@ -24,9 +24,10 @@
   }
   .site .mk-mark img {
     display: block;
-    height: 100%;
+    height: 72px;
     width: auto;
     max-width: 200px;
+    max-height: 72px;
     object-fit: contain;
     transition: transform .4s var(--as-ease);
   }
