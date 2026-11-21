@@ -2,7 +2,7 @@ import type { CSSProperties } from 'react';
 import { useI18n } from '@/contexts/I18nContext';
 import { useContent } from '@/contexts/ContentContext';
 import { builtInProjectImage } from '@/lib/siteContent';
-import { SectionHead, useReveal } from '../blocks';
+import { Pill, SectionHead, useReveal } from '../blocks';
 import { hostOf, PROJECTS } from './projects';
 import { ProjectCover } from './ProjectCover';
 import './work.css';
@@ -11,7 +11,7 @@ import './work.css';
  * Screenshot grid of live sites: each shot wipes in from the left and settles
  * from a slight zoom, then zooms gently on hover.
  */
-export function ProjectsGrid() {
+export function ProjectsGrid({ limit, showAll }: { limit?: number; showAll?: boolean } = {}) {
   const { t } = useI18n();
   const { content } = useContent();
   const ref = useReveal();
@@ -34,6 +34,8 @@ export function ProjectsGrid() {
         description: t(`public.home.projects.items.${p.key}.description`),
       }));
 
+  const shown = limit ? items.slice(0, limit) : items;
+
   return (
     <section className="as-section" aria-labelledby="work-projects-title">
       <div className="as-wrap">
@@ -45,7 +47,7 @@ export function ProjectsGrid() {
           size="md"
         />
         <div ref={ref} className="mt-10 grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-6 sm:gap-y-12 md:mt-16 lg:grid-cols-3">
-          {items.map((p, i) => {
+          {shown.map((p, i) => {
             const name = p.name;
             const host = hostOf(p.link);
             const delay = { '--d': `${(i % 3) * 110}ms` } as CSSProperties;
@@ -76,6 +78,13 @@ export function ProjectsGrid() {
             );
           })}
         </div>
+        {showAll && (
+          <div className="mt-12 flex justify-center md:mt-20">
+            <Pill to="/case-studies" variant="ink">
+              {t('nav.caseStudies')}
+            </Pill>
+          </div>
+        )}
       </div>
     </section>
   );
