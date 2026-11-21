@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { api, CMS_LOCALES, type Project, type Locale, toCmsLocale } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/Button';
-import { ImageUpload } from '@/components/admin/ImageUpload';
 import { LocaleTabs } from '@/components/admin/LocaleTabs';
 import { ImportBuiltIn } from '@/components/admin/ImportBuiltIn';
 import { ProjectCover } from '@/components/site/work/ProjectCover';
@@ -168,7 +167,7 @@ export function AdminProjects() {
           projects.map((project) => (
             <div key={project.id} className="flex items-center gap-3 rounded-lg border border-surface-3 bg-surface p-2.5">
               <div className="wk-cover-box h-12 w-16 shrink-0 overflow-hidden rounded">
-                {project.image ? <img src={project.image} alt="" className="h-full w-full object-cover object-top" /> : <ProjectCover name={project.title} />}
+                <ProjectCover name={project.title} />
               </div>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-medium text-white">{project.title}</p>
@@ -322,25 +321,10 @@ export function AdminProjects() {
                     />
                   </div>
                   <div className="md:col-span-2">
-                    {!formData[locCode].image && (
-                      <>
-                        <div className="mb-3 w-40 overflow-hidden rounded border border-surface-3 sm:w-56" style={{ aspectRatio: '16 / 10', containerType: 'inline-size' }}>
-                          <ProjectCover name={formData[locCode].title || ''} />
-                        </div>
-                        <p className="mb-2 text-xs text-text-subtle">{t('admin.coverHint', 'Cover photo is optional: without it the site name is shown on a coloured cover.')}</p>
-                      </>
-                    )}
-                    <ImageUpload
-                      value={formData[locCode].image}
-                      onChange={(url) =>
-                        setFormData({
-                          ...formData,
-                          [locCode]: { ...formData[locCode], image: url },
-                        })
-                      }
-                      folder="projects"
-                      label={t('admin.coverPhoto', 'Cover photo (optional)')}
-                    />
+                    <div className="wk-cover-box mb-2 w-40 overflow-hidden rounded border border-surface-3 sm:w-56" style={{ aspectRatio: '16 / 10' }}>
+                      <ProjectCover name={formData[locCode].title || ''} />
+                    </div>
+                    <p className="text-xs text-text-subtle">{t('admin.coverHint', 'The cover is made from the site name: the same one is shown in the list and on the public site.')}</p>
                   </div>
                 </div>
               </div>

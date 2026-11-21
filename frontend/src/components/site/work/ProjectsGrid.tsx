@@ -1,15 +1,14 @@
 import type { CSSProperties } from 'react';
 import { useI18n } from '@/contexts/I18nContext';
 import { useContent } from '@/contexts/ContentContext';
-import { builtInProjectImage } from '@/lib/siteContent';
 import { Pill, SectionHead, useReveal } from '../blocks';
 import { hostOf, PROJECTS } from './projects';
 import { ProjectCover } from './ProjectCover';
 import './work.css';
 
 /**
- * Screenshot grid of live sites: each shot wipes in from the left and settles
- * from a slight zoom, then zooms gently on hover.
+ * Grid of live sites: each cover (the site's name on a brand colour, the same
+ * as in the admin panel) wipes in from the left, then zooms gently on hover.
  */
 export function ProjectsGrid({ limit, showAll }: { limit?: number; showAll?: boolean } = {}) {
   const { t } = useI18n();
@@ -22,14 +21,12 @@ export function ProjectsGrid({ limit, showAll }: { limit?: number; showAll?: boo
     ? cms.map((p) => ({
         key: p.id,
         link: p.link || '#',
-        image: p.image || builtInProjectImage(p.link) || '',
         name: p.title,
         description: p.summary,
       }))
     : PROJECTS.map((p) => ({
         key: p.key,
         link: p.link,
-        image: p.image as string,
         name: t(`public.home.projects.items.${p.key}.name`),
         description: t(`public.home.projects.items.${p.key}.description`),
       }));
@@ -56,7 +53,7 @@ export function ProjectsGrid({ limit, showAll }: { limit?: number; showAll?: boo
                 <a href={p.link} target="_blank" rel="noopener noreferrer" className="wk-proj group">
                   <div className="wk-wipe" data-reveal style={delay}>
                     <div className="wk-shot wk-wipe__in">
-                      {p.image ? <img src={p.image} alt={name} loading="lazy" decoding="async" width={1900} height={938} /> : <ProjectCover name={name} />}
+                      <ProjectCover name={name} />
                       <span className="wk-shot__host">{host}</span>
                     </div>
                   </div>
