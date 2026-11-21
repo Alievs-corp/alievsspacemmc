@@ -4,6 +4,7 @@ import { useContent } from '@/contexts/ContentContext';
 import { builtInProjectImage } from '@/lib/siteContent';
 import { SectionHead, useReveal } from '../blocks';
 import { hostOf, PROJECTS } from './projects';
+import { ProjectCover } from './ProjectCover';
 import './work.css';
 
 /**
@@ -43,7 +44,7 @@ export function ProjectsGrid() {
           lead={t('public.home.projects.copy')}
           size="md"
         />
-        <div ref={ref} className="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 md:mt-16 lg:grid-cols-3">
+        <div ref={ref} className="mt-10 grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-6 sm:gap-y-12 md:mt-16 lg:grid-cols-3">
           {items.map((p, i) => {
             const name = p.name;
             const host = hostOf(p.link);
@@ -53,17 +54,17 @@ export function ProjectsGrid() {
                 <a href={p.link} target="_blank" rel="noopener noreferrer" className="wk-proj group">
                   <div className="wk-wipe" data-reveal style={delay}>
                     <div className="wk-shot wk-wipe__in">
-                      {p.image ? <img src={p.image} alt={name} loading="lazy" decoding="async" width={1900} height={938} /> : null}
+                      {p.image ? <img src={p.image} alt={name} loading="lazy" decoding="async" width={1900} height={938} /> : <ProjectCover name={name} />}
                       <span className="wk-shot__host">{host}</span>
                     </div>
                   </div>
-                  <div className="grid gap-2" data-reveal style={delay}>
+                  <div className="grid gap-1 sm:gap-2" data-reveal style={delay}>
                     <div className="flex items-baseline justify-between gap-4">
-                      <h3 className="wk-proj__name as-h3 !text-[clamp(20px,1.8vw,26px)]">{name}</h3>
-                      <span className="as-mono shrink-0 text-[var(--as-fg-soft)]">{String(i + 1).padStart(2, '0')}</span>
+                      <h3 className="wk-proj__name as-h3 !text-[clamp(15px,1.8vw,26px)]">{name}</h3>
+                      <span className="as-mono hidden shrink-0 text-[var(--as-fg-soft)] sm:inline">{String(i + 1).padStart(2, '0')}</span>
                     </div>
-                    <p className="text-[15px] leading-relaxed text-[var(--as-fg-soft)]">{p.description}</p>
-                    <span className="as-mono mt-1 inline-flex items-center gap-2 text-[var(--as-accent)]">
+                    <p className="line-clamp-2 text-[12px] leading-snug text-[var(--as-fg-soft)] sm:line-clamp-none sm:text-[15px] sm:leading-relaxed">{p.description}</p>
+                    <span className="as-mono mt-0.5 inline-flex items-center gap-2 sm:mt-1 text-[var(--as-accent)]">
                       {t('ui.openSite')}
                       <span aria-hidden className="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1">
                         ↗
