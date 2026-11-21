@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { Upload } from 'lucide-react';
 import { api } from '@/lib/api';
+import { MAX_UPLOAD_BYTES, formatBytes, isMediaOfKind } from '@/lib/media';
 import { useI18n } from '@/contexts/I18nContext';
 import { cn } from '@/lib/utils';
 
@@ -23,8 +24,12 @@ export function MediaUpload({ accept, onUploaded, label, folder = 'marketing', c
     const file = e.target.files?.[0];
     e.target.value = '';
     if (!file) return;
-    if (!file.type.startsWith(`${accept}/`)) {
+    if (!isMediaOfKind(file, accept)) {
       setError(t('panel.marketing.failedUpload'));
+      return;
+    }
+    if (file.size > MAX_UPLOAD_BYTES) {
+      setError(`${formatBytes(file.size)} > ${formatBytes(MAX_UPLOAD_BYTES)}`);
       return;
     }
     setBusy(true);
