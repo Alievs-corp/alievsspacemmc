@@ -3,9 +3,45 @@ import { useCallback, useEffect, useState } from 'react';
 import { api, toCmsLocale, type Marketing as MarketingData, type MarketingMedia } from '@/lib/api';
 import { useI18n } from '@/contexts/I18nContext';
 import { Seo } from '@/components/Seo';
-import { CtaWalk, PageHero, Pill, SectionHead, Ticker, useReveal } from '@/components/site/blocks';
+import { CtaWalk, PageHero, Pill, SectionHead, useReveal } from '@/components/site/blocks';
 import { videoSource } from '@/components/site/marketing/media';
 import '@/components/site/marketing/marketing.css';
+
+/** One partner: just the logo (or its name when there is no logo), no frame or background. */
+function PartnerMark({ p }: { p: MarketingData['partners'][number] }) {
+  const inner = p.logo ? <img src={p.logo} alt={p.name} loading="lazy" decoding="async" draggable={false} /> : <span className="mk-mark__name">{p.name}</span>;
+  return p.link ? (
+    <a className="mk-mark" href={p.link} target="_blank" rel="noopener noreferrer" title={p.name}>
+      {inner}
+    </a>
+  ) : (
+    <div className="mk-mark" title={p.name}>
+      {inner}
+    </div>
+  );
+}
+
+/** Partners glide along a single line, endlessly; hover pauses, reduced motion stops it. */
+function PartnersMarquee({ partners }: { partners: MarketingData['partners'] }) {
+  // Repeat short lists so one group is always wider than the screen, then
+  // render that group twice: the track slides by exactly one group and loops.
+  const repeat = Math.max(1, Math.ceil(8 / partners.length));
+  const group = Array.from({ length: repeat }, () => partners).flat();
+  const duration = Math.max(20, group.length * 5);
+  return (
+    <div className="mk-marquee mt-10 md:mt-14" style={{ '--mk-dur': `${duration}s` } as CSSProperties}>
+      <div className="mk-marquee__track">
+        {[0, 1].map((copy) => (
+          <div key={copy} className="mk-marquee__group" aria-hidden={copy === 1 || undefined}>
+            {group.map((p, i) => (
+              <PartnerMark key={`${p.name}-${i}`} p={p} />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 const EMPTY: MarketingData = { headline: '', intro: '', partners: [], gallery: [] };
 
@@ -102,7 +138,6 @@ export function Marketing() {
   const [data, setData] = useState<MarketingData>(EMPTY);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState<number | null>(null);
-  const partnersRef = useReveal();
   const galleryRef = useReveal();
 
   useEffect(() => {
@@ -151,41 +186,12 @@ export function Marketing() {
         }
       />
 
-      {partners.length > 1 && <Ticker items={partners.map((p) => p.name)} duration={36} />}
-
       {partners.length > 0 && (
         <section id="mk-partners" className="as-section" aria-labelledby="mk-partners-title">
           <div className="as-wrap">
             <SectionHead id="mk-partners-title" eyebrow={t('site.marketing.partnersEyebrow')} title={t('site.marketing.partnersTitle')} size="md" />
-            <div ref={partnersRef} className="mk-partners mt-12 md:mt-16">
-              {partners.map((p, i) => {
-                const inner = (
-                  <>
-                    <div className="mk-partner__logo">
-                      {p.logo ? <img src={p.logo} alt={p.name} loading="lazy" decoding="async" /> : <span className="mk-partner__initial">{p.name.charAt(0).toUpperCase()}</span>}
-                    </div>
-                    <h3 className="mk-partner__name">{p.name}</h3>
-                    {p.desc && <p className="mk-partner__desc">{p.desc}</p>}
-                    {p.link && (
-                      <span className="as-mono text-[var(--as-accent)]">
-                        {t('site.marketing.visit')} <span aria-hidden>↗</span>
-                      </span>
-                    )}
-                  </>
-                );
-                const style = { '--d': `${(i % 4) * 80}ms` } as CSSProperties;
-                return p.link ? (
-                  <a key={`${p.name}-${i}`} className="mk-partner" href={p.link} target="_blank" rel="noopener noreferrer" data-reveal style={style}>
-                    {inner}
-                  </a>
-                ) : (
-                  <div key={`${p.name}-${i}`} className="mk-partner" data-reveal style={style}>
-                    {inner}
-                  </div>
-                );
-              })}
-            </div>
           </div>
+          <PartnersMarquee partners={partners} />
         </section>
       )}
 
