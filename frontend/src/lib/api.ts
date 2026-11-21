@@ -707,7 +707,7 @@ export const api = {
 
     // File Upload
     uploadFile: (file: File, folder?: string, isPublic?: boolean, opts?: { onProgress?: (fraction: number) => void; signal?: AbortSignal }): Promise<{ url: string; filename: string; size: number }> => {
-      // Big files (videos up to 1000 GB) go to storage in parts instead of one request.
+      // Big files (videos up to 40 GB) go to storage in parts instead of one request.
       if (file.size > BIG_UPLOAD_THRESHOLD) {
         return bigUpload(
           <T,>(path: string, body: unknown) => fetchAPI<T>(path, { method: 'POST', body: JSON.stringify(body) }),
