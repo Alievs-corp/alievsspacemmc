@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { api } from '@/lib/api';
+import { MAX_UPLOAD_BYTES, formatBytes, isMediaOfKind } from '@/lib/media';
 import { Button } from '@/components/ui/Button';
 
 interface ImageUploadProps {
@@ -17,8 +18,12 @@ export function ImageUpload({ value, onChange, folder = 'images', label }: Image
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (!file.type.startsWith('image/')) {
+    if (!isMediaOfKind(file, 'image')) {
       setError('Please select an image file');
+      return;
+    }
+    if (file.size > MAX_UPLOAD_BYTES) {
+      setError(`${formatBytes(file.size)} > ${formatBytes(MAX_UPLOAD_BYTES)}`);
       return;
     }
 
