@@ -1,6 +1,7 @@
 import { useI18n } from '@/contexts/I18nContext';
 import { Seo } from '@/components/Seo';
 import { Ticker } from '@/components/site/blocks';
+import { ProjectsGrid } from '@/components/site/work/ProjectsGrid';
 import HomeStatement from '@/components/site/home/HomeStatement';
 import HomeHero from '@/components/ui/Home/HomeHero';
 import StatsBand from '@/components/ui/Home/StatsBand';
@@ -37,6 +38,7 @@ export function Home() {
       <WeBuild />
       <Ticker items={ticker} duration={28} />
       <StatsBand />
+      <ProjectsGrid limit={6} showAll />
       <ValueProps />
       <PremiumProcess />
       <PackagesTeaser />
