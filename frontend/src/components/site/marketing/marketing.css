@@ -174,6 +174,24 @@
   .mk-viewer__btn--prev { left: 16px; top: 50%; transform: translateY(-50%); }
   .mk-viewer__btn--next { right: 16px; top: 50%; transform: translateY(-50%); }
 
+  /* Phones: an Instagram-style grid, three small square tiles per row. */
+  @media (max-width: 639px) {
+    .site .mk-gallery { display: grid; columns: auto; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-left: -4px; margin-right: -4px; }
+    .site .mk-tile, .site .mk-tile--video:not([style*="aspect-ratio"]) { margin: 0; aspect-ratio: 1 / 1 !important; cursor: pointer; }
+    .site .mk-tile img, .site .mk-tile video { height: 100%; object-fit: cover; }
+    .site .mk-tile--video { aspect-ratio: 1 / 1 !important; }
+    .site .mk-cap { display: none; }
+    .site .mk-play { background: none; place-items: start end; padding: 6px; }
+    .site .mk-play span { width: 22px; height: 22px; font-size: 9px; background: rgba(0, 0, 0, .45); color: #fff; }
+    .mk-viewer { padding: 0; }
+    .mk-viewer__stage { gap: 0; }
+    .mk-viewer__cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 16px 20px; background: linear-gradient(to top, rgba(0, 0, 0, .7), transparent); font-size: 14px; }
+    .mk-viewer__btn { width: 40px; height: 40px; background: rgba(0, 0, 0, .35); }
+    .mk-viewer__btn--close { top: 12px; right: 12px; }
+    .mk-viewer__btn--prev { left: 8px; }
+    .mk-viewer__btn--next { right: 8px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .site .mk-tile img, .site .mk-tile video, .site .mk-mark img { transition: none; }
     .site .mk-marquee__track { animation: none; }
