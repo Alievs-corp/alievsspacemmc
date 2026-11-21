@@ -184,11 +184,11 @@ export function AdminMarketing() {
 
         {doc.partners.length === 0 && <p className="py-6 text-center text-sm text-text-subtle">{t('panel.marketing.noPartners')}</p>}
 
-        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+        <div className="grid grid-cols-2 gap-2 lg:grid-cols-3 2xl:grid-cols-4">
           {doc.partners.map((p, i) => (
             <div key={i} className="space-y-1.5 rounded-md border border-surface-3 bg-surface-2/30 p-2">
-              <div className="flex items-start gap-2">
-                <div className="grid h-12 w-16 shrink-0 place-items-center overflow-hidden rounded border border-surface-3 bg-surface p-1">
+              <div className="flex flex-col items-stretch gap-1.5 sm:flex-row sm:items-start sm:gap-2">
+                <div className="grid h-12 w-full shrink-0 sm:w-16 place-items-center overflow-hidden rounded border border-surface-3 bg-surface p-1">
                   {p.logo ? <img src={p.logo} alt="" className="h-full w-full object-contain" /> : <ImageIcon className="h-5 w-5 text-text-subtle" />}
                 </div>
                 <div className="min-w-0 flex-1 space-y-1">
@@ -197,7 +197,7 @@ export function AdminMarketing() {
                 </div>
               </div>
               <input className={inputSm} placeholder={t('panel.marketing.partnerDesc')} value={p.desc} onChange={(e) => patchText('partners', i, { desc: e.target.value })} />
-              <div className="flex items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center justify-between gap-1.5">
                 <MediaUpload accept="image" label={t('panel.marketing.logo')} folder="marketing/partners" onUploaded={(url) => patchShared('partners', i, { logo: url })} />
                 <RowActions
                   onUp={() => move('partners', i, -1)}
