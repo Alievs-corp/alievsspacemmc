@@ -5,6 +5,8 @@ export interface VideoSource {
   src: string;
   /** Thumbnail for the grid when the editor did not upload a cover. */
   thumb?: string;
+  /** YouTube Shorts and similar are 9:16, so the embed must not be forced into 16:9. */
+  portrait?: boolean;
 }
 
 export function videoSource(url: string): VideoSource {
@@ -21,6 +23,7 @@ export function videoSource(url: string): VideoSource {
         kind: 'embed',
         src: `https://www.youtube-nocookie.com/embed/${yt}?autoplay=1&rel=0`,
         thumb: `https://img.youtube.com/vi/${yt}/hqdefault.jpg`,
+        portrait: /\/shorts\//.test(u.pathname),
       };
     }
     if (host === 'vimeo.com' || host === 'player.vimeo.com') {
