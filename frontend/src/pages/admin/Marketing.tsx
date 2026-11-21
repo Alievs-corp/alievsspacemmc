@@ -16,6 +16,9 @@ const blank = (): Marketing => ({ headline: '', intro: '', partners: [], gallery
 const inputCls =
   'w-full rounded-md border border-surface-3 bg-surface px-3 py-2 text-sm text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary';
 
+const inputSm =
+  'w-full rounded border border-surface-3 bg-surface px-2 py-1 text-xs text-white placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary';
+
 /**
  * Lists (partners, gallery) share structure across languages: the same item
  * sits at the same index in every language, so adding, removing and moving
@@ -181,20 +184,20 @@ export function AdminMarketing() {
 
         {doc.partners.length === 0 && <p className="py-6 text-center text-sm text-text-subtle">{t('panel.marketing.noPartners')}</p>}
 
-        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {doc.partners.map((p, i) => (
-            <div key={i} className="space-y-2 rounded-md border border-surface-3 bg-surface-2/30 p-3">
-              <div className="flex items-start gap-3">
-                <div className="grid h-14 w-20 shrink-0 place-items-center overflow-hidden rounded border border-surface-3 bg-surface p-1.5">
-                  {p.logo ? <img src={p.logo} alt="" className="h-full w-full object-contain" /> : <ImageIcon className="h-6 w-6 text-text-subtle" />}
+            <div key={i} className="space-y-1.5 rounded-md border border-surface-3 bg-surface-2/30 p-2">
+              <div className="flex items-start gap-2">
+                <div className="grid h-12 w-16 shrink-0 place-items-center overflow-hidden rounded border border-surface-3 bg-surface p-1">
+                  {p.logo ? <img src={p.logo} alt="" className="h-full w-full object-contain" /> : <ImageIcon className="h-5 w-5 text-text-subtle" />}
                 </div>
-                <div className="min-w-0 flex-1 space-y-2">
-                  <input className={inputCls} placeholder={t('panel.marketing.partnerName')} value={p.name} onChange={(e) => patchShared('partners', i, { name: e.target.value })} />
-                  <input className={inputCls} placeholder={`${t('panel.marketing.partnerLink')} https://…`} value={p.link} onChange={(e) => patchShared('partners', i, { link: e.target.value })} />
+                <div className="min-w-0 flex-1 space-y-1">
+                  <input className={inputSm} placeholder={t('panel.marketing.partnerName')} value={p.name} onChange={(e) => patchShared('partners', i, { name: e.target.value })} />
+                  <input className={inputSm} placeholder={`${t('panel.marketing.partnerLink')} https://…`} value={p.link} onChange={(e) => patchShared('partners', i, { link: e.target.value })} />
                 </div>
               </div>
-              <textarea rows={1} className={inputCls} placeholder={t('panel.marketing.partnerDesc')} value={p.desc} onChange={(e) => patchText('partners', i, { desc: e.target.value })} />
-              <div className="flex flex-wrap items-center justify-between gap-2">
+              <input className={inputSm} placeholder={t('panel.marketing.partnerDesc')} value={p.desc} onChange={(e) => patchText('partners', i, { desc: e.target.value })} />
+              <div className="flex items-center justify-between gap-2">
                 <MediaUpload accept="image" label={t('panel.marketing.logo')} folder="marketing/partners" onUploaded={(url) => patchShared('partners', i, { logo: url })} />
                 <RowActions
                   onUp={() => move('partners', i, -1)}
@@ -302,7 +305,7 @@ export function AdminMarketing() {
 
 function RowActions({ onUp, onDown, onRemove, first, last }: { onUp: () => void; onDown: () => void; onRemove: () => void; first: boolean; last: boolean }) {
   const { t } = useI18n();
-  const btn = 'grid h-8 w-8 place-items-center rounded-md border border-surface-3 text-text-subtle transition-colors hover:text-text disabled:opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus';
+  const btn = 'grid h-7 w-7 place-items-center rounded-md border border-surface-3 text-text-subtle transition-colors hover:text-text disabled:opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus';
   return (
     <div className="flex items-center gap-1.5">
       <button type="button" className={btn} onClick={onUp} disabled={first} aria-label={t('panel.marketing.moveUp')} title={t('panel.marketing.moveUp')}>
