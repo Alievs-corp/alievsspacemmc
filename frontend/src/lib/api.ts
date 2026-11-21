@@ -707,13 +707,15 @@ export const api = {
 
     // File Upload
     uploadFile: (file: File, folder?: string, isPublic?: boolean, opts?: { onProgress?: (fraction: number) => void; signal?: AbortSignal }): Promise<{ url: string; filename: string; size: number }> => {
-      // Big files (videos up to 40 GB) go to storage in parts instead of one request.
-      if (file.size > BIG_UPLOAD_THRESHOLD) {
-        return bigUpload(
-          <T,>(path: string, body: unknown) => fetchAPI<T>(path, { method: 'POST', body: JSON.stringify(body) }),
-          file,
-          { folder, isPublic, onProgress: opts?.onProgress, signal: opts?.signal },
-        );
+      // Videos and big files (up to 40 GB) go to storage in parts instead of one
+      // request, so the API's single-request MAX_FILE_SIZE never applies to them.
+      const inParts = () => bigUpload(
+        <T,>(path: string, body: unknown) => fetchAPI<T>(path, { method: 'POST', body: JSON.stringify(body) }),
+        file,
+        { folder, isPublic, onProgress: opts?.onProgress, signal: opts?.signal },
+      );
+      if (file.size > BIG_UPLOAD_THRESHOLD || file.type.startsWith('video/')) {
+        return inParts();
       }
       const formData = new FormData();
       formData.append('file', file);
@@ -732,7 +734,10 @@ export const api = {
         method: 'POST',
         headers,
         body: formData,
+        signal: opts?.signal,
       }).then(async (response) => {
+        // Over the single-request limit: send the same file in parts instead.
+        if (response.status === 413) return inParts();
         if (!response.ok) {
           const error = await response.json().catch(() => ({ error: response.statusText }));
           throw new Error(error.error || `API error: ${response.statusText}`);
