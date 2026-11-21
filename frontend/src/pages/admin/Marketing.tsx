@@ -112,9 +112,9 @@ export function AdminMarketing() {
       return copy as never;
     });
 
-  const addPartner = () => mapAll('partners', (l) => [...l, emptyPartner()]);
+  const addPartner = () => mapAll('partners', (l) => [emptyPartner(), ...l]);
   const addMedia = (kind: MarketingMedia['kind']) =>
-    mapAll('gallery', (l) => [...l, { kind, url: '', poster: '', caption: '' }]);
+    mapAll('gallery', (l) => [{ kind, url: '', poster: '', caption: '' }, ...l]);
 
   const save = async () => {
     setSaving(true);
@@ -142,21 +142,21 @@ export function AdminMarketing() {
   if (loading) return <div className="text-text-subtle">{t('admin.loading')}</div>;
 
   return (
-    <div className="space-y-6 pb-24">
+    <div className="space-y-4 pb-20">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h1 className="font-display text-2xl font-bold text-text sm:text-3xl">{t('panel.marketing.title')}</h1>
-          <p className="mt-2 max-w-2xl text-sm text-text-subtle">{t('panel.marketing.subtitle')}</p>
+          <p className="mt-1 max-w-2xl text-sm text-text-subtle">{t('panel.marketing.subtitle')}</p>
         </div>
         <LocaleTabs locales={supportedLocales} active={loc} onChange={(c) => setLoc(c as Locale)} />
       </div>
 
       {error && <div className="rounded-md border border-red-800 bg-red-900/20 p-3 text-sm text-red-400">{error}</div>}
 
-      <p className="rounded-md border border-surface-3 bg-surface-2/40 px-4 py-3 text-sm text-text-subtle">{t('panel.marketing.shared')}</p>
+      <p className="rounded-md border border-surface-3 bg-surface-2/40 px-3 py-2 text-xs text-text-subtle">{t('panel.marketing.shared')}</p>
 
       {/* Page text */}
-      <section className="space-y-4 rounded-lg border border-surface-3 bg-surface p-5 sm:p-6">
+      <section className="space-y-3 rounded-lg border border-surface-3 bg-surface p-3 sm:p-4">
         <div>
           <label className="mb-1 block text-sm font-medium text-white">{t('panel.marketing.headline')}</label>
           <input className={inputCls} value={doc.headline} onChange={(e) => setText({ headline: e.target.value })} />
@@ -168,7 +168,7 @@ export function AdminMarketing() {
       </section>
 
       {/* Partners */}
-      <section className="space-y-4 rounded-lg border border-surface-3 bg-surface p-5 sm:p-6">
+      <section className="space-y-3 rounded-lg border border-surface-3 bg-surface p-3 sm:p-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="font-display text-lg font-semibold text-text">
             {t('panel.marketing.partners')} <span className="ml-1 text-sm font-normal text-text-subtle">{counts.partners}</span>
@@ -181,11 +181,11 @@ export function AdminMarketing() {
 
         {doc.partners.length === 0 && <p className="py-6 text-center text-sm text-text-subtle">{t('panel.marketing.noPartners')}</p>}
 
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {doc.partners.map((p, i) => (
-            <div key={i} className="space-y-3 rounded-md border border-surface-3 bg-surface-2/30 p-4">
+            <div key={i} className="space-y-2 rounded-md border border-surface-3 bg-surface-2/30 p-3">
               <div className="flex items-start gap-3">
-                <div className="grid h-16 w-24 shrink-0 place-items-center overflow-hidden rounded border border-surface-3 bg-surface p-1.5">
+                <div className="grid h-14 w-20 shrink-0 place-items-center overflow-hidden rounded border border-surface-3 bg-surface p-1.5">
                   {p.logo ? <img src={p.logo} alt="" className="h-full w-full object-contain" /> : <ImageIcon className="h-6 w-6 text-text-subtle" />}
                 </div>
                 <div className="min-w-0 flex-1 space-y-2">
@@ -193,7 +193,7 @@ export function AdminMarketing() {
                   <input className={inputCls} placeholder={`${t('panel.marketing.partnerLink')} https://…`} value={p.link} onChange={(e) => patchShared('partners', i, { link: e.target.value })} />
                 </div>
               </div>
-              <textarea rows={2} className={inputCls} placeholder={t('panel.marketing.partnerDesc')} value={p.desc} onChange={(e) => patchText('partners', i, { desc: e.target.value })} />
+              <textarea rows={1} className={inputCls} placeholder={t('panel.marketing.partnerDesc')} value={p.desc} onChange={(e) => patchText('partners', i, { desc: e.target.value })} />
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <MediaUpload accept="image" label={t('panel.marketing.logo')} folder="marketing/partners" onUploaded={(url) => patchShared('partners', i, { logo: url })} />
                 <RowActions
@@ -210,7 +210,7 @@ export function AdminMarketing() {
       </section>
 
       {/* Gallery */}
-      <section className="space-y-4 rounded-lg border border-surface-3 bg-surface p-5 sm:p-6">
+      <section className="space-y-3 rounded-lg border border-surface-3 bg-surface p-3 sm:p-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="font-display text-lg font-semibold text-text">
             {t('panel.marketing.gallery')} <span className="ml-1 text-sm font-normal text-text-subtle">{counts.gallery}</span>
@@ -229,44 +229,47 @@ export function AdminMarketing() {
 
         {doc.gallery.length === 0 && <p className="py-6 text-center text-sm text-text-subtle">{t('panel.marketing.noGallery')}</p>}
 
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {doc.gallery.map((g, i) => {
             const isVideo = g.kind === 'video';
             const thumb = isVideo ? g.poster || (g.url ? videoSource(g.url).thumb : '') : g.url;
             return (
-              <div key={i} className="space-y-3 rounded-md border border-surface-3 bg-surface-2/30 p-4">
-                <div className="relative grid aspect-video place-items-center overflow-hidden rounded border border-surface-3 bg-surface">
-                  {thumb ? (
-                    <img src={thumb} alt="" className="h-full w-full object-cover" />
-                  ) : isVideo && g.url && videoSource(g.url).kind === 'file' ? (
-                    <video src={`${g.url}#t=0.5`} preload="metadata" muted className="h-full w-full object-cover" />
-                  ) : isVideo ? (
-                    <Film className="h-8 w-8 text-text-subtle" />
-                  ) : (
-                    <ImageIcon className="h-8 w-8 text-text-subtle" />
-                  )}
-                  <span className={cn('absolute left-2 top-2 rounded px-2 py-0.5 text-xs font-medium', isVideo ? 'bg-primary text-on-primary' : 'bg-black/60 text-white')}>
-                    {isVideo ? t('panel.marketing.video') : t('panel.marketing.photo')}
-                  </span>
-                </div>
+              <div key={i} className="rounded-md border border-surface-3 bg-surface-2/30 p-3">
+                <div className="flex gap-3">
+                  <div className="relative grid h-24 w-24 shrink-0 place-items-center overflow-hidden rounded border border-surface-3 bg-surface sm:h-28 sm:w-28">
+                    {thumb ? (
+                      <img src={thumb} alt="" className="h-full w-full object-cover" />
+                    ) : isVideo && g.url && videoSource(g.url).kind === 'file' ? (
+                      <video src={`${g.url}#t=0.5`} preload="metadata" muted className="h-full w-full object-cover" />
+                    ) : isVideo ? (
+                      <Film className="h-8 w-8 text-text-subtle" />
+                    ) : (
+                      <ImageIcon className="h-8 w-8 text-text-subtle" />
+                    )}
+                    <span className={cn('absolute left-1 top-1 rounded px-1.5 py-0.5 text-[10px] font-medium', isVideo ? 'bg-primary text-on-primary' : 'bg-black/60 text-white')}>
+                      {isVideo ? t('panel.marketing.video') : t('panel.marketing.photo')}
+                    </span>
+                  </div>
+                  <div className="min-w-0 flex-1 space-y-2">
+                    {isVideo && (
+                      <input className={inputCls} placeholder={t('panel.marketing.videoUrl')} value={g.url} onChange={(e) => patchShared('gallery', i, { url: e.target.value })} />
+                    )}
+                    <input className={inputCls} placeholder={t('panel.marketing.caption')} value={g.caption} onChange={(e) => patchText('gallery', i, { caption: e.target.value })} />
 
-                {isVideo && (
-                  <input className={inputCls} placeholder={t('panel.marketing.videoUrl')} value={g.url} onChange={(e) => patchShared('gallery', i, { url: e.target.value })} />
-                )}
-                <input className={inputCls} placeholder={t('panel.marketing.caption')} value={g.caption} onChange={(e) => patchText('gallery', i, { caption: e.target.value })} />
-
-                <div className="flex flex-wrap items-center gap-2">
-                  <MediaUpload
-                    accept={isVideo ? 'video' : 'image'}
-                    label={isVideo ? t('panel.marketing.uploadVideo') : t('panel.marketing.uploadPhoto')}
-                    folder="marketing/gallery"
-                    onUploaded={(url) => patchShared('gallery', i, { url })}
-                  />
-                  {isVideo && (
-                    <MediaUpload accept="image" label={t('panel.marketing.poster')} folder="marketing/gallery" onUploaded={(url) => patchShared('gallery', i, { poster: url })} />
-                  )}
+                    <div className="flex flex-wrap items-center gap-2">
+                      <MediaUpload
+                        accept={isVideo ? 'video' : 'image'}
+                        label={isVideo ? t('panel.marketing.uploadVideo') : t('panel.marketing.uploadPhoto')}
+                        folder="marketing/gallery"
+                        onUploaded={(url) => patchShared('gallery', i, { url })}
+                      />
+                      {isVideo && (
+                        <MediaUpload accept="image" label={t('panel.marketing.poster')} folder="marketing/gallery" onUploaded={(url) => patchShared('gallery', i, { poster: url })} />
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <div className="flex justify-end">
+                <div className="mt-2 flex justify-end">
                   <RowActions
                     onUp={() => move('gallery', i, -1)}
                     onDown={() => move('gallery', i, 1)}
