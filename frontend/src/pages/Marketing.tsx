@@ -84,15 +84,23 @@ function Viewer({ items, index, onIndex, onClose }: { items: MarketingMedia[]; i
         </>
       )}
       <div className="mk-viewer__stage" onClick={(e) => e.stopPropagation()}>
-        {video ? (
-          video.kind === 'embed' ? (
-            <iframe src={video.src} title={item.caption || t('site.marketing.play')} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen />
+        <div className={video?.kind === 'embed' ? 'mk-viewer__media mk-viewer__media--embed' : 'mk-viewer__media'}>
+          {video ? (
+            video.kind === 'embed' ? (
+              <iframe
+                src={video.src}
+                title={item.caption || t('site.marketing.play')}
+                style={{ aspectRatio: video.portrait ? '9 / 16' : '16 / 9' }}
+                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                allowFullScreen
+              />
+            ) : (
+              <video key={video.src} src={video.src} poster={item.poster || undefined} controls autoPlay playsInline />
+            )
           ) : (
-            <video src={video.src} poster={item.poster || undefined} controls autoPlay playsInline />
-          )
-        ) : (
-          <img src={item.url} alt={item.caption} />
-        )}
+            <img src={item.url} alt={item.caption} />
+          )}
+        </div>
         {item.caption && <p className="mk-viewer__cap">{item.caption}</p>}
       </div>
     </div>
@@ -103,6 +111,8 @@ function Tile({ item, delay, onOpen }: { item: MarketingMedia; delay: number; on
   const { t } = useI18n();
   const video = item.kind === 'video' ? videoSource(item.url) : null;
   const thumb = item.poster || video?.thumb;
+  const [ratio, setRatio] = useState<number | null>(null);
+  const fit = (w: number, h: number) => w > 0 && h > 0 && setRatio(Math.min(2, Math.max(0.5, w / h)));
   const label = item.caption || (video ? t('site.marketing.play') : t('site.marketing.galleryTitle'));
 
   return (
@@ -112,14 +122,14 @@ function Tile({ item, delay, onOpen }: { item: MarketingMedia; delay: number; on
       onClick={onOpen}
       aria-label={label}
       data-reveal
-      style={{ '--d': `${delay}ms` } as CSSProperties}
+      style={{ '--d': `${delay}ms`, ...(video && (ratio || video.portrait) ? { aspectRatio: String(ratio ?? 9 / 16) } : {}) } as CSSProperties}
     >
       {video ? (
         <>
           {thumb ? (
-            <img src={thumb} alt="" loading="lazy" decoding="async" />
+            <img src={thumb} alt="" loading="lazy" decoding="async" onLoad={video.kind === 'file' || item.poster ? (e) => fit(e.currentTarget.naturalWidth, e.currentTarget.naturalHeight) : undefined} />
           ) : video.kind === 'file' ? (
-            <video src={`${video.src}#t=0.5`} preload="metadata" muted playsInline />
+            <video src={`${video.src}#t=0.5`} preload="metadata" muted playsInline onLoadedMetadata={(e) => fit(e.currentTarget.videoWidth, e.currentTarget.videoHeight)} />
           ) : null}
           <span className="mk-play" aria-hidden>
             <span>▶</span>

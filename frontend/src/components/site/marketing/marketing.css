@@ -69,8 +69,9 @@
   }
   .site .mk-tile:hover img, .site .mk-tile:hover video { transform: scale(1.05); }
   .site .mk-tile:focus-visible { outline: 2px solid var(--as-accent); outline-offset: 3px; }
-  .site .mk-tile--video { cursor: pointer; aspect-ratio: 16 / 10; background: var(--as-ink); }
+  .site .mk-tile--video { cursor: pointer; background: var(--as-ink); }
   .site .mk-tile--video img, .site .mk-tile--video video { height: 100%; object-fit: cover; }
+  .site .mk-tile--video:not([style*="aspect-ratio"]) { aspect-ratio: 16 / 10; }
   .site .mk-play {
     position: absolute;
     inset: 0;
@@ -111,25 +112,49 @@
     position: fixed;
     inset: 0;
     z-index: 200;
-    display: grid;
-    place-items: center;
-    padding: clamp(16px, 4vw, 48px);
-    background: rgba(18, 12, 9, .94);
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(12px, 3vw, 40px);
+    background: rgba(14, 9, 7, .97);
   }
-  .mk-viewer__stage { display: grid; gap: 14px; max-width: min(1200px, 100%); max-height: 100%; justify-items: center; }
-  .mk-viewer__stage img, .mk-viewer__stage video {
-    max-width: 100%;
-    max-height: calc(100dvh - 160px);
+  /* The stage is exactly the free area; the media box inside it can never be larger,
+     so any shape (9:16, 16:9, square, tall or wide photo) is shown whole and centred. */
+  .mk-viewer__stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    height: 100%;
+    max-width: 1400px;
+    min-height: 0;
+  }
+  .mk-viewer__media {
+    flex: 1 1 0;
+    min-height: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mk-viewer__media img, .mk-viewer__media video {
+    display: block;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
+    background: transparent;
   }
-  .mk-viewer__stage iframe {
-    width: min(1100px, 92vw);
-    aspect-ratio: 16 / 9;
-    height: auto;
+  .mk-viewer__media--embed iframe {
+    display: block;
+    height: 100%;
+    max-width: 100%;
     border: 0;
     background: #000;
   }
-  .mk-viewer__cap { color: #f2ebdf; font-size: 15px; text-align: center; max-width: 70ch; }
+  .mk-viewer__cap { flex: none; color: #f2ebdf; font-size: 15px; text-align: center; max-width: 70ch; }
   .mk-viewer__btn {
     position: absolute;
     display: grid;
